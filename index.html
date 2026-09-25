@@ -77,6 +77,14 @@ h2{
 .bar-price small{display:block; font-weight:500; color:var(--muted); font-size:11px}
 .bar-row.cheapest .bar-price{color:var(--best)}
 .compare-toggle{padding-block:10px 6px; text-align:center}
+.winners{display:flex; gap:12px; flex-wrap:wrap; padding-block:4px 10px}
+.winner{
+  flex:1 1 150px; display:flex; flex-direction:column; gap:2px; align-items:center;
+  background:var(--best-soft); border:1px solid var(--best); border-radius:12px;
+  padding:14px 10px;
+}
+.winner-name{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:17px}
+.winner-price{color:var(--best); font-weight:700; font-variant-numeric:tabular-nums}
 
 /* filtres */
 .controls{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:16px}
@@ -227,19 +235,24 @@ document.getElementById("stats").innerHTML = [
     </div>`;
   const winners = rows.filter(r => r.p === min);
   const others = rows.filter(r => r.p !== min);
+  const winnerCard = r => `
+    <div class="winner">
+      <span class="winner-name">${r.name}</span>
+      <span class="winner-price">${fmtDT(r.p)}</span>
+    </div>`;
   document.getElementById("compare").innerHTML =
-    winners.map(bar).join("") +
+    `<div class="winners">${winners.map(winnerCard).join("")}</div>` +
     (others.length ? `
-      <div id="compare-rest" hidden>${others.map(bar).join("")}</div>
+      <div id="compare-rest" hidden>${rows.map(bar).join("")}</div>
       <div class="compare-toggle">
-        <button type="button" id="compare-more" class="chipbtn">Voir le classement complet (${others.length} autres marques)</button>
+        <button type="button" id="compare-more" class="chipbtn">Voir le classement complet (${rows.length} marques)</button>
       </div>` : "");
   const btn = document.getElementById("compare-more");
   if (btn) btn.addEventListener("click", () => {
     const rest = document.getElementById("compare-rest");
     rest.hidden = !rest.hidden;
     btn.textContent = rest.hidden
-      ? `Voir le classement complet (${others.length} autres marques)`
+      ? `Voir le classement complet (${rows.length} marques)`
       : "Masquer le classement complet";
   });
 })();
