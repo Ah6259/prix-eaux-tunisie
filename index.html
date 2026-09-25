@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prix des Eaux de Tunisie</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F4F8FA; --surface:#FFFFFF; --ink:#0F2B3D; --muted:#5A7484;
+  --accent:#0E7FA8; --accent-soft:#E1F0F6; --best:#128A52; --best-soft:#E3F3EB;
+  --line:#D7E4EB; --chip:#EDF4F8; --shadow:0 1px 3px rgba(15,43,61,.08);
+  --gaz:#8A5A0E; --gaz-soft:#F6EDDC;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1B24; --surface:#132530; --ink:#E6F1F6; --muted:#8FA9B6;
+    --accent:#4FB6DC; --accent-soft:#12384A; --best:#4CC38A; --best-soft:#123B2A;
+    --line:#1E3644; --chip:#1A303D; --shadow:0 1px 3px rgba(0,0,0,.35);
+    --gaz:#E0B160; --gaz-soft:#3A2E14;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1B24; --surface:#132530; --ink:#E6F1F6; --muted:#8FA9B6;
+  --accent:#4FB6DC; --accent-soft:#12384A; --best:#4CC38A; --best-soft:#123B2A;
+  --line:#1E3644; --chip:#1A303D; --shadow:0 1px 3px rgba(0,0,0,.35);
+  --gaz:#E0B160; --gaz-soft:#3A2E14;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Figtree",system-ui,sans-serif; font-size:15px; line-height:1.5;
+}
+.wrap{max-width:1080px; margin:0 auto; padding-inline:16px}
+
+header.site{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+  background:var(--bg); border-bottom:1px solid var(--line);
+}
+.site-inner{display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding-block:12px}
+h1{
+  font-family:"Bricolage Grotesque","Figtree",sans-serif; font-weight:800;
+  font-size:clamp(20px,3.5vw,27px); margin:0; letter-spacing:-.01em; text-wrap:balance;
+}
+h1 .drop{color:var(--accent)}
+.search{flex:1 1 220px; min-width:180px; position:relative}
+.search input{
+  width:100%; padding:9px 12px 9px 36px; border:1px solid var(--line); border-radius:999px;
+  background:var(--surface); color:var(--ink); font:inherit; outline:none;
+}
+.search input:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.search svg{position:absolute; left:12px; top:50%; translate:0 -50%; width:16px; height:16px; stroke:var(--muted); fill:none; stroke-width:2}
+
+.stats{display:flex; gap:24px; flex-wrap:wrap; padding-block:20px 4px}
+.stat b{font-family:"Bricolage Grotesque",sans-serif; font-size:24px; font-weight:800; display:block; line-height:1.1}
+.stat span{color:var(--muted); font-size:13px}
+
+section{padding-block:20px}
+h2{
+  font-family:"Bricolage Grotesque","Figtree",sans-serif; font-weight:600;
+  font-size:19px; margin:0 0 4px; letter-spacing:-.01em;
+}
+.sub{color:var(--muted); font-size:13px; margin:0 0 14px}
+
+/* comparateur 1.5L */
+.compare{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 18px 10px; box-shadow:var(--shadow)}
+.bar-row{display:grid; grid-template-columns:110px 1fr 84px; align-items:center; gap:10px; padding-block:7px; border-bottom:1px solid var(--line)}
+.bar-row:last-child{border-bottom:0}
+.bar-row .bname{font-weight:600; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.bar-track{height:14px; border-radius:7px; background:var(--chip); overflow:hidden}
+.bar-fill{height:100%; border-radius:7px; background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 60%,var(--bg)))}
+.bar-row.cheapest .bar-fill{background:var(--best)}
+.bar-price{text-align:right; font-variant-numeric:tabular-nums; font-weight:700; font-size:14px}
+.bar-price small{display:block; font-weight:500; color:var(--muted); font-size:11px}
+.bar-row.cheapest .bar-price{color:var(--best)}
+
+/* filtres */
+.controls{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:16px}
+.chipbtn{
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  border-radius:999px; padding:6px 14px; font:inherit; font-size:13px; font-weight:500; cursor:pointer;
+}
+.chipbtn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
+.controls select{
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  border-radius:999px; padding:6px 12px; font:inherit; font-size:13px; margin-left:auto;
+}
+
+/* cartes marques */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px}
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:14px;
+  box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+}
+.card-head{display:flex; gap:14px; padding:14px 16px 10px; align-items:center}
+.card-head img{
+  width:64px; height:80px; object-fit:contain; flex:none;
+  background:#fff; border-radius:10px; border:1px solid var(--line); padding:4px;
+}
+.card-head .id h3{margin:0; font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:18px}
+.badges{display:flex; gap:6px; margin-top:4px; flex-wrap:wrap}
+.badge{font-size:11px; font-weight:600; padding:2px 9px; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
+.badge.gaz{background:var(--gaz-soft); color:var(--gaz)}
+.meta{padding:0 16px 8px; color:var(--muted); font-size:12.5px}
+.meta b{color:var(--ink); font-weight:600}
+table.prices{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:auto}
+table.prices th{
+  text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--muted); font-weight:600; padding:8px 16px 4px; border-top:1px solid var(--line);
+}
+table.prices th:last-child{text-align:right; padding-right:16px}
+table.prices td{padding:5px 16px; border-top:1px solid var(--line); vertical-align:top}
+table.prices tr:first-child td{border-top:1px solid var(--line)}
+.fmt{font-weight:600; white-space:nowrap}
+.fmt small{color:var(--muted); font-weight:500}
+.offer-list{display:flex; flex-direction:column; gap:2px; align-items:flex-end}
+.offer{display:flex; gap:8px; align-items:baseline; font-variant-numeric:tabular-nums}
+.offer .store{color:var(--muted); font-size:12px}
+.offer .p{font-weight:600; min-width:70px; text-align:right}
+.offer.best .p{color:var(--best)}
+.offer.best .store::after{content:" ↓"; color:var(--best); font-weight:700}
+
+footer{border-top:1px solid var(--line); margin-top:28px; padding-block:22px 34px; color:var(--muted); font-size:13px}
+footer a{color:var(--accent); text-decoration:none}
+footer a:hover{text-decoration:underline}
+.empty{padding:40px 0; text-align:center; color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+@media (max-width:480px){
+  .bar-row{grid-template-columns:84px 1fr 74px}
+  .card-head img{width:52px; height:66px}
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-inner">
+    <h1>Prix des Eaux de Tunisie <span class="drop">◆</span></h1>
+    <div class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" type="search" placeholder="Chercher une marque… (Safia, Marwa…)" aria-label="Chercher une marque">
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats" id="stats"></div>
+
+  <section>
+    <h2>Le match des 1,5 L</h2>
+    <p class="sub">Meilleur prix constaté par marque pour la bouteille d'eau plate 1,5 L — le format le plus vendu en Tunisie.</p>
+    <div class="compare" id="compare"></div>
+  </section>
+
+  <section>
+    <h2>Toutes les marques</h2>
+    <p class="sub">Prix relevés chez Géant, Carrefour, Monoprix et Aziza. La flèche ↓ marque l'enseigne la moins chère.</p>
+    <div class="controls" id="controls">
+      <button class="chipbtn" data-type="toutes" aria-pressed="true">Toutes</button>
+      <button class="chipbtn" data-type="plate" aria-pressed="false">Plates</button>
+      <button class="chipbtn" data-type="gazeuse" aria-pressed="false">Gazeuses</button>
+      <select id="sort" aria-label="Trier les marques">
+        <option value="nom">Tri : nom A→Z</option>
+        <option value="prix15">Tri : prix 1,5 L croissant</option>
+        <option value="prixL">Tri : prix au litre croissant</option>
+      </select>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>Aucune marque ne correspond à cette recherche.</div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap" id="foot"></div>
+</footer>
+
+<script src="data/eaux.js"></script>
+<script>
+const DATA = window.EAUX_DATA;
+const fmtDT = v => v.toLocaleString("fr-FR",{minimumFractionDigits:3, maximumFractionDigits:3}) + " DT";
+
+/* helpers ---------------------------------------------------------------- */
+const plain = p => !p.flavor;
+function minPrice(prod){ return Math.min(...Object.values(prod.prices)); }
+function bestStores(prod){
+  const m = minPrice(prod);
+  return Object.entries(prod.prices).filter(([,v]) => v === m).map(([s]) => s);
+}
+function brand15(b){ // meilleur prix 1.5L eau plate
+  const c = b.products.filter(p => plain(p) && p.category === "plate" && Math.abs(p.liters - 1.5) < .01);
+  return c.length ? Math.min(...c.map(minPrice)) : null;
+}
+function brandPerL(b){ // meilleur prix au litre (eaux nature uniquement)
+  const c = b.products.filter(p => plain(p) && p.liters >= 0.4);
+  return c.length ? Math.min(...c.map(p => minPrice(p) / p.liters)) : null;
+}
+
+/* stats ------------------------------------------------------------------ */
+const nProd = DATA.brands.reduce((n,b) => n + b.products.length, 0);
+const nOff  = DATA.brands.reduce((n,b) => n + b.products.reduce((m,p) => m + Object.keys(p.prices).length, 0), 0);
+const all15 = DATA.brands.map(brand15).filter(v => v !== null);
+document.getElementById("stats").innerHTML = [
+  [DATA.brands.length, "marques"],
+  [nProd, "produits"],
+  [nOff, "prix relevés"],
+  [fmtDT(Math.min(...all15)) + " – " + fmtDT(Math.max(...all15)), "fourchette 1,5 L"],
+].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+
+/* comparateur 1.5L ------------------------------------------------------- */
+(function(){
+  const rows = DATA.brands
+    .map(b => ({name:b.name, p:brand15(b)}))
+    .filter(r => r.p !== null)
+    .sort((a,z) => a.p - z.p);
+  const max = Math.max(...rows.map(r => r.p));
+  const min = rows[0].p;
+  document.getElementById("compare").innerHTML = rows.map(r => `
+    <div class="bar-row${r.p === min ? " cheapest" : ""}">
+      <span class="bname">${r.name}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.p / max * 100)}%"></div></div>
+      <span class="bar-price">${fmtDT(r.p)}${r.p === min ? "<small>la moins chère</small>" : ""}</span>
+    </div>`).join("");
+})();
+
+/* cartes marques --------------------------------------------------------- */
+const state = { q:"", type:"toutes", sort:"nom" };
+
+function prodRow(p){
+  const best = bestStores(p);
+  const multi = Object.keys(p.prices).length > 1;
+  const offers = Object.entries(p.prices)
+    .sort((a,z) => a[1] - z[1])
+    .map(([s,v]) => `<span class="offer${multi && best.includes(s) ? " best" : ""}">
+        <span class="store">${s}</span><span class="p">${fmtDT(v)}</span></span>`)
+    .join("");
+  const label = p.format + (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
+                (p.category === "gazeuse" ? ` <small>· gazeuse</small>` : "");
+  return `<tr><td class="fmt">${label}</td><td><span class="offer-list">${offers}</span></td></tr>`;
+}
+
+function card(b){
+  const meta = [];
+  if (b.source) meta.push(`Source : <b>${b.source}</b>`);
+  if (b.company) meta.push(`${b.company}`);
+  if (b.note) meta.push(b.note);
+  const badges = b.types.map(t =>
+    `<span class="badge${t === "gazeuse" ? " gaz" : ""}">${t === "gazeuse" ? "Gazeuse" : "Plate"}</span>`).join("");
+  return `<article class="card">
+    <div class="card-head">
+      ${b.img ? `<img src="${b.img}" alt="Bouteille ${b.name}" loading="lazy">` : ""}
+      <div class="id"><h3>${b.name}</h3><div class="badges">${badges}</div></div>
+    </div>
+    ${meta.length ? `<div class="meta">${meta.join(" · ")}</div>` : ""}
+    <table class="prices">
+      <tr><th>Format</th><th>Prix par enseigne</th></tr>
+      ${b.products.slice().sort((a,z) =>
+          (a.liters - z.liters) ||
+          ((a.category === "gazeuse") - (z.category === "gazeuse")) ||
+          (a.flavor || "").localeCompare(z.flavor || "")
+        ).map(prodRow).join("")}
+    </table>
+  </article>`;
+}
+
+function render(){
+  const q = state.q.trim().toLowerCase();
+  let list = DATA.brands.filter(b => {
+    if (q && !b.name.toLowerCase().includes(q)) return false;
+    if (state.type !== "toutes" && !b.types.includes(state.type)) return false;
+    return true;
+  });
+  const key = { prix15: brand15, prixL: brandPerL }[state.sort];
+  list = list.slice().sort(key
+    ? (a,z) => (key(a) ?? 99) - (key(z) ?? 99)
+    : (a,z) => a.name.localeCompare(z.name, "fr"));
+  document.getElementById("grid").innerHTML = list.map(card).join("");
+  document.getElementById("empty").hidden = list.length > 0;
+}
+
+document.getElementById("q").addEventListener("input", e => { state.q = e.target.value; render(); });
+document.getElementById("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
+document.querySelectorAll("#controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
+  document.querySelectorAll("#controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
+  state.type = btn.dataset.type; render();
+}));
+render();
+
+/* footer ----------------------------------------------------------------- */
+document.getElementById("foot").innerHTML =
+  `Prix indicatifs relevés le ${new Date(DATA.updated + "T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}
+   sur les boutiques en ligne — ils peuvent varier selon le magasin et la date. Sources :
+   ${DATA.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${s.name}</a>`).join(" · ")}.
+   Projet personnel — les visuels de bouteilles proviennent des catalogues des enseignes.`;
+</script>
+</body>
+</html>
