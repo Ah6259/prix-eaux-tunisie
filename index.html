@@ -71,6 +71,7 @@ h2{
   display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
   gap:2px 28px; padding-block:8px 4px;
 }
+#compare-rest[hidden]{display:none}
 .rank{
   display:flex; align-items:baseline; gap:8px; padding-block:4px;
   border-bottom:1px dashed var(--line); font-size:14px;
@@ -80,6 +81,7 @@ h2{
 .rank .rprice{font-variant-numeric:tabular-nums; font-weight:600}
 .rank.cheapest .rprice, .rank.cheapest .rn{color:var(--best)}
 .compare-toggle{padding-block:10px 6px; text-align:center}
+.mode-note{color:var(--muted); font-size:12px; flex-basis:100%}
 .winners{display:flex; gap:12px; flex-wrap:wrap; padding-block:4px 10px}
 .winner{
   flex:1 1 150px; display:flex; flex-direction:column; gap:2px; align-items:center;
@@ -88,6 +90,7 @@ h2{
 }
 .winner-name{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:17px}
 .winner-price{color:var(--best); font-weight:700; font-variant-numeric:tabular-nums}
+.winner-price small{color:var(--muted); font-weight:500; font-size:11px}
 
 /* filtres */
 .controls{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:16px}
@@ -163,7 +166,12 @@ footer a:hover{text-decoration:underline}
 
   <section>
     <h2>Le match des 1,5 L</h2>
-    <p class="sub">Les marques gagnantes — le prix le moins cher constaté pour la bouteille d'eau plate 1,5 L, le format le plus vendu en Tunisie.</p>
+    <p class="sub">Les marques gagnantes — le prix le moins cher constaté pour l'eau plate 1,5 L, le format le plus vendu en Tunisie.</p>
+    <div class="controls" id="mode-controls">
+      <button class="chipbtn" data-mode="bouteille" aria-pressed="true">Prix bouteille</button>
+      <button class="chipbtn" data-mode="stika" aria-pressed="false">Prix stika (pack de 6)</button>
+      <span class="mode-note">Stika = 6 × le prix de la bouteille · les grands formats (6 L, 19 L) restent à l'unité</span>
+    </div>
     <div class="compare" id="compare"></div>
   </section>
 
@@ -221,46 +229,54 @@ document.getElementById("stats").innerHTML = [
   [fmtDT(Math.min(...all15)) + " – " + fmtDT(Math.max(...all15)), "fourchette 1,5 L"],
 ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
+/* état global ------------------------------------------------------------ */
+const state = { q:"", type:"toutes", sort:"nom", mode:"bouteille", compareOpen:false };
+
+// prix affiché : en mode stika, 6 × le prix bouteille (grands formats à l'unité)
+const dispPrice = (v, liters) => (state.mode === "stika" && liters <= 2) ? v * 6 : v;
+
 /* comparateur 1.5L : seules les gagnantes (prix le moins cher) sont affichées,
    le classement complet se déroule à la demande ---------------------------- */
-(function(){
+function renderCompare(){
   const rows = DATA.brands
     .map(b => ({name:b.name, p:brand15(b)}))
     .filter(r => r.p !== null)
     .sort((a,z) => a.p - z.p);
   const min = rows[0].p;
+  const show = p => fmtDT(dispPrice(p, 1.5));
   const rankRow = (r, i) => `
     <div class="rank${r.p === min ? " cheapest" : ""}">
       <span class="rn">${i + 1}</span>
       <span class="rname">${r.name}</span>
-      <span class="rprice">${fmtDT(r.p)}</span>
+      <span class="rprice">${show(r.p)}</span>
     </div>`;
   const winners = rows.filter(r => r.p === min);
   const others = rows.filter(r => r.p !== min);
+  const unit = state.mode === "stika" ? "la stika" : "la bouteille";
   const winnerCard = r => `
     <div class="winner">
       <span class="winner-name">${r.name}</span>
-      <span class="winner-price">${fmtDT(r.p)}</span>
+      <span class="winner-price">${show(r.p)} <small>${unit}</small></span>
     </div>`;
+  const btnLabel = () => state.compareOpen
+    ? "Masquer le classement complet"
+    : `Voir le classement complet (${rows.length} marques)`;
   document.getElementById("compare").innerHTML =
     `<div class="winners">${winners.map(winnerCard).join("")}</div>` +
     (others.length ? `
-      <div id="compare-rest" hidden>${rows.map(rankRow).join("")}</div>
+      <div id="compare-rest" ${state.compareOpen ? "" : "hidden"}>${rows.map(rankRow).join("")}</div>
       <div class="compare-toggle">
-        <button type="button" id="compare-more" class="chipbtn">Voir le classement complet (${rows.length} marques)</button>
+        <button type="button" id="compare-more" class="chipbtn">${btnLabel()}</button>
       </div>` : "");
   const btn = document.getElementById("compare-more");
   if (btn) btn.addEventListener("click", () => {
-    const rest = document.getElementById("compare-rest");
-    rest.hidden = !rest.hidden;
-    btn.textContent = rest.hidden
-      ? `Voir le classement complet (${rows.length} marques)`
-      : "Masquer le classement complet";
+    state.compareOpen = !state.compareOpen;
+    document.getElementById("compare-rest").hidden = !state.compareOpen;
+    btn.textContent = btnLabel();
   });
-})();
+}
 
 /* cartes marques --------------------------------------------------------- */
-const state = { q:"", type:"toutes", sort:"nom" };
 
 function prodRow(p){
   const best = bestStores(p);
@@ -268,9 +284,11 @@ function prodRow(p){
   const offers = Object.entries(p.prices)
     .sort((a,z) => a[1] - z[1])
     .map(([s,v]) => `<span class="offer${multi && best.includes(s) ? " best" : ""}">
-        <span class="store">${s}</span><span class="p">${fmtDT(v)}</span></span>`)
+        <span class="store">${s}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>`)
     .join("");
-  const label = p.format + (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
+  const stika = state.mode === "stika" && p.liters <= 2;
+  const label = p.format + (stika ? ` <small>· stika ×6</small>` : "") +
+                (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
                 (p.category === "gazeuse" ? ` <small>· gazeuse</small>` : "");
   return `<tr><td class="fmt">${label}</td><td><span class="offer-list">${offers}</span></td></tr>`;
 }
@@ -320,6 +338,12 @@ document.querySelectorAll("#controls .chipbtn").forEach(btn => btn.addEventListe
   document.querySelectorAll("#controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
   state.type = btn.dataset.type; render();
 }));
+document.querySelectorAll("#mode-controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
+  document.querySelectorAll("#mode-controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
+  state.mode = btn.dataset.mode;
+  renderCompare(); render();
+}));
+renderCompare();
 render();
 
 /* footer ----------------------------------------------------------------- */
