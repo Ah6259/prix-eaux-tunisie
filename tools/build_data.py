@@ -200,7 +200,7 @@ data = {
     "stores": ["Géant", "Carrefour", "Monoprix", "Aziza"],
     "sources": [
         {"name": "Géant Drive Tunisie", "url": "https://www.geantdrive.tn"},
-        {"name": "barka.tn (comparateur : Carrefour, Monoprix, Aziza, Géant)", "url": "https://barka.tn"},
+        {"name": "Carrefour, Monoprix, Aziza", "url": "https://barka.tn"},
         {"name": "Wikipédia — Eaux minérales en Tunisie", "url": "https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie"},
     ],
     "brands": out_brands,

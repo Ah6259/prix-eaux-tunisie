@@ -13,7 +13,7 @@ window.EAUX_DATA = {
    "url": "https://www.geantdrive.tn"
   },
   {
-   "name": "barka.tn (comparateur : Carrefour, Monoprix, Aziza, Géant)",
+   "name": "Carrefour, Monoprix, Aziza",
    "url": "https://barka.tn"
   },
   {
