@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Prix des Eaux de Tunisie</title>
-<meta name="description" content="Comparateur des prix des eaux minérales en Tunisie : Safia, Marwa, Sabrine, Melliti… Prix bouteille et stika chez Géant, Carrefour, Monoprix et Aziza, mis à jour chaque jour.">
+<title>Prix des eaux minérales en Tunisie — bouteille &amp; stika | Prix des Eaux de Tunisie</title>
+<meta name="description" content="Comparateur des prix des eaux minérales en Tunisie : Safia, Marwa, Sabrine, Melliti, Cristaline… Prix bouteille et stika (pack de 6) chez Géant, Carrefour, Monoprix et Aziza, mis à jour chaque jour.">
 <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -21,6 +21,57 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="fr_TN">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Prix des Eaux de Tunisie",
+      "url": "https://ah6259.github.io/prix-eaux-tunisie/",
+      "description": "Comparateur des prix des eaux minérales en Tunisie (bouteille et stika) chez Géant, Carrefour, Monoprix et Aziza, mis à jour chaque jour.",
+      "inLanguage": "fr"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quelle est l'eau minérale la moins chère en Tunisie ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Au dernier relevé, la bouteille de 1,5 L d'eau plate la moins chère est à environ 0,610 DT (Bargou, Marwa et Melliti), soit environ 3,660 DT la stika de 6 bouteilles. Le classement est mis à jour chaque jour sur le site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "C'est quoi une stika ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En Tunisie, la stika est le pack de 6 bouteilles d'eau, le format le plus acheté par les familles. Son prix correspond à 6 fois le prix d'une bouteille."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "D'où viennent les prix affichés ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les prix sont relevés automatiquement chaque jour sur les boutiques en ligne des grandes surfaces tunisiennes : Géant Drive, Carrefour, Monoprix et Aziza. Ils sont indicatifs et peuvent varier selon le magasin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelles marques d'eau sont comparées ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "22 marques vendues en Tunisie : Safia, Sabrine, Marwa, Melliti, Garci, Aïn Oktor, Cristaline, Fourat, Dima, Mira, Pristine, May, Jannet, Jektiss, Melina, Aqualine, Bargou, Élixir, Primaqua, Délice, Beya et Tijen."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 :root{
@@ -165,6 +216,11 @@ table.prices tr:first-child td{border-top:1px solid var(--line)}
 .offer.best .p{color:var(--best)}
 .offer.best .store::after{content:" ↓"; color:var(--best); font-weight:700}
 
+.intro{color:var(--muted); font-size:14px; max-width:68ch; margin:18px 0 0}
+.intro strong{color:var(--ink)}
+.faq h3{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:15.5px; margin:18px 0 4px}
+.faq p{color:var(--muted); font-size:14px; max-width:68ch; margin:0}
+.faq p strong, .faq p span{color:var(--ink)}
 footer{border-top:1px solid var(--line); margin-top:28px; padding-block:22px 34px; color:var(--muted); font-size:13px}
 footer a{color:var(--accent); text-decoration:none}
 footer a:hover{text-decoration:underline}
@@ -205,6 +261,10 @@ footer a:hover{text-decoration:underline}
 </header>
 
 <div class="wrap">
+  <p class="intro">Comparez les <strong>prix de l'eau minérale en Tunisie</strong> : Safia, Marwa, Sabrine,
+  Melliti, Cristaline et 17 autres marques, en bouteille (0,5 L à 2 L) comme en
+  <strong>stika</strong> (pack de 6). Les prix sont relevés chaque jour sur les boutiques en ligne de
+  Géant, Carrefour, Monoprix et Aziza, pour trouver l'eau la moins chère avant de faire ses courses.</p>
   <div class="stats" id="stats"></div>
 
   <section>
@@ -219,6 +279,27 @@ footer a:hover{text-decoration:underline}
     <p class="sub">Prix relevés chez Géant, Carrefour, Monoprix et Aziza. La flèche ↓ marque l'enseigne la moins chère.</p>
     <div class="grid" id="grid"></div>
     <div class="empty" id="empty" hidden>Aucune marque ne correspond à cette recherche.</div>
+  </section>
+
+  <section class="faq">
+    <h2>Questions fréquentes</h2>
+    <h3>Quelle est l'eau minérale la moins chère en Tunisie ?</h3>
+    <p>Au dernier relevé, la bouteille de 1,5 L d'eau plate la moins chère est à
+    <span id="faq-min">0,610 DT</span> (<span id="faq-winners">Bargou, Marwa et Melliti</span>),
+    soit <span id="faq-min-stika">3,660 DT</span> la stika de 6 bouteilles. Le classement complet
+    des marques est mis à jour chaque jour en haut de cette page.</p>
+    <h3>C'est quoi une « stika » ?</h3>
+    <p>En Tunisie, la <strong>stika</strong> est le pack de 6 bouteilles d'eau, le format le plus
+    acheté par les familles. Sur ce site, le bouton « Stika (×6) » convertit tous les prix affichés
+    en prix du pack (6 × le prix d'une bouteille).</p>
+    <h3>D'où viennent les prix affichés ?</h3>
+    <p>Les prix sont relevés automatiquement chaque jour sur les boutiques en ligne des grandes
+    surfaces tunisiennes : Géant Drive, Carrefour, Monoprix et Aziza. Ils sont indicatifs et
+    peuvent varier selon le magasin et les promotions du moment.</p>
+    <h3>Quelles marques d'eau sont comparées ?</h3>
+    <p>22 marques vendues en Tunisie : Safia, Sabrine, Marwa, Melliti, Garci, Aïn Oktor,
+    Cristaline, Fourat, Dima, Mira, Pristine, May, Jannet, Jektiss, Melina, Aqualine, Bargou,
+    Élixir, Primaqua, Délice, Beya et Tijen — eaux plates et gazeuses.</p>
   </section>
 </div>
 
@@ -375,6 +456,23 @@ document.querySelectorAll("#mode-controls .chipbtn").forEach(btn => btn.addEvent
 }));
 renderCompare();
 render();
+
+/* FAQ : garder les chiffres à jour avec les données du jour ---------------- */
+(function(){
+  const rows = DATA.brands
+    .map(b => ({name:b.name, p:brand15(b)}))
+    .filter(r => r.p !== null)
+    .sort((a,z) => a.p - z.p);
+  if (!rows.length) return;
+  const min = rows[0].p;
+  const winners = rows.filter(r => r.p === min).map(r => r.name);
+  const list = winners.length > 1
+    ? winners.slice(0, -1).join(", ") + " et " + winners[winners.length - 1]
+    : winners[0];
+  document.getElementById("faq-min").textContent = fmtDT(min);
+  document.getElementById("faq-min-stika").textContent = fmtDT(min * 6);
+  document.getElementById("faq-winners").textContent = list;
+})();
 
 /* footer ----------------------------------------------------------------- */
 document.getElementById("foot").innerHTML =

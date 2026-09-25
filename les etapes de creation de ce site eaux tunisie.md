@@ -46,11 +46,16 @@ pour créer n'importe quel autre site.
 
 13. **Statistiques privées** : compte GoatCounter (gratuit) + une ligne de
     script invisible → voir ses visiteurs (pays, appareils, provenance)
-14. **Google Search Console** : déclarer le site (balise de vérification),
+14. **SEO sur la page** : titre riche en mots-clés, meta description,
+    vrai texte visible (intro + section FAQ avec les questions que les gens
+    tapent dans Google), données structurées JSON-LD (WebSite, FAQPage),
+    balise canonical, attributs alt sur les images
+15. **Google Search Console** : déclarer le site (balise de vérification),
     soumettre `sitemap.xml`, « Demander une indexation »
     → apparaît dans Google sous quelques jours
-15. **Faire connaître** : partager dans les groupes Facebook ciblés,
-    WhatsApp, Reddit… Les visites font monter le site dans Google
+16. **Faire connaître (liens externes)** : partager dans les groupes Facebook
+    ciblés, WhatsApp, Reddit… Chaque lien vers le site depuis un autre site
+    (backlink) et chaque visite font monter le site dans Google
 
 ## Les outils utilisés (tous gratuits)
 
