@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
 """Récupère les produits 'eaux' de Géant Drive (geantdrive.tn) -> tools/geant_products.json"""
-import re, json, html, pathlib, urllib.request
+import re, json, html, pathlib, ssl, urllib.error, urllib.request
 
 HERE = pathlib.Path(__file__).parent
 URL = "https://www.geantdrive.tn/tunis-city/11-eaux?resultsPerPage=100"
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"}
 
+def uopen(req, timeout=60):
+    try:
+        return urllib.request.urlopen(req, timeout=timeout)
+    except urllib.error.URLError as e:
+        if "CERTIFICATE_VERIFY_FAILED" not in str(e):
+            raise
+        # la chaîne TLS de certains sites .tn est incomplète : Windows la complète tout
+        # seul, pas Linux (GitHub Actions) — repli sans vérification du certificat
+        return urllib.request.urlopen(req, timeout=timeout, context=ssl._create_unverified_context())
+
 req = urllib.request.Request(URL, headers=UA)
-txt = urllib.request.urlopen(req, timeout=60).read().decode("utf-8", errors="ignore")
+txt = uopen(req).read().decode("utf-8", errors="ignore")
 
 blocks = txt.split("product-miniature js-product-miniature")[1:]
 out = []

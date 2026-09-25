@@ -1,5 +1,5 @@
 """Scrape barka.tn brand pages for Tunisian mineral water products and per-store prices."""
-import re, json, time, pathlib, urllib.request
+import re, json, time, pathlib, ssl, urllib.error, urllib.request
 
 SCRATCH = pathlib.Path(__file__).parent
 PAGES = SCRATCH / "pages" / "barka"
@@ -17,7 +17,14 @@ def fetch(url, dest):
         return dest.read_text(encoding="utf-8", errors="ignore")
     try:
         req = urllib.request.Request(url, headers=UA)
-        data = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", errors="ignore")
+        try:
+            resp = urllib.request.urlopen(req, timeout=30)
+        except urllib.error.URLError as e:
+            if "CERTIFICATE_VERIFY_FAILED" not in str(e):
+                raise
+            # chaîne TLS incomplète sur certains sites .tn (échec sous Linux/GitHub Actions)
+            resp = urllib.request.urlopen(req, timeout=30, context=ssl._create_unverified_context())
+        data = resp.read().decode("utf-8", errors="ignore")
         dest.write_text(data, encoding="utf-8")
         time.sleep(0.8)
         return data
