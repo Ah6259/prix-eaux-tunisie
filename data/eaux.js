@@ -48,9 +48,9 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Géant": 0.63,
       "Carrefour": 0.63,
-      "Monoprix": 0.63
+      "Monoprix": 0.63,
+      "Géant": 0.63
      }
     },
     {
@@ -60,9 +60,9 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Géant": 0.65,
       "Carrefour": 0.66,
-      "Monoprix": 0.7
+      "Monoprix": 0.7,
+      "Géant": 0.65
      }
     },
     {
@@ -331,17 +331,6 @@ window.EAUX_DATA = {
      }
     },
     {
-     "liters": 0.5,
-     "format": "0.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/delice_delio_250ml_pomme.jpg",
-     "prices": {
-      "Carrefour": 0.51,
-      "Monoprix": 0.51
-     }
-    },
-    {
      "liters": 1.0,
      "format": "1 L",
      "category": "plate",
@@ -509,8 +498,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.65,
       "Monoprix": 0.68,
+      "Carrefour": 0.65,
       "Géant": 0.67
      }
     },
@@ -521,8 +510,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Monoprix": 0.68,
       "Géant": 0.61,
+      "Monoprix": 0.68,
       "Carrefour": 0.61
      }
     }
@@ -548,8 +537,8 @@ window.EAUX_DATA = {
      "img": "assets/img/marwa_15l.jpg",
      "prices": {
       "Géant": 0.4,
-      "Monoprix": 0.47,
-      "Carrefour": 0.41
+      "Carrefour": 0.41,
+      "Monoprix": 0.47
      }
     },
     {
@@ -628,8 +617,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/melina_x.jpg",
      "prices": {
-      "Monoprix": 0.42,
-      "Géant": 0.42
+      "Géant": 0.42,
+      "Monoprix": 0.42
      }
     },
     {
@@ -639,8 +628,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/melina_15l.jpg",
      "prices": {
-      "Géant": 0.62,
-      "Monoprix": 0.62
+      "Monoprix": 0.62,
+      "Géant": 0.62
      }
     },
     {
@@ -733,8 +722,8 @@ window.EAUX_DATA = {
      "img": "assets/img/mira_095l.jpg",
      "prices": {
       "Géant": 0.61,
-      "Monoprix": 0.66,
-      "Carrefour": 0.7
+      "Carrefour": 0.7,
+      "Monoprix": 0.66
      }
     },
     {
@@ -754,8 +743,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
-      "Carrefour": 0.79,
-      "Monoprix": 0.84
+      "Monoprix": 0.84,
+      "Carrefour": 0.79
      }
     }
    ],
@@ -895,7 +884,6 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Géant": 0.43,
       "Carrefour": 0.41,
       "Monoprix": 0.41
      }
@@ -933,8 +921,8 @@ window.EAUX_DATA = {
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
       "Géant": 0.44,
-      "Monoprix": 0.49,
-      "Carrefour": 0.46
+      "Carrefour": 0.46,
+      "Monoprix": 0.49
      }
     },
     {
@@ -945,8 +933,8 @@ window.EAUX_DATA = {
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
       "Géant": 0.68,
-      "Carrefour": 0.69,
-      "Monoprix": 0.69
+      "Monoprix": 0.69,
+      "Carrefour": 0.69
      }
     }
    ],
