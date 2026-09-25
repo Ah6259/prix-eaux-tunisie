@@ -94,6 +94,15 @@ h2{
 .winner-price small{color:var(--muted); font-weight:500; font-size:11px}
 
 /* filtres */
+.toolbar{
+  display:flex; gap:6px 14px; flex-wrap:wrap; align-items:center;
+  padding-block:8px 10px; border-top:1px solid var(--line);
+}
+.tgroup{display:flex; gap:6px; flex-wrap:wrap}
+.toolbar select{
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  border-radius:999px; padding:6px 12px; font:inherit; font-size:13px; margin-left:auto;
+}
 .controls{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:16px}
 .chipbtn{
   border:1px solid var(--line); background:var(--surface); color:var(--ink);
@@ -160,6 +169,22 @@ footer a:hover{text-decoration:underline}
       <input id="q" type="search" placeholder="Chercher une marque… (Safia, Marwa…)" aria-label="Chercher une marque">
     </div>
   </div>
+  <div class="wrap toolbar">
+    <div class="tgroup" id="mode-controls" role="group" aria-label="Unité de prix">
+      <button class="chipbtn" data-mode="bouteille" aria-pressed="true">Bouteille</button>
+      <button class="chipbtn" data-mode="stika" aria-pressed="false">Stika (×6)</button>
+    </div>
+    <div class="tgroup" id="controls" role="group" aria-label="Type d'eau">
+      <button class="chipbtn" data-type="toutes" aria-pressed="true">Toutes</button>
+      <button class="chipbtn" data-type="plate" aria-pressed="false">Plates</button>
+      <button class="chipbtn" data-type="gazeuse" aria-pressed="false">Gazeuses</button>
+    </div>
+    <select id="sort" aria-label="Trier les marques">
+      <option value="nom">Tri : nom A→Z</option>
+      <option value="prix15">Tri : prix 1,5 L croissant</option>
+      <option value="prixL">Tri : prix au litre croissant</option>
+    </select>
+  </div>
 </header>
 
 <div class="wrap">
@@ -167,28 +192,14 @@ footer a:hover{text-decoration:underline}
 
   <section>
     <h2>Le match des 1,5 L</h2>
-    <p class="sub">Les marques gagnantes — le prix le moins cher constaté pour l'eau plate 1,5 L, le format le plus vendu en Tunisie.</p>
-    <div class="controls" id="mode-controls">
-      <button class="chipbtn" data-mode="bouteille" aria-pressed="true">Prix bouteille</button>
-      <button class="chipbtn" data-mode="stika" aria-pressed="false">Prix stika (pack de 6)</button>
-      <span class="mode-note">Stika = 6 × le prix de la bouteille · les grands formats (6 L, 19 L) restent à l'unité</span>
-    </div>
+    <p class="sub">Les marques gagnantes — le prix le moins cher constaté pour l'eau plate 1,5 L, le format le plus vendu en Tunisie.
+      <br>Stika = 6 × le prix de la bouteille · les grands formats (6 L, 19 L) restent à l'unité.</p>
     <div class="compare" id="compare"></div>
   </section>
 
   <section>
     <h2>Toutes les marques</h2>
     <p class="sub">Prix relevés chez Géant, Carrefour, Monoprix et Aziza. La flèche ↓ marque l'enseigne la moins chère.</p>
-    <div class="controls" id="controls">
-      <button class="chipbtn" data-type="toutes" aria-pressed="true">Toutes</button>
-      <button class="chipbtn" data-type="plate" aria-pressed="false">Plates</button>
-      <button class="chipbtn" data-type="gazeuse" aria-pressed="false">Gazeuses</button>
-      <select id="sort" aria-label="Trier les marques">
-        <option value="nom">Tri : nom A→Z</option>
-        <option value="prix15">Tri : prix 1,5 L croissant</option>
-        <option value="prixL">Tri : prix au litre croissant</option>
-      </select>
-    </div>
     <div class="grid" id="grid"></div>
     <div class="empty" id="empty" hidden>Aucune marque ne correspond à cette recherche.</div>
   </section>
