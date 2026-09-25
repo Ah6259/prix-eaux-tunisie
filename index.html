@@ -76,6 +76,7 @@ h2{
 .bar-price{text-align:right; font-variant-numeric:tabular-nums; font-weight:700; font-size:14px}
 .bar-price small{display:block; font-weight:500; color:var(--muted); font-size:11px}
 .bar-row.cheapest .bar-price{color:var(--best)}
+.compare-toggle{padding-block:10px 6px; text-align:center}
 
 /* filtres */
 .controls{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:16px}
@@ -151,7 +152,7 @@ footer a:hover{text-decoration:underline}
 
   <section>
     <h2>Le match des 1,5 L</h2>
-    <p class="sub">Meilleur prix constaté par marque pour la bouteille d'eau plate 1,5 L — le format le plus vendu en Tunisie.</p>
+    <p class="sub">Les marques gagnantes — le prix le moins cher constaté pour la bouteille d'eau plate 1,5 L, le format le plus vendu en Tunisie.</p>
     <div class="compare" id="compare"></div>
   </section>
 
@@ -209,7 +210,8 @@ document.getElementById("stats").innerHTML = [
   [fmtDT(Math.min(...all15)) + " – " + fmtDT(Math.max(...all15)), "fourchette 1,5 L"],
 ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
-/* comparateur 1.5L ------------------------------------------------------- */
+/* comparateur 1.5L : seules les gagnantes (prix le moins cher) sont affichées,
+   le classement complet se déroule à la demande ---------------------------- */
 (function(){
   const rows = DATA.brands
     .map(b => ({name:b.name, p:brand15(b)}))
@@ -217,12 +219,29 @@ document.getElementById("stats").innerHTML = [
     .sort((a,z) => a.p - z.p);
   const max = Math.max(...rows.map(r => r.p));
   const min = rows[0].p;
-  document.getElementById("compare").innerHTML = rows.map(r => `
+  const bar = r => `
     <div class="bar-row${r.p === min ? " cheapest" : ""}">
       <span class="bname">${r.name}</span>
       <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.p / max * 100)}%"></div></div>
       <span class="bar-price">${fmtDT(r.p)}${r.p === min ? "<small>la moins chère</small>" : ""}</span>
-    </div>`).join("");
+    </div>`;
+  const winners = rows.filter(r => r.p === min);
+  const others = rows.filter(r => r.p !== min);
+  document.getElementById("compare").innerHTML =
+    winners.map(bar).join("") +
+    (others.length ? `
+      <div id="compare-rest" hidden>${others.map(bar).join("")}</div>
+      <div class="compare-toggle">
+        <button type="button" id="compare-more" class="chipbtn">Voir le classement complet (${others.length} autres marques)</button>
+      </div>` : "");
+  const btn = document.getElementById("compare-more");
+  if (btn) btn.addEventListener("click", () => {
+    const rest = document.getElementById("compare-rest");
+    rest.hidden = !rest.hidden;
+    btn.textContent = rest.hidden
+      ? `Voir le classement complet (${others.length} autres marques)`
+      : "Masquer le classement complet";
+  });
 })();
 
 /* cartes marques --------------------------------------------------------- */
