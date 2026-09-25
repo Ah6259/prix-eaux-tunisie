@@ -3,7 +3,9 @@
 Site web (et base d'une future app) qui liste les marques d'eau minérale vendues en Tunisie
 avec leurs prix relevés chez les grandes surfaces : **Géant, Carrefour, Monoprix, Aziza**.
 
-Version en ligne (privée) : https://claude.ai/artifact/N4YgHUrDQegTPn69Z77DCv
+**Site public : https://ah6259.github.io/prix-eaux-tunisie/**
+Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
+(Ancienne version privée Claude : https://claude.ai/artifact/N4YgHUrDQegTPn69Z77DCv)
 
 ## Contenu actuel (25/09/2026)
 
@@ -51,6 +53,14 @@ Notes :
 - Les métadonnées des marques (source, société, notes) sont dans `META` en tête de `build_data.py`.
 - Certaines marques (Hayet, Cristal Chaâbi, Aïn Mizeb…) ne sont pas encore couvertes :
   barka.tn renvoie une erreur 500 pour elles, il faudra une autre source.
+
+## Déploiement (GitHub Pages)
+
+Le site est un site statique déployé sur GitHub Pages (branche `main`, racine).
+Le workflow [`.github/workflows/maj-prix.yml`](.github/workflows/maj-prix.yml) tourne
+tous les jours à 9h30 (heure de Tunis) sur les serveurs GitHub : il re-scrape les prix,
+commit `data/` si quelque chose a changé, et GitHub Pages redéploie automatiquement.
+Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour des prix » → *Run workflow*.
 
 ## Sources
 
