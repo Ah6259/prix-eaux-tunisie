@@ -222,11 +222,13 @@ function brandPerL(b){ // meilleur prix au litre (eaux nature uniquement)
 const nProd = DATA.brands.reduce((n,b) => n + b.products.length, 0);
 const nOff  = DATA.brands.reduce((n,b) => n + b.products.reduce((m,p) => m + Object.keys(p.prices).length, 0), 0);
 const all15 = DATA.brands.map(brand15).filter(v => v !== null);
+const min15 = Math.min(...all15), max15 = Math.max(...all15);
 document.getElementById("stats").innerHTML = [
   [DATA.brands.length, "marques"],
   [nProd, "produits"],
   [nOff, "prix relevés"],
-  [fmtDT(Math.min(...all15)) + " – " + fmtDT(Math.max(...all15)), "fourchette 1,5 L"],
+  [fmtDT(min15) + " – " + fmtDT(max15), "fourchette bouteille 1,5 L"],
+  [fmtDT(min15 * 6) + " – " + fmtDT(max15 * 6), "fourchette stika 1,5 L"],
 ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
 /* état global ------------------------------------------------------------ */
