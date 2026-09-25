@@ -70,6 +70,11 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
 
 ## Idées pour la suite
 
+- **Fonction de commande** (priorité — la vraie raison de revenir sur le site) :
+  permettre au visiteur de composer sa commande (marque, format, bouteille/stika,
+  quantité) puis l'envoyer vers l'enseigne la moins chère ou le drive
+  (lien direct produit Géant Drive / panier), voire livraison locale à terme
+
 - Vrais logos des marques (sites officiels / pages Facebook) à la place des photos de bouteilles
 - Historique des prix (relevés datés, courbes d'évolution)
 - Prix au litre affiché sur chaque produit
