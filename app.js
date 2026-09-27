@@ -160,7 +160,7 @@ function card(b, prods){
   return `<article class="card">
     <div class="card-head">
       ${b.img ? `<img src="${b.img}" alt="Bouteille ${b.name}" loading="lazy">` : ""}
-      <div class="id"><h3>${b.name}</h3><div class="badges">${badges}</div></div>
+      <div class="id"><h3><a class="marque-lien" href="marque/${b.id}/">${b.name}</a></h3><div class="badges">${badges}</div></div>
     </div>
     ${meta.length ? `<div class="meta">${meta.join(" · ")}</div>` : ""}
     ${compoBlock(b)}

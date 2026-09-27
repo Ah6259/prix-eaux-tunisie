@@ -203,6 +203,16 @@ table.prices tr:first-child td{border-top:1px solid var(--line)}
 .faq h3{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:15.5px; margin:18px 0 4px}
 .faq p{color:var(--muted); font-size:14px; max-width:68ch; margin:0}
 .faq p strong, .faq p span{color:var(--ink)}
+.marque-lien{color:inherit; text-decoration:none}
+.marque-lien:hover{color:var(--accent); text-decoration:underline}
+.marques-nav{border-top:1px solid var(--line); margin-top:20px; padding-top:14px}
+.marques-nav h2{font-size:15px}
+.marques-nav ul{
+  list-style:none; margin:8px 0 0; padding:0;
+  display:flex; flex-wrap:wrap; gap:6px 14px; font-size:12.5px;
+}
+.marques-nav a{color:var(--muted); text-decoration:none}
+.marques-nav a:hover{color:var(--accent); text-decoration:underline}
 footer{border-top:1px solid var(--line); margin-top:28px; padding-block:22px 34px; color:var(--muted); font-size:13px}
 footer a{color:var(--accent); text-decoration:none}
 footer a:hover{text-decoration:underline}

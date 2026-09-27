@@ -11,5 +11,6 @@ if (-not (Test-Path $py)) { $py = "python" }
 
 & $py -u collect_prices.py 2>&1 | Add-Content $log
 & $py -u build_history.py  2>&1 | Add-Content $log
+& $py -u build_pages.py    2>&1 | Add-Content $log
 
 "=== Fin $(Get-Date -Format 'HH:mm') ===`r`n" | Add-Content $log

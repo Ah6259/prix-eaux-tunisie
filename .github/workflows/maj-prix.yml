@@ -30,11 +30,14 @@ jobs:
       - name: Reconstruire l'historique des prix
         run: python tools/build_history.py
 
+      - name: Régénérer les pages par marque et le sitemap
+        run: python tools/build_pages.py
+
       - name: Publier les nouvelles données
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/ assets/img/produits/
+          git add data/ assets/img/produits/ marque/ sitemap.xml index.html
           if git diff --cached --quiet; then
             echo "Aucun changement de prix aujourd'hui."
           else
