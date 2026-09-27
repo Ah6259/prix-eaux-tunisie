@@ -192,6 +192,13 @@
         <button type="button" class="chipbtn" id="o-geo">📍 Me localiser (GPS)</button>
         <span class="geo-status" id="o-geo-status"></span>
       </div>
+      <div class="geo-box" id="geo-box" hidden>
+        <p class="geo-hint">La position automatique n'est pas toujours exacte : déplacez le repère
+        (ou touchez la carte) pour le mettre sur l'endroit précis de la livraison — portail,
+        entrée d'immeuble… — puis confirmez.</p>
+        <div class="geo-map" id="geo-map"></div>
+        <button type="button" class="chipbtn geo-confirm" id="o-geo-confirm">✔ Confirmer cette position</button>
+      </div>
       <label>Remarque
         <input id="o-note" type="text" placeholder="ex. étage, horaire préféré…"></label>
       <p class="order-note">Votre commande ne vous engage à rien : vous confirmez (ou non) une fois

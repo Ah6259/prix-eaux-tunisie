@@ -293,7 +293,40 @@ function renderOrderItems(){
      confirmons sur WhatsApp avec les frais de livraison.`;
 }
 
-let geoPos = null;
+let geoPos = null;          // position CONFIRMÉE par le client (sinon null)
+let geoMap = null, geoMarker = null;
+
+// Leaflet (carte OpenStreetMap) chargé seulement au premier clic sur « Me localiser »
+function loadLeaflet(){
+  if (window.L) return Promise.resolve();
+  return new Promise((ok, ko) => {
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+    document.head.appendChild(css);
+    const js = document.createElement("script");
+    js.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+    js.onload = ok; js.onerror = ko;
+    document.head.appendChild(js);
+  });
+}
+
+function showGeoMap(lat, lng, zoom){
+  document.getElementById("geo-box").hidden = false;
+  geoPos = null;  // toute nouvelle position doit être reconfirmée par le client
+  if (!geoMap){
+    geoMap = L.map("geo-map").setView([lat, lng], zoom);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      { maxZoom: 19, attribution: "© OpenStreetMap" }).addTo(geoMap);
+    geoMarker = L.marker([lat, lng], { draggable: true }).addTo(geoMap);
+    geoMap.on("click", e => geoMarker.setLatLng(e.latlng));
+  } else {
+    geoMap.setView([lat, lng], zoom);
+    geoMarker.setLatLng([lat, lng]);
+  }
+  // le conteneur vient d'apparaître : recalculer la taille de la carte
+  setTimeout(() => geoMap.invalidateSize(), 150);
+}
 
 function messageWhatsApp(){
   const lines = cartLines();
@@ -309,7 +342,7 @@ function messageWhatsApp(){
     nom ? `Nom : ${nom}` : null,
     `Tél : ${tel}`,
     `Adresse : ${adr}`,
-    geoPos ? `Position GPS : https://maps.google.com/?q=${geoPos.lat},${geoPos.lng}` : null,
+    geoPos ? `Position exacte confirmée par le client : https://maps.google.com/?q=${geoPos.lat},${geoPos.lng}` : null,
     note ? `Remarque : ${note}` : null,
   ].filter(x => x !== null).join("\n");
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`;
@@ -344,17 +377,31 @@ document.getElementById("order-items").addEventListener("click", e => {
   saveCart(); renderCartBar(); renderOrderItems();
 });
 
-document.getElementById("o-geo").addEventListener("click", () => {
+document.getElementById("o-geo").addEventListener("click", async () => {
   const status = document.getElementById("o-geo-status");
-  if (!navigator.geolocation){ status.textContent = "GPS non disponible sur cet appareil."; return; }
   status.textContent = "Localisation…";
+  try { await loadLeaflet(); }
+  catch (e) { status.textContent = "Carte indisponible — décrivez précisément l'adresse."; return; }
+  const manuel = () => {   // GPS refusé ou en échec : placement du repère à la main
+    status.textContent = "Placez le repère sur la carte, puis confirmez.";
+    showGeoMap(36.8065, 10.1815, 11);  // Tunis par défaut
+  };
+  if (!navigator.geolocation) return manuel();
   navigator.geolocation.getCurrentPosition(
     pos => {
-      geoPos = { lat: pos.coords.latitude.toFixed(6), lng: pos.coords.longitude.toFixed(6) };
-      status.textContent = "Position enregistrée ✓";
+      status.textContent = "Vérifiez le repère, ajustez-le si besoin, puis confirmez.";
+      showGeoMap(pos.coords.latitude, pos.coords.longitude, 17);
     },
-    () => { status.textContent = "Impossible d'obtenir la position — indiquez l'adresse complète."; },
+    manuel,
     { enableHighAccuracy: true, timeout: 12000 });
+});
+
+document.getElementById("o-geo-confirm").addEventListener("click", () => {
+  if (!geoMarker) return;
+  const ll = geoMarker.getLatLng();
+  geoPos = { lat: ll.lat.toFixed(6), lng: ll.lng.toFixed(6) };
+  document.getElementById("geo-box").hidden = true;
+  document.getElementById("o-geo-status").textContent = "Position confirmée ✓ (cliquez pour modifier)";
 });
 
 document.getElementById("order-form").addEventListener("submit", e => {
