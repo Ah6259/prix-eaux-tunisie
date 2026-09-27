@@ -2,18 +2,22 @@
  "updated": "2026-09-27",
  "currency": "DT",
  "stores": [
-  "Géant",
   "Carrefour",
+  "Géant",
   "Monoprix",
   "Aziza"
  ],
  "sources": [
   {
+   "name": "Carrefour Tunisie",
+   "url": "https://www.carrefour.tn"
+  },
+  {
    "name": "Géant Drive Tunisie",
    "url": "https://www.geantdrive.tn"
   },
   {
-   "name": "Carrefour, Monoprix, Aziza",
+   "name": "Monoprix & Aziza (via barka.tn)",
    "url": "https://barka.tn"
   },
   {
@@ -28,10 +32,14 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/aqualine_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
@@ -47,7 +55,7 @@
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Carrefour": 0.63,
+      "Carrefour": 0.61,
       "Monoprix": 0.63
      }
     },
@@ -59,8 +67,8 @@
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
       "Géant": 0.6,
-      "Monoprix": 0.7,
-      "Carrefour": 0.66
+      "Carrefour": 0.63,
+      "Monoprix": 0.7
      }
     },
     {
@@ -70,37 +78,10 @@
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Carrefour": 0.76,
+      "Carrefour": 0.78,
       "Monoprix": 0.83
      }
     }
-   ],
-   "img": "assets/img/aqualine_15l.jpg",
-   "types": [
-    "plate"
-   ]
-  },
-  {
-   "id": "ain-oktor",
-   "name": "Aïn Oktor",
-   "company": null,
-   "source": "Korbous (Cap Bon)",
-   "note": "Eau minérale naturelle gazeuse.",
-   "products": [
-    {
-     "liters": 0.9,
-     "format": "0.9 L",
-     "category": "gazeuse",
-     "flavor": null,
-     "img": "assets/img/oktor_09l.jpg",
-     "prices": {
-      "Géant": 0.69
-     }
-    }
-   ],
-   "img": "assets/img/oktor_09l.jpg",
-   "types": [
-    "gazeuse"
    ]
   },
   {
@@ -109,6 +90,10 @@
    "company": null,
    "source": "Bargou (Siliana)",
    "note": "Lancée en 2015.",
+   "img": "assets/img/bargou_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 1.5,
@@ -117,13 +102,10 @@
      "flavor": null,
      "img": "assets/img/bargou_15l.jpg",
      "prices": {
-      "Carrefour": 0.61
+      "Aziza": 0.59,
+      "Carrefour": 0.67
      }
     }
-   ],
-   "img": "assets/img/bargou_15l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -132,10 +114,14 @@
    "company": null,
    "source": null,
    "note": "Eau de source naturelle.",
+   "img": "assets/img/beya_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/beya_15l.jpg",
@@ -153,10 +139,29 @@
       "Géant": 0.66
      }
     }
-   ],
-   "img": "assets/img/beya_15l.jpg",
+   ]
+  },
+  {
+   "id": "brima",
+   "name": "Brima",
+   "company": null,
+   "source": null,
+   "note": null,
+   "img": "assets/img/produits/d62fddf4951e.webp",
    "types": [
     "plate"
+   ],
+   "products": [
+    {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/d62fddf4951e.webp",
+     "prices": {
+      "Carrefour": 0.47
+     }
+    }
    ]
   },
   {
@@ -165,15 +170,19 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/cristaline_2l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
-      "Carrefour": 0.42,
+      "Carrefour": 0.4,
       "Monoprix": 0.42
      }
     },
@@ -184,7 +193,7 @@
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
-      "Carrefour": 0.64,
+      "Carrefour": 0.61,
       "Monoprix": 0.64
      }
     },
@@ -195,15 +204,85 @@
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
+      "Carrefour": 0.8,
       "Géant": 0.81,
-      "Carrefour": 0.84,
-      "Monoprix": 0.84
+      "Monoprix": 0.84,
+      "Aziza": 0.85
      }
     }
-   ],
-   "img": "assets/img/cristaline_2l.jpg",
+   ]
+  },
+  {
+   "id": "denya",
+   "name": "Denya",
+   "company": null,
+   "source": null,
+   "note": null,
+   "img": "assets/img/produits/2df55c3e5df9.webp",
    "types": [
     "plate"
+   ],
+   "products": [
+    {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/2df55c3e5df9.webp",
+     "prices": {
+      "Carrefour": 0.46
+     }
+    },
+    {
+     "liters": 1.0,
+     "format": "1 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/bcb6baf2ffc7.jpg",
+     "prices": {
+      "Aziza": 0.5
+     }
+    },
+    {
+     "liters": 1.65,
+     "format": "1.65 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/507c2c4a3e7b.webp",
+     "prices": {
+      "Carrefour": 0.72
+     }
+    },
+    {
+     "liters": 1.75,
+     "format": "1.75 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/2f238ed5ca4a.webp",
+     "prices": {
+      "Carrefour": 0.76
+     }
+    },
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/d1aeeb2cec92.webp",
+     "prices": {
+      "Carrefour": 0.8
+     }
+    },
+    {
+     "liters": 2.25,
+     "format": "2.25 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/ceb67f3e0c00.webp",
+     "prices": {
+      "Carrefour": 0.76
+     }
+    }
    ]
   },
   {
@@ -212,16 +291,20 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/dima_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/dima_15l.jpg",
      "prices": {
-      "Géant": 0.56,
-      "Carrefour": 0.45
+      "Carrefour": 0.45,
+      "Géant": 0.56
      }
     },
     {
@@ -241,13 +324,9 @@
      "flavor": null,
      "img": "assets/img/dima_15l.jpg",
      "prices": {
-      "Carrefour": 0.75
+      "Carrefour": 0.78
      }
     }
-   ],
-   "img": "assets/img/dima_15l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -255,68 +334,12 @@
    "name": "Délice",
    "company": "Groupe Délice",
    "source": null,
-   "note": "Eau de source Délice ; gamme gazeuse aromatisée Deli'O.",
+   "note": "Eau de source Délice.",
+   "img": "assets/img/delice_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
-    {
-     "liters": 0.25,
-     "format": "250 ml",
-     "category": "gazeuse",
-     "flavor": "Ananas",
-     "img": "assets/img/delice_delio_250ml_ananas.jpg",
-     "prices": {
-      "Géant": 0.98
-     }
-    },
-    {
-     "liters": 0.25,
-     "format": "250 ml",
-     "category": "gazeuse",
-     "flavor": "Fraise",
-     "img": "assets/img/delice_delio_250ml_fraise.jpg",
-     "prices": {
-      "Géant": 0.98
-     }
-    },
-    {
-     "liters": 0.25,
-     "format": "250 ml",
-     "category": "gazeuse",
-     "flavor": "Menthe",
-     "img": "assets/img/delice_delio_250ml_menthe.jpg",
-     "prices": {
-      "Géant": 0.98
-     }
-    },
-    {
-     "liters": 0.25,
-     "format": "250 ml",
-     "category": "gazeuse",
-     "flavor": "Poire",
-     "img": "assets/img/delice_delio_250ml_poire.jpg",
-     "prices": {
-      "Géant": 0.98
-     }
-    },
-    {
-     "liters": 0.25,
-     "format": "250 ml",
-     "category": "gazeuse",
-     "flavor": "Pomme",
-     "img": "assets/img/delice_delio_250ml_pomme.jpg",
-     "prices": {
-      "Géant": 0.98
-     }
-    },
-    {
-     "liters": 0.25,
-     "format": "250 ml",
-     "category": "gazeuse",
-     "flavor": "Pêche",
-     "img": "assets/img/delice_delio_250ml_peche.jpg",
-     "prices": {
-      "Géant": 0.98
-     }
-    },
     {
      "liters": 0.25,
      "format": "250 ml",
@@ -328,12 +351,25 @@
      }
     },
     {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/delice_delio_250ml_pomme.jpg",
+     "prices": {
+      "Carrefour": 0.48,
+      "Aziza": 0.48,
+      "Monoprix": 0.51
+     }
+    },
+    {
      "liters": 1.0,
      "format": "1 L",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/delice_1l.jpg",
      "prices": {
+      "Carrefour": 0.68,
       "Géant": 0.73
      }
     },
@@ -344,14 +380,11 @@
      "flavor": null,
      "img": "assets/img/delice_15l.jpg",
      "prices": {
-      "Géant": 0.66
+      "Carrefour": 0.65,
+      "Géant": 0.66,
+      "Aziza": 0.68
      }
     }
-   ],
-   "img": "assets/img/delice_15l.jpg",
-   "types": [
-    "gazeuse",
-    "plate"
    ]
   },
   {
@@ -360,10 +393,14 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/fourat_2l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/fourat_2l.jpg",
@@ -378,15 +415,12 @@
      "flavor": null,
      "img": "assets/img/fourat_2l.jpg",
      "prices": {
+      "Aziza": 0.85,
+      "Carrefour": 0.88,
       "Géant": 0.88,
-      "Carrefour": 0.89,
       "Monoprix": 0.9
      }
     }
-   ],
-   "img": "assets/img/fourat_2l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -395,10 +429,15 @@
    "company": "SFBT (Sostem)",
    "source": "Aïn Garci, Enfidha (Sousse)",
    "note": "La plus ancienne eau gazeuse naturelle de Tunisie.",
+   "img": "assets/img/garci_1l.jpg",
+   "types": [
+    "gazeuse",
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "gazeuse",
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
@@ -415,8 +454,7 @@
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
      "prices": {
-      "Monoprix": 0.67,
-      "Carrefour": 0.62
+      "Monoprix": 0.67
      }
     },
     {
@@ -426,14 +464,11 @@
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
      "prices": {
-      "Géant": 0.69
+      "Carrefour": 0.62,
+      "Géant": 0.69,
+      "Monoprix": 0.74
      }
     }
-   ],
-   "img": "assets/img/garci_1l.jpg",
-   "types": [
-    "gazeuse",
-    "plate"
    ]
   },
   {
@@ -442,6 +477,10 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/jannet_2l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 2.0,
@@ -450,13 +489,10 @@
      "flavor": null,
      "img": "assets/img/jannet_2l.jpg",
      "prices": {
-      "Carrefour": 0.89
+      "Aziza": 0.7,
+      "Carrefour": 0.83
      }
     }
-   ],
-   "img": "assets/img/jannet_2l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -465,10 +501,15 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/jektiss_x.jpg",
+   "types": [
+    "gazeuse",
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "gazeuse",
      "flavor": null,
      "img": "assets/img/jektiss_x.jpg",
@@ -484,7 +525,8 @@
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.65,
+      "Aziza": 0.63,
+      "Carrefour": 0.67,
       "Monoprix": 0.68
      }
     },
@@ -495,16 +537,34 @@
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
+      "Carrefour": 0.59,
       "Géant": 0.59,
-      "Carrefour": 0.61,
       "Monoprix": 0.68
      }
     }
-   ],
-   "img": "assets/img/jektiss_x.jpg",
+   ]
+  },
+  {
+   "id": "main",
+   "name": "Main",
+   "company": null,
+   "source": null,
+   "note": null,
+   "img": "assets/img/produits/4e4f22bb6f87.webp",
    "types": [
-    "gazeuse",
     "plate"
+   ],
+   "products": [
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/4e4f22bb6f87.webp",
+     "prices": {
+      "Carrefour": 0.6
+     }
+    }
    ]
   },
   {
@@ -513,22 +573,26 @@
    "company": "Eaux Minérales Marwa",
    "source": "Kef Ghrab, Joumine (Bizerte)",
    "note": "Commercialisée depuis 1993.",
+   "img": "assets/img/marwa_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/marwa_15l.jpg",
      "prices": {
+      "Carrefour": 0.4,
       "Géant": 0.4,
-      "Monoprix": 0.47,
-      "Carrefour": 0.41
+      "Monoprix": 0.47
      }
     },
     {
      "liters": 0.75,
-     "format": "0.75 L",
+     "format": "750 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/marwa_15l.jpg",
@@ -544,14 +608,9 @@
      "img": "assets/img/marwa_15l.jpg",
      "prices": {
       "Géant": 0.61,
-      "Monoprix": 0.64,
-      "Carrefour": 0.64
+      "Monoprix": 0.64
      }
     }
-   ],
-   "img": "assets/img/marwa_15l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -560,6 +619,10 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/may_tunisia_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 1.5,
@@ -568,8 +631,8 @@
      "flavor": null,
      "img": "assets/img/may_tunisia_15l.jpg",
      "prices": {
-      "Géant": 0.67,
-      "Carrefour": 0.67
+      "Carrefour": 0.67,
+      "Géant": 0.67
      }
     },
     {
@@ -582,10 +645,6 @@
       "Monoprix": 0.89
      }
     }
-   ],
-   "img": "assets/img/may_tunisia_15l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -594,10 +653,14 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/melina_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/melina_x.jpg",
@@ -626,10 +689,6 @@
       "Monoprix": 0.79
      }
     }
-   ],
-   "img": "assets/img/melina_15l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -638,16 +697,21 @@
    "company": "SFBT (Sostem)",
    "source": "Aïn El Beidha, Téboursouk (Béja)",
    "note": null,
+   "img": "assets/img/melliti_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
+      "Carrefour": 0.4,
       "Géant": 0.4,
-      "Carrefour": 0.42,
+      "Aziza": 0.42,
       "Monoprix": 0.47
      }
     },
@@ -659,15 +723,9 @@
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
       "Géant": 0.61,
-      "Aziza": 0.63,
-      "Monoprix": 0.69,
-      "Carrefour": 0.64
+      "Monoprix": 0.69
      }
     }
-   ],
-   "img": "assets/img/melliti_15l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -676,20 +734,34 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/mira_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
-     "liters": 0.4,
-     "format": "0.4 L",
+     "liters": 0.25,
+     "format": "250 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
-      "Carrefour": 0.42
+      "Carrefour": 0.37
+     }
+    },
+    {
+     "liters": 0.4,
+     "format": "400 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/mira_2l.jpg",
+     "prices": {
+      "Carrefour": 0.39
      }
     },
     {
      "liters": 0.6,
-     "format": "0.6 L",
+     "format": "600 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
@@ -699,14 +771,14 @@
     },
     {
      "liters": 0.95,
-     "format": "0.95 L",
+     "format": "950 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/mira_095l.jpg",
      "prices": {
+      "Carrefour": 0.61,
       "Géant": 0.61,
-      "Monoprix": 0.66,
-      "Carrefour": 0.7
+      "Monoprix": 0.66
      }
     },
     {
@@ -726,14 +798,65 @@
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
-      "Carrefour": 0.79,
+      "Carrefour": 0.74,
       "Monoprix": 0.84
      }
     }
-   ],
-   "img": "assets/img/mira_15l.jpg",
+   ]
+  },
+  {
+   "id": "palma",
+   "name": "Palma",
+   "company": null,
+   "source": null,
+   "note": null,
+   "img": "assets/img/produits/a10da5f9cc3a.webp",
    "types": [
+    "gazeuse",
     "plate"
+   ],
+   "products": [
+    {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "gazeuse",
+     "flavor": null,
+     "img": "assets/img/produits/e8ce8d8e6e67.webp",
+     "prices": {
+      "Carrefour": 0.8
+     }
+    },
+    {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/322c6eeed7e7.webp",
+     "prices": {
+      "Aziza": 0.36,
+      "Carrefour": 0.5
+     }
+    },
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/a10da5f9cc3a.webp",
+     "prices": {
+      "Carrefour": 0.76
+     }
+    },
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/f004e536a900.webp",
+     "prices": {
+      "Carrefour": 0.92
+     }
+    }
    ]
   },
   {
@@ -742,6 +865,10 @@
    "company": null,
    "source": null,
    "note": "Eau de table, grands formats et bonbonnes.",
+   "img": "assets/img/primaqua_6l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 6.0,
@@ -750,9 +877,10 @@
      "flavor": null,
      "img": "assets/img/primaqua_6l.jpg",
      "prices": {
+      "Carrefour": 2.34,
       "Géant": 2.39,
       "Monoprix": 2.46,
-      "Carrefour": 2.39
+      "Aziza": 4.19
      }
     },
     {
@@ -762,14 +890,9 @@
      "flavor": null,
      "img": "assets/img/primaqua_19l_avec_consigne.jpg",
      "prices": {
-      "Géant": 14.55,
       "Carrefour": 5.35
      }
     }
-   ],
-   "img": "assets/img/primaqua_6l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -778,10 +901,14 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/pristine_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/pristine_980ml.jpg",
@@ -800,14 +927,24 @@
      }
     },
     {
+     "liters": 1.0,
+     "format": "1 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/pristine_980ml.jpg",
+     "prices": {
+      "Carrefour": 0.62
+     }
+    },
+    {
      "liters": 1.5,
      "format": "1.5 L",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/pristine_15l.jpg",
      "prices": {
-      "Géant": 0.67,
-      "Carrefour": 0.64
+      "Carrefour": 0.64,
+      "Géant": 0.67
      }
     },
     {
@@ -817,14 +954,54 @@
      "flavor": null,
      "img": "assets/img/pristine_2l.jpg",
      "prices": {
-      "Géant": 0.8,
-      "Carrefour": 0.79
+      "Carrefour": 0.79,
+      "Géant": 0.8
      }
     }
-   ],
-   "img": "assets/img/pristine_15l.jpg",
+   ]
+  },
+  {
+   "id": "rim",
+   "name": "Rim",
+   "company": null,
+   "source": null,
+   "note": null,
+   "img": "assets/img/produits/ffd03e3f94f9.webp",
    "types": [
     "plate"
+   ],
+   "products": [
+    {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/27db4ab3d625.webp",
+     "prices": {
+      "Carrefour": 0.43
+     }
+    },
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/ffd03e3f94f9.webp",
+     "prices": {
+      "Carrefour": 0.67,
+      "Géant": 0.69
+     }
+    },
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/be3428661094.webp",
+     "prices": {
+      "Carrefour": 0.86
+     }
+    }
    ]
   },
   {
@@ -833,7 +1010,21 @@
    "company": "Sabrine SA",
    "source": "Oued Kharroub, Chebika (Kairouan)",
    "note": "Commercialisée depuis 1991, première eau certifiée ISO 22000 en Tunisie.",
+   "img": "assets/img/sabrine_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
+    {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/sabrine_15l.jpg",
+     "prices": {
+      "Aziza": 0.37
+     }
+    },
     {
      "liters": 1.5,
      "format": "1.5 L",
@@ -841,16 +1032,12 @@
      "flavor": null,
      "img": "assets/img/sabrine_15l.jpg",
      "prices": {
-      "Géant": 0.68,
-      "Aziza": 0.67,
       "Monoprix": 0.66,
-      "Carrefour": 0.7
+      "Aziza": 0.67,
+      "Carrefour": 0.68,
+      "Géant": 0.68
      }
     }
-   ],
-   "img": "assets/img/sabrine_15l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -859,17 +1046,21 @@
    "company": "SFBT (Sostem)",
    "source": "Aïn Mizeb & Aïn Ksiba, El Ksour (Le Kef)",
    "note": "Marque historique d'eau plate en Tunisie.",
+   "img": "assets/img/safia_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Géant": 0.43,
       "Monoprix": 0.41,
-      "Carrefour": 0.41
+      "Carrefour": 0.43,
+      "Géant": 0.43
      }
     },
     {
@@ -879,15 +1070,10 @@
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Géant": 0.69,
-      "Carrefour": 0.72,
-      "Monoprix": 0.67
+      "Monoprix": 0.67,
+      "Géant": 0.69
      }
     }
-   ],
-   "img": "assets/img/safia_15l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
@@ -896,17 +1082,21 @@
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/tijen_15l.jpg",
+   "types": [
+    "plate"
+   ],
    "products": [
     {
      "liters": 0.5,
-     "format": "0.5 L",
+     "format": "500 ml",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
+      "Carrefour": 0.44,
       "Géant": 0.44,
-      "Monoprix": 0.49,
-      "Carrefour": 0.46
+      "Monoprix": 0.49
      }
     },
     {
@@ -916,38 +1106,54 @@
      "flavor": null,
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
+      "Carrefour": 0.68,
       "Géant": 0.68,
-      "Monoprix": 0.69,
-      "Carrefour": 0.69
+      "Monoprix": 0.69
      }
     }
-   ],
-   "img": "assets/img/tijen_15l.jpg",
-   "types": [
-    "plate"
    ]
   },
   {
-   "id": "elixir",
-   "name": "Élixir",
+   "id": "vivian",
+   "name": "Vivian",
    "company": null,
    "source": null,
    "note": null,
+   "img": "assets/img/produits/86a2e56fd2b8.webp",
+   "types": [
+    "plate"
+   ],
    "products": [
+    {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/576043c7945c.webp",
+     "prices": {
+      "Carrefour": 0.38
+     }
+    },
     {
      "liters": 1.5,
      "format": "1.5 L",
      "category": "plate",
      "flavor": null,
-     "img": "assets/img/elixir_15l.jpg",
+     "img": "assets/img/produits/86a2e56fd2b8.webp",
      "prices": {
-      "Géant": 0.7
+      "Carrefour": 0.82
+     }
+    },
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/ac9ed07fe7f8.webp",
+     "prices": {
+      "Carrefour": 0.9
      }
     }
-   ],
-   "img": "assets/img/elixir_15l.jpg",
-   "types": [
-    "plate"
    ]
   }
  ]

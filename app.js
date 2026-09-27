@@ -78,7 +78,7 @@ function renderCompare(){
 
 /* cartes marques --------------------------------------------------------- */
 
-function prodRow(p){
+function prodRow(p, b){
   const best = bestStores(p);
   const multi = Object.keys(p.prices).length > 1;
   const offers = Object.entries(p.prices)
@@ -90,7 +90,10 @@ function prodRow(p){
   const label = p.format + (stika ? ` <small>· stika ×6</small>` : "") +
                 (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
                 (p.category === "gazeuse" ? ` <small>· gazeuse</small>` : "");
-  return `<tr><td class="fmt">${label}</td><td><span class="offer-list">${offers}</span></td></tr>`;
+  const add = `<button type="button" class="addbtn" title="Ajouter à la commande"
+      aria-label="Ajouter ${b.name} ${p.format} à la commande"
+      data-bid="${b.id}" data-liters="${p.liters}" data-category="${p.category}" data-flavor="${p.flavor || ""}">+</button>`;
+  return `<tr><td class="fmt">${label}</td><td><span class="offer-list">${offers}</span></td><td class="addc">${add}</td></tr>`;
 }
 
 function card(b){
@@ -107,12 +110,12 @@ function card(b){
     </div>
     ${meta.length ? `<div class="meta">${meta.join(" · ")}</div>` : ""}
     <table class="prices">
-      <tr><th>Format</th><th>Prix par enseigne</th></tr>
+      <tr><th>Format</th><th>Prix par enseigne</th><th></th></tr>
       ${b.products.slice().sort((a,z) =>
           (a.liters - z.liters) ||
           ((a.category === "gazeuse") - (z.category === "gazeuse")) ||
           (a.flavor || "").localeCompare(z.flavor || "")
-        ).map(prodRow).join("")}
+        ).map(p => prodRow(p, b)).join("")}
     </table>
   </article>`;
 }
@@ -163,9 +166,184 @@ render();
   document.getElementById("faq-winners").textContent = list;
 })();
 
+/* intro + FAQ : nombre et liste des marques suivant les données du jour ---- */
+(function(){
+  const noms = DATA.brands.map(b => b.name);
+  const el = (id, txt) => { const e = document.getElementById(id); if (e) e.textContent = txt; };
+  el("intro-autres", `${Math.max(noms.length - 5, 0)} autres marques`);
+  el("faq-nb-marques", noms.length);
+  el("faq-marques-liste", noms.length > 1
+    ? noms.slice(0, -1).join(", ") + " et " + noms[noms.length - 1]
+    : noms.join(""));
+})();
+
 /* footer ----------------------------------------------------------------- */
 document.getElementById("foot").innerHTML =
   `Prix indicatifs relevés le ${new Date(DATA.updated + "T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}
    sur les boutiques en ligne — ils peuvent varier selon le magasin et la date. Sources :
    ${DATA.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${s.name}</a>`).join(" · ")}.
    Projet personnel — les visuels de bouteilles proviennent des catalogues des enseignes.`;
+
+/* ========================================================================= */
+/* Commande : panier + envoi WhatsApp                                        */
+/* ========================================================================= */
+const WHATSAPP = "21624321390";
+const CART_KEY = "eaux_commande";
+
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) {}
+const saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} };
+
+function findProduct(bid, liters, category, flavor){
+  const b = DATA.brands.find(x => x.id === bid);
+  const p = b && b.products.find(x =>
+    Math.abs(x.liters - liters) < .001 && x.category === category && (x.flavor || "") === (flavor || ""));
+  return b && p ? {b, p} : null;
+}
+
+// prix unitaire estimé : enseigne la moins chère du jour (stika = 6 × bouteille)
+function unitInfo(p, unit){
+  const min = minPrice(p);
+  return { prix: unit === "stika" ? min * 6 : min, enseigne: bestStores(p)[0] };
+}
+
+function addToCart(bid, liters, category, flavor){
+  const found = findProduct(bid, liters, category, flavor);
+  if (!found) return;
+  const unit = (state.mode === "stika" && liters <= 2) ? "stika" : "bouteille";
+  const key = [bid, liters, category, flavor || "", unit].join("|");
+  const item = cart.find(x => x.key === key);
+  if (item) item.qty += 1;
+  else cart.push({ key, bid, liters, category, flavor: flavor || "", unit, qty: 1 });
+  saveCart(); renderCartBar(); renderOrderItems();
+}
+
+function cartLines(){
+  return cart.map(item => {
+    const found = findProduct(item.bid, item.liters, item.category, item.flavor);
+    if (!found) return null;
+    const u = unitInfo(found.p, item.unit);
+    const unitLabel = item.unit === "stika" ? "stika (6 bouteilles)" : "bouteille";
+    return { ...item, nom: found.b.name, format: found.p.format,
+             gaz: item.category === "gazeuse", unitLabel,
+             prix: u.prix * item.qty, enseigne: u.enseigne };
+  }).filter(Boolean);
+}
+
+function renderCartBar(){
+  const bar = document.getElementById("cartbar");
+  const lines = cartLines();
+  const n = lines.reduce((s, l) => s + l.qty, 0);
+  const total = lines.reduce((s, l) => s + l.prix, 0);
+  bar.hidden = n === 0;
+  document.body.classList.toggle("has-cart", n > 0);
+  if (n) document.getElementById("cartbar-info").innerHTML =
+    `${n} article${n > 1 ? "s" : ""} · environ <b>${fmtDT(total)}</b> + livraison`;
+}
+
+function renderOrderItems(){
+  const box = document.getElementById("order-items");
+  const lines = cartLines();
+  if (!lines.length){
+    box.innerHTML = `<p class="order-empty">Votre commande est vide — ajoutez des produits avec le bouton +.</p>`;
+    document.getElementById("order-total").textContent = "";
+    return;
+  }
+  box.innerHTML = lines.map(l => `
+    <div class="order-item">
+      <span class="oi-name">${l.nom} ${l.format}${l.gaz ? " gazeuse" : ""}${l.flavor ? " " + l.flavor : ""}
+        <small>${l.unitLabel} · ${l.enseigne}</small></span>
+      <span class="qty">
+        <button type="button" data-dec="${l.key}" aria-label="Une ${l.unitLabel} de moins">−</button>
+        <b>${l.qty}</b>
+        <button type="button" data-inc="${l.key}" aria-label="Une ${l.unitLabel} de plus">+</button>
+      </span>
+      <span class="oi-price">${fmtDT(l.prix)}</span>
+    </div>`).join("");
+  const total = lines.reduce((s, l) => s + l.prix, 0);
+  document.getElementById("order-total").innerHTML =
+    `Total estimé : ${fmtDT(total)} <small>+ frais de livraison</small>`;
+}
+
+let geoPos = null;
+
+function messageWhatsApp(){
+  const lines = cartLines();
+  const nom = document.getElementById("o-nom").value.trim();
+  const tel = document.getElementById("o-tel").value.trim();
+  const adr = document.getElementById("o-adr").value.trim();
+  const note = document.getElementById("o-note").value.trim();
+  const total = lines.reduce((s, l) => s + l.prix, 0);
+  const txt = [
+    "🚰 Commande — Prix des Eaux de Tunisie",
+    "",
+    ...lines.map(l => `• ${l.qty} × ${l.unitLabel} ${l.nom} ${l.format}${l.gaz ? " gazeuse" : ""}` +
+                      ` — ~${fmtDT(l.prix)} (${l.enseigne})`),
+    "",
+    `Total produits estimé : ~${fmtDT(total)} + livraison`,
+    nom ? `Nom : ${nom}` : null,
+    `Tél : ${tel}`,
+    `Adresse : ${adr}`,
+    geoPos ? `Position GPS : https://maps.google.com/?q=${geoPos.lat},${geoPos.lng}` : null,
+    note ? `Remarque : ${note}` : null,
+  ].filter(x => x !== null).join("\n");
+  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`;
+}
+
+/* écouteurs --------------------------------------------------------------- */
+document.getElementById("grid").addEventListener("click", e => {
+  const btn = e.target.closest(".addbtn");
+  if (!btn) return;
+  addToCart(btn.dataset.bid, parseFloat(btn.dataset.liters), btn.dataset.category, btn.dataset.flavor);
+  btn.textContent = "✓";
+  setTimeout(() => { btn.textContent = "+"; }, 700);
+});
+
+const overlay = document.getElementById("order-overlay");
+document.getElementById("cart-open").addEventListener("click", () => {
+  renderOrderItems();
+  overlay.hidden = false;
+});
+document.getElementById("order-close").addEventListener("click", () => { overlay.hidden = true; });
+overlay.addEventListener("click", e => { if (e.target === overlay) overlay.hidden = true; });
+document.addEventListener("keydown", e => { if (e.key === "Escape") overlay.hidden = true; });
+
+document.getElementById("order-items").addEventListener("click", e => {
+  const inc = e.target.closest("[data-inc]"), dec = e.target.closest("[data-dec]");
+  if (!inc && !dec) return;
+  const key = (inc || dec).dataset.inc || (inc || dec).dataset.dec;
+  const item = cart.find(x => x.key === key);
+  if (!item) return;
+  item.qty += inc ? 1 : -1;
+  if (item.qty <= 0) cart = cart.filter(x => x !== item);
+  saveCart(); renderCartBar(); renderOrderItems();
+});
+
+document.getElementById("o-geo").addEventListener("click", () => {
+  const status = document.getElementById("o-geo-status");
+  if (!navigator.geolocation){ status.textContent = "GPS non disponible sur cet appareil."; return; }
+  status.textContent = "Localisation…";
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      geoPos = { lat: pos.coords.latitude.toFixed(6), lng: pos.coords.longitude.toFixed(6) };
+      status.textContent = "Position enregistrée ✓";
+    },
+    () => { status.textContent = "Impossible d'obtenir la position — indiquez l'adresse complète."; },
+    { enableHighAccuracy: true, timeout: 12000 });
+});
+
+document.getElementById("order-form").addEventListener("submit", e => {
+  e.preventDefault();
+  if (!cartLines().length){ renderOrderItems(); return; }
+  const tel = document.getElementById("o-tel").value.replace(/\D/g, "");
+  if (tel.length < 8){
+    document.getElementById("o-tel").focus();
+    document.getElementById("o-tel").setCustomValidity("Numéro de téléphone incomplet");
+    document.getElementById("order-form").reportValidity();
+    document.getElementById("o-tel").setCustomValidity("");
+    return;
+  }
+  window.open(messageWhatsApp(), "_blank", "noopener");
+});
+
+renderCartBar();

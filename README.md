@@ -7,52 +7,52 @@ avec leurs prix relevés chez les grandes surfaces : **Géant, Carrefour, Monopr
 Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
 (Ancienne version privée Claude : https://claude.ai/artifact/N4YgHUrDQegTPn69Z77DCv)
 
-## Contenu actuel (25/09/2026)
+## Contenu actuel (27/09/2026)
 
-- 22 marques, 60 produits, 116 prix relevés
-- Visuels de bouteilles (36 images) extraits des catalogues des enseignes
+- 26 marques, 73 produits, 132 prix relevés (Carrefour, Géant, Monoprix, Aziza)
+- Visuels de bouteilles : photos choisies à la main (`assets/img/`) + photos des enseignes
+  téléchargées automatiquement (`assets/img/produits/`)
 - Comparateur du format 1,5 L, recherche, filtres plate/gazeuse, tri par prix
+- **Commande avec livraison** : bouton + sur chaque produit, panier, adresse + localisation GPS,
+  envoi de la commande par WhatsApp (numéro dans `WHATSAPP` en tête de la section commande d'`app.js`)
 
 ## Structure
 
 | Chemin | Rôle |
 |---|---|
-| `index.html` | La page web complète (HTML/CSS/JS vanilla, aucune dépendance) |
+| `index.html` | La page (HTML seul — structure et textes) |
+| `style.css` | Tout le style (thème clair/sombre) |
+| `app.js` | Tout le JavaScript : rendu, filtres, panier et commande WhatsApp |
 | `data/eaux.js` | Données chargées par la page (`window.EAUX_DATA`) — généré, ne pas éditer à la main |
 | `data/eaux.json` | Mêmes données en JSON pur (pour une future app / API) |
-| `assets/img/` | Photos de bouteilles téléchargées des CDN des enseignes |
-| `tools/` | Scripts Python de collecte et de consolidation |
+| `assets/img/` | Photos de bouteilles |
+| `tools/collect_prices.py` | Script unique de collecte des prix (remplace l'ancien trio geant/barka/build) |
 
 Ouvrir simplement `index.html` dans un navigateur (fonctionne en local, sans serveur).
 
 ## Mettre à jour les prix
 
 **Automatique** : la tâche planifiée Windows `PrixEauxTunisie-MAJ` lance `tools/update_prix.ps1`
-tous les jours à 9h30 (ou dès que le PC est allumé si l'heure est passée). Elle vide le cache,
-relance les 3 scripts et écrit le détail dans `tools/update_log.txt`.
-Gérer la tâche : `taskschd.msc` (Planificateur de tâches) → « PrixEauxTunisie-MAJ »,
-ou la supprimer avec `Unregister-ScheduledTask -TaskName "PrixEauxTunisie-MAJ"`.
+tous les jours à 9h30 (ou dès que le PC est allumé si l'heure est passée) et écrit le détail
+dans `tools/update_log.txt`. Gérer la tâche : `taskschd.msc` → « PrixEauxTunisie-MAJ ».
 
 **Manuel** : double-clic sur `tools/update_prix.bat`, ou :
 
 ```
-cd tools
-python geant_scrape.py    # 1. scrape Géant Drive  -> geant_products.json
-python barka_scrape.py    # 2. scrape barka.tn     -> barka_products.json (quelques minutes)
-python build_data.py      # 3. consolide           -> ../data/eaux.js + eaux.json
+python tools/collect_prices.py
 ```
 
 Notes :
-- `barka_scrape.py` met les pages HTML en cache dans `tools/pages/barka/`.
-  Le script automatique supprime ce dossier ; en manuel, le **supprimer avant une mise à jour**
-  pour forcer un re-téléchargement.
-- La version en ligne (artifact) ne se met pas à jour toute seule : demander à Claude
-  « mets à jour les prix en ligne » pour la republier avec les données fraîches.
-- barka.tn est un comparateur qui agrège Carrefour, Monoprix, Aziza et Géant ;
-  les prix Géant viennent en direct de geantdrive.tn (plus frais).
-- Les métadonnées des marques (source, société, notes) sont dans `META` en tête de `build_data.py`.
-- Certaines marques (Hayet, Cristal Chaâbi, Aïn Mizeb…) ne sont pas encore couvertes :
-  barka.tn renvoie une erreur 500 pour elles, il faudra une autre source.
+- Sources : Carrefour en direct (API GraphQL), Géant Drive en direct, Monoprix et Aziza
+  via le comparateur barka.tn. Si une source est en panne, ses prix du dernier relevé
+  réussi sont conservés.
+- Garde-fous : marques d'eau connues uniquement (`MARQUES_EAU`), packs/fardeaux écartés
+  (la stika est affichée comme 6 × la bouteille), prix hors 0,25–2,5 DT/L ou supérieurs
+  au double de l'offre la moins chère écartés.
+- Les métadonnées des marques (source, société, notes) sont dans `META` en tête de
+  `tools/collect_prices.py`.
+- Les anciens scripts `geant_scrape.py`, `barka_scrape.py` et `build_data.py` sont conservés
+  pour référence mais ne sont plus utilisés.
 
 ## Déploiement (GitHub Pages)
 
@@ -70,11 +70,10 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
 
 ## Idées pour la suite
 
-- **Fonction de commande** (priorité — la vraie raison de revenir sur le site) :
-  permettre au visiteur de composer sa commande (marque, format, bouteille/stika,
-  quantité) puis l'envoyer vers l'enseigne la moins chère ou le drive
-  (lien direct produit Géant Drive / panier), voire livraison locale à terme
-
+- Composition des eaux (TDS, calcium, sodium, pH…) d'après le tableau de l'Office du
+  thermalisme (article Babnet du Dr Imed Houcine) — en cours
+- Listes privées fournisseurs / livreurs + suivi des commandes (Google Sheets pour commencer)
+- Une page par marque (`/safia/`…) pour le référencement Google
 - Vrais logos des marques (sites officiels / pages Facebook) à la place des photos de bouteilles
 - Historique des prix (relevés datés, courbes d'évolution)
 - Prix au litre affiché sur chaque produit
