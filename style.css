@@ -101,6 +101,9 @@ h2{
   border-radius:999px; padding:6px 14px; font:inherit; font-size:13px; font-weight:500; cursor:pointer;
 }
 .chipbtn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
+/* bouton Stika mis en avant (vert) */
+.chip-stika{border-color:var(--best); color:var(--best); background:var(--best-soft); font-weight:700}
+.chip-stika[aria-pressed="true"]{background:var(--best); border-color:var(--best); color:#fff}
 .controls select{
   border:1px solid var(--line); background:var(--surface); color:var(--ink);
   border-radius:999px; padding:6px 12px; font:inherit; font-size:13px; margin-left:auto;
@@ -205,6 +208,12 @@ td.addc{width:34px; text-align:center; padding-right:0}
 .cartbar-btn{
   border:none; border-radius:999px; padding:10px 20px; cursor:pointer;
   background:var(--accent); color:#fff; font:inherit; font-weight:700; font-size:14px;
+  display:flex; align-items:center; gap:7px;
+}
+.cart-count{
+  background:#fff; color:var(--accent); border-radius:999px; min-width:22px; height:22px;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:13px; padding:0 6px;
 }
 body.has-cart{padding-bottom:70px}
 

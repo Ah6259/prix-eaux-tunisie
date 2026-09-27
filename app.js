@@ -67,14 +67,21 @@ function compoBlock(b){
 /* stats ------------------------------------------------------------------ */
 const nProd = DATA.brands.reduce((n,b) => n + b.products.length, 0);
 const nOff  = DATA.brands.reduce((n,b) => n + b.products.reduce((m,p) => m + Object.keys(p.prices).length, 0), 0);
+const majCourte = new Date(DATA.updated + "T12:00:00")
+  .toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
 document.getElementById("stats").innerHTML = [
+  [majCourte, "prix mis à jour"],
   [DATA.brands.length, "marques"],
   [nProd, "produits"],
   [nOff, "prix relevés"],
 ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
 /* état global — au chargement : stikas de 1,5 L, les moins chères d'abord -- */
-const state = { q:"", type:"toutes", format:"1.5", sort:"prix15", compareOpen:false };
+const state = { q:"", type:"toutes", format:"1.5", sort:"prix15", mode:"stika", compareOpen:false };
+
+// prix affiché selon l'unité choisie (stika = n × bouteille ; grands formats à l'unité)
+const dispPrice = (v, liters) =>
+  (state.mode === "stika" && liters <= GRAND_FORMAT) ? v * tailleStika(liters) : v;
 
 /* comparateur 1.5L : seules les gagnantes (prix le moins cher) sont affichées,
    le classement complet se déroule à la demande ---------------------------- */
@@ -88,18 +95,18 @@ function renderCompare(){
     <div class="rank${r.p === min ? " cheapest" : ""}">
       <span class="rn">${i + 1}</span>
       <span class="rname">${r.name}</span>
-      <span class="rprice">${fmtDT(r.p)}</span>
+      <span class="rprice">${fmtDT(dispPrice(r.p, 1.5))}</span>
     </div>`;
   const winners = rows.filter(r => r.p === min);
   const others = rows.filter(r => r.p !== min);
+  const stika = state.mode === "stika";
   const winnerCard = r => `
     <div class="winner">
       <svg class="cup" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M6 3h12v2h3v3c0 2.5-2 4.5-4.4 4.9A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.6-3A5 5 0 0 1 3 8V5h3V3zm-1 4v1a3 3 0 0 0 1.6 2.6A9 9 0 0 1 6 7H5zm14 0h-1a9 9 0 0 1-.6 3.6A3 3 0 0 0 19 8V7z"/>
       </svg>
       <span class="winner-name">${r.name}</span>
-      <span class="winner-price">${fmtDT(r.p)} <small>la bouteille</small></span>
-      <span class="winner-price"><small>stika (×6) : ${fmtDT(r.p * 6)}</small></span>
+      <span class="winner-price">${fmtDT(stika ? r.p * 6 : r.p)} <small>${stika ? "la stika (×6)" : "la bouteille"}</small></span>
     </div>`;
   const btnLabel = () => state.compareOpen
     ? "Masquer le classement complet"
@@ -127,21 +134,19 @@ function prodRow(p, b){
   const offers = Object.entries(p.prices)
     .sort((a,z) => a[1] - z[1])
     .map(([s,v]) => `<span class="offer${multi && best.includes(s) ? " best" : ""}">
-        <span class="store">${s}</span><span class="p">${fmtDT(v)}</span></span>`)
+        <span class="store">${s}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>`)
     .join("");
   const label = p.format +
                 (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
                 (p.category === "gazeuse" ? ` <small>· gazeuse</small>` : "");
-  const n = tailleStika(p.liters);
-  const stikaCell = p.liters <= GRAND_FORMAT
-    ? `<span class="p">${fmtDT(minPrice(p) * n)}</span><small class="nb">×${n} bouteilles</small>`
-    : `<span class="nostika">—</span>`;
+  const stika = state.mode === "stika" && p.liters <= GRAND_FORMAT;
+  const unite = stika ? `<small class="nb">stika ×${tailleStika(p.liters)}</small>`
+    : (state.mode === "stika" ? `<small class="nb">à l'unité</small>` : "");
   const add = `<button type="button" class="addbtn" title="Ajouter à la commande"
       aria-label="Ajouter ${b.name} ${p.format} à la commande"
       data-bid="${b.id}" data-liters="${p.liters}" data-category="${p.category}" data-flavor="${p.flavor || ""}">+</button>`;
-  return `<tr><td class="addc">${add}</td><td class="fmt">${label}</td>
-    <td><span class="offer-list">${offers}</span></td>
-    <td class="stika-cell">${stikaCell}</td></tr>`;
+  return `<tr><td class="addc">${add}</td><td class="fmt">${label}${unite ? "<br>" + unite : ""}</td>
+    <td><span class="offer-list">${offers}</span></td></tr>`;
 }
 
 function card(b, prods){
@@ -160,7 +165,9 @@ function card(b, prods){
     ${meta.length ? `<div class="meta">${meta.join(" · ")}</div>` : ""}
     ${compoBlock(b)}
     ${prods.length ? `<table class="prices">
-      <tr><th></th><th>Format</th><th>Bouteille</th><th>Stika</th></tr>
+      <tr><th></th><th>Format</th>${state.mode === "stika"
+        ? "<th>Prix stika par enseigne</th>"
+        : "<th>Prix bouteille par enseigne</th>"}</tr>
       ${prods.slice().sort((a,z) =>
           (a.liters - z.liters) ||
           ((a.category === "gazeuse") - (z.category === "gazeuse")) ||
@@ -203,6 +210,13 @@ document.getElementById("format-controls").innerHTML = FORMATS.map(f =>
 document.querySelectorAll("#format-controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
   document.querySelectorAll("#format-controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
   state.format = btn.dataset.format; render();
+}));
+
+// bascule Stika / Bouteille (stika par défaut : l'eau s'achète en stika)
+document.querySelectorAll("#mode-controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
+  document.querySelectorAll("#mode-controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
+  state.mode = btn.dataset.mode;
+  renderCompare(); render();
 }));
 
 document.getElementById("sort").value = state.sort;   // tri par prix croissant au chargement
@@ -264,8 +278,8 @@ function findProduct(bid, liters, category, flavor){
 function addToCart(bid, liters, category, flavor){
   const found = findProduct(bid, liters, category, flavor);
   if (!found) return;
-  // unité par défaut : la stika (l'unité de livraison habituelle) ; bouteille pour les grands formats
-  const unit = liters <= GRAND_FORMAT ? "stika" : "bouteille";
+  // unité : celle du mode affiché (stika par défaut) ; bouteille pour les grands formats
+  const unit = (liters <= GRAND_FORMAT && state.mode === "stika") ? "stika" : "bouteille";
   const key = [bid, liters, category, flavor || "", unit].join("|");
   const item = cart.find(x => x.key === key);
   if (item) item.qty += 1;
@@ -292,8 +306,12 @@ function renderCartBar(){
   const n = lines.reduce((s, l) => s + l.qty, 0);
   bar.hidden = n === 0;
   document.body.classList.toggle("has-cart", n > 0);
-  if (n) document.getElementById("cartbar-info").innerHTML =
-    `${n} article${n > 1 ? "s" : ""} · prix et livraison confirmés sur WhatsApp`;
+  if (n){
+    document.getElementById("cartbar-info").innerHTML =
+      `${n} article${n > 1 ? "s" : ""} · prix et livraison confirmés sur WhatsApp`;
+    document.getElementById("cart-open").innerHTML =
+      `Commander 🛒 <span class="cart-count">${n}</span>`;
+  }
 }
 
 function renderOrderItems(){
