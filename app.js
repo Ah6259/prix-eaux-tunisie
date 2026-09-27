@@ -173,7 +173,12 @@ function card(b, prods){
           ((a.category === "gazeuse") - (z.category === "gazeuse")) ||
           (a.flavor || "").localeCompare(z.flavor || "")
         ).map(p => prodRow(p, b)).join("")}
-    </table>` : `<div class="noprice">Prix non disponible pour le moment dans les enseignes suivies.</div>`}
+    </table>` : `<div class="noprice">
+      <button type="button" class="addbtn" title="Commander (prix à confirmer)"
+        aria-label="Ajouter ${b.name} à la commande, prix à confirmer sur WhatsApp"
+        data-generic="${b.id}">+</button>
+      <span>Prix non disponible pour le moment dans les enseignes suivies — commandez, le prix vous sera confirmé sur WhatsApp.</span>
+    </div>`}
   </article>`;
 }
 
@@ -330,9 +335,11 @@ const saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(car
 
 function findProduct(bid, liters, category, flavor){
   const b = DATA.brands.find(x => x.id === bid);
-  const p = b && b.products.find(x =>
+  if (!b) return null;
+  if (liters == null) return { b, p: null };  // commande générique : marque sans prix relevé
+  const p = b.products.find(x =>
     Math.abs(x.liters - liters) < .001 && x.category === category && (x.flavor || "") === (flavor || ""));
-  return b && p ? {b, p} : null;
+  return p ? {b, p} : null;
 }
 
 function addToCart(bid, liters, category, flavor){
@@ -347,7 +354,19 @@ function addToCart(bid, liters, category, flavor){
   saveCart(); renderCartBar(); renderOrderItems();
 }
 
+// marque sans prix relevé : on commande quand même, le prix sera confirmé sur WhatsApp
+function addGenericToCart(bid){
+  const b = DATA.brands.find(x => x.id === bid);
+  if (!b) return;
+  const key = [bid, "generique"].join("|");
+  const item = cart.find(x => x.key === key);
+  if (item) item.qty += 1;
+  else cart.push({ key, bid, liters: null, category: null, flavor: "", unit: "generique", qty: 1 });
+  saveCart(); renderCartBar(); renderOrderItems();
+}
+
 function unitLabel(item){
+  if (item.unit === "generique") return "au choix";
   return item.unit === "stika" ? `stika (${tailleStika(item.liters)} bouteilles)` : "bouteille";
 }
 
@@ -355,7 +374,7 @@ function cartLines(){
   return cart.map(item => {
     const found = findProduct(item.bid, item.liters, item.category, item.flavor);
     if (!found) return null;
-    return { ...item, nom: found.b.name, format: found.p.format,
+    return { ...item, nom: found.b.name, format: found.p ? found.p.format : "(format à confirmer)",
              gaz: item.category === "gazeuse", unitLabel: unitLabel(item) };
   }).filter(Boolean);
 }
@@ -385,7 +404,7 @@ function renderOrderItems(){
   box.innerHTML = lines.map(l => `
     <div class="order-item">
       <span class="oi-name">${l.nom} ${l.format}${l.gaz ? " gazeuse" : ""}${l.flavor ? " " + l.flavor : ""}
-        ${l.liters <= GRAND_FORMAT ? `<select class="oi-unit" data-unit="${l.key}" aria-label="Unité">
+        ${l.liters != null && l.liters <= GRAND_FORMAT ? `<select class="oi-unit" data-unit="${l.key}" aria-label="Unité">
           <option value="stika"${l.unit === "stika" ? " selected" : ""}>stika (${tailleStika(l.liters)} bouteilles)</option>
           <option value="bouteille"${l.unit === "bouteille" ? " selected" : ""}>bouteille à l'unité</option>
         </select>` : `<small>${l.unitLabel}</small>`}</span>
@@ -460,7 +479,8 @@ function messageWhatsApp(){
 document.getElementById("grid").addEventListener("click", e => {
   const btn = e.target.closest(".addbtn");
   if (!btn) return;
-  addToCart(btn.dataset.bid, parseFloat(btn.dataset.liters), btn.dataset.category, btn.dataset.flavor);
+  if (btn.dataset.generic) addGenericToCart(btn.dataset.generic);
+  else addToCart(btn.dataset.bid, parseFloat(btn.dataset.liters), btn.dataset.category, btn.dataset.flavor);
   btn.textContent = "✓";
   setTimeout(() => { btn.textContent = "+"; }, 700);
 });
