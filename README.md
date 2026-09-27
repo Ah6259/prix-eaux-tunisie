@@ -12,9 +12,12 @@ Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
 - 26 marques, 73 produits, 132 prix relevés (Carrefour, Géant, Monoprix, Aziza)
 - Visuels de bouteilles : photos choisies à la main (`assets/img/`) + photos des enseignes
   téléchargées automatiquement (`assets/img/produits/`)
-- Comparateur du format 1,5 L, recherche, filtres plate/gazeuse, tri par prix
+- Comparateur du format 1,5 L, recherche, filtres plate/gazeuse, tri par prix ou par minéralité
 - **Commande avec livraison** : bouton + sur chaque produit, panier, adresse + localisation GPS,
   envoi de la commande par WhatsApp (numéro dans `WHATSAPP` en tête de la section commande d'`app.js`)
+- **Composition minéralogique** (résidu sec, calcium, sodium, pH…) de 32 eaux, dépliable sur
+  chaque carte, valeurs hors repère OMS/UE surlignées — données dans `data/composition.js`
+  (statique, entretenu à la main, source : Office du Thermalisme / article Babnet mai 2024)
 
 ## Structure
 
@@ -70,8 +73,6 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
 
 ## Idées pour la suite
 
-- Composition des eaux (TDS, calcium, sodium, pH…) d'après le tableau de l'Office du
-  thermalisme (article Babnet du Dr Imed Houcine) — en cours
 - Listes privées fournisseurs / livreurs + suivi des commandes (Google Sheets pour commencer)
 - Une page par marque (`/safia/`…) pour le référencement Google
 - Vrais logos des marques (sites officiels / pages Facebook) à la place des photos de bouteilles

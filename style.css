@@ -123,6 +123,27 @@ h2{
 .badge.gaz{background:var(--gaz-soft); color:var(--gaz)}
 .meta{padding:0 16px 8px; color:var(--muted); font-size:12.5px}
 .meta b{color:var(--ink); font-weight:600}
+
+/* composition minéralogique */
+.compo{margin:0 16px 8px; border:1px solid var(--line); border-radius:10px; background:var(--chip)}
+.compo summary{
+  cursor:pointer; padding:7px 12px; font-size:13px; font-weight:600; color:var(--accent);
+  list-style-position:inside;
+}
+.compo summary small{color:var(--muted); font-weight:500}
+.compo[open] summary{border-bottom:1px solid var(--line)}
+.compo-table{width:100%; border-collapse:collapse; font-size:12.5px}
+.compo-table th{
+  text-align:right; padding:5px 12px 2px; font-size:11px; color:var(--muted); font-weight:600;
+}
+.compo-table td{padding:3px 12px; border-top:1px dashed var(--line)}
+.compo-table td:first-child{color:var(--muted)}
+.compo-table td small{font-size:10px}
+.compo-table .cv{text-align:right; font-variant-numeric:tabular-nums; font-weight:600}
+.compo-table .cv.over{background:var(--gaz-soft); color:var(--gaz); border-radius:4px}
+.compo-src{margin:0; padding:7px 12px 9px; font-size:11px; color:var(--muted)}
+.compo-src a{color:var(--accent); text-decoration:none}
+.over-demo{background:var(--gaz-soft); color:var(--gaz); padding:0 4px; border-radius:4px}
 table.prices{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:auto}
 table.prices th{
   text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.06em;

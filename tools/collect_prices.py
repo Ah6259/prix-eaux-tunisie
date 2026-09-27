@@ -53,7 +53,7 @@ def http_get(url, params=None, timeout=60):
 
 # Marques d'eau embouteillée connues sur le marché tunisien
 MARQUES_EAU = {
-    "AQUALINE", "BARGOU", "BEYA", "BRIMA", "BULLA REGIA", "CRISTALINE", "DELICE", "DENYA",
+    "AQUALINE", "AZIZ", "BARGOU", "BEYA", "BRIMA", "BULLA REGIA", "CRISTALINE", "DELICE", "DENYA",
     "DIMA", "ELIXIR", "FOURAT", "GARCI", "HAYET", "JANNET", "JEKTISS", "MAIN", "MARWA",
     "MAY", "MELINA", "MELLITI", "MIRA", "OKTOR", "PALMA", "PRIMAQUA", "PRISTINE", "RAYAN",
     "RIM", "ROYAL", "SABRINE", "SAFIA", "SAHA", "TIBA", "TIJEN", "VIVIAN",

@@ -17,6 +17,42 @@ function brandPerL(b){ // meilleur prix au litre (eaux nature uniquement)
   return c.length ? Math.min(...c.map(p => minPrice(p) / p.liters)) : null;
 }
 
+/* composition minéralogique (data/composition.js) ------------------------- */
+const COMPO = window.EAUX_COMPO || { waters: {}, guide: {}, cats: {} };
+const brandCompo = b => COMPO.waters[b.id] || null;
+const brandTds = b => { const c = brandCompo(b); return c ? Math.min(...c.map(x => x.tds)) : null; };
+
+function compoBlock(b){
+  const entries = brandCompo(b);
+  if (!entries) return "";
+  const g = COMPO.guide;
+  const ROWS = [
+    ["tds", "Résidu sec (TDS)", "mg/L"], ["ca", "Calcium", "mg/L"], ["mg", "Magnésium", "mg/L"],
+    ["na", "Sodium", "mg/L"], ["k", "Potassium", "mg/L"], ["hco3", "Bicarbonates", "mg/L"],
+    ["so4", "Sulfates", "mg/L"], ["cl", "Chlorures", "mg/L"], ["no3", "Nitrates", "mg/L"],
+    ["f", "Fluorures", "mg/L"], ["ph", "pH", ""],
+  ];
+  const over = (k, v) => k === "ph"
+    ? (v < g.ph[0] || v > g.ph[1])
+    : (g[k] != null && v > g[k]);
+  const fmtv = v => v.toLocaleString("fr-FR", { maximumFractionDigits: 2 });
+  const head = entries.length > 1
+    ? `<tr><th></th>${entries.map(e => `<th>${e.src}</th>`).join("")}</tr>`
+    : "";
+  const rows = ROWS.map(([k, label, unit]) =>
+    `<tr><td>${label}${unit ? ` <small>${unit}</small>` : ""}</td>` +
+    entries.map(e => `<td class="cv${over(k, e[k]) ? " over" : ""}">${fmtv(e[k])}</td>`).join("") +
+    `</tr>`).join("");
+  const cats = [...new Set(entries.map(e => COMPO.cats[e.cat]))].join(" · ");
+  const srcs = entries.length === 1 ? ` — ${entries[0].src}` : "";
+  return `<details class="compo">
+    <summary>Composition <small>· résidu sec ${entries.map(e => fmtv(e.tds)).join(" / ")} mg/L</small></summary>
+    <table class="compo-table">${head}${rows}</table>
+    <p class="compo-src">${cats}${srcs} · valeurs <span class="over-demo">surlignées</span> au-dessus du
+    repère OMS/UE · source : <a href="${COMPO.credit.url}" target="_blank" rel="noopener">${COMPO.credit.name}</a></p>
+  </details>`;
+}
+
 /* stats ------------------------------------------------------------------ */
 const nProd = DATA.brands.reduce((n,b) => n + b.products.length, 0);
 const nOff  = DATA.brands.reduce((n,b) => n + b.products.reduce((m,p) => m + Object.keys(p.prices).length, 0), 0);
@@ -109,6 +145,7 @@ function card(b){
       <div class="id"><h3>${b.name}</h3><div class="badges">${badges}</div></div>
     </div>
     ${meta.length ? `<div class="meta">${meta.join(" · ")}</div>` : ""}
+    ${compoBlock(b)}
     <table class="prices">
       <tr><th>Format</th><th>Prix par enseigne</th><th></th></tr>
       ${b.products.slice().sort((a,z) =>
@@ -127,9 +164,9 @@ function render(){
     if (state.type !== "toutes" && !b.types.includes(state.type)) return false;
     return true;
   });
-  const key = { prix15: brand15, prixL: brandPerL }[state.sort];
+  const key = { prix15: brand15, prixL: brandPerL, tds: brandTds }[state.sort];
   list = list.slice().sort(key
-    ? (a,z) => (key(a) ?? 99) - (key(z) ?? 99)
+    ? (a,z) => (key(a) ?? 9999) - (key(z) ?? 9999)
     : (a,z) => a.name.localeCompare(z.name, "fr"));
   document.getElementById("grid").innerHTML = list.map(card).join("");
   document.getElementById("empty").hidden = list.length > 0;
