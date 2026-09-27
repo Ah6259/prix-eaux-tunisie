@@ -1,0 +1,156 @@
+:root{
+  color-scheme:light;
+  --bg:#F4F8FA; --surface:#FFFFFF; --ink:#0F2B3D; --muted:#5A7484;
+  --accent:#0E7FA8; --accent-soft:#E1F0F6; --best:#128A52; --best-soft:#E3F3EB;
+  --line:#D7E4EB; --chip:#EDF4F8; --shadow:0 1px 3px rgba(15,43,61,.08);
+  --gaz:#8A5A0E; --gaz-soft:#F6EDDC;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1B24; --surface:#132530; --ink:#E6F1F6; --muted:#8FA9B6;
+    --accent:#4FB6DC; --accent-soft:#12384A; --best:#4CC38A; --best-soft:#123B2A;
+    --line:#1E3644; --chip:#1A303D; --shadow:0 1px 3px rgba(0,0,0,.35);
+    --gaz:#E0B160; --gaz-soft:#3A2E14;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1B24; --surface:#132530; --ink:#E6F1F6; --muted:#8FA9B6;
+  --accent:#4FB6DC; --accent-soft:#12384A; --best:#4CC38A; --best-soft:#123B2A;
+  --line:#1E3644; --chip:#1A303D; --shadow:0 1px 3px rgba(0,0,0,.35);
+  --gaz:#E0B160; --gaz-soft:#3A2E14;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Figtree",system-ui,sans-serif; font-size:15px; line-height:1.5;
+}
+.wrap{max-width:1080px; margin:0 auto; padding-inline:16px}
+
+header.site{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+  background:var(--bg); border-bottom:1px solid var(--line);
+}
+.site-inner{display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding-block:12px}
+h1{
+  font-family:"Bricolage Grotesque","Figtree",sans-serif; font-weight:800;
+  font-size:clamp(20px,3.5vw,27px); margin:0; letter-spacing:-.01em; text-wrap:balance;
+}
+h1 .drop{color:var(--accent)}
+.search{flex:1 1 220px; min-width:180px; position:relative}
+.search input{
+  width:100%; padding:9px 12px 9px 36px; border:1px solid var(--line); border-radius:999px;
+  background:var(--surface); color:var(--ink); font:inherit; outline:none;
+}
+.search input:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.search svg{position:absolute; left:12px; top:50%; translate:0 -50%; width:16px; height:16px; stroke:var(--muted); fill:none; stroke-width:2}
+
+.stats{display:flex; gap:24px; flex-wrap:wrap; padding-block:20px 4px}
+.stat b{font-family:"Bricolage Grotesque",sans-serif; font-size:24px; font-weight:800; display:block; line-height:1.1}
+.stat span{color:var(--muted); font-size:13px}
+
+section{padding-block:20px}
+h2{
+  font-family:"Bricolage Grotesque","Figtree",sans-serif; font-weight:600;
+  font-size:19px; margin:0 0 4px; letter-spacing:-.01em;
+}
+.sub{color:var(--muted); font-size:13px; margin:0 0 14px}
+
+/* comparateur 1.5L */
+.compare{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 18px 10px; box-shadow:var(--shadow)}
+#compare-rest{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:2px 28px; padding-block:8px 4px;
+}
+#compare-rest[hidden]{display:none}
+.rank{
+  display:flex; align-items:baseline; gap:8px; padding-block:4px;
+  border-bottom:1px dashed var(--line); font-size:14px;
+}
+.rank .rn{color:var(--muted); font-size:12px; font-variant-numeric:tabular-nums; min-width:18px}
+.rank .rname{font-weight:600; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.rank .rprice{font-variant-numeric:tabular-nums; font-weight:600}
+.rank.cheapest .rprice, .rank.cheapest .rn{color:var(--best)}
+.compare-toggle{padding-block:10px 6px; text-align:center}
+.mode-note{color:var(--muted); font-size:12px; flex-basis:100%}
+.winners{display:flex; gap:12px; flex-wrap:wrap; padding-block:4px 10px}
+.winner{
+  flex:1 1 150px; display:flex; flex-direction:column; gap:2px; align-items:center;
+  background:var(--best-soft); border:1px solid var(--best); border-radius:12px;
+  padding:14px 10px;
+}
+.winner .cup{width:30px; height:30px; fill:#D9A520; margin-bottom:2px}
+.winner-name{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:17px}
+.winner-price{color:var(--best); font-weight:700; font-variant-numeric:tabular-nums}
+.winner-price small{color:var(--muted); font-weight:500; font-size:11px}
+
+/* filtres */
+.toolbar{
+  display:flex; gap:6px 14px; flex-wrap:wrap; align-items:center;
+  padding-block:8px 10px; border-top:1px solid var(--line);
+}
+.tgroup{display:flex; gap:6px; flex-wrap:wrap}
+.toolbar select{
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  border-radius:999px; padding:6px 12px; font:inherit; font-size:13px; margin-left:auto;
+}
+.controls{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:16px}
+.chipbtn{
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  border-radius:999px; padding:6px 14px; font:inherit; font-size:13px; font-weight:500; cursor:pointer;
+}
+.chipbtn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
+.controls select{
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  border-radius:999px; padding:6px 12px; font:inherit; font-size:13px; margin-left:auto;
+}
+
+/* cartes marques */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px}
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:14px;
+  box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+}
+.card-head{display:flex; gap:14px; padding:14px 16px 10px; align-items:center}
+.card-head img{
+  width:64px; height:80px; object-fit:contain; flex:none;
+  background:#fff; border-radius:10px; border:1px solid var(--line); padding:4px;
+}
+.card-head .id h3{margin:0; font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:18px}
+.badges{display:flex; gap:6px; margin-top:4px; flex-wrap:wrap}
+.badge{font-size:11px; font-weight:600; padding:2px 9px; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
+.badge.gaz{background:var(--gaz-soft); color:var(--gaz)}
+.meta{padding:0 16px 8px; color:var(--muted); font-size:12.5px}
+.meta b{color:var(--ink); font-weight:600}
+table.prices{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:auto}
+table.prices th{
+  text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--muted); font-weight:600; padding:8px 16px 4px; border-top:1px solid var(--line);
+}
+table.prices th:last-child{text-align:right; padding-right:16px}
+table.prices td{padding:5px 16px; border-top:1px solid var(--line); vertical-align:top}
+table.prices tr:first-child td{border-top:1px solid var(--line)}
+.fmt{font-weight:600; white-space:nowrap}
+.fmt small{color:var(--muted); font-weight:500}
+.offer-list{display:flex; flex-direction:column; gap:2px; align-items:flex-end}
+.offer{display:flex; gap:8px; align-items:baseline; font-variant-numeric:tabular-nums}
+.offer .store{color:var(--muted); font-size:12px}
+.offer .p{font-weight:600; min-width:70px; text-align:right}
+.offer.best .p{color:var(--best)}
+.offer.best .store::after{content:" ↓"; color:var(--best); font-weight:700}
+
+.intro{color:var(--muted); font-size:14px; max-width:68ch; margin:18px 0 0}
+.intro strong{color:var(--ink)}
+.faq h3{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:15.5px; margin:18px 0 4px}
+.faq p{color:var(--muted); font-size:14px; max-width:68ch; margin:0}
+.faq p strong, .faq p span{color:var(--ink)}
+footer{border-top:1px solid var(--line); margin-top:28px; padding-block:22px 34px; color:var(--muted); font-size:13px}
+footer a{color:var(--accent); text-decoration:none}
+footer a:hover{text-decoration:underline}
+.empty{padding:40px 0; text-align:center; color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+@media (max-width:480px){
+  .bar-row{grid-template-columns:84px 1fr 74px}
+  .card-head img{width:52px; height:66px}
+}

@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-09-26",
+ "updated": "2026-09-27",
  "currency": "DT",
  "stores": [
   "Géant",
@@ -36,7 +36,6 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Géant": 0.4,
       "Carrefour": 0.4,
       "Monoprix": 0.44
      }
@@ -48,7 +47,6 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Géant": 0.63,
       "Carrefour": 0.63,
       "Monoprix": 0.63
      }
@@ -60,9 +58,9 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Géant": 0.65,
-      "Carrefour": 0.66,
-      "Monoprix": 0.7
+      "Géant": 0.6,
+      "Monoprix": 0.7,
+      "Carrefour": 0.66
      }
     },
     {
@@ -72,7 +70,6 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Géant": 0.78,
       "Carrefour": 0.76,
       "Monoprix": 0.83
      }
@@ -199,8 +196,8 @@ window.EAUX_DATA = {
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
       "Géant": 0.81,
-      "Monoprix": 0.84,
-      "Carrefour": 0.84
+      "Carrefour": 0.84,
+      "Monoprix": 0.84
      }
     }
    ],
@@ -418,8 +415,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
      "prices": {
-      "Carrefour": 0.62,
-      "Monoprix": 0.67
+      "Monoprix": 0.67,
+      "Carrefour": 0.62
      }
     },
     {
@@ -499,8 +496,8 @@ window.EAUX_DATA = {
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
       "Géant": 0.59,
-      "Monoprix": 0.68,
-      "Carrefour": 0.61
+      "Carrefour": 0.61,
+      "Monoprix": 0.68
      }
     }
    ],
@@ -547,8 +544,8 @@ window.EAUX_DATA = {
      "img": "assets/img/marwa_15l.jpg",
      "prices": {
       "Géant": 0.61,
-      "Carrefour": 0.64,
-      "Monoprix": 0.64
+      "Monoprix": 0.64,
+      "Carrefour": 0.64
      }
     }
    ],
@@ -605,8 +602,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/melina_x.jpg",
      "prices": {
-      "Monoprix": 0.42,
-      "Géant": 0.42
+      "Monoprix": 0.42
      }
     },
     {
@@ -616,8 +612,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/melina_15l.jpg",
      "prices": {
-      "Monoprix": 0.62,
-      "Géant": 0.62
+      "Géant": 0.59,
+      "Monoprix": 0.62
      }
     },
     {
@@ -627,8 +623,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/melina_x.jpg",
      "prices": {
-      "Monoprix": 0.79,
-      "Géant": 0.79
+      "Monoprix": 0.79
      }
     }
    ],
@@ -664,9 +659,9 @@ window.EAUX_DATA = {
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
       "Géant": 0.61,
-      "Carrefour": 0.64,
+      "Aziza": 0.63,
       "Monoprix": 0.69,
-      "Aziza": 0.63
+      "Carrefour": 0.64
      }
     }
    ],
@@ -756,8 +751,8 @@ window.EAUX_DATA = {
      "img": "assets/img/primaqua_6l.jpg",
      "prices": {
       "Géant": 2.39,
-      "Carrefour": 2.39,
-      "Monoprix": 2.46
+      "Monoprix": 2.46,
+      "Carrefour": 2.39
      }
     },
     {
@@ -847,9 +842,9 @@ window.EAUX_DATA = {
      "img": "assets/img/sabrine_15l.jpg",
      "prices": {
       "Géant": 0.68,
-      "Carrefour": 0.7,
       "Aziza": 0.67,
-      "Monoprix": 0.66
+      "Monoprix": 0.66,
+      "Carrefour": 0.7
      }
     }
    ],
