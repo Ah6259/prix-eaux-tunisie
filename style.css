@@ -4,6 +4,7 @@
   --accent:#0E7FA8; --accent-soft:#E1F0F6; --best:#128A52; --best-soft:#E3F3EB;
   --line:#D7E4EB; --chip:#EDF4F8; --shadow:0 1px 3px rgba(15,43,61,.08);
   --gaz:#8A5A0E; --gaz-soft:#F6EDDC;
+  --chartline:#0E7FA8;  /* validé (contraste, bande de luminosité) sur fond clair */
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -11,6 +12,7 @@
     --accent:#4FB6DC; --accent-soft:#12384A; --best:#4CC38A; --best-soft:#123B2A;
     --line:#1E3644; --chip:#1A303D; --shadow:0 1px 3px rgba(0,0,0,.35);
     --gaz:#E0B160; --gaz-soft:#3A2E14;
+    --chartline:#35A0C8;  /* validé sur fond sombre */
     color-scheme:dark;
   }
 }
@@ -19,6 +21,7 @@
   --accent:#4FB6DC; --accent-soft:#12384A; --best:#4CC38A; --best-soft:#123B2A;
   --line:#1E3644; --chip:#1A303D; --shadow:0 1px 3px rgba(0,0,0,.35);
   --gaz:#E0B160; --gaz-soft:#3A2E14;
+  --chartline:#35A0C8;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -101,9 +104,35 @@ h2{
   border-radius:999px; padding:6px 14px; font:inherit; font-size:13px; font-weight:500; cursor:pointer;
 }
 .chipbtn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
-/* bouton Stika mis en avant (vert) */
-.chip-stika{border-color:var(--best); color:var(--best); background:var(--best-soft); font-weight:700}
+/* bouton Stika mis en avant (vert, avec l'icône du pack de bouteilles) */
+.chip-stika{
+  border-color:var(--best); color:var(--best); background:var(--best-soft); font-weight:700;
+  display:inline-flex; align-items:center; gap:6px;
+}
 .chip-stika[aria-pressed="true"]{background:var(--best); border-color:var(--best); color:#fff}
+.ic-stika{width:24px; height:16px; fill:currentColor; flex:none}
+
+/* évolution des prix */
+.histo{
+  position:relative; background:var(--surface); border:1px solid var(--line);
+  border-radius:14px; padding:10px 10px 4px; box-shadow:var(--shadow);
+}
+.histo svg{width:100%; height:auto; display:block}
+.histo .gline{stroke:var(--line); stroke-width:1; stroke-dasharray:3 4}
+.histo .serie{fill:none; stroke:var(--chartline); stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.histo .pt{fill:var(--surface); stroke:var(--chartline); stroke-width:2; cursor:pointer}
+.histo .pt:hover{fill:var(--chartline)}
+.histo .ax{fill:var(--muted); font-size:11px; font-family:"Figtree",system-ui,sans-serif}
+.histo .val{fill:var(--ink); font-size:12.5px; font-weight:700; font-family:"Figtree",system-ui,sans-serif}
+.histo-tip{
+  position:absolute; z-index:5; pointer-events:none; transform:translate(-50%,-100%);
+  background:var(--ink); color:var(--bg); padding:6px 10px; border-radius:8px;
+  font-size:12px; line-height:1.35; white-space:nowrap; text-align:center;
+}
+.histo-table summary{cursor:pointer; color:var(--accent); font-size:12.5px; padding:8px 6px}
+.histo-table table{width:100%; border-collapse:collapse; font-size:13px; margin:0 0 8px}
+.histo-table th{text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); padding:4px 8px}
+.histo-table td{padding:4px 8px; border-top:1px dashed var(--line); font-variant-numeric:tabular-nums}
 .controls select{
   border:1px solid var(--line); background:var(--surface); color:var(--ink);
   border-radius:999px; padding:6px 12px; font:inherit; font-size:13px; margin-left:auto;

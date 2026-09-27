@@ -88,7 +88,7 @@
   <div class="wrap toolbar">
     <div class="tgroup" id="mode-controls" role="group" aria-label="Unité de prix">
       <button class="chipbtn" data-mode="bouteille" aria-pressed="false">Bouteille</button>
-      <button class="chipbtn chip-stika" data-mode="stika" aria-pressed="true">Stika 🧊</button>
+      <button class="chipbtn chip-stika" data-mode="stika" aria-pressed="true"><svg class="ic-stika" viewBox="0 0 26 17" aria-hidden="true"><path d="M3.5 1.2h2v1.6h-2zM11.9 1.2h2.2v1.6h-2.2zM20.5 1.2h2v1.6h-2zM3.2 3.2h2.6l.7 1.6v.7H2.5v-.7zM11.6 3.2h2.8l.7 1.6v.7h-4.2v-.7zM20.2 3.2h2.6l.7 1.6v.7h-4z"/><rect x="1.2" y="6.2" width="6.8" height="10" rx="1.6"/><rect x="9.6" y="6.2" width="6.8" height="10" rx="1.6"/><rect x="18" y="6.2" width="6.8" height="10" rx="1.6"/></svg>Stika</button>
     </div>
     <div class="tgroup" id="controls" role="group" aria-label="Type d'eau">
       <button class="chipbtn" data-type="toutes" aria-pressed="true">Toutes</button>
@@ -117,6 +117,13 @@
     <p class="sub">Les marques gagnantes — le prix le moins cher constaté pour l'eau plate 1,5 L, le format le plus vendu en Tunisie.
       <br>Prix stika = 6 × le prix de la bouteille (12 bouteilles pour les 50 cl).</p>
     <div class="compare" id="compare"></div>
+  </section>
+
+  <section id="histo-section">
+    <h2>Évolution des prix</h2>
+    <p class="sub">La stika d'eau plate 1,5 L la moins chère, relevée chaque jour.
+      L'historique démarre le 25 septembre 2026 — la courbe s'allonge jour après jour.</p>
+    <div class="histo" id="histo"></div>
   </section>
 
   <section>
@@ -214,6 +221,7 @@
 
 <script src="data/eaux.js"></script>
 <script src="data/composition.js"></script>
+<script src="data/historique.js"></script>
 <script src="app.js"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->

@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # historique complet, nécessaire à build_history.py
 
       - uses: actions/setup-python@v5
         with:
@@ -24,6 +26,9 @@ jobs:
 
       - name: Scraper les prix (Carrefour + Géant Drive + barka.tn)
         run: python tools/collect_prices.py
+
+      - name: Reconstruire l'historique des prix
+        run: python tools/build_history.py
 
       - name: Publier les nouvelles données
         run: |

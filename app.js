@@ -240,6 +240,65 @@ render();
   document.getElementById("faq-winners").textContent = list;
 })();
 
+/* évolution des prix (data/historique.js, régénéré chaque jour) ----------- */
+(function renderHisto(){
+  const box = document.getElementById("histo");
+  const H = window.EAUX_HISTO;
+  if (!box) return;
+  if (!H || !H.serie || !H.serie.length){ document.getElementById("histo-section").hidden = true; return; }
+  const pts = H.serie;
+  const W = 640, HT = 210, m = { t: 24, r: 20, b: 30, l: 48 };
+  const iw = W - m.l - m.r, ih = HT - m.t - m.b;
+  const vals = pts.map(p => p.stika15);
+  const vLo = Math.min(...vals), vHi = Math.max(...vals);
+  const pad = Math.max((vHi - vLo) * 0.35, 0.15);
+  const lo = vLo - pad, hi = vHi + pad;
+  const x = i => m.l + (pts.length === 1 ? iw / 2 : i * iw / (pts.length - 1));
+  const y = v => m.t + ih - (v - lo) / (hi - lo) * ih;
+  const dShort = s => new Date(s + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+  const ticks = [vLo, (vLo + vHi) / 2, vHi].filter((v, i, a) => a.indexOf(v) === i);
+  const grid = ticks.map(v => `
+    <line class="gline" x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}"/>
+    <text class="ax" x="${m.l - 6}" y="${y(v) + 3.5}" text-anchor="end">${v.toLocaleString("fr-FR", {minimumFractionDigits: 2})}</text>`).join("");
+  const step = Math.max(1, Math.ceil(pts.length / 7));
+  const xlabels = pts.map((p, i) => (i % step === 0 || i === pts.length - 1)
+    ? `<text class="ax" x="${x(i)}" y="${HT - 8}" text-anchor="middle">${dShort(p.date)}</text>` : "").join("");
+  const path = pts.map((p, i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(p.stika15).toFixed(1)}`).join(" ");
+  const marks = pts.map((p, i) => `<circle class="pt" data-i="${i}" cx="${x(i).toFixed(1)}" cy="${y(p.stika15).toFixed(1)}" r="4"/>`).join("");
+  const last = pts[pts.length - 1];
+  box.innerHTML = `
+    <svg viewBox="0 0 ${W} ${HT}" role="img" aria-label="Prix de la stika 1,5 L la moins chère, jour par jour">
+      ${grid}
+      <path class="serie" d="${path}"/>
+      ${marks}
+      <text class="val" x="${x(pts.length - 1).toFixed(1)}" y="${(y(last.stika15) - 10).toFixed(1)}"
+        text-anchor="${pts.length > 3 ? "end" : "middle"}">${fmtDT(last.stika15)}</text>
+      ${xlabels}
+    </svg>
+    <div class="histo-tip" id="histo-tip" hidden></div>
+    <details class="histo-table">
+      <summary>Voir les valeurs</summary>
+      <table>
+        <tr><th>Date</th><th>Stika 1,5 L la moins chère</th><th>Marque(s)</th></tr>
+        ${pts.map(p => `<tr><td>${dShort(p.date)}</td><td>${fmtDT(p.stika15)}</td><td>${p.marques.join(", ")}</td></tr>`).join("")}
+      </table>
+    </details>`;
+  const tip = document.getElementById("histo-tip");
+  box.querySelectorAll(".pt").forEach(c => {
+    const show = () => {
+      const p = pts[+c.dataset.i];
+      tip.innerHTML = `<b>${fmtDT(p.stika15)}</b> la stika · ${dShort(p.date)}<br><small>${p.marques.join(", ")}</small>`;
+      const r = c.getBoundingClientRect(), b = box.getBoundingClientRect();
+      tip.hidden = false;
+      tip.style.left = Math.min(Math.max(r.left - b.left, 60), b.width - 80) + "px";
+      tip.style.top = (r.top - b.top - 8) + "px";
+    };
+    c.addEventListener("mouseenter", show);
+    c.addEventListener("click", show);
+    c.addEventListener("mouseleave", () => { tip.hidden = true; });
+  });
+})();
+
 /* intro + FAQ : nombre et liste des marques suivant les données du jour ---- */
 (function(){
   const noms = DATA.brands.map(b => b.name);
