@@ -288,7 +288,9 @@ function renderOrderItems(){
       </span>
     </div>`).join("");
   document.getElementById("order-total").innerHTML =
-    `Nous vous confirmons le prix total et les frais de livraison sur WhatsApp.`;
+    `Les prix affichés sur le site sont ceux des grandes surfaces, mis à jour chaque jour,
+     à titre indicatif. Le prix final peut varier selon la disponibilité : nous vous le
+     confirmons sur WhatsApp avec les frais de livraison.`;
 }
 
 let geoPos = null;
