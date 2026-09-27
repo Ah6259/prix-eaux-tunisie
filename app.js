@@ -238,12 +238,6 @@ function findProduct(bid, liters, category, flavor){
   return b && p ? {b, p} : null;
 }
 
-// prix unitaire estimé : enseigne la moins chère du jour (stika = 6 × bouteille)
-function unitInfo(p, unit){
-  const min = minPrice(p);
-  return { prix: unit === "stika" ? min * 6 : min, enseigne: bestStores(p)[0] };
-}
-
 function addToCart(bid, liters, category, flavor){
   const found = findProduct(bid, liters, category, flavor);
   if (!found) return;
@@ -259,11 +253,9 @@ function cartLines(){
   return cart.map(item => {
     const found = findProduct(item.bid, item.liters, item.category, item.flavor);
     if (!found) return null;
-    const u = unitInfo(found.p, item.unit);
     const unitLabel = item.unit === "stika" ? "stika (6 bouteilles)" : "bouteille";
     return { ...item, nom: found.b.name, format: found.p.format,
-             gaz: item.category === "gazeuse", unitLabel,
-             prix: u.prix * item.qty, enseigne: u.enseigne };
+             gaz: item.category === "gazeuse", unitLabel };
   }).filter(Boolean);
 }
 
@@ -271,11 +263,10 @@ function renderCartBar(){
   const bar = document.getElementById("cartbar");
   const lines = cartLines();
   const n = lines.reduce((s, l) => s + l.qty, 0);
-  const total = lines.reduce((s, l) => s + l.prix, 0);
   bar.hidden = n === 0;
   document.body.classList.toggle("has-cart", n > 0);
   if (n) document.getElementById("cartbar-info").innerHTML =
-    `${n} article${n > 1 ? "s" : ""} · environ <b>${fmtDT(total)}</b> + livraison`;
+    `${n} article${n > 1 ? "s" : ""} · prix et livraison confirmés sur WhatsApp`;
 }
 
 function renderOrderItems(){
@@ -289,17 +280,15 @@ function renderOrderItems(){
   box.innerHTML = lines.map(l => `
     <div class="order-item">
       <span class="oi-name">${l.nom} ${l.format}${l.gaz ? " gazeuse" : ""}${l.flavor ? " " + l.flavor : ""}
-        <small>${l.unitLabel} · ${l.enseigne}</small></span>
+        <small>${l.unitLabel}</small></span>
       <span class="qty">
         <button type="button" data-dec="${l.key}" aria-label="Une ${l.unitLabel} de moins">−</button>
         <b>${l.qty}</b>
         <button type="button" data-inc="${l.key}" aria-label="Une ${l.unitLabel} de plus">+</button>
       </span>
-      <span class="oi-price">${fmtDT(l.prix)}</span>
     </div>`).join("");
-  const total = lines.reduce((s, l) => s + l.prix, 0);
   document.getElementById("order-total").innerHTML =
-    `Total estimé : ${fmtDT(total)} <small>+ frais de livraison</small>`;
+    `Nous vous confirmons le prix total et les frais de livraison sur WhatsApp.`;
 }
 
 let geoPos = null;
@@ -310,14 +299,11 @@ function messageWhatsApp(){
   const tel = document.getElementById("o-tel").value.trim();
   const adr = document.getElementById("o-adr").value.trim();
   const note = document.getElementById("o-note").value.trim();
-  const total = lines.reduce((s, l) => s + l.prix, 0);
   const txt = [
     "🚰 Commande — Prix des Eaux de Tunisie",
     "",
-    ...lines.map(l => `• ${l.qty} × ${l.unitLabel} ${l.nom} ${l.format}${l.gaz ? " gazeuse" : ""}` +
-                      ` — ~${fmtDT(l.prix)} (${l.enseigne})`),
+    ...lines.map(l => `• ${l.qty} × ${l.unitLabel} ${l.nom} ${l.format}${l.gaz ? " gazeuse" : ""}`),
     "",
-    `Total produits estimé : ~${fmtDT(total)} + livraison`,
     nom ? `Nom : ${nom}` : null,
     `Tél : ${tel}`,
     `Adresse : ${adr}`,
