@@ -73,8 +73,8 @@ document.getElementById("stats").innerHTML = [
   [nOff, "prix relevés"],
 ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
-/* état global ------------------------------------------------------------ */
-const state = { q:"", type:"toutes", format:"", sort:"nom", compareOpen:false };
+/* état global — au chargement : stikas de 1,5 L, les moins chères d'abord -- */
+const state = { q:"", type:"toutes", format:"1.5", sort:"prix15", compareOpen:false };
 
 /* comparateur 1.5L : seules les gagnantes (prix le moins cher) sont affichées,
    le classement complet se déroule à la demande ---------------------------- */
@@ -148,6 +148,7 @@ function card(b, prods){
   const meta = [];
   if (b.source) meta.push(`Source : <b>${b.source}</b>`);
   if (b.company) meta.push(`${b.company}`);
+  if (b.depuis) meta.push(`Commercialisée depuis <b>${b.depuis}</b>`);
   if (b.note) meta.push(b.note);
   const badges = b.types.map(t =>
     `<span class="badge${t === "gazeuse" ? " gaz" : ""}">${t === "gazeuse" ? "Gazeuse" : "Plate"}</span>`).join("");
@@ -158,14 +159,14 @@ function card(b, prods){
     </div>
     ${meta.length ? `<div class="meta">${meta.join(" · ")}</div>` : ""}
     ${compoBlock(b)}
-    <table class="prices">
+    ${prods.length ? `<table class="prices">
       <tr><th></th><th>Format</th><th>Bouteille</th><th>Stika</th></tr>
       ${prods.slice().sort((a,z) =>
           (a.liters - z.liters) ||
           ((a.category === "gazeuse") - (z.category === "gazeuse")) ||
           (a.flavor || "").localeCompare(z.flavor || "")
         ).map(p => prodRow(p, b)).join("")}
-    </table>
+    </table>` : `<div class="noprice">Prix non disponible pour le moment dans les enseignes suivies.</div>`}
   </article>`;
 }
 
@@ -175,7 +176,12 @@ function render(){
   let list = DATA.brands
     .map(b => ({ b, prods: b.products.filter(p =>
         fmt.test(p) && (state.type === "toutes" || p.category === state.type)) }))
-    .filter(({ b, prods }) => prods.length && (!q || b.name.toLowerCase().includes(q)));
+    .filter(({ b, prods }) => {
+      if (q && !b.name.toLowerCase().includes(q)) return false;
+      if (!b.products.length)  // marque sans prix relevé : toujours affichée
+        return state.type === "toutes" || b.types.includes(state.type);
+      return prods.length > 0;
+    });
   const key = { prix15: brand15, prixL: brandPerL, tds: brandTds }[state.sort];
   list = list.slice().sort(key
     ? (a,z) => (key(a.b) ?? 9999) - (key(z.b) ?? 9999)
@@ -191,14 +197,15 @@ document.querySelectorAll("#controls .chipbtn").forEach(btn => btn.addEventListe
   state.type = btn.dataset.type; render();
 }));
 
-// puces de filtre par format de bouteille
+// puces de filtre par format de bouteille (1,5 L actif au chargement)
 document.getElementById("format-controls").innerHTML = FORMATS.map(f =>
-  `<button class="chipbtn" data-format="${f.id}" aria-pressed="${f.id === ""}">${f.nom}</button>`).join("");
+  `<button class="chipbtn" data-format="${f.id}" aria-pressed="${f.id === state.format}">${f.nom}</button>`).join("");
 document.querySelectorAll("#format-controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
   document.querySelectorAll("#format-controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
   state.format = btn.dataset.format; render();
 }));
 
+document.getElementById("sort").value = state.sort;   // tri par prix croissant au chargement
 renderCompare();
 render();
 

@@ -71,34 +71,45 @@ ALIAS_MARQUES = {
     "ROYALE": "ROYAL",
 }
 
-# Fiche de chaque marque (affichée sur les cartes du site)
+# Fiche de chaque marque (affichée sur les cartes du site).
+# « depuis » = date d'autorisation / de commercialisation d'après les fiches officielles
+# de l'Office National du Thermalisme (hydrotherapie.tn) ; None quand non vérifiable.
 META = {
-    "SAFIA":     {"name": "Safia", "company": "SFBT (Sostem)", "source": "Aïn Mizeb & Aïn Ksiba, El Ksour (Le Kef)", "note": "Marque historique d'eau plate en Tunisie."},
-    "SABRINE":   {"name": "Sabrine", "company": "Sabrine SA", "source": "Oued Kharroub, Chebika (Kairouan)", "note": "Commercialisée depuis 1991, première eau certifiée ISO 22000 en Tunisie."},
-    "MARWA":     {"name": "Marwa", "company": "Eaux Minérales Marwa", "source": "Kef Ghrab, Joumine (Bizerte)", "note": "Commercialisée depuis 1993."},
-    "MELLITI":   {"name": "Melliti", "company": "SFBT (Sostem)", "source": "Aïn El Beidha, Téboursouk (Béja)", "note": None},
-    "GARCI":     {"name": "Garci", "company": "SFBT (Sostem)", "source": "Aïn Garci, Enfidha (Sousse)", "note": "La plus ancienne eau gazeuse naturelle de Tunisie."},
-    "OKTOR":     {"name": "Aïn Oktor", "company": None, "source": "Korbous (Cap Bon)", "note": "Eau minérale naturelle gazeuse."},
-    "CRISTALINE":{"name": "Cristaline", "company": None, "source": None, "note": None},
-    "FOURAT":    {"name": "Fourat", "company": None, "source": None, "note": None},
-    "DIMA":      {"name": "Dima", "company": None, "source": None, "note": None},
-    "MIRA":      {"name": "Mira", "company": None, "source": None, "note": None},
-    "PRISTINE":  {"name": "Pristine", "company": None, "source": None, "note": None},
-    "MAY":       {"name": "May", "company": None, "source": None, "note": None},
-    "JANNET":    {"name": "Jannet", "company": None, "source": None, "note": None},
-    "JEKTISS":   {"name": "Jektiss", "company": None, "source": None, "note": None},
-    "MELINA":    {"name": "Melina", "company": None, "source": None, "note": None},
-    "AQUALINE":  {"name": "Aqualine", "company": None, "source": None, "note": None},
-    "BARGOU":    {"name": "Bargou", "company": None, "source": "Bargou (Siliana)", "note": "Lancée en 2015."},
-    "RAYAN":     {"name": "Rayan", "company": None, "source": None, "note": None},
-    "ELIXIR":    {"name": "Élixir", "company": None, "source": None, "note": None},
-    "PRIMAQUA":  {"name": "Primaqua", "company": None, "source": None, "note": "Eau de table, grands formats et bonbonnes."},
-    "DELICE":    {"name": "Délice", "company": "Groupe Délice", "source": None, "note": "Eau de source Délice."},
-    "BEYA":      {"name": "Beya", "company": None, "source": None, "note": "Eau de source naturelle."},
-    "TIJEN":     {"name": "Tijen", "company": None, "source": None, "note": None},
-    "HAYET":     {"name": "Hayet", "company": None, "source": None, "note": None},
-    "BULLA REGIA": {"name": "Bulla Régia", "company": None, "source": "Jendouba", "note": None},
-    "ROYAL":     {"name": "Royal", "company": None, "source": None, "note": None},
+    "SAFIA":     {"name": "Safia", "company": "SFBT (Sostem)", "source": "Aïn Mizeb & Aïn Ksiba, El Ksour (Le Kef)", "depuis": 1968, "note": "Marque historique d'eau plate en Tunisie (2e source autorisée en 1989)."},
+    "SABRINE":   {"name": "Sabrine", "company": "Sabrine SA", "source": "Oued Kharroub, Chébika (Kairouan)", "depuis": 1990, "note": "Première eau certifiée ISO 22000 en Tunisie."},
+    "MARWA":     {"name": "Marwa", "company": "Eaux Minérales Marwa", "source": "Kef Ghrab, Joumine (Bizerte)", "depuis": 1994, "note": None},
+    "MELLITI":   {"name": "Melliti", "company": "SFBT (Sostem)", "source": "Aïn El Beidha, Téboursouk (Béja)", "depuis": 1977, "note": None},
+    "GARCI":     {"name": "Garci", "company": "SFBT (Sostem)", "source": "Aïn Garci, Enfidha (Sousse)", "depuis": 1968, "note": "La plus ancienne eau gazeuse naturelle de Tunisie (source exploitée dès 1900)."},
+    "OKTOR":     {"name": "Aïn Oktor", "company": None, "source": "Korbous, Soliman (Nabeul)", "depuis": 1963, "note": "Eau minérale naturelle gazeuse (source exploitée dès 1904).", "types": ["gazeuse"]},
+    "CRISTALINE":{"name": "Cristaline", "company": None, "source": "Mogren (Zaghouan)", "depuis": 2002, "note": None},
+    "FOURAT":    {"name": "Fourat", "company": None, "source": "Oueslatia (Kairouan)", "depuis": 2001, "note": None},
+    "DIMA":      {"name": "Dima", "company": None, "source": "Tajerouine (Le Kef)", "depuis": 2009, "note": None},
+    "MIRA":      {"name": "Mira", "company": None, "source": "Hajeb El Ayoun (Kairouan)", "depuis": 2018, "note": None},
+    "PRISTINE":  {"name": "Pristine", "company": None, "source": "Henchir Kefia (Zaghouan)", "depuis": 2017, "note": None},
+    "MAY":       {"name": "May", "company": None, "source": "Le Krib (Siliana)", "depuis": 2011, "note": None},
+    "JANNET":    {"name": "Jannet", "company": None, "source": "Haffouz (Kairouan)", "depuis": 2002, "note": None},
+    "JEKTISS":   {"name": "Jektiss", "company": None, "source": "Koutine (Médenine)", "depuis": 1989, "note": "Eau de table (traitée par osmose inverse)."},
+    "MELINA":    {"name": "Melina", "company": None, "source": "Bargou (Siliana)", "depuis": 2007, "note": None},
+    "AQUALINE":  {"name": "Aqualine", "company": None, "source": "Mogren (Zaghouan)", "depuis": 2009, "note": None},
+    "BARGOU":    {"name": "Bargou", "company": None, "source": "Bargou (Siliana)", "depuis": 2015, "note": None},
+    "RAYAN":     {"name": "Rayan", "company": None, "source": "Nefza (Béja)", "depuis": 2011, "note": "Devenue Élixir en 2015."},
+    "ELIXIR":    {"name": "Élixir", "company": None, "source": "Nefza (Béja)", "depuis": 2015, "note": "Ex-Rayan (2011)."},
+    "PRIMAQUA":  {"name": "Primaqua", "company": None, "source": "Koutine (Médenine)", "depuis": 2007, "note": "Eau de table (osmose inverse), grands formats et bonbonnes."},
+    "DELICE":    {"name": "Délice", "company": "Groupe Délice", "source": "Jelma (Sidi Bouzid)", "depuis": 2020, "note": "Eau de source Délice."},
+    "BEYA":      {"name": "Beya", "company": None, "source": "Cherichira, Haffouz (Kairouan)", "depuis": 2020, "note": "Eau de source naturelle."},
+    "TIJEN":     {"name": "Tijen", "company": None, "source": "Labiadh (Sidi Bouzid)", "depuis": 2018, "note": None},
+    "HAYET":     {"name": "Hayet", "company": None, "source": "Jelma (Sidi Bouzid)", "depuis": 1996, "note": None},
+    "BULLA REGIA": {"name": "Bulla Régia", "company": None, "source": "Aïn Ghenaa (Jendouba)", "depuis": 1999, "note": "Eau de table, ex-Zullel."},
+    "ROYAL":     {"name": "Royal", "company": "Royal Drinks", "source": "Aïn Sokra, Siliana sud", "depuis": 2016, "note": "Ex-Cristal."},
+    "SAHA":      {"name": "Saha", "company": None, "source": "El Fahs (Zaghouan)", "depuis": 2017, "note": "Eau de table."},
+    "TIBA":      {"name": "Tiba", "company": "Tiba Eaux Minérales", "source": "Tlebt (Kasserine)", "depuis": None, "note": None},
+    "AZIZ":      {"name": "Aziz", "company": None, "source": "Le Krib (Siliana)", "depuis": None, "note": None},
+    "BRIMA":     {"name": "Brima", "company": None, "source": None, "depuis": None, "note": None},
+    "MAIN":      {"name": "Maïn", "company": None, "source": "Tataouine nord", "depuis": 2004, "note": None},
+    "DENYA":     {"name": "Denya", "company": None, "source": "Hajeb El Ayoun (Kairouan)", "depuis": 2018, "note": None},
+    "PALMA":     {"name": "Palma", "company": None, "source": "Sidi Aïch (Gafsa)", "depuis": 2011, "note": None},
+    "VIVIAN":    {"name": "Vivian", "company": None, "source": "ex-Övia, Zaghouan", "depuis": 2011, "note": None},
+    "RIM":       {"name": "Rim", "company": None, "source": None, "depuis": None, "note": None},
 }
 
 ENSEIGNES = {"carrefour": "Carrefour", "geant": "Géant", "monoprix": "Monoprix", "aziza": "Aziza"}
@@ -418,10 +429,11 @@ def main():
     imgs = images_curated()
     brands = {}
     for (marque, typ, litres), p in sorted(produits.items()):
-        meta = META.get(marque) or {"name": marque.title(), "company": None, "source": None, "note": None}
+        meta = META.get(marque) or {"name": marque.title(), "company": None, "source": None, "depuis": None, "note": None}
         b = brands.setdefault(meta["name"], {
             "id": slug(meta["name"]), "name": meta["name"],
-            "company": meta["company"], "source": meta["source"], "note": meta["note"],
+            "company": meta["company"], "source": meta["source"],
+            "depuis": meta.get("depuis"), "note": meta["note"],
             "img": None, "types": [], "products": [],
         })
         img = find_img_curated(imgs, b["id"], litres)
@@ -446,6 +458,23 @@ def main():
         b["img"] = next((p["img"] for p in b["products"] if p["img"] and abs(p["liters"] - 1.5) < .01 and p["category"] == "plate"),
                         next((p["img"] for p in b["products"] if p["img"]), None))
         out_brands.append(b)
+
+    # Marques connues du marché tunisien sans prix relevé aujourd'hui :
+    # affichées quand même sur le site (composition + « prix non disponible »)
+    deja = {b["name"] for b in out_brands}
+    for meta in META.values():
+        if meta["name"] in deja:
+            continue
+        bid = slug(meta["name"])
+        out_brands.append({
+            "id": bid, "name": meta["name"],
+            "company": meta["company"], "source": meta["source"],
+            "depuis": meta.get("depuis"), "note": meta["note"],
+            "img": find_img_curated(imgs, bid, None),
+            "types": meta.get("types", ["plate"]),
+            "products": [],
+        })
+    out_brands.sort(key=lambda b: b["name"])
 
     data = {
         "updated": date.today().isoformat(),
