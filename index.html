@@ -86,15 +86,12 @@
     </div>
   </div>
   <div class="wrap toolbar">
-    <div class="tgroup" id="mode-controls" role="group" aria-label="Unité de prix">
-      <button class="chipbtn" data-mode="bouteille" aria-pressed="true">Bouteille</button>
-      <button class="chipbtn" data-mode="stika" aria-pressed="false">Stika (×6)</button>
-    </div>
     <div class="tgroup" id="controls" role="group" aria-label="Type d'eau">
       <button class="chipbtn" data-type="toutes" aria-pressed="true">Toutes</button>
       <button class="chipbtn" data-type="plate" aria-pressed="false">Plates</button>
       <button class="chipbtn" data-type="gazeuse" aria-pressed="false">Gazeuses</button>
     </div>
+    <div class="tgroup" id="format-controls" role="group" aria-label="Format de bouteille"></div>
     <select id="sort" aria-label="Trier les marques">
       <option value="nom">Tri : nom A→Z</option>
       <option value="prix15">Tri : prix 1,5 L croissant</option>
@@ -114,14 +111,15 @@
   <section>
     <h2>Le match des 1,5 L</h2>
     <p class="sub">Les marques gagnantes — le prix le moins cher constaté pour l'eau plate 1,5 L, le format le plus vendu en Tunisie.
-      <br>Stika = 6 × le prix de la bouteille · les grands formats (6 L, 19 L) restent à l'unité.</p>
+      <br>Prix stika = 6 × le prix de la bouteille (12 bouteilles pour les 50 cl).</p>
     <div class="compare" id="compare"></div>
   </section>
 
   <section>
     <h2>Toutes les marques</h2>
-    <p class="sub">Prix relevés chez Géant, Carrefour, Monoprix et Aziza. La flèche ↓ marque l'enseigne la moins chère.
-      Le bouton <b>+</b> ajoute le produit à votre commande, livrée chez vous.</p>
+    <p class="sub">Prix bouteille et stika relevés chez Géant, Carrefour, Monoprix et Aziza — la flèche ↓ marque
+      l'enseigne la moins chère. Le bouton <b>+</b> en début de ligne ajoute le produit à votre
+      commande, livrée chez vous.</p>
     <div class="grid" id="grid"></div>
     <div class="empty" id="empty" hidden>Aucune marque ne correspond à cette recherche.</div>
   </section>
@@ -134,9 +132,9 @@
     soit <span id="faq-min-stika">3,660 DT</span> la stika de 6 bouteilles. Le classement complet
     des marques est mis à jour chaque jour en haut de cette page.</p>
     <h3>C'est quoi une « stika » ?</h3>
-    <p>En Tunisie, la <strong>stika</strong> est le pack de 6 bouteilles d'eau, le format le plus
-    acheté par les familles. Sur ce site, le bouton « Stika (×6) » convertit tous les prix affichés
-    en prix du pack (6 × le prix d'une bouteille).</p>
+    <p>En Tunisie, la <strong>stika</strong> est le pack de 6 bouteilles d'eau (12 pour les petites
+    bouteilles de 50 cl), le format le plus acheté par les familles. Sur ce site, chaque produit
+    affiche le prix de la bouteille et celui de la stika.</p>
     <h3>D'où viennent les prix affichés ?</h3>
     <p>Les prix sont relevés automatiquement chaque jour sur les boutiques en ligne des grandes
     surfaces tunisiennes : Géant Drive, Carrefour, Monoprix et Aziza. Ils sont indicatifs et

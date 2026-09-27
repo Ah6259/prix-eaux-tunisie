@@ -3,6 +3,17 @@ const fmtDT = v => v.toLocaleString("fr-FR",{minimumFractionDigits:3, maximumFra
 
 /* helpers ---------------------------------------------------------------- */
 const plain = p => !p.flavor;
+// nombre de bouteilles par stika (fardeau) : 12 pour les petites, 6 sinon
+const tailleStika = liters => (liters <= 0.75 ? 12 : 6);
+const GRAND_FORMAT = 2.5;   // au-delà : bidons et bonbonnes, pas de stika
+const FORMATS = [
+  { id: "",         nom: "Tous formats", test: () => true },
+  { id: "petit",    nom: "≤ 0,75 L",     test: p => p.liters <= 0.75 },
+  { id: "1",        nom: "1 L",          test: p => p.liters > 0.75 && p.liters < 1.25 },
+  { id: "1.5",      nom: "1,5 L",        test: p => p.liters >= 1.25 && p.liters < 1.6 },
+  { id: "2",        nom: "2 L",          test: p => p.liters >= 1.6 && p.liters <= GRAND_FORMAT },
+  { id: "bonbonne", nom: "Grands formats", test: p => p.liters > GRAND_FORMAT },
+];
 function minPrice(prod){ return Math.min(...Object.values(prod.prices)); }
 function bestStores(prod){
   const m = minPrice(prod);
@@ -63,10 +74,7 @@ document.getElementById("stats").innerHTML = [
 ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
 /* état global ------------------------------------------------------------ */
-const state = { q:"", type:"toutes", sort:"nom", mode:"bouteille", compareOpen:false };
-
-// prix affiché : en mode stika, 6 × le prix bouteille (grands formats à l'unité)
-const dispPrice = (v, liters) => (state.mode === "stika" && liters <= 2) ? v * 6 : v;
+const state = { q:"", type:"toutes", format:"", sort:"nom", compareOpen:false };
 
 /* comparateur 1.5L : seules les gagnantes (prix le moins cher) sont affichées,
    le classement complet se déroule à la demande ---------------------------- */
@@ -76,23 +84,22 @@ function renderCompare(){
     .filter(r => r.p !== null)
     .sort((a,z) => a.p - z.p);
   const min = rows[0].p;
-  const show = p => fmtDT(dispPrice(p, 1.5));
   const rankRow = (r, i) => `
     <div class="rank${r.p === min ? " cheapest" : ""}">
       <span class="rn">${i + 1}</span>
       <span class="rname">${r.name}</span>
-      <span class="rprice">${show(r.p)}</span>
+      <span class="rprice">${fmtDT(r.p)}</span>
     </div>`;
   const winners = rows.filter(r => r.p === min);
   const others = rows.filter(r => r.p !== min);
-  const unit = state.mode === "stika" ? "la stika" : "la bouteille";
   const winnerCard = r => `
     <div class="winner">
       <svg class="cup" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M6 3h12v2h3v3c0 2.5-2 4.5-4.4 4.9A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.6-3A5 5 0 0 1 3 8V5h3V3zm-1 4v1a3 3 0 0 0 1.6 2.6A9 9 0 0 1 6 7H5zm14 0h-1a9 9 0 0 1-.6 3.6A3 3 0 0 0 19 8V7z"/>
       </svg>
       <span class="winner-name">${r.name}</span>
-      <span class="winner-price">${show(r.p)} <small>${unit}</small></span>
+      <span class="winner-price">${fmtDT(r.p)} <small>la bouteille</small></span>
+      <span class="winner-price"><small>stika (×6) : ${fmtDT(r.p * 6)}</small></span>
     </div>`;
   const btnLabel = () => state.compareOpen
     ? "Masquer le classement complet"
@@ -120,19 +127,24 @@ function prodRow(p, b){
   const offers = Object.entries(p.prices)
     .sort((a,z) => a[1] - z[1])
     .map(([s,v]) => `<span class="offer${multi && best.includes(s) ? " best" : ""}">
-        <span class="store">${s}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>`)
+        <span class="store">${s}</span><span class="p">${fmtDT(v)}</span></span>`)
     .join("");
-  const stika = state.mode === "stika" && p.liters <= 2;
-  const label = p.format + (stika ? ` <small>· stika ×6</small>` : "") +
+  const label = p.format +
                 (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
                 (p.category === "gazeuse" ? ` <small>· gazeuse</small>` : "");
+  const n = tailleStika(p.liters);
+  const stikaCell = p.liters <= GRAND_FORMAT
+    ? `<span class="p">${fmtDT(minPrice(p) * n)}</span><small class="nb">×${n} bouteilles</small>`
+    : `<span class="nostika">—</span>`;
   const add = `<button type="button" class="addbtn" title="Ajouter à la commande"
       aria-label="Ajouter ${b.name} ${p.format} à la commande"
       data-bid="${b.id}" data-liters="${p.liters}" data-category="${p.category}" data-flavor="${p.flavor || ""}">+</button>`;
-  return `<tr><td class="fmt">${label}</td><td><span class="offer-list">${offers}</span></td><td class="addc">${add}</td></tr>`;
+  return `<tr><td class="addc">${add}</td><td class="fmt">${label}</td>
+    <td><span class="offer-list">${offers}</span></td>
+    <td class="stika-cell">${stikaCell}</td></tr>`;
 }
 
-function card(b){
+function card(b, prods){
   const meta = [];
   if (b.source) meta.push(`Source : <b>${b.source}</b>`);
   if (b.company) meta.push(`${b.company}`);
@@ -147,8 +159,8 @@ function card(b){
     ${meta.length ? `<div class="meta">${meta.join(" · ")}</div>` : ""}
     ${compoBlock(b)}
     <table class="prices">
-      <tr><th>Format</th><th>Prix par enseigne</th><th></th></tr>
-      ${b.products.slice().sort((a,z) =>
+      <tr><th></th><th>Format</th><th>Bouteille</th><th>Stika</th></tr>
+      ${prods.slice().sort((a,z) =>
           (a.liters - z.liters) ||
           ((a.category === "gazeuse") - (z.category === "gazeuse")) ||
           (a.flavor || "").localeCompare(z.flavor || "")
@@ -159,16 +171,16 @@ function card(b){
 
 function render(){
   const q = state.q.trim().toLowerCase();
-  let list = DATA.brands.filter(b => {
-    if (q && !b.name.toLowerCase().includes(q)) return false;
-    if (state.type !== "toutes" && !b.types.includes(state.type)) return false;
-    return true;
-  });
+  const fmt = FORMATS.find(f => f.id === state.format) || FORMATS[0];
+  let list = DATA.brands
+    .map(b => ({ b, prods: b.products.filter(p =>
+        fmt.test(p) && (state.type === "toutes" || p.category === state.type)) }))
+    .filter(({ b, prods }) => prods.length && (!q || b.name.toLowerCase().includes(q)));
   const key = { prix15: brand15, prixL: brandPerL, tds: brandTds }[state.sort];
   list = list.slice().sort(key
-    ? (a,z) => (key(a) ?? 9999) - (key(z) ?? 9999)
-    : (a,z) => a.name.localeCompare(z.name, "fr"));
-  document.getElementById("grid").innerHTML = list.map(card).join("");
+    ? (a,z) => (key(a.b) ?? 9999) - (key(z.b) ?? 9999)
+    : (a,z) => a.b.name.localeCompare(z.b.name, "fr"));
+  document.getElementById("grid").innerHTML = list.map(({ b, prods }) => card(b, prods)).join("");
   document.getElementById("empty").hidden = list.length > 0;
 }
 
@@ -178,11 +190,15 @@ document.querySelectorAll("#controls .chipbtn").forEach(btn => btn.addEventListe
   document.querySelectorAll("#controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
   state.type = btn.dataset.type; render();
 }));
-document.querySelectorAll("#mode-controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
-  document.querySelectorAll("#mode-controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
-  state.mode = btn.dataset.mode;
-  renderCompare(); render();
+
+// puces de filtre par format de bouteille
+document.getElementById("format-controls").innerHTML = FORMATS.map(f =>
+  `<button class="chipbtn" data-format="${f.id}" aria-pressed="${f.id === ""}">${f.nom}</button>`).join("");
+document.querySelectorAll("#format-controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
+  document.querySelectorAll("#format-controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
+  state.format = btn.dataset.format; render();
 }));
+
 renderCompare();
 render();
 
@@ -241,7 +257,8 @@ function findProduct(bid, liters, category, flavor){
 function addToCart(bid, liters, category, flavor){
   const found = findProduct(bid, liters, category, flavor);
   if (!found) return;
-  const unit = (state.mode === "stika" && liters <= 2) ? "stika" : "bouteille";
+  // unité par défaut : la stika (l'unité de livraison habituelle) ; bouteille pour les grands formats
+  const unit = liters <= GRAND_FORMAT ? "stika" : "bouteille";
   const key = [bid, liters, category, flavor || "", unit].join("|");
   const item = cart.find(x => x.key === key);
   if (item) item.qty += 1;
@@ -249,13 +266,16 @@ function addToCart(bid, liters, category, flavor){
   saveCart(); renderCartBar(); renderOrderItems();
 }
 
+function unitLabel(item){
+  return item.unit === "stika" ? `stika (${tailleStika(item.liters)} bouteilles)` : "bouteille";
+}
+
 function cartLines(){
   return cart.map(item => {
     const found = findProduct(item.bid, item.liters, item.category, item.flavor);
     if (!found) return null;
-    const unitLabel = item.unit === "stika" ? "stika (6 bouteilles)" : "bouteille";
     return { ...item, nom: found.b.name, format: found.p.format,
-             gaz: item.category === "gazeuse", unitLabel };
+             gaz: item.category === "gazeuse", unitLabel: unitLabel(item) };
   }).filter(Boolean);
 }
 
@@ -280,7 +300,10 @@ function renderOrderItems(){
   box.innerHTML = lines.map(l => `
     <div class="order-item">
       <span class="oi-name">${l.nom} ${l.format}${l.gaz ? " gazeuse" : ""}${l.flavor ? " " + l.flavor : ""}
-        <small>${l.unitLabel}</small></span>
+        ${l.liters <= GRAND_FORMAT ? `<select class="oi-unit" data-unit="${l.key}" aria-label="Unité">
+          <option value="stika"${l.unit === "stika" ? " selected" : ""}>stika (${tailleStika(l.liters)} bouteilles)</option>
+          <option value="bouteille"${l.unit === "bouteille" ? " selected" : ""}>bouteille à l'unité</option>
+        </select>` : `<small>${l.unitLabel}</small>`}</span>
       <span class="qty">
         <button type="button" data-dec="${l.key}" aria-label="Une ${l.unitLabel} de moins">−</button>
         <b>${l.qty}</b>
@@ -365,6 +388,19 @@ document.getElementById("cart-open").addEventListener("click", () => {
 document.getElementById("order-close").addEventListener("click", () => { overlay.hidden = true; });
 overlay.addEventListener("click", e => { if (e.target === overlay) overlay.hidden = true; });
 document.addEventListener("keydown", e => { if (e.key === "Escape") overlay.hidden = true; });
+
+document.getElementById("order-items").addEventListener("change", e => {
+  const sel = e.target.closest("[data-unit]");
+  if (!sel) return;
+  const item = cart.find(x => x.key === sel.dataset.unit);
+  if (!item) return;
+  item.unit = sel.value;
+  const newKey = [item.bid, item.liters, item.category, item.flavor, item.unit].join("|");
+  const doublon = cart.find(x => x !== item && x.key === newKey);
+  if (doublon){ doublon.qty += item.qty; cart = cart.filter(x => x !== item); }
+  else item.key = newKey;
+  saveCart(); renderCartBar(); renderOrderItems();
+});
 
 document.getElementById("order-items").addEventListener("click", e => {
   const inc = e.target.closest("[data-inc]"), dec = e.target.closest("[data-dec]");
