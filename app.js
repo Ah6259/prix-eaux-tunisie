@@ -288,7 +288,8 @@ function renderOrderItems(){
       </span>
     </div>`).join("");
   document.getElementById("order-total").innerHTML =
-    `Nous vous confirmons le prix total et les frais de livraison sur WhatsApp.`;
+    `Nous vérifions le stock et le prix chez nos fournisseurs, puis nous vous confirmons
+     le tout sur WhatsApp.`;
 }
 
 let geoPos = null;
