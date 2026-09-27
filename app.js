@@ -182,7 +182,8 @@ function render(){
   const fmt = FORMATS.find(f => f.id === state.format) || FORMATS[0];
   let list = DATA.brands
     .map(b => ({ b, prods: b.products.filter(p =>
-        fmt.test(p) && (state.type === "toutes" || p.category === state.type)) }))
+        fmt.test(p) && (state.type === "toutes" || p.category === state.type) &&
+        Object.keys(p.prices).length > 0) }))
     .filter(({ b, prods }) => {
       if (q && !b.name.toLowerCase().includes(q)) return false;
       if (!b.products.length)  // marque sans prix relevé : toujours affichée
