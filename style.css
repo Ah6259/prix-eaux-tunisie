@@ -110,7 +110,7 @@ h2{
   display:inline-flex; align-items:center; gap:6px;
 }
 .chip-stika[aria-pressed="true"]{background:var(--best); border-color:var(--best); color:#fff}
-.ic-stika{width:24px; height:16px; fill:currentColor; flex:none}
+.ic-stika{width:26px; height:20px; flex:none; filter:drop-shadow(0 1px 1px rgba(15,43,61,.25))}
 
 /* évolution des prix */
 .histo{
