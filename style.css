@@ -396,3 +396,6 @@ body.has-cart{padding-bottom:70px}
 }
 .collapse > :not(summary){margin-top:12px}
 .collapse .sub{margin-bottom:10px}
+
+/* photos miniatures sur les boutons Stika / Bouteille */
+.chipbtn .ic-photo{height:22px; width:auto; border-radius:4px; display:inline-block; vertical-align:-6px; margin-right:6px}
