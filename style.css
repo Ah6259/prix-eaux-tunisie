@@ -389,5 +389,10 @@ body.has-cart{padding-bottom:70px}
 .collapse[open] .cta-closed{display:none}
 .collapse[open] .cta-open{display:inline}
 #hadith-collapse .sum-cta{font-family:"Amiri Quran",serif; font-size:15px; padding:5px 16px 8px}
+@media (max-width:560px){
+  .sum-cta{padding:5px 11px; font-size:13px; gap:4px}
+  #hadith-collapse .sum-cta{font-size:14px; padding:3px 11px 6px}
+  .cta-long{display:none}
+}
 .collapse > :not(summary){margin-top:12px}
 .collapse .sub{margin-bottom:10px}
