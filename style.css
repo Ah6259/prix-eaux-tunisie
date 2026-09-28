@@ -359,3 +359,25 @@ body.has-cart{padding-bottom:70px}
   font-family:"Amiri Quran",serif; color:var(--muted);
   font-size:15px; margin-top:8px;
 }
+
+/* sections repliables (gagnant du match, hadith) */
+.collapse{border:0}
+.collapse summary{
+  display:flex; align-items:center; gap:10px; cursor:pointer;
+  list-style:none; padding:10px 14px; border-radius:12px;
+  background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
+  user-select:none;
+}
+.collapse summary::-webkit-details-marker{display:none}
+.collapse summary h2{margin:0; font-size:18px}
+.collapse summary:hover{border-color:var(--accent)}
+.sum-icon.cup-icon{width:26px; height:26px; fill:#D9A520; flex:none}
+.sum-icon.saw{
+  font-family:"Amiri Quran",serif; color:var(--accent);
+  font-size:30px; line-height:1; flex:none;
+}
+.hadith-title{font-family:"Amiri Quran",serif; font-weight:400}
+.collapse .chevron{margin-inline-start:auto; color:var(--muted); transition:transform .2s}
+.collapse[open] .chevron{transform:rotate(180deg)}
+.collapse > :not(summary){margin-top:12px}
+.collapse .sub{margin-bottom:10px}
