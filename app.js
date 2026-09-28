@@ -560,3 +560,35 @@ document.getElementById("order-form").addEventListener("submit", e => {
 });
 
 renderCartBar();
+
+/* formulaire d'avis (Formspree) : envoi sans quitter la page ---------------- */
+(function(){
+  const form = document.getElementById("avis-form");
+  if (!form) return;
+  const status = document.getElementById("avis-status");
+  const btn = form.querySelector(".avis-send");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    status.className = ""; status.textContent = "Envoi…";
+    try {
+      const r = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" },
+      });
+      if (r.ok) {
+        form.reset();
+        status.className = "ok";
+        status.textContent = "Merci ! Votre message a bien été envoyé.";
+      } else {
+        throw new Error();
+      }
+    } catch {
+      status.className = "err";
+      status.textContent = "Échec de l'envoi — réessayez, ou plus tard.";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();

@@ -399,3 +399,25 @@ body.has-cart{padding-bottom:70px}
 
 /* photos miniatures sur les boutons Stika / Bouteille */
 .chipbtn .ic-photo{height:22px; width:auto; border-radius:4px; display:inline-block; vertical-align:-6px; margin-right:6px}
+
+/* section Votre avis (formulaire Formspree) */
+.avis form{display:flex; flex-direction:column; gap:10px; max-width:640px}
+.avis-row{display:flex; gap:10px; flex-wrap:wrap}
+.avis-row input{flex:1 1 220px}
+.avis input, .avis textarea{
+  border:1px solid var(--line); border-radius:10px; background:var(--surface);
+  color:var(--ink); font:inherit; padding:10px 12px;
+}
+.avis input:focus, .avis textarea:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.avis textarea{resize:vertical}
+.avis .hp{position:absolute; left:-9999px; height:0; border:0; padding:0}
+.avis-actions{display:flex; align-items:center; gap:12px}
+.avis-send{
+  background:var(--accent); color:#fff; border:0; border-radius:999px;
+  padding:9px 26px; font:inherit; font-weight:600; cursor:pointer;
+}
+.avis-send:hover{filter:brightness(1.1)}
+.avis-send:disabled{opacity:.6; cursor:default}
+#avis-status{font-size:13.5px; color:var(--muted)}
+#avis-status.ok{color:var(--best); font-weight:600}
+#avis-status.err{color:#C0392B; font-weight:600}

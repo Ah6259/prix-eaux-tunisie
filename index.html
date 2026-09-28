@@ -189,6 +189,23 @@
     Mira, Pristine, May, Jannet, Jektiss, Melina, Aqualine, Brima, Denya, Main, Palma, Rim,
     Vivian, Primaqua, Délice, Beya et Tijen</span> — eaux plates et gazeuses.</p>
   </section>
+
+  <section class="avis" id="avis">
+    <h2>💬 Votre avis</h2>
+    <p class="sub">Une remarque, un prix à corriger, une marque manquante, une idée ? Écrivez-nous.</p>
+    <form id="avis-form" action="https://formspree.io/f/mwlpakqj" method="POST">
+      <div class="avis-row">
+        <input type="text" name="nom" placeholder="Votre nom (facultatif)" autocomplete="name">
+        <input type="email" name="email" placeholder="Votre email (facultatif, pour vous répondre)" autocomplete="email">
+      </div>
+      <textarea name="message" required rows="4" placeholder="Votre message…"></textarea>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+      <div class="avis-actions">
+        <button type="submit" class="avis-send">Envoyer</button>
+        <span id="avis-status" role="status"></span>
+      </div>
+    </form>
+  </section>
 </div>
 
 <div class="wrap">
