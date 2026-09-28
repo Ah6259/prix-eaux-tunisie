@@ -44,5 +44,7 @@ jobs:
             echo "Aucun changement de prix aujourd'hui."
           else
             git commit -m "Mise à jour automatique des prix ($(date -u +%Y-%m-%d))"
+            # se resynchroniser d'abord : un commit a pu être poussé pendant le scraping
+            git pull --rebase origin main
             git push
           fi
