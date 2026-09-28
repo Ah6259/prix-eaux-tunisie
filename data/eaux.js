@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-09-27",
+ "updated": "2026-09-28",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -31,6 +31,7 @@ window.EAUX_DATA = {
    "name": "Aqualine",
    "company": null,
    "source": "Mogren (Zaghouan)",
+   "depuis": 2009,
    "note": null,
    "img": "assets/img/aqualine_15l.jpg",
    "types": [
@@ -82,40 +83,40 @@ window.EAUX_DATA = {
       "Monoprix": 0.83
      }
     }
-   ],
-   "depuis": 2009
+   ]
   },
   {
    "id": "aziz",
    "name": "Aziz",
    "company": null,
    "source": "Le Krib (Siliana)",
+   "depuis": null,
    "note": null,
    "img": null,
    "types": [
     "plate"
    ],
-   "products": [],
-   "depuis": null
+   "products": []
   },
   {
    "id": "ain-oktor",
    "name": "Aïn Oktor",
    "company": null,
    "source": "Korbous, Soliman (Nabeul)",
+   "depuis": 1963,
    "note": "Eau minérale naturelle gazeuse (source exploitée dès 1904).",
    "img": "assets/img/oktor_09l.jpg",
    "types": [
     "gazeuse"
    ],
-   "products": [],
-   "depuis": 1963
+   "products": []
   },
   {
    "id": "bargou",
    "name": "Bargou",
    "company": null,
    "source": "Bargou (Siliana)",
+   "depuis": 2015,
    "note": null,
    "img": "assets/img/bargou_15l.jpg",
    "types": [
@@ -133,14 +134,14 @@ window.EAUX_DATA = {
       "Carrefour": 0.67
      }
     }
-   ],
-   "depuis": 2015
+   ]
   },
   {
    "id": "beya",
    "name": "Beya",
    "company": null,
    "source": "Cherichira, Haffouz (Kairouan)",
+   "depuis": 2020,
    "note": "Eau de source naturelle.",
    "img": "assets/img/beya_15l.jpg",
    "types": [
@@ -167,14 +168,14 @@ window.EAUX_DATA = {
       "Géant": 0.66
      }
     }
-   ],
-   "depuis": 2020
+   ]
   },
   {
    "id": "brima",
    "name": "Brima",
    "company": null,
    "source": null,
+   "depuis": null,
    "note": null,
    "img": "assets/img/produits/d62fddf4951e.webp",
    "types": [
@@ -191,27 +192,27 @@ window.EAUX_DATA = {
       "Carrefour": 0.47
      }
     }
-   ],
-   "depuis": null
+   ]
   },
   {
    "id": "bulla-regia",
    "name": "Bulla Régia",
    "company": null,
    "source": "Aïn Ghenaa (Jendouba)",
+   "depuis": 1999,
    "note": "Eau de table, ex-Zullel.",
    "img": null,
    "types": [
     "plate"
    ],
-   "products": [],
-   "depuis": 1999
+   "products": []
   },
   {
    "id": "cristaline",
    "name": "Cristaline",
    "company": null,
    "source": "Mogren (Zaghouan)",
+   "depuis": 2002,
    "note": null,
    "img": "assets/img/cristaline_2l.jpg",
    "types": [
@@ -253,14 +254,14 @@ window.EAUX_DATA = {
       "Aziza": 0.85
      }
     }
-   ],
-   "depuis": 2002
+   ]
   },
   {
    "id": "denya",
    "name": "Denya",
    "company": null,
    "source": "Hajeb El Ayoun (Kairouan)",
+   "depuis": 2018,
    "note": null,
    "img": "assets/img/produits/2df55c3e5df9.webp",
    "types": [
@@ -327,14 +328,14 @@ window.EAUX_DATA = {
       "Carrefour": 0.76
      }
     }
-   ],
-   "depuis": 2018
+   ]
   },
   {
    "id": "dima",
    "name": "Dima",
    "company": null,
    "source": "Tajerouine (Le Kef)",
+   "depuis": 2009,
    "note": null,
    "img": "assets/img/dima_15l.jpg",
    "types": [
@@ -372,14 +373,14 @@ window.EAUX_DATA = {
       "Carrefour": 0.78
      }
     }
-   ],
-   "depuis": 2009
+   ]
   },
   {
    "id": "delice",
    "name": "Délice",
    "company": "Groupe Délice",
    "source": "Jelma (Sidi Bouzid)",
+   "depuis": 2020,
    "note": "Eau de source Délice.",
    "img": "assets/img/delice_15l.jpg",
    "types": [
@@ -431,14 +432,14 @@ window.EAUX_DATA = {
       "Aziza": 0.68
      }
     }
-   ],
-   "depuis": 2020
+   ]
   },
   {
    "id": "fourat",
    "name": "Fourat",
    "company": null,
    "source": "Oueslatia (Kairouan)",
+   "depuis": 2001,
    "note": null,
    "img": "assets/img/fourat_2l.jpg",
    "types": [
@@ -468,14 +469,14 @@ window.EAUX_DATA = {
       "Monoprix": 0.9
      }
     }
-   ],
-   "depuis": 2001
+   ]
   },
   {
    "id": "garci",
    "name": "Garci",
    "company": "SFBT (Sostem)",
    "source": "Aïn Garci, Enfidha (Sousse)",
+   "depuis": 1968,
    "note": "La plus ancienne eau gazeuse naturelle de Tunisie (source exploitée dès 1900).",
    "img": "assets/img/garci_1l.jpg",
    "types": [
@@ -517,27 +518,27 @@ window.EAUX_DATA = {
       "Monoprix": 0.74
      }
     }
-   ],
-   "depuis": 1968
+   ]
   },
   {
    "id": "hayet",
    "name": "Hayet",
    "company": null,
    "source": "Jelma (Sidi Bouzid)",
+   "depuis": 1996,
    "note": null,
    "img": null,
    "types": [
     "plate"
    ],
-   "products": [],
-   "depuis": 1996
+   "products": []
   },
   {
    "id": "jannet",
    "name": "Jannet",
    "company": null,
    "source": "Haffouz (Kairouan)",
+   "depuis": 2002,
    "note": null,
    "img": "assets/img/jannet_2l.jpg",
    "types": [
@@ -555,14 +556,14 @@ window.EAUX_DATA = {
       "Carrefour": 0.83
      }
     }
-   ],
-   "depuis": 2002
+   ]
   },
   {
    "id": "jektiss",
    "name": "Jektiss",
    "company": null,
    "source": "Koutine (Médenine)",
+   "depuis": 1989,
    "note": "Eau de table (traitée par osmose inverse).",
    "img": "assets/img/jektiss_x.jpg",
    "types": [
@@ -605,14 +606,14 @@ window.EAUX_DATA = {
       "Monoprix": 0.68
      }
     }
-   ],
-   "depuis": 1989
+   ]
   },
   {
    "id": "marwa",
    "name": "Marwa",
    "company": "Eaux Minérales Marwa",
    "source": "Kef Ghrab, Joumine (Bizerte)",
+   "depuis": 1994,
    "note": null,
    "img": "assets/img/marwa_15l.jpg",
    "types": [
@@ -652,14 +653,14 @@ window.EAUX_DATA = {
       "Monoprix": 0.64
      }
     }
-   ],
-   "depuis": 1994
+   ]
   },
   {
    "id": "may",
    "name": "May",
    "company": null,
    "source": "Le Krib (Siliana)",
+   "depuis": 2011,
    "note": null,
    "img": "assets/img/may_tunisia_15l.jpg",
    "types": [
@@ -687,14 +688,14 @@ window.EAUX_DATA = {
       "Monoprix": 0.89
      }
     }
-   ],
-   "depuis": 2011
+   ]
   },
   {
    "id": "main",
    "name": "Maïn",
    "company": null,
    "source": "Tataouine nord",
+   "depuis": 2004,
    "note": null,
    "img": "assets/img/produits/4e4f22bb6f87.webp",
    "types": [
@@ -711,14 +712,14 @@ window.EAUX_DATA = {
       "Carrefour": 0.6
      }
     }
-   ],
-   "depuis": 2004
+   ]
   },
   {
    "id": "melina",
    "name": "Melina",
    "company": null,
    "source": "Bargou (Siliana)",
+   "depuis": 2007,
    "note": null,
    "img": "assets/img/melina_15l.jpg",
    "types": [
@@ -756,14 +757,14 @@ window.EAUX_DATA = {
       "Monoprix": 0.79
      }
     }
-   ],
-   "depuis": 2007
+   ]
   },
   {
    "id": "melliti",
    "name": "Melliti",
    "company": "SFBT (Sostem)",
    "source": "Aïn El Beidha, Téboursouk (Béja)",
+   "depuis": 1977,
    "note": null,
    "img": "assets/img/melliti_15l.jpg",
    "types": [
@@ -794,14 +795,14 @@ window.EAUX_DATA = {
       "Monoprix": 0.69
      }
     }
-   ],
-   "depuis": 1977
+   ]
   },
   {
    "id": "mira",
    "name": "Mira",
    "company": null,
    "source": "Hajeb El Ayoun (Kairouan)",
+   "depuis": 2018,
    "note": null,
    "img": "assets/img/mira_15l.jpg",
    "types": [
@@ -871,14 +872,14 @@ window.EAUX_DATA = {
       "Monoprix": 0.84
      }
     }
-   ],
-   "depuis": 2018
+   ]
   },
   {
    "id": "palma",
    "name": "Palma",
    "company": null,
    "source": "Sidi Aïch (Gafsa)",
+   "depuis": 2011,
    "note": null,
    "img": "assets/img/produits/a10da5f9cc3a.webp",
    "types": [
@@ -927,14 +928,14 @@ window.EAUX_DATA = {
       "Carrefour": 0.92
      }
     }
-   ],
-   "depuis": 2011
+   ]
   },
   {
    "id": "primaqua",
    "name": "Primaqua",
    "company": null,
    "source": "Koutine (Médenine)",
+   "depuis": 2007,
    "note": "Eau de table (osmose inverse), grands formats et bonbonnes.",
    "img": "assets/img/primaqua_6l.jpg",
    "types": [
@@ -964,14 +965,14 @@ window.EAUX_DATA = {
       "Carrefour": 5.35
      }
     }
-   ],
-   "depuis": 2007
+   ]
   },
   {
    "id": "pristine",
    "name": "Pristine",
    "company": null,
    "source": "Henchir Kefia (Zaghouan)",
+   "depuis": 2017,
    "note": null,
    "img": "assets/img/pristine_15l.jpg",
    "types": [
@@ -1030,27 +1031,27 @@ window.EAUX_DATA = {
       "Géant": 0.8
      }
     }
-   ],
-   "depuis": 2017
+   ]
   },
   {
    "id": "rayan",
    "name": "Rayan",
    "company": null,
    "source": "Nefza (Béja)",
+   "depuis": 2011,
    "note": "Devenue Élixir en 2015.",
    "img": null,
    "types": [
     "plate"
    ],
-   "products": [],
-   "depuis": 2011
+   "products": []
   },
   {
    "id": "rim",
    "name": "Rim",
    "company": null,
    "source": null,
+   "depuis": null,
    "note": null,
    "img": "assets/img/produits/ffd03e3f94f9.webp",
    "types": [
@@ -1088,27 +1089,27 @@ window.EAUX_DATA = {
       "Carrefour": 0.86
      }
     }
-   ],
-   "depuis": null
+   ]
   },
   {
    "id": "royal",
    "name": "Royal",
    "company": "Royal Drinks",
    "source": "Aïn Sokra, Siliana sud",
+   "depuis": 2016,
    "note": "Ex-Cristal.",
    "img": null,
    "types": [
     "plate"
    ],
-   "products": [],
-   "depuis": 2016
+   "products": []
   },
   {
    "id": "sabrine",
    "name": "Sabrine",
    "company": "Sabrine SA",
    "source": "Oued Kharroub, Chébika (Kairouan)",
+   "depuis": 1990,
    "note": "Première eau certifiée ISO 22000 en Tunisie.",
    "img": "assets/img/sabrine_15l.jpg",
    "types": [
@@ -1138,14 +1139,14 @@ window.EAUX_DATA = {
       "Géant": 0.68
      }
     }
-   ],
-   "depuis": 1990
+   ]
   },
   {
    "id": "safia",
    "name": "Safia",
    "company": "SFBT (Sostem)",
    "source": "Aïn Mizeb & Aïn Ksiba, El Ksour (Le Kef)",
+   "depuis": 1968,
    "note": "Marque historique d'eau plate en Tunisie (2e source autorisée en 1989).",
    "img": "assets/img/safia_15l.jpg",
    "types": [
@@ -1175,40 +1176,40 @@ window.EAUX_DATA = {
       "Géant": 0.69
      }
     }
-   ],
-   "depuis": 1968
+   ]
   },
   {
    "id": "saha",
    "name": "Saha",
    "company": null,
    "source": "El Fahs (Zaghouan)",
+   "depuis": 2017,
    "note": "Eau de table.",
    "img": null,
    "types": [
     "plate"
    ],
-   "products": [],
-   "depuis": 2017
+   "products": []
   },
   {
    "id": "tiba",
    "name": "Tiba",
    "company": "Tiba Eaux Minérales",
    "source": "Tlebt (Kasserine)",
+   "depuis": null,
    "note": null,
    "img": null,
    "types": [
     "plate"
    ],
-   "products": [],
-   "depuis": null
+   "products": []
   },
   {
    "id": "tijen",
    "name": "Tijen",
    "company": null,
    "source": "Labiadh (Sidi Bouzid)",
+   "depuis": 2018,
    "note": null,
    "img": "assets/img/tijen_15l.jpg",
    "types": [
@@ -1239,14 +1240,14 @@ window.EAUX_DATA = {
       "Monoprix": 0.69
      }
     }
-   ],
-   "depuis": 2018
+   ]
   },
   {
    "id": "vivian",
    "name": "Vivian",
    "company": null,
    "source": "ex-Övia, Zaghouan",
+   "depuis": 2011,
    "note": null,
    "img": "assets/img/produits/86a2e56fd2b8.webp",
    "types": [
@@ -1283,21 +1284,20 @@ window.EAUX_DATA = {
       "Carrefour": 0.9
      }
     }
-   ],
-   "depuis": 2011
+   ]
   },
   {
    "id": "elixir",
    "name": "Élixir",
    "company": null,
    "source": "Nefza (Béja)",
+   "depuis": 2015,
    "note": "Ex-Rayan (2011).",
    "img": "assets/img/elixir_15l.jpg",
    "types": [
     "plate"
    ],
-   "products": [],
-   "depuis": 2015
+   "products": []
   }
  ]
 };
