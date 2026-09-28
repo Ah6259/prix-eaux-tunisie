@@ -56,6 +56,14 @@ pour créer n'importe quel autre site.
 16. **Faire connaître (liens externes)** : partager dans les groupes Facebook
     ciblés, WhatsApp, Reddit… Chaque lien vers le site depuis un autre site
     (backlink) et chaque visite font monter le site dans Google
+17. **Recueillir les avis des visiteurs** : un site statique n'a pas de serveur
+    pour recevoir des messages — passer par un service de formulaire comme
+    **Formspree** (gratuit jusqu'à 50 messages/mois) : créer un compte, créer
+    un formulaire, mettre son adresse (`https://formspree.io/f/…`) dans
+    l'attribut `action` d'un `<form>` sur le site. Les messages arrivent par
+    email, l'adresse email reste invisible pour les visiteurs. Envoi en
+    JavaScript (fetch + `Accept: application/json`) pour rester sur la page,
+    et un champ caché « honeypot » (`_gotcha`) contre le spam
 
 ## Les outils utilisés (tous gratuits)
 
@@ -68,3 +76,4 @@ pour créer n'importe quel autre site.
 | GitHub Actions | automatisation quotidienne |
 | GoatCounter | statistiques de visite privées |
 | Google Search Console | référencement Google |
+| Formspree | formulaire d'avis / contact (messages reçus par email) |
