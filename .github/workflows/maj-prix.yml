@@ -2,7 +2,9 @@ name: Mise à jour des prix
 
 on:
   schedule:
-    - cron: "30 8 * * *"   # tous les jours à 9h30, heure de Tunis (UTC+1)
+    # Tous les jours vers 1h du matin heure de Tunis (UTC+1). Minute décalée
+    # (1h07) car GitHub retarde beaucoup les horaires ronds comme :00/:30.
+    - cron: "7 0 * * *"
   workflow_dispatch:        # bouton de lancement manuel dans l'onglet Actions
 
 permissions:
