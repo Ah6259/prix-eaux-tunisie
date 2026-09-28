@@ -35,11 +35,12 @@ Ouvrir simplement `index.html` dans un navigateur (fonctionne en local, sans ser
 
 ## Mettre à jour les prix
 
-**Automatique** : la tâche planifiée Windows `PrixEauxTunisie-MAJ` lance `tools/update_prix.ps1`
-tous les jours à 9h30 (ou dès que le PC est allumé si l'heure est passée) et écrit le détail
-dans `tools/update_log.txt`. Gérer la tâche : `taskschd.msc` → « PrixEauxTunisie-MAJ ».
+**Automatique** : le workflow GitHub Actions (`.github/workflows/maj-prix.yml`) tourne
+chaque nuit vers 1h du matin (heure de Tunis) sur les serveurs GitHub — PC éteint ou pas —
+et publie directement sur le site. (L'ancienne tâche planifiée Windows locale
+`PrixEauxTunisie-MAJ` a été supprimée le 28/09/2026 : elle était devenue redondante.)
 
-**Manuel** : double-clic sur `tools/update_prix.bat`, ou :
+**Manuel** (copie locale uniquement) : double-clic sur `tools/update_prix.bat`, ou :
 
 ```
 python tools/collect_prices.py
