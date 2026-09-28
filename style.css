@@ -337,3 +337,25 @@ body.has-cart{padding-bottom:70px}
   .bar-row{grid-template-columns:84px 1fr 74px}
   .card-head img{width:52px; height:66px}
 }
+
+/* hadith sur la sqya (le don de l'eau) */
+.hadith-section{padding-block:4px 8px}
+.hadith{
+  margin:0; text-align:center; background:var(--surface);
+  border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
+  padding:20px 26px 16px; position:relative; overflow:hidden;
+}
+.hadith::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px;
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+.hadith-ornament{color:var(--accent); font-size:13px; letter-spacing:10px; padding-left:10px; margin-bottom:4px}
+.hadith-text{
+  font-family:"Amiri Quran","Scheherazade New",serif;
+  font-size:clamp(20px, 3.2vw, 28px); line-height:2.2; text-wrap:balance;
+  margin:0 auto; max-width:36em; color:var(--ink);
+}
+.hadith-source{
+  font-family:"Amiri Quran",serif; color:var(--muted);
+  font-size:15px; margin-top:8px;
+}
