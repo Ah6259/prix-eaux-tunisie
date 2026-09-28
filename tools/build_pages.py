@@ -193,9 +193,18 @@ liens = "".join(f'<li><a href="marque/{b["id"]}/">Prix eau {esc(b["name"])}</a><
 bloc = f"<!--MARQUES--><ul>{liens}</ul><!--/MARQUES-->"
 if "<!--MARQUES-->" in html:
     html = re.sub(r"<!--MARQUES-->.*?<!--/MARQUES-->", bloc, html, flags=re.S)
-    index.write_text(html, encoding="utf-8")
     lien_accueil = "oui"
 else:
     lien_accueil = "NON (marqueur absent de index.html)"
+
+# nombre de marques tenu à jour dans les métas (description, og:description
+# lue par WhatsApp/Facebook) et le JSON-LD ; la liste de marques du JSON-LD aussi
+nb = len(data["brands"])
+html = re.sub(r"\d+ marques", f"{nb} marques", html)
+noms = ", ".join(b["name"] for b in data["brands"])
+html = re.sub(r'("text": ")\d+ marques vendues en Tunisie : [^"]*(")',
+              lambda m: m.group(1) + f"{nb} marques vendues en Tunisie : {noms}." + m.group(2),
+              html)
+index.write_text(html, encoding="utf-8")
 
 print(f"{len(data['brands'])} pages marque générées · sitemap {len(urls)} URLs · liens accueil : {lien_accueil}")
