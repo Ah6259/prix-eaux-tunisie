@@ -64,16 +64,11 @@ function compoBlock(b){
 }
 
 /* stats ------------------------------------------------------------------ */
-const nProd = DATA.brands.reduce((n,b) => n + b.products.length, 0);
-const nOff  = DATA.brands.reduce((n,b) => n + b.products.reduce((m,p) => m + Object.keys(p.prices).length, 0), 0);
 const majCourte = new Date(DATA.updated + "T12:00:00")
   .toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
-document.getElementById("stats").innerHTML = [
-  [majCourte, "prix mis à jour"],
-  [DATA.brands.length, "marques"],
-  [nProd, "produits"],
-  [nOff, "prix relevés"],
-].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+// petite ligne sous le titre : « Mis à jour le 29 sept. · 35 marques · 4 enseignes »
+document.getElementById("stats").textContent =
+  `Mis à jour le ${majCourte} · ${DATA.brands.length} marques · ${DATA.stores.length} enseignes`;
 
 /* état global — au chargement : stikas de 1,5 L, les moins chères d'abord -- */
 // filtres multi-sélection : listes vides = aucun filtre, tout est affiché

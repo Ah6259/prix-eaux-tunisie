@@ -54,9 +54,8 @@ h1 .drop{color:var(--accent)}
 .stat span{color:var(--muted); font-size:13px}
 
 /* baisses de prix du jour + lien canal Telegram */
-.baisses{margin-top:14px}
 .baisses-list{
-  background:var(--best-soft); border:1px solid var(--best); border-radius:14px;
+  margin-top:14px; background:var(--best-soft); border:1px solid var(--best); border-radius:14px;
   padding:12px 16px; margin-bottom:8px;
 }
 .baisses-list h2{font-size:16px; margin:0 0 6px; color:var(--best)}
@@ -67,14 +66,20 @@ h1 .drop{color:var(--accent)}
 .baisses-list details{margin-top:6px}
 .baisses-list summary{cursor:pointer; color:var(--best); font-size:13px; font-weight:600}
 .baisses-list details ul{margin-top:6px}
-.tg-join{
-  display:inline-flex; align-items:center; gap:8px; font-size:13.5px; color:var(--ink);
-  text-decoration:none; padding:7px 14px; border-radius:999px;
+/* titre + cloche (lien vers le canal Telegram) + ligne « Mis à jour le… » */
+.titre{display:flex; flex-wrap:wrap; align-items:center; gap:0 10px}
+.stats-line{flex-basis:100%; margin:2px 0 0; color:var(--muted); font-size:12.5px}
+.bell{
+  width:34px; height:34px; border-radius:50%; flex:none; text-decoration:none;
+  display:inline-flex; align-items:center; justify-content:center; font-size:18px;
   background:var(--accent-soft); border:1px solid var(--line);
+  animation:sonne 1.2s ease-in-out 1s 2;
 }
-.tg-join:hover{border-color:var(--accent)}
-.tg-join b{color:var(--accent)}
-.tg-join svg{width:18px; height:18px; fill:#229ED9; flex:none}
+.bell:hover{border-color:var(--accent)}
+@keyframes sonne{
+  0%,60%,100%{transform:rotate(0)} 10%,30%{transform:rotate(14deg)} 20%,40%{transform:rotate(-14deg)}
+}
+@media (prefers-reduced-motion:reduce){.bell{animation:none}}
 
 section{padding-block:20px}
 h2{
