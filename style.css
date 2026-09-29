@@ -85,7 +85,12 @@ h1 .drop{color:var(--accent)}
 }
 @media (prefers-reduced-motion:reduce){.tg-btn{animation:none}}
 .tg-btn svg{fill:#fff; flex:none}
-@media (max-width:560px){ .tg-long{display:none} }
+.tg-txt{display:flex; flex-direction:column; align-items:center; line-height:1.1}
+/* « PROMO » en rouge sous « Alertes » (pastille rouge : lisible sur le bouton bleu) */
+.tg-promo{
+  margin-top:2px; background:#E53935; color:#fff; font-size:9.5px; font-weight:800;
+  letter-spacing:.06em; padding:1px 6px; border-radius:999px;
+}
 
 section{padding-block:20px}
 h2{
