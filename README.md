@@ -91,6 +91,23 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
 8. **Commande groupée de quartier** : atteindre le minimum de livraison, meilleur prix.
 9. **Espace marques / distributeurs** : promos mises à jour par les marques (lien avec la publicité).
 
+### Projet futur : comparateur pour d'autres produits (idée du 29/09/2026, à reprendre)
+
+Réutiliser toute la recette du site de l'eau (scrapers Carrefour/Géant/barka, page,
+filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'autres produits.
+- **Garder le site de l'eau tel quel** (il marche) ; créer un 2ᵉ site « Prix des courses en
+  Tunisie », une page par catégorie, avec des liens croisés.
+- **Candidats** : 🍼 lait infantile + couches (1er choix), ☕ café, 🫒 huile d'olive,
+  🐟 thon / tomate concentrée / harissa, 🧴 lessive et ménager.
+- **À éviter** : produits subventionnés ou à prix fixé (lait demi-écrémé, sucre, farine,
+  semoule, pain, huile subventionnée) : même prix partout.
+- **Méthode** : un seul produit pilote, mesurer 2-3 semaines sur GoatCounter, puis étendre.
+  Fonction phare plus tard : **comparateur de couffin** (liste de courses → magasin le moins cher).
+- **Difficultés** : prix à l'unité ou au kg (tailles et paquets variables), filtrage des faux
+  produits trouvés par les scrapers.
+- **Première action à la reprise** : vérifier (sans rien créer) combien de produits
+  Carrefour et Géant ont en ligne pour le produit pilote choisi.
+
 ### Autres idées
 
 - **Bannière publicitaire** si une marque d'eau le demande : encart image + lien,
