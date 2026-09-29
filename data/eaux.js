@@ -3,8 +3,7 @@ window.EAUX_DATA = {
  "currency": "DT",
  "stores": [
   "Carrefour",
-  "Géant",
-  "Monoprix"
+  "Géant"
  ],
  "sources": [
   {
@@ -14,10 +13,6 @@ window.EAUX_DATA = {
   {
    "name": "Géant Drive Tunisie",
    "url": "https://www.geantdrive.tn"
-  },
-  {
-   "name": "Monoprix (via barka.tn)",
-   "url": "https://barka.tn"
   },
   {
    "name": "Wikipédia — Eaux minérales en Tunisie",
@@ -44,8 +39,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Carrefour": 0.4,
-      "Monoprix": 0.44
+      "Carrefour": 0.4
      }
     },
     {
@@ -55,8 +49,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Carrefour": 0.61,
-      "Monoprix": 0.63
+      "Carrefour": 0.61
      }
     },
     {
@@ -67,8 +60,7 @@ window.EAUX_DATA = {
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
       "Géant": 0.6,
-      "Carrefour": 0.63,
-      "Monoprix": 0.7
+      "Carrefour": 0.63
      }
     },
     {
@@ -78,8 +70,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Carrefour": 0.78,
-      "Monoprix": 0.83
+      "Carrefour": 0.78
      }
     }
    ]
@@ -224,8 +215,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
-      "Carrefour": 0.4,
-      "Monoprix": 0.42
+      "Carrefour": 0.4
      }
     },
     {
@@ -235,8 +225,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
-      "Carrefour": 0.61,
-      "Monoprix": 0.64
+      "Carrefour": 0.61
      }
     },
     {
@@ -247,8 +236,7 @@ window.EAUX_DATA = {
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
       "Carrefour": 0.8,
-      "Géant": 0.81,
-      "Monoprix": 0.84
+      "Géant": 0.81
      }
     }
    ]
@@ -391,8 +379,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/delice_delio_250ml_pomme.jpg",
      "prices": {
-      "Carrefour": 0.48,
-      "Monoprix": 0.51
+      "Carrefour": 0.48
      }
     },
     {
@@ -449,8 +436,7 @@ window.EAUX_DATA = {
      "img": "assets/img/fourat_2l.jpg",
      "prices": {
       "Carrefour": 0.88,
-      "Géant": 0.88,
-      "Monoprix": 0.9
+      "Géant": 0.88
      }
     }
    ]
@@ -476,18 +462,7 @@ window.EAUX_DATA = {
      "img": "assets/img/garci_1l.jpg",
      "prices": {
       "Géant": 0.46,
-      "Carrefour": 0.48,
-      "Monoprix": 0.48
-     }
-    },
-    {
-     "liters": 1.0,
-     "format": "1 L",
-     "category": "gazeuse",
-     "flavor": null,
-     "img": "assets/img/garci_1l.jpg",
-     "prices": {
-      "Monoprix": 0.67
+      "Carrefour": 0.48
      }
     },
     {
@@ -498,8 +473,7 @@ window.EAUX_DATA = {
      "img": "assets/img/garci_1l.jpg",
      "prices": {
       "Carrefour": 0.62,
-      "Géant": 0.69,
-      "Monoprix": 0.74
+      "Géant": 0.69
      }
     }
    ]
@@ -561,8 +535,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jektiss_x.jpg",
      "prices": {
-      "Carrefour": 0.45,
-      "Monoprix": 0.49
+      "Carrefour": 0.45
      }
     },
     {
@@ -572,8 +545,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.67,
-      "Monoprix": 0.68
+      "Carrefour": 0.67
      }
     },
     {
@@ -584,8 +556,7 @@ window.EAUX_DATA = {
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
       "Carrefour": 0.59,
-      "Géant": 0.59,
-      "Monoprix": 0.68
+      "Géant": 0.59
      }
     }
    ]
@@ -610,8 +581,7 @@ window.EAUX_DATA = {
      "img": "assets/img/marwa_15l.jpg",
      "prices": {
       "Carrefour": 0.4,
-      "Géant": 0.4,
-      "Monoprix": 0.47
+      "Géant": 0.4
      }
     },
     {
@@ -631,8 +601,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/marwa_15l.jpg",
      "prices": {
-      "Géant": 0.61,
-      "Monoprix": 0.64
+      "Géant": 0.61
      }
     }
    ]
@@ -658,16 +627,6 @@ window.EAUX_DATA = {
      "prices": {
       "Carrefour": 0.67,
       "Géant": 0.67
-     }
-    },
-    {
-     "liters": 2.0,
-     "format": "2 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/may_tunisia_15l.jpg",
-     "prices": {
-      "Monoprix": 0.89
      }
     }
    ]
@@ -709,34 +668,13 @@ window.EAUX_DATA = {
    ],
    "products": [
     {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/melina_x.jpg",
-     "prices": {
-      "Monoprix": 0.42
-     }
-    },
-    {
      "liters": 1.5,
      "format": "1.5 L",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/melina_15l.jpg",
      "prices": {
-      "Géant": 0.59,
-      "Monoprix": 0.62
-     }
-    },
-    {
-     "liters": 2.0,
-     "format": "2 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/melina_x.jpg",
-     "prices": {
-      "Monoprix": 0.79
+      "Géant": 0.59
      }
     }
    ]
@@ -761,8 +699,7 @@ window.EAUX_DATA = {
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
       "Carrefour": 0.4,
-      "Géant": 0.4,
-      "Monoprix": 0.47
+      "Géant": 0.4
      }
     },
     {
@@ -772,8 +709,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
-      "Géant": 0.61,
-      "Monoprix": 0.69
+      "Géant": 0.61
      }
     }
    ]
@@ -811,16 +747,6 @@ window.EAUX_DATA = {
      }
     },
     {
-     "liters": 0.6,
-     "format": "600 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/mira_2l.jpg",
-     "prices": {
-      "Monoprix": 0.42
-     }
-    },
-    {
      "liters": 0.95,
      "format": "950 ml",
      "category": "plate",
@@ -828,8 +754,7 @@ window.EAUX_DATA = {
      "img": "assets/img/mira_095l.jpg",
      "prices": {
       "Carrefour": 0.61,
-      "Géant": 0.61,
-      "Monoprix": 0.66
+      "Géant": 0.61
      }
     },
     {
@@ -849,8 +774,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
-      "Carrefour": 0.74,
-      "Monoprix": 0.84
+      "Carrefour": 0.74
      }
     }
    ]
@@ -930,8 +854,7 @@ window.EAUX_DATA = {
      "img": "assets/img/primaqua_6l.jpg",
      "prices": {
       "Carrefour": 2.34,
-      "Géant": 2.39,
-      "Monoprix": 2.46
+      "Géant": 2.39
      }
     },
     {
@@ -1102,7 +1025,6 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/sabrine_15l.jpg",
      "prices": {
-      "Monoprix": 0.66,
       "Carrefour": 0.68,
       "Géant": 0.68
      }
@@ -1128,7 +1050,6 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Monoprix": 0.41,
       "Carrefour": 0.43,
       "Géant": 0.43
      }
@@ -1140,7 +1061,6 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Monoprix": 0.67,
       "Géant": 0.69
      }
     }
@@ -1192,8 +1112,7 @@ window.EAUX_DATA = {
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
       "Carrefour": 0.44,
-      "Géant": 0.44,
-      "Monoprix": 0.49
+      "Géant": 0.44
      }
     },
     {
@@ -1204,8 +1123,7 @@ window.EAUX_DATA = {
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
       "Carrefour": 0.68,
-      "Géant": 0.68,
-      "Monoprix": 0.69
+      "Géant": 0.68
      }
     }
    ]
