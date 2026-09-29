@@ -199,8 +199,11 @@ function render(){
   let list = DATA.brands
     .map(b => {
       const parNature = sansType || natSel.includes(brandNature(b));
+      // exception eau traitée : quand le filtre « Traitée » est actif, on montre
+      // tous ses formats (aucune eau de table n'existe en 1,5 L, le format par défaut)
+      const sansFmt = natSel.includes("table") && brandNature(b) === "table";
       return { b, parNature, prods: b.products.filter(p =>
-        fmtOk(p) && (parNature || (gazSel && p.category === "gazeuse")) &&
+        (sansFmt || fmtOk(p)) && (parNature || (gazSel && p.category === "gazeuse")) &&
         Object.keys(p.prices).length > 0) };
     })
     .filter(({ b, parNature, prods }) => {
