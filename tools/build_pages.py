@@ -125,7 +125,7 @@ def page_marque(b):
 </head>
 <body>
 <header class="site"><div class="wrap site-inner">
-  <h1>Prix de l'eau {esc(nom)} <span class="drop">◆</span></h1>
+  <h1>Prix de l'eau {esc(nom)}</h1>
 </div></header>
 <div class="wrap">
   <p class="intro" style="margin-top:14px"><a href="../../">← Prix de toutes les eaux minérales en Tunisie</a></p>

@@ -67,14 +67,19 @@ h1 .drop{color:var(--accent)}
 .baisses-list summary{cursor:pointer; color:var(--best); font-size:13px; font-weight:600}
 .baisses-list details ul{margin-top:6px}
 /* titre + cloche (lien vers le canal Telegram) + ligne « Mis à jour le… » */
-/* grille : titre | bouton sur la même ligne (le titre passe à la ligne si besoin), puis la date */
-.titre{display:grid; grid-template-columns:auto auto; justify-content:start; align-items:center; gap:0 12px; flex:1 1 300px}
-.titre h1{min-width:0}
-.stats-line{grid-column:1 / -1; margin:2px 0 0; color:var(--muted); font-size:12.5px}
-@media (max-width:560px){ .titre{grid-template-columns:1fr auto} }
+/* titre + date ; le bouton Alertes suit le titre (ordinateur) ou la recherche (téléphone) */
+.titre{flex:none}
+.stats-line{margin:2px 0 0; color:var(--muted); font-size:12.5px}
+@media (max-width:560px){
+  .site-inner{gap:10px}
+  .titre{flex-basis:100%}
+  .titre h1{white-space:nowrap}              /* titre toujours sur une ligne */
+  .search{order:1; flex:1 1 0; min-width:0}  /* recherche à gauche… */
+  .tg-btn{order:2}                           /* …bouton Alertes à droite */
+}
 /* bouton Telegram « Alertes prix », tout à droite du titre */
 .tg-btn{
-  justify-self:end; display:inline-flex; align-items:center; gap:6px;
+  flex:none; display:inline-flex; align-items:center; gap:6px;
   background:#229ED9; color:#fff; text-decoration:none; font-size:13px; font-weight:700;
   padding:6px 12px; border-radius:999px;
 }
