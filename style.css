@@ -75,10 +75,13 @@ h1 .drop{color:var(--accent)}
   background:#229ED9; color:#fff; text-decoration:none; font-size:13px; font-weight:700;
   padding:6px 12px; border-radius:999px;
 }
-.tg-btn{animation:secoue 1.2s ease-in-out 1s 2}   /* s'agite 2 fois à l'ouverture */
+/* 3 secousses à l'ouverture, puis de nouveau toutes les 12 s — 3 séries au total, ensuite immobile */
+.tg-btn{animation:secoue 12s ease-in-out 1s 3}
 .tg-btn:hover{background:#1A86BA}
 @keyframes secoue{
-  0%,60%,100%{transform:rotate(0)} 10%,30%{transform:rotate(8deg)} 20%,40%{transform:rotate(-8deg)}
+  0%,15%,100%{transform:rotate(0)}
+  2.5%,7.5%,12.5%{transform:rotate(8deg)}
+  5%,10%{transform:rotate(-8deg)}
 }
 @media (prefers-reduced-motion:reduce){.tg-btn{animation:none}}
 .tg-btn svg{fill:#fff; flex:none}
