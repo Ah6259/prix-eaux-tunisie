@@ -421,3 +421,25 @@ body.has-cart{padding-bottom:70px}
 #avis-status{font-size:13.5px; color:var(--muted)}
 #avis-status.ok{color:var(--best); font-weight:600}
 #avis-status.err{color:#C0392B; font-weight:600}
+
+/* bouton ? et fenetre d'explication des types d'eau */
+.chip-help{font-weight:700; min-width:34px; color:var(--accent)}
+.help-pop{
+  position:fixed; inset:0; z-index:60; display:grid; place-items:center;
+  background:rgba(15,43,61,.45); padding:16px;
+}
+.help-pop[hidden]{display:none}
+.help-box{
+  position:relative; background:var(--surface); color:var(--ink);
+  border:1px solid var(--line); border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,.25);
+  max-width:520px; max-height:85vh; overflow:auto; padding:22px 24px;
+}
+.help-box h2{margin:0 0 12px; font-size:18px}
+.help-box p{margin:0 0 10px; font-size:14px; line-height:1.55}
+.help-box .help-src{color:var(--muted); font-size:12.5px; border-top:1px solid var(--line); padding-top:10px; margin-top:12px}
+.help-box a{color:var(--accent)}
+.help-close{
+  position:absolute; top:8px; right:10px; border:0; background:none; color:var(--muted);
+  font-size:26px; line-height:1; cursor:pointer; padding:4px 8px;
+}
+.help-close:hover{color:var(--ink)}

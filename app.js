@@ -608,3 +608,15 @@ renderCartBar();
     }
   });
 })();
+
+/* fenetre d'aide : les types d'eau ---------------------------------------- */
+(function(){
+  const btn = document.getElementById("type-help");
+  const pop = document.getElementById("type-help-pop");
+  if (!btn || !pop) return;
+  const close = document.getElementById("type-help-close");
+  btn.addEventListener("click", () => { pop.hidden = false; });
+  close.addEventListener("click", () => { pop.hidden = true; });
+  pop.addEventListener("click", (e) => { if (e.target === pop) pop.hidden = true; });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") pop.hidden = true; });
+})();

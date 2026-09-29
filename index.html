@@ -69,6 +69,14 @@
         },
         {
           "@type": "Question",
+          "name": "Quelle différence entre eau minérale, eau de source et eau de table ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L'eau minérale naturelle vient d'une source souterraine protégée et a une composition stable et garantie, sans traitement. L'eau de source est souterraine et naturellement potable, mais sa composition peut varier. L'eau de table (traitée) est rendue potable par traitement. La classification des marques tunisiennes est issue du tableau officiel de l'Office du Thermalisme."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Quelles marques d'eau sont comparées ?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -104,6 +112,7 @@
       <button class="chipbtn" data-type="source" aria-pressed="false">Source</button>
       <button class="chipbtn" data-type="table" aria-pressed="false">Traitée</button>
       <button class="chipbtn" data-type="gazeuse" aria-pressed="false">Gazeuses</button>
+      <button class="chipbtn chip-help" id="type-help" aria-label="Comprendre les types d'eau" title="Comprendre les types d'eau">?</button>
     </div>
     <div class="tgroup" id="format-controls" role="group" aria-label="Format de bouteille"></div>
     <select id="sort" aria-label="Trier les marques">
@@ -112,6 +121,25 @@
       <option value="prixL">Tri : prix au litre croissant</option>
       <option value="tds">Tri : minéralité (résidu sec)</option>
     </select>
+  </div>
+  <div class="help-pop" id="type-help-pop" role="dialog" aria-label="Les types d'eau embouteillée" hidden>
+    <div class="help-box">
+      <button type="button" class="help-close" id="type-help-close" aria-label="Fermer">×</button>
+      <h2>Les types d'eau embouteillée</h2>
+      <p><strong>Eau minérale naturelle</strong> — issue d'une source souterraine protégée, avec une
+      composition minérale <em>stable et garantie</em>. Aucun traitement chimique n'est autorisé.</p>
+      <p><strong>Eau de source</strong> — souterraine et naturellement potable elle aussi, mais sa
+      composition peut varier dans le temps ; les exigences sont moins strictes.</p>
+      <p><strong>Eau traitée (eau de table)</strong> — eau rendue potable par traitement,
+      quelle que soit son origine.</p>
+      <p><strong>Eau gazeuse</strong> — eau avec bulles, naturelles (comme Garci ou Aïn Oktor)
+      ou ajoutées.</p>
+      <p class="help-src">Classification et compositions transcrites du tableau de
+      l'<strong>Office du Thermalisme</strong> (organisme officiel tunisien), publié par le
+      Dr Ing. Imed Houcine — <a href="https://www.babnet.net/festivaldetail-287073.asp"
+      target="_blank" rel="noopener">voir la publication (mai 2024)</a>. Le détail par marque
+      (calcium, sodium, pH…) est dans « Composition » sur chaque fiche.</p>
+    </div>
   </div>
 </header>
 
@@ -200,6 +228,13 @@
     gazeuses <strong>Garci</strong> (1 677 mg/L) et <strong>Aïn Oktor</strong> (1 680 mg/L).
     Ouvrez « Composition » sur la carte d'une marque pour le détail (calcium, sodium, pH…),
     ou triez par minéralité avec le menu en haut de page.</p>
+    <h3>Quelle différence entre eau minérale, eau de source et eau de table ?</h3>
+    <p>L'<strong>eau minérale naturelle</strong> vient d'une source souterraine protégée et a une
+    composition stable et garantie, sans aucun traitement. L'<strong>eau de source</strong> est
+    aussi souterraine et naturellement potable, mais sa composition peut varier. L'<strong>eau de
+    table (traitée)</strong> est rendue potable par traitement. Utilisez les boutons Minérale /
+    Source / Traitée en haut de la page pour filtrer les marques — classification issue du tableau
+    officiel de l'Office du Thermalisme.</p>
     <h3>Quelles marques d'eau sont comparées ?</h3>
     <p><span id="faq-nb-marques">26</span> marques vendues en Tunisie :
     <span id="faq-marques-liste">Safia, Sabrine, Marwa, Melliti, Garci, Cristaline, Fourat, Dima,
