@@ -53,6 +53,29 @@ h1 .drop{color:var(--accent)}
 .stat b{font-family:"Bricolage Grotesque",sans-serif; font-size:24px; font-weight:800; display:block; line-height:1.1}
 .stat span{color:var(--muted); font-size:13px}
 
+/* baisses de prix du jour + lien canal Telegram */
+.baisses{margin-top:14px}
+.baisses-list{
+  background:var(--best-soft); border:1px solid var(--best); border-radius:14px;
+  padding:12px 16px; margin-bottom:8px;
+}
+.baisses-list h2{font-size:16px; margin:0 0 6px; color:var(--best)}
+.baisses-list ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px; font-size:13.5px}
+.baisses-list s{color:var(--muted)}
+.baisses-list .bx-p{color:var(--best); font-variant-numeric:tabular-nums}
+.baisses-list .bx-pct{font-size:11.5px; font-weight:700; color:#fff; background:var(--best); border-radius:999px; padding:1px 7px; margin-left:4px}
+.baisses-list details{margin-top:6px}
+.baisses-list summary{cursor:pointer; color:var(--best); font-size:13px; font-weight:600}
+.baisses-list details ul{margin-top:6px}
+.tg-join{
+  display:inline-flex; align-items:center; gap:8px; font-size:13.5px; color:var(--ink);
+  text-decoration:none; padding:7px 14px; border-radius:999px;
+  background:var(--accent-soft); border:1px solid var(--line);
+}
+.tg-join:hover{border-color:var(--accent)}
+.tg-join b{color:var(--accent)}
+.tg-join svg{width:18px; height:18px; fill:#229ED9; flex:none}
+
 section{padding-block:20px}
 h2{
   font-family:"Bricolage Grotesque","Figtree",sans-serif; font-weight:600;

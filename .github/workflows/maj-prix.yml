@@ -35,6 +35,11 @@ jobs:
       - name: Régénérer les pages par marque et le sitemap
         run: python tools/build_pages.py
 
+      - name: Détecter les baisses de prix et les publier sur Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python tools/price_drops.py
+
       - name: Publier les nouvelles données
         run: |
           git config user.name "github-actions[bot]"

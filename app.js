@@ -222,6 +222,25 @@ function render(){
          : a.b.name.localeCompare(z.b.name, "fr")));
   document.getElementById("grid").innerHTML = list.map(({ b, prods }) => card(b, prods)).join("");
   document.getElementById("empty").hidden = list.length > 0;
+  renderBaisses();
+}
+
+/* bandeau « Baisses de prix du jour » : affiché seulement si les baisses
+   datent du relevé affiché (data/baisses.js, écrit par tools/price_drops.py) */
+function renderBaisses(){
+  const B = window.EAUX_BAISSES, box = document.getElementById("baisses-list");
+  if (!B || B.date !== DATA.updated || !B.baisses.length){ box.hidden = true; return; }
+  const ligne = x => {
+    const nom = `${x.marque} ${x.format.replace(".", ",")}${x.gazeuse ? " gazeuse" : ""}${x.saveur ? " " + x.saveur : ""}`;
+    const stika = state.mode === "stika" && x.litres <= GRAND_FORMAT;
+    return `<li><b>${nom}</b>${stika ? " <small>(stika)</small>" : ""} chez ${x.enseigne} :
+      <s>${fmtDT(dispPrice(x.avant, x.litres))}</s> → <b class="bx-p">${fmtDT(dispPrice(x.prix, x.litres))}</b>
+      <span class="bx-pct">−${String(x.pct).replace(".", ",")} %</span></li>`;
+  };
+  const top = B.baisses.slice(0, 3), reste = B.baisses.slice(3);
+  box.innerHTML = `<h2>📉 Baisses de prix aujourd'hui</h2><ul>${top.map(ligne).join("")}</ul>` +
+    (reste.length ? `<details><summary>+ ${reste.length} autre${reste.length > 1 ? "s" : ""} baisse${reste.length > 1 ? "s" : ""}</summary><ul>${reste.map(ligne).join("")}</ul></details>` : "");
+  box.hidden = false;
 }
 
 document.getElementById("q").addEventListener("input", e => { state.q = e.target.value; render(); });
