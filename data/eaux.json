@@ -4,8 +4,7 @@
  "stores": [
   "Carrefour",
   "Géant",
-  "Monoprix",
-  "Aziza"
+  "Monoprix"
  ],
  "sources": [
   {
@@ -17,7 +16,7 @@
    "url": "https://www.geantdrive.tn"
   },
   {
-   "name": "Monoprix & Aziza (via barka.tn)",
+   "name": "Monoprix (via barka.tn)",
    "url": "https://barka.tn"
   },
   {
@@ -130,7 +129,6 @@
      "flavor": null,
      "img": "assets/img/bargou_15l.jpg",
      "prices": {
-      "Aziza": 0.59,
       "Carrefour": 0.67
      }
     }
@@ -250,8 +248,7 @@
      "prices": {
       "Carrefour": 0.8,
       "Géant": 0.81,
-      "Monoprix": 0.84,
-      "Aziza": 0.85
+      "Monoprix": 0.84
      }
     }
    ]
@@ -276,16 +273,6 @@
      "img": "assets/img/produits/2df55c3e5df9.webp",
      "prices": {
       "Carrefour": 0.46
-     }
-    },
-    {
-     "liters": 1.0,
-     "format": "1 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/bcb6baf2ffc7.jpg",
-     "prices": {
-      "Aziza": 0.5
      }
     },
     {
@@ -405,7 +392,6 @@
      "img": "assets/img/delice_delio_250ml_pomme.jpg",
      "prices": {
       "Carrefour": 0.48,
-      "Aziza": 0.48,
       "Monoprix": 0.51
      }
     },
@@ -428,8 +414,7 @@
      "img": "assets/img/delice_15l.jpg",
      "prices": {
       "Carrefour": 0.65,
-      "Géant": 0.66,
-      "Aziza": 0.68
+      "Géant": 0.66
      }
     }
    ]
@@ -463,7 +448,6 @@
      "flavor": null,
      "img": "assets/img/fourat_2l.jpg",
      "prices": {
-      "Aziza": 0.85,
       "Carrefour": 0.88,
       "Géant": 0.88,
       "Monoprix": 0.9
@@ -552,7 +536,6 @@
      "flavor": null,
      "img": "assets/img/jannet_2l.jpg",
      "prices": {
-      "Aziza": 0.7,
       "Carrefour": 0.83
      }
     }
@@ -589,7 +572,6 @@
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Aziza": 0.63,
       "Carrefour": 0.67,
       "Monoprix": 0.68
      }
@@ -780,7 +762,6 @@
      "prices": {
       "Carrefour": 0.4,
       "Géant": 0.4,
-      "Aziza": 0.42,
       "Monoprix": 0.47
      }
     },
@@ -904,7 +885,6 @@
      "flavor": null,
      "img": "assets/img/produits/322c6eeed7e7.webp",
      "prices": {
-      "Aziza": 0.36,
       "Carrefour": 0.5
      }
     },
@@ -951,8 +931,7 @@
      "prices": {
       "Carrefour": 2.34,
       "Géant": 2.39,
-      "Monoprix": 2.46,
-      "Aziza": 4.19
+      "Monoprix": 2.46
      }
     },
     {
@@ -1117,16 +1096,6 @@
    ],
    "products": [
     {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/sabrine_15l.jpg",
-     "prices": {
-      "Aziza": 0.37
-     }
-    },
-    {
      "liters": 1.5,
      "format": "1.5 L",
      "category": "plate",
@@ -1134,7 +1103,6 @@
      "img": "assets/img/sabrine_15l.jpg",
      "prices": {
       "Monoprix": 0.66,
-      "Aziza": 0.67,
       "Carrefour": 0.68,
       "Géant": 0.68
      }

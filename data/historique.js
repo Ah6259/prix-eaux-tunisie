@@ -122,12 +122,11 @@ window.EAUX_HISTO = {
    "stika15": 3.54,
    "bouteille15": 0.59,
    "marques": [
-    "Bargou",
     "Melina"
    ],
    "parMarque": {
     "Aqualine": 0.6,
-    "Bargou": 0.59,
+    "Bargou": 0.67,
     "Beya": 0.66,
     "Cristaline": 0.61,
     "Dima": 0.66,
