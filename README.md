@@ -74,6 +74,17 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
 
 ## Idées pour la suite
 
+- **Bannière publicitaire** si une marque d'eau le demande : encart image + lien,
+  clairement marqué « Publicité », sans jamais toucher aux prix ni au classement
+  (la neutralité du comparateur est toute la valeur du site). Argument de vente :
+  les statistiques GoatCounter. Prévoir un statut pour facturer.
+- **Nom de domaine + hébergement pro** (à faire avant que le site soit très populaire,
+  et nécessaire si publicité) : acheter un domaine (ex. prix-eaux.tn), héberger sur
+  Cloudflare Pages ou Netlify (gratuits, publicité autorisée). Migration SANS perte :
+  l'ancien site GitHub Pages redirige page par page vers le nouveau domaine (comme
+  fait pour le doublon prix-eau-tunisie) + outil « Changement d'adresse » de Search
+  Console. Les liens déjà partagés (Facebook, WhatsApp…) continuent de fonctionner —
+  rien à repartager.
 - Listes privées fournisseurs / livreurs + suivi des commandes (Google Sheets pour commencer)
 - Une page par marque (`/safia/`…) pour le référencement Google
 - Vrais logos des marques (sites officiels / pages Facebook) à la place des photos de bouteilles
