@@ -67,19 +67,17 @@ h1 .drop{color:var(--accent)}
 .baisses-list summary{cursor:pointer; color:var(--best); font-size:13px; font-weight:600}
 .baisses-list details ul{margin-top:6px}
 /* titre + cloche (lien vers le canal Telegram) + ligne « Mis à jour le… » */
-.titre{display:flex; flex-wrap:wrap; align-items:center; gap:0 10px}
+.titre{display:flex; flex-wrap:wrap; align-items:center; gap:0 10px; flex:1 1 300px}
 .stats-line{flex-basis:100%; margin:2px 0 0; color:var(--muted); font-size:12.5px}
-.bell{
-  width:34px; height:34px; border-radius:50%; flex:none; text-decoration:none;
-  display:inline-flex; align-items:center; justify-content:center; font-size:18px;
-  background:var(--accent-soft); border:1px solid var(--line);
-  animation:sonne 1.2s ease-in-out 1s 2;
+/* bouton Telegram « Alertes prix », tout à droite du titre */
+.tg-btn{
+  margin-left:auto; flex:none; display:inline-flex; align-items:center; gap:6px;
+  background:#229ED9; color:#fff; text-decoration:none; font-size:13px; font-weight:700;
+  padding:6px 12px; border-radius:999px;
 }
-.bell:hover{border-color:var(--accent)}
-@keyframes sonne{
-  0%,60%,100%{transform:rotate(0)} 10%,30%{transform:rotate(14deg)} 20%,40%{transform:rotate(-14deg)}
-}
-@media (prefers-reduced-motion:reduce){.bell{animation:none}}
+.tg-btn:hover{background:#1A86BA}
+.tg-btn svg{fill:#fff; flex:none}
+@media (max-width:560px){ .tg-long{display:none} }
 
 section{padding-block:20px}
 h2{
