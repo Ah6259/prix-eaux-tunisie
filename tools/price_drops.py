@@ -104,10 +104,11 @@ def libelle(x):
 def message(baisses):
     lignes = ["📉 <b>Baisses de prix de l'eau aujourd'hui</b>", ""]
     for x in baisses[:MAX_MESSAGE]:
-        ligne = f"• <b>{libelle(x)}</b> chez {x['enseigne']} : {dt(x['avant'])} → <b>{dt(x['prix'])}</b> (−{str(x['pct']).replace('.', ',')} %)"
-        if x["litres"] <= 2.5:
-            ligne += f"\n   Stika : {dt(x['prix'] * taille_stika(x['litres']))}"
-        lignes.append(ligne)
+        # prix de la stika (pack) ; les bidons et bonbonnes (> 2,5 L) sont vendus à l'unité
+        n = taille_stika(x["litres"]) if x["litres"] <= 2.5 else 1
+        quoi = f"Stika {libelle(x)} (×{n})" if n > 1 else libelle(x)
+        lignes.append(f"• <b>{quoi}</b> chez {x['enseigne']} : {dt(x['avant'] * n)} → "
+                      f"<b>{dt(x['prix'] * n)}</b> (−{str(x['pct']).replace('.', ',')} %)")
     if len(baisses) > MAX_MESSAGE:
         lignes.append(f"… et {len(baisses) - MAX_MESSAGE} autres baisses.")
     lignes += ["", f"💧 Tous les prix : {SITE}"]

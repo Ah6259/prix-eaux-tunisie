@@ -232,9 +232,10 @@ function renderBaisses(){
   if (!B || B.date !== DATA.updated || !B.baisses.length){ box.hidden = true; return; }
   const ligne = x => {
     const nom = `${x.marque} ${x.format.replace(".", ",")}${x.gazeuse ? " gazeuse" : ""}${x.saveur ? " " + x.saveur : ""}`;
-    const stika = state.mode === "stika" && x.litres <= GRAND_FORMAT;
-    return `<li><b>${nom}</b>${stika ? " <small>(stika)</small>" : ""} chez ${x.enseigne} :
-      <s>${fmtDT(dispPrice(x.avant, x.litres))}</s> → <b class="bx-p">${fmtDT(dispPrice(x.prix, x.litres))}</b>
+    // toujours le prix de la stika (bidons et bonbonnes : prix à l'unité)
+    const n = x.litres <= GRAND_FORMAT ? tailleStika(x.litres) : 1;
+    return `<li><b>${n > 1 ? "Stika " : ""}${nom}</b>${n > 1 ? ` <small>(×${n})</small>` : ""} chez ${x.enseigne} :
+      <s>${fmtDT(x.avant * n)}</s> → <b class="bx-p">${fmtDT(x.prix * n)}</b>
       <span class="bx-pct">−${String(x.pct).replace(".", ",")} %</span></li>`;
   };
   const top = B.baisses.slice(0, 3), reste = B.baisses.slice(3);
