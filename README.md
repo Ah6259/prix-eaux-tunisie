@@ -78,8 +78,12 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
   clairement marqué « Publicité », sans jamais toucher aux prix ni au classement
   (la neutralité du comparateur est toute la valeur du site). Argument de vente :
   les statistiques GoatCounter. Prévoir un statut pour facturer.
-- **Nom de domaine + hébergement pro** (à faire avant que le site soit très populaire,
-  et nécessaire si publicité) : acheter un domaine (ex. prix-eaux.tn), héberger sur
+- **Nom de domaine + hébergement pro** — décision d'Ahmed (29/09/2026) : achat
+  **différé jusqu'au premier annonceur** (pas de dépense avant). Le jour venu :
+  un seul domaine suffit (prix-eau.tn en priorité, prix-eaux.tn en protection ;
+  vérifiés disponibles au registre ATI le 29/09/2026, ~30-60 DT/an chez un
+  registrar agréé type Oxahost — attention à ne pas confondre avec leurs packs
+  d'hébergement facturés au mois, inutiles ici). Héberger sur
   Cloudflare Pages ou Netlify (gratuits, publicité autorisée). Migration SANS perte :
   l'ancien site GitHub Pages redirige page par page vers le nouveau domaine (comme
   fait pour le doublon prix-eau-tunisie) + outil « Changement d'adresse » de Search
