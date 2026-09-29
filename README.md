@@ -78,8 +78,10 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
 
 1. **« Quelle eau pour moi ? »** (priorité) : questionnaire (bébé, peu de sodium, sportif,
    calculs rénaux…) qui recommande des eaux d'après `data/composition.js` — bon pour le SEO.
-2. **Alerte prix / promo** (priorité) : prévenir quand le prix d'une marque baisse
-   (email, WhatsApp ou Telegram) — les baisses se détectent dans le relevé nocturne.
+2. ✅ **Alerte prix / promo** — FAIT le 29/09/2026 : bandeau « Baisses de prix aujourd'hui »
+   sur le site + publication automatique sur le canal Telegram https://t.me/prixeautunisie
+   (`tools/price_drops.py`, secret GitHub `TELEGRAM_BOT_TOKEN`). Plus tard : alerte email
+   par marque, recopie éventuelle sur une chaîne WhatsApp.
 3. **Calculateur de budget** : taille du foyer → stikas par mois, coût et économie par marque.
 4. **Comparer 2 eaux côte à côte** : prix + composition.
 5. **Livraison de bonbonnes 19 L** (maisons/bureaux) : livreurs par ville, abonnement,
