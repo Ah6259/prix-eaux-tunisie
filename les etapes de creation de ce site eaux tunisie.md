@@ -107,6 +107,11 @@ pour créer n'importe quel autre site.
   de plusieurs heures → choisir une minute décalée (ex. 1h07). Toujours faire
   `git pull --rebase` avant `git push` dans le workflow (collision possible)
 - **Sites .tn** : certificats SSL incomplets → prévoir un repli dans les scripts
+- **Vérifier que chaque source est vivante** : un comparateur (barka.tn) donnait pour Aziza
+  les prix de son ancienne boutique en ligne, fermée → prix périmés (stika affichée 3,540 DT,
+  4,900 DT en magasin, signalé par un client). Contrôler que les liens des produits mènent à
+  une boutique actuelle, et faire des vérifications en magasin de temps en temps ;
+  au moindre doute, retirer l'enseigne plutôt qu'afficher un faux prix
 - **Un seul site** : ne pas créer deux dépôts pour le même projet. Si c'est
   arrivé, transformer le doublon en **redirection** (sans `noindex`) pour que
   Google transfère le référencement vers le bon site
