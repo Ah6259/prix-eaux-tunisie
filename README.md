@@ -1,7 +1,8 @@
 # Prix des Eaux de Tunisie
 
 Site web (et base d'une future app) qui liste les marques d'eau minérale vendues en Tunisie
-avec leurs prix relevés chez les grandes surfaces : **Géant, Carrefour, Monoprix, Aziza**.
+avec leurs prix relevés chez les grandes surfaces : **Géant, Carrefour, Monoprix**
+(Aziza retiré le 30/09/2026 : pas de source de prix fiable, voir « Mettre à jour les prix »).
 
 **Site public : https://ah6259.github.io/prix-eaux-tunisie/**
 Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
@@ -47,8 +48,10 @@ python tools/collect_prices.py
 ```
 
 Notes :
-- Sources : Carrefour en direct (API GraphQL), Géant Drive en direct, Monoprix et Aziza
-  via le comparateur barka.tn. Si une source est en panne, ses prix du dernier relevé
+- Sources : Carrefour en direct (API GraphQL), Géant Drive en direct, Monoprix via le
+  comparateur barka.tn. **Aziza n'est plus suivi** (30/09/2026) : barka.tn ne donne que les
+  prix de l'ancienne boutique en ligne d'Aziza, fermée (prix périmés, signalés par un client) ;
+  le site actuel d'Aziza ne publie que des catalogues promo et son API de prix est privée. Si une source est en panne, ses prix du dernier relevé
   réussi sont conservés.
 - Garde-fous : marques d'eau connues uniquement (`MARQUES_EAU`), packs/fardeaux écartés
   (la stika est affichée comme 6 × la bouteille), prix hors 0,25–2,5 DT/L ou supérieurs
