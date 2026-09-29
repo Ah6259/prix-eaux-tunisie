@@ -443,3 +443,13 @@ body.has-cart{padding-bottom:70px}
   font-size:26px; line-height:1; cursor:pointer; padding:4px 8px;
 }
 .help-close:hover{color:var(--ink)}
+
+/* petits ecrans : boutons plus compacts pour que chaque groupe de filtres
+   (types d'eau + ?, formats) tienne sur sa propre ligne sans deborder */
+@media (max-width:560px){
+  .toolbar{gap:6px 10px}
+  .tgroup{gap:4px; flex-wrap:nowrap; flex:1 1 100%}
+  .toolbar .chipbtn{padding:5px 9px; font-size:12px}
+  .toolbar .chip-help{min-width:28px}
+  .toolbar select{padding:5px 9px; font-size:12px; margin-left:0}
+}
