@@ -49,10 +49,13 @@ def http_get(url, params=None, timeout=60):
     chaîne de certificats incomplète chez Géant) mais acceptent curl."""
     if params:
         url += "?" + urlencode({k: v for k, v in params.items() if v is not None})
-    r = subprocess.run(
-        ["curl", "-sSL", "--fail", "-A", UA, "--max-time", str(timeout), url],
-        capture_output=True, timeout=timeout + 10,
-    )
+    cmd = ["curl", "-sSL", "--fail", "-A", UA, "-H", "Accept-Language: fr-FR,fr;q=0.9",
+           "--max-time", str(timeout), url]
+    r = subprocess.run(cmd, capture_output=True, timeout=timeout + 10)
+    if r.returncode == 60:
+        # chaîne de certificats incomplète (Géant, sur les serveurs GitHub) : on réessaie
+        # sans vérification — acceptable ici, on ne fait que lire des prix publics
+        r = subprocess.run(cmd[:1] + ["-k"] + cmd[1:], capture_output=True, timeout=timeout + 10)
     if r.returncode:
         raise RuntimeError(f"curl {r.returncode} {url}: {r.stderr.decode(errors='replace').strip()}")
     return r.stdout
