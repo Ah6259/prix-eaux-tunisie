@@ -8,7 +8,10 @@ de ce site (marques -> produits -> prix par enseigne).
 Sources :
   - Carrefour Tunisie : API GraphQL (catégorie « Eaux ») — en direct
   - Géant Drive       : page catégorie « Eaux » (HTML PrestaShop) — en direct
-  - Barka.tn          : comparateur, utilisé pour Monoprix et Aziza
+  - Barka.tn          : comparateur, utilisé pour Monoprix
+  (Aziza retiré le 30/09/2026 : barka.tn ne donne que les prix de l'ancienne boutique
+   en ligne d'Aziza, fermée — prix périmés, ex. Bargou 0,590 au lieu de ~0,817 en magasin.
+   Le site actuel d'Aziza ne publie que des catalogues promo, son API de prix est privée.)
 
 Si une source est en panne, ses prix du dernier relevé réussi (data/eaux.json)
 sont conservés au lieu de disparaître.
@@ -275,7 +278,7 @@ def geant():
     return out
 
 
-# ---------------------------------------------------------------- Barka (Monoprix, Aziza)
+# ---------------------------------------------------------------- Barka (Monoprix)
 def barka(requetes=("eau minerale", "eau gazeuse", "eau de source"), max_pages=40):
     vus, out, brut = set(), [], []
 
@@ -284,7 +287,7 @@ def barka(requetes=("eau minerale", "eau gazeuse", "eau de source"), max_pages=4
         prix = parse_prix(bp.get("product_price"))
         nom, marque = (bp.get("name") or "").strip(), bp.get("brand") or ""
         taille = " ".join(bp.get("size") or [])
-        if shop not in ("monoprix", "aziza"):
+        if shop != "monoprix":   # Aziza exclu : prix périmés (voir en tête)
             return
         # les packs/fardeaux sont écartés : le site affiche la stika comme 6 × la bouteille
         if re.search(r"fardeau|\blot\b|\bpack\b|\d\s*[x×*]\s*\d", sans_accents(f"{nom} {taille}").lower()):
@@ -376,7 +379,7 @@ def main():
     ancien = json.loads(OUT_JSON.read_text(encoding="utf-8")) if OUT_JSON.exists() else None
     offres, echecs = [], 0
     for nom, f, cibles in (("Carrefour", carrefour, {"carrefour"}), ("Géant", geant, {"geant"}),
-                           ("Barka", barka, {"monoprix", "aziza"})):
+                           ("Barka", barka, {"monoprix"})):
         try:
             res = f()
             if not res:
@@ -438,7 +441,7 @@ def main():
         })
         img = find_img_curated(imgs, b["id"], litres)
         if not img:  # pas de photo choisie à la main : celle de l'enseigne (Carrefour d'abord)
-            for e in ("carrefour", "geant", "monoprix", "aziza"):
+            for e in ("carrefour", "geant", "monoprix"):
                 if p["images"].get(e):
                     img = telecharger_image(p["images"][e])
                     if img:
@@ -479,11 +482,11 @@ def main():
     data = {
         "updated": date.today().isoformat(),
         "currency": "DT",
-        "stores": ["Carrefour", "Géant", "Monoprix", "Aziza"],
+        "stores": ["Carrefour", "Géant", "Monoprix"],
         "sources": [
             {"name": "Carrefour Tunisie", "url": "https://www.carrefour.tn"},
             {"name": "Géant Drive Tunisie", "url": "https://www.geantdrive.tn"},
-            {"name": "Monoprix & Aziza (via barka.tn)", "url": "https://barka.tn"},
+            {"name": "Monoprix (via barka.tn)", "url": "https://barka.tn"},
             {"name": "Wikipédia — Eaux minérales en Tunisie", "url": "https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie"},
         ],
         "brands": out_brands,

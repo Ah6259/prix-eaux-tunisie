@@ -17,7 +17,7 @@ data = json.loads((ROOT / "data" / "eaux.json").read_text(encoding="utf-8"))
 compo_js = (ROOT / "data" / "composition.js").read_text(encoding="utf-8")
 COMPO = json.loads(re.search(r"window\.EAUX_COMPO\s*=\s*({.*})\s*;", compo_js, re.S).group(1))
 
-STORES_ORDER = ["Carrefour", "Géant", "Monoprix", "Aziza"]
+STORES_ORDER = ["Carrefour", "Géant", "Monoprix"]
 GRAND_FORMAT = 2.5
 taille_stika = lambda l: 12 if l <= 0.75 else 6
 fmt_dt = lambda v: f"{v:,.3f}".replace(",", " ").replace(".", ",") + " DT"
@@ -57,7 +57,7 @@ def page_marque(b):
     tableau = (f"<table class='prices'><tr><th>Format</th><th>Prix bouteille par enseigne</th>"
                f"<th>Stika</th></tr>{''.join(lignes)}</table>") if lignes else \
         "<p><em>Prix non disponible pour le moment dans les enseignes que nous suivons " \
-        "(Carrefour, Géant, Monoprix, Aziza).</em></p>"
+        "(Carrefour, Géant, Monoprix).</em></p>"
 
     # composition
     compo_html = ""
@@ -90,7 +90,7 @@ def page_marque(b):
            if p["category"] == "plate" and abs(p["liters"] - 1.5) < .01 and p["prices"]]
     if c15:
         prix15 = min(c15)
-    desc = (f"Prix de l'eau {nom} en Tunisie : bouteille et stika chez Géant, Carrefour, Monoprix et Aziza, "
+    desc = (f"Prix de l'eau {nom} en Tunisie : bouteille et stika chez Géant, Carrefour et Monoprix, "
             f"mis à jour chaque jour."
             + (f" 1,5 L à partir de {fmt_dt(prix15).replace(chr(160), ' ')}." if prix15 else "")
             + (f" Source : {b['source']}." if b.get("source") else "")

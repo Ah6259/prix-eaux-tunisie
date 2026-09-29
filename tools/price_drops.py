@@ -117,8 +117,8 @@ def message(baisses):
 
 BIENVENUE = (
     "💧 <b>Bienvenue sur Prix Eau Tunisie — Promos !</b>\n\n"
-    "Chaque nuit, notre robot relève les prix de l'eau minérale chez Carrefour, Géant, "
-    "Monoprix et Aziza. Dès qu'un prix baisse, vous êtes prévenu ici 📉\n\n"
+    "Chaque nuit, notre robot relève les prix de l'eau minérale chez Carrefour, Géant "
+    "et Monoprix. Dès qu'un prix baisse, vous êtes prévenu ici 📉\n\n"
     "Partagez le canal : t.me/prixeautunisie\n"
     f"Comparer tous les prix : {SITE}"
 )

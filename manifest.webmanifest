@@ -1,7 +1,7 @@
 {
   "name": "Prix des Eaux de Tunisie",
   "short_name": "Prix Eaux",
-  "description": "Comparateur des prix des eaux minérales en Tunisie — Géant, Carrefour, Monoprix, Aziza",
+  "description": "Comparateur des prix des eaux minérales en Tunisie — Géant, Carrefour, Monoprix",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
