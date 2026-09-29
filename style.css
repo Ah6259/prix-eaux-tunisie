@@ -440,6 +440,11 @@ body.has-cart{padding-bottom:70px}
   .sum-cta{padding:5px 11px; font-size:13px; gap:4px}
   #hadith-collapse .sum-cta{font-size:14px; padding:3px 11px 6px}
   .cta-long{display:none}
+  /* titre du hadith toujours sur une seule ligne : police adaptée à la largeur */
+  #hadith-collapse summary{gap:8px}
+  .hadith-title{white-space:nowrap; font-size:min(18px, 3.9vw) !important; min-width:0}
+  .sum-icon.saw{font-size:24px}
+  #match-collapse summary h2{white-space:nowrap; font-size:min(18px, 4.6vw)}
 }
 .collapse > :not(summary){margin-top:12px}
 .collapse .sub{margin-bottom:10px}
