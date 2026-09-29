@@ -779,7 +779,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
-      "Carrefour": 0.74
+      "Carrefour": 0.74,
+      "Géant": 0.74
      }
     }
    ]
