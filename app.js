@@ -241,9 +241,16 @@ render();
   const list = winners.length > 1
     ? winners.slice(0, -1).join(", ") + " et " + winners[winners.length - 1]
     : winners[0];
-  document.getElementById("faq-min").textContent = fmtDT(min);
-  document.getElementById("faq-min-stika").textContent = fmtDT(min * 6);
-  document.getElementById("faq-winners").textContent = list;
+  const el = (id, txt) => { const e = document.getElementById(id); if (e) e.textContent = txt; };
+  el("faq-min", fmtDT(min));
+  el("faq-min-stika", fmtDT(min * 6));
+  el("faq-winners", list);
+  // question « prix d'une stika » : mêmes données, exprimées en stika
+  const max = rows[rows.length - 1].p;
+  el("faq-stika-prix", fmtDT(min * 6));
+  el("faq-stika-marques", list);
+  el("faq-stika-min", fmtDT(min * 6));
+  el("faq-stika-max", fmtDT(max * 6));
 })();
 
 /* évolution des prix (data/historique.js, régénéré chaque jour) ----------- */
