@@ -232,10 +232,11 @@ document.querySelectorAll("#controls .chipbtn[data-type]").forEach(btn => btn.ad
 
 // puces de filtre par format de bouteille (1,5 L actif au chargement)
 document.getElementById("format-controls").innerHTML = FORMATS.map(f =>
-  `<button class="chipbtn" data-format="${f.id}" aria-pressed="${state.formats.includes(f.id)}">${f.nom}</button>`).join("");
-document.querySelectorAll("#format-controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
+  `<button class="chipbtn" data-format="${f.id}" aria-pressed="${state.formats.includes(f.id)}">${f.nom}</button>`).join("") +
+  `<button class="chipbtn chip-help" id="format-help" aria-label="Comprendre les formats de bouteille" title="Comprendre les formats de bouteille">?</button>`;
+document.querySelectorAll("#format-controls .chipbtn[data-format]").forEach(btn => btn.addEventListener("click", () => {
   btn.setAttribute("aria-pressed", btn.getAttribute("aria-pressed") !== "true");
-  state.formats = [...document.querySelectorAll('#format-controls .chipbtn[aria-pressed="true"]')]
+  state.formats = [...document.querySelectorAll('#format-controls .chipbtn[data-format][aria-pressed="true"]')]
     .map(x => x.dataset.format);
   render();
 }));
@@ -622,14 +623,14 @@ renderCartBar();
   });
 })();
 
-/* fenetre d'aide : les types d'eau ---------------------------------------- */
-(function(){
-  const btn = document.getElementById("type-help");
-  const pop = document.getElementById("type-help-pop");
+/* fenetres d'aide : types d'eau et formats de bouteille -------------------- */
+[["type-help", "type-help-pop", "type-help-close"],
+ ["format-help", "format-help-pop", "format-help-close"]].forEach(([b, p2, c]) => {
+  const btn = document.getElementById(b);
+  const pop = document.getElementById(p2);
   if (!btn || !pop) return;
-  const close = document.getElementById("type-help-close");
   btn.addEventListener("click", () => { pop.hidden = false; });
-  close.addEventListener("click", () => { pop.hidden = true; });
+  document.getElementById(c).addEventListener("click", () => { pop.hidden = true; });
   pop.addEventListener("click", (e) => { if (e.target === pop) pop.hidden = true; });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") pop.hidden = true; });
-})();
+});
