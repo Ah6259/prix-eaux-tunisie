@@ -3,7 +3,8 @@ window.EAUX_DATA = {
  "currency": "DT",
  "stores": [
   "Carrefour",
-  "Géant"
+  "Géant",
+  "Otrity"
  ],
  "sources": [
   {
@@ -13,6 +14,10 @@ window.EAUX_DATA = {
   {
    "name": "Géant Drive Tunisie",
    "url": "https://www.geantdrive.tn"
+  },
+  {
+   "name": "Otrity (épicerie en ligne, livraison)",
+   "url": "https://otrity.com/categorie-produit/boissons/eaux/"
   },
   {
    "name": "Wikipédia — Eaux minérales en Tunisie",
