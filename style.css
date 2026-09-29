@@ -425,8 +425,10 @@ section:has(> #match-collapse){padding-bottom:6px}
   font-family:"Amiri Quran",serif; color:var(--accent);
   font-size:30px; line-height:1; flex:none;
 }
-/* titre en gras, même allure que « Gagnant du match » (Amiri Quran n'existe pas en gras) */
-.hadith-title{font-family:"Cairo",sans-serif; font-weight:700; flex:1 1 auto; min-width:0; text-align:center}
+/* titre calligraphique en gras : Amiri (même style qu'Amiri Quran, qui n'existe pas en gras) */
+/* symbole ﷺ + titre centrés ensemble : marges automatiques de part et d'autre du groupe */
+#hadith-collapse .sum-icon.saw{margin-inline-start:auto}
+.hadith-title{font-family:"Amiri","Amiri Quran",serif; font-weight:700; min-width:0; font-size:21px !important; -webkit-text-stroke:.35px currentColor}
 .sum-cta{
   margin-inline-start:auto; flex:none; display:inline-flex; align-items:center; gap:6px;
   background:var(--accent); color:#fff; border-radius:999px;
@@ -445,7 +447,7 @@ section:has(> #match-collapse){padding-bottom:6px}
   .cta-long{display:none}
   /* titre du hadith toujours sur une seule ligne : police adaptée à la largeur */
   #hadith-collapse summary{gap:6px; padding-inline:10px}
-  .hadith-title{white-space:nowrap; font-size:min(18px, 3.3vw) !important}
+  .hadith-title{white-space:nowrap; font-size:min(19px, 3.9vw) !important}
   .sum-icon.saw{font-size:20px}
   #hadith-collapse .sum-cta{padding:3px 9px 6px}
   #match-collapse summary h2{white-space:nowrap; font-size:min(18px, 4.6vw)}
