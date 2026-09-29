@@ -182,17 +182,26 @@ function card(b, prods){
   </article>`;
 }
 
+// nature officielle de l'eau (Office du Thermalisme, via composition.js)
+const NATURES = { "1": "minerale", "2": "source", "3": "table" };
+function brandNature(b){
+  const w = COMPO.waters[b.id];
+  return w && w[0] ? NATURES[String(w[0].cat)] : null;
+}
+
 function render(){
   const q = state.q.trim().toLowerCase();
   const fmt = FORMATS.find(f => f.id === state.format) || FORMATS[0];
+  const parNature = ["minerale", "source", "table"].includes(state.type);
   let list = DATA.brands
     .map(b => ({ b, prods: b.products.filter(p =>
-        fmt.test(p) && (state.type === "toutes" || p.category === state.type) &&
+        fmt.test(p) && (state.type === "toutes" || parNature || p.category === state.type) &&
         Object.keys(p.prices).length > 0) }))
     .filter(({ b, prods }) => {
       if (q && !b.name.toLowerCase().includes(q)) return false;
+      if (parNature && brandNature(b) !== state.type) return false;
       if (!b.products.length)  // marque sans prix relevé : toujours affichée
-        return state.type === "toutes" || b.types.includes(state.type);
+        return state.type === "toutes" || parNature || b.types.includes(state.type);
       return prods.length > 0;
     });
   const key = { prix15: brand15, prixL: brandPerL, tds: brandTds }[state.sort];
