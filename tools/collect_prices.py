@@ -8,7 +8,10 @@ de ce site (marques -> produits -> prix par enseigne).
 Sources :
   - Carrefour Tunisie : API GraphQL (catégorie « Eaux ») — en direct
   - Géant Drive       : page catégorie « Eaux » (HTML PrestaShop) — en direct
-  - Barka.tn          : comparateur, utilisé pour Monoprix
+  - Barka.tn          : comparateur — N'EST PLUS UTILISÉ (fonction barka() gardée pour référence)
+  (Monoprix retiré le 30/09/2026 : vérifié sur courses.monoprix.tn par Ahmed, barka.tn
+   affichait en vente Safia/Marwa/Melina 1,5 L indisponibles et Sabrine 0,660 au lieu de 0,680 ;
+   courses.monoprix.tn bloque les robots (403). Ne réintroduire qu'avec une source directe vérifiée.)
   (Aziza retiré le 30/09/2026 : barka.tn ne donne que les prix de l'ancienne boutique
    en ligne d'Aziza, fermée — prix périmés, ex. Bargou 0,590 au lieu de ~0,817 en magasin.
    Le site actuel d'Aziza ne publie que des catalogues promo, son API de prix est privée.)
@@ -378,8 +381,8 @@ def main():
 
     ancien = json.loads(OUT_JSON.read_text(encoding="utf-8")) if OUT_JSON.exists() else None
     offres, echecs = [], 0
-    for nom, f, cibles in (("Carrefour", carrefour, {"carrefour"}), ("Géant", geant, {"geant"}),
-                           ("Barka", barka, {"monoprix"})):
+    sources = (("Carrefour", carrefour, {"carrefour"}), ("Géant", geant, {"geant"}))
+    for nom, f, cibles in sources:
         try:
             res = f()
             if not res:
@@ -394,7 +397,7 @@ def main():
                 repris = anciennes_offres(ancien, cibles)
                 print(f"  -> reprise de {len(repris)} offres du relevé précédent")
                 offres += repris
-    if echecs == 3:
+    if echecs == len(sources):
         sys.exit("Toutes les sources sont en échec : eaux.json n'est pas modifié.")
 
     # Regroupe les offres bouteille (les packs sont écartés) par marque + type + volume
@@ -441,7 +444,7 @@ def main():
         })
         img = find_img_curated(imgs, b["id"], litres)
         if not img:  # pas de photo choisie à la main : celle de l'enseigne (Carrefour d'abord)
-            for e in ("carrefour", "geant", "monoprix"):
+            for e in ("carrefour", "geant"):
                 if p["images"].get(e):
                     img = telecharger_image(p["images"][e])
                     if img:
@@ -482,11 +485,10 @@ def main():
     data = {
         "updated": date.today().isoformat(),
         "currency": "DT",
-        "stores": ["Carrefour", "Géant", "Monoprix"],
+        "stores": ["Carrefour", "Géant"],
         "sources": [
             {"name": "Carrefour Tunisie", "url": "https://www.carrefour.tn"},
             {"name": "Géant Drive Tunisie", "url": "https://www.geantdrive.tn"},
-            {"name": "Monoprix (via barka.tn)", "url": "https://barka.tn"},
             {"name": "Wikipédia — Eaux minérales en Tunisie", "url": "https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie"},
         ],
         "brands": out_brands,
