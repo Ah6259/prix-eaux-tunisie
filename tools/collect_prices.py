@@ -8,6 +8,7 @@ de ce site (marques -> produits -> prix par enseigne).
 Sources :
   - Carrefour Tunisie : API GraphQL (catégorie « Eaux ») — en direct
   - Géant Drive       : page catégorie « Eaux » (HTML PrestaShop) — en direct
+  - Otrity            : épicerie en ligne, API WooCommerce — prix de la stika LIVRÉE (ajouté le 30/09/2026)
   - Barka.tn          : comparateur — N'EST PLUS UTILISÉ (fonction barka() gardée pour référence)
   (Monoprix retiré le 30/09/2026 : vérifié sur courses.monoprix.tn par Ahmed, barka.tn
    affichait en vente Safia/Marwa/Melina 1,5 L indisponibles et Sabrine 0,660 au lieu de 0,680 ;
@@ -118,7 +119,7 @@ META = {
     "RIM":       {"name": "Rim", "company": None, "source": None, "depuis": None, "note": None},
 }
 
-ENSEIGNES = {"carrefour": "Carrefour", "geant": "Géant", "monoprix": "Monoprix", "aziza": "Aziza"}
+ENSEIGNES = {"carrefour": "Carrefour", "geant": "Géant", "otrity": "Otrity", "monoprix": "Monoprix", "aziza": "Aziza"}
 
 # id de marque -> préfixe des photos choisies à la main dans assets/img
 IMG_STEMS = {
@@ -281,6 +282,41 @@ def geant():
     return out
 
 
+# ---------------------------------------------------------------- Otrity
+def otrity():
+    """otrity.com : épicerie en ligne (livraison le jour même), WooCommerce.
+    API publique « Store API », catégorie Eaux = 1261. Les prix affichés sont ceux
+    de la STIKA LIVRÉE (le conditionnement n'est pas écrit : « Safia 1.5L » à 5,000 DT) ;
+    on les ramène au prix par bouteille (÷ 6, ou ÷ 12 pour ≤ 0,75 L) comme les autres
+    enseignes. Les incohérences (ex. une bouteille vendue à l'unité) sont écartées
+    ensuite par les garde-fous de prix au litre."""
+    items = json.loads(http_get("https://otrity.com/wp-json/wc/store/v1/products",
+                                {"category": 1261, "per_page": 100}))
+    (RAW_DIR / "otrity.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
+    out = []
+    for it in items:
+        nom = html.unescape(it.get("name") or "").strip()
+        desc = html.unescape(re.sub(r"<[^>]+>", " ", it.get("short_description") or ""))
+        marque = trouver_marque("", nom)
+        if not it.get("is_in_stock") or not marque or not est_eau(nom, marque):
+            continue
+        vol, _ = parse_volume(nom)
+        pr = it.get("prices") or {}
+        if not vol or not pr.get("price"):
+            continue
+        prix_pack = int(pr["price"]) / 10 ** int(pr.get("currency_minor_unit", 0))
+        n = 12 if vol <= 0.75 else 6 if vol <= 2.5 else 1
+        t = sans_accents(f"{nom} {desc}").lower()
+        typ = "gazeuse" if re.search(r"gazeuse|gazeifiee|petillant", t) and not re.search(r"non gaz|plate", t) else "plate"
+        out.append({
+            "enseigne": "otrity", "marque": marque, "nom": nom,
+            "volume_l": vol, "nb_unites": 1, "type": typ,
+            "prix": round(prix_pack / n, 4),   # 4 décimales : 6 × 0,8333 = 5,000 (et non 4,998)
+            "image_src": ((it.get("images") or [{}])[0]).get("src"),
+        })
+    return out
+
+
 # ---------------------------------------------------------------- Barka (Monoprix)
 def barka(requetes=("eau minerale", "eau gazeuse", "eau de source"), max_pages=40):
     vus, out, brut = set(), [], []
@@ -381,7 +417,8 @@ def main():
 
     ancien = json.loads(OUT_JSON.read_text(encoding="utf-8")) if OUT_JSON.exists() else None
     offres, echecs = [], 0
-    sources = (("Carrefour", carrefour, {"carrefour"}), ("Géant", geant, {"geant"}))
+    sources = (("Carrefour", carrefour, {"carrefour"}), ("Géant", geant, {"geant"}),
+               ("Otrity", otrity, {"otrity"}))
     for nom, f, cibles in sources:
         try:
             res = f()
@@ -444,7 +481,7 @@ def main():
         })
         img = find_img_curated(imgs, b["id"], litres)
         if not img:  # pas de photo choisie à la main : celle de l'enseigne (Carrefour d'abord)
-            for e in ("carrefour", "geant"):
+            for e in ("carrefour", "geant", "otrity"):
                 if p["images"].get(e):
                     img = telecharger_image(p["images"][e])
                     if img:
@@ -454,7 +491,7 @@ def main():
         b["products"].append({
             "liters": litres, "format": fmt_affiche(litres), "category": typ, "flavor": None,
             "img": img,
-            "prices": {ENSEIGNES[e]: round(v, 3) for e, v in sorted(p["offres"].items(), key=lambda x: x[1])},
+            "prices": {ENSEIGNES[e]: round(v, 4) for e, v in sorted(p["offres"].items(), key=lambda x: x[1])},
         })
 
     out_brands = []
@@ -485,10 +522,11 @@ def main():
     data = {
         "updated": date.today().isoformat(),
         "currency": "DT",
-        "stores": ["Carrefour", "Géant"],
+        "stores": ["Carrefour", "Géant", "Otrity"],
         "sources": [
             {"name": "Carrefour Tunisie", "url": "https://www.carrefour.tn"},
             {"name": "Géant Drive Tunisie", "url": "https://www.geantdrive.tn"},
+            {"name": "Otrity (épicerie en ligne, livraison)", "url": "https://otrity.com/categorie-produit/boissons/eaux/"},
             {"name": "Wikipédia — Eaux minérales en Tunisie", "url": "https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie"},
         ],
         "brands": out_brands,
