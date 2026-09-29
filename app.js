@@ -7,7 +7,6 @@ const plain = p => !p.flavor;
 const tailleStika = liters => (liters <= 0.75 ? 12 : 6);
 const GRAND_FORMAT = 2.5;   // au-delà : bidons et bonbonnes, pas de stika
 const FORMATS = [
-  { id: "",         nom: "Tous",     test: () => true },
   { id: "petit",    nom: "≤ 0,75 L", test: p => p.liters <= 0.75 },
   { id: "1",        nom: "1 L",      test: p => p.liters > 0.75 && p.liters < 1.25 },
   { id: "1.5",      nom: "1,5 L",    test: p => p.liters >= 1.25 && p.liters < 1.6 },
@@ -77,7 +76,8 @@ document.getElementById("stats").innerHTML = [
 ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
 /* état global — au chargement : stikas de 1,5 L, les moins chères d'abord -- */
-const state = { q:"", type:"toutes", format:"1.5", sort:"prix15", mode:"stika", compareOpen:false };
+// filtres multi-sélection : listes vides = aucun filtre, tout est affiché
+const state = { q:"", types:[], formats:["1.5"], sort:"prix15", mode:"stika", compareOpen:false };
 
 // prix affiché selon l'unité choisie (stika = n × bouteille ; grands formats à l'unité)
 const dispPrice = (v, liters) =>
@@ -191,17 +191,24 @@ function brandNature(b){
 
 function render(){
   const q = state.q.trim().toLowerCase();
-  const fmt = FORMATS.find(f => f.id === state.format) || FORMATS[0];
-  const parNature = ["minerale", "source", "table"].includes(state.type);
+  const fmtsSel = FORMATS.filter(f => state.formats.includes(f.id));
+  const fmtOk = p => !fmtsSel.length || fmtsSel.some(f => f.test(p));
+  const natSel = state.types.filter(t => t !== "gazeuse");
+  const gazSel = state.types.includes("gazeuse");
+  const sansType = !state.types.length;
   let list = DATA.brands
-    .map(b => ({ b, prods: b.products.filter(p =>
-        fmt.test(p) && (state.type === "toutes" || parNature || p.category === state.type) &&
-        Object.keys(p.prices).length > 0) }))
-    .filter(({ b, prods }) => {
+    .map(b => {
+      const parNature = sansType || natSel.includes(brandNature(b));
+      return { b, parNature, prods: b.products.filter(p =>
+        fmtOk(p) && (parNature || (gazSel && p.category === "gazeuse")) &&
+        Object.keys(p.prices).length > 0) };
+    })
+    .filter(({ b, parNature, prods }) => {
       if (q && !b.name.toLowerCase().includes(q)) return false;
-      if (parNature && brandNature(b) !== state.type) return false;
+      const typeOk = parNature || (gazSel && b.types.includes("gazeuse"));
+      if (!typeOk) return false;
       if (!b.products.length)  // marque sans prix relevé : toujours affichée
-        return state.type === "toutes" || parNature || b.types.includes(state.type);
+        return true;
       return prods.length > 0;
     });
   const key = { prix15: brand15, prixL: brandPerL, tds: brandTds }[state.sort];
@@ -214,17 +221,23 @@ function render(){
 
 document.getElementById("q").addEventListener("input", e => { state.q = e.target.value; render(); });
 document.getElementById("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
-document.querySelectorAll("#controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
-  document.querySelectorAll("#controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
-  state.type = btn.dataset.type; render();
+// filtres multi-sélection : chaque puce s'active/se désactive au clic ;
+// aucune puce active = pas de filtre (tout est affiché)
+document.querySelectorAll("#controls .chipbtn[data-type]").forEach(btn => btn.addEventListener("click", () => {
+  btn.setAttribute("aria-pressed", btn.getAttribute("aria-pressed") !== "true");
+  state.types = [...document.querySelectorAll('#controls .chipbtn[aria-pressed="true"]')]
+    .map(x => x.dataset.type);
+  render();
 }));
 
 // puces de filtre par format de bouteille (1,5 L actif au chargement)
 document.getElementById("format-controls").innerHTML = FORMATS.map(f =>
-  `<button class="chipbtn" data-format="${f.id}" aria-pressed="${f.id === state.format}">${f.nom}</button>`).join("");
+  `<button class="chipbtn" data-format="${f.id}" aria-pressed="${state.formats.includes(f.id)}">${f.nom}</button>`).join("");
 document.querySelectorAll("#format-controls .chipbtn").forEach(btn => btn.addEventListener("click", () => {
-  document.querySelectorAll("#format-controls .chipbtn").forEach(x => x.setAttribute("aria-pressed", x === btn));
-  state.format = btn.dataset.format; render();
+  btn.setAttribute("aria-pressed", btn.getAttribute("aria-pressed") !== "true");
+  state.formats = [...document.querySelectorAll('#format-controls .chipbtn[aria-pressed="true"]')]
+    .map(x => x.dataset.format);
+  render();
 }));
 
 // bascule Stika / Bouteille (stika par défaut : l'eau s'achète en stika)
