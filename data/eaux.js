@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-09-28",
+ "updated": "2026-09-29",
  "currency": "DT",
  "stores": [
   "Carrefour",
