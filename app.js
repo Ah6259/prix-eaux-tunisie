@@ -437,7 +437,7 @@ function renderCartBar(){
   document.body.classList.toggle("has-cart", n > 0);
   if (n){
     document.getElementById("cartbar-info").innerHTML =
-      `${n} article${n > 1 ? "s" : ""} · prix et livraison confirmés sur WhatsApp`;
+      `${n} article${n > 1 ? "s" : ""} · commande bientôt disponible`;
     document.getElementById("cart-open").innerHTML =
       `Commander 🛒 <span class="cart-count">${n}</span>`;
   }

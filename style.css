@@ -351,6 +351,15 @@ body.has-cart{padding-bottom:70px}
 }
 .order-total:empty{display:none}
 #order-form{display:flex; flex-direction:column; gap:10px}
+.order-fields{display:flex; flex-direction:column; gap:10px; border:0; padding:0; margin:0; min-width:0}
+/* commande pas encore ouverte : champs grisés, non cliquables */
+.order-fields[disabled]{opacity:.45; filter:grayscale(1); pointer-events:none; user-select:none}
+.order-soon{
+  margin:10px 0 4px; padding:10px 12px; border-radius:10px; font-size:13.5px; line-height:1.45;
+  background:var(--gaz-soft); color:var(--gaz); border:1px solid var(--gaz);
+}
+.order-soon b{color:inherit}
+.order-soon a{color:var(--accent); font-weight:600}
 #order-form label{font-size:13px; font-weight:600; display:flex; flex-direction:column; gap:4px}
 #order-form input, #order-form textarea{
   border:1px solid var(--line); border-radius:10px; padding:9px 12px;
@@ -361,6 +370,7 @@ body.has-cart{padding-bottom:70px}
 .geo-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
 .geo-status{font-size:13px; color:var(--best)}
 .geo-box{display:flex; flex-direction:column; gap:8px}
+.geo-box[hidden]{display:none}
 .geo-hint{margin:0; font-size:12.5px; color:var(--muted)}
 .geo-map{
   height:260px; border:1px solid var(--line); border-radius:10px; overflow:hidden;
