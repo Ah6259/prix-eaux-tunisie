@@ -12,7 +12,7 @@ const FORMATS = [
   { id: "1",        nom: "1 L",          test: p => p.liters > 0.75 && p.liters < 1.25 },
   { id: "1.5",      nom: "1,5 L",        test: p => p.liters >= 1.25 && p.liters < 1.6 },
   { id: "2",        nom: "2 L",          test: p => p.liters >= 1.6 && p.liters <= GRAND_FORMAT },
-  { id: "bonbonne", nom: "Grands formats", test: p => p.liters > GRAND_FORMAT },
+  // pas de bouton « Grands formats » : les bidons/bonbonnes restent visibles via « Tous formats »
 ];
 function minPrice(prod){ return Math.min(...Object.values(prod.prices)); }
 function bestStores(prod){
