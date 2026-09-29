@@ -387,6 +387,8 @@ body.has-cart{padding-bottom:70px}
 
 /* hadith sur la sqya (le don de l'eau) */
 .hadith-section{padding-block:4px 8px}
+/* barres Gagnant du match et hadith rapprochées */
+section:has(> #match-collapse){padding-bottom:6px}
 .hadith{
   margin:0; text-align:center; background:var(--surface);
   border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
@@ -423,7 +425,8 @@ body.has-cart{padding-bottom:70px}
   font-family:"Amiri Quran",serif; color:var(--accent);
   font-size:30px; line-height:1; flex:none;
 }
-.hadith-title{font-family:"Amiri Quran",serif; font-weight:400}
+/* titre en gras, même allure que « Gagnant du match » (Amiri Quran n'existe pas en gras) */
+.hadith-title{font-family:"Cairo",sans-serif; font-weight:700; flex:1 1 auto; min-width:0; text-align:center}
 .sum-cta{
   margin-inline-start:auto; flex:none; display:inline-flex; align-items:center; gap:6px;
   background:var(--accent); color:#fff; border-radius:999px;
@@ -441,9 +444,10 @@ body.has-cart{padding-bottom:70px}
   #hadith-collapse .sum-cta{font-size:14px; padding:3px 11px 6px}
   .cta-long{display:none}
   /* titre du hadith toujours sur une seule ligne : police adaptée à la largeur */
-  #hadith-collapse summary{gap:8px}
-  .hadith-title{white-space:nowrap; font-size:min(18px, 3.9vw) !important; min-width:0}
-  .sum-icon.saw{font-size:24px}
+  #hadith-collapse summary{gap:6px; padding-inline:10px}
+  .hadith-title{white-space:nowrap; font-size:min(18px, 3.3vw) !important}
+  .sum-icon.saw{font-size:20px}
+  #hadith-collapse .sum-cta{padding:3px 9px 6px}
   #match-collapse summary h2{white-space:nowrap; font-size:min(18px, 4.6vw)}
 }
 .collapse > :not(summary){margin-top:12px}
