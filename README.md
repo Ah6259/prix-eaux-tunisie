@@ -74,6 +74,23 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
 
 ## Idées pour la suite
 
+### Nouveaux services (liste du 29/09/2026, par ordre conseillé)
+
+1. **« Quelle eau pour moi ? »** (priorité) : questionnaire (bébé, peu de sodium, sportif,
+   calculs rénaux…) qui recommande des eaux d'après `data/composition.js` — bon pour le SEO.
+2. **Alerte prix / promo** (priorité) : prévenir quand le prix d'une marque baisse
+   (email, WhatsApp ou Telegram) — les baisses se détectent dans le relevé nocturne.
+3. **Calculateur de budget** : taille du foyer → stikas par mois, coût et économie par marque.
+4. **Comparer 2 eaux côte à côte** : prix + composition.
+5. **Livraison de bonbonnes 19 L** (maisons/bureaux) : livreurs par ville, abonnement,
+   consigne — prolonge la fonction de commande.
+6. **Prix signalés par les visiteurs** : épiceries de quartier, prix par région.
+7. **Carte des magasins** : où trouver chaque marque.
+8. **Commande groupée de quartier** : atteindre le minimum de livraison, meilleur prix.
+9. **Espace marques / distributeurs** : promos mises à jour par les marques (lien avec la publicité).
+
+### Autres idées
+
 - **Bannière publicitaire** si une marque d'eau le demande : encart image + lien,
   clairement marqué « Publicité », sans jamais toucher aux prix ni au classement
   (la neutralité du comparateur est toute la valeur du site). Argument de vente :
