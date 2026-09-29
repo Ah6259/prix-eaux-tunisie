@@ -215,9 +215,11 @@ function render(){
       return prods.length > 0;
     });
   const key = { prix15: brand15, prixL: brandPerL, tds: brandTds }[state.sort];
-  list = list.slice().sort(key
-    ? (a,z) => (key(a.b) ?? 9999) - (key(z.b) ?? 9999)
-    : (a,z) => a.b.name.localeCompare(z.b.name, "fr"));
+  // les marques sans aucun prix affiché restent toujours en bas, quel que soit le tri
+  list = list.slice().sort((a,z) =>
+    (!a.prods.length - !z.prods.length) ||
+    (key ? (key(a.b) ?? 9999) - (key(z.b) ?? 9999)
+         : a.b.name.localeCompare(z.b.name, "fr")));
   document.getElementById("grid").innerHTML = list.map(({ b, prods }) => card(b, prods)).join("");
   document.getElementById("empty").hidden = list.length > 0;
 }
