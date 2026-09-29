@@ -65,6 +65,62 @@ pour créer n'importe quel autre site.
     JavaScript (fetch + `Accept: application/json`) pour rester sur la page,
     et un champ caché « honeypot » (`_gotcha`) contre le spam
 
+## Phase 7 — Faire revenir les visiteurs (alertes automatiques)
+
+18. **Créer un canal Telegram public** (5 min, sur téléphone) : Discussions →
+    bouton nouveau message (crayon ✏️, au-dessus de la barre du bas ou en haut
+    à droite) → « Nouveau canal » → nom + description (avec le lien du site) →
+    type **Public** + un lien `t.me/mon_canal` → ✔, puis encore ✔.
+    **Vérifier** en ouvrant `https://t.me/mon_canal` dans un navigateur : on doit
+    voir le nom du canal et « 1 subscriber ». Si on voit « If you have Telegram,
+    you can contact @… », le canal n'est pas vraiment public (il est resté privé,
+    ou le lien n'a pas été enregistré) → Modifier → Type de canal → Public
+19. **Créer un robot Telegram** : ouvrir `https://t.me/BotFather` (badge bleu ✔)
+    → Démarrer → `/newbot` → un nom → un identifiant finissant par `bot`
+    → BotFather donne un **code secret (token)**. Ce code = mot de passe du
+    canal : ne jamais le publier ni l'envoyer dans une discussion
+20. **Faire du robot un administrateur du canal** avec le droit « Publier des
+    messages ». Si la recherche « Ajouter un administrateur » ne trouve rien :
+    ouvrir la fiche du robot → ⋮ → « Ajouter à un groupe ou un canal »
+21. **Ranger le token dans le coffre-fort de GitHub** : dépôt → Settings →
+    Secrets and variables → Actions → New repository secret
+    (ex. `TELEGRAM_BOT_TOKEN`). Le workflow le lit avec
+    `${{ secrets.TELEGRAM_BOT_TOKEN }}`, personne ne peut le voir
+22. **Publier automatiquement** : dans le workflow quotidien, un script compare
+    les données du jour à celles de la veille (`git show HEAD:data/…`) et, s'il
+    y a du nouveau (ici : baisse de prix ≥ 1 %), envoie un message via
+    `https://api.telegram.org/bot<TOKEN>/sendMessage` (chat_id = `@mon_canal`).
+    Rien de nouveau → rien n'est publié (pas de messages inutiles). Le même
+    résultat sert à un bandeau sur le site. Un petit workflow manuel « message
+    de bienvenue » sert à tester le robot
+23. **Mettre le lien du canal sur le site** et le partager avec le site
+    (WhatsApp : la publication automatique n'y est pas gratuite — une « chaîne
+    WhatsApp » ne peut être alimentée qu'à la main)
+
+## Pièges rencontrés et leçons (à réutiliser)
+
+- **Cache des téléphones** : après une mise à jour, un téléphone peut garder
+  l'ancien `style.css` avec la nouvelle page → affichage cassé (ex. icône géante).
+  Solution : charger `style.css?v=NUMERO` et `app.js?v=NUMERO` et **changer le
+  numéro à chaque modification** ; donner `width`/`height` aux icônes SVG
+- **Horaires des robots GitHub** : les heures rondes (0h00, 9h30) sont retardées
+  de plusieurs heures → choisir une minute décalée (ex. 1h07). Toujours faire
+  `git pull --rebase` avant `git push` dans le workflow (collision possible)
+- **Sites .tn** : certificats SSL incomplets → prévoir un repli dans les scripts
+- **Un seul site** : ne pas créer deux dépôts pour le même projet. Si c'est
+  arrivé, transformer le doublon en **redirection** (sans `noindex`) pour que
+  Google transfère le référencement vers le bon site
+- **Sessions Claude sur téléphone** : elles travaillent sur des branches
+  `claude/…` → fusionner dans `main`, sinon rien n'apparaît en ligne
+- **Nom de domaine** : inutile au début (GitHub Pages est gratuit) ; l'acheter
+  seulement quand il rapporte (premier annonceur). Migration possible plus tard
+  sans perte, avec des redirections page par page
+- **Premier canal de trafic qui marche** : un partage Instagram (10 → 100 visites
+  par jour). Google prend plus de temps
+- **Toujours vérifier sur son propre téléphone** et envoyer une capture d'écran
+  en cas de doute : c'est comme ça qu'on repère les problèmes réels
+- **Toujours demander avant d'installer un logiciel** sur le PC
+
 ## Les outils utilisés (tous gratuits)
 
 | Outil | Rôle |
@@ -77,3 +133,5 @@ pour créer n'importe quel autre site.
 | GoatCounter | statistiques de visite privées |
 | Google Search Console | référencement Google |
 | Formspree | formulaire d'avis / contact (messages reçus par email) |
+| Telegram (canal + robot BotFather) | alertes automatiques aux abonnés |
+| GitHub Secrets | coffre-fort pour les codes secrets (tokens) |
