@@ -7,12 +7,12 @@ const plain = p => !p.flavor;
 const tailleStika = liters => (liters <= 0.75 ? 12 : 6);
 const GRAND_FORMAT = 2.5;   // au-delà : bidons et bonbonnes, pas de stika
 const FORMATS = [
-  { id: "",         nom: "Tous formats", test: () => true },
-  { id: "petit",    nom: "≤ 0,75 L",     test: p => p.liters <= 0.75 },
-  { id: "1",        nom: "1 L",          test: p => p.liters > 0.75 && p.liters < 1.25 },
-  { id: "1.5",      nom: "1,5 L",        test: p => p.liters >= 1.25 && p.liters < 1.6 },
-  { id: "2",        nom: "2 L",          test: p => p.liters >= 1.6 && p.liters <= GRAND_FORMAT },
-  // pas de bouton « Grands formats » : les bidons/bonbonnes restent visibles via « Tous formats »
+  { id: "",         nom: "Tous",     test: () => true },
+  { id: "petit",    nom: "≤ 0,75 L", test: p => p.liters <= 0.75 },
+  { id: "1",        nom: "1 L",      test: p => p.liters > 0.75 && p.liters < 1.25 },
+  { id: "1.5",      nom: "1,5 L",    test: p => p.liters >= 1.25 && p.liters < 1.6 },
+  { id: "2",        nom: "2 L",      test: p => p.liters >= 1.6 && p.liters <= GRAND_FORMAT },
+  { id: "bonbonne", nom: "≥ 5 L",    test: p => p.liters > GRAND_FORMAT },
 ];
 function minPrice(prod){ return Math.min(...Object.values(prod.prices)); }
 function bestStores(prod){
