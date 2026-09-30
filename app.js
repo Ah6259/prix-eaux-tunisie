@@ -801,10 +801,25 @@ const SIG_FORM = {
   if (!total){
     box.innerHTML = "";          // pas encore de vote : rien à afficher
   } else {
-    box.innerHTML = `<ol class="vote-liste">` + VOTES.classement.slice(0, 5).map((v, i) =>
-      `<li class="${i === 0 ? "vote-gagnant" : ""}"><span class="vote-rang">${i === 0 ? "❤️" : i + 1}</span>
-        <b>${v.marque}</b><span class="vote-nb">${v.votes} vote${v.votes > 1 ? "s" : ""} · ${Math.round(v.votes * 100 / total)} %</span></li>`
-    ).join("") + `</ol><p class="vote-total">${total} votant${total > 1 ? "s" : ""}</p>`;
+    // comme pour le prix : le(s) gagnant(s) sur une ligne, puis le classement complet à la demande
+    const cl = VOTES.classement;
+    const nb = v => `${v.votes} vote${v.votes > 1 ? "s" : ""} · ${Math.round(v.votes * 100 / total)} %`;
+    const gagnants = cl.filter(v => v.votes === cl[0].votes);
+    box.innerHTML =
+      `<div class="winners">` + gagnants.map(v => `<div class="winner vote-win">
+        <span class="vote-coeur" aria-hidden="true">❤️</span>
+        <span class="winner-name">${v.marque}</span>
+        <span class="winner-price">${nb(v)}</span></div>`).join("") + `</div>` +
+      `<ol class="vote-liste" id="vote-rest" hidden>` + cl.map((v, i) =>
+        `<li><span class="vote-rang">${i + 1}</span><b>${v.marque}</b><span class="vote-nb">${nb(v)}</span></li>`
+      ).join("") + `</ol>` +
+      `<div class="compare-toggle"><button type="button" class="chipbtn" id="vote-more">Voir le classement des votes (${total} votant${total > 1 ? "s" : ""})</button></div>`;
+    const btn = document.getElementById("vote-more");
+    btn.addEventListener("click", () => {
+      const rest = document.getElementById("vote-rest");
+      rest.hidden = !rest.hidden;
+      btn.textContent = rest.hidden ? `Voir le classement des votes (${total} votant${total > 1 ? "s" : ""})` : "Masquer le classement des votes";
+    });
   }
   sel.innerHTML = `<option value="">— mon eau préférée —</option>` + DATA.brands.slice()
     .sort((a, z) => a.name.localeCompare(z.name, "fr"))

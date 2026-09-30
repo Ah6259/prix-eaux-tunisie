@@ -639,3 +639,14 @@ section:has(> #match-open){padding-bottom:6px}
 
 /* mention de droits d'auteur (pied de page) */
 .copyright{margin:10px auto 0; font-size:12px; color:var(--muted)}
+
+/* gagnant par le vote : même carte que le prix, en rose */
+.winner.vote-win{background:#FCE8EE; border-color:#D6336C}
+.winner.vote-win .winner-price{color:#B02A5B}
+.vote-coeur{font-size:18px; flex:none}
+#vote-more{white-space:nowrap; font-size:12.5px; padding:6px 12px}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .winner.vote-win{background:#3A1624} }
+:root[data-theme="dark"] .winner.vote-win{background:#3A1624}
+
+.vote-liste[hidden]{display:none}   /* classement des votes replié tant qu'on n'a pas cliqué */
+#match-titre{text-align:center; margin-inline:28px}   /* titre et trophée au milieu de la fenêtre */
