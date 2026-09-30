@@ -1,24 +1,29 @@
 # Prix des Eaux de Tunisie
 
-Site web (et base d'une future app) qui liste les marques d'eau minérale vendues en Tunisie
-avec leurs prix relevés chez les grandes surfaces : **Géant et Carrefour**
-(Aziza et Monoprix retirés le 30/09/2026 : pas de source de prix fiable, voir « Mettre à jour les prix »).
+Site web (et base d'une future app) qui compare les prix des marques d'eau minérale vendues
+en Tunisie (bouteille et **stika**), relevés automatiquement chez **Carrefour**, **Géant** et
+l'épicerie en ligne **Otrity**, complétés par les **prix signalés par les visiteurs**.
+(Aziza et Monoprix retirés le 30/09/2026 : pas de source de prix fiable, voir « Mettre à jour les prix ».)
 
 **Site public : https://ah6259.github.io/prix-eaux-tunisie/**
 Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
 (Ancienne version privée Claude : https://claude.ai/artifact/N4YgHUrDQegTPn69Z77DCv)
 
-## Contenu actuel (27/09/2026)
+## Contenu actuel (30/09/2026)
 
-- 26 marques, 73 produits, 132 prix relevés (Carrefour, Géant, Monoprix, Aziza)
-- Visuels de bouteilles : photos choisies à la main (`assets/img/`) + photos des enseignes
-  téléchargées automatiquement (`assets/img/produits/`)
-- Comparateur du format 1,5 L, recherche, filtres plate/gazeuse, tri par prix ou par minéralité
-- **Commande avec livraison** : bouton + sur chaque produit, panier, adresse + localisation GPS,
-  envoi de la commande par WhatsApp (numéro dans `WHATSAPP` en tête de la section commande d'`app.js`)
-- **Composition minéralogique** (résidu sec, calcium, sodium, pH…) de 32 eaux, dépliable sur
-  chaque carte, valeurs hors repère OMS/UE surlignées — données dans `data/composition.js`
-  (statique, entretenu à la main, source : Office du Thermalisme / article Babnet mai 2024)
+- 35 marques (26 avec prix), ~95 prix relevés chaque jour (Carrefour, Géant, Otrity)
+- Comparateur « Gagnant du match 1,5 L », recherche, filtres multi-sélection (minérale / source /
+  traitée / gazeuse, formats), tri ; mode **Stika** (6 × bouteille, 12 pour ≤ 0,75 L) ou Bouteille
+- **Composition minéralogique** de 32 eaux (Office du Thermalisme, `data/composition.js`)
+- **Historique des prix**, pages par marque (`marque/<slug>/`), FAQ, SEO, PWA
+- **Alertes** : baisses de prix ≥ 1 % publiées chaque nuit sur le canal Telegram
+  https://t.me/prixeautunisie + bandeau « Baisses de prix aujourd'hui »
+- **Prix signalés par les visiteurs** (Google Forms → robot toutes les 2 h → site + Telegram)
+- **Commande** : panier et formulaire présents mais **fermés** (pas encore de fournisseur) —
+  formulaire grisé + tampon « En cours de développement ». Pour rouvrir : retirer
+  `disabled` du `fieldset.order-fields` et le bloc `div.tampon` dans `index.html`,
+  et remettre le texte de la barre panier dans `app.js`
+- **Votre avis** (Formspree), hadith de la sqya, statistiques privées GoatCounter
 
 ## Plan de continuité — si Ahmed n'est plus disponible
 
@@ -46,22 +51,36 @@ et lui demander de lire ce README.
 
 | Chemin | Rôle |
 |---|---|
-| `index.html` | La page (HTML seul — structure et textes) |
+| `index.html` | La page (structure et textes) — **changer les `?v=` de style.css / app.js à chaque modification** (cache des téléphones) |
 | `style.css` | Tout le style (thème clair/sombre) |
-| `app.js` | Tout le JavaScript : rendu, filtres, panier et commande WhatsApp |
-| `data/eaux.js` | Données chargées par la page (`window.EAUX_DATA`) — généré, ne pas éditer à la main |
-| `data/eaux.json` | Mêmes données en JSON pur (pour une future app / API) |
-| `assets/img/` | Photos de bouteilles |
-| `tools/collect_prices.py` | Script unique de collecte des prix (remplace l'ancien trio geant/barka/build) |
+| `app.js` | Rendu, filtres, avertissement de fraîcheur, prix signalés, panier |
+| `data/eaux.js` / `eaux.json` | Prix (généré — ne pas éditer), avec `statut_sources` |
+| `data/otrity.json` | Relevé Otrity fait depuis le PC d'Ahmed |
+| `data/signalements*.js/json` | Prix signalés (générés) ; `signalements_manuels.json` = ajouts à la main |
+| `data/baisses.*`, `historique.*`, `composition.js` | Baisses du jour, historique, composition |
+| `tools/collect_prices.py` | Collecte des prix (Carrefour, Géant, Otrity) + garde-fous |
+| `tools/price_drops.py` | Baisses de prix → site + Telegram |
+| `tools/signalements.py` | Décision automatique sur les prix signalés → site + Telegram |
+| `tools/otrity_local.py`, `tools/installer_pc.ps1` | Relevé Otrity depuis le PC / réinstallation sur un nouveau PC |
+| `tools/test_pannes.py` | **Simulateur de pannes (16 scénarios) — à relancer après toute modification du robot** |
+| `tools/build_history.py`, `tools/build_pages.py` | Historique, pages par marque, sitemap |
 
-Ouvrir simplement `index.html` dans un navigateur (fonctionne en local, sans serveur).
+## Robots (GitHub Actions)
+
+| Workflow | Quand | Rôle |
+|---|---|---|
+| `maj-prix.yml` | chaque nuit ≈ 1h07 (Tunis) | collecte → baisses/Telegram → historique → pages → publication |
+| `signalements.yml` | toutes les 2 h, 8h05–22h05 | prix signalés → site + Telegram |
+| `battement-de-coeur.yml` | le 1er du mois | empêche GitHub de mettre les robots en pause (60 j) |
+| `telegram-bienvenue.yml` | à la main | message de présentation sur le canal |
+| Tâche Windows « PrixEaux-Otrity » (PC d'Ahmed) | chaque jour 12h | relevé Otrity (bloqué par Cloudflare sur GitHub) |
 
 ## Mettre à jour les prix
 
 **Automatique** : le workflow GitHub Actions (`.github/workflows/maj-prix.yml`) tourne
 chaque nuit vers 1h du matin (heure de Tunis) sur les serveurs GitHub — PC éteint ou pas —
-et publie directement sur le site. (L'ancienne tâche planifiée Windows locale
-`PrixEauxTunisie-MAJ` a été supprimée le 28/09/2026 : elle était devenue redondante.)
+et publie directement sur le site. Lancement immédiat :
+`gh workflow run maj-prix.yml -R Ah6259/prix-eaux-tunisie`.
 
 **Manuel** (copie locale uniquement) : double-clic sur `tools/update_prix.bat`, ou :
 
@@ -74,8 +93,12 @@ Notes :
   suivi** (30/09/2026) : barka.tn affichait des produits indisponibles et des prix faux
   (vérifié sur courses.monoprix.tn, qui bloque les robots). **Aziza n'est plus suivi** (30/09/2026) : barka.tn ne donne que les
   prix de l'ancienne boutique en ligne d'Aziza, fermée (prix périmés, signalés par un client) ;
-  le site actuel d'Aziza ne publie que des catalogues promo et son API de prix est privée. Si une source est en panne, ses prix du dernier relevé
-  réussi sont conservés.
+  le site actuel d'Aziza ne publie que des catalogues promo et son API de prix est privée.
+  **Otrity** : épicerie en ligne (prix de la stika livrée), lue depuis le PC d'Ahmed car
+  Cloudflare bloque GitHub. Monoprix et Jumia exigent une vérification « humain » :
+  on ne contourne pas (demander l'autorisation, ou prix signalés).
+- Source en panne : ses derniers prix sont gardés **7 jours au plus**, puis retirés ; un résultat
+  incohérent (prix en millimes, marques inconnues, trop peu de produits) compte comme une panne.
 - Garde-fous : marques d'eau connues uniquement (`MARQUES_EAU`), packs/fardeaux écartés
   (la stika est affichée comme 6 × la bouteille), prix hors 0,25–2,5 DT/L ou supérieurs
   au double de l'offre la moins chère écartés.
@@ -86,17 +109,18 @@ Notes :
 
 ## Déploiement (GitHub Pages)
 
-Le site est un site statique déployé sur GitHub Pages (branche `main`, racine).
-Le workflow [`.github/workflows/maj-prix.yml`](.github/workflows/maj-prix.yml) tourne
-tous les jours à 9h30 (heure de Tunis) sur les serveurs GitHub : il re-scrape les prix,
-commit `data/` si quelque chose a changé, et GitHub Pages redéploie automatiquement.
-Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour des prix » → *Run workflow*.
+Site statique servi par GitHub Pages (branche `main`, racine) : chaque commit des robots
+redéploie le site en ~1 minute. Le dépôt doit rester **public** (Pages gratuit).
+Le dépôt `Ah6259/prix-eau-tunisie` n'est qu'une **redirection** vers ce site : à garder.
 
 ## Sources
 
+- [Carrefour Tunisie](https://www.carrefour.tn) — prix (API GraphQL) et images
 - [Géant Drive Tunisie](https://www.geantdrive.tn) — prix et images
-- [barka.tn](https://barka.tn) — comparateur multi-enseignes
-- [Wikipédia — Eaux minérales en Tunisie](https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie) — liste des marques et sources
+- [Otrity](https://otrity.com/categorie-produit/boissons/eaux/) — épicerie en ligne (stika livrée)
+- Prix signalés par les visiteurs (Google Forms d'Ahmed)
+- [Office du Thermalisme via Babnet](https://www.babnet.net/festivaldetail-287073.asp) — composition des eaux
+- [Wikipédia — Eaux minérales en Tunisie](https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie) — liste des marques
 
 ## Idées pour la suite
 
