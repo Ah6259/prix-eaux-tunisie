@@ -486,27 +486,22 @@ section:has(> #match-collapse){padding-bottom:6px}
   #match-collapse summary h2{white-space:nowrap; font-size:min(18px, 4.6vw)}
 }
 .collapse > :not(summary){margin-top:12px}
-/* barre « Signaler un prix vu en magasin » (sous le hadith), même allure que les barres repliables */
+/* section « Signaler un prix vu en magasin » : bouton puis liste des derniers prix signalés */
 .sig-section{padding-block:0 8px}
-.sig-bar{
-  width:100%; display:flex; align-items:center; gap:10px; cursor:pointer; text-align:start;
-  padding:10px 14px; border-radius:12px; font:inherit; color:var(--ink);
-  background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
+.sig-ico{font-size:22px; line-height:1; flex:none}
+.sig-bouton{
+  display:inline-flex; align-items:center; gap:6px; border:0; cursor:pointer;
+  background:var(--accent); color:#fff; font:inherit; font-weight:700; font-size:14px;
+  padding:9px 18px; border-radius:999px;
 }
-.sig-bar h2{margin:0; font-size:18px}
-.sig-bar .sum-icon{font-size:22px; line-height:1; flex:none}
-.sig-bar:hover{border-color:var(--accent)}
-.sig-bar:hover .sum-cta{filter:brightness(1.1)}
-.sig-bar h2{min-width:0}
-.sig-cta-fl{display:none}
-/* téléphone : titre complet sur UNE ligne (police adaptée à la largeur) ;
-   le bouton se réduit à une flèche pour laisser la place au titre */
-@media (max-width:560px){
-  .sig-bar{gap:8px; padding-inline:10px}
-  .sig-bar h2{white-space:nowrap; font-size:min(18px, 3.9vw)}
-  .sig-bar .sum-icon{font-size:18px}
-  .sig-cta-txt{display:none}
-  .sig-cta-fl{display:inline; font-size:18px; line-height:1; padding:0 4px}
+.sig-bouton:hover{filter:brightness(1.1)}
+.sig-derniers{margin-top:12px; font-size:13.5px}
+.sig-derniers ul{list-style:none; margin:4px 0 0; padding:0; display:flex; flex-direction:column; gap:6px}
+.sig-derniers li{padding:7px 10px; border-radius:10px; background:var(--gaz-soft)}
+.sig-derniers small{color:var(--muted)}
+.sig-derniers .sig-prix{color:var(--gaz)}
+.sig-vide{color:var(--muted); margin:0}
+@media (max-width:560px){ #sig-collapse summary h2{white-space:nowrap; font-size:min(18px, 3.9vw)} }
 }
 .collapse .sub{margin-bottom:10px}
 

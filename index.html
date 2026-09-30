@@ -89,7 +89,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20260930m">
+<link rel="stylesheet" href="style.css?v=20260930n">
 </head>
 <body>
 
@@ -229,11 +229,15 @@
 
   <!-- signaler un prix vu en magasin : ouvre la fenêtre #sig-pop (app.js) -->
   <section class="sig-section">
-    <button type="button" class="sig-bar" id="sig-open">
-      <span class="sum-icon" aria-hidden="true">📍</span>
-      <h2>Signaler un prix vu en magasin</h2>
-      <span class="sum-cta"><span class="sig-cta-txt">Signaler</span><span class="sig-cta-fl" aria-hidden="true">›</span></span>
-    </button>
+    <details class="collapse" id="sig-collapse">
+      <summary>
+        <span class="sum-icon sig-ico" aria-hidden="true">📍</span>
+        <h2>Signaler un prix vu en magasin</h2>
+        <span class="sum-cta"><span class="cta-closed">Voir</span><span class="cta-open">Fermer</span> <span class="chev" aria-hidden="true">▾</span></span>
+      </summary>
+      <button type="button" class="sig-bouton" id="sig-open">📍 Signaler un prix</button>
+      <div class="sig-derniers" id="sig-derniers"></div>
+    </details>
   </section>
 
   <section>
@@ -429,7 +433,7 @@
 <script src="data/historique.js"></script>
 <script src="data/baisses.js" onerror="void 0"></script>
 <script src="data/signalements.js?v=20260930a"></script>
-<script src="app.js?v=20260930k"></script>
+<script src="app.js?v=20260930n"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

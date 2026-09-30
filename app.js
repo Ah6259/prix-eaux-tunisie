@@ -214,6 +214,29 @@ function card(b, prods){
    affichés 30 jours avec leur date, hors calcul du moins cher --------------- */
 const SIGNALES = window.EAUX_SIGNALES || [];
 const JOURS_SIGNALE = 30;
+/* liste des derniers prix signalés (section « Signaler un prix vu en magasin ») */
+function renderDerniersSignales(){
+  const box = document.getElementById("sig-derniers");
+  if (!box) return;
+  const now = new Date(DATA.updated + "T12:00:00");
+  const recents = SIGNALES
+    .filter(s => (now - new Date(s.date + "T12:00:00")) / 864e5 <= JOURS_SIGNALE)
+    .sort((a, z) => z.date.localeCompare(a.date));
+  if (!recents.length){
+    box.innerHTML = `<p class="sig-vide">Aucun prix signalé ces 30 derniers jours : soyez le premier !</p>`;
+    return;
+  }
+  const nomMarque = id => (DATA.brands.find(b => b.id === id) || {}).name || id;
+  box.innerHTML = `<p class="sig-titre">Derniers prix signalés par les visiteurs</p><ul>` + recents.map(s => {
+    const stika = state.mode === "stika" && s.litres <= GRAND_FORMAT;
+    const vu = new Date(s.date + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+    return `<li><b>${s.marque || nomMarque(s.id)} ${String(s.litres).replace(".", ",")} L${s.type === "gazeuse" ? " gazeuse" : ""}</b>
+      · ${s.magasin}${s.lieu ? ` <small>(${s.lieu})</small>` : ""} :
+      <b class="sig-prix">${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? " la stika" : ""}
+      <small>· vu le ${vu}${s.nb > 1 ? ` · confirmé par ${s.nb} visiteurs` : ""}</small></li>`;
+  }).join("") + `</ul>`;
+}
+
 function signalesBlock(b){
   const now = new Date(DATA.updated + "T12:00:00");
   const recents = SIGNALES
@@ -272,6 +295,7 @@ function render(){
   document.getElementById("grid").innerHTML = list.map(({ b, prods }) => card(b, prods)).join("");
   document.getElementById("empty").hidden = list.length > 0;
   renderBaisses();
+  renderDerniersSignales();
 }
 
 /* bandeau « Baisses de prix du jour » : affiché seulement si les baisses
