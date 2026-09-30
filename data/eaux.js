@@ -1225,5 +1225,19 @@ window.EAUX_DATA = {
    ],
    "products": []
   }
- ]
+ ],
+ "statut_sources": {
+  "carrefour": {
+   "dernier_ok": "2026-09-30",
+   "nb": 62
+  },
+  "geant": {
+   "dernier_ok": "2026-09-30",
+   "nb": 31
+  },
+  "otrity": {
+   "dernier_ok": "2026-09-30",
+   "nb": 7
+  }
+ }
 };
