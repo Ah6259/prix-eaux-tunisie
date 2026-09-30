@@ -171,7 +171,7 @@
    "source": null,
    "depuis": null,
    "note": null,
-   "img": "assets/img/produits/d62fddf4951e.webp",
+   "img": "assets/img/produits/f90bcda67b0d.jpg",
    "types": [
     "plate"
    ],
@@ -184,6 +184,16 @@
      "img": "assets/img/produits/d62fddf4951e.webp",
      "prices": {
       "Carrefour": 0.47
+     }
+    },
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/f90bcda67b0d.jpg",
+     "prices": {
+      "Otrity": 0.75
      }
     }
    ]
@@ -230,7 +240,8 @@
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
-      "Carrefour": 0.61
+      "Carrefour": 0.61,
+      "Otrity": 0.7083
      }
     },
     {
@@ -295,7 +306,8 @@
      "flavor": null,
      "img": "assets/img/produits/d1aeeb2cec92.webp",
      "prices": {
-      "Carrefour": 0.8
+      "Carrefour": 0.8,
+      "Otrity": 0.9333
      }
     },
     {
@@ -473,6 +485,16 @@
     {
      "liters": 1.0,
      "format": "1 L",
+     "category": "gazeuse",
+     "flavor": null,
+     "img": "assets/img/garci_1l.jpg",
+     "prices": {
+      "Otrity": 0.9167
+     }
+    },
+    {
+     "liters": 1.0,
+     "format": "1 L",
      "category": "plate",
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
@@ -490,11 +512,22 @@
    "source": "Jelma (Sidi Bouzid)",
    "depuis": 1996,
    "note": null,
-   "img": null,
+   "img": "assets/img/produits/2ba9322512a7.webp",
    "types": [
     "plate"
    ],
-   "products": []
+   "products": [
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/2ba9322512a7.webp",
+     "prices": {
+      "Otrity": 0.8167
+     }
+    }
+   ]
   },
   {
    "id": "jannet",
@@ -1067,7 +1100,8 @@
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Géant": 0.69
+      "Géant": 0.69,
+      "Otrity": 0.8333
      }
     }
    ]
