@@ -66,10 +66,10 @@ def main():
         git("add", "data/otrity.json")
         if subprocess.run(["git", "-C", str(ROOT), "diff", "--cached", "--quiet"]).returncode == 0:
             log("aucun changement à envoyer")
-        else:
-            git("commit", "-m", f"Relevé Otrity depuis le PC ({datetime.date.today()})", "--", "data/otrity.json")
-            git("push", "origin", "main")
-            log("envoyé sur GitHub")
+            return
+        git("commit", "-m", f"Relevé Otrity depuis le PC ({datetime.date.today()})", "--", "data/otrity.json")
+        git("push", "origin", "main")
+        log("envoyé sur GitHub")
         subprocess.run([GH, "workflow", "run", "maj-prix.yml", "-R", REPO], check=True, capture_output=True)
         log("mise à jour du site relancée")
     except Exception as e:
