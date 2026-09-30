@@ -3,7 +3,7 @@
 
 Le formulaire « Signaler un prix » du site dépose les réponses dans un Google Forms
 (tableau Google Sheets d'Ahmed, publié en CSV — lecture seule). Ce script, lancé
-3 fois par jour (8h, 14h, 20h — workflow signalements.yml) :
+toutes les 2 h de 8h à 22h (workflow signalements.yml) :
   1. lit toutes les réponses ;
   2. décide seul de publier ou de rejeter chaque signalement (règles ci-dessous) ;
   3. écrit data/signalements.js (lu par le site) + data/signalements.json (état) ;

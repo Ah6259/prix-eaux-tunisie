@@ -2,8 +2,9 @@ name: Prix signalés par les visiteurs
 
 on:
   schedule:
-    # 8h05, 14h05 et 20h05 heure de Tunis (UTC+1) — minute décalée, voir maj-prix.yml
-    - cron: "5 7,13,19 * * *"
+    # toutes les 2 h de 8h05 à 22h05 heure de Tunis (UTC+1) — rien la nuit (pas de
+    # notifications Telegram nocturnes) ; minute décalée, voir maj-prix.yml
+    - cron: "5 7-21/2 * * *"
   workflow_dispatch:        # lancement manuel dans l'onglet Actions
 
 permissions:
