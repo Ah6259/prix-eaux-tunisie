@@ -122,16 +122,19 @@ h2{
 .rank .rname{font-weight:600; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .rank .rprice{font-variant-numeric:tabular-nums; font-weight:600}
 .rank.cheapest .rprice, .rank.cheapest .rn{color:var(--best)}
-.compare-toggle{padding-block:10px 6px; text-align:center}
+.compare-toggle{padding-block:8px 4px; text-align:center}
+#compare-more{white-space:nowrap; font-size:12.5px; padding:6px 12px}   /* « Voir le classement complet » sur une ligne */
 .mode-note{color:var(--muted); font-size:12px; flex-basis:100%}
-.winners{display:flex; gap:12px; flex-wrap:wrap; padding-block:4px 10px}
+.winners{display:flex; flex-direction:column; gap:8px; padding-block:2px 6px}
+/* gagnant sur UNE ligne : coupe · nom · prix */
 .winner{
-  flex:1 1 150px; display:flex; flex-direction:column; gap:2px; align-items:center;
+  display:flex; align-items:center; gap:10px; white-space:nowrap;
   background:var(--best-soft); border:1px solid var(--best); border-radius:12px;
-  padding:14px 10px;
+  padding:8px 12px;
 }
-.winner .cup{width:30px; height:30px; fill:#D9A520; margin-bottom:2px}
-.winner-name{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:17px}
+.winner .cup{width:22px; height:22px; fill:#D9A520; flex:none}
+.winner-price{margin-left:auto}
+.winner-name{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:16px; overflow:hidden; text-overflow:ellipsis}
 .winner-price{color:var(--best); font-weight:700; font-variant-numeric:tabular-nums}
 .winner-price small{color:var(--muted); font-weight:500; font-size:11px}
 
