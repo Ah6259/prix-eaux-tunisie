@@ -1,0 +1,75 @@
+{
+ "date": "2026-09-30",
+ "offres": [
+  {
+   "enseigne": "otrity",
+   "marque": "BRIMA",
+   "nom": "Eau minérale Brima 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.75,
+   "image_src": "https://otrity.com/wp-content/uploads/2026/09/fff.jpg"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "HAYET",
+   "nom": "Eau minérale Hayet 0.75L",
+   "volume_l": 0.75,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.1583,
+   "image_src": "https://otrity.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-01-29-at-19.56.43-10.jpeg"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "CRISTALINE",
+   "nom": "Eau minérale Cristaline 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.7083,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/10/eau-minerale-2.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "GARCI",
+   "nom": "Eau minérale Garci 1L",
+   "volume_l": 1.0,
+   "nb_unites": 1,
+   "type": "gazeuse",
+   "prix": 0.9167,
+   "image_src": "https://otrity.com/wp-content/uploads/Eau-minerale-Garci-0.5L.jpg"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "DENYA",
+   "nom": "Eau minérale Denya 2L",
+   "volume_l": 2.0,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.9333,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/09/b2_1.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "HAYET",
+   "nom": "Eau minérale Hayet 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.8167,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/09/HAYET_1_5_L_f98db598a1.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "SAFIA",
+   "nom": "Eau minérale Safia 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.8333,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/09/eau-minerale-8.webp"
+  }
+ ]
+}
