@@ -175,7 +175,29 @@ function card(b, prods){
         data-generic="${b.id}">+</button>
       <span>Prix non disponible pour le moment dans les enseignes suivies — commandez, le prix vous sera confirmé sur WhatsApp.</span>
     </div>`}
+    ${signalesBlock(b)}
   </article>`;
+}
+
+/* prix signalés par les visiteurs (data/signalements.js, vérifiés à la main) :
+   affichés 30 jours avec leur date, hors calcul du moins cher --------------- */
+const SIGNALES = window.EAUX_SIGNALES || [];
+const JOURS_SIGNALE = 30;
+function signalesBlock(b){
+  const now = new Date(DATA.updated + "T12:00:00");
+  const recents = SIGNALES
+    .filter(s => s.id === b.id && (now - new Date(s.date + "T12:00:00")) / 864e5 <= JOURS_SIGNALE)
+    .sort((a, z) => z.date.localeCompare(a.date));
+  const lignes = recents.map(s => {
+    const stika = state.mode === "stika" && s.litres <= GRAND_FORMAT;
+    const vu = new Date(s.date + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+    return `<li>${s.magasin}${s.lieu ? ` <small>(${s.lieu})</small>` : ""} · ${String(s.litres).replace(".", ",")} L${s.type === "gazeuse" ? " gazeuse" : ""} :
+      <b>${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? " la stika" : ""} <small>· vu le ${vu}</small></li>`;
+  }).join("");
+  return `<div class="signales">
+    ${lignes ? `<p class="sig-titre">📍 Prix signalés par les visiteurs</p><ul>${lignes}</ul>` : ""}
+    <button type="button" class="sig-btn" data-signaler="${b.id}">📍 Signaler un prix vu en magasin</button>
+  </div>`;
 }
 
 // nature officielle de l'eau (Office du Thermalisme, via composition.js)
@@ -638,6 +660,55 @@ renderCartBar();
     } catch {
       status.className = "err";
       status.textContent = "Échec de l'envoi — réessayez, ou plus tard.";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+
+/* « Signaler un prix vu en magasin » : fenêtre + envoi Formspree ------------- */
+(function(){
+  const pop = document.getElementById("sig-pop");
+  const form = document.getElementById("sig-form");
+  if (!pop || !form) return;
+  const sel = document.getElementById("sig-marque");
+  sel.innerHTML = DATA.brands.slice().sort((a, z) => a.name.localeCompare(z.name, "fr"))
+    .map(b => `<option value="${b.name}">${b.name}</option>`).join("") + `<option>Autre marque</option>`;
+  const status = document.getElementById("sig-status");
+  const ouvrir = id => {
+    const b = DATA.brands.find(x => x.id === id);
+    if (b) sel.value = b.name;
+    document.getElementById("sig-date").value = new Date().toISOString().slice(0, 10);
+    status.className = ""; status.textContent = "";
+    pop.hidden = false;
+  };
+  document.getElementById("grid").addEventListener("click", e => {
+    const btn = e.target.closest("[data-signaler]");
+    if (btn) ouvrir(btn.dataset.signaler);
+  });
+  const fermer = () => { pop.hidden = true; };
+  document.getElementById("sig-close").addEventListener("click", fermer);
+  pop.addEventListener("click", e => { if (e.target === pop) fermer(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") fermer(); });
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const f = new FormData(form);
+    document.getElementById("sig-subject").value =
+      `Prix signalé : ${f.get("marque")} ${f.get("format")} — ${f.get("prix")} DT ${f.get("unite")} chez ${f.get("magasin")}`;
+    const btn = form.querySelector(".avis-send");
+    btn.disabled = true;
+    status.className = ""; status.textContent = "Envoi…";
+    try {
+      const r = await fetch(form.action, { method: "POST", body: new FormData(form),
+                                           headers: { "Accept": "application/json" } });
+      if (!r.ok) throw new Error();
+      form.reset();
+      status.className = "ok";
+      status.textContent = "Merci ! Le prix sera publié après vérification.";
+      setTimeout(fermer, 2500);
+    } catch {
+      status.className = "err";
+      status.textContent = "Échec de l'envoi — réessayez plus tard.";
     } finally {
       btn.disabled = false;
     }

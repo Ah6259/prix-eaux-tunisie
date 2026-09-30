@@ -89,7 +89,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20260930b">
+<link rel="stylesheet" href="style.css?v=20260930e">
 </head>
 <body>
 
@@ -330,6 +330,45 @@
   </div>
 </div>
 
+<!-- Signaler un prix vu en magasin : envoyé par email (Formspree), publié après vérification
+     dans data/signalements.js -->
+<div class="help-pop" id="sig-pop" role="dialog" aria-labelledby="sig-titre" hidden>
+  <div class="help-box">
+    <button type="button" class="help-close" id="sig-close" aria-label="Fermer">×</button>
+    <h2 id="sig-titre">📍 Signaler un prix</h2>
+    <p class="help-src">Vous avez vu un prix en magasin ? Partagez-le : il sera publié sur la fiche
+    de la marque après vérification, avec sa date.</p>
+    <form id="sig-form" action="https://formspree.io/f/mwlpakqj" method="POST">
+      <input type="hidden" name="_subject" id="sig-subject" value="Prix signalé">
+      <input type="hidden" name="type" value="Prix signalé">
+      <label>Marque <select name="marque" id="sig-marque" required></select></label>
+      <div class="sig-row">
+        <label>Format <select name="format" required>
+          <option>0,5 L</option><option>1 L</option><option selected>1,5 L</option><option>2 L</option>
+          <option>6 L</option><option>19 L</option><option>Autre</option></select></label>
+        <label>Eau <select name="eau"><option>Plate</option><option>Gazeuse</option></select></label>
+      </div>
+      <div class="sig-row">
+        <label>Prix (DT) <input type="text" name="prix" inputmode="decimal" required placeholder="ex. 4,900"></label>
+        <label>Pour <select name="unite"><option>une stika</option><option>une bouteille</option></select></label>
+      </div>
+      <div class="sig-row">
+        <label>Magasin <select name="magasin" required>
+          <option value="">— choisir —</option><option>Aziza</option><option>Monoprix</option>
+          <option>Magasin Général</option><option>Carrefour</option><option>Géant</option>
+          <option>Épicerie de quartier</option><option>Autre</option></select></label>
+        <label>Ville / quartier <input type="text" name="lieu" placeholder="ex. Ariana"></label>
+      </div>
+      <label>Vu le <input type="date" name="date" id="sig-date" required></label>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+      <div class="avis-actions">
+        <button type="submit" class="avis-send">Envoyer</button>
+        <span id="sig-status" role="status"></span>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="overlay" id="order-overlay" hidden>
   <div class="order-panel" role="dialog" aria-modal="true" aria-labelledby="order-title">
     <div class="order-head">
@@ -378,7 +417,8 @@
 <script src="data/composition.js"></script>
 <script src="data/historique.js"></script>
 <script src="data/baisses.js" onerror="void 0"></script>
-<script src="app.js?v=20260930c"></script>
+<script src="data/signalements.js?v=20260930a"></script>
+<script src="app.js?v=20260930d"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

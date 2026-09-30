@@ -490,6 +490,29 @@ section:has(> #match-collapse){padding-bottom:6px}
 #avis-status.ok{color:var(--best); font-weight:600}
 #avis-status.err{color:#C0392B; font-weight:600}
 
+/* prix signalés par les visiteurs (sur chaque carte) + formulaire « Signaler un prix » */
+.signales{padding:8px 16px 12px; border-top:1px dashed var(--line); font-size:12.5px}
+.sig-titre{margin:0 0 4px; font-weight:700; color:var(--gaz)}
+.signales ul{list-style:none; margin:0 0 6px; padding:0; display:flex; flex-direction:column; gap:2px}
+.signales small{color:var(--muted)}
+.sig-btn{
+  border:0; background:none; padding:0; font:inherit; font-size:12.5px; font-weight:600;
+  color:var(--accent); cursor:pointer; text-decoration:underline; text-underline-offset:2px;
+}
+#sig-form{display:flex; flex-direction:column; gap:10px; margin-top:8px}
+#sig-form label{display:flex; flex-direction:column; gap:3px; font-size:12.5px; font-weight:600}
+#sig-form .sig-row label{flex:1 1 120px; min-width:0}
+#sig-form input, #sig-form select{
+  border:1px solid var(--line); border-radius:10px; background:var(--surface);
+  color:var(--ink); font:inherit; font-weight:400; font-size:14px; padding:8px 10px;
+}
+#sig-form input:focus, #sig-form select:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.sig-row{display:flex; gap:10px; flex-wrap:wrap}
+#sig-form .hp{position:absolute; left:-9999px; height:0; border:0; padding:0}
+#sig-status{font-size:13.5px; color:var(--muted)}
+#sig-status.ok{color:var(--best); font-weight:600}
+#sig-status.err{color:#C0392B; font-weight:600}
+
 /* bouton ? et fenetre d'explication des types d'eau */
 .chip-help{font-weight:700; min-width:34px; color:var(--accent)}
 .help-pop{
