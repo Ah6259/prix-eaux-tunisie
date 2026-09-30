@@ -104,6 +104,8 @@ def decider(r, marques, par_produit, par_format, publies):
     prix = parse_nombre(r["prix"])
     if not prix or prix <= 0:
         return None, f"prix invalide « {r['prix']} »"
+    if prix >= 100:            # prix écrit en millimes, à la tunisienne : 3900 = 3,900 DT
+        prix = prix / 1000
     try:
         vu = date.fromisoformat(r["date"][:10])
     except ValueError:
