@@ -57,6 +57,15 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - Fournisseurs / livreurs : liste privée `prive/fournisseurs-livreurs.xlsx` (dossier `prive/` ignoré par git — jamais sur GitHub).
   Contexte : pénurie d'eau en bouteille été 2026 (saisies pour spéculation) → rôle d'intermédiaire plutôt que stockage.
 
+## Commande automatisée — cahier des charges d'Ahmed (30/09/2026, à construire à la réouverture)
+1. Le client passe commande sur le site (produits, adresse, position).
+2. Le fournisseur partenaire de la zone reçoit la demande, **indique SES prix** et **confirme d'un clic**.
+3. Le client reçoit ce prix et **confirme** (ou refuse).
+4. Le fournisseur confirme le départ → le client voit « **en cours de livraison** » ; puis « livrée ».
+Tout automatique (Dispatch Eau = tableau de bord d'Ahmed). Liste des fournisseurs = secret (dépôt privé proposé).
+Pistes techniques proposées : robots dans un dépôt GitHub PRIVÉ ; téléphones via l'API Google Places (clé d'Ahmed,
+quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Pages Jaunes / OpenStreetMap en complément.
+
 ## Décisions et idées en attente
 - Nom de domaine (prix-eau.tn) acheté **seulement au premier annonceur** — ne pas le proposer avant.
 - Reporté : publication immédiate des prix signalés (Apps Script onFormSubmit → workflow_dispatch).
