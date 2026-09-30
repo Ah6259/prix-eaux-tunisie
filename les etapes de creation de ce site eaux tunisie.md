@@ -128,6 +128,15 @@ pour créer n'importe quel autre site.
     ailleurs — sinon la supprimer et en créer une nouvelle), mettre un **plafond de requêtes/jour** et
     un budget d'alerte. Le robot limite le nombre de recherches et garde un cache
 
+29. **Vote des visiteurs** (« mon eau préférée ») sans serveur : le vote part dans le même Google Forms
+    avec un marqueur (format = VOTE) et un jeton anonyme gardé dans le navigateur ; le robot compte un
+    vote par jeton (le plus récent) et publie le classement. Vote indicatif (non infalsifiable)
+30. **Fenêtres (pop-up)** plutôt que sections dépliables pour les contenus secondaires (gagnant, hadith,
+    signalement) : la page reste courte et les prix arrivent plus vite
+31. **Protéger son travail** : fichier LICENSE « tous droits réservés » + mention © en bas du site ;
+    l'historique git prouve l'antériorité. Pour cacher aussi le code : dépôt privé (GitHub Pro payant)
+    ou hébergement Cloudflare Pages (gratuit) — le contenu affiché reste toujours téléchargeable
+
 ## Pièges rencontrés et leçons (à réutiliser)
 
 - **Cache des téléphones** : après une mise à jour, un téléphone peut garder
@@ -163,6 +172,8 @@ pour créer n'importe quel autre site.
 - **Toujours vérifier sur son propre téléphone** et envoyer une capture d'écran
   en cas de doute : c'est comme ça qu'on repère les problèmes réels
 - **Toujours demander avant d'installer un logiciel** sur le PC
+- **Les Tunisiens écrivent souvent les prix en millimes** (« 3900 » = 3,900 DT) : le robot doit le
+  comprendre, sinon il rejette de vrais signalements
 - **Facebook** bloque toute lecture automatique, même des pages publiques : trouver les pages par
   la recherche web, puis copier soi-même la partie « À propos ». Ne jamais utiliser sa session
 - **Excel ouvert = fichier verrouillé** : fermer Excel avant qu'un programme le modifie

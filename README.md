@@ -26,7 +26,9 @@ Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
   formulaire grisé + tampon « En cours de développement ». Pour rouvrir : retirer
   `disabled` du `fieldset.order-fields` et le bloc `div.tampon` dans `index.html`,
   et remettre le texte de la barre panier dans `app.js`
-- **Votre avis** (Formspree), hadith de la sqya, statistiques privées GoatCounter
+- **Gagnant du match** (fenêtre) : par le prix (stika 1,5 L la moins chère) et **par le vote des clients**
+  (un vote par navigateur via le Google Forms, décompte automatique toutes les 2 h → `data/votes.js`)
+- **Votre avis** (Formspree), hadith de la sqya (fenêtre), statistiques privées GoatCounter
 
 ## Plan de continuité — si Ahmed n'est plus disponible
 
@@ -62,7 +64,7 @@ et lui demander de lire ce README.
 | `app.js` | Rendu, filtres, avertissement de fraîcheur, prix signalés, panier |
 | `data/eaux.js` / `eaux.json` | Prix (généré — ne pas éditer), avec `statut_sources` |
 | `data/otrity.json` | Relevé Otrity fait depuis le PC d'Ahmed |
-| `data/signalements*.js/json` | Prix signalés (générés) ; `signalements_manuels.json` = ajouts à la main |
+| `data/signalements*.js/json`, `data/votes.js` | Prix signalés et votes (générés) ; `signalements_manuels.json` = ajouts à la main |
 | `data/baisses.*`, `historique.*`, `composition.js` | Baisses du jour, historique, composition |
 | `tools/collect_prices.py` | Collecte des prix (Carrefour, Géant, Otrity) + garde-fous |
 | `tools/price_drops.py` | Baisses de prix → site + Telegram |
@@ -76,7 +78,7 @@ et lui demander de lire ce README.
 | Workflow | Quand | Rôle |
 |---|---|---|
 | `maj-prix.yml` | chaque nuit ≈ 1h07 (Tunis) | collecte → baisses/Telegram → historique → pages → publication |
-| `signalements.yml` | toutes les 2 h, 8h05–22h05 | prix signalés → site + Telegram |
+| `signalements.yml` | toutes les 2 h, 8h05–22h05 | prix signalés → site + Telegram ; décompte des votes |
 | `battement-de-coeur.yml` | le 1er du mois | empêche GitHub de mettre les robots en pause (60 j) |
 | `telegram-bienvenue.yml` | à la main | message de présentation sur le canal |
 | Tâche Windows « PrixEaux-Otrity » (PC d'Ahmed) | chaque jour 12h | relevé Otrity (bloqué par Cloudflare sur GitHub) |
