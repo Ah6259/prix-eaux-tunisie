@@ -11,5 +11,27 @@ window.EAUX_SIGNALES = [
   "lieu": "boutique en ligne",
   "date": "2026-09-30",
   "nb": 1
+ },
+ {
+  "id": "aziz",
+  "marque": "Aziz",
+  "litres": 1.5,
+  "type": "plate",
+  "prix": 0.65,
+  "magasin": "Aziza",
+  "lieu": "Omrane",
+  "date": "2026-09-30",
+  "nb": 1
+ },
+ {
+  "id": "royal",
+  "marque": "Royal",
+  "litres": 1.5,
+  "type": "plate",
+  "prix": 0.65,
+  "magasin": "Aziza",
+  "lieu": "Omrane sup",
+  "date": "2026-09-30",
+  "nb": 1
  }
 ];
