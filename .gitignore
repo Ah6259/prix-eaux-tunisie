@@ -7,3 +7,6 @@ tools/barka_products.json
 __pycache__/
 *.pyc
 tools/otrity_local.log
+
+# listes privées (fournisseurs, livreurs, commandes) — ne pas publier
+prive/
