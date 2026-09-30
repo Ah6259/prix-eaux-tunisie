@@ -809,7 +809,7 @@ const SIG_FORM = {
       `<div class="winners">` + gagnants.map(v => `<div class="winner vote-win">
         <span class="vote-coeur" aria-hidden="true">❤️</span>
         <span class="winner-name">${v.marque}</span>
-        <span class="winner-price">${nb(v)}</span></div>`).join("") + `</div>` +
+        <span class="winner-price">${v.votes} vote${v.votes > 1 ? "s" : ""} <small>(${Math.round(v.votes * 100 / total)} %)</small></span></div>`).join("") + `</div>` +
       `<ol class="vote-liste" id="vote-rest" hidden>` + cl.map((v, i) =>
         `<li><span class="vote-rang">${i + 1}</span><b>${v.marque}</b><span class="vote-nb">${nb(v)}</span></li>`
       ).join("") + `</ol>` +

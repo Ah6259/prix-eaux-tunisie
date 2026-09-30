@@ -650,3 +650,8 @@ section:has(> #match-open){padding-bottom:6px}
 
 .vote-liste[hidden]{display:none}   /* classement des votes replié tant qu'on n'a pas cliqué */
 #match-titre{text-align:center; margin-inline:28px}   /* titre et trophée au milieu de la fenêtre */
+
+/* fenêtre Gagnant : mêmes tailles de texte pour « par le prix » et « par le vote » (la plus petite) */
+#match-pop .sub{font-size:13px; line-height:1.45}
+#match-pop .winner-price{font-size:14px}
+#match-pop .winner-price small{font-size:11px}
