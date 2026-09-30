@@ -99,9 +99,14 @@ pour créer n'importe quel autre site.
 
 24. **Prix signalés par les visiteurs** : un bouton « Signaler un prix » sur chaque fiche ouvre
     un petit formulaire (marque, format, prix, magasin, ville, date) envoyé par email via
-    Formspree. Après vérification, le prix est ajouté à un fichier de données et affiché avec
-    sa date pendant 30 jours, sans entrer dans le classement (contre les faux prix). Couvre
-    les magasins sans site internet ou qui bloquent les robots
+    un **Google Forms** (gratuit ; ses réponses vont dans un Google Sheets « publié sur le Web »
+    en CSV, que le robot peut lire). Formspree ne convient pas : lire ses réponses par
+    programme est payant. Trois fois par jour, un robot GitHub lit le tableau, **décide seul**
+    (prix au litre plausible, écart aux prix connus, doublons = « confirmé »), publie le prix
+    sur la fiche avec sa date pendant 30 jours — hors classement, contre les faux prix — et
+    l'annonce sur le canal Telegram. Google Forms : questions « Réponse courte » (le contrôle
+    se fait côté robot), ne pas collecter les e-mails, « Publier » avec accès « toute personne
+    disposant du lien ». Couvre les magasins sans site internet ou qui bloquent les robots
 
 ## Pièges rencontrés et leçons (à réutiliser)
 

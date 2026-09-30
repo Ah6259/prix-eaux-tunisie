@@ -91,8 +91,10 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
 5. **Livraison de bonbonnes 19 L** (maisons/bureaux) : livreurs par ville, abonnement,
    consigne — prolonge la fonction de commande.
 6. ✅ **Prix signalés par les visiteurs** — FAIT le 30/09/2026 : bouton « 📍 Signaler un prix »
-   sur chaque carte → email Formspree → après vérification, ajout dans `data/signalements.js`
-   (prix d'une bouteille, date) → affiché 30 jours sur la carte, hors calcul du moins cher.
+   sur chaque carte → Google Forms d'Ahmed (tableau Google Sheets publié en CSV) → robot
+   `tools/signalements.py` 3×/jour (8h, 14h, 20h, workflow `signalements.yml`) qui décide seul
+   (vraisemblance, écart aux prix connus, doublons = « confirmé ») → affiché 30 jours sur la
+   carte (hors calcul du moins cher) + annoncé sur le canal Telegram. Tout est automatique.
 7. **Carte des magasins** : où trouver chaque marque.
 8. **Commande groupée de quartier** : atteindre le minimum de livraison, meilleur prix.
 9. **Espace marques / distributeurs** : promos mises à jour par les marques (lien avec la publicité).
