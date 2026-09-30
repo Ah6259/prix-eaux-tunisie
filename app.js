@@ -786,7 +786,9 @@ const SIG_FORM = {
 
 /* fenetres d'aide : types d'eau et formats de bouteille -------------------- */
 [["type-help", "type-help-pop", "type-help-close"],
- ["format-help", "format-help-pop", "format-help-close"]].forEach(([b, p2, c]) => {
+ ["format-help", "format-help-pop", "format-help-close"],
+ ["match-open", "match-pop", "match-close"],
+ ["hadith-open", "hadith-pop", "hadith-close"]].forEach(([b, p2, c]) => {
   const btn = document.getElementById(b);
   const pop = document.getElementById(p2);
   if (!btn || !pop) return;

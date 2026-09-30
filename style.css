@@ -421,7 +421,7 @@ body.has-cart{padding-bottom:70px}
 /* hadith sur la sqya (le don de l'eau) */
 .hadith-section{padding-block:4px 8px}
 /* barres Gagnant du match et hadith rapprochées */
-section:has(> #match-collapse){padding-bottom:6px}
+section:has(> #match-open){padding-bottom:6px}
 .hadith{
   margin:0; text-align:center; background:var(--surface);
   border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
@@ -460,7 +460,7 @@ section:has(> #match-collapse){padding-bottom:6px}
 }
 /* titre calligraphique en gras : Amiri (même style qu'Amiri Quran, qui n'existe pas en gras) */
 /* symbole ﷺ + titre centrés ensemble : marges automatiques de part et d'autre du groupe */
-#hadith-collapse .sum-icon.saw{margin-inline-start:auto}
+#hadith-open .sum-icon.saw{margin-inline-start:auto}
 .hadith-title{font-family:"Amiri","Amiri Quran",serif; font-weight:700; min-width:0; font-size:21px !important; -webkit-text-stroke:.35px currentColor}
 .sum-cta{
   margin-inline-start:auto; flex:none; display:inline-flex; align-items:center; gap:6px;
@@ -473,17 +473,17 @@ section:has(> #match-collapse){padding-bottom:6px}
 .cta-open{display:none}
 .collapse[open] .cta-closed{display:none}
 .collapse[open] .cta-open{display:inline}
-#hadith-collapse .sum-cta{font-family:"Amiri Quran",serif; font-size:15px; padding:5px 16px 8px}
+#hadith-open .sum-cta{font-family:"Amiri Quran",serif; font-size:15px; padding:5px 16px 8px}
 @media (max-width:560px){
   .sum-cta{padding:5px 11px; font-size:13px; gap:4px}
-  #hadith-collapse .sum-cta{font-size:14px; padding:3px 11px 6px}
+  #hadith-open .sum-cta{font-size:14px; padding:3px 11px 6px}
   .cta-long{display:none}
   /* titre du hadith toujours sur une seule ligne : police adaptée à la largeur */
-  #hadith-collapse summary{gap:6px; padding-inline:10px}
+  #hadith-open{gap:6px; padding-inline:10px}
   .hadith-title{white-space:nowrap; font-size:min(19px, 3.9vw) !important}
   .sum-icon.saw{font-size:20px}
-  #hadith-collapse .sum-cta{padding:3px 9px 6px}
-  #match-collapse summary h2{white-space:nowrap; font-size:min(18px, 4.6vw)}
+  #hadith-open .sum-cta{padding:3px 9px 6px}
+  #match-open h2{white-space:nowrap; font-size:min(18px, 4.6vw)}
 }
 .collapse > :not(summary){margin-top:12px}
 /* section « Signaler un prix vu en magasin » : bouton puis liste des derniers prix signalés */
@@ -612,3 +612,9 @@ section:has(> #match-collapse){padding-bottom:6px}
 .fmt-ill img{width:auto; object-fit:contain; background:#fff; border:1px solid var(--line); border-radius:8px; padding:3px}
 .fmt-ill figcaption{font-size:12.5px; font-weight:600; line-height:1.25}
 .fmt-ill figcaption small{color:var(--muted); font-weight:500; font-size:11px}
+
+/* fenêtres Gagnant du match / hadith */
+#match-pop .help-box{max-width:720px}
+#match-pop .compare{box-shadow:none}
+#hadith-pop .hadith-title{white-space:normal !important; text-align:center; margin:4px 32px 10px; font-size:21px !important}
+#hadith-pop .help-close{left:12px; right:auto}
