@@ -680,16 +680,17 @@ const SIG_FORM = {
   const form = document.getElementById("sig-form");
   if (!pop || !form) return;
   const sel = document.getElementById("sig-marque");
-  sel.innerHTML = DATA.brands.slice().sort((a, z) => a.name.localeCompare(z.name, "fr"))
+  sel.innerHTML = `<option value="">— choisir —</option>` + DATA.brands.slice().sort((a, z) => a.name.localeCompare(z.name, "fr"))
     .map(b => `<option value="${b.name}">${b.name}</option>`).join("") + `<option>Autre marque</option>`;
   const status = document.getElementById("sig-status");
   const ouvrir = id => {
     const b = DATA.brands.find(x => x.id === id);
-    if (b) sel.value = b.name;
+    sel.value = b ? b.name : "";       // depuis la barre du haut : marque à choisir
     document.getElementById("sig-date").value = new Date().toISOString().slice(0, 10);
     status.className = ""; status.textContent = "";
     pop.hidden = false;
   };
+  document.getElementById("sig-open").addEventListener("click", () => ouvrir(null));
   document.getElementById("grid").addEventListener("click", e => {
     const btn = e.target.closest("[data-signaler]");
     if (btn) ouvrir(btn.dataset.signaler);

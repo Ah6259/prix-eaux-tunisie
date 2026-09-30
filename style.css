@@ -463,6 +463,24 @@ section:has(> #match-collapse){padding-bottom:6px}
   #match-collapse summary h2{white-space:nowrap; font-size:min(18px, 4.6vw)}
 }
 .collapse > :not(summary){margin-top:12px}
+/* barre « Signaler un prix vu en magasin » (sous le hadith), même allure que les barres repliables */
+.sig-section{padding-block:0 8px}
+.sig-bar{
+  width:100%; display:flex; align-items:center; gap:10px; cursor:pointer; text-align:start;
+  padding:10px 14px; border-radius:12px; font:inherit; color:var(--ink);
+  background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
+}
+.sig-bar h2{margin:0; font-size:18px}
+.sig-bar .sum-icon{font-size:22px; line-height:1; flex:none}
+.sig-bar:hover{border-color:var(--accent)}
+.sig-bar:hover .sum-cta{filter:brightness(1.1)}
+.sig-bar h2{min-width:0}
+.sig-court{display:none}
+@media (max-width:560px){
+  .sig-bar h2{white-space:nowrap; font-size:min(18px, 4.6vw)}
+  .sig-long{display:none}
+  .sig-court{display:inline}
+}
 .collapse .sub{margin-bottom:10px}
 
 /* photos miniatures sur les boutons Stika / Bouteille */
