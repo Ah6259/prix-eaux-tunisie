@@ -89,7 +89,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20260930y">
+<link rel="stylesheet" href="style.css?v=20260930za">
 </head>
 <body>
 
@@ -344,13 +344,16 @@
     <div class="vote-sec">
       <h3 class="match-h3">❤️ Par le vote des clients</h3>
       <p class="sub">Votez pour votre eau préférée ! Un vote par personne ; classement mis à jour toutes les 2h.</p>
-      <div id="vote-classement"></div>
+      <!-- même cadre que « par le prix » : gagnant + bouton classement (+ liste) -->
+      <div class="compare" id="vote-cadre" hidden>
+        <div id="vote-classement"></div>
+        <div id="vote-plus"></div>
+      </div>
       <div class="vote-form">
         <select id="vote-marque" aria-label="Mon eau préférée"></select>
         <button type="button" class="sig-bouton" id="vote-btn">❤️ Voter</button>
       </div>
       <p class="vote-status" id="vote-status" role="status"></p>
-      <div id="vote-plus"></div>
     </div>
   </div>
 </div>
@@ -466,7 +469,7 @@
 <script src="data/baisses.js" onerror="void 0"></script>
 <script src="data/votes.js" onerror="void 0"></script>
 <script src="data/signalements.js?v=20260930a"></script>
-<script src="app.js?v=20260930z"></script>
+<script src="app.js?v=20260930za"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

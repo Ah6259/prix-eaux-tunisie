@@ -810,7 +810,8 @@ const SIG_FORM = {
         <span class="vote-coeur" aria-hidden="true">❤️</span>
         <span class="winner-name">${v.marque}</span>
         <span class="winner-price">${v.votes} vote${v.votes > 1 ? "s" : ""} <small>(${Math.round(v.votes * 100 / total)} %)</small></span></div>`).join("") + `</div>`;
-    // bouton « Voir le classement des votes » + liste : SOUS le bouton Voter
+    // cadre identique à « par le prix » : gagnant, puis bouton du classement et liste
+    document.getElementById("vote-cadre").hidden = false;
     document.getElementById("vote-plus").innerHTML =
       `<div class="compare-toggle"><button type="button" class="chipbtn" id="vote-more">Voir le classement des votes (${total} votant${total > 1 ? "s" : ""})</button></div>` +
       `<ol class="vote-liste" id="vote-rest" hidden>` + cl.map((v, i) =>

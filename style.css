@@ -655,3 +655,6 @@ section:has(> #match-open){padding-bottom:6px}
 #match-pop .sub{font-size:13px; line-height:1.45}
 #match-pop .winner-price{font-size:14px}
 #match-pop .winner-price small{font-size:11px}
+
+#vote-cadre{margin-bottom:10px}
+#vote-cadre[hidden]{display:none}
