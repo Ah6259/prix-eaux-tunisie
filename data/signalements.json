@@ -1,7 +1,20 @@
 {
- "maj": "2026-09-30T09:58",
+ "maj": "2026-09-30T13:42",
  "publies": 1,
- "rejetes": [],
+ "rejetes": [
+  {
+   "horodateur": "30/09/2026 11:08:02",
+   "marque": "Aziz",
+   "prix": "3900",
+   "raison": "prix au litre invraisemblable (433.33 DT/L)"
+  },
+  {
+   "horodateur": "30/09/2026 14:36:42",
+   "marque": "Royal",
+   "prix": "3900",
+   "raison": "prix au litre invraisemblable (433.33 DT/L)"
+  }
+ ],
  "annonces": [
   "30/09/2026 10:58:17"
  ]
