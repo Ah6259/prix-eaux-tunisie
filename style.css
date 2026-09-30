@@ -554,6 +554,8 @@ section:has(> #match-collapse){padding-bottom:6px}
 #sig-form input:focus, #sig-form select:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
 .sig-row{display:flex; gap:10px; flex-wrap:wrap}
 #sig-form .hp{position:absolute; left:-9999px; height:0; border:0; padding:0}
+/* texte d'aide dans les cases : clairement « fantôme » (disparaît quand on tape) */
+#sig-form ::placeholder{color:var(--muted); opacity:.6; font-style:italic}
 #sig-status{font-size:13.5px; color:var(--muted)}
 #sig-status.ok{color:var(--best); font-weight:600}
 #sig-status.err{color:#C0392B; font-weight:600}
