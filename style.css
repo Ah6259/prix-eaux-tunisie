@@ -501,7 +501,26 @@ section:has(> #match-collapse){padding-bottom:6px}
 .sig-derniers small{color:var(--muted)}
 .sig-derniers .sig-prix{color:var(--gaz)}
 .sig-vide{color:var(--muted); margin:0}
-@media (max-width:560px){ #sig-collapse summary h2{white-space:nowrap; font-size:min(18px, 3.9vw)} }
+/* barre de la page qui ouvre la fenêtre */
+.sig-bar{
+  width:100%; display:flex; align-items:center; gap:10px; cursor:pointer; text-align:start;
+  padding:10px 14px; border-radius:12px; font:inherit; color:var(--ink);
+  background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
+}
+.sig-bar h2{margin:0; font-size:18px; min-width:0}
+.sig-bar:hover{border-color:var(--accent)}
+.sig-bar:hover .sum-cta{filter:brightness(1.1)}
+.sig-cta-fl{display:none}
+/* dans la fenêtre : section « Signaler un prix » dépliable, puis la liste */
+#sig-form-sec{margin-top:10px}
+#sig-form-sec summary h2{font-size:16px; white-space:nowrap}
+#sig-pop .sig-derniers{margin-top:16px; border-top:1px solid var(--line); padding-top:12px}
+@media (max-width:560px){
+  .sig-bar{gap:8px; padding-inline:10px}
+  .sig-bar h2{white-space:nowrap; font-size:min(18px, 3.9vw)}
+  .sig-cta-txt{display:none}
+  .sig-cta-fl{display:inline; font-size:18px; line-height:1; padding:0 4px}
+}
 }
 .collapse .sub{margin-bottom:10px}
 

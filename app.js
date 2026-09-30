@@ -741,6 +741,8 @@ const SIG_FORM = {
   const ouvrir = id => {
     const b = DATA.brands.find(x => x.id === id);
     sel.value = b ? b.name : "";       // depuis la barre du haut : marque à choisir
+    // depuis la carte d'une marque : formulaire ouvert directement ; depuis la barre : fermé
+    document.getElementById("sig-form-sec").open = !!b;
     document.getElementById("sig-date").value = new Date().toISOString().slice(0, 10);
     status.className = ""; status.textContent = "";
     pop.hidden = false;
@@ -771,6 +773,7 @@ const SIG_FORM = {
       form.reset();
       status.className = "ok";
       status.textContent = "Merci ! Le prix sera vérifié puis publié dans quelques heures.";
+      setTimeout(() => { document.getElementById("sig-form-sec").open = false; }, 2500);
       setTimeout(fermer, 2500);
     } catch {
       status.className = "err";
