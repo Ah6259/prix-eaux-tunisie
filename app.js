@@ -809,11 +809,13 @@ const SIG_FORM = {
       `<div class="winners">` + gagnants.map(v => `<div class="winner vote-win">
         <span class="vote-coeur" aria-hidden="true">❤️</span>
         <span class="winner-name">${v.marque}</span>
-        <span class="winner-price">${v.votes} vote${v.votes > 1 ? "s" : ""} <small>(${Math.round(v.votes * 100 / total)} %)</small></span></div>`).join("") + `</div>` +
+        <span class="winner-price">${v.votes} vote${v.votes > 1 ? "s" : ""} <small>(${Math.round(v.votes * 100 / total)} %)</small></span></div>`).join("") + `</div>`;
+    // bouton « Voir le classement des votes » + liste : SOUS le bouton Voter
+    document.getElementById("vote-plus").innerHTML =
+      `<div class="compare-toggle"><button type="button" class="chipbtn" id="vote-more">Voir le classement des votes (${total} votant${total > 1 ? "s" : ""})</button></div>` +
       `<ol class="vote-liste" id="vote-rest" hidden>` + cl.map((v, i) =>
         `<li><span class="vote-rang">${i + 1}</span><b>${v.marque}</b><span class="vote-nb">${nb(v)}</span></li>`
-      ).join("") + `</ol>` +
-      `<div class="compare-toggle"><button type="button" class="chipbtn" id="vote-more">Voir le classement des votes (${total} votant${total > 1 ? "s" : ""})</button></div>`;
+      ).join("") + `</ol>`;
     const btn = document.getElementById("vote-more");
     btn.addEventListener("click", () => {
       const rest = document.getElementById("vote-rest");
