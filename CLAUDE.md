@@ -52,6 +52,8 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - **Commande FERMÉE** (pas encore de fournisseur) : `fieldset.order-fields` disabled + tampon `div.tampon`.
   Rouvrir : retirer `disabled` + le tampon, remettre « prix et livraison confirmés sur WhatsApp » dans app.js.
 - « Votre avis » : Formspree (mwlpakqj). Statistiques : GoatCounter.
+- Fournisseurs / livreurs : liste privée `prive/fournisseurs-livreurs.csv` (dossier `prive/` ignoré par git — jamais sur GitHub).
+  Contexte : pénurie d'eau en bouteille été 2026 (saisies pour spéculation) → rôle d'intermédiaire plutôt que stockage.
 
 ## Décisions et idées en attente
 - Nom de domaine (prix-eau.tn) acheté **seulement au premier annonceur** — ne pas le proposer avant.
