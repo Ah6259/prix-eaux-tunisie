@@ -95,6 +95,12 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
    `tools/signalements.py` 3×/jour (8h, 14h, 20h, workflow `signalements.yml`) qui décide seul
    (vraisemblance, écart aux prix connus, doublons = « confirmé ») → affiché 30 jours sur la
    carte (hors calcul du moins cher) + annoncé sur le canal Telegram. Tout est automatique.
+   **Plus tard (pas urgent, ~15 min avec Ahmed)** : publication quasi immédiate (2-3 min) —
+   script Google Apps Script attaché au formulaire, déclencheur « à l'envoi », qui lance le
+   workflow `signalements.yml` via l'API GitHub (`workflow_dispatch`) avec une clé GitHub
+   limitée (fine-grained token, Actions : write sur ce seul dépôt) rangée dans le script.
+   Garder alors un passage de secours toutes les 2 h. Autre option discutée : passer le
+   cron à toutes les 2 h de 8h à 22h.
 7. **Carte des magasins** : où trouver chaque marque.
 8. **Commande groupée de quartier** : atteindre le minimum de livraison, meilleur prix.
 9. **Espace marques / distributeurs** : promos mises à jour par les marques (lien avec la publicité).
