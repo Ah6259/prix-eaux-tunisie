@@ -97,6 +97,12 @@ pour créer n'importe quel autre site.
     (WhatsApp : la publication automatique n'y est pas gratuite — une « chaîne
     WhatsApp » ne peut être alimentée qu'à la main)
 
+24. **Prix signalés par les visiteurs** : un bouton « Signaler un prix » sur chaque fiche ouvre
+    un petit formulaire (marque, format, prix, magasin, ville, date) envoyé par email via
+    Formspree. Après vérification, le prix est ajouté à un fichier de données et affiché avec
+    sa date pendant 30 jours, sans entrer dans le classement (contre les faux prix). Couvre
+    les magasins sans site internet ou qui bloquent les robots
+
 ## Pièges rencontrés et leçons (à réutiliser)
 
 - **Cache des téléphones** : après une mise à jour, un téléphone peut garder

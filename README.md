@@ -90,7 +90,9 @@ Il peut aussi être lancé à la main : onglet **Actions** → « Mise à jour d
 4. **Comparer 2 eaux côte à côte** : prix + composition.
 5. **Livraison de bonbonnes 19 L** (maisons/bureaux) : livreurs par ville, abonnement,
    consigne — prolonge la fonction de commande.
-6. **Prix signalés par les visiteurs** : épiceries de quartier, prix par région.
+6. ✅ **Prix signalés par les visiteurs** — FAIT le 30/09/2026 : bouton « 📍 Signaler un prix »
+   sur chaque carte → email Formspree → après vérification, ajout dans `data/signalements.js`
+   (prix d'une bouteille, date) → affiché 30 jours sur la carte, hors calcul du moins cher.
 7. **Carte des magasins** : où trouver chaque marque.
 8. **Commande groupée de quartier** : atteindre le minimum de livraison, meilleur prix.
 9. **Espace marques / distributeurs** : promos mises à jour par les marques (lien avec la publicité).
