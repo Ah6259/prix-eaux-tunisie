@@ -54,7 +54,9 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   À la réouverture : ajouter aussi la carte publique des gouvernorats desservis (nombre de fournisseurs PARTENAIRES
   par gouvernorat, jamais de noms ni d'adresses) — décision d'Ahmed, pas avant.
 - « Votre avis » : Formspree (mwlpakqj). Statistiques : GoatCounter.
-- Fournisseurs / livreurs : liste privée `prive/fournisseurs-livreurs.xlsx` (dossier `prive/` ignoré par git — jamais sur GitHub).
+- Fournisseurs / livreurs : **dépôt PRIVÉ `Ah6259/dispatch-eau-prive`** (dossier local `../dispatch-eau-prive`,
+  Excel `fournisseurs/fournisseurs-livreurs.xlsx`, données RNE dans `data/rne/`) — ne jamais les mettre dans ce dépôt public.
+  Suivi quotidien : application Claude « Dispatch Eau ».
   Contexte : pénurie d'eau en bouteille été 2026 (saisies pour spéculation) → rôle d'intermédiaire plutôt que stockage.
 
 ## Commande automatisée — cahier des charges d'Ahmed (30/09/2026, à construire à la réouverture)
