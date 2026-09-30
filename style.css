@@ -633,3 +633,6 @@ section:has(> #match-open){padding-bottom:6px}
 .vote-form select{flex:1 1 180px; border:1px solid var(--line); border-radius:999px; padding:8px 12px;
   background:var(--surface); color:var(--ink); font:inherit; font-size:14px}
 .vote-status{font-size:13px; color:var(--best); margin:8px 0 0; min-height:1em}
+
+/* mention de droits d'auteur (pied de page) */
+.copyright{margin:10px auto 0; font-size:12px; color:var(--muted)}
