@@ -1,0 +1,59 @@
+# Mémoire du projet — Prix des Eaux de Tunisie
+
+Fichier lu automatiquement par Claude Code au début de chaque session dans ce dossier.
+**À tenir à jour à chaque « update workflow »** (en même temps que le README et le guide).
+Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
+
+## Qui et comment travailler
+- Propriétaire : Ahmed (compte GitHub `Ah6259`), débutant en git/web. Expliquer simplement, **en français**.
+- **Toujours demander avant d'installer un logiciel.**
+- Ahmed veut que **tout soit automatique** (il ne veut rien vérifier à la main).
+- Noter chaque nouvelle étape dans « les etapes de creation de ce site eaux tunisie.md » (guide réutilisable).
+- « update workflow » = mettre à jour CLAUDE.md + README + guide, puis commit/push.
+
+## Le site
+- Public : https://ah6259.github.io/prix-eaux-tunisie/ — dépôt `Ah6259/prix-eaux-tunisie` (GitHub Pages, branche main).
+  Doit rester **public** (Pages gratuit). `gh` : "C:\Program Files\GitHub CLI\gh.exe".
+- `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
+- 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
+- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification.**
+- Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
+
+## Sources de prix
+- **Carrefour** (API GraphQL) et **Géant Drive** (HTML) : lus en direct chaque nuit. Géant : `curl -k` en cas d'erreur de certificat (code 60).
+- **Otrity** (épicerie en ligne, prix = stika livrée ÷ 6 ou 12) : Cloudflare bloque GitHub → relevé depuis le PC
+  d'Ahmed par la tâche Windows « PrixEaux-Otrity » (12h, `tools/otrity_local.py` → `data/otrity.json`, ignoré après 3 jours).
+  Nouveau PC : `tools/installer_pc.ps1`.
+- **Aziza et Monoprix retirés** (30/09/2026) : barka.tn donnait des prix périmés / produits indisponibles.
+  Monoprix et Jumia exigent une vérification « humain » : **pas de contournement** (demander l'autorisation ou prix signalés).
+  Relevé depuis le PC seulement si le site laisse passer un particulier.
+
+## Robots (GitHub Actions)
+- `maj-prix.yml` ≈ 1h07 Tunis : collect_prices → price_drops (Telegram) → build_history → build_pages → commit.
+- `signalements.yml` toutes les 2 h de 8h05 à 22h05 : prix signalés (Google Forms → CSV) → site + Telegram.
+- `battement-de-coeur.yml` le 1er du mois (évite la pause GitHub après 60 jours sans activité).
+- `telegram-bienvenue.yml` manuel. Groupe de concurrence commun `maj-prix`. Secret : `TELEGRAM_BOT_TOKEN`.
+- Relancer à la main : `gh workflow run maj-prix.yml -R Ah6259/prix-eaux-tunisie`.
+
+## Robustesse
+- `statut_sources` dans data/eaux.json ; source en panne → anciens prix gardés **7 jours** max puis retirés ;
+  panne aussi si < 50 % d'offres plausibles ou < 30 % du nombre précédent.
+- Le site avertit selon la date du **visiteur** (ℹ️ enseigne ≥ 2 j, ⚠️ tout ≥ 3 j ou aucun prix).
+- **`python tools/test_pannes.py` (16 scénarios) à relancer après toute modification du robot.**
+- Toujours lire les « échec » dans les journaux des robots (la reprise des anciens prix masque les pannes).
+
+## Fonctions
+- Canal Telegram https://t.me/prixeautunisie : baisses ≥ 1 % (prix stika) + prix signalés. Bouton « Alertes / PROMO ».
+- Prix signalés 100 % automatiques : Google Forms (SIG_FORM dans app.js, champ « magazin » [sic]) → `tools/signalements.py`
+  (plausibilité, ≤ 40 % de la médiane, doublons = « confirmé ») → affichés 30 jours, hors classement.
+  Ajouts manuels : `data/signalements_manuels.json`.
+- **Commande FERMÉE** (pas encore de fournisseur) : `fieldset.order-fields` disabled + tampon `div.tampon`.
+  Rouvrir : retirer `disabled` + le tampon, remettre « prix et livraison confirmés sur WhatsApp » dans app.js.
+- « Votre avis » : Formspree (mwlpakqj). Statistiques : GoatCounter.
+
+## Décisions et idées en attente
+- Nom de domaine (prix-eau.tn) acheté **seulement au premier annonceur** — ne pas le proposer avant.
+- Reporté : publication immédiate des prix signalés (Apps Script onFormSubmit → workflow_dispatch).
+- Idées : README « Nouveaux services » (prochain conseillé : « Quelle eau pour moi ? ») ; comparateur d'autres produits (mis de côté) ;
+  vrais logos ; marques manquantes (Ovia…).
+- Plan de continuité : voir README.
