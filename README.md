@@ -42,6 +42,9 @@ renouveler. Ce qui se passe en cas de problème (simulé par `python tools/test_
 | Compte Telegram inactif | Les alertes s'arrêtent si le canal perd son robot | Telegram → Confidentialité → « Supprimer mon compte si absent » : durée maximale ; ajouter un 2ᵉ administrateur |
 | Telegram en panne | Prix publiés quand même ; annonce retentée au passage suivant, sans doublon | — |
 
+**Données privées** : la liste des fournisseurs, livreurs et grossistes (et leurs robots) est dans un dépôt
+GitHub **privé** séparé (`dispatch-eau-prive`), jamais dans ce dépôt public.
+
 **Successeur** : ajouter une personne de confiance comme collaboratrice du dépôt GitHub
 (Settings → Collaborators), administratrice du canal Telegram et éditrice du Google Forms
 « Prix signalés ». Pour toute réparation, ouvrir une session Claude Code dans ce dossier

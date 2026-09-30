@@ -115,6 +115,19 @@ pour créer n'importe quel autre site.
     60 jours), un simulateur de pannes qui rejoue tous les scénarios, un script de
     réinstallation pour un nouveau PC, et un successeur désigné (GitHub, Telegram, Google)
 
+26. **Trouver des fournisseurs dans le registre officiel** : le Registre National des Entreprises
+    (registre-entreprises.tn) permet de chercher par **activité** (ex. « المياه المعدنية بالجملة »,
+    « commerce de gros de boissons ») : nom, adresse, forme juridique, état (actif/radié), dépôt des
+    états financiers. Pas de téléphone ni de chiffre d'affaires (e-bilan payant). Classer ensuite par
+    gouvernorat et noter la fiabilité (société > commerçant, états financiers déposés…)
+27. **Garder secrète sa liste de fournisseurs** : un **dépôt GitHub privé** (gratuit) séparé du site
+    public, pour la sauvegarder en ligne et y faire tourner ses robots sans que personne ne la voie
+28. **Téléphones automatiques avec Google Maps (API « Places (New) »)** : projet Google Cloud, facturation
+    (en Tunisie : **prépaiement de 30 $** crédité sous 24 h), activer « Places API (New) », créer une
+    clé **restreinte à cette seule API**, la ranger dans les **secrets GitHub** (ne jamais la coller
+    ailleurs — sinon la supprimer et en créer une nouvelle), mettre un **plafond de requêtes/jour** et
+    un budget d'alerte. Le robot limite le nombre de recherches et garde un cache
+
 ## Pièges rencontrés et leçons (à réutiliser)
 
 - **Cache des téléphones** : après une mise à jour, un téléphone peut garder
@@ -150,6 +163,10 @@ pour créer n'importe quel autre site.
 - **Toujours vérifier sur son propre téléphone** et envoyer une capture d'écran
   en cas de doute : c'est comme ça qu'on repère les problèmes réels
 - **Toujours demander avant d'installer un logiciel** sur le PC
+- **Facebook** bloque toute lecture automatique, même des pages publiques : trouver les pages par
+  la recherche web, puis copier soi-même la partie « À propos ». Ne jamais utiliser sa session
+- **Excel ouvert = fichier verrouillé** : fermer Excel avant qu'un programme le modifie
+- **Pénurie d'eau (été 2026)** : ne pas stocker pour revendre (saisies pour spéculation)
 
 ## Les outils utilisés (tous gratuits)
 
