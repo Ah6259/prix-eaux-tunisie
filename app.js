@@ -799,7 +799,7 @@ const SIG_FORM = {
   const status = document.getElementById("vote-status");
   const total = VOTES.total || 0;
   if (!total){
-    box.innerHTML = `<p class="vote-vide">Pas encore de vote : soyez le premier !</p>`;
+    box.innerHTML = "";          // pas encore de vote : rien à afficher
   } else {
     box.innerHTML = `<ol class="vote-liste">` + VOTES.classement.slice(0, 5).map((v, i) =>
       `<li class="${i === 0 ? "vote-gagnant" : ""}"><span class="vote-rang">${i === 0 ? "❤️" : i + 1}</span>
@@ -810,7 +810,7 @@ const SIG_FORM = {
     .sort((a, z) => a.name.localeCompare(z.name, "fr"))
     .map(b => `<option value="${b.name}">${b.name}</option>`).join("");
   const mien = lire("vote-marque");
-  if (mien){ sel.value = mien; status.textContent = `Votre vote : ${mien} (vous pouvez le changer).`; }
+  if (mien){ sel.value = mien; status.textContent = `Votre vote : ${mien}.`; }
   document.getElementById("vote-btn").addEventListener("click", async () => {
     const marque = sel.value;
     if (!marque){ status.textContent = "Choisissez d'abord une marque."; return; }
