@@ -51,6 +51,8 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Ajouts manuels : `data/signalements_manuels.json`.
 - **Commande FERMÉE** (pas encore de fournisseur) : `fieldset.order-fields` disabled + tampon `div.tampon`.
   Rouvrir : retirer `disabled` + le tampon, remettre « prix et livraison confirmés sur WhatsApp » dans app.js.
+  À la réouverture : ajouter aussi la carte publique des gouvernorats desservis (nombre de fournisseurs PARTENAIRES
+  par gouvernorat, jamais de noms ni d'adresses) — décision d'Ahmed, pas avant.
 - « Votre avis » : Formspree (mwlpakqj). Statistiques : GoatCounter.
 - Fournisseurs / livreurs : liste privée `prive/fournisseurs-livreurs.xlsx` (dossier `prive/` ignoré par git — jamais sur GitHub).
   Contexte : pénurie d'eau en bouteille été 2026 (saisies pour spéculation) → rôle d'intermédiaire plutôt que stockage.
