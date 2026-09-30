@@ -112,6 +112,13 @@ pour créer n'importe quel autre site.
   4,900 DT en magasin, signalé par un client). Contrôler que les liens des produits mènent à
   une boutique actuelle, et faire des vérifications en magasin de temps en temps ;
   au moindre doute, retirer l'enseigne plutôt qu'afficher un faux prix
+- **Lire les journaux du robot** : quand une source échoue, le robot réaffiche les prix
+  d'avant sans rien dire. Géant a ainsi échoué 3 jours (certificat) sans qu'on le voie
+- **Sites qui bloquent les robots** : certains (Otrity) bloquent seulement les serveurs
+  (GitHub) mais laissent passer un PC de particulier → relevé depuis son PC par une
+  tâche planifiée Windows, qui envoie un fichier au robot (ignoré s'il a plus de 3 jours).
+  D'autres (Monoprix, Jumia) exigent une vérification « humain » : on ne force pas,
+  on demande l'autorisation ou on utilise des prix signalés
 - **Un seul site** : ne pas créer deux dépôts pour le même projet. Si c'est
   arrivé, transformer le doublon en **redirection** (sans `noindex`) pour que
   Google transfère le référencement vers le bon site
