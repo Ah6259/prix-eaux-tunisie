@@ -20,6 +20,28 @@ Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
   chaque carte, valeurs hors repère OMS/UE surlignées — données dans `data/composition.js`
   (statique, entretenu à la main, source : Office du Thermalisme / article Babnet mai 2024)
 
+## Plan de continuité — si Ahmed n'est plus disponible
+
+Le site tourne **seul** sur les serveurs de GitHub, gratuitement, sans nom de domaine à
+renouveler. Ce qui se passe en cas de problème (simulé par `python tools/test_pannes.py`,
+16 scénarios) :
+
+| Risque | Ce que fait le système tout seul | À faire par un humain |
+|---|---|---|
+| Un magasin change son site / tombe en panne | Garde ses derniers prix **7 jours** au plus (mention « Prix Géant du … » dès 2 jours), puis les **retire** | Demander à Claude : « lis le README et répare la collecte des prix de <magasin> » |
+| Un site renvoie des prix absurdes (millimes, produits manquants, marques inconnues) | Détecté (« incohérent » / « suspect ») : traité comme une panne | Idem |
+| Toutes les sources en panne | Bandeau ⚠️ « prix non mis à jour depuis le … » dès 3 jours ; plus aucun prix après 7 jours | Idem, ou chercher de nouvelles sources |
+| Robots GitHub arrêtés | Le site compare la date des prix à la date du visiteur : ⚠️ affiché quand même. Un « battement de cœur » mensuel empêche GitHub de mettre les robots en pause (60 jours sans activité) | Onglet **Actions** du dépôt → réactiver les workflows |
+| PC d'Ahmed éteint, volé ou en panne | Seuls les prix **Otrity** disparaissent (après 3 jours) ; tout le reste continue | Sur un nouveau PC : `tools/installer_pc.ps1`. En cas de **vol** : changer le mot de passe GitHub et révoquer les sessions (github.com → Settings → Sessions / Applications), fermer les sessions Telegram et Google de l'appareil volé |
+| Compte Google inactif (supprimé après 2 ans) | Les prix signalés ne sont plus lus ; les anciens disparaissent après 30 jours ; rien ne casse | Gestionnaire de compte inactif Google → personne de confiance |
+| Compte Telegram inactif | Les alertes s'arrêtent si le canal perd son robot | Telegram → Confidentialité → « Supprimer mon compte si absent » : durée maximale ; ajouter un 2ᵉ administrateur |
+| Telegram en panne | Prix publiés quand même ; annonce retentée au passage suivant, sans doublon | — |
+
+**Successeur** : ajouter une personne de confiance comme collaboratrice du dépôt GitHub
+(Settings → Collaborators), administratrice du canal Telegram et éditrice du Google Forms
+« Prix signalés ». Pour toute réparation, ouvrir une session Claude Code dans ce dossier
+et lui demander de lire ce README.
+
 ## Structure
 
 | Chemin | Rôle |

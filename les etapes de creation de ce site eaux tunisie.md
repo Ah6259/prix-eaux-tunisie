@@ -108,6 +108,13 @@ pour créer n'importe quel autre site.
     se fait côté robot), ne pas collecter les e-mails, « Publier » avec accès « toute personne
     disposant du lien ». Couvre les magasins sans site internet ou qui bloquent les robots
 
+25. **Rendre le site autonome pour des années** : limiter la durée de vie des prix d'une
+    source en panne (7 jours), détecter les données incohérentes, avertir le visiteur en
+    comparant la date des prix à SA date du jour (fonctionne même si les robots s'arrêtent),
+    un robot « battement de cœur » mensuel (GitHub met en pause les tâches d'un dépôt inactif
+    60 jours), un simulateur de pannes qui rejoue tous les scénarios, un script de
+    réinstallation pour un nouveau PC, et un successeur désigné (GitHub, Telegram, Google)
+
 ## Pièges rencontrés et leçons (à réutiliser)
 
 - **Cache des téléphones** : après une mise à jour, un téléphone peut garder
