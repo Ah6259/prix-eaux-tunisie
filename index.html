@@ -89,7 +89,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20260930r">
+<link rel="stylesheet" href="style.css?v=20260930s">
 </head>
 <body>
 
@@ -334,9 +334,22 @@
 <div class="help-pop" id="match-pop" role="dialog" aria-labelledby="match-titre" hidden>
   <div class="help-box">
     <button type="button" class="help-close" id="match-close" aria-label="Fermer">×</button>
-    <h2 id="match-titre">🏆 Gagnant du match 1,5 L</h2>
+    <h2 id="match-titre">🏆 Gagnant du match</h2>
+    <h3 class="match-h3">💰 Par le prix — stika 1,5 L</h3>
     <p class="sub">Les marques gagnantes — le prix le moins cher constaté pour Stika 1,5 L vendu en Tunisie.</p>
     <div class="compare" id="compare"></div>
+    <!-- vote « mon eau préférée » : envoyé au Google Forms (format = VOTE), compté par tools/signalements.py -->
+    <div class="vote-sec">
+      <h3 class="match-h3">❤️ Par le vote des clients</h3>
+      <p class="sub">Votez pour votre eau préférée ! Un vote par personne (vous pouvez changer d'avis) ;
+      classement mis à jour toutes les 2 heures. Vote indicatif.</p>
+      <div id="vote-classement"></div>
+      <div class="vote-form">
+        <select id="vote-marque" aria-label="Mon eau préférée"></select>
+        <button type="button" class="sig-bouton" id="vote-btn">❤️ Voter</button>
+      </div>
+      <p class="vote-status" id="vote-status" role="status"></p>
+    </div>
   </div>
 </div>
 
@@ -449,8 +462,9 @@
 <script src="data/composition.js"></script>
 <script src="data/historique.js"></script>
 <script src="data/baisses.js" onerror="void 0"></script>
+<script src="data/votes.js" onerror="void 0"></script>
 <script src="data/signalements.js?v=20260930a"></script>
-<script src="app.js?v=20260930q"></script>
+<script src="app.js?v=20260930s"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

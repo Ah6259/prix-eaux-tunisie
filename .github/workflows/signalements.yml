@@ -33,7 +33,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/signalements.js data/signalements.json
+          git add data/signalements.js data/signalements.json data/votes.js
           if git diff --cached --quiet; then
             echo "Aucun nouveau signalement."
           else

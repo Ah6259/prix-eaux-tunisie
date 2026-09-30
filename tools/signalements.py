@@ -43,6 +43,7 @@ CSV_URL = ("https://docs.google.com/spreadsheets/d/e/2PACX-1vRI0naKTfS10a5cUe8Fz
 OUT_JS = ROOT / "data" / "signalements.js"
 OUT_JSON = ROOT / "data" / "signalements.json"
 MANUELS = ROOT / "data" / "signalements_manuels.json"
+OUT_VOTES = ROOT / "data" / "votes.js"
 JOURS_MAX = 30
 GRAND_FORMAT = 2.5
 
@@ -137,6 +138,32 @@ def decider(r, marques, par_produit, par_format, publies):
     }, None
 
 
+def ecrire_votes(reponses, marques):
+    """Votes « mon eau préférée » : lignes du formulaire avec format = VOTE.
+    Champ lieu = jeton anonyme du navigateur (« vote:… ») : un seul vote compté par
+    navigateur (le plus récent, on peut changer d'avis). Vote indicatif, non infalsifiable."""
+    par_jeton = {}
+    for r in reponses:
+        if r["format"].strip().upper() != "VOTE":
+            continue
+        b = marques.get(norm(r["marque"]))
+        jeton = (r["lieu"] or "").strip()
+        if not b or not jeton.startswith("vote:"):
+            continue
+        par_jeton[jeton] = b          # les réponses sont dans l'ordre d'arrivée : la dernière gagne
+    compte = {}
+    for b in par_jeton.values():
+        compte[b["id"]] = compte.get(b["id"], {"id": b["id"], "marque": b["name"], "votes": 0})
+        compte[b["id"]]["votes"] += 1
+    classement = sorted(compte.values(), key=lambda x: (-x["votes"], x["marque"]))
+    OUT_VOTES.write_text(
+        "// GÉNÉRÉ par tools/signalements.py — votes « mon eau préférée » (un vote par navigateur)\n"
+        "window.EAUX_VOTES = " + json.dumps({"maj": datetime.now().isoformat(timespec="minutes"),
+                                             "total": len(par_jeton), "classement": classement},
+                                            ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
+    print(f"Votes : {len(par_jeton)} votant(s), {len(classement)} marque(s)")
+
+
 def message(s):
     n = taille_stika(s["litres"]) if s["litres"] <= GRAND_FORMAT else 1
     quoi = f"{'Stika ' if n > 1 else ''}{s['marque']} {str(s['litres']).replace('.', ',').rstrip('0').rstrip(',')} L"
@@ -165,8 +192,9 @@ def main():
         print(f"! Tableau des signalements illisible ({e}) : rien n'est modifié.")
         return
     publies, rejets = [], []
+    ecrire_votes(reponses, marques)
     for r in reponses:
-        if not r["marque"] or r["marque"].upper().startswith("TEST"):
+        if not r["marque"] or r["marque"].upper().startswith("TEST") or r["format"].strip().upper() == "VOTE":
             continue
         s, raison = decider(r, marques, par_produit, par_format, publies)
         if raison:

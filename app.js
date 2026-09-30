@@ -784,6 +784,51 @@ const SIG_FORM = {
   });
 })();
 
+/* « Gagnant du match » par le vote des clients -------------------------------
+   Vote envoyé au Google Forms (format = VOTE, jeton anonyme du navigateur dans « lieu ») ;
+   tools/signalements.py compte un vote par navigateur (le plus récent) toutes les 2 h. */
+(function(){
+  const sel = document.getElementById("vote-marque");
+  if (!sel) return;
+  const VOTES = window.EAUX_VOTES || { total: 0, classement: [] };
+  const lire = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const ecrire = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  let jeton = lire("vote-jeton");
+  if (!jeton){ jeton = "vote:" + Math.random().toString(36).slice(2) + Date.now().toString(36); ecrire("vote-jeton", jeton); }
+  const box = document.getElementById("vote-classement");
+  const status = document.getElementById("vote-status");
+  const total = VOTES.total || 0;
+  if (!total){
+    box.innerHTML = `<p class="vote-vide">Pas encore de vote : soyez le premier !</p>`;
+  } else {
+    box.innerHTML = `<ol class="vote-liste">` + VOTES.classement.slice(0, 5).map((v, i) =>
+      `<li class="${i === 0 ? "vote-gagnant" : ""}"><span class="vote-rang">${i === 0 ? "❤️" : i + 1}</span>
+        <b>${v.marque}</b><span class="vote-nb">${v.votes} vote${v.votes > 1 ? "s" : ""} · ${Math.round(v.votes * 100 / total)} %</span></li>`
+    ).join("") + `</ol><p class="vote-total">${total} votant${total > 1 ? "s" : ""}</p>`;
+  }
+  sel.innerHTML = `<option value="">— mon eau préférée —</option>` + DATA.brands.slice()
+    .sort((a, z) => a.name.localeCompare(z.name, "fr"))
+    .map(b => `<option value="${b.name}">${b.name}</option>`).join("");
+  const mien = lire("vote-marque");
+  if (mien){ sel.value = mien; status.textContent = `Votre vote : ${mien} (vous pouvez le changer).`; }
+  document.getElementById("vote-btn").addEventListener("click", async () => {
+    const marque = sel.value;
+    if (!marque){ status.textContent = "Choisissez d'abord une marque."; return; }
+    const corps = new URLSearchParams();
+    const vide = { marque, format: "VOTE", eau: "", prix: "", unite: "", magasin: "", lieu: jeton,
+                   date: new Date().toISOString().slice(0, 10) };
+    Object.entries(SIG_FORM.champs).forEach(([nom, entry]) => corps.append(entry, vide[nom] || ""));
+    status.textContent = "Envoi…";
+    try {
+      await fetch(SIG_FORM.url, { method: "POST", mode: "no-cors", body: corps });
+      ecrire("vote-marque", marque);
+      status.textContent = `Merci ! Votre vote pour ${marque} sera compté au prochain décompte (dans les 2 heures).`;
+    } catch (e) {
+      status.textContent = "Échec de l'envoi — réessayez plus tard.";
+    }
+  });
+})();
+
 /* fenetres d'aide : types d'eau et formats de bouteille -------------------- */
 [["type-help", "type-help-pop", "type-help-close"],
  ["format-help", "format-help-pop", "format-help-close"],

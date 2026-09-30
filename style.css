@@ -618,3 +618,18 @@ section:has(> #match-open){padding-bottom:6px}
 #match-pop .compare{box-shadow:none}
 #hadith-pop .hadith-title{white-space:normal !important; text-align:center; margin:4px 32px 10px; font-size:21px !important}
 #hadith-pop .help-close{left:12px; right:auto}
+
+/* Gagnant du match : sous-titres + vote des clients */
+.match-h3{font-size:15px; margin:14px 0 4px}
+.match-h3:first-of-type{margin-top:2px}
+.vote-sec{margin-top:18px; border-top:1px solid var(--line); padding-top:4px}
+.vote-liste{list-style:none; margin:6px 0 4px; padding:0; display:flex; flex-direction:column; gap:6px}
+.vote-liste li{display:flex; align-items:center; gap:10px; padding:7px 12px; border-radius:10px; background:var(--chip); font-size:14px}
+.vote-liste li.vote-gagnant{background:var(--best-soft); border:1px solid var(--best)}
+.vote-rang{min-width:22px; text-align:center; font-weight:800; color:var(--muted)}
+.vote-nb{margin-left:auto; color:var(--muted); font-size:12.5px; white-space:nowrap}
+.vote-total, .vote-vide{color:var(--muted); font-size:12.5px; margin:4px 0 0}
+.vote-form{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap}
+.vote-form select{flex:1 1 180px; border:1px solid var(--line); border-radius:999px; padding:8px 12px;
+  background:var(--surface); color:var(--ink); font:inherit; font-size:14px}
+.vote-status{font-size:13px; color:var(--best); margin:8px 0 0; min-height:1em}
