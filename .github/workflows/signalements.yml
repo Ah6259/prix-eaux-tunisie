@@ -1,0 +1,42 @@
+name: Prix signalés par les visiteurs
+
+on:
+  schedule:
+    # 8h05, 14h05 et 20h05 heure de Tunis (UTC+1) — minute décalée, voir maj-prix.yml
+    - cron: "5 7,13,19 * * *"
+  workflow_dispatch:        # lancement manuel dans l'onglet Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: maj-prix           # même file d'attente que la mise à jour des prix (pas de push simultanés)
+  cancel-in-progress: false
+
+jobs:
+  signalements:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lire, vérifier et publier les prix signalés (site + Telegram)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python tools/signalements.py
+
+      - name: Publier
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/signalements.js data/signalements.json
+          if git diff --cached --quiet; then
+            echo "Aucun nouveau signalement."
+          else
+            git commit -m "Prix signalés par les visiteurs ($(date -u +%Y-%m-%d\ %H:%M))"
+            git pull --rebase origin main
+            git push
+          fi

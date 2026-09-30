@@ -330,17 +330,15 @@
   </div>
 </div>
 
-<!-- Signaler un prix vu en magasin : envoyé par email (Formspree), publié après vérification
-     dans data/signalements.js -->
+<!-- Signaler un prix vu en magasin : envoyé au Google Forms d'Ahmed (app.js, SIG_FORM) ;
+     tools/signalements.py le lit 3 fois par jour, décide seul et publie (site + Telegram) -->
 <div class="help-pop" id="sig-pop" role="dialog" aria-labelledby="sig-titre" hidden>
   <div class="help-box">
     <button type="button" class="help-close" id="sig-close" aria-label="Fermer">×</button>
     <h2 id="sig-titre">📍 Signaler un prix</h2>
-    <p class="help-src">Vous avez vu un prix en magasin ? Partagez-le : il sera publié sur la fiche
-    de la marque après vérification, avec sa date.</p>
-    <form id="sig-form" action="https://formspree.io/f/mwlpakqj" method="POST">
-      <input type="hidden" name="_subject" id="sig-subject" value="Prix signalé">
-      <input type="hidden" name="type" value="Prix signalé">
+    <p class="help-src">Vous avez vu un prix en magasin ? Partagez-le : après une vérification
+    automatique, il est publié sur la fiche de la marque (avec sa date) et sur notre canal Telegram.</p>
+    <form id="sig-form">
       <label>Marque <select name="marque" id="sig-marque" required></select></label>
       <div class="sig-row">
         <label>Format <select name="format" required>
@@ -418,7 +416,7 @@
 <script src="data/historique.js"></script>
 <script src="data/baisses.js" onerror="void 0"></script>
 <script src="data/signalements.js?v=20260930a"></script>
-<script src="app.js?v=20260930d"></script>
+<script src="app.js?v=20260930f"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

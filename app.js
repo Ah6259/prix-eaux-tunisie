@@ -192,7 +192,7 @@ function signalesBlock(b){
     const stika = state.mode === "stika" && s.litres <= GRAND_FORMAT;
     const vu = new Date(s.date + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
     return `<li>${s.magasin}${s.lieu ? ` <small>(${s.lieu})</small>` : ""} · ${String(s.litres).replace(".", ",")} L${s.type === "gazeuse" ? " gazeuse" : ""} :
-      <b>${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? " la stika" : ""} <small>· vu le ${vu}</small></li>`;
+      <b>${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? " la stika" : ""} <small>· vu le ${vu}${s.nb > 1 ? ` · confirmé par ${s.nb} visiteurs` : ""}</small></li>`;
   }).join("");
   return `<div class="signales">
     ${lignes ? `<p class="sig-titre">📍 Prix signalés par les visiteurs</p><ul>${lignes}</ul>` : ""}
@@ -666,7 +666,15 @@ renderCartBar();
   });
 })();
 
-/* « Signaler un prix vu en magasin » : fenêtre + envoi Formspree ------------- */
+/* « Signaler un prix vu en magasin » : fenêtre + envoi au Google Forms d'Ahmed.
+   Les réponses arrivent dans son tableau Google Sheets ; tools/signalements.py
+   les lit 3 fois par jour, décide seul et publie (site + canal Telegram) ------ */
+const SIG_FORM = {
+  url: "https://docs.google.com/forms/d/e/1FAIpQLSd7sR4KmzqrCi-Yjw0WV9SmT_3sZfKJtPmkGnDjMRHl4Q78PA/formResponse",
+  champs: { marque: "entry.897098257", format: "entry.1939823394", eau: "entry.86622726",
+            prix: "entry.1187219157", unite: "entry.107804725", magasin: "entry.1043442008",
+            lieu: "entry.506707149", date: "entry.1622032670" },
+};
 (function(){
   const pop = document.getElementById("sig-pop");
   const form = document.getElementById("sig-form");
@@ -693,18 +701,20 @@ renderCartBar();
   form.addEventListener("submit", async e => {
     e.preventDefault();
     const f = new FormData(form);
-    document.getElementById("sig-subject").value =
-      `Prix signalé : ${f.get("marque")} ${f.get("format")} — ${f.get("prix")} DT ${f.get("unite")} chez ${f.get("magasin")}`;
     const btn = form.querySelector(".avis-send");
     btn.disabled = true;
     status.className = ""; status.textContent = "Envoi…";
     try {
-      const r = await fetch(form.action, { method: "POST", body: new FormData(form),
-                                           headers: { "Accept": "application/json" } });
-      if (!r.ok) throw new Error();
+      if (!f.get("_gotcha")) {          // champ piège rempli = robot : on ne transmet pas
+        const corps = new URLSearchParams();
+        Object.entries(SIG_FORM.champs).forEach(([nom, entry]) => corps.append(entry, f.get(nom) || ""));
+        // Google Forms ne renvoie pas de réponse lisible (mode no-cors) : seule une
+        // panne réseau déclenche l'erreur
+        await fetch(SIG_FORM.url, { method: "POST", mode: "no-cors", body: corps });
+      }
       form.reset();
       status.className = "ok";
-      status.textContent = "Merci ! Le prix sera publié après vérification.";
+      status.textContent = "Merci ! Le prix sera vérifié puis publié dans quelques heures.";
       setTimeout(fermer, 2500);
     } catch {
       status.className = "err";
