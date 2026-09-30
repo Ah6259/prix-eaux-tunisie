@@ -433,6 +433,19 @@ def main():
             # Source en panne : on reprend ses prix du dernier relevé réussi plutôt que de la vider
             echecs += 1
             print(f"! {nom} en échec : {e}", file=sys.stderr)
+            if nom == "Otrity":
+                # bloqué par Cloudflare sur GitHub : relevé fait depuis le PC d'Ahmed
+                # (tools/otrity_local.py), utilisé seulement s'il a 3 jours ou moins
+                fichier = ROOT / "data" / "otrity.json"
+                if fichier.exists():
+                    rel = json.loads(fichier.read_text(encoding="utf-8"))
+                    age = (date.today() - date.fromisoformat(rel["date"])).days
+                    if age <= 3:
+                        print(f"  -> relevé local du {rel['date']} : {len(rel['offres'])} offres")
+                        offres += rel["offres"]
+                    else:
+                        print(f"  -> relevé local du {rel['date']} trop ancien ({age} j) : ignoré")
+                continue
             if ancien:
                 repris = anciennes_offres(ancien, cibles)
                 print(f"  -> reprise de {len(repris)} offres du relevé précédent")
