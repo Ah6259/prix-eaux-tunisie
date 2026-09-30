@@ -247,6 +247,9 @@ table.prices tr:first-child td{border-top:1px solid var(--line)}
 
 .intro{color:var(--muted); font-size:14px; max-width:68ch; margin:18px 0 0}
 .intro strong{color:var(--ink)}
+/* avertissement de fraîcheur des prix (source en panne, robots arrêtés…) */
+.alerte-maj{margin:10px 0 0; padding:9px 12px; border-radius:10px; font-size:13.5px;
+  background:var(--gaz-soft); color:var(--gaz); border:1px solid var(--gaz)}
 .faq h3{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:15.5px; margin:18px 0 4px}
 .faq p{color:var(--muted); font-size:14px; max-width:68ch; margin:0}
 .faq p strong, .faq p span{color:var(--ink)}

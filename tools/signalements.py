@@ -157,8 +157,15 @@ def main():
     etat = json.loads(OUT_JSON.read_text(encoding="utf-8")) if OUT_JSON.exists() else {}
     deja_annonces = set(etat.get("annonces", []))
 
+    try:
+        reponses = lire_reponses()
+    except Exception as e:
+        # tableau Google supprimé / dépublié / Google en panne : on ne touche à rien.
+        # Les prix déjà publiés disparaissent seuls du site après 30 jours (app.js).
+        print(f"! Tableau des signalements illisible ({e}) : rien n'est modifié.")
+        return
     publies, rejets = [], []
-    for r in lire_reponses():
+    for r in reponses:
         if not r["marque"] or r["marque"].upper().startswith("TEST"):
             continue
         s, raison = decider(r, marques, par_produit, par_format, publies)

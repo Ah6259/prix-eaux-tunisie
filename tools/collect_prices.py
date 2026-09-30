@@ -40,6 +40,7 @@ OUT_JSON = ROOT / "data" / "eaux.json"
 IMG_CURATED = ROOT / "assets" / "img"          # photos choisies à la main (prioritaires)
 IMG_AUTO = ROOT / "assets" / "img" / "produits"  # photos téléchargées des enseignes
 RAW_DIR = ROOT / "tools" / "raw"
+MAX_JOURS_REPRISE = 7   # une source en panne garde ses anciens prix 7 jours au plus
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36"
 
@@ -419,39 +420,61 @@ def main():
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
 
     ancien = json.loads(OUT_JSON.read_text(encoding="utf-8")) if OUT_JSON.exists() else None
-    offres, echecs = [], 0
-    sources = (("Carrefour", carrefour, {"carrefour"}), ("Géant", geant, {"geant"}),
-               ("Otrity", otrity, {"otrity"}))
-    for nom, f, cibles in sources:
+    aujourdhui = date.today()
+    # État de chaque source : date du dernier relevé réussi + nombre d'offres trouvées.
+    # (au premier passage, on suppose que le relevé précédent était réussi)
+    statut = dict((ancien or {}).get("statut_sources") or {})
+    if ancien and not statut:
+        statut = {k: {"dernier_ok": ancien.get("updated"), "nb": 0} for k in ("carrefour", "geant", "otrity")}
+    offres = []
+    sources = (("Carrefour", carrefour, "carrefour"), ("Géant", geant, "geant"),
+               ("Otrity", otrity, "otrity"))
+    for nom, f, cle_src in sources:
+        prec = statut.get(cle_src) or {}
         try:
             res = f()
             if not res:
                 raise RuntimeError("aucune offre trouvée")
+            # site modifié : prix écrits autrement (millimes…), marques méconnaissables…
+            valides = [o for o in res if o.get("marque") and o.get("volume_l") and o.get("prix")
+                       and 0.25 <= o["prix"] / (o["volume_l"] * (o.get("nb_unites") or 1)) <= 2.5]
+            if len(valides) < 0.5 * len(res):
+                raise RuntimeError(f"données incohérentes : seulement {len(valides)} offres "
+                                   f"plausibles sur {len(res)}")
+            # site modifié qui ne renvoie plus qu'une partie des produits : on ne s'y fie pas
+            if prec.get("nb") and len(res) < 0.3 * prec["nb"]:
+                raise RuntimeError(f"résultat suspect : {len(res)} offres contre {prec['nb']} au dernier relevé réussi")
             print(f"{nom}: {len(res)} offres")
             offres += res
+            statut[cle_src] = {"dernier_ok": aujourdhui.isoformat(), "nb": len(res)}
         except Exception as e:
-            # Source en panne : on reprend ses prix du dernier relevé réussi plutôt que de la vider
-            echecs += 1
             print(f"! {nom} en échec : {e}", file=sys.stderr)
-            if nom == "Otrity":
+            if cle_src == "otrity":
                 # bloqué par Cloudflare sur GitHub : relevé fait depuis le PC d'Ahmed
                 # (tools/otrity_local.py), utilisé seulement s'il a 3 jours ou moins
                 fichier = ROOT / "data" / "otrity.json"
                 if fichier.exists():
                     rel = json.loads(fichier.read_text(encoding="utf-8"))
-                    age = (date.today() - date.fromisoformat(rel["date"])).days
-                    if age <= 3:
+                    age = (aujourdhui - date.fromisoformat(rel["date"])).days
+                    if age <= 3 and rel.get("offres"):
                         print(f"  -> relevé local du {rel['date']} : {len(rel['offres'])} offres")
                         offres += rel["offres"]
+                        statut[cle_src] = {"dernier_ok": rel["date"], "nb": len(rel["offres"])}
                     else:
                         print(f"  -> relevé local du {rel['date']} trop ancien ({age} j) : ignoré")
                 continue
-            if ancien:
-                repris = anciennes_offres(ancien, cibles)
-                print(f"  -> reprise de {len(repris)} offres du relevé précédent")
+            # Source en panne : on reprend ses prix du dernier relevé réussi, mais JAMAIS
+            # plus de MAX_JOURS_REPRISE jours (au-delà, ses prix disparaissent du site)
+            dernier = prec.get("dernier_ok")
+            age = (aujourdhui - date.fromisoformat(dernier)).days if dernier else None
+            if ancien and age is not None and age <= MAX_JOURS_REPRISE:
+                repris = anciennes_offres(ancien, {cle_src})
+                print(f"  -> reprise de {len(repris)} offres du relevé du {dernier} ({age} j)")
                 offres += repris
-    if echecs == len(sources):
-        sys.exit("Toutes les sources sont en échec : eaux.json n'est pas modifié.")
+            else:
+                print(f"  -> dernier relevé réussi : {dernier or 'jamais'} — prix {nom} retirés du site")
+    # Même si TOUTES les sources échouent, on écrit le fichier : les prix trop vieux
+    # disparaissent et le site affiche un avertissement (voir statut_sources dans app.js)
 
     # Regroupe les offres bouteille (les packs sont écartés) par marque + type + volume
     produits = {}
@@ -546,6 +569,7 @@ def main():
             {"name": "Wikipédia — Eaux minérales en Tunisie", "url": "https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie"},
         ],
         "brands": out_brands,
+        "statut_sources": statut,
     }
 
     OUT_JS.write_text("window.EAUX_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")

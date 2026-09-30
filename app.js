@@ -64,8 +64,39 @@ function compoBlock(b){
 }
 
 /* stats ------------------------------------------------------------------ */
-const majCourte = new Date(DATA.updated + "T12:00:00")
-  .toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+// fraîcheur des prix : date du dernier relevé RÉUSSI de chaque enseigne (statut_sources,
+// écrit par collect_prices.py). Comparée à la date du jour du visiteur : même si tous les
+// robots s'arrêtaient, le site préviendrait que les prix sont anciens.
+const NOMS_SRC = { carrefour: "Carrefour", geant: "Géant", otrity: "Otrity" };
+const STATUT = DATA.statut_sources || {};
+const dateCourte = d => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+const joursDepuis = d => Math.floor((Date.now() - new Date(d + "T12:00:00")) / 864e5);
+const enseignesAvecPrix = new Set(DATA.brands.flatMap(b => b.products.flatMap(p => Object.keys(p.prices))));
+const derniersOk = Object.entries(STATUT)
+  .filter(([k, s]) => s && s.dernier_ok && enseignesAvecPrix.has(NOMS_SRC[k]))
+  .map(([, s]) => s.dernier_ok).sort();
+const derniereMaj = derniersOk.length ? derniersOk[derniersOk.length - 1] : DATA.updated;
+const majCourte = dateCourte(derniereMaj);
+(function alerteFraicheur(){
+  const el = document.getElementById("alerte-maj");
+  if (!el) return;
+  let msg = "";
+  if (!enseignesAvecPrix.size) {
+    msg = "⚠️ Les prix sont momentanément indisponibles : les sites des magasins n'ont pas pu être lus. Réessayez plus tard.";
+  } else if (joursDepuis(derniereMaj) >= 3) {
+    msg = `⚠️ Les prix n'ont pas pu être mis à jour depuis le ${majCourte} : ils sont peut-être dépassés.`;
+  } else {
+    const enRetard = Object.entries(STATUT)
+      // en retard = dernier relevé réussi il y a 2 jours ou plus (1 jour est normal :
+      // Otrity est relevé à midi depuis le PC d'Ahmed, les autres la nuit)
+      .filter(([k, s]) => s && s.dernier_ok && joursDepuis(s.dernier_ok) >= 2 && enseignesAvecPrix.has(NOMS_SRC[k]))
+      .map(([k, s]) => `${NOMS_SRC[k]} du ${dateCourte(s.dernier_ok)}`);
+    if (enRetard.length)
+      msg = `ℹ️ Prix ${enRetard.join(", ")} (site momentanément indisponible).`;
+  }
+  el.textContent = msg;
+  el.hidden = !msg;
+})();
 // petite ligne sous le titre : « Mis à jour le 29 sept. · 35 marques · 4 enseignes »
 const nEnseignes = new Set(DATA.brands.flatMap(b => b.products.flatMap(p => Object.keys(p.prices)))).size;
 document.getElementById("stats").textContent =

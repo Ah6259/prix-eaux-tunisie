@@ -1,0 +1,30 @@
+name: Battement de cœur (garde les robots actifs)
+
+# GitHub met en pause les tâches planifiées d'un dépôt public sans activité depuis
+# 60 jours. Si un jour plus aucun prix ne change (sources en panne, site oublié…),
+# ce petit robot enregistre une activité chaque mois pour que les autres continuent.
+on:
+  schedule:
+    - cron: "17 3 1 * *"      # le 1er de chaque mois vers 4h17 (heure de Tunis)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: maj-prix
+  cancel-in-progress: false
+
+jobs:
+  battement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          date -u +"%Y-%m-%d %H:%M UTC" > data/battement.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/battement.txt
+          git commit -m "Battement de cœur mensuel ($(date -u +%Y-%m))"
+          git pull --rebase origin main
+          git push
