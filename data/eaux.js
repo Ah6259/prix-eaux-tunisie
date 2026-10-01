@@ -518,6 +518,16 @@ window.EAUX_DATA = {
    ],
    "products": [
     {
+     "liters": 1.0,
+     "format": "1 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/af175984367a.jpg",
+     "prices": {
+      "Otrity": 0.7167
+     }
+    },
+    {
      "liters": 1.5,
      "format": "1.5 L",
      "category": "plate",
@@ -1090,7 +1100,8 @@ window.EAUX_DATA = {
      "img": "assets/img/safia_15l.jpg",
      "prices": {
       "Carrefour": 0.43,
-      "Géant": 0.43
+      "Géant": 0.43,
+      "Otrity": 0.5167
      }
     },
     {
@@ -1236,8 +1247,8 @@ window.EAUX_DATA = {
    "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-09-30",
-   "nb": 7
+   "dernier_ok": "2026-10-01",
+   "nb": 9
   }
  }
 };
