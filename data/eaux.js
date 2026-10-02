@@ -757,7 +757,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
-      "Géant": 0.61
+      "Géant": 0.61,
+      "Otrity": 0.7083
      }
     }
    ]
@@ -913,7 +914,6 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/primaqua_19l_avec_consigne.jpg",
      "prices": {
-      "Géant": 5.3,
       "Carrefour": 5.35
      }
     }
@@ -1248,8 +1248,8 @@ window.EAUX_DATA = {
    "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-10-01",
-   "nb": 9
+   "dernier_ok": "2026-10-02",
+   "nb": 10
   }
  }
 };
