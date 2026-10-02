@@ -1,5 +1,5 @@
 {
- "date": "2026-10-01",
+ "date": "2026-10-02",
  "offres": [
   {
    "enseigne": "otrity",
@@ -70,6 +70,16 @@
    "type": "plate",
    "prix": 0.9333,
    "image_src": "https://otrity.com/wp-content/uploads/2020/09/b2_1.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "MELLITI",
+   "nom": "Eau minérale Melliti 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.7083,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/09/eau-minerale-6.webp"
   },
   {
    "enseigne": "otrity",
