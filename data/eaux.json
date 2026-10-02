@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-01",
+ "updated": "2026-10-02",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -913,6 +913,7 @@
      "flavor": null,
      "img": "assets/img/primaqua_19l_avec_consigne.jpg",
      "prices": {
+      "Géant": 5.3,
       "Carrefour": 5.35
      }
     }
@@ -1239,11 +1240,11 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-01",
+   "dernier_ok": "2026-10-02",
    "nb": 62
   },
   "geant": {
-   "dernier_ok": "2026-10-01",
+   "dernier_ok": "2026-10-02",
    "nb": 31
   },
   "otrity": {
