@@ -85,16 +85,20 @@ Tout automatique (Dispatch Eau = tableau de bord d'Ahmed). Liste des fournisseur
 Pistes techniques proposées : robots dans un dépôt GitHub PRIVÉ ; téléphones via l'API Google Places (clé d'Ahmed,
 quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Pages Jaunes / OpenStreetMap en complément.
 
-## Interface (état au 30/09/2026 soir)
+## Interface (état au 03/10/2026)
 - En haut : titre + bouton « Alertes / PROMO » (Telegram), ligne « Mis à jour le… · N marques · N enseignes ».
-- Trois barres qui ouvrent chacune une FENÊTRE (help-pop, fermeture ×, clic dehors, Échap) :
-  1. **Gagnant du match** : « 💰 Par le prix — stika 1,5 L » (cadre : carte verte + « Voir le classement complet »)
-     et « ❤️ Par le vote des clients » (même cadre : carte rose + « Voir le classement des votes », caché s'il n'y a
-     aucun vote ; puis liste « mon eau préférée » + bouton Voter). Textes des deux parties à la même taille (13 px).
-  2. **Hadith** (Amiri gras, ﷺ + titre centrés, RTL).
-  3. **Signaler un prix vu en magasin** : section « 📝 Signaler un prix » dépliable (formulaire) + derniers prix signalés.
-- Droits : LICENSE « tous droits réservés » + mention © en pied de page (site et pages marques).
-  Point 2 en attente de décision d'Ahmed : dépôt privé via GitHub Pro (~4 $/mois) ou Cloudflare Pages avec le domaine.
+- **Identité** (retour des visiteurs : le site doit dire ce qu'il est) : prix des magasins tunisiens, **indicatifs**,
+  relevés dans les grandes surfaces et épiceries en ligne + prix signalés ; pour la future livraison, **le prix final
+  dépendra du fournisseur et du stock au moment de la livraison**.
+- **La réponse sans clic** : carte verte « 💧 La moins chère aujourd'hui » (stika ou bouteille 1,5 L) + top 5, puis
+  « Voir le classement complet » (renderCompare dans #compare). Le prix le moins cher n'est affiché QU'ICI.
+- Étiquettes : 🔍 Comparer · 📍 Signaler un prix · 🔔 Alertes promo · 🚚 Livraison BIENTÔT (fenêtre qui explique la
+  future commande en 4 étapes + « Être prévenu de l'ouverture »).
+- Barres qui ouvrent une FENÊTRE : « ❤️ L'eau préférée des clients » (vote seul), hadith, « Signaler un prix vu en magasin ».
+- `COMMANDE_OUVERTE = false` dans app.js : boutons « + » et barre panier masqués (classe commande-fermee).
+- Droits : LICENSE « tous droits réservés » + mention © en pied de page.
+- Prochaine amélioration conseillée : en-tête plus mince (filtres derrière un bouton « Filtres »), cartes compactes.
+- **Règle** : demander l'accord d'Ahmed avant de modifier le site (sauf s'il dit « fais »).
 
 ## Décisions et idées en attente
 - Nom de domaine (prix-eau.tn) acheté **seulement au premier annonceur** — ne pas le proposer avant.
