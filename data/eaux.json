@@ -512,7 +512,7 @@
    "source": "Jelma (Sidi Bouzid)",
    "depuis": 1996,
    "note": null,
-   "img": "assets/img/produits/2ba9322512a7.webp",
+   "img": "assets/img/produits/af175984367a.jpg",
    "types": [
     "plate"
    ],
@@ -525,16 +525,6 @@
      "img": "assets/img/produits/af175984367a.jpg",
      "prices": {
       "Otrity": 0.7167
-     }
-    },
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/2ba9322512a7.webp",
-     "prices": {
-      "Otrity": 0.8167
      }
     }
    ]
@@ -558,7 +548,8 @@
      "flavor": null,
      "img": "assets/img/jannet_2l.jpg",
      "prices": {
-      "Carrefour": 0.83
+      "Carrefour": 0.83,
+      "Otrity": 1.0
      }
     }
    ]
@@ -1248,7 +1239,7 @@
    "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-10-02",
+   "dernier_ok": "2026-10-03",
    "nb": 10
   }
  }
