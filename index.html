@@ -89,7 +89,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20260930za">
+<link rel="stylesheet" href="style.css?v=20261003d">
 </head>
 <body>
 
@@ -190,7 +190,19 @@
 </header>
 
 <div class="wrap">
-  <p class="intro">Comparez les <strong>prix de l'eau minérale en Tunisie</strong></p>
+  <!-- identité du site : dès le premier écran, ce que le site est (et n'est pas) -->
+  <p class="intro identite">Les <strong>prix de l'eau dans les magasins tunisiens</strong>, comparés chaque jour.
+  <span class="identite-2">Prix <b>indicatifs</b> relevés dans les grandes surfaces et épiceries en ligne, complétés par les prix que vous signalez.
+  Pour la future livraison à domicile, le <b>prix final</b> dépendra du fournisseur et du stock disponible au moment de la livraison.</span></p>
+  <!-- la réponse tout de suite : stika 1,5 L la moins chère + top 5 (app.js : renderTop) -->
+  <section class="top-reponse" id="top-reponse" aria-label="Les moins chères aujourd'hui"></section>
+  <!-- ce qu'on peut faire sur le site -->
+  <nav class="etiquettes" aria-label="Ce que vous pouvez faire">
+    <a class="etiq" href="#grid">🔍 Comparer</a>
+    <button type="button" class="etiq" id="etiq-signaler">📍 Signaler un prix</button>
+    <a class="etiq" href="https://t.me/prixeautunisie" target="_blank" rel="noopener">🔔 Alertes promo</a>
+    <button type="button" class="etiq etiq-bientot" id="livraison-open">🚚 Livraison <span class="bientot">bientôt</span></button>
+  </nav>
   <p class="alerte-maj" id="alerte-maj" role="status" hidden></p>
 
   <!-- baisses de prix du jour (data/baisses.js, écrit chaque nuit par tools/price_drops.py) -->
@@ -228,7 +240,7 @@
 
   <section>
     <h2>Les prix, marque par marque</h2>
-    <p class="sub">La flèche ↓ marque l'enseigne la moins chère. Le bouton <b>+</b> ajoute le produit à votre commande.</p>
+    <p class="sub">La flèche ↓ marque l'enseigne la moins chère.</p>
     <div class="grid" id="grid"></div>
     <div class="empty" id="empty" hidden>Aucune marque ne correspond à cette recherche.</div>
   </section>
@@ -371,6 +383,26 @@
   </div>
 </div>
 
+<!-- fenêtre « Livraison à domicile — bientôt » : explique la future commande -->
+<div class="help-pop" id="livraison-pop" role="dialog" aria-labelledby="livraison-titre" hidden>
+  <div class="help-box">
+    <button type="button" class="help-close" id="livraison-close" aria-label="Fermer">×</button>
+    <h2 id="livraison-titre">🚚 Livraison à domicile — bientôt</h2>
+    <p>Nous préparons la <strong>commande d'eau livrée chez vous</strong>, avec des fournisseurs partenaires
+    (grossistes et livreurs) près de chez vous. Voici comment elle fonctionnera :</p>
+    <ol class="etapes-cmd">
+      <li><b>Vous commandez</b> sur le site : marques, nombre de stikas, adresse.</li>
+      <li><b>Un fournisseur de votre région vous propose son prix</b>, livraison comprise.</li>
+      <li><b>Vous acceptez</b> (ou non) : rien n'est engagé avant votre accord.</li>
+      <li><b>Vous suivez la livraison</b> jusqu'à votre porte. Paiement à la livraison.</li>
+    </ol>
+    <p class="help-src">Les prix affichés sur ce site sont ceux des <b>grandes surfaces</b>, à titre indicatif.
+    Le <b>prix final d'une commande</b> est celui du fournisseur : il dépend du <b>stock disponible au moment
+    de la livraison</b> et peut donc être différent. Vous le connaissez et l'acceptez avant toute livraison.</p>
+    <a class="sig-bouton livraison-alerte" href="https://t.me/prixeautunisie" target="_blank" rel="noopener">🔔 Être prévenu de l'ouverture</a>
+  </div>
+</div>
+
 <!-- Signaler un prix vu en magasin : envoyé au Google Forms d'Ahmed (app.js, SIG_FORM) ;
      tools/signalements.py le lit 3 fois par jour, décide seul et publie (site + Telegram) -->
 <div class="help-pop" id="sig-pop" role="dialog" aria-labelledby="sig-titre" hidden>
@@ -469,7 +501,7 @@
 <script src="data/baisses.js" onerror="void 0"></script>
 <script src="data/votes.js" onerror="void 0"></script>
 <script src="data/signalements.js?v=20260930a"></script>
-<script src="app.js?v=20260930za"></script>
+<script src="app.js?v=20261003d"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

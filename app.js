@@ -1,4 +1,8 @@
 const DATA = window.EAUX_DATA;
+// Commande en ligne : false tant qu'il n'y a pas de fournisseur partenaire. À false, les
+// boutons « + » et la barre panier sont masqués (pas de bouton qui mène à une impasse).
+const COMMANDE_OUVERTE = false;
+if (!COMMANDE_OUVERTE) document.documentElement.classList.add("commande-fermee");
 const fmtDT = v => v.toLocaleString("fr-FR",{minimumFractionDigits:3, maximumFractionDigits:3}) + " DT";
 
 /* helpers ---------------------------------------------------------------- */
@@ -176,6 +180,39 @@ function prodRow(p, b){
     <td><span class="offer-list">${offers}</span></td></tr>`;
 }
 
+/* LA RÉPONSE EN HAUT DE PAGE : la stika (ou bouteille) 1,5 L la moins chère + top 5 */
+function meilleur15(b){
+  const c = b.products.filter(p => plain(p) && p.category === "plate" && Math.abs(p.liters - 1.5) < .01
+                                && Object.keys(p.prices).length);
+  if (!c.length) return null;
+  const p = c.reduce((a, z) => minPrice(z) < minPrice(a) ? z : a);
+  return { prix: minPrice(p), magasins: bestStores(p) };
+}
+function renderTop(){
+  const box = document.getElementById("top-reponse");
+  if (!box) return;
+  const rows = DATA.brands.map(b => ({ b, m: meilleur15(b) })).filter(r => r.m)
+    .sort((a, z) => a.m.prix - z.m.prix);
+  if (!rows.length){ box.hidden = true; return; }
+  const stika = state.mode === "stika";
+  const prix = v => fmtDT(stika ? v * 6 : v);
+  const unite = stika ? "la stika (6 × 1,5 L)" : "la bouteille 1,5 L";
+  const [g] = rows;
+  box.innerHTML = `
+    <a class="top-gagnant" href="#m-${g.b.id}">
+      <span class="top-label">💧 La moins chère aujourd'hui</span>
+      <span class="top-ligne"><b class="top-nom">${g.b.name}</b>
+        <b class="top-prix">${prix(g.m.prix)}</b></span>
+      <span class="top-detail">${unite} · chez ${g.m.magasins.join(", ")}</span>
+    </a>
+    <ol class="top-liste" start="2">${rows.slice(1, 5).map(r => `
+      <li><a href="#m-${r.b.id}"><span class="top-n">${r.b.name}</span>
+        <span class="top-p">${prix(r.m.prix)}</span><small>${r.m.magasins.join(", ")}</small></a></li>`).join("")}
+    </ol>
+    <a class="top-tout" href="#grid">Voir toutes les marques ↓</a>`;
+  box.hidden = false;
+}
+
 function card(b, prods){
   const meta = [];
   if (b.source) meta.push(`Source : <b>${b.source}</b>`);
@@ -184,7 +221,7 @@ function card(b, prods){
   if (b.note) meta.push(b.note);
   const badges = b.types.map(t =>
     `<span class="badge${t === "gazeuse" ? " gaz" : ""}">${t === "gazeuse" ? "Gazeuse" : "Plate"}</span>`).join("");
-  return `<article class="card">
+  return `<article class="card" id="m-${b.id}">
     <div class="card-head">
       ${b.img ? `<img src="${b.img}" alt="Bouteille ${b.name}" loading="lazy">` : ""}
       <div class="id"><h3><a class="marque-lien" href="marque/${b.id}/">${b.name}</a></h3><div class="badges">${badges}</div></div>
@@ -204,7 +241,7 @@ function card(b, prods){
       <button type="button" class="addbtn" title="Commander (prix à confirmer)"
         aria-label="Ajouter ${b.name} à la commande, prix à confirmer sur WhatsApp"
         data-generic="${b.id}">+</button>
-      <span>Prix non disponible pour le moment dans les enseignes suivies — commandez, le prix vous sera confirmé sur WhatsApp.</span>
+      <span>Prix non disponible pour le moment dans les enseignes suivies${COMMANDE_OUVERTE ? " — commandez, le prix vous sera confirmé sur WhatsApp" : ""}.</span>
     </div>`}
     ${signalesBlock(b)}
   </article>`;
@@ -296,6 +333,7 @@ function render(){
   document.getElementById("empty").hidden = list.length > 0;
   renderBaisses();
   renderDerniersSignales();
+  renderTop();
 }
 
 /* bandeau « Baisses de prix du jour » : affiché seulement si les baisses
@@ -748,6 +786,8 @@ const SIG_FORM = {
     pop.hidden = false;
   };
   document.getElementById("sig-open").addEventListener("click", () => ouvrir(null));
+  const etiq = document.getElementById("etiq-signaler");      // étiquette « 📍 Signaler un prix » du haut
+  if (etiq) etiq.addEventListener("click", () => { ouvrir(null); document.getElementById("sig-form-sec").open = true; });
   document.getElementById("grid").addEventListener("click", e => {
     const btn = e.target.closest("[data-signaler]");
     if (btn) ouvrir(btn.dataset.signaler);
@@ -851,7 +891,8 @@ const SIG_FORM = {
 [["type-help", "type-help-pop", "type-help-close"],
  ["format-help", "format-help-pop", "format-help-close"],
  ["match-open", "match-pop", "match-close"],
- ["hadith-open", "hadith-pop", "hadith-close"]].forEach(([b, p2, c]) => {
+ ["hadith-open", "hadith-pop", "hadith-close"],
+ ["livraison-open", "livraison-pop", "livraison-close"]].forEach(([b, p2, c]) => {
   const btn = document.getElementById(b);
   const pop = document.getElementById(p2);
   if (!btn || !pop) return;
