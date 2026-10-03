@@ -45,6 +45,8 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `maj-prix.yml` ≈ 1h07 Tunis : collect_prices → price_drops (Telegram) → build_history → build_pages → commit.
 - `signalements.yml` toutes les 2 h de 8h05 à 22h05 : prix signalés (Google Forms → CSV) → site + Telegram.
 - `battement-de-coeur.yml` le 1er du mois (évite la pause GitHub après 60 jours sans activité).
+- `instagram.yml` chaque lundi 9h05 : `tools/image_semaine.py` → image 1080×1350 « les 5 stikas les moins chères »
+  + texte (assets/instagram/) envoyés sur le canal Telegram ; Ahmed les repost sur Instagram.
 - `telegram-bienvenue.yml` manuel. Groupe de concurrence commun `maj-prix`. Secret : `TELEGRAM_BOT_TOKEN`.
 - Relancer à la main : `gh workflow run maj-prix.yml -R Ah6259/prix-eaux-tunisie`.
 
@@ -102,6 +104,14 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 - Droits : LICENSE « tous droits réservés » + mention © en pied de page.
 - Prochaine amélioration conseillée : en-tête plus mince (filtres derrière un bouton « Filtres »), cartes compactes.
 - **Règle** : demander l'accord d'Ahmed avant de modifier le site (sauf s'il dit « fais »).
+
+## Visibilité (03/10/2026)
+- Trafic : ~50 % Google, ~50 % Instagram. Bouton « Partager sur WhatsApp » (accueil, pages marques, guides).
+- Pages guides générées chaque nuit par `tools/build_guides.py` (appelé par build_pages) : `prix-stika/` (FR+AR, FAQ JSON-LD)
+  et `quelle-eau/` (sodium, légèreté, calcium, magnésium d'après composition.js). Dans le sitemap et le pied de page.
+- Titres des pages marques avec le prix de la stika ; lignes en arabe (mots latins isolés par U+2068/U+2069).
+- Encore à faire par Ahmed : lien du site dans la bio Instagram ; demander l'indexation des 2 guides dans Search Console.
+  Proposé : message aux journalistes (pénurie d'eau) et textes pour groupes Facebook.
 
 ## Décisions et idées en attente
 - Nom de domaine (prix-eau.tn) acheté **seulement au premier annonceur** — ne pas le proposer avant.

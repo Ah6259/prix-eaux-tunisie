@@ -80,6 +80,7 @@ et lui demander de lire ce README.
 | `maj-prix.yml` | chaque nuit ≈ 1h07 (Tunis) | collecte → baisses/Telegram → historique → pages → publication |
 | `signalements.yml` | toutes les 2 h, 8h05–22h05 | prix signalés → site + Telegram ; décompte des votes |
 | `battement-de-coeur.yml` | le 1er du mois | empêche GitHub de mettre les robots en pause (60 j) |
+| `instagram.yml` | chaque lundi 9h05 | image « 5 stikas les moins chères » + texte → canal Telegram (pour Instagram) |
 | `telegram-bienvenue.yml` | à la main | message de présentation sur le canal |
 | Tâche Windows « PrixEaux-Otrity » (PC d'Ahmed) | chaque jour 12h | relevé Otrity (bloqué par Cloudflare sur GitHub) |
 

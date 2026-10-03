@@ -137,6 +137,15 @@ pour créer n'importe quel autre site.
     l'historique git prouve l'antériorité. Pour cacher aussi le code : dépôt privé (GitHub Pro payant)
     ou hébergement Cloudflare Pages (gratuit) — le contenu affiché reste toujours téléchargeable
 
+32. **Visibilité** : savoir d'où viennent les visiteurs (GoatCounter : ici 50 % Google, 50 % Instagram) ;
+    bouton « Partager sur WhatsApp » avec un message tout prêt ; pages « guides » qui répondent aux
+    questions tapées dans Google (prix de la stika aujourd'hui, quelle eau choisir), régénérées chaque nuit ;
+    le prix dans le titre des pages (donne envie de cliquer) ; quelques phrases en arabe pour les
+    recherches en arabe ; une image Instagram fabriquée automatiquement chaque semaine (Chrome
+    « headless » photographie une page HTML) et envoyée sur Telegram pour être repostée
+33. **Dire clairement ce qu'est le site dès le premier écran** (retour des visiteurs) : ce qu'on fait,
+    d'où viennent les prix, qu'ils sont indicatifs, et ce qui arrive bientôt (commande)
+
 ## Pièges rencontrés et leçons (à réutiliser)
 
 - **Cache des téléphones** : après une mise à jour, un téléphone peut garder
