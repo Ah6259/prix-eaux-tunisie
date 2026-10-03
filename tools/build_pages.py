@@ -7,6 +7,8 @@ et la liste de liens statiques de l'accueil — pour le référencement Google.
 """
 import json
 import re
+import sys
+import urllib.parse
 from datetime import date
 from pathlib import Path
 
@@ -97,6 +99,14 @@ def page_marque(b):
             + " Composition et livraison à domicile.")
 
     img = f"../../{b['img']}" if b.get("img") else None
+    # le prix de la stika dans le titre Google : donne envie de cliquer dans les résultats
+    titre = (f"Prix {esc(nom)} en Tunisie — stika 1,5 L à {fmt_dt(prix15 * 6)} | Prix des Eaux de Tunisie"
+             if prix15 else f"Prix {esc(nom)} en Tunisie — bouteille &amp; stika | Prix des Eaux de Tunisie")
+    iso = lambda x: "⁨" + x + "⁩"   # mots latins isolés dans la phrase arabe
+    ar = (f"سعر ماء {iso(esc(nom))} في تونس — ستيكة 1,5 لتر ابتداءً من {iso(fmt_dt(prix15 * 6))}" if prix15
+          else f"سعر ماء {iso(esc(nom))} في تونس")
+    wa = "https://wa.me/?text=" + urllib.parse.quote(
+        f"💧 Prix de l'eau {nom}" + (f" : stika 1,5 L à {fmt_dt(prix15 * 6)}" if prix15 else "") + f" — {SITE}/marque/{bid}/")
 
     jsonld = json.dumps({
         "@context": "https://schema.org",
@@ -115,7 +125,7 @@ def page_marque(b):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Prix {esc(nom)} en Tunisie — bouteille &amp; stika | Prix des Eaux de Tunisie</title>
+<title>{titre}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{SITE}/marque/{bid}/">
 <link rel="icon" type="image/svg+xml" href="../../assets/icons/icon.svg">
@@ -128,7 +138,8 @@ def page_marque(b):
   <h1>Prix de l'eau {esc(nom)}</h1>
 </div></header>
 <div class="wrap">
-  <p class="intro" style="margin-top:14px"><a href="../../">← Prix de toutes les eaux minérales en Tunisie</a></p>
+  <p class="ar" dir="rtl" lang="ar" style="font-size:15px;color:var(--muted);margin:10px 0 0">{ar}</p>
+  <p class="intro" style="margin-top:8px"><a href="../../">← Prix de toutes les eaux minérales en Tunisie</a></p>
   <section>
     <div class="card" style="max-width:680px">
       <div class="card-head">
@@ -141,18 +152,20 @@ def page_marque(b):
     <p class="sub" style="margin-top:10px">Prix relevés le {maj_fr} sur les boutiques en ligne des
     grandes surfaces — indicatifs, ils peuvent varier selon le magasin.
     Stika = pack de 6 bouteilles (12 pour les 50 cl).</p>
+    <a href="{wa}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#25D366;color:#fff;font-weight:700;text-decoration:none;padding:8px 16px;border-radius:999px;font-size:14px">🟢 Partager sur WhatsApp</a>
   </section>
   <section>{compo_html}</section>
   <section>
-    <h2>Commander l'eau {esc(nom)} avec livraison</h2>
-    <p class="intro" style="margin-top:6px">Sur <a href="../../">Prix des Eaux de Tunisie</a>, ajoutez
-    vos stikas {esc(nom)} au panier avec le bouton +, indiquez votre adresse et recevez votre eau
-    à domicile — le prix total et les frais de livraison vous sont confirmés sur WhatsApp,
-    paiement à la livraison.</p>
+    <h2>Commande et livraison de l'eau {esc(nom)} — bientôt</h2>
+    <p class="intro" style="margin-top:6px">La commande avec livraison à domicile arrive bientôt sur
+    <a href="../../">Prix des Eaux de Tunisie</a> : vous commanderez auprès de grossistes et dépôts partenaires
+    de votre région, à leurs propres prix, livraison comprise (les prix ci-dessus sont ceux des grandes
+    surfaces, à titre indicatif). <a href="https://t.me/prixeautunisie" rel="noopener">Être prévenu de l'ouverture</a>.</p>
   </section>
 </div>
 <footer><div class="wrap">
-  <a href="../../">Comparateur des prix de l'eau en Tunisie</a> — 35 marques, mis à jour chaque jour.
+  <a href="../../">Comparateur des prix de l'eau en Tunisie</a> — 35 marques, mis à jour chaque jour ·
+  <a href="../../prix-stika/">Prix de la stika aujourd'hui</a> · <a href="../../quelle-eau/">Quelle eau choisir ?</a>
   <p class="copyright">© 2026 Prix des Eaux de Tunisie — tous droits réservés.</p>
 </div></footer>
 </body>
@@ -175,6 +188,11 @@ for d in (ROOT / "marque").iterdir():
         for f in d.iterdir():
             f.unlink()
         d.rmdir()
+
+# pages guides (prix de la stika du jour, quelle eau choisir)
+sys.path.insert(0, str(ROOT / "tools"))
+from build_guides import generer  # noqa: E402
+urls += generer(data, COMPO, SITE, ROOT, maj_fr)
 
 # sitemap
 today = date.today().isoformat()

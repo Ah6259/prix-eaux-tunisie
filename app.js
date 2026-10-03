@@ -206,6 +206,8 @@ function renderTop(){
         <b class="top-prix">${prix(g.m.prix)}</b></span>
       <span class="top-detail">${unite} · chez ${g.m.magasins.join(", ")}</span>
     </a>
+    <a class="top-partage" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(
+      `💧 L'eau la moins chère aujourd'hui : ${g.b.name} ${prix(g.m.prix)} ${stika ? "la stika" : "la bouteille"} (chez ${g.m.magasins.join(", ")}). Comparez toutes les marques : https://ah6259.github.io/prix-eaux-tunisie/`)}">🟢 Partager sur WhatsApp</a>
     <ol class="top-liste" start="2">${rows.slice(1, 5).map(r => `
       <li><a href="#m-${r.b.id}"><span class="top-n">${r.b.name}</span>
         <span class="top-p">${prix(r.m.prix)}</span><small>${r.m.magasins.join(", ")}</small></a></li>`).join("")}
