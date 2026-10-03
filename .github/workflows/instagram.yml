@@ -1,0 +1,36 @@
+name: Image Instagram de la semaine
+
+# Chaque lundi vers 9h05 (heure de Tunis) : image « les 5 stikas les moins chères » + texte à copier,
+# enregistrés dans assets/instagram/ et envoyés sur le canal Telegram (Ahmed les récupère pour Instagram).
+on:
+  schedule:
+    - cron: "5 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: maj-prix
+  cancel-in-progress: false
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fabriquer l'image et l'envoyer sur Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python tools/image_semaine.py
+      - name: Enregistrer
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/instagram/
+          git diff --cached --quiet || git commit -m "Image Instagram de la semaine ($(date -u +%Y-%m-%d))"
+          git pull --rebase origin main
+          git push
