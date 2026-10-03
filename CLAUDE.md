@@ -95,7 +95,8 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 - Étiquettes : 🔍 Comparer · 📍 Signaler un prix · 🔔 Alertes promo · 🚚 Livraison BIENTÔT (fenêtre qui explique la
   future commande en 4 étapes + « Être prévenu de l'ouverture »).
 - Barres qui ouvrent une FENÊTRE : « ❤️ L'eau préférée des clients » (vote seul), hadith, « Signaler un prix vu en magasin ».
-- `COMMANDE_OUVERTE = false` dans app.js : boutons « + » et barre panier masqués (classe commande-fermee).
+- `COMMANDE_OUVERTE = false` dans app.js. Boutons « + » et barre « Commander 🛒 » **visibles** (Ahmed les veut, 03/10) ;
+  le panier mène au formulaire grisé + tampon.
 - Droits : LICENSE « tous droits réservés » + mention © en pied de page.
 - Prochaine amélioration conseillée : en-tête plus mince (filtres derrière un bouton « Filtres »), cartes compactes.
 - **Règle** : demander l'accord d'Ahmed avant de modifier le site (sauf s'il dit « fais »).

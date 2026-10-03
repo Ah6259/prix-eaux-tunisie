@@ -659,8 +659,6 @@ section:has(> #match-open){padding-bottom:6px}
 #vote-cadre{margin-bottom:10px}
 #vote-cadre[hidden]{display:none}
 
-/* commande fermée : aucun bouton « + », aucune barre panier */
-.commande-fermee .addbtn, .commande-fermee td.addc, .commande-fermee .cartbar{display:none !important}
 
 /* la réponse en haut de page */
 .top-reponse{margin-top:12px}

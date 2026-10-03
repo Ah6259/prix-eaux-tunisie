@@ -1,6 +1,7 @@
 const DATA = window.EAUX_DATA;
-// Commande en ligne : false tant qu'il n'y a pas de fournisseur partenaire. À false, les
-// boutons « + » et la barre panier sont masqués (pas de bouton qui mène à une impasse).
+// Commande en ligne : false tant qu'il n'y a pas de fournisseur partenaire (formulaire grisé
+// + tampon « En cours de développement » ; les boutons « + » et « Commander » restent visibles,
+// choix d'Ahmed du 03/10/2026).
 const COMMANDE_OUVERTE = false;
 if (!COMMANDE_OUVERTE) document.documentElement.classList.add("commande-fermee");
 const fmtDT = v => v.toLocaleString("fr-FR",{minimumFractionDigits:3, maximumFractionDigits:3}) + " DT";
