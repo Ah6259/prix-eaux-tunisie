@@ -787,8 +787,6 @@ const SIG_FORM = {
     pop.hidden = false;
   };
   document.getElementById("sig-open").addEventListener("click", () => ouvrir(null));
-  const etiq = document.getElementById("etiq-signaler");      // étiquette « 📍 Signaler un prix » du haut
-  if (etiq) etiq.addEventListener("click", () => { ouvrir(null); document.getElementById("sig-form-sec").open = true; });
   document.getElementById("grid").addEventListener("click", e => {
     const btn = e.target.closest("[data-signaler]");
     if (btn) ouvrir(btn.dataset.signaler);

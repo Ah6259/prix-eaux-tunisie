@@ -486,7 +486,7 @@ section:has(> #match-open){padding-bottom:6px}
   .hadith-title{white-space:nowrap; font-size:min(19px, 3.9vw) !important}
   .sum-icon.saw{font-size:20px}
   #hadith-open .sum-cta{padding:3px 9px 6px}
-  #match-open h2{white-space:nowrap; font-size:min(18px, 4.6vw)}
+  #match-open h2{white-space:nowrap; font-size:min(18px, 3.9vw)}
 }
 .collapse > :not(summary){margin-top:12px}
 /* section « Signaler un prix vu en magasin » : bouton puis liste des derniers prix signalés */

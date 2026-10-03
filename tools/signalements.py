@@ -166,16 +166,23 @@ def ecrire_votes(reponses, marques):
     print(f"Votes : {len(par_jeton)} votant(s), {len(classement)} marque(s)")
 
 
-def message(s):
+def ligne(s):
+    """Une ligne courte par prix : « 📍 Stika Aziz 1,5 L : 3,900 DT · Aziza (Omrane) · 30/09 »."""
     n = taille_stika(s["litres"]) if s["litres"] <= GRAND_FORMAT else 1
     quoi = f"{'Stika ' if n > 1 else ''}{s['marque']} {str(s['litres']).replace('.', ',').rstrip('0').rstrip(',')} L"
     if s["type"] == "gazeuse":
         quoi += " gazeuse"
     lieu = f" ({s['lieu']})" if s["lieu"] else ""
     vu = datetime.fromisoformat(s["date"]).strftime("%d/%m")
-    return (f"📍 <b>Prix signalé par un visiteur</b>\n"
-            f"<b>{quoi}</b> : <b>{dt(s['prix'] * n)}</b> chez {s['magasin']}{lieu}, vu le {vu}\n\n"
-            f"Vous aussi, signalez un prix vu en magasin : {SITE}")
+    return f"<b>{quoi}</b> : <b>{dt(s['prix'] * n)}</b> · {s['magasin']}{lieu} · {vu}"
+
+
+def message(nouveaux):
+    """UN seul message par passage, court, pour tous les nouveaux prix."""
+    lien = f'👉 <a href="{SITE}">Signaler un prix : prix-eaux-tunisie</a>'
+    if len(nouveaux) == 1:
+        return f"📍 {ligne(nouveaux[0])}\n{lien}"
+    return "📍 <b>Prix signalés par les visiteurs</b>\n" + "\n".join("• " + ligne(s) for s in nouveaux) + "\n" + lien
 
 
 def main():
@@ -225,10 +232,10 @@ def main():
         encoding="utf-8")
 
     nouveaux = [s for s in publies if s["cle"] not in deja_annonces]
-    for s in nouveaux:
+    if nouveaux:
         try:
-            telegram(message(s))
-            deja_annonces.add(s["cle"])
+            telegram(message(nouveaux))
+            deja_annonces.update(s["cle"] for s in nouveaux)
         except Exception as e:   # Telegram en panne : on réessaiera au prochain passage
             print("Échec Telegram :", e)
     OUT_JSON.write_text(json.dumps({

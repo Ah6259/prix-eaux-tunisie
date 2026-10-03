@@ -89,7 +89,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261003i">
+<link rel="stylesheet" href="style.css?v=20261003k">
 </head>
 <body>
 
@@ -197,13 +197,6 @@
   <!-- la réponse tout de suite : stika 1,5 L la moins chère + top 5 (app.js : renderTop) -->
   <section class="top-reponse" id="top-reponse" aria-label="Les moins chères aujourd'hui"></section>
   <div class="top-classement" id="compare"></div>
-  <!-- ce qu'on peut faire sur le site -->
-  <nav class="etiquettes" aria-label="Ce que vous pouvez faire">
-    <a class="etiq" href="#grid">🔍 Comparer</a>
-    <button type="button" class="etiq" id="etiq-signaler">📍 Signaler un prix</button>
-    <a class="etiq" href="https://t.me/prixeautunisie" target="_blank" rel="noopener">🔔 Alertes promo</a>
-    <button type="button" class="etiq etiq-bientot" id="livraison-open">🚚 Commande &amp; livraison <span class="bientot">bientôt</span></button>
-  </nav>
   <p class="alerte-maj" id="alerte-maj" role="status" hidden></p>
 
   <!-- baisses de prix du jour (data/baisses.js, écrit chaque nuit par tools/price_drops.py) -->
@@ -233,6 +226,15 @@
     <button type="button" class="sig-bar" id="sig-open">
       <span class="sum-icon sig-ico" aria-hidden="true">📍</span>
       <h2>Signaler un prix vu en magasin</h2>
+      <span class="sum-cta"><span class="sig-cta-txt">Voir</span><span class="sig-cta-fl" aria-hidden="true">›</span></span>
+    </button>
+  </section>
+
+  <!-- commande & livraison : annoncée, pas encore ouverte (fenêtre #livraison-pop) -->
+  <section class="sig-section">
+    <button type="button" class="sig-bar" id="livraison-open">
+      <span class="sum-icon sig-ico" aria-hidden="true">🚚</span>
+      <h2>Commande &amp; livraison <span class="bientot">bientôt</span></h2>
       <span class="sum-cta"><span class="sig-cta-txt">Voir</span><span class="sig-cta-fl" aria-hidden="true">›</span></span>
     </button>
   </section>
@@ -498,7 +500,7 @@
 <script src="data/baisses.js" onerror="void 0"></script>
 <script src="data/votes.js" onerror="void 0"></script>
 <script src="data/signalements.js?v=20260930a"></script>
-<script src="app.js?v=20261003i"></script>
+<script src="app.js?v=20261003j"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
