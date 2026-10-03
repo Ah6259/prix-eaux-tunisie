@@ -704,3 +704,5 @@ section:has(> #match-open){padding-bottom:6px}
 .top-classement #compare-rest{margin-top:8px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:6px 12px}
 .vote-sec{margin-top:6px; border-top:0; padding-top:0}
 #match-titre{white-space:nowrap; font-size:min(18px, 4.4vw)}   /* titre de la fenêtre du vote sur une ligne */
+.livraison-cle{background:var(--warn-soft, #F6EDDC); border-left:4px solid var(--gaz); padding:8px 12px; border-radius:8px}
+#livraison-titre{white-space:nowrap; font-size:min(18px, 4.4vw); margin-right:28px}

@@ -89,7 +89,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261003f">
+<link rel="stylesheet" href="style.css?v=20261003h">
 </head>
 <body>
 
@@ -202,7 +202,7 @@
     <a class="etiq" href="#grid">🔍 Comparer</a>
     <button type="button" class="etiq" id="etiq-signaler">📍 Signaler un prix</button>
     <a class="etiq" href="https://t.me/prixeautunisie" target="_blank" rel="noopener">🔔 Alertes promo</a>
-    <button type="button" class="etiq etiq-bientot" id="livraison-open">🚚 Livraison <span class="bientot">bientôt</span></button>
+    <button type="button" class="etiq etiq-bientot" id="livraison-open">🚚 Commande &amp; livraison <span class="bientot">bientôt</span></button>
   </nav>
   <p class="alerte-maj" id="alerte-maj" role="status" hidden></p>
 
@@ -378,13 +378,15 @@
   </div>
 </div>
 
-<!-- fenêtre « Livraison à domicile — bientôt » : explique la future commande -->
+<!-- fenêtre « Commande et livraison — bientôt » : explique la future commande -->
 <div class="help-pop" id="livraison-pop" role="dialog" aria-labelledby="livraison-titre" hidden>
   <div class="help-box">
     <button type="button" class="help-close" id="livraison-close" aria-label="Fermer">×</button>
-    <h2 id="livraison-titre">🚚 Livraison à domicile — bientôt</h2>
-    <p>Nous préparons la <strong>commande d'eau livrée chez vous</strong>, avec des fournisseurs partenaires
-    (grossistes et livreurs) près de chez vous. Voici comment elle fonctionnera :</p>
+    <h2 id="livraison-titre">🚚 Commande et livraison — bientôt</h2>
+    <p class="livraison-cle"><strong>Ce ne sont pas les grandes surfaces qui livrent</strong> : vous commanderez
+    directement auprès de <strong>grossistes et dépôts partenaires</strong> de votre région, à <strong>leurs propres
+    prix</strong>, livraison comprise.</p>
+    <p>Voici comment la commande fonctionnera :</p>
     <ol class="etapes-cmd">
       <li><b>Vous commandez</b> sur le site : marques, nombre de stikas, adresse.</li>
       <li><b>Un fournisseur de votre région vous propose son prix</b>, livraison comprise.</li>
