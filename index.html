@@ -89,7 +89,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261003d">
+<link rel="stylesheet" href="style.css?v=20261003f">
 </head>
 <body>
 
@@ -196,6 +196,7 @@
   Pour la future livraison à domicile, le <b>prix final</b> dépendra du fournisseur et du stock disponible au moment de la livraison.</span></p>
   <!-- la réponse tout de suite : stika 1,5 L la moins chère + top 5 (app.js : renderTop) -->
   <section class="top-reponse" id="top-reponse" aria-label="Les moins chères aujourd'hui"></section>
+  <div class="top-classement" id="compare"></div>
   <!-- ce qu'on peut faire sur le site -->
   <nav class="etiquettes" aria-label="Ce que vous pouvez faire">
     <a class="etiq" href="#grid">🔍 Comparer</a>
@@ -210,14 +211,12 @@
     <div class="baisses-list" id="baisses-list" hidden></div>
   </div>
 
-  <!-- Gagnant du match et hadith : barres qui ouvrent une fenêtre (#match-pop, #hadith-pop) -->
+  <!-- Eau préférée (vote) et hadith : barres qui ouvrent une fenêtre (#match-pop, #hadith-pop) -->
   <section>
     <button type="button" class="sig-bar" id="match-open">
-      <svg class="sum-icon cup-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M6 3h12v2h3v3c0 2.5-2 4.5-4.4 4.9A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.6-3A5 5 0 0 1 3 8V5h3V3zm-1 4v1a3 3 0 0 0 1.6 2.6A9 9 0 0 1 6 7H5zm14 0h-1a9 9 0 0 1-.6 3.6A3 3 0 0 0 19 8V7z"/>
-        </svg>
-      <h2>Gagnant du match 1,5 L</h2>
-      <span class="sum-cta">Voir<span class="cta-long"> le gagnant</span></span>
+      <span class="sum-icon sig-ico" aria-hidden="true">❤️</span>
+      <h2>L'eau préférée des clients</h2>
+      <span class="sum-cta">Voir</span>
     </button>
   </section>
 
@@ -344,17 +343,13 @@
   </div>
 </div>
 
-<!-- fenêtre « Gagnant du match » (classement rempli par app.js : renderCompare) -->
+<!-- fenêtre « L'eau préférée des clients » (vote) -->
 <div class="help-pop" id="match-pop" role="dialog" aria-labelledby="match-titre" hidden>
   <div class="help-box">
     <button type="button" class="help-close" id="match-close" aria-label="Fermer">×</button>
-    <h2 id="match-titre">🏆 Gagnant du match</h2>
-    <h3 class="match-h3">💰 Par le prix — stika 1,5 L</h3>
-    <p class="sub">Le prix le moins cher constaté pour Stika 1,5 L vendu en Tunisie.</p>
-    <div class="compare" id="compare"></div>
+    <h2 id="match-titre">❤️ L'eau préférée des clients</h2>
     <!-- vote « mon eau préférée » : envoyé au Google Forms (format = VOTE), compté par tools/signalements.py -->
     <div class="vote-sec">
-      <h3 class="match-h3">❤️ Par le vote des clients</h3>
       <p class="sub">Votez pour votre eau préférée ! Un vote par personne ; classement mis à jour toutes les 2h.</p>
       <!-- même cadre que « par le prix » : gagnant + bouton classement (+ liste) -->
       <div class="compare" id="vote-cadre" hidden>
@@ -501,7 +496,7 @@
 <script src="data/baisses.js" onerror="void 0"></script>
 <script src="data/votes.js" onerror="void 0"></script>
 <script src="data/signalements.js?v=20260930a"></script>
-<script src="app.js?v=20261003d"></script>
+<script src="app.js?v=20261003e"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

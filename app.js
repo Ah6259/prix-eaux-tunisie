@@ -142,8 +142,8 @@ function renderCompare(){
   const btnLabel = () => state.compareOpen
     ? "Masquer le classement complet"
     : `Voir le classement complet (${rows.length} marques)`;
+  // sous la carte « La moins chère » du haut : seulement le classement complet, à la demande
   document.getElementById("compare").innerHTML =
-    `<div class="winners">${winners.map(winnerCard).join("")}</div>` +
     (others.length ? `
       <div id="compare-rest" ${state.compareOpen ? "" : "hidden"}>${rows.map(rankRow).join("")}</div>
       <div class="compare-toggle">
@@ -209,7 +209,7 @@ function renderTop(){
       <li><a href="#m-${r.b.id}"><span class="top-n">${r.b.name}</span>
         <span class="top-p">${prix(r.m.prix)}</span><small>${r.m.magasins.join(", ")}</small></a></li>`).join("")}
     </ol>
-    <a class="top-tout" href="#grid">Voir toutes les marques ↓</a>`;
+`;
   box.hidden = false;
 }
 
