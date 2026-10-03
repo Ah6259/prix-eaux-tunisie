@@ -94,14 +94,10 @@ def photographier(html, sortie):
 
 
 def legende(rows, maj):
-    jour = date.fromisoformat(maj).strftime("%d/%m")
-    lignes = "\n".join(f"{i + 1}. {nom} : {dt(prix)} ({', '.join(m)})" for i, (prix, nom, m) in enumerate(rows))
-    return (f"💧 Les stikas d'eau les moins chères cette semaine en Tunisie (6 × 1,5 L, prix relevés le {jour}) :\n\n"
-            f"{lignes}\n\n"
-            "Prix indicatifs des grandes surfaces, comparés chaque jour sur notre site 👉 lien dans la bio\n"
-            "🔔 Alertes promo sur Telegram : t.me/prixeautunisie\n\n"
-            "💧 أرخص ستيكات الماء هذا الأسبوع في تونس\n\n"
-            "#eau #eauminerale #stika #prix #tunisie #tunis #bonplan #ستيكة #ماء #تونس")
+    """Texte court, le même pour Telegram et Instagram : la liste des prix est déjà dans l'image."""
+    return ("💧 Les stikas d'eau les moins chères cette semaine en Tunisie\n"
+            "Tous les prix, chaque jour 👉 ah6259.github.io/prix-eaux-tunisie\n"
+            "#eau #stika #prix #tunisie #ستيكة #ماء #تونس")
 
 
 def envoyer_telegram(image, texte):
