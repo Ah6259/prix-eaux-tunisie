@@ -734,8 +734,13 @@ section:has(> #match-open){padding-bottom:6px}
 #livraison-titre{white-space:nowrap; font-size:min(18px, 4.4vw); margin-right:28px}
 
 /* visibilité : partage WhatsApp, ligne en arabe, liens guides */
-.top-partage{display:inline-flex; align-items:center; gap:6px; margin-top:8px; background:#25D366; color:#fff;
-  font-weight:700; font-size:13.5px; text-decoration:none; padding:7px 14px; border-radius:999px}
+/* carte verte : le petit bouton « Partager » est posé en bas à droite, sous le prix */
+.top-carte{position:relative}
+.top-carte .top-detail{padding-right:104px}
+.top-partage{position:absolute; right:16px; bottom:10px;
+  display:inline-flex; align-items:center; gap:4px; background:#25D366; color:#fff;
+  font-weight:700; font-size:12px; text-decoration:none; padding:4px 10px 4px 8px; border-radius:999px}
+.top-partage svg{width:14px; height:14px; fill:currentColor}
 .top-partage:hover{filter:brightness(1.05)}
 .identite-ar{margin:4px 0 0; font-size:14px; color:var(--muted)}
 .guides-liens{font-size:13px; margin:8px auto 0}

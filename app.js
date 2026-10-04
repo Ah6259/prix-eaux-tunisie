@@ -200,14 +200,17 @@ function renderTop(){
   const unite = stika ? "la stika (6 × 1,5 L)" : "la bouteille 1,5 L";
   const [g] = rows;
   box.innerHTML = `
+    <div class="top-carte">
     <a class="top-gagnant" href="#m-${g.b.id}">
       <span class="top-label">💧 La moins chère aujourd'hui</span>
       <span class="top-ligne"><b class="top-nom">${g.b.name}</b>
         <b class="top-prix">${prix(g.m.prix)}</b></span>
       <span class="top-detail">${unite} · chez ${g.m.magasins.join(", ")}</span>
     </a>
-    <a class="top-partage" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(
-      `💧 L'eau la moins chère aujourd'hui : ${g.b.name} ${prix(g.m.prix)} ${stika ? "la stika" : "la bouteille"} (chez ${g.m.magasins.join(", ")}). Comparez toutes les marques : https://ah6259.github.io/prix-eaux-tunisie/`)}">🟢 Partager sur WhatsApp</a>
+    <!-- petit bouton de partage WhatsApp, posé sous le prix (dans la carte verte) -->
+    <a class="top-partage" target="_blank" rel="noopener" aria-label="Partager sur WhatsApp" title="Partager sur WhatsApp" href="https://wa.me/?text=${encodeURIComponent(
+      `💧 L'eau la moins chère aujourd'hui : ${g.b.name} ${prix(g.m.prix)} ${stika ? "la stika" : "la bouteille"} (chez ${g.m.magasins.join(", ")}). Comparez toutes les marques : https://ah6259.github.io/prix-eaux-tunisie/`)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"/></svg>Partager</a>
+    </div>
     <ol class="top-liste" start="2">${rows.slice(1, 5).map(r => `
       <li><a href="#m-${r.b.id}"><span class="top-n">${r.b.name}</span>
         <span class="top-p">${prix(r.m.prix)}</span><small>${r.m.magasins.join(", ")}</small></a></li>`).join("")}
