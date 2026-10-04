@@ -12,11 +12,14 @@ l'épicerie en ligne **Otrity**, complétés par les **prix signalés par les vi
 Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
 (Ancienne version privée Claude : https://claude.ai/artifact/N4YgHUrDQegTPn69Z77DCv)
 
-## Contenu actuel (30/09/2026)
+## Contenu actuel (04/10/2026)
 
 - 35 marques (26 avec prix), ~95 prix relevés chaque jour (Carrefour, Géant, Otrity)
-- Comparateur « Gagnant du match 1,5 L », recherche, filtres multi-sélection (minérale / source /
-  traitée / gazeuse, formats), tri ; mode **Stika** (6 × bouteille, 12 pour ≤ 0,75 L) ou Bouteille
+- Carte « 💧 La moins chère aujourd'hui » (« Stika (6 × 1,5 L) – Géant ») + petit bouton « Partager »
+  (WhatsApp) sous le prix, top 5, classement complet ; recherche
+- Menu fixe en haut : **3 boutons sur une ligne** qui ouvrent chacun un panneau — **Stika/Bouteille**
+  (stika = 6 × bouteille, 12 pour ≤ 0,75 L), **Type d'eau** (minérale / source / traitée / gazeuse,
+  plusieurs choix), **Format** (plusieurs choix) ; le tri est au-dessus de la liste des marques
 - **Composition minéralogique** de 32 eaux (Office du Thermalisme, `data/composition.js`)
 - **Historique des prix**, pages par marque (`marque/<slug>/`), FAQ, SEO, PWA
 - **Alertes** : baisses de prix ≥ 1 % publiées chaque nuit sur le canal Telegram

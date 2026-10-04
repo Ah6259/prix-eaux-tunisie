@@ -87,12 +87,13 @@ Tout automatique (Dispatch Eau = tableau de bord d'Ahmed). Liste des fournisseur
 Pistes techniques proposées : robots dans un dépôt GitHub PRIVÉ ; téléphones via l'API Google Places (clé d'Ahmed,
 quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Pages Jaunes / OpenStreetMap en complément.
 
-## Interface (état au 03/10/2026)
+## Interface (état au 04/10/2026)
 - En haut : titre + bouton « Alertes / PROMO » (Telegram), ligne « Mis à jour le… · N marques · N enseignes ».
 - **Identité** (retour des visiteurs : le site doit dire ce qu'il est) : prix des magasins tunisiens, **indicatifs**,
   relevés dans les grandes surfaces et épiceries en ligne + prix signalés ; pour la future livraison, **le prix final
   dépendra du fournisseur et du stock au moment de la livraison**.
-- **La réponse sans clic** : carte verte « 💧 La moins chère aujourd'hui » (stika ou bouteille 1,5 L) + top 5, puis
+- **La réponse sans clic** : carte verte « 💧 La moins chère aujourd'hui » (stika ou bouteille 1,5 L ; ligne courte
+  « Stika (6 × 1,5 L) – Géant » ; petit bouton vert « ➦ Partager » WhatsApp sous le prix, 04/10) + top 5, puis
   « Voir le classement complet » (renderCompare dans #compare). Le prix le moins cher n'est affiché QU'ICI.
 - Quatre barres (même style, une ligne sur téléphone) qui ouvrent une FENÊTRE : « ❤️ L'eau préférée des clients » (vote seul),
   hadith, « 📍 Signaler un prix vu en magasin », « 🚚 Commande & livraison BIENTÔT » (explique la future commande :
@@ -108,7 +109,7 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 - **Règle** : demander l'accord d'Ahmed avant de modifier le site (sauf s'il dit « fais »).
 
 ## Visibilité (03/10/2026)
-- Trafic : ~50 % Google, ~50 % Instagram. Bouton « Partager sur WhatsApp » (accueil, pages marques, guides).
+- Trafic : ~50 % Google, ~50 % Instagram. Partage WhatsApp : petit bouton « Partager » sur l'accueil ; gros bouton sur les pages marques et guides.
 - Pages guides générées chaque nuit par `tools/build_guides.py` (appelé par build_pages) : `prix-stika/` (FR+AR, FAQ JSON-LD)
   et `quelle-eau/` (sodium, légèreté, calcium, magnésium d'après composition.js). Dans le sitemap et le pied de page.
 - Titres des pages marques avec le prix de la stika ; lignes en arabe (mots latins isolés par U+2068/U+2069).

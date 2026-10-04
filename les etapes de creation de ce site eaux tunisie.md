@@ -145,6 +145,12 @@ pour créer n'importe quel autre site.
     « headless » photographie une page HTML) et envoyée sur Telegram pour être repostée
 33. **Dire clairement ce qu'est le site dès le premier écran** (retour des visiteurs) : ce qu'on fait,
     d'où viennent les prix, qu'ils sont indicatifs, et ce qui arrive bientôt (commande)
+34. **Un menu du haut le plus mince possible sur téléphone** : la barre qui reste fixée en haut
+    prend de la place à chaque écran. Les filtres (Stika/Bouteille, type d'eau, format) sont devenus
+    **3 boutons sur une seule ligne** ; chacun ouvre un petit panneau, et le bouton affiche le choix
+    en cours (« Bouteille », « Minérale », « 1,5 L »). Le tri, moins utilisé, est descendu au-dessus
+    de la liste. Même idée pour la carte « la moins chère » : un **petit bouton « Partager »** (flèche)
+    sous le prix plutôt qu'un gros bouton, et un texte court (« Stika (6 × 1,5 L) – Géant »)
 
 ## Pièges rencontrés et leçons (à réutiliser)
 
