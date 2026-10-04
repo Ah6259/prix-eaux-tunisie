@@ -102,7 +102,9 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 - `COMMANDE_OUVERTE = false` dans app.js. Boutons « + » et barre « Commander 🛒 » **visibles** (Ahmed les veut, 03/10) ;
   le panier mène au formulaire grisé + tampon.
 - Droits : LICENSE « tous droits réservés » + mention © en pied de page.
-- Prochaine amélioration conseillée : en-tête plus mince (filtres derrière un bouton « Filtres »), cartes compactes.
+- **Barre des filtres (04/10, demande d'Ahmed)** : 3 boutons sur une ligne (Stika/Bouteille · Type d'eau · Format),
+  chacun ouvre un petit panneau (`.dd` / `.dd-panel`) ; le bouton affiche le choix actuel. Le tri est au-dessus de la liste des marques.
+- Prochaine amélioration conseillée : cartes compactes.
 - **Règle** : demander l'accord d'Ahmed avant de modifier le site (sauf s'il dit « fais »).
 
 ## Visibilité (03/10/2026)

@@ -387,6 +387,41 @@ document.querySelectorAll("#mode-controls .chipbtn").forEach(btn => btn.addEvent
   renderCompare(); render();
 }));
 
+/* barre des filtres : 3 boutons (Stika/Bouteille, Type d'eau, Format) ----
+   chaque bouton ouvre son panneau ; le texte du bouton montre le choix actuel */
+const NOMS_TYPES = { minerale:"Minérale", source:"Source", table:"Traitée", gazeuse:"Gazeuse" };
+function majBoutonsFiltres(){
+  const stika = state.mode === "stika";
+  document.getElementById("dd-mode-txt").textContent = stika ? "Stika" : "Bouteille";
+  document.getElementById("dd-mode-ic").src = `assets/icons/${stika ? "stika-pack" : "bouteille"}.png`;
+  document.getElementById("dd-mode-btn").classList.toggle("dd-stika", stika);
+  const t = state.types;
+  document.getElementById("dd-type-txt").textContent =
+    !t.length ? "Type d'eau" : t.length === 1 ? NOMS_TYPES[t[0]] : `${t.length} types`;
+  document.getElementById("dd-type-btn").classList.toggle("dd-actif", t.length > 0);
+  const f = FORMATS.filter(x => state.formats.includes(x.id));
+  document.getElementById("dd-format-txt").textContent =
+    !f.length ? "Format" : f.length === 1 ? f[0].nom : `${f.length} formats`;
+}
+const ddPaires = ["mode", "type", "format"].map(k =>
+  [document.getElementById(`dd-${k}-btn`), document.getElementById(`dd-${k}`)]);
+function fermerPanneaux(sauf){
+  ddPaires.forEach(([b, p]) => { if (p !== sauf){ p.hidden = true; b.setAttribute("aria-expanded", "false"); } });
+}
+ddPaires.forEach(([b, p]) => b.addEventListener("click", () => {
+  fermerPanneaux(p);
+  p.hidden = !p.hidden;
+  b.setAttribute("aria-expanded", String(!p.hidden));
+}));
+// clic ailleurs ou touche Échap : on ferme
+document.addEventListener("click", e => { if (!e.target.closest(".dd")) fermerPanneaux(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") fermerPanneaux(); });
+// Stika / Bouteille : un seul choix possible, le panneau se ferme tout de suite
+document.querySelectorAll("#mode-controls .chipbtn").forEach(btn => btn.addEventListener("click", () => fermerPanneaux()));
+document.querySelectorAll("#controls .chipbtn[data-type], #format-controls .chipbtn[data-format], #mode-controls .chipbtn")
+  .forEach(btn => btn.addEventListener("click", majBoutonsFiltres));
+majBoutonsFiltres();
+
 document.getElementById("sort").value = state.sort;   // tri par prix croissant au chargement
 renderCompare();
 render();

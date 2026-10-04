@@ -140,13 +140,40 @@ h2{
 
 /* filtres */
 .toolbar{
-  display:flex; gap:6px 14px; flex-wrap:wrap; align-items:center;
-  padding-block:8px 10px; border-top:1px solid var(--line);
+  display:flex; gap:8px; align-items:center; position:relative;
+  padding-block:8px; border-top:1px solid var(--line);
 }
 .tgroup{display:flex; gap:6px; flex-wrap:wrap}
-.toolbar select{
+/* les 3 boutons de la barre : toujours sur UNE ligne, même largeur */
+.dd{flex:1 1 auto; min-width:0; max-width:240px}
+.dd-btn{
+  width:100%; display:flex; align-items:center; justify-content:center; gap:6px;
   border:1px solid var(--line); background:var(--surface); color:var(--ink);
-  border-radius:999px; padding:6px 12px; font:inherit; font-size:13px; margin-left:auto;
+  border-radius:999px; padding:7px 12px; font:inherit; font-size:14px; font-weight:600; cursor:pointer;
+  white-space:nowrap; overflow:hidden;
+}
+.dd-btn span{overflow:hidden; text-overflow:ellipsis}
+.dd-btn i{font-style:normal; font-size:11px; color:var(--muted); flex:none}
+.dd-btn .ic-photo{height:22px; width:auto; border-radius:4px; margin-right:0; flex:none}
+.dd-btn[aria-expanded="true"]{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.dd-btn.dd-stika{border-color:var(--best); color:var(--best); background:var(--best-soft); font-weight:700}
+.dd-btn.dd-actif{background:var(--accent); border-color:var(--accent); color:#fff}
+.dd-btn.dd-actif i{color:#fff}
+/* panneau qui s'ouvre sous la barre */
+.dd-panel{
+  position:absolute; left:16px; right:16px; top:calc(100% + 4px); z-index:30;
+  background:var(--surface); border:1px solid var(--line); border-radius:14px;
+  max-width:560px; padding:10px 12px 12px; box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+.dd-panel[hidden]{display:none}
+.dd-titre{margin:0 0 8px; font-size:13px; font-weight:700; color:var(--muted)}
+.dd-titre small{font-weight:400}
+/* tri : au-dessus de la liste des marques */
+.liste-tete{display:flex; align-items:center; gap:8px 12px; flex-wrap:wrap}
+.liste-tete h2{margin-right:auto}
+.liste-tete select{
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  border-radius:999px; padding:6px 12px; font:inherit; font-size:13px;
 }
 .controls{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:16px}
 .chipbtn{
@@ -602,12 +629,13 @@ section:has(> #match-open){padding-bottom:6px}
 /* petits ecrans : boutons plus compacts pour que chaque groupe de filtres
    (types d'eau + ?, formats) tienne sur sa propre ligne sans deborder */
 @media (max-width:560px){
-  .toolbar{gap:6px 10px}
-  .tgroup{gap:4px; flex-wrap:nowrap; flex:1 1 100%}
-  .toolbar .chipbtn{padding:5px 9px; font-size:12px}
-  .toolbar .chip-help{min-width:28px}
-  .toolbar select{padding:5px 9px; font-size:12px}
+  .toolbar{gap:6px}
+  .dd-btn{padding:6px 8px; font-size:13px; gap:4px}
+  .dd-btn .ic-photo{height:18px; vertical-align:-4px; margin-right:2px}
+  .dd-panel .chipbtn{padding:6px 10px; font-size:13px}
 }
+/* très petits téléphones : on retire l'image du bouton Stika/Bouteille pour garder le mot entier */
+@media (max-width:380px){ .dd-btn .ic-photo{display:none} }
 
 /* illustration des formats de bouteille */
 .fmt-ill{display:flex; gap:14px; align-items:flex-end; justify-content:center; flex-wrap:wrap; padding-block:8px 4px}

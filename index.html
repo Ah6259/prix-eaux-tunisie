@@ -89,7 +89,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261003m">
+<link rel="stylesheet" href="style.css?v=20261004a">
 </head>
 <body>
 
@@ -109,25 +109,41 @@
       <input id="q" type="search" placeholder="Chercher une marque… (Safia, Marwa…)" aria-label="Chercher une marque">
     </div>
   </div>
+  <!-- barre des filtres : 3 boutons côte à côte, chacun ouvre son petit panneau -->
   <div class="wrap toolbar">
-    <div class="tgroup" id="mode-controls" role="group" aria-label="Unité de prix">
-      <button class="chipbtn chip-stika" data-mode="stika" aria-pressed="true"><img class="ic-photo" src="assets/icons/stika-pack.png" alt="">Stika</button>
-      <button class="chipbtn" data-mode="bouteille" aria-pressed="false"><img class="ic-photo" src="assets/icons/bouteille.png" alt="">Bouteille</button>
+    <div class="dd">
+      <button type="button" class="dd-btn dd-stika" id="dd-mode-btn" aria-expanded="false" aria-controls="dd-mode">
+        <img class="ic-photo" id="dd-mode-ic" src="assets/icons/stika-pack.png" alt=""><span id="dd-mode-txt">Stika</span><i aria-hidden="true">▾</i></button>
+      <div class="dd-panel" id="dd-mode" hidden>
+        <p class="dd-titre">Prix affiché</p>
+        <div class="tgroup" id="mode-controls" role="group" aria-label="Unité de prix">
+          <button class="chipbtn chip-stika" data-mode="stika" aria-pressed="true"><img class="ic-photo" src="assets/icons/stika-pack.png" alt="">Stika</button>
+          <button class="chipbtn" data-mode="bouteille" aria-pressed="false"><img class="ic-photo" src="assets/icons/bouteille.png" alt="">Bouteille</button>
+        </div>
+      </div>
     </div>
-    <div class="tgroup" id="controls" role="group" aria-label="Type d'eau">
-      <button class="chipbtn" data-type="minerale" aria-pressed="false">Minérale</button>
-      <button class="chipbtn" data-type="source" aria-pressed="false">Source</button>
-      <button class="chipbtn" data-type="table" aria-pressed="false">Traitée</button>
-      <button class="chipbtn" data-type="gazeuse" aria-pressed="false">Gazeuses</button>
-      <button class="chipbtn chip-help" id="type-help" aria-label="Comprendre les types d'eau" title="Comprendre les types d'eau">?</button>
+    <div class="dd">
+      <button type="button" class="dd-btn" id="dd-type-btn" aria-expanded="false" aria-controls="dd-type">
+        <span id="dd-type-txt">Type d'eau</span><i aria-hidden="true">▾</i></button>
+      <div class="dd-panel" id="dd-type" hidden>
+        <p class="dd-titre">Type d'eau <small>(plusieurs choix possibles)</small></p>
+        <div class="tgroup" id="controls" role="group" aria-label="Type d'eau">
+          <button class="chipbtn" data-type="minerale" aria-pressed="false">Minérale</button>
+          <button class="chipbtn" data-type="source" aria-pressed="false">Source</button>
+          <button class="chipbtn" data-type="table" aria-pressed="false">Traitée</button>
+          <button class="chipbtn" data-type="gazeuse" aria-pressed="false">Gazeuses</button>
+          <button class="chipbtn chip-help" id="type-help" aria-label="Comprendre les types d'eau" title="Comprendre les types d'eau">?</button>
+        </div>
+      </div>
     </div>
-    <div class="tgroup" id="format-controls" role="group" aria-label="Format de bouteille"></div>
-    <select id="sort" aria-label="Trier les marques">
-      <option value="nom">Tri : nom A→Z</option>
-      <option value="prix15">Tri : prix 1,5 L croissant</option>
-      <option value="prixL">Tri : prix au litre croissant</option>
-      <option value="tds">Tri : minéralité (résidu sec)</option>
-    </select>
+    <div class="dd">
+      <button type="button" class="dd-btn" id="dd-format-btn" aria-expanded="false" aria-controls="dd-format">
+        <span id="dd-format-txt">1,5 L</span><i aria-hidden="true">▾</i></button>
+      <div class="dd-panel dd-droite" id="dd-format" hidden>
+        <p class="dd-titre">Format <small>(plusieurs choix possibles)</small></p>
+        <div class="tgroup" id="format-controls" role="group" aria-label="Format de bouteille"></div>
+      </div>
+    </div>
   </div>
   <div class="help-pop" id="format-help-pop" role="dialog" aria-label="Les formats de bouteille" hidden>
     <div class="help-box">
@@ -241,7 +257,15 @@
   </section>
 
   <section>
-    <h2>Les prix, marque par marque</h2>
+    <div class="liste-tete">
+      <h2>Les prix, marque par marque</h2>
+      <select id="sort" aria-label="Trier les marques">
+        <option value="nom">Tri : nom A→Z</option>
+        <option value="prix15">Tri : prix 1,5 L croissant</option>
+        <option value="prixL">Tri : prix au litre croissant</option>
+        <option value="tds">Tri : minéralité (résidu sec)</option>
+      </select>
+    </div>
     <p class="sub">La flèche ↓ marque l'enseigne la moins chère.</p>
     <div class="grid" id="grid"></div>
     <div class="empty" id="empty" hidden>Aucune marque ne correspond à cette recherche.</div>
@@ -503,7 +527,7 @@
 <script src="data/baisses.js" onerror="void 0"></script>
 <script src="data/votes.js" onerror="void 0"></script>
 <script src="data/signalements.js?v=20260930a"></script>
-<script src="app.js?v=20261003m"></script>
+<script src="app.js?v=20261004a"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
