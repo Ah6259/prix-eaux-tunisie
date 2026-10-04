@@ -62,6 +62,8 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   panne aussi si < 50 % d'offres plausibles ou < 30 % du nombre précédent.
 - Le site avertit selon la date du **visiteur** (ℹ️ enseigne ≥ 2 j, ⚠️ tout ≥ 3 j ou aucun prix).
 - **`python tools/test_pannes.py` (16 scénarios) à relancer après toute modification du robot.**
+- **`node tools/test_site.mjs` (61 vérifications de la page d'accueil) à relancer après toute modification du site.**
+  Il faut jsdom, installé une fois par PC : `npm install --no-save --no-package-lock jsdom` (node_modules ignoré par git).
 - Toujours lire les « échec » dans les journaux des robots (la reprise des anciens prix masque les pannes).
 
 ## Fonctions

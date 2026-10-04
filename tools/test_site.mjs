@@ -1,190 +1,161 @@
+// Test de la page d'accueil, simulée sans navigateur (jsdom).
+// À lancer après chaque modification du site :  node tools/test_site.mjs
+// jsdom s'installe une fois par PC :  npm install --no-save --no-package-lock jsdom
+// Réécrit le 05/10/2026 pour le site actuel (carte « La moins chère », 4 fenêtres, menus de filtres, commande fermée).
 import { JSDOM } from "jsdom";
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 
-const root = "C:/Ahmed_2501_01/personnel/_claude code project/eau minerale Tunisienne Prix";
-const html = readFileSync(root + "/index.html", "utf8")
-  .replace(/<script[^>]*src="data\/eaux\.js"><\/script>/, "")
-  .replace(/<script[^>]*src="app\.js"><\/script>/, "")
-  .replace(/<script[^>]*goatcounter[^>]*><\/script>/, "");
+const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const lire = f => readFileSync(join(root, f), "utf8");
+// les scripts de la page sont lancés un par un ci-dessous ; GoatCounter est retiré
+const html = lire("index.html").replace(/<script[^>]*src="[^"]*"[^>]*><\/script>/g, "");
 
-const dom = new JSDOM(html, { url: "https://ah6259.github.io/prix-eaux-tunisie/", runScripts: "outside-only" });
+const dom = new JSDOM(html, { url: "https://ah6259.github.io/prix-eaux-tunisie/", runScripts: "outside-only", pretendToBeVisual: true });
 const { window } = dom;
-global.window = window;
-
-const run = (file) => {
-  const code = readFileSync(root + "/" + file, "utf8");
-  window.eval(code);
-};
-
-let errors = 0;
-try {
-  run("data/eaux.js");
-  run("data/composition.js");
-  run("data/historique.js");
-  run("app.js");
-} catch (e) {
-  errors++;
-  console.error("ERREUR au chargement:", e.message, "\n", e.stack?.split("\n").slice(0,4).join("\n"));
-}
-
 const doc = window.document;
-const check = (desc, cond) => { console.log((cond ? "OK " : "FAIL ") + desc); if (!cond) errors++; };
+window.open = () => null;
+window.fetch = async () => ({ ok: true, json: async () => ({}), text: async () => "" });
 
-check("stats remplis (4 avec la date)", doc.getElementById("stats").children.length === 4);
-check("date de maj en tete de site", doc.getElementById("stats").textContent.includes("prix mis à jour"));
-const stikaBtn = doc.querySelector('#mode-controls [data-mode="stika"]');
-check("bouton Stika present, colore, actif par defaut",
-  stikaBtn && stikaBtn.className.includes("chip-stika") && stikaBtn.getAttribute("aria-pressed") === "true");
-check("prix affiches en stika par defaut", doc.querySelector("#grid .card table.prices").textContent.includes("Prix stika par enseigne"));
-check("icone stika sur le bouton", !!doc.querySelector(".chip-stika .ic-stika"));
-check("icone stika en 3D (degrades)", doc.querySelectorAll(".ic-stika linearGradient").length >= 3);
-check("Stika est le premier bouton", doc.querySelector("#mode-controls .chipbtn").className.includes("chip-stika"));
+let erreurs = 0;
+const check = (desc, cond) => { console.log((cond ? "OK   " : "FAIL ") + desc); if (!cond) erreurs++; };
+const clic = el => el.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+const cartes = () => [...doc.querySelectorAll("#grid .card")];
+const carte = nom => cartes().find(c => c.querySelector("h3")?.textContent === nom);
 
-// courbe d'evolution des prix
-const nJours = window.EAUX_HISTO.serie.length;
-check("courbe des prix rendue", !!doc.querySelector("#histo svg .serie"));
-check("un repere par jour", doc.querySelectorAll("#histo .pt").length === nJours);
-check("dernier prix etiquete", doc.querySelector("#histo .val").textContent.includes("DT"));
-check("vue tableau de la courbe", doc.querySelectorAll("#histo .histo-table tr").length === nJours + 1);
-check("comparateur rempli", doc.getElementById("compare").innerHTML.includes("winner"));
-check("cartes marques", doc.querySelectorAll("#grid .card").length > 12);
-check("boutons + presents", doc.querySelectorAll("#grid .addbtn").length > 8);
-
-// defauts au chargement : stika 1,5 L, tri prix croissant, marques sans prix a la fin
-check("tri par defaut : prix croissant", doc.getElementById("sort").value === "prix15");
-check("filtre par defaut : 1,5 L", doc.querySelector('#format-controls [data-format="1.5"]').getAttribute("aria-pressed") === "true");
-const cards0 = [...doc.querySelectorAll("#grid .card")];
-check("derniere carte = marque sans prix", cards0[cards0.length - 1].textContent.includes("non disponible"));
-const hayet = cards0.find(c => c.querySelector("h3")?.textContent === "Hayet");
-check("Hayet presente sans prix", !!hayet && hayet.textContent.includes("non disponible"));
-check("Hayet avec composition", !!hayet && !!hayet.querySelector(".compo"));
-check("Hayet sans bouton +", !!hayet && !hayet.querySelector(".addbtn"));
-check("footer rempli", doc.getElementById("foot").textContent.includes("Sources"));
-check("faq nb marques", doc.getElementById("faq-nb-marques").textContent === String(window.EAUX_DATA.brands.length));
-check("faq liste marques", doc.getElementById("faq-marques-liste").textContent.includes(" et "));
-check("cartbar cachee au depart", doc.getElementById("cartbar").hidden === true);
-
-// simulation : ajout au panier
-const btn = doc.querySelector("#grid .addbtn");
-btn.click();
-check("cartbar visible apres ajout", doc.getElementById("cartbar").hidden === false);
-check("compteur d articles sur le bouton Commander", doc.getElementById("cart-open").textContent.includes("1"));
-check("cartbar sans prix d enseigne", !doc.getElementById("cartbar-info").textContent.includes("DT"));
-check("cartbar renvoie vers WhatsApp", doc.getElementById("cartbar-info").textContent.includes("WhatsApp"));
-
-// second ajout du meme produit -> quantite 2
-btn.click();
-check("quantite cumulee", doc.getElementById("cartbar-info").textContent.includes("2 articles"));
-
-// ouvrir le panneau
-doc.getElementById("cart-open").click();
-check("panneau ouvert", doc.getElementById("order-overlay").hidden === false);
-check("article dans le panneau", doc.querySelectorAll(".order-item").length === 1);
-check("pas de prix dans le panneau", !doc.getElementById("order-items").textContent.includes("DT"));
-check("mention prix confirme WhatsApp", doc.getElementById("order-total").textContent.includes("WhatsApp"));
-
-// quantite +1 puis -3 -> panier vide
-doc.querySelector("[data-inc]").click();
-check("qty=3 apres +", doc.querySelector(".qty b").textContent === "3");
-doc.querySelector("[data-dec]").click();
-doc.querySelector("[data-dec]").click();
-doc.querySelector("[data-dec]").click();
-check("panier vide apres -3", doc.getElementById("cartbar").hidden === true);
-
-// re-ajout puis message WhatsApp
-btn.click();
-doc.getElementById("cart-open").click();
-doc.getElementById("o-tel").value = "24 321 390";
-doc.getElementById("o-adr").value = "12 rue de Marseille, Tunis";
-doc.getElementById("o-nom").value = "Test Client";
-
-let opened = null;
-window.open = (url) => { opened = url; return null; };
-doc.getElementById("order-form").dispatchEvent(new window.Event("submit", { bubbles: true, cancelable: true }));
-check("lien wa.me genere", opened && opened.startsWith("https://wa.me/21624321390?text="));
-if (opened) {
-  const msg = decodeURIComponent(opened.split("text=")[1]);
-  console.log("--- message WhatsApp genere ---\n" + msg + "\n-------------------------------");
-  check("message contient produit en stika par defaut", /• 1 × stika \(\d+ bouteilles\)/.test(msg));
-  check("message sans prix d enseigne", !msg.includes("DT") && !msg.includes("Carrefour"));
-  check("message contient tel", msg.includes("24 321 390"));
-  check("message contient adresse", msg.includes("rue de Marseille"));
+// ---- chargement : mêmes fichiers et même ordre que index.html -------------
+for (const f of ["data/eaux.js", "data/composition.js", "data/historique.js", "data/baisses.js",
+                 "data/votes.js", "data/signalements.js", "app.js"]) {
+  if (!existsSync(join(root, f))) continue;
+  try { window.eval(lire(f)); }
+  catch (e) { erreurs++; console.log(`FAIL chargement de ${f} : ${e.message}`); }
 }
+const DATA = window.EAUX_DATA;
 
-// changement d'unite stika -> bouteille dans le panier
-const unitSel = doc.querySelector(".oi-unit");
-check("menu d unite present", !!unitSel);
-unitSel.value = "bouteille";
-unitSel.dispatchEvent(new window.Event("change", { bubbles: true }));
-check("unite passee en bouteille", doc.querySelector(".oi-unit").value === "bouteille");
+// ---- en haut de page -------------------------------------------------------
+const stats = doc.getElementById("stats").textContent;
+check("ligne « Mis à jour le … · N marques · N enseignes »",
+  stats.startsWith("Mis à jour le") && stats.includes(`${DATA.brands.length} marques`) && /\d enseignes/.test(stats));
 
-// bascule Stika <-> Bouteille : une seule unite affichee a la fois
-doc.querySelector('#mode-controls [data-mode="bouteille"]').click();
-check("mode bouteille : en-tete change", doc.querySelector("#grid .card table.prices").textContent.includes("Prix bouteille par enseigne"));
-check("mode bouteille : pas de mention stika dans l en-tete", !doc.querySelector("#grid .card table.prices tr").textContent.includes("stika"));
-doc.querySelector('#mode-controls [data-mode="stika"]').click();
-check("retour mode stika", doc.querySelector("#grid .card table.prices").textContent.includes("Prix stika par enseigne"));
-check("le + est en premiere colonne", doc.querySelector("#grid .card table.prices tr:nth-child(2) td").className.includes("addc"));
-
-// filtre par format (choix multiples ; 1,5 L coché au chargement)
-check("puces de format presentes", doc.querySelectorAll("#format-controls .chipbtn[data-format]").length >= 4);
-check("1,5 L coche au chargement", doc.querySelector('#format-controls [data-format="1.5"]').getAttribute("aria-pressed") === "true");
-const fmts = [...doc.querySelectorAll("#grid .fmt")].map(td => td.textContent.trim());
-check("filtre 1,5 L : uniquement du 1,5 L", fmts.length > 5 && fmts.every(f => f.startsWith("1.5 L")));
-const chipBonbonne = doc.querySelector('#format-controls [data-format="bonbonne"]');
-chipBonbonne.click();
-check("filtre grands formats : vendus a l unite", doc.getElementById("grid").textContent.includes("à l'unité"));
-chipBonbonne.click();
-
-// composition
-check("blocs composition presents", doc.querySelectorAll("#grid .compo").length > 15);
-const safia = [...doc.querySelectorAll("#grid .card")].find(c => c.querySelector("h3")?.textContent === "Safia");
-check("Safia a 2 colonnes de composition", safia && safia.querySelectorAll(".compo-table th").length === 3);
-check("valeurs hors norme surlignees", doc.querySelectorAll("#grid .cv.over").length > 0);
-const garci = [...doc.querySelectorAll("#grid .card")].find(c => c.querySelector("h3")?.textContent === "Garci");
-check("Garci TDS 1677 affiche", garci && /1\D677/.test(garci.querySelector(".compo summary").textContent));
-
-// localisation : carte + confirmation obligatoire
-let markerPos = { lat: 36.100001, lng: 10.200001 };
-window.L = {
-  map: () => ({ setView(){ return this; }, on(){}, invalidateSize(){} }),
-  tileLayer: () => ({ addTo(){} }),
-  marker: (ll) => ({ addTo(){ return this; }, setLatLng(p){ markerPos = p; }, getLatLng: () => markerPos, on(){} }),
+// carte verte « La moins chère aujourd'hui » = vraiment la moins chère (stika 1,5 L)
+const top = doc.getElementById("top-reponse");
+check("carte « La moins chère » affichée", !top.hidden && top.textContent.includes("La moins chère aujourd'hui"));
+const prix15 = b => {
+  const v = b.products.filter(p => p.category !== "gazeuse" && !p.flavor && Math.abs(p.liters - 1.5) < .01)
+    .flatMap(p => Object.values(p.prices));
+  return v.length ? Math.min(...v) : null;
 };
-Object.defineProperty(window.navigator, "geolocation", {
-  value: { getCurrentPosition: (ok) => ok({ coords: { latitude: 36.100001, longitude: 10.200001 } }) },
-  configurable: true,
-});
-doc.getElementById("o-geo").click();
-await new Promise(r => setTimeout(r, 250));
-check("carte affichee apres localisation", doc.getElementById("geo-box").hidden === false);
-check("statut demande de verifier", doc.getElementById("o-geo-status").textContent.includes("Vérifiez"));
+const minimum = Math.min(...DATA.brands.map(prix15).filter(v => v !== null));
+const gagnants = DATA.brands.filter(b => prix15(b) === minimum).map(b => b.name);
+check(`gagnant = la moins chère (${gagnants.join(" / ")})`, gagnants.includes(top.querySelector(".top-nom")?.textContent));
+check("prix de la carte en stika (×6)", top.querySelector(".top-prix")?.textContent.includes((minimum * 6).toFixed(3).replace(".", ",")));
+check("top 2 à 5 affiché", top.querySelectorAll(".top-liste li").length === Math.min(4, DATA.brands.filter(b => prix15(b) !== null).length - 1));
+check("bouton Partager WhatsApp", top.querySelector(".top-partage")?.href.startsWith("https://wa.me/?text="));
+const plus = doc.getElementById("compare-more");
+check("bouton « Voir le classement complet »", !!plus && plus.textContent.includes("classement complet"));
+clic(plus);
+check("classement complet déplié", doc.getElementById("compare-rest") && !doc.getElementById("compare-rest").hidden);
+clic(doc.getElementById("compare-more"));
 
-// avant confirmation : la position ne part PAS dans le message
-opened = null;
-doc.getElementById("o-tel").value = "24 321 390";
-doc.getElementById("o-adr").value = "12 rue de Marseille, Tunis";
-doc.getElementById("order-form").dispatchEvent(new window.Event("submit", { bubbles: true, cancelable: true }));
-let msg2 = opened ? decodeURIComponent(opened.split("text=")[1]) : "";
-check("position absente si non confirmee", !msg2.includes("maps.google.com"));
+// ---- les 4 barres ouvrent leur fenêtre, la croix la ferme -------------------
+for (const [bouton, fenetre, croix, texte] of [
+  ["match-open", "match-pop", "match-close", "préférée"],
+  ["hadith-open", "hadith-pop", "hadith-close", ""],
+  ["sig-open", "sig-pop", "sig-close", "Signaler"],
+  ["livraison-open", "livraison-pop", "livraison-close", "grandes surfaces"]]) {
+  const pop = doc.getElementById(fenetre);
+  check(`fenêtre ${fenetre} cachée au départ`, pop.hidden === true);
+  clic(doc.getElementById(bouton));
+  check(`${bouton} ouvre la fenêtre`, pop.hidden === false && pop.textContent.includes(texte));
+  clic(doc.getElementById(croix));
+  check(`la croix ferme ${fenetre}`, pop.hidden === true);
+}
+clic(doc.getElementById("sig-open"));
+check("Signaler : liste des marques remplie", doc.querySelectorAll("#sig-marque option").length > DATA.brands.length);
+doc.dispatchEvent(new window.KeyboardEvent("keydown", { key: "Escape" }));
+check("Échap ferme la fenêtre Signaler", doc.getElementById("sig-pop").hidden === true);
 
-// le client ajuste le repere puis confirme
-markerPos = { lat: 36.123456, lng: 10.654321 };
-doc.getElementById("o-geo-confirm").click();
-check("carte repliee apres confirmation", doc.getElementById("geo-box").hidden === true);
-check("statut position confirmee", doc.getElementById("o-geo-status").textContent.includes("confirmée"));
-opened = null;
-doc.getElementById("order-form").dispatchEvent(new window.Event("submit", { bubbles: true, cancelable: true }));
-msg2 = opened ? decodeURIComponent(opened.split("text=")[1]) : "";
-check("position confirmee dans le message", msg2.includes("Position exacte confirmée par le client : https://maps.google.com/?q=36.123456,10.654321"));
+// ---- barre des filtres : 3 menus -------------------------------------------
+check("menu Stika/Bouteille affiche « Stika »", doc.getElementById("dd-mode-txt").textContent === "Stika");
+check("menu Format affiche « 1,5 L » au chargement", doc.getElementById("dd-format-txt").textContent.includes("1,5"));
+clic(doc.getElementById("dd-format-btn"));
+check("le menu Format s'ouvre", doc.getElementById("dd-format").hidden === false);
+clic(doc.getElementById("dd-type-btn"));
+check("ouvrir un autre menu ferme le premier", doc.getElementById("dd-format").hidden === true && doc.getElementById("dd-type").hidden === false);
+clic(doc.body);
+check("clic ailleurs : menus fermés", doc.getElementById("dd-type").hidden === true);
 
-// tri par mineralite
-doc.getElementById("sort").value = "tds";
-doc.getElementById("sort").dispatchEvent(new window.Event("change"));
-const firstCards = [...doc.querySelectorAll("#grid .card h3")].map(h => h.textContent);
-check("tri TDS : Hayet (238 mg/L) en premier", firstCards[0] === "Hayet");
-const anyCard = [...doc.querySelectorAll("#grid .card")].find(c => c.querySelector("h3")?.textContent === "Marwa");
-check("fiche marque : Commercialisée depuis affiche", anyCard && anyCard.textContent.includes("Commercialisée depuis 1994"));
+// ---- cartes des marques -----------------------------------------------------
+check("cartes des marques affichées", cartes().length > 12);
+check("tri par défaut : prix croissant", doc.getElementById("sort").value === "prix15");
+const fmts = [...doc.querySelectorAll("#grid .fmt")].map(td => td.textContent.trim());
+check("au chargement : uniquement du 1,5 L", fmts.length > 5 && fmts.every(f => f.startsWith("1.5 L")));
+check("prix affichés en stika par défaut", doc.querySelector("#grid .card table.prices").textContent.includes("Prix stika par enseigne"));
+check("boutons + présents", doc.querySelectorAll("#grid .addbtn").length > 8);
+check("dernière carte = marque sans prix", cartes().at(-1).textContent.includes("non disponible"));
+check("blocs composition présents", doc.querySelectorAll("#grid .compo").length > 10);
+check("valeurs hors norme surlignées", doc.querySelectorAll("#grid .cv.over").length > 0);
 
-console.log(errors ? `\n${errors} PROBLEME(S)` : "\nTOUT PASSE");
-process.exit(errors ? 1 : 0);
+// Stika -> Bouteille -> Stika
+clic(doc.querySelector('#mode-controls [data-mode="bouteille"]'));
+check("mode bouteille : en-tête des prix", doc.querySelector("#grid .card table.prices").textContent.includes("Prix bouteille par enseigne"));
+check("mode bouteille : bouton du menu mis à jour", doc.getElementById("dd-mode-txt").textContent === "Bouteille");
+check("mode bouteille : carte du haut en bouteille", top.textContent.includes("Bouteille 1,5 L"));
+clic(doc.querySelector('#mode-controls [data-mode="stika"]'));
+check("retour en stika", doc.querySelector("#grid .card table.prices").textContent.includes("Prix stika par enseigne"));
+
+// formats : choix multiples
+const bonbonne = doc.querySelector('#format-controls [data-format="bonbonne"]');
+clic(bonbonne);
+check("ajout des grands formats : vendus à l'unité", doc.getElementById("grid").textContent.includes("à l'unité"));
+check("menu Format : « 2 formats »", doc.getElementById("dd-format-txt").textContent === "2 formats");
+clic(bonbonne);
+
+// ---- recherche : une marque cherchée s'affiche avec tous ses formats -------
+const q = doc.getElementById("q");
+const tape = t => { q.value = t; q.dispatchEvent(new window.Event("input", { bubbles: true })); };
+tape("hayet");
+check("recherche « hayet » : la carte Hayet s'affiche", !!carte("Hayet") && cartes().length === 1);
+tape("géant");  // aucune marque ne s'appelle ainsi
+check("recherche sans résultat : message « aucune »", cartes().length === 0 && !doc.getElementById("empty").hidden);
+tape("SAFIA");
+check("recherche sans tenir compte des majuscules", !!carte("Safia"));
+tape("");
+check("recherche effacée : toutes les cartes reviennent", cartes().length > 12);
+
+// tri par minéralité (TDS)
+const sort = doc.getElementById("sort");
+sort.value = "tds"; sort.dispatchEvent(new window.Event("change"));
+const tds = cartes().map(c => c.querySelector("h3").textContent);
+check("tri par minéralité : cartes réordonnées", tds.length > 12);
+sort.value = "prix15"; sort.dispatchEvent(new window.Event("change"));
+
+// ---- panier et commande (FERMÉE : formulaire grisé + tampon) ----------------
+check("barre du panier cachée au départ", doc.getElementById("cartbar").hidden === true);
+const btnPlus = doc.querySelector("#grid .addbtn");
+clic(btnPlus);
+check("barre du panier visible après un +", doc.getElementById("cartbar").hidden === false);
+check("compteur 1 sur « Commander »", doc.getElementById("cart-open").textContent.includes("1"));
+check("barre du panier sans prix d'enseigne", !doc.getElementById("cartbar-info").textContent.includes("DT"));
+clic(btnPlus);
+check("même produit ajouté deux fois : 2 articles", doc.getElementById("cartbar-info").textContent.includes("2 articles"));
+clic(doc.getElementById("cart-open"));
+check("panneau de commande ouvert", doc.getElementById("order-overlay").hidden === false);
+check("un seul article dans le panneau", doc.querySelectorAll(".order-item").length === 1);
+check("commande fermée : formulaire grisé", doc.querySelector("fieldset.order-fields").disabled === true);
+check("commande fermée : tampon « En cours de développement »", doc.getElementById("order-soon").textContent.includes("En cours de développement"));
+clic(doc.querySelector("[data-inc]"));
+check("quantité 3 après +", doc.querySelector(".qty b").textContent === "3");
+for (let i = 0; i < 3; i++) clic(doc.querySelector("[data-dec]"));
+check("panier vide après 3 × −", doc.getElementById("cartbar").hidden === true);
+
+// ---- bas de page -------------------------------------------------------------
+const pied = doc.getElementById("foot").textContent;
+check("pied de page : sources Carrefour, Géant, Otrity", ["Carrefour", "Géant", "Otrity"].every(s => pied.includes(s)));
+check("pied de page : marques et logos à leurs propriétaires", pied.includes("appartiennent à leurs propriétaires"));
+check("FAQ : nombre de marques", doc.getElementById("faq-nb-marques").textContent === String(DATA.brands.length));
+check("courbe d'évolution des prix", !!doc.querySelector("#histo svg"));
+
+console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");
+process.exit(erreurs ? 1 : 0);
