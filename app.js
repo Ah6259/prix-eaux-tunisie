@@ -197,7 +197,7 @@ function renderTop(){
   if (!rows.length){ box.hidden = true; return; }
   const stika = state.mode === "stika";
   const prix = v => fmtDT(stika ? v * 6 : v);
-  const unite = stika ? "la stika (6 × 1,5 L)" : "la bouteille 1,5 L";
+  const unite = stika ? "Stika (6 × 1,5 L)" : "Bouteille 1,5 L";
   const [g] = rows;
   box.innerHTML = `
     <div class="top-carte">
@@ -205,7 +205,7 @@ function renderTop(){
       <span class="top-label">💧 La moins chère aujourd'hui</span>
       <span class="top-ligne"><b class="top-nom">${g.b.name}</b>
         <b class="top-prix">${prix(g.m.prix)}</b></span>
-      <span class="top-detail">${unite} · chez ${g.m.magasins.join(", ")}</span>
+      <span class="top-detail">${unite} – ${g.m.magasins.join(", ")}</span>
     </a>
     <!-- petit bouton de partage WhatsApp, posé sous le prix (dans la carte verte) -->
     <a class="top-partage" target="_blank" rel="noopener" aria-label="Partager sur WhatsApp" title="Partager sur WhatsApp" href="https://wa.me/?text=${encodeURIComponent(
