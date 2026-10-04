@@ -41,12 +41,19 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Monoprix et Jumia exigent une vérification « humain » : **pas de contournement** (demander l'autorisation ou prix signalés).
   Relevé depuis le PC seulement si le site laisse passer un particulier.
 
+- **Règle (Ahmed, 04/10)** : chaque nouvelle enseigne ajoutée doit avoir **son logo officiel, dans ses couleurs**
+  (robot `logos.yml` avec le champ « sites », puis recadrage dans `assets/logos/` + entrée dans `LOGOS` d'app.js).
+- **Recherche quotidienne de nouvelles sources** (demande d'Ahmed, 04/10) : Routine Claude « Nouvelles sources de prix »
+  chaque matin ; carnet `tools/sources_a_explorer.md` ; test de lecture depuis GitHub par le robot `tester-source.yml`.
+  Elle propose, elle n'ajoute rien au site sans l'accord d'Ahmed.
+
 ## Robots (GitHub Actions)
 - `maj-prix.yml` ≈ 1h07 Tunis : collect_prices → price_drops (Telegram) → build_history → build_pages → commit.
 - `signalements.yml` toutes les 2 h de 8h05 à 22h05 : prix signalés (Google Forms → CSV) → site + Telegram.
 - `battement-de-coeur.yml` le 1er du mois (évite la pause GitHub après 60 jours sans activité).
 - `instagram.yml` chaque lundi 9h05 : `tools/image_semaine.py` → image 1080×1350 « les 5 stikas les moins chères »
   + texte (assets/instagram/) envoyés sur le canal Telegram ; Ahmed les repost sur Instagram.
+- `logos.yml` (manuel) : télécharge les logos d'une enseigne ; `tester-source.yml` (manuel) : vérifie si GitHub peut lire un site.
 - `telegram-bienvenue.yml` manuel. Groupe de concurrence commun `maj-prix`. Secret : `TELEGRAM_BOT_TOKEN`.
 - Relancer à la main : `gh workflow run maj-prix.yml -R Ah6259/prix-eaux-tunisie`.
 
