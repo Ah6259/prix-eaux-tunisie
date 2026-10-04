@@ -3,7 +3,10 @@
 Tout ce qui ressemble à un logo est rangé dans assets/logos/brut/ ; on choisit ensuite le bon."""
 import re, subprocess, pathlib, urllib.parse
 
-SITES = {
+import os
+# Sites à visiter : par défaut les enseignes suivies ; sinon la liste donnée au lancement
+# (champ « sites » du robot logos.yml, ex. « geant=https://www.geant.tn/ monoprix=https://www.monoprix.tn/ »).
+SITES = dict(x.split("=", 1) for x in os.environ.get("SITES", "").split()) or {
     "carrefour": "https://www.carrefour.tn/",
     "geant": "https://www.geantdrive.tn/",
     "otrity": "https://otrity.com/",
@@ -27,6 +30,7 @@ def telecharger(url, sortie=None):
 
 
 for nom, base in SITES.items():
+    nom = nom + "-" + urllib.parse.urlparse(base).netloc.replace("www.", "").replace(".", "_")
     print("==", nom, base)
     html = telecharger(base)
     if not html:

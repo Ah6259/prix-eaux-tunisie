@@ -2,6 +2,11 @@ name: Chercher les logos des enseignes
 
 on:
   workflow_dispatch:        # lancement manuel seulement
+    inputs:
+      sites:
+        description: "Sites à visiter, ex. « geant=https://www.geant.tn/ » (vide = enseignes suivies)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -19,6 +24,8 @@ jobs:
         with:
           python-version: "3.12"
       - name: Télécharger les logos depuis les sites des enseignes
+        env:
+          SITES: ${{ inputs.sites }}
         run: python tools/chercher_logos.py
       - name: Enregistrer les fichiers trouvés
         run: |
