@@ -10,3 +10,6 @@ tools/otrity_local.log
 
 # listes privées (fournisseurs, livreurs, commandes) — ne pas publier
 prive/
+
+# preuves datées des conditions d'utilisation des sites sources — privé, ne pas publier
+preuves conditions d'utilisation/

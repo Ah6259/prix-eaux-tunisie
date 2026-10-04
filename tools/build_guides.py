@@ -16,6 +16,13 @@ def _esc(s):
     return str(s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+# Mention des sources en bas de chaque page (les CGU de Carrefour demandent de citer la source)
+SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
+                '<a href="https://www.carrefour.tn" rel="noopener">Carrefour Tunisie</a> · '
+                '<a href="https://www.geantdrive.tn" rel="noopener">Géant Drive</a> · '
+                '<a href="https://otrity.com" rel="noopener">Otrity</a>. '
+                'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
+
 NOMS_COLONNES = {"na": "Sodium", "tds": "Résidu sec", "ca": "Calcium", "mg": "Magnésium"}
 
 
@@ -68,6 +75,7 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
 <footer><div class="wrap">
   <a href="../">Comparateur des prix de l'eau en Tunisie</a> · <a href="../prix-stika/">Prix de la stika</a> ·
   <a href="../quelle-eau/">Quelle eau choisir ?</a>
+  <p>{SOURCES_HTML}</p>
   <p class="copyright">© 2026 Prix des Eaux de Tunisie — tous droits réservés.</p>
 </div></footer>
 </body>

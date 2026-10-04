@@ -549,7 +549,8 @@ document.getElementById("foot").innerHTML =
   `Prix indicatifs relevés le ${new Date(DATA.updated + "T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}
    sur les boutiques en ligne — ils peuvent varier selon le magasin et la date. Sources :
    ${DATA.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${s.name}</a>`).join(" · ")}.
-   Projet personnel — les visuels de bouteilles proviennent des catalogues des enseignes.`;
+   Projet personnel — les visuels de bouteilles proviennent des catalogues des enseignes ;
+   les noms, marques et logos des enseignes appartiennent à leurs propriétaires.`;
 
 /* ========================================================================= */
 /* Commande : panier + envoi WhatsApp                                        */

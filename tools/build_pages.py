@@ -12,6 +12,9 @@ import urllib.parse
 from datetime import date
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_guides import SOURCES_HTML  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://ah6259.github.io/prix-eaux-tunisie"
 
@@ -166,6 +169,7 @@ def page_marque(b):
 <footer><div class="wrap">
   <a href="../../">Comparateur des prix de l'eau en Tunisie</a> — 35 marques, mis à jour chaque jour ·
   <a href="../../prix-stika/">Prix de la stika aujourd'hui</a> · <a href="../../quelle-eau/">Quelle eau choisir ?</a>
+  <p>{SOURCES_HTML}</p>
   <p class="copyright">© 2026 Prix des Eaux de Tunisie — tous droits réservés.</p>
 </div></footer>
 </body>
