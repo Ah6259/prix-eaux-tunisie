@@ -90,7 +90,7 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 ## Interface (état au 04/10/2026)
 - En haut : titre + bouton « Alertes / PROMO » (Telegram), ligne « Mis à jour le… · N marques · N enseignes ».
 - **Identité** (retour des visiteurs : le site doit dire ce qu'il est) : prix des magasins tunisiens, **indicatifs**,
-  relevés dans les grandes surfaces et épiceries en ligne + prix signalés ; pour la future livraison, **le prix final
+  relevés dans les grandes surfaces et épiceries en ligne + prix signalés ; pour la future commande, **le prix final
   dépendra du fournisseur et du stock au moment de la livraison**.
 - **La réponse sans clic** : carte verte « 💧 La moins chère aujourd'hui » (stika ou bouteille 1,5 L ; ligne courte
   « Stika (6 × 1,5 L) – Géant » ; petit bouton vert « ➦ Partager » WhatsApp sous le prix, 04/10) + top 5, puis
