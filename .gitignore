@@ -13,3 +13,5 @@ prive/
 
 # preuves datées des conditions d'utilisation des sites sources — privé, ne pas publier
 preuves conditions d'utilisation/
+
+node_modules/

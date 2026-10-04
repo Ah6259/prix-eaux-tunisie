@@ -126,15 +126,15 @@ doc.querySelector('#mode-controls [data-mode="stika"]').click();
 check("retour mode stika", doc.querySelector("#grid .card table.prices").textContent.includes("Prix stika par enseigne"));
 check("le + est en premiere colonne", doc.querySelector("#grid .card table.prices tr:nth-child(2) td").className.includes("addc"));
 
-// filtre par format
-const chip15 = doc.querySelector('#format-controls [data-format="1.5"]');
-check("puces de format presentes", doc.querySelectorAll("#format-controls .chipbtn").length === 6);
-chip15.click();
+// filtre par format (choix multiples ; 1,5 L coché au chargement)
+check("puces de format presentes", doc.querySelectorAll("#format-controls .chipbtn[data-format]").length >= 4);
+check("1,5 L coche au chargement", doc.querySelector('#format-controls [data-format="1.5"]').getAttribute("aria-pressed") === "true");
 const fmts = [...doc.querySelectorAll("#grid .fmt")].map(td => td.textContent.trim());
 check("filtre 1,5 L : uniquement du 1,5 L", fmts.length > 5 && fmts.every(f => f.startsWith("1.5 L")));
-doc.querySelector('#format-controls [data-format="bonbonne"]').click();
+const chipBonbonne = doc.querySelector('#format-controls [data-format="bonbonne"]');
+chipBonbonne.click();
 check("filtre grands formats : vendus a l unite", doc.getElementById("grid").textContent.includes("à l'unité"));
-doc.querySelector('#format-controls [data-format=""]').click();
+chipBonbonne.click();
 
 // composition
 check("blocs composition presents", doc.querySelectorAll("#grid .compo").length > 15);
