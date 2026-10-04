@@ -1,0 +1,34 @@
+name: Tester une source de prix
+
+# Lancement manuel : vérifie si les serveurs GitHub peuvent lire un site
+# (code HTTP, blocage Cloudflare/captcha, robots.txt, mots « eau / prix » trouvés).
+# Utilisé par la recherche quotidienne de nouvelles sources. Ne modifie rien.
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: "Adresses à tester, séparées par des espaces"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  tester:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tester chaque adresse
+        env:
+          URLS: ${{ inputs.urls }}
+        run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36"
+          for u in $URLS; do
+            echo "=================== $u"
+            code=$(curl -sSL -m 30 -A "$UA" -o page.html -w "%{http_code}" "$u" || curl -sSLk -m 30 -A "$UA" -o page.html -w "%{http_code}" "$u" || echo ERREUR)
+            echo "CODE HTTP : $code   TAILLE : $(wc -c < page.html 2>/dev/null) octets"
+            grep -qiE "just a moment|cf-chl|captcha|are you human|verify you are" page.html 2>/dev/null && echo "BLOCAGE ANTI-ROBOT DÉTECTÉ"
+            echo "TITRE : $(grep -oiE '<title[^>]*>[^<]*' page.html | head -1 | sed 's/<title[^>]*>//')"
+            echo "MOTS : eau=$(grep -oiE '\beau\b|\beaux\b' page.html | wc -l) prix/DT=$(grep -oiE 'prix|[0-9],[0-9]{3} ?(dt|tnd)|TND' page.html | wc -l) safia=$(grep -oi safia page.html | wc -l) wp-json=$(grep -oi wp-json page.html | wc -l) graphql=$(grep -oi graphql page.html | wc -l)"
+            base=$(echo "$u" | grep -oE '^https?://[^/]+')
+            echo "--- robots.txt :"; curl -sSL -m 15 -A "$UA" "$base/robots.txt" | head -25
+          done
