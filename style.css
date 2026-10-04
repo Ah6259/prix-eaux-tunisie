@@ -751,3 +751,10 @@ section:has(> #match-open){padding-bottom:6px}
 .logo-ens{height:1.15em; width:auto; vertical-align:-0.2em; display:inline-block}
 .logo-mot{height:1.45em; vertical-align:-0.38em}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .logo-mot{background:#fff; border-radius:4px; padding:1px 3px} }
+
+/* fenêtre Coran + hadith : deux parties (versets, puis paroles du Prophète ﷺ) */
+.coran-h3{font-family:"Amiri","Amiri Quran",serif; font-weight:700; color:var(--accent); font-size:19px; text-align:center; margin:16px 0 8px}
+#hadith-pop .hadith + .hadith{margin-top:10px}
+#hadith-pop .hadith{padding:14px 18px 12px}
+#hadith-pop .hadith-text{font-size:clamp(18px, 3vw, 24px); line-height:2}
+.hadith.ayat .hadith-text{font-family:"Amiri Quran","Scheherazade New",serif}

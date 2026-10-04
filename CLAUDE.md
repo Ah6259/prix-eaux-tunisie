@@ -103,7 +103,7 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
   « Stika (6 × 1,5 L) – Géant » ; petit bouton vert « ➦ Partager » WhatsApp sous le prix, 04/10) + top 5, puis
   « Voir le classement complet » (renderCompare dans #compare). Le prix le moins cher n'est affiché QU'ICI.
 - Quatre barres (même style, une ligne sur téléphone) qui ouvrent une FENÊTRE : « ❤️ L'eau préférée des clients » (vote seul),
-  hadith, « 📍 Signaler un prix vu en magasin », « 🚚 Commande & livraison BIENTÔT » (explique la future commande :
+  « ۞ الماء في القرآن الكريم والحديث النبوي » (bouton « اقرأ » → versets du Coran puis hadiths sur l'eau, en arabe, 04/10), « 📍 Signaler un prix vu en magasin », « 🚚 Commande & livraison BIENTÔT » (explique la future commande :
   ce ne sont PAS les grandes surfaces qui livrent, grossistes/dépôts partenaires à leurs prix, 4 étapes, alerte d'ouverture).
   Les petits boutons-étiquettes ont été retirés (03/10 : en double et hors du premier écran).
 - Telegram des prix signalés : UN message court par passage (une ligne par prix + lien « Signaler un prix »).

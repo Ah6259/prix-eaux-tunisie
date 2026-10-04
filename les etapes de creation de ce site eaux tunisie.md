@@ -208,3 +208,7 @@ pour créer n'importe quel autre site.
 | Formspree | formulaire d'avis / contact (messages reçus par email) |
 | Telegram (canal + robot BotFather) | alertes automatiques aux abonnés |
 | GitHub Secrets | coffre-fort pour les codes secrets (tokens) |
+
+- **Coran et hadith sur l'eau (04/10/2026)** : la barre du hadith devient « الماء في القرآن الكريم والحديث النبوي » ;
+  le bouton « اقرأ » ouvre une fenêtre avec d'abord des versets du Coran sur l'eau (sourate et numéro du verset),
+  puis des paroles du Prophète ﷺ (avec leur source). Toujours vérifier le texte arabe et la référence avant d'en ajouter.
