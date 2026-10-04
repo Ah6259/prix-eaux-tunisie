@@ -319,8 +319,14 @@ function brandNature(b){
   return w && w[0] ? NATURES[String(w[0].cat)] : null;
 }
 
+// recherche sans tenir compte des accents ni des majuscules (« delice » trouve « Délice »)
+const sansAccent = s => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
 function render(){
-  const q = state.q.trim().toLowerCase();
+  const q = sansAccent(state.q.trim());
+  // quand on cherche une marque par son nom : elle s'affiche toujours, avec TOUS ses formats,
+  // même si les filtres (format 1,5 L par défaut, type d'eau) l'auraient cachée
+  const recherche = q.length > 0;
   const fmtsSel = FORMATS.filter(f => state.formats.includes(f.id));
   const fmtOk = p => !fmtsSel.length || fmtsSel.some(f => f.test(p));
   const natSel = state.types.filter(t => t !== "gazeuse");
@@ -333,11 +339,11 @@ function render(){
       // tous ses formats (aucune eau de table n'existe en 1,5 L, le format par défaut)
       const sansFmt = natSel.includes("table") && brandNature(b) === "table";
       return { b, parNature, prods: b.products.filter(p =>
-        (sansFmt || fmtOk(p)) && (parNature || (gazSel && p.category === "gazeuse")) &&
-        Object.keys(p.prices).length > 0) };
+        Object.keys(p.prices).length > 0 &&
+        (recherche || ((sansFmt || fmtOk(p)) && (parNature || (gazSel && p.category === "gazeuse"))))) };
     })
     .filter(({ b, parNature, prods }) => {
-      if (q && !b.name.toLowerCase().includes(q)) return false;
+      if (recherche) return sansAccent(b.name).includes(q);
       const typeOk = parNature || (gazSel && b.types.includes("gazeuse"));
       if (!typeOk) return false;
       if (!b.products.length)  // marque sans prix relevé : toujours affichée
