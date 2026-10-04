@@ -212,3 +212,6 @@ pour créer n'importe quel autre site.
 - **Coran et hadith sur l'eau (04/10/2026)** : la barre du hadith devient « الماء في القرآن الكريم والحديث النبوي » ;
   le bouton « اقرأ » ouvre une fenêtre avec d'abord des versets du Coran sur l'eau (sourate et numéro du verset),
   puis des paroles du Prophète ﷺ (avec leur source). Toujours vérifier le texte arabe et la référence avant d'en ajouter.
+- **Ligne sous le titre (04/10/2026)** : pour dire que le site ne sert pas qu'aux prix, on garde le nom
+  « Prix des Eaux de Tunisie » (Google le connaît) et on ajoute dessous « Comparer les prix · Commander (bientôt) ·
+  Se faire livrer ». Sur téléphone, elle passe à la ligne entre les morceaux, jamais au milieu d'un mot.

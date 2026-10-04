@@ -96,6 +96,8 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 
 ## Interface (état au 04/10/2026)
 - En haut : titre + bouton « Alertes / PROMO » (Telegram), ligne « Mis à jour le… · N marques · N enseignes ».
+  Sous le titre (04/10) : `p.slogan` « Comparer les prix · Commander (bientôt) · Se faire livrer » — nom du site gardé
+  (référencement Google). Retirer « (bientôt) » à la réouverture de la commande.
 - **Identité** (retour des visiteurs : le site doit dire ce qu'il est) : prix des magasins tunisiens, **indicatifs**,
   relevés dans les grandes surfaces et épiceries en ligne + prix signalés ; pour la future commande, **le prix final
   dépendra du fournisseur et du stock au moment de la livraison**.
