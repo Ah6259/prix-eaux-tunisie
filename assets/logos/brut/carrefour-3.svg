@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="fr-FR" data-image-optimizing-origin="auto" data-media-backend="https://back.carrefour.tn/media/"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="apple-touch-icon" sizes="180x180" href="/carrefour-static/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/carrefour-static/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/carrefour-static/favicons/favicon-16x16.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#da532c"><meta name="theme-color" content="#ffffff"><link rel="icon" type="image/x-icon" href="/carrefour-static/favicons/favicon.ico"><link rel="manifest" href="/carrefour-static/manifest.json"><link rel="preconnect" href="https://back.carrefour.tn"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><meta name="robots" content="index,follow"><script defer="defer" src="/runtime.a452626eb9cd11d5c653.js"></script><script defer="defer" src="/vendors.383682a533abf280933a.js"></script><script defer="defer" src="/client.234f49dee832b62ec4c9.js"></script></head><body class="bg-body text-base text-colorDefault"><div id="root"></div><noscript><style>.fallback-nojs {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                .fallback-nojs a {
+                    color: currentColor;
+                }
+
+                .fallback-closed {
+                    height: 40vh;
+                }
+
+                .fallback-heading {
+                    font-family: 'Source Serif Pro';
+                    font-weight: 600;
+                    padding-bottom: 16px;
+                    font-size: xx-large;
+                }
+
+                .fallback-message {
+                    font-family: 'Muli';
+                }
+
+                @media only screen and (max-width: 768px) {
+                    .fallback-heading {
+                        font-size: x-large;
+                    }
+                }</style><div class="fallback-nojs"><img class="fallback-closed" alt="JavaScript is disabled" src="/carrefour-static/icons/carrefour_maskable_512.png"><div class="fallback-heading">Oops! JavaScript est désactivé</div><div class="fallback-message">Pour naviguer sur Carrefour,<br><a href="https://www.enable-javascript.com">Activer JavaScript sur votre navigateur.</a></div></div></noscript><script nonce="{{pageTypeNonce}}">try {
+                var INLINED_PAGE_TYPE = JSON.parse(
+                    '{{pageType}}'.replace(/&quot;/g, '"')
+                );
+            } catch (error) {}</script></body></html>
