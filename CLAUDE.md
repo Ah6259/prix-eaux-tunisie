@@ -105,6 +105,10 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 - Droits : LICENSE « tous droits réservés » + mention © en pied de page.
 - **Barre des filtres (04/10, demande d'Ahmed)** : 3 boutons sur une ligne (Stika/Bouteille · Type d'eau · Format),
   chacun ouvre un petit panneau (`.dd` / `.dd-panel`) ; le bouton affiche le choix actuel. Le tri est au-dessus de la liste des marques.
+- **Logos des enseignes (04/10)** devant le nom du magasin (`LOGOS` / `enseigne()` dans app.js, fichiers `assets/logos/`) :
+  Carrefour = icône + nom ; Géant = le mot « Géant » du logo à la place du texte. Téléchargés depuis les sites par le robot
+  manuel `logos.yml` (`tools/chercher_logos.py`). Otrity : bloqué pour GitHub → `tools/otrity_local.py` rapporte une fois
+  `assets/logos/otrity.png` depuis le PC (sinon le nom reste en texte).
 - Prochaine amélioration conseillée : cartes compactes.
 - **Règle** : demander l'accord d'Ahmed avant de modifier le site (sauf s'il dit « fais »).
 

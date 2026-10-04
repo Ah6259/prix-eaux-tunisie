@@ -28,6 +28,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import collect_prices  # noqa: E402
 
 OUT = ROOT / "data" / "otrity.json"
+LOGO = ROOT / "assets" / "logos" / "otrity.png"   # logo affiché sur le site devant « Otrity »
 LOG = ROOT / "tools" / "otrity_local.log"
 GH = r"C:\Program Files\GitHub CLI\gh.exe"
 REPO = "Ah6259/prix-eaux-tunisie"
@@ -47,6 +48,25 @@ def git(*args):
     return r.stdout
 
 
+def chercher_logo():
+    """Une seule fois : l'icône officielle du site Otrity (WordPress la donne dans /wp-json/).
+    Ne bloque jamais le relevé des prix si ça échoue."""
+    if LOGO.exists():
+        return False
+    try:
+        info = json.loads(collect_prices.http_get("https://otrity.com/wp-json/"))
+        url = info.get("site_icon_url")
+        if not url:
+            raise RuntimeError("pas d'icône déclarée")
+        LOGO.parent.mkdir(parents=True, exist_ok=True)
+        LOGO.write_bytes(collect_prices.http_get(url))
+        log(f"logo Otrity téléchargé ({url})")
+        return True
+    except Exception as e:
+        log(f"logo Otrity non trouvé : {e}")
+        return False
+
+
 def main():
     try:
         collect_prices.RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -60,14 +80,18 @@ def main():
     OUT.write_text(json.dumps({"date": datetime.date.today().isoformat(), "offres": offres},
                               ensure_ascii=False, indent=1), encoding="utf-8")
     log(f"{len(offres)} offres Otrity relevées")
+    nouveau_logo = chercher_logo()
 
     try:
         git("pull", "--rebase", "--autostash", "origin", "main")
         git("add", "data/otrity.json")
+        if nouveau_logo:
+            git("add", str(LOGO))
         if subprocess.run(["git", "-C", str(ROOT), "diff", "--cached", "--quiet"]).returncode == 0:
             log("aucun changement à envoyer")
             return
-        git("commit", "-m", f"Relevé Otrity depuis le PC ({datetime.date.today()})", "--", "data/otrity.json")
+        git("commit", "-m", f"Relevé Otrity depuis le PC ({datetime.date.today()})", "--", "data/otrity.json",
+            *([str(LOGO)] if nouveau_logo else []))
         git("push", "origin", "main")
         log("envoyé sur GitHub")
         subprocess.run([GH, "workflow", "run", "maj-prix.yml", "-R", REPO], check=True, capture_output=True)

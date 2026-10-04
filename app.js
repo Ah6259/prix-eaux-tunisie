@@ -73,6 +73,21 @@ function compoBlock(b){
 // écrit par collect_prices.py). Comparée à la date du jour du visiteur : même si tous les
 // robots s'arrêtaient, le site préviendrait que les prix sont anciens.
 const NOMS_SRC = { carrefour: "Carrefour", geant: "Géant", otrity: "Otrity" };
+// logos officiels des enseignes (assets/logos/), affichés devant le nom du magasin.
+// Géant : le logo est le mot « Géant » lui-même, il remplace le texte.
+// Otrity : logo rapporté par le PC d'Ahmed (Cloudflare bloque GitHub) ; s'il manque, on garde le texte.
+const LOGOS = {
+  "Carrefour": { src: "assets/logos/carrefour.png" },
+  "Géant":     { src: "assets/logos/geant.png", mot: true },
+  "Otrity":    { src: "assets/logos/otrity.png" },
+};
+function enseigne(nom){
+  const l = LOGOS[nom];
+  if (!l) return nom;
+  if (l.mot) return `<img class="logo-ens logo-mot" src="${l.src}" alt="${nom}" title="${nom}">`;
+  return `<span class="ens"><img class="logo-ens" src="${l.src}" alt="" onerror="this.remove()">${nom}</span>`;
+}
+const enseignes = liste => liste.map(enseigne).join(", ");
 const STATUT = DATA.statut_sources || {};
 const dateCourte = d => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
 const joursDepuis = d => Math.floor((Date.now() - new Date(d + "T12:00:00")) / 864e5);
@@ -166,7 +181,7 @@ function prodRow(p, b){
   const offers = Object.entries(p.prices)
     .sort((a,z) => a[1] - z[1])
     .map(([s,v]) => `<span class="offer${multi && best.includes(s) ? " best" : ""}">
-        <span class="store">${s}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>`)
+        <span class="store">${enseigne(s)}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>`)
     .join("");
   const label = p.format +
                 (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
@@ -205,7 +220,7 @@ function renderTop(){
       <span class="top-label">💧 La moins chère aujourd'hui</span>
       <span class="top-ligne"><b class="top-nom">${g.b.name}</b>
         <b class="top-prix">${prix(g.m.prix)}</b></span>
-      <span class="top-detail">${unite} – ${g.m.magasins.join(", ")}</span>
+      <span class="top-detail">${unite} – ${enseignes(g.m.magasins)}</span>
     </a>
     <!-- petit bouton de partage WhatsApp, posé sous le prix (dans la carte verte) -->
     <a class="top-partage" target="_blank" rel="noopener" aria-label="Partager sur WhatsApp" title="Partager sur WhatsApp" href="https://wa.me/?text=${encodeURIComponent(
@@ -213,7 +228,7 @@ function renderTop(){
     </div>
     <ol class="top-liste" start="2">${rows.slice(1, 5).map(r => `
       <li><a href="#m-${r.b.id}"><span class="top-n">${r.b.name}</span>
-        <span class="top-p">${prix(r.m.prix)}</span><small>${r.m.magasins.join(", ")}</small></a></li>`).join("")}
+        <span class="top-p">${prix(r.m.prix)}</span><small>${enseignes(r.m.magasins)}</small></a></li>`).join("")}
     </ol>
 `;
   box.hidden = false;
@@ -274,7 +289,7 @@ function renderDerniersSignales(){
     const stika = state.mode === "stika" && s.litres <= GRAND_FORMAT;
     const vu = new Date(s.date + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
     return `<li><b>${s.marque || nomMarque(s.id)} ${String(s.litres).replace(".", ",")} L${s.type === "gazeuse" ? " gazeuse" : ""}</b>
-      · ${s.magasin}${s.lieu ? ` <small>(${s.lieu})</small>` : ""} :
+      · ${enseigne(s.magasin)}${s.lieu ? ` <small>(${s.lieu})</small>` : ""} :
       <b class="sig-prix">${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? " la stika" : ""}
       <small>· vu le ${vu}${s.nb > 1 ? ` · confirmé par ${s.nb} visiteurs` : ""}</small></li>`;
   }).join("") + `</ul>`;
@@ -288,7 +303,7 @@ function signalesBlock(b){
   const lignes = recents.map(s => {
     const stika = state.mode === "stika" && s.litres <= GRAND_FORMAT;
     const vu = new Date(s.date + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
-    return `<li>${s.magasin}${s.lieu ? ` <small>(${s.lieu})</small>` : ""} · ${String(s.litres).replace(".", ",")} L${s.type === "gazeuse" ? " gazeuse" : ""} :
+    return `<li>${enseigne(s.magasin)}${s.lieu ? ` <small>(${s.lieu})</small>` : ""} · ${String(s.litres).replace(".", ",")} L${s.type === "gazeuse" ? " gazeuse" : ""} :
       <b>${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? " la stika" : ""} <small>· vu le ${vu}${s.nb > 1 ? ` · confirmé par ${s.nb} visiteurs` : ""}</small></li>`;
   }).join("");
   return `<div class="signales">
