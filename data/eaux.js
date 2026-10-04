@@ -1239,7 +1239,7 @@ window.EAUX_DATA = {
    "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-10-03",
+   "dernier_ok": "2026-10-04",
    "nb": 10
   }
  }
