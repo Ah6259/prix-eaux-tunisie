@@ -26,13 +26,8 @@ SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
 CSS_V = "20261005u"
 
-# Logo (goutte blanche dans un carré bleu) : même dessin que l'en-tête de l'accueil
-LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" '
-            'x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1499C7"/><stop offset="1" stop-color="#0A5F80"/>'
-            '</linearGradient></defs><rect width="40" height="40" rx="11" fill="url(#lg-eau{n})"/>'
-            '<path d="M20 6.5S10.5 19.3 10.5 25.6a9.5 9.5 0 0 0 19 0C29.5 19.3 20 6.5 20 6.5z" fill="#fff"/>'
-            '<path d="M15.4 26.2a4.8 4.8 0 0 0 2.5 4.1" fill="none" stroke="#9FD3E8" stroke-width="2.2" '
-            'stroke-linecap="round"/></svg>')
+# Logo (goutte en aplats dans un carré bleu, comme l'icône du téléphone) : même dessin que l'en-tête de l'accueil
+LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1797C4"/><stop offset="1" stop-color="#0A5F80"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg-eau{n})"/><path d="M256 84C256 84 142 236 142 318a114 114 0 0 0 228 0C370 236 256 84 256 84Z" fill="#fff"/><path d="M256 84C256 84 370 236 370 318a114 114 0 0 1-114 114Z" fill="#D5EEF7"/><path d="M150 336Q203 306 256 336T362 336Q356 410 256 432Q156 410 150 336Z" fill="#7FCBE6"/><path d="M256 336Q309 366 362 336Q356 410 256 432Z" fill="#5DB7D9"/></svg>')
 
 ICONE_WA = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 '
             '12 2zm4.6 12.1c-.3-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 '
