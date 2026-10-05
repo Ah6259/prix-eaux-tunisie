@@ -174,6 +174,11 @@ check("bandeau : crédit et licence de la photo affichés", !!credit && /Photo/.
       && credit.textContent.includes("Wikimedia Commons") && !!credit.querySelector('a[rel~="license"]'));
 const creditPied = doc.querySelector("footer .credit-pied")?.textContent || "";
 check("pied de page : crédit de la photo", creditPied.includes("Photo") && LICENCE.test(creditPied));
+// photo du bandeau NEUTRE (aucune marque : sinon les visiteurs croient à une publicité) — déclarée par le nom de fichier
+check("bandeau : photo déclarée NEUTRE, sans marque (fichiers photo-neutre-*)", fichiersBande.length >= 2 && fichiersBande.every(f => /^assets\/photo-neutre-[a-z0-9-]+\.jpg$/.test(f)));
+check("bandeau : crédit de l'auteur affiché sur la photo et dans le pied de page", !!credit && /Shixart1985/.test(credit.textContent) && /Shixart1985/.test(creditPied));
+check("plus aucune ancienne photo de marques (photo-eaux-tunisie*) dans le dépôt ni dans la page", !existsSync(join(root, "assets/photo-eaux-tunisie.jpg"))
+  && !existsSync(join(root, "assets/photo-eaux-tunisie-720.jpg")) && !lire("index.html").includes("photo-eaux-tunisie"));
 // preuves (dossier ignoré par git) : vérifiées sur le PC d'Ahmed, absentes sur GitHub
 const dossierPreuves = join(root, "preuves conditions d'utilisation");
 const lisezMoi = existsSync(dossierPreuves) ? readdirSync(dossierPreuves).map(d => join(dossierPreuves, d, "photos", "LISEZ-MOI.md"))
@@ -185,10 +190,12 @@ else check("preuve de licence de la photo sauvegardée", !!credit?.dataset.sourc
 const guides = ["prix-stika/index.html", "quelle-eau/index.html"];
 const marques = readdirSync(join(root, "marque")).map(m => `marque/${m}/index.html`).filter(f => existsSync(join(root, f)));
 // WhatsApp n'affiche la GRANDE image d'aperçu que si le fichier pèse moins d'environ 300 Ko : JPEG léger obligatoire
-const og = existsSync(join(root, "assets/og-image-v5.jpg")) ? readFileSync(join(root, "assets/og-image-v5.jpg")) : Buffer.alloc(0);
-check("image d'aperçu og-image-v5.jpg : JPEG de moins de 250 Ko (grande image sur WhatsApp)", og.length > 0 && og.length < 250 * 1024 && og[0] === 0xFF && og[1] === 0xD8);
-check("accueil et guides : image d'aperçu v5", ["index.html", ...guides].every(f => lire(f).includes("assets/og-image-v5.jpg")));
-check("plus aucune référence aux anciennes images d'aperçu (v2, v3, v4)", ["index.html", ...guides, "tools/build_guides.py"].every(f => !/og-image-v[234]/.test(lire(f))));
+const og = existsSync(join(root, "assets/og-image-v6.jpg")) ? readFileSync(join(root, "assets/og-image-v6.jpg")) : Buffer.alloc(0);
+check("image d'aperçu og-image-v6.jpg : JPEG de moins de 250 Ko (grande image sur WhatsApp)", og.length > 0 && og.length < 250 * 1024 && og[0] === 0xFF && og[1] === 0xD8);
+check("accueil, guides et pages marques : image d'aperçu v6 en JPEG (og:image:type)", ["index.html", ...guides, ...marques].every(f => lire(f).includes("assets/og-image-v6.jpg")
+  && lire(f).includes('<meta property="og:image:type" content="image/jpeg">')));
+check("plus aucune référence aux anciennes images d'aperçu (v2 à v5)", ["index.html", ...guides, ...marques, "tools/build_guides.py", "tools/build_pages.py"].every(f => !/og-image-v[2345]/.test(lire(f)))
+  && !existsSync(join(root, "assets/og-image-v5.jpg")));
 
 // ---- sécurité, robots d'IA et anti-copie (consigne d'Ahmed du 05/10/2026) --------------------------
 const robots = lire("robots.txt");
@@ -209,6 +216,8 @@ sur("referrer strict-origin-when-cross-origin", s => s.includes('<meta name="ref
 sur("script anti-copie protection.js chargé", s => /<script src="(\.\.\/)*protection\.js\?v=/.test(s));
 sur("CSP présente, sans script en ligne permis", s => /http-equiv="Content-Security-Policy" content="[^"]*script-src 'self'/.test(s) && !/script-src[^;]*unsafe/.test(s));
 sur("aucun script dans la page (bloqué par la CSP)", s => !/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>/.test(s) && !/<[a-z]+ [^>]*\son(error|load|click)=/.test(s));
+sur("aucun gestionnaire d'événement en ligne (attribut on…=, bloqué par la CSP)", s => !/<[a-z][^>]*\son[a-z]+\s*=/i.test(s));
+check("app.js ne génère aucun attribut on…= dans son HTML (bloqué par la CSP)", !/\son[a-z]+=["'`]/.test(lire("app.js")));
 sur("statistiques GoatCounter (sans cookies) chargées, CSP compatible", s => s.includes('<script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>')
   && /script-src[^;]*https:\/\/gc\.zgo\.at/.test(s) && /connect-src[^;]*https:\/\/prix-eaux-tunisie\.goatcounter\.com/.test(s) && /img-src[^;]*https:\/\/prix-eaux-tunisie\.goatcounter\.com/.test(s));
 // manifeste : id UNIQUE = chemin du site (tous les sites d'Ahmed partagent ah6259.github.io ; sinon « déjà installée »)

@@ -136,6 +136,14 @@ def page_marque(b):
 <title>{titre}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{SITE}/marque/{bid}/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{SITE}/marque/{bid}/">
+<meta property="og:title" content="{titre}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:image" content="{SITE}/assets/og-image-v6.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <link rel="icon" type="image/svg+xml" href="../../assets/icons/icon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="../../style.css?v={CSS_V}">

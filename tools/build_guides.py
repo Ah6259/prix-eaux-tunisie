@@ -24,7 +24,7 @@ SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
-CSS_V = "20261005r"
+CSS_V = "20261005s"
 
 # Logo (goutte blanche dans un carré bleu) : même dessin que l'en-tête de l'accueil
 LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" '
@@ -106,8 +106,10 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
 <link rel="canonical" href="{SITE}/{chemin}/">
 <meta property="og:title" content="{_esc(titre)}">
 <meta property="og:description" content="{_esc(description)}">
-<meta property="og:image" content="{SITE}/assets/og-image-v5.jpg">
+<meta property="og:image" content="{SITE}/assets/og-image-v6.jpg">
 <meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <link rel="icon" type="image/svg+xml" href="../assets/icons/icon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="../style.css?v={CSS_V}">

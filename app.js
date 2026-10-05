@@ -85,8 +85,17 @@ function enseigne(nom){
   const l = LOGOS[nom];
   if (!l) return nom;
   if (l.mot) return `<img class="logo-ens logo-mot" src="${l.src}" alt="${nom}" title="${nom}">`;
-  return `<span class="ens"><img class="logo-ens" src="${l.src}" alt="" onerror="this.remove()">${nom}</span>`;
+  return `<span class="ens"><img class="logo-ens" src="${l.src}" alt="">${nom}</span>`;
 }
+// logo introuvable : on retire l'image (le nom reste écrit). Écouteur global en phase de capture
+// (l'événement « error » d'une image ne remonte pas) : aucun gestionnaire écrit dans le HTML (attribut « on… »), interdit par la CSP.
+document.addEventListener("error", e => {
+  const t = e.target;
+  if (t && t.matches && t.matches("img.logo-ens")) {
+    if (t.classList.contains("logo-mot")) t.replaceWith(document.createTextNode(t.alt || ""));
+    else t.remove();
+  }
+}, true);
 const enseignes = liste => liste.map(enseigne).join(", ");
 const STATUT = DATA.statut_sources || {};
 const dateCourte = d => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });

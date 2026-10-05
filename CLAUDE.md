@@ -28,16 +28,19 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
 - Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification.**
-- Image d'aperçu des liens partagés : `assets/og-image-v5.jpg` (05/10 : texte à gauche + photo nette des bouteilles tunisiennes à droite), volontairement **sans nombre de marques ni noms de magasins**
+- Image d'aperçu des liens partagés : `assets/og-image-v6.jpg` (05/10 : texte à gauche + photo NEUTRE de l'eau versée à droite ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
 
-- **Photo du bandeau bleu (05/10, refaite le soir car floue)** : photo NETTE prise en Tunisie, en bande AU-DESSUS du texte
-  (`figure.hero-bande`, `assets/photo-eaux-tunisie.jpg` 1440 px + `-720.jpg`) : étiquettes de 5 bouteilles tunisiennes
-  (Melina, Dima, Cristaline, Aqualine, Fourat) recadrées et assemblées ; « Tunisie Eaux minérales.jpg », M. Rais, domaine public,
-  Wikimedia Commons. Rien par-dessus (pas de dégradé ni de flou) ; texte un peu resserré sur téléphone pour que la carte
-  « La moins chère » ne descende pas. Crédit sur la photo (`.credit-photo`) et dans le pied de page ; preuve dans
-  `preuves conditions d'utilisation/2026-10-05/photos/` (ignoré par git).
+- **Photo du bandeau bleu (05/10)** — **RÈGLE (Ahmed) : photo SANS AUCUNE MARQUE, NEUTRE** (sinon les visiteurs croient à une
+  publicité : l'ancienne montrait 5 marques), sans visage ni logo lisible, et NETTE (la photo floue du rayon n'était « pas claire »).
+  Actuelle : eau versée d'une bouteille sans étiquette dans un verre (« Person pours water from a bottle into a glass in a kitchen.jpg »,
+  Shixart1985, **CC BY 2.0** → crédit obligatoire), recadrée en bande AU-DESSUS du texte (`figure.hero-bande`,
+  `assets/photo-neutre-eau-versee.jpg` 1440×173 + `-720.jpg` ; le test exige des fichiers `photo-neutre-*`).
+  Rien par-dessus (pas de dégradé ni de flou) ; crédit en haut à droite de la photo (`.credit-photo`) et dans le pied de page ;
+  preuve dans `preuves conditions d'utilisation/2026-10-05/photos/` (ignoré par git). La carte « La moins chère » ne doit pas descendre.
+- **CSP : aucun gestionnaire en ligne** (`onerror=`, `onclick=`… interdits, bloqués par la CSP) : app.js utilise un écouteur
+  global (ex. logo d'enseigne introuvable → `document.addEventListener("error", …, true)`) ; vérifié par test_site.mjs.
 - **Pas de traduction automatique (05/10)** : `translate="no"` sur `<html>` + `<meta name="google" content="notranslate">`
   sur toutes les pages (index.html et gabarits de build_guides.py / build_pages.py) — Chrome traduisait en anglais les pages FR/AR.
 - **Sécurité / anti-copie (05/10, consigne d'Ahmed)** : robots.txt interdit les robots d'IA et aspirateurs (moteurs de recherche permis) ;

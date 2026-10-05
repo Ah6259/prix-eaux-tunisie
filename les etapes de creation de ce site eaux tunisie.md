@@ -227,3 +227,14 @@ pour créer n'importe quel autre site.
   Nouvelle image d'aperçu `og-image-v4.png`.
 - **Empêcher Chrome de traduire le site (05/10/2026)** : une page FR + AR trompe Chrome, qui proposait l'anglais.
   `translate="no"` sur `<html>` et `<meta name="google" content="notranslate">` sur toutes les pages ; vérifié par le test.
+- **Photo du bandeau NEUTRE, sans marque (05/10/2026)** : retour d'Ahmed « on voit 5 marques, les visiteurs vont croire
+  que c'est de la publicité ». Règle : la photo d'un comparateur ne montre **aucune marque ni logo lisible**, ni visage.
+  Recherche sur Wikimedia Commons (API, mots « water poured into glass »…), choix d'une photo nette d'eau versée d'une
+  bouteille sans étiquette dans un verre (CC BY 2.0 : crédit obligatoire, « recadrée »), preuve de licence sauvegardée
+  (HTML, PDF, métadonnées, SHA-256, Internet Archive). Bande 1440×173 + 720 px recadrée avec Pillow (fichiers `photo-neutre-*`,
+  ~25 Ko), crédit déplacé en haut à droite pour ne pas cacher le verre. Captures 340/390 px avant/après : la carte
+  « La moins chère » reste au même endroit. Nouvelle image d'aperçu `og-image-v6.jpg` (texte + photo neutre, 84 Ko),
+  ajoutée aussi aux 35 pages marques (qui n'en avaient pas). Le test vérifie le nom `photo-neutre-*` et le crédit.
+- **Gestionnaire « onerror » bloqué par la CSP (05/10/2026)** : depuis l'ajout de la Content-Security-Policy, un attribut
+  `onerror="…"` écrit dans le HTML est refusé (erreur dans la console). Remplacé par un écouteur global
+  `document.addEventListener("error", …, true)` ; le test refuse tout attribut `on…=` dans les pages et dans app.js.

@@ -795,12 +795,12 @@ header.site{background:var(--surface); box-shadow:0 1px 0 var(--line),0 4px 14px
 .hero .identite-2{opacity:.92; margin-top:6px; line-height:1.5}
 .hero .identite-ar{color:rgba(255,255,255,.85); margin-top:8px}
 .chevauche{margin-top:-32px; position:relative}
-/* vraie photo NETTE (bouteilles tunisiennes, domaine public) en bandeau AU-DESSUS du texte : rien par-dessus,
+/* vraie photo NETTE et NEUTRE (eau versée, aucune marque) en bandeau AU-DESSUS du texte : rien par-dessus,
    le texte blanc reste sur le bleu uni. Téléphone : pleine largeur ; ordinateur : dans la colonne, coins arrondis. */
 .hero-photo{position:relative; padding-top:0}
 .hero-bande{position:relative; margin:0 0 9px; background:#fff}
 .hero-bande img{display:block; width:100%; height:auto; aspect-ratio:1440/173; object-fit:cover}
-.credit-photo{position:absolute; right:3px; bottom:2px; margin:0; padding:0 5px; border-radius:5px; font-size:8.5px;
+.credit-photo{position:absolute; right:3px; top:2px; margin:0; padding:0 5px; border-radius:5px; font-size:8.5px;
   line-height:1.4; color:#fff; background:rgba(4,40,56,.6)}
 .credit-photo a{color:inherit; text-decoration:underline}
 @media (min-width:700px){
