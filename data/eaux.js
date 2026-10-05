@@ -1099,8 +1099,7 @@ window.EAUX_DATA = {
      "img": "assets/img/safia_15l.jpg",
      "prices": {
       "Carrefour": 0.43,
-      "Géant": 0.43,
-      "Otrity": 0.5167
+      "Géant": 0.43
      }
     },
     {
@@ -1253,8 +1252,8 @@ window.EAUX_DATA = {
    "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-10-04",
-   "nb": 10
+   "dernier_ok": "2026-10-05",
+   "nb": 9
   }
  }
 };
