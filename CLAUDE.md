@@ -193,3 +193,13 @@ Outils pratiques, Appels d'offres, Code de la route, Documents Tunisie, + site r
 vérification Google Search Console). Dans le dossier parent `_claude code project\` : `nouveau site - procedure.md`
 (procédure pour tout nouveau site), `regles communes a tous les sites.md`, `securite commune - consigne.md`,
 `liste des idees de sites.md`. Toute remarque d'Ahmed sur un site s'applique à tous.
+
+## Mise à jour du 05/10/2026 (soir)
+- **Icône (famille commune des 5 sites)** : un seul symbole en aplats 2-3 tons, accent doré `#F2B33D`, sans texte ni brillance (règle d'Ahmed : jamais d'effet « image IA » ni de clip-art). Ce site : **goutte (blanc / bleu clair, eau en bas)**. Source = `assets/icons/icon.svg` ; PNG 192/512 = dessin arrondi, maskable 512 et iPhone 180 = même dessin sur carré plein, symbole à 78 %. Générateur (hors dépôt) : `_claude code project/icones des sites - generateur.py`. Changer l'icône → renouveler `CACHE_VERSION` de `sw.js`.
+- **« Gratuit » mis en avant** (titres Google, descriptions, aperçus de partage, manifeste), seulement là où c'est vrai. La future partie payante n'est jamais annoncée à l'avance (décision d'Ahmed).
+- **Aperçus WhatsApp** : tous les sites sont réglés pareil (1200 × 630, JPEG léger). WhatsApp sur PC fait de petites vignettes : envoyer les liens depuis le téléphone (ou transférer un message préparé sur le téléphone).
+- **Règle d'Ahmed : tout tourne sur internet (GitHub), sans son PC ni son intervention, « même s'il meurt ».**
+- Logo d'en-tête = même goutte, en ligne dans index.html et dans `LOGO_SVG` de `tools/build_guides.py` (pages marques et guides).
+- Icône adaptative Android dédiée : `assets/icons/icon-maskable-512.png` (le manifeste ne réutilise plus icon-512).
+- Titres : « comparateur gratuit » (accueil, 35 pages marques via build_pages.py, guides via build_guides.py).
+- Reste dépendant du PC : relevé Otrity (Cloudflare bloque GitHub) → chercher une autre source accessible depuis GitHub.

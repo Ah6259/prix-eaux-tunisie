@@ -210,3 +210,6 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - Marques manquantes : Hayet, Jannet (autres formats), Aïn Mizeb, Bulla Régia…
 - Version PWA installable sur téléphone (manifest + service worker impossible en artifact,
   mais possible une fois hébergé, ex. GitHub Pages)
+
+## Nouveautés
+- 05/10/2026 : nouvelle icône (goutte, famille commune des sites) et mention « comparateur gratuit » dans Google.

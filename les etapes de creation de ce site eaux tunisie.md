@@ -250,3 +250,5 @@ pour créer n'importe quel autre site.
 - **Mise à jour générale (05/10/2026)** : voir la section « Mise à jour du 05/10/2026 » de CLAUDE.md. Pour un NOUVEAU
   site, suivre `_claude code project
 ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
+
+- **05/10/2026 (soir)** : nouvelle icône goutte (même famille que les autres sites, logo d'en-tête compris) ; « comparateur gratuit » dans les titres Google. Envoyer les liens WhatsApp depuis le téléphone pour avoir la grande image.
