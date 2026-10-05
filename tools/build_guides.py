@@ -196,7 +196,7 @@ def page_prix_stika(data, SITE, maj_fr):
     return _gabarit(SITE, "prix-stika",
                     f"Prix de la stika d'eau en Tunisie aujourd'hui — {g['name']} à {_dt(pg * 6)}",
                     f"Prix de la stika d'eau minérale en Tunisie le {maj_fr} : la moins chère est {g['name']} "
-                    f"à {_dt(pg * 6)}. Comparatif de toutes les marques, mis à jour chaque jour.",
+                    f"à {_dt(pg * 6)}. Comparatif gratuit de toutes les marques, mis à jour chaque jour.",
                     "Prix de la stika d'eau aujourd'hui", corps, jsonld,
                     f"ثمن ستيكة الماء في تونس اليوم — أرخص ستيكة: {_iso(g['name'])} بـ {_iso(_dt(pg * 6))}", maj=maj_fr)
 
@@ -246,7 +246,7 @@ def page_quelle_eau(data, COMPO, SITE, maj_fr):
     return _gabarit(SITE, "quelle-eau",
                     "Quelle eau minérale choisir en Tunisie ? Bébé, peu salée, calcium, magnésium",
                     "Quelle eau minérale choisir en Tunisie : eaux pauvres en sodium (bébé, régime sans sel), "
-                    "eaux légères, riches en calcium ou en magnésium, avec leur prix de la stika.",
+                    "eaux légères, riches en calcium ou en magnésium, avec leur prix de la stika. Guide gratuit.",
                     "Quelle eau minérale choisir ?", corps, None,
                     "أي ماء معدني أختار في تونس؟ ماء للرضيع، قليل الملح، غني بالكالسيوم", maj=maj_fr)
 

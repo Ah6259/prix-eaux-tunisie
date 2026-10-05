@@ -95,7 +95,7 @@ def page_marque(b):
            if p["category"] == "plate" and abs(p["liters"] - 1.5) < .01 and p["prices"]]
     if c15:
         prix15 = min(c15)
-    desc = (f"Prix de l'eau {nom} en Tunisie : bouteille et stika chez Géant, Carrefour et Otrity, "
+    desc = (f"Comparateur gratuit : prix de l'eau {nom} en Tunisie, bouteille et stika chez Géant, Carrefour et Otrity, "
             f"mis à jour chaque jour."
             + (f" 1,5 L à partir de {fmt_dt(prix15).replace(chr(160), ' ')}." if prix15 else "")
             + (f" Source : {b['source']}." if b.get("source") else "")
@@ -109,8 +109,8 @@ def page_marque(b):
                       f'<a href="{esc(cr["page"])}" rel="noopener">Photo : {esc(cr["source"])}</a>, '
                       f'<a href="{esc(cr["licence_url"])}" rel="license noopener">CC BY-SA</a></figcaption></figure>')
     # le prix de la stika dans le titre Google : donne envie de cliquer dans les résultats
-    titre = (f"Prix {esc(nom)} en Tunisie — stika 1,5 L à {fmt_dt(prix15 * 6)} | Prix des Eaux de Tunisie"
-             if prix15 else f"Prix {esc(nom)} en Tunisie — bouteille &amp; stika | Prix des Eaux de Tunisie")
+    titre = (f"Prix {esc(nom)} en Tunisie — stika 1,5 L à {fmt_dt(prix15 * 6)} | comparateur gratuit"
+             if prix15 else f"Prix {esc(nom)} en Tunisie — bouteille &amp; stika | comparateur gratuit")
     iso = lambda x: "⁨" + x + "⁩"   # mots latins isolés dans la phrase arabe
     ar = (f"سعر ماء {iso(esc(nom))} في تونس — ستيكة 1,5 لتر ابتداءً من {iso(fmt_dt(prix15 * 6))}" if prix15
           else f"سعر ماء {iso(esc(nom))} في تونس")
