@@ -184,9 +184,9 @@ else check("preuve de licence de la photo sauvegardée", !!credit?.dataset.sourc
 // ---- image d'aperçu des liens partagés : v4, sans nombre de marques ni noms de magasins -------------
 const guides = ["prix-stika/index.html", "quelle-eau/index.html"];
 const marques = readdirSync(join(root, "marque")).map(m => `marque/${m}/index.html`).filter(f => existsSync(join(root, f)));
-check("image d'aperçu og-image-v4.png présente (1200 × 630)", existsSync(join(root, "assets/og-image-v4.png")) &&
-  readFileSync(join(root, "assets/og-image-v4.png")).readUInt32BE(16) === 1200 && readFileSync(join(root, "assets/og-image-v4.png")).readUInt32BE(20) === 630);
-check("accueil et guides : image d'aperçu v4", ["index.html", ...guides].every(f => lire(f).includes("assets/og-image-v4.png")));
+check("image d'aperçu og-image-v5.jpg présente (1200 × 630)", existsSync(join(root, "assets/og-image-v5.jpg")) &&
+  readFileSync(join(root, "assets/og-image-v5.jpg")).readUInt32BE(16) === 1200 && readFileSync(join(root, "assets/og-image-v5.jpg")).readUInt32BE(20) === 630);
+check("accueil et guides : image d'aperçu v4", ["index.html", ...guides].every(f => lire(f).includes("assets/og-image-v5.jpg")));
 check("plus aucune référence aux anciennes images d'aperçu (v2, v3)", ["index.html", ...guides, "tools/build_guides.py"].every(f => !/og-image-v[23]/.test(lire(f))));
 
 // ---- sécurité, robots d'IA et anti-copie (consigne d'Ahmed du 05/10/2026) --------------------------
@@ -208,6 +208,8 @@ sur("referrer strict-origin-when-cross-origin", s => s.includes('<meta name="ref
 sur("script anti-copie protection.js chargé", s => /<script src="(\.\.\/)*protection\.js\?v=/.test(s));
 sur("CSP présente, sans script en ligne permis", s => /http-equiv="Content-Security-Policy" content="[^"]*script-src 'self'/.test(s) && !/script-src[^;]*unsafe/.test(s));
 sur("aucun script dans la page (bloqué par la CSP)", s => !/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>/.test(s) && !/<[a-z]+ [^>]*\son(error|load|click)=/.test(s));
+sur("statistiques GoatCounter (sans cookies) chargées, CSP compatible", s => s.includes('<script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>')
+  && /script-src[^;]*https:\/\/gc\.zgo\.at/.test(s) && /connect-src[^;]*https:\/\/prix-eaux-tunisie\.goatcounter\.com/.test(s) && /img-src[^;]*https:\/\/prix-eaux-tunisie\.goatcounter\.com/.test(s));
 sur("liens externes en rel=\"noopener\"", s => [...s.matchAll(/<a [^>]*href="https?:\/\/[^"]+"[^>]*>/g)].every(m => /rel="[^"]*noopener/.test(m[0])));
 // la CSP autorise tout ce qu'utilisent la page et app.js (sinon formulaires, statistiques ou carte cassés)
 const csp = lire("index.html").match(/Content-Security-Policy" content="([^"]+)"/)[1];

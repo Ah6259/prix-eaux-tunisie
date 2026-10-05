@@ -28,7 +28,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
 - Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification.**
-- Image d'aperçu des liens partagés : `assets/og-image-v4.png` (05/10 : texte à gauche + photo nette des bouteilles tunisiennes à droite), volontairement **sans nombre de marques ni noms de magasins**
+- Image d'aperçu des liens partagés : `assets/og-image-v5.jpg` (05/10 : texte à gauche + photo nette des bouteilles tunisiennes à droite), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
 
@@ -93,7 +93,9 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Rouvrir : retirer `disabled` + le tampon, remettre « prix et livraison confirmés sur WhatsApp » dans app.js.
   À la réouverture : ajouter aussi la carte publique des gouvernorats desservis (nombre de fournisseurs PARTENAIRES
   par gouvernorat, jamais de noms ni d'adresses) — décision d'Ahmed, pas avant.
-- « Votre avis » : Formspree (mwlpakqj). Statistiques : GoatCounter.
+- « Votre avis » : Formspree (mwlpakqj). Statistiques : GoatCounter (sans cookies) sur l'accueil, les pages marques et
+  les guides (balise dans `pied()` de build_guides.py). Le même compteur `prix-eaux-tunisie.goatcounter.com` sert aussi
+  aux autres sites d'Ahmed (outils pratiques, appels d'offres, code de la route, documents, portail), séparés par chemin.
 - Grossistes : 494 grossistes actifs trouvés au Registre National des Entreprises (API publique `rne-api`, recherche par activité),
   classés par gouvernorat et fiabilité ★. Téléphones : robot Google Places du dépôt privé (clé dans ses secrets).
 - Fournisseurs / livreurs : **dépôt PRIVÉ `Ah6259/dispatch-eau-prive`** (dossier local `../dispatch-eau-prive`,
