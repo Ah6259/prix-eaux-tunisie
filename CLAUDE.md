@@ -153,6 +153,26 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 - Prochaine amélioration conseillée : cartes compactes.
 - **Règle** : demander l'accord d'Ahmed avant de modifier le site (sauf s'il dit « fais »).
 
+## Mise à jour du 05/10/2026 (design pro, photos, sécurité, installation)
+- **Design pro** : en-tête blanc avec logo, bandeau bleu avec la photo NEUTRE (eau versée dans un verre, sans aucune
+  marque : sinon les visiteurs croient à de la publicité), badges de confiance, icônes SVG, pied de page complet.
+  Retour en arrière possible : tag git `avant-design-pro`.
+- **Photos des bouteilles** : catalogues des magasins ; pour les marques sans magasin, photos LIBRES d'Open Food Facts
+  (`data/photos_libres.json`, appliquées par `appliquer_photos_libres()` dans collect_prices.py, crédit affiché) :
+  Tiba, Royal. Sans photo libre : Aziz, Bulla Régia, Saha, Rayan (Rayan serait devenue Élixir en 2015 → à confirmer).
+- **Tri par résidu sec** : le filtre de format ne retire aucune marque (Hayet, vendue seulement en 1 L, est 1re).
+- **Sécurité** : CSP stricte en meta (aucun script en ligne ni attribut `on…=`), meta noai, `protection.js`
+  (anti-copie légère, anti-iframe), robots.txt COMMUN au site racine ah6259.github.io (robots d'IA interdits).
+- **Installation sur téléphone** : `manifest.webmanifest` avec `"id": "/prix-eaux-tunisie/"`, service worker `sw.js`
+  (réseau d'abord, cache seulement hors connexion), meta iPhone ; testé (`tools/test_sw.mjs`).
+- **Partage** : image d'aperçu JPEG < 250 Ko (`og-image-v6.jpg`, sinon WhatsApp montre une petite vignette), aussi sur
+  les 35 pages marques ; pas de traduction automatique (`translate="no"` + meta notranslate).
+- **Statistiques** GoatCounter sur toutes les pages (le même compteur sert aux 5 sites, séparés par chemin).
+- **Tests** : `node tools/test_site.mjs`, `node tools/test_sw.mjs`, `python tools/test_pannes.py` (18 scénarios), lancés
+  aussi par `tests.yml` à chaque envoi.
+- **Reste à faire (audit du 05/10)** : alerte quand une source de prix tombe en panne ; `data/baisses.js` manquant (404) ;
+  texte Google « livrer à domicile » alors que la commande est fermée ; logo Otrity 404 ; `.gitattributes`.
+
 ## Visibilité (03/10/2026)
 - Trafic : ~50 % Google, ~50 % Instagram. Partage WhatsApp : petit bouton « Partager » sur l'accueil ; gros bouton sur les pages marques et guides.
 - Pages guides générées chaque nuit par `tools/build_guides.py` (appelé par build_pages) : `prix-stika/` (FR+AR, FAQ JSON-LD)

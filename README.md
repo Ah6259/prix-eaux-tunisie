@@ -12,7 +12,11 @@ l'épicerie en ligne **Otrity**, complétés par les **prix signalés par les vi
 Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
 (Ancienne version privée Claude : https://claude.ai/artifact/N4YgHUrDQegTPn69Z77DCv)
 
-## Contenu actuel (04/10/2026)
+## Contenu actuel (05/10/2026)
+
+> 05/10 : design pro, photo neutre, photos libres des marques sans magasin, sécurité (CSP, noai, anti-copie),
+> site installable (manifeste + service worker), Votre avis, GoatCounter, aperçu WhatsApp léger. Détails : CLAUDE.md.
+
 
 - 35 marques (26 avec prix), ~95 prix relevés chaque jour (Carrefour, Géant, Otrity)
 - Carte « 💧 La moins chère aujourd'hui » (« Stika (6 × 1,5 L) – Géant ») + petit bouton « Partager »

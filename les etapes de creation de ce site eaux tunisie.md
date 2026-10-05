@@ -247,3 +247,6 @@ pour créer n'importe quel autre site.
 - **Gestionnaire « onerror » bloqué par la CSP (05/10/2026)** : depuis l'ajout de la Content-Security-Policy, un attribut
   `onerror="…"` écrit dans le HTML est refusé (erreur dans la console). Remplacé par un écouteur global
   `document.addEventListener("error", …, true)` ; le test refuse tout attribut `on…=` dans les pages et dans app.js.
+- **Mise à jour générale (05/10/2026)** : voir la section « Mise à jour du 05/10/2026 » de CLAUDE.md. Pour un NOUVEAU
+  site, suivre `_claude code project
+ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
