@@ -162,9 +162,13 @@ check("courbe d'évolution des prix", !!doc.querySelector("#histo svg"));
 const LICENCE = /CC BY-SA \d\.\d|CC BY \d\.\d|CC0|domaine public/;
 const css = lire("style.css");
 const hero = doc.querySelector(".hero.hero-photo");
-const photo = (css.match(/\.hero-photo\{[^}]*url\("([^"]+)"\)/) || [])[1];
-check("bandeau : vraie photo derrière le texte (fichier présent)", !!hero && !!photo && /\.(jpe?g|webp)$/.test(photo) && existsSync(join(root, photo)));
-check("bandeau : photo légère (≤ 150 Ko)", !!photo && existsSync(join(root, photo)) && statSync(join(root, photo)).size <= 150_000);
+const imgBande = hero?.querySelector(".hero-bande img");
+const fichiersBande = imgBande ? [imgBande.getAttribute("src"), ...(imgBande.getAttribute("srcset") || "").split(",").map(s => s.trim().split(/\s+/)[0])].filter(Boolean) : [];
+const photo = fichiersBande[0];
+check("bandeau : vraie photo NETTE au-dessus du texte (fichiers présents, texte alternatif)", !!hero && fichiersBande.length >= 1 &&
+  fichiersBande.every(f => /\.(jpe?g|webp)$/.test(f) && existsSync(join(root, f))) && (imgBande.getAttribute("alt") || "").length > 10);
+check("bandeau : photo légère (≤ 150 Ko chaque fichier)", fichiersBande.length >= 1 && fichiersBande.every(f => existsSync(join(root, f)) && statSync(join(root, f)).size <= 150_000));
+check("bandeau : photo pas noyée (aucun dégradé ni flou par-dessus)", !/\.hero-photo\{[^}]*url\(/.test(css) && !/\.hero-bande[^{]*\{[^}]*(filter|blur)/.test(css));
 const credit = hero?.querySelector(".credit-photo");
 check("bandeau : crédit et licence de la photo affichés", !!credit && /Photo/.test(credit.textContent) && LICENCE.test(credit.textContent)
       && credit.textContent.includes("Wikimedia Commons") && !!credit.querySelector('a[rel~="license"]'));
@@ -177,12 +181,13 @@ const lisezMoi = existsSync(dossierPreuves) ? readdirSync(dossierPreuves).map(d 
 if (lisezMoi === null) console.log("SAUTÉ preuve de licence de la photo (dossier des preuves absent, normal sur GitHub)");
 else check("preuve de licence de la photo sauvegardée", !!credit?.dataset.source && lisezMoi.includes(credit.dataset.source));
 
-// ---- image d'aperçu des liens partagés : v3, sans nombre de marques ni noms de magasins -------------
+// ---- image d'aperçu des liens partagés : v4, sans nombre de marques ni noms de magasins -------------
 const guides = ["prix-stika/index.html", "quelle-eau/index.html"];
 const marques = readdirSync(join(root, "marque")).map(m => `marque/${m}/index.html`).filter(f => existsSync(join(root, f)));
-check("image d'aperçu og-image-v3.png présente", existsSync(join(root, "assets/og-image-v3.png")));
-check("accueil et guides : image d'aperçu v3", ["index.html", ...guides].every(f => lire(f).includes("assets/og-image-v3.png")));
-check("plus aucune référence à og-image-v2", ["index.html", ...guides, "tools/build_guides.py"].every(f => !lire(f).includes("og-image-v2")));
+check("image d'aperçu og-image-v4.png présente (1200 × 630)", existsSync(join(root, "assets/og-image-v4.png")) &&
+  readFileSync(join(root, "assets/og-image-v4.png")).readUInt32BE(16) === 1200 && readFileSync(join(root, "assets/og-image-v4.png")).readUInt32BE(20) === 630);
+check("accueil et guides : image d'aperçu v4", ["index.html", ...guides].every(f => lire(f).includes("assets/og-image-v4.png")));
+check("plus aucune référence aux anciennes images d'aperçu (v2, v3)", ["index.html", ...guides, "tools/build_guides.py"].every(f => !/og-image-v[23]/.test(lire(f))));
 
 // ---- sécurité, robots d'IA et anti-copie (consigne d'Ahmed du 05/10/2026) --------------------------
 const robots = lire("robots.txt");
@@ -198,6 +203,7 @@ const toutesPages = ["index.html", ...guides, ...marques];
 const sur = (desc, test) => { const ko = toutesPages.filter(f => !test(lire(f), f));
   check(`${desc} (${toutesPages.length} pages)${ko.length ? " — manque : " + ko.slice(0, 3).join(", ") : ""}`, ko.length === 0); };
 sur("meta noai, noimageai", s => s.includes('<meta name="robots" content="noai, noimageai">'));
+sur("pas de traduction automatique (translate=\"no\" + meta google notranslate)", s => /<html lang="fr" translate="no">/.test(s) && s.includes('<meta name="google" content="notranslate">'));
 sur("referrer strict-origin-when-cross-origin", s => s.includes('<meta name="referrer" content="strict-origin-when-cross-origin">'));
 sur("script anti-copie protection.js chargé", s => /<script src="(\.\.\/)*protection\.js\?v=/.test(s));
 sur("CSP présente, sans script en ligne permis", s => /http-equiv="Content-Security-Policy" content="[^"]*script-src 'self'/.test(s) && !/script-src[^;]*unsafe/.test(s));

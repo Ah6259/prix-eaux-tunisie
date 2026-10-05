@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" translate="no">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://prix-eaux-tunisie.goatcounter.com; connect-src 'self' https://docs.google.com https://formspree.io https://prix-eaux-tunisie.goatcounter.com; form-action 'self' https://docs.google.com https://formspree.io; object-src 'none'; base-uri 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -19,7 +20,7 @@
 <meta property="og:title" content="Prix des Eaux de Tunisie">
 <meta property="og:description" content="Compare les prix de 35 marques d'eau minérale (bouteille et stika) chez Géant, Carrefour et Otrity. Mis à jour chaque jour.">
 <meta property="og:url" content="https://ah6259.github.io/prix-eaux-tunisie/">
-<meta property="og:image" content="https://ah6259.github.io/prix-eaux-tunisie/assets/og-image-v3.png">
+<meta property="og:image" content="https://ah6259.github.io/prix-eaux-tunisie/assets/og-image-v4.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="fr_TN">
@@ -92,7 +93,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261005q">
+<link rel="stylesheet" href="style.css?v=20261005r">
 </head>
 <body>
 
@@ -211,7 +212,13 @@
 
 <!-- identité du site : dès le premier écran, ce que le site est (et n'est pas) — bandeau bleu -->
 <div class="hero hero-photo">
-  <p class="credit-photo" data-source="https://commons.wikimedia.org/wiki/File:%D0%9F%D0%BE%D0%BB%D0%BA%D0%B0_%D1%81_%D0%BF%D0%B8%D1%82%D1%8C%D0%B5%D0%B2%D0%BE%D0%B9_%D0%B2%D0%BE%D0%B4%D0%BE%D0%B9_%D0%B2_%D0%BC%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD%D0%B5.jpg">Photo : <a href="https://commons.wikimedia.org/wiki/File:%D0%9F%D0%BE%D0%BB%D0%BA%D0%B0_%D1%81_%D0%BF%D0%B8%D1%82%D1%8C%D0%B5%D0%B2%D0%BE%D0%B9_%D0%B2%D0%BE%D0%B4%D0%BE%D0%B9_%D0%B2_%D0%BC%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD%D0%B5.jpg" rel="noopener">JustKronos</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0</a>, Wikimedia Commons</p>
+  <!-- vraie photo NETTE prise en Tunisie (bouteilles de marques tunisiennes, domaine public), en bandeau au-dessus du texte -->
+  <figure class="hero-bande">
+    <img src="assets/photo-eaux-tunisie.jpg" srcset="assets/photo-eaux-tunisie-720.jpg 720w, assets/photo-eaux-tunisie.jpg 1440w"
+      sizes="(min-width:700px) 1048px, 100vw" width="1440" height="173" fetchpriority="high" decoding="async"
+      alt="Bouteilles d'eau minérale tunisiennes : Melina, Dima, Cristaline, Aqualine, Fourat">
+    <figcaption class="credit-photo" data-source="https://commons.wikimedia.org/wiki/File:Tunisie_Eaux_min%C3%A9rales.jpg">Photo <a href="https://commons.wikimedia.org/wiki/File:Tunisie_Eaux_min%C3%A9rales.jpg" rel="noopener">M. Rais</a> · <a href="https://commons.wikimedia.org/wiki/Template:PD-self" rel="license noopener">domaine public</a> · Wikimedia Commons</figcaption>
+  </figure>
   <div class="wrap">
   <p class="intro identite">Les <strong>prix de l'eau dans les magasins tunisiens</strong>, comparés chaque jour.
   <span class="identite-2">Prix <b>indicatifs</b> relevés dans les grandes surfaces et épiceries en ligne, complétés par les prix que vous signalez.
@@ -384,7 +391,7 @@
     <a href="#avis">Votre avis</a></nav>
     <h2 class="pied-titre" id="sources">Sources des prix</h2>
     <div class="pied-sources" id="foot"></div>
-    <p class="credit-pied">Photo du bandeau : rayon d'eau en bouteille, <a href="https://commons.wikimedia.org/wiki/File:%D0%9F%D0%BE%D0%BB%D0%BA%D0%B0_%D1%81_%D0%BF%D0%B8%D1%82%D1%8C%D0%B5%D0%B2%D0%BE%D0%B9_%D0%B2%D0%BE%D0%B4%D0%BE%D0%B9_%D0%B2_%D0%BC%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD%D0%B5.jpg" rel="noopener">JustKronos</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0</a> (domaine public), Wikimedia Commons, recadrée et adoucie.</p>
+    <p class="credit-pied">Photo du bandeau : bouteilles d'eau minérale tunisiennes (Tunisie, 2010), <a href="https://commons.wikimedia.org/wiki/File:Tunisie_Eaux_min%C3%A9rales.jpg" rel="noopener">M. Rais</a>, <a href="https://commons.wikimedia.org/wiki/Template:PD-self" rel="license noopener">domaine public</a>, Wikimedia Commons ; étiquettes recadrées et assemblées en bandeau.</p>
     <p class="copyright">© 2026 Prix des Eaux de Tunisie — tous droits réservés. Reproduction du site,
     de son code ou de ses données interdite sans autorisation.</p>
   </div>
@@ -590,8 +597,8 @@
 <script src="data/baisses.js"></script>
 <script src="data/votes.js"></script>
 <script src="data/signalements.js?v=20260930a"></script>
-<script src="protection.js?v=20261005q"></script>
-<script src="app.js?v=20261005q"></script>
+<script src="protection.js?v=20261005r"></script>
+<script src="app.js?v=20261005r"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

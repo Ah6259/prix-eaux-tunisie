@@ -28,14 +28,18 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
 - Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification.**
-- Image d'aperçu des liens partagés : `assets/og-image-v3.png` (05/10 : avec la photo du rayon), volontairement **sans nombre de marques ni noms de magasins**
+- Image d'aperçu des liens partagés : `assets/og-image-v4.png` (05/10 : texte à gauche + photo nette des bouteilles tunisiennes à droite), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
 
-- **Photo du bandeau bleu (05/10)** : vraie photo discrète derrière le texte (`.hero-photo`, `assets/photo-rayon-eau.jpg`,
-  rayon d'eau en bouteille, JustKronos, CC0, Wikimedia Commons, recadrée + léger flou pour rendre les étiquettes illisibles).
-  Crédit en haut à droite du bandeau (`.credit-photo`) et dans le pied de page ; preuve de licence dans
-  `preuves conditions d'utilisation/2026-10-05/photos/` (ignoré par git). Les photos des bouteilles des marques n'ont pas changé.
+- **Photo du bandeau bleu (05/10, refaite le soir car floue)** : photo NETTE prise en Tunisie, en bande AU-DESSUS du texte
+  (`figure.hero-bande`, `assets/photo-eaux-tunisie.jpg` 1440 px + `-720.jpg`) : étiquettes de 5 bouteilles tunisiennes
+  (Melina, Dima, Cristaline, Aqualine, Fourat) recadrées et assemblées ; « Tunisie Eaux minérales.jpg », M. Rais, domaine public,
+  Wikimedia Commons. Rien par-dessus (pas de dégradé ni de flou) ; texte un peu resserré sur téléphone pour que la carte
+  « La moins chère » ne descende pas. Crédit sur la photo (`.credit-photo`) et dans le pied de page ; preuve dans
+  `preuves conditions d'utilisation/2026-10-05/photos/` (ignoré par git).
+- **Pas de traduction automatique (05/10)** : `translate="no"` sur `<html>` + `<meta name="google" content="notranslate">`
+  sur toutes les pages (index.html et gabarits de build_guides.py / build_pages.py) — Chrome traduisait en anglais les pages FR/AR.
 - **Sécurité / anti-copie (05/10, consigne d'Ahmed)** : robots.txt interdit les robots d'IA et aspirateurs (moteurs de recherche permis) ;
   sur toutes les pages (accueil, guides, 35 marques — via les gabarits de `build_guides.py` / `build_pages.py`) : meta `noai, noimageai`,
   referrer, **CSP** (scripts : le site + gc.zgo.at + cdnjs ; envois : docs.google.com, formspree.io, goatcounter ; tuiles OpenStreetMap)
@@ -145,3 +149,9 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 - Idées : README « Nouveaux services » (prochain conseillé : « Quelle eau pour moi ? ») ; comparateur d'autres produits (mis de côté) ;
   vrais logos ; marques manquantes (Ovia…).
 - Plan de continuité : voir README.
+
+## Autres sites d'Ahmed (05/10/2026) — même méthode, mêmes règles
+Outils pratiques, Appels d'offres, Code de la route, Documents Tunisie, + site racine ah6259.github.io (robots.txt COMMUN,
+vérification Google Search Console). Dans le dossier parent `_claude code project\` : `nouveau site - procedure.md`
+(procédure pour tout nouveau site), `regles communes a tous les sites.md`, `securite commune - consigne.md`,
+`liste des idees de sites.md`. Toute remarque d'Ahmed sur un site s'applique à tous.

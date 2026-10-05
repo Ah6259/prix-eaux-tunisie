@@ -220,3 +220,10 @@ pour créer n'importe quel autre site.
 - **Protection contre les robots d'IA et la copie (05/10/2026)** : robots.txt (robots d'IA interdits, Google permis),
   meta noai, Content-Security-Policy, `protection.js` (anti clic droit sur les photos, source ajoutée au texte copié,
   anti-iframe). Le test `tools/test_site.mjs` vérifie tout, et un sabotage volontaire d'une copie le fait bien sonner.
+- **Photo du bandeau rendue nette (05/10/2026)** : retour d'Ahmed « l'image n'est pas claire ». Une photo floue sous un
+  dégradé ne sert à rien : on prend une vraie photo prise en Tunisie (bouteilles de marques tunisiennes, domaine public),
+  on découpe les étiquettes avec Pillow pour en faire une bande fine, posée AU-DESSUS du texte (rien par-dessus).
+  Vérifier sur captures 340/390 px que la réponse principale ne descend pas (resserrer un peu le texte si besoin).
+  Nouvelle image d'aperçu `og-image-v4.png`.
+- **Empêcher Chrome de traduire le site (05/10/2026)** : une page FR + AR trompe Chrome, qui proposait l'anglais.
+  `translate="no"` sur `<html>` et `<meta name="google" content="notranslate">` sur toutes les pages ; vérifié par le test.

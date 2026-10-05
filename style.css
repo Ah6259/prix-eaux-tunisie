@@ -795,19 +795,27 @@ header.site{background:var(--surface); box-shadow:0 1px 0 var(--line),0 4px 14px
 .hero .identite-2{opacity:.92; margin-top:6px; line-height:1.5}
 .hero .identite-ar{color:rgba(255,255,255,.85); margin-top:8px}
 .chevauche{margin-top:-32px; position:relative}
-/* vraie photo discrète derrière le bandeau (rayon d'eau, CC0) : dégradé bleu pour garder le texte lisible */
-.hero-photo{position:relative; background:
-  linear-gradient(100deg,rgba(14,127,168,.9) 0%,rgba(10,95,128,.74) 50%,rgba(10,95,128,.42) 100%),
-  url("assets/photo-rayon-eau.jpg") center 45%/cover, linear-gradient(160deg,var(--hero1) 0%,var(--hero2) 100%)}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .hero-photo{background:
-  linear-gradient(100deg,rgba(14,95,128,.93) 0%,rgba(10,60,82,.8) 50%,rgba(10,60,82,.5) 100%),
-  url("assets/photo-rayon-eau.jpg") center 45%/cover, linear-gradient(160deg,var(--hero1) 0%,var(--hero2) 100%)} }
-:root[data-theme="dark"] .hero-photo{background:
-  linear-gradient(100deg,rgba(14,95,128,.93) 0%,rgba(10,60,82,.8) 50%,rgba(10,60,82,.5) 100%),
-  url("assets/photo-rayon-eau.jpg") center 45%/cover, linear-gradient(160deg,var(--hero1) 0%,var(--hero2) 100%)}
-.hero-photo .wrap{text-shadow:0 1px 3px rgba(4,40,56,.55)}
-.credit-photo{position:absolute; top:3px; right:8px; margin:0; font-size:9.5px; line-height:1.2; color:rgba(255,255,255,.72)}
+/* vraie photo NETTE (bouteilles tunisiennes, domaine public) en bandeau AU-DESSUS du texte : rien par-dessus,
+   le texte blanc reste sur le bleu uni. Téléphone : pleine largeur ; ordinateur : dans la colonne, coins arrondis. */
+.hero-photo{position:relative; padding-top:0}
+.hero-bande{position:relative; margin:0 0 9px; background:#fff}
+.hero-bande img{display:block; width:100%; height:auto; aspect-ratio:1440/173; object-fit:cover}
+.credit-photo{position:absolute; right:3px; bottom:2px; margin:0; padding:0 5px; border-radius:5px; font-size:8.5px;
+  line-height:1.4; color:#fff; background:rgba(4,40,56,.6)}
 .credit-photo a{color:inherit; text-decoration:underline}
+@media (min-width:700px){
+  .hero-photo{padding-top:16px}
+  .hero-bande{width:calc(100% - 32px); max-width:1048px; margin:0 auto 16px; border-radius:14px; overflow:hidden}
+  .hero-bande img{max-height:160px}
+}
+/* téléphone : texte un peu plus serré pour que la photo n'abaisse pas la carte « La moins chère » */
+@media (max-width:560px){
+  .hero{padding-bottom:33px} .chevauche{margin-top:-28px}
+  .hero-bande{margin-bottom:6px}
+  .hero .identite{font-size:14.5px; line-height:1.38}
+  .hero .identite-2{font-size:12px; line-height:1.36; margin-top:3px}
+  .hero .identite-ar{margin-top:4px; font-size:13px; line-height:1.45}
+}
 .credit-pied{margin:10px 0 0; font-size:12px; color:var(--muted)}
 
 /* la réponse : carte blanche qui chevauche le bandeau */
