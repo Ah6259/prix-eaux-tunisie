@@ -204,9 +204,9 @@ else check("preuve de licence de la photo sauvegardée", !!credit?.dataset.sourc
 const guides = ["prix-stika/index.html", "quelle-eau/index.html"];
 const marques = readdirSync(join(root, "marque")).map(m => `marque/${m}/index.html`).filter(f => existsSync(join(root, f)));
 // WhatsApp n'affiche la GRANDE image d'aperçu que si le fichier pèse moins d'environ 300 Ko : JPEG léger obligatoire
-const og = existsSync(join(root, "assets/og-image-v6.jpg")) ? readFileSync(join(root, "assets/og-image-v6.jpg")) : Buffer.alloc(0);
-check("image d'aperçu og-image-v6.jpg : JPEG de moins de 250 Ko (grande image sur WhatsApp)", og.length > 0 && og.length < 250 * 1024 && og[0] === 0xFF && og[1] === 0xD8);
-check("accueil, guides et pages marques : image d'aperçu v6 en JPEG (og:image:type)", ["index.html", ...guides, ...marques].every(f => lire(f).includes("assets/og-image-v6.jpg")
+const og = existsSync(join(root, "assets/og-image-v7.jpg")) ? readFileSync(join(root, "assets/og-image-v7.jpg")) : Buffer.alloc(0);
+check("image d'aperçu og-image-v7.jpg : JPEG de moins de 250 Ko (grande image sur WhatsApp)", og.length > 0 && og.length < 250 * 1024 && og[0] === 0xFF && og[1] === 0xD8);
+check("accueil, guides et pages marques : image d'aperçu v7 en JPEG (og:image:type)", ["index.html", ...guides, ...marques].every(f => lire(f).includes("assets/og-image-v7.jpg")
   && lire(f).includes('<meta property="og:image:type" content="image/jpeg">')));
 check("plus aucune référence aux anciennes images d'aperçu (v2 à v5)", ["index.html", ...guides, ...marques, "tools/build_guides.py", "tools/build_pages.py"].every(f => !/og-image-v[2345]/.test(lire(f)))
   && !existsSync(join(root, "assets/og-image-v5.jpg")));

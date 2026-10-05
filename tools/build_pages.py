@@ -146,7 +146,7 @@ def page_marque(b):
 <meta property="og:url" content="{SITE}/marque/{bid}/">
 <meta property="og:title" content="{titre}">
 <meta property="og:description" content="{esc(desc)}">
-<meta property="og:image" content="{SITE}/assets/og-image-v6.jpg">
+<meta property="og:image" content="{SITE}/assets/og-image-v7.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">

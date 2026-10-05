@@ -28,7 +28,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
 - Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification.**
-- Image d'aperçu des liens partagés : `assets/og-image-v6.jpg` (05/10 : texte à gauche + photo NEUTRE de l'eau versée à droite ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
+- Image d'aperçu des liens partagés : `assets/og-image-v7.jpg` (05/10 : texte à gauche + nouvelle icône goutte + photo NEUTRE de l'eau versée à droite ; modèle `tools/og-image.html`, capture Edge 1200×630 puis JPEG qualité 88 ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
 
@@ -165,7 +165,7 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
   (anti-copie légère, anti-iframe), robots.txt COMMUN au site racine ah6259.github.io (robots d'IA interdits).
 - **Installation sur téléphone** : `manifest.webmanifest` avec `"id": "/prix-eaux-tunisie/"`, service worker `sw.js`
   (réseau d'abord, cache seulement hors connexion), meta iPhone ; testé (`tools/test_sw.mjs`).
-- **Partage** : image d'aperçu JPEG < 250 Ko (`og-image-v6.jpg`, sinon WhatsApp montre une petite vignette), aussi sur
+- **Partage** : image d'aperçu JPEG < 250 Ko (`og-image-v7.jpg`, sinon WhatsApp montre une petite vignette), aussi sur
   les 35 pages marques ; pas de traduction automatique (`translate="no"` + meta notranslate).
 - **Statistiques** GoatCounter sur toutes les pages (le même compteur sert aux 5 sites, séparés par chemin).
 - **Tests** : `node tools/test_site.mjs`, `node tools/test_sw.mjs`, `python tools/test_pannes.py` (18 scénarios), lancés

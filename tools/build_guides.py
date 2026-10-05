@@ -102,7 +102,7 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
 <link rel="canonical" href="{SITE}/{chemin}/">
 <meta property="og:title" content="{_esc(titre)}">
 <meta property="og:description" content="{_esc(description)}">
-<meta property="og:image" content="{SITE}/assets/og-image-v6.jpg">
+<meta property="og:image" content="{SITE}/assets/og-image-v7.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
