@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-10-04",
+ "updated": "2026-10-05",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -1245,11 +1245,11 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-04",
+   "dernier_ok": "2026-10-05",
    "nb": 62
   },
   "geant": {
-   "dernier_ok": "2026-10-04",
+   "dernier_ok": "2026-10-05",
    "nb": 31
   },
   "otrity": {
