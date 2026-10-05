@@ -3,7 +3,8 @@
 // jsdom s'installe une fois par PC :  npm install --no-save --no-package-lock jsdom
 // Réécrit le 05/10/2026 pour le site actuel (carte « La moins chère », 4 fenêtres, menus de filtres, commande fermée).
 import { JSDOM } from "jsdom";
-import { readFileSync, existsSync } from "fs";
+import { readFileSync, existsSync, readdirSync, statSync } from "fs";
+import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
@@ -26,7 +27,7 @@ const carte = nom => cartes().find(c => c.querySelector("h3")?.textContent === n
 
 // ---- chargement : mêmes fichiers et même ordre que index.html -------------
 for (const f of ["data/eaux.js", "data/composition.js", "data/historique.js", "data/baisses.js",
-                 "data/votes.js", "data/signalements.js", "app.js"]) {
+                 "data/votes.js", "data/signalements.js", "protection.js", "app.js"]) {
   if (!existsSync(join(root, f))) continue;
   try { window.eval(lire(f)); }
   catch (e) { erreurs++; console.log(`FAIL chargement de ${f} : ${e.message}`); }
@@ -156,6 +157,81 @@ check("pied de page : sources Carrefour, Géant, Otrity", ["Carrefour", "Géant"
 check("pied de page : marques et logos à leurs propriétaires", pied.includes("appartiennent à leurs propriétaires"));
 check("FAQ : nombre de marques", doc.getElementById("faq-nb-marques").textContent === String(DATA.brands.length));
 check("courbe d'évolution des prix", !!doc.querySelector("#histo svg"));
+
+// ---- vraie photo du bandeau : fichier, crédit + licence affichés, preuve de licence ------------------
+const LICENCE = /CC BY-SA \d\.\d|CC BY \d\.\d|CC0|domaine public/;
+const css = lire("style.css");
+const hero = doc.querySelector(".hero.hero-photo");
+const photo = (css.match(/\.hero-photo\{[^}]*url\("([^"]+)"\)/) || [])[1];
+check("bandeau : vraie photo derrière le texte (fichier présent)", !!hero && !!photo && /\.(jpe?g|webp)$/.test(photo) && existsSync(join(root, photo)));
+check("bandeau : photo légère (≤ 150 Ko)", !!photo && existsSync(join(root, photo)) && statSync(join(root, photo)).size <= 150_000);
+const credit = hero?.querySelector(".credit-photo");
+check("bandeau : crédit et licence de la photo affichés", !!credit && /Photo/.test(credit.textContent) && LICENCE.test(credit.textContent)
+      && credit.textContent.includes("Wikimedia Commons") && !!credit.querySelector('a[rel~="license"]'));
+const creditPied = doc.querySelector("footer .credit-pied")?.textContent || "";
+check("pied de page : crédit de la photo", creditPied.includes("Photo") && LICENCE.test(creditPied));
+// preuves (dossier ignoré par git) : vérifiées sur le PC d'Ahmed, absentes sur GitHub
+const dossierPreuves = join(root, "preuves conditions d'utilisation");
+const lisezMoi = existsSync(dossierPreuves) ? readdirSync(dossierPreuves).map(d => join(dossierPreuves, d, "photos", "LISEZ-MOI.md"))
+  .filter(existsSync).map(f => readFileSync(f, "utf8")).join("\n") : null;
+if (lisezMoi === null) console.log("SAUTÉ preuve de licence de la photo (dossier des preuves absent, normal sur GitHub)");
+else check("preuve de licence de la photo sauvegardée", !!credit?.dataset.source && lisezMoi.includes(credit.dataset.source));
+
+// ---- image d'aperçu des liens partagés : v3, sans nombre de marques ni noms de magasins -------------
+const guides = ["prix-stika/index.html", "quelle-eau/index.html"];
+const marques = readdirSync(join(root, "marque")).map(m => `marque/${m}/index.html`).filter(f => existsSync(join(root, f)));
+check("image d'aperçu og-image-v3.png présente", existsSync(join(root, "assets/og-image-v3.png")));
+check("accueil et guides : image d'aperçu v3", ["index.html", ...guides].every(f => lire(f).includes("assets/og-image-v3.png")));
+check("plus aucune référence à og-image-v2", ["index.html", ...guides, "tools/build_guides.py"].every(f => !lire(f).includes("og-image-v2")));
+
+// ---- sécurité, robots d'IA et anti-copie (consigne d'Ahmed du 05/10/2026) --------------------------
+const robots = lire("robots.txt");
+const blocs = robots.split(/\n\s*\n/).filter(b => /User-agent/i.test(b));
+const regle = ua => { const b = blocs.find(b => new RegExp(`^User-agent: ${ua}\\s*$`, "mi").test(b));
+  return b ? (/^Disallow: \/\s*$/m.test(b) ? "interdit" : "permis") : "absent"; };
+const ROBOTS_IA = ["GPTBot", "ChatGPT-User", "OAI-SearchBot", "ClaudeBot", "Claude-Web", "anthropic-ai", "CCBot", "Google-Extended",
+  "Applebot-Extended", "PerplexityBot", "Bytespider", "Amazonbot", "Meta-ExternalAgent", "FacebookBot", "Diffbot", "Omgilibot",
+  "cohere-ai", "ImagesiftBot", "HTTrack", "WebCopier", "WebZIP", "Offline Explorer", "wget", "SiteSnagger"];
+for (const ua of ROBOTS_IA) check(`robots.txt interdit ${ua}`, regle(ua) === "interdit");
+check("robots.txt laisse passer Googlebot, Bingbot et les autres", regle("Googlebot") === "permis" && regle("Bingbot") === "permis" && regle("\\*") === "permis");
+const toutesPages = ["index.html", ...guides, ...marques];
+const sur = (desc, test) => { const ko = toutesPages.filter(f => !test(lire(f), f));
+  check(`${desc} (${toutesPages.length} pages)${ko.length ? " — manque : " + ko.slice(0, 3).join(", ") : ""}`, ko.length === 0); };
+sur("meta noai, noimageai", s => s.includes('<meta name="robots" content="noai, noimageai">'));
+sur("referrer strict-origin-when-cross-origin", s => s.includes('<meta name="referrer" content="strict-origin-when-cross-origin">'));
+sur("script anti-copie protection.js chargé", s => /<script src="(\.\.\/)*protection\.js\?v=/.test(s));
+sur("CSP présente, sans script en ligne permis", s => /http-equiv="Content-Security-Policy" content="[^"]*script-src 'self'/.test(s) && !/script-src[^;]*unsafe/.test(s));
+sur("aucun script dans la page (bloqué par la CSP)", s => !/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>/.test(s) && !/<[a-z]+ [^>]*\son(error|load|click)=/.test(s));
+sur("liens externes en rel=\"noopener\"", s => [...s.matchAll(/<a [^>]*href="https?:\/\/[^"]+"[^>]*>/g)].every(m => /rel="[^"]*noopener/.test(m[0])));
+// la CSP autorise tout ce qu'utilisent la page et app.js (sinon formulaires, statistiques ou carte cassés)
+const csp = lire("index.html").match(/Content-Security-Policy" content="([^"]+)"/)[1];
+const dir = n => (csp.match(new RegExp(`${n} ([^;]+)`)) || [, ""])[1];
+check("CSP : Google Forms (signaler, vote) autorisé", dir("connect-src").includes("https://docs.google.com") && dir("form-action").includes("https://docs.google.com"));
+check("CSP : Formspree (votre avis) autorisé", dir("connect-src").includes("https://formspree.io") && dir("form-action").includes("https://formspree.io"));
+check("CSP : GoatCounter autorisé", dir("script-src").includes("https://gc.zgo.at") && dir("connect-src").includes("goatcounter.com"));
+check("CSP : Google Fonts autorisées", dir("style-src").includes("https://fonts.googleapis.com") && dir("font-src").includes("https://fonts.gstatic.com"));
+check("CSP : carte Leaflet (cdnjs + tuiles OpenStreetMap) autorisée", dir("script-src").includes("https://cdnjs.cloudflare.com") && dir("img-src").includes("tile.openstreetmap.org"));
+const domainesAppJs = [...new Set([...lire("app.js").matchAll(/(?:url|src|href)\s*[:=]\s*["'`](https:\/\/[^/"'`$]+)/g)].map(m => m[1]))]
+  .filter(d => !/wa\.me|t\.me|maps\.google|ah6259\.github\.io/.test(d));   // simples liens, rien n'est chargé
+check(`CSP : chaque domaine chargé par app.js est autorisé (${domainesAppJs.join(", ")})`, domainesAppJs.length > 1 && domainesAppJs.every(d => csp.includes(d)));
+const prot = lire("protection.js");
+check("anti-copie : clic droit et glisser bloqués sur les photos", prot.includes('"contextmenu"') && prot.includes('"dragstart"') && /img\{[^}]*-webkit-touch-callout:none/.test(css));
+check("anti-copie : source ajoutée au texte copié", prot.includes('"copy"') && prot.includes("© tous droits réservés"));
+check("anti-copie : anti-iframe d'un autre site", prot.includes("window.top !== window.self"));
+check("champs, formulaires, liens et boutons restent sélectionnables", /input, select, textarea, form, form \*, a, button\{user-select:text/.test(css));
+// formulaires toujours utilisables avec la protection chargée
+clic(doc.getElementById("sig-open"));
+const champsSig = [...doc.querySelectorAll("#sig-form input, #sig-form select")];
+check("Signaler un prix : champs utilisables", champsSig.length > 2 && champsSig.every(x => !x.disabled));
+doc.dispatchEvent(new window.KeyboardEvent("keydown", { key: "Escape" }));
+check("Votre avis (Formspree) : formulaire présent", !!doc.getElementById("avis-form")?.getAttribute("action")?.startsWith("https://formspree.io/"));
+tape("safia");
+check("recherche toujours utilisable", !!carte("Safia"));
+tape("");
+// aucun secret ni e-mail privé dans les fichiers suivis par git
+const suivis = execSync("git ls-files", { cwd: root, encoding: "utf8" }).split("\n").filter(f => /\.(html|js|mjs|py|yml|md|txt|json|css|ps1|bat)$/.test(f));
+const fuite = suivis.filter(f => /(api[_-]?key|secret|token|password)\s*[:=]\s*["'][A-Za-z0-9_\-]{16,}|ghp_[A-Za-z0-9]{20,}|AIza[0-9A-Za-z_\-]{30,}|\b\d{8,10}:AA[A-Za-z0-9_\-]{30,}|[A-Za-z0-9._%+-]+@(gmail|yahoo|hotmail|outlook)\.[a-z]+/i.test(lire(f)));
+check(`aucun secret ni e-mail privé dans le dépôt${fuite.length ? " : " + fuite.join(", ") : ""}`, fuite.length === 0);
 
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");
 process.exit(erreurs ? 1 : 0);

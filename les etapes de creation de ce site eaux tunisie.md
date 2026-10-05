@@ -212,3 +212,11 @@ pour créer n'importe quel autre site.
 - **Coran et hadith sur l'eau (04/10/2026)** : la barre du hadith devient « الماء في القرآن الكريم والحديث النبوي » ;
   le bouton « اقرأ » ouvre une fenêtre avec d'abord des versets du Coran sur l'eau (sourate et numéro du verset),
   puis des paroles du Prophète ﷺ (avec leur source). Toujours vérifier le texte arabe et la référence avant d'en ajouter.
+- **Vraie photo dans le bandeau (05/10/2026)** : photo libre de droits trouvée sur Wikimedia Commons (API publique),
+  licence vérifiée sur sa page (CC0), preuve sauvegardée (HTML, métadonnées, empreintes sha256, copie Internet Archive)
+  dans `preuves conditions d'utilisation/` (jamais publié). Recadrage + compression + léger flou avec Python Pillow
+  (≤ 150 Ko), placée derrière le texte avec un dégradé bleu pour rester lisible ; crédit affiché. Nouvelle image d'aperçu
+  `og-image-v3.png` faite avec Chrome sans écran à partir d'une page HTML temporaire.
+- **Protection contre les robots d'IA et la copie (05/10/2026)** : robots.txt (robots d'IA interdits, Google permis),
+  meta noai, Content-Security-Policy, `protection.js` (anti clic droit sur les photos, source ajoutée au texte copié,
+  anti-iframe). Le test `tools/test_site.mjs` vérifie tout, et un sabotage volontaire d'une copie le fait bien sonner.

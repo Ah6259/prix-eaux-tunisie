@@ -795,6 +795,20 @@ header.site{background:var(--surface); box-shadow:0 1px 0 var(--line),0 4px 14px
 .hero .identite-2{opacity:.92; margin-top:6px; line-height:1.5}
 .hero .identite-ar{color:rgba(255,255,255,.85); margin-top:8px}
 .chevauche{margin-top:-32px; position:relative}
+/* vraie photo discrète derrière le bandeau (rayon d'eau, CC0) : dégradé bleu pour garder le texte lisible */
+.hero-photo{position:relative; background:
+  linear-gradient(100deg,rgba(14,127,168,.9) 0%,rgba(10,95,128,.74) 50%,rgba(10,95,128,.42) 100%),
+  url("assets/photo-rayon-eau.jpg") center 45%/cover, linear-gradient(160deg,var(--hero1) 0%,var(--hero2) 100%)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .hero-photo{background:
+  linear-gradient(100deg,rgba(14,95,128,.93) 0%,rgba(10,60,82,.8) 50%,rgba(10,60,82,.5) 100%),
+  url("assets/photo-rayon-eau.jpg") center 45%/cover, linear-gradient(160deg,var(--hero1) 0%,var(--hero2) 100%)} }
+:root[data-theme="dark"] .hero-photo{background:
+  linear-gradient(100deg,rgba(14,95,128,.93) 0%,rgba(10,60,82,.8) 50%,rgba(10,60,82,.5) 100%),
+  url("assets/photo-rayon-eau.jpg") center 45%/cover, linear-gradient(160deg,var(--hero1) 0%,var(--hero2) 100%)}
+.hero-photo .wrap{text-shadow:0 1px 3px rgba(4,40,56,.55)}
+.credit-photo{position:absolute; top:3px; right:8px; margin:0; font-size:9.5px; line-height:1.2; color:rgba(255,255,255,.72)}
+.credit-photo a{color:inherit; text-decoration:underline}
+.credit-pied{margin:10px 0 0; font-size:12px; color:var(--muted)}
 
 /* la réponse : carte blanche qui chevauche le bandeau */
 .top-reponse{margin-top:0; background:var(--surface); border:1px solid var(--line); border-radius:18px;
@@ -896,3 +910,9 @@ footer .copyright{margin:14px 0 0}
 .page-hero + .wrap > section:first-child{padding-top:16px}
 .page-hero + .wrap > section:first-child > .intro:first-child{margin-top:0}
 .histo-fold summary h2{font-size:19px}
+
+/* protection légère contre la copie (voir protection.js) : photos non sélectionnables ni glissables,
+   prix / classements / compositions non sélectionnables ; champs, formulaires, liens et boutons restent utilisables */
+img{-webkit-user-drag:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none}
+.hero, #top-reponse, #compare, #grid, #histo-section, .card, .compo, table, .faq, .baisses{user-select:none; -webkit-user-select:none}
+input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-select:text}

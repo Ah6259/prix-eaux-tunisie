@@ -24,7 +24,7 @@ SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
-CSS_V = "20261005p"
+CSS_V = "20261005q"
 
 # Logo (goutte blanche dans un carré bleu) : même dessin que l'en-tête de l'accueil
 LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" '
@@ -94,12 +94,16 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://prix-eaux-tunisie.goatcounter.com; connect-src 'self' https://docs.google.com https://formspree.io https://prix-eaux-tunisie.goatcounter.com; form-action 'self' https://docs.google.com https://formspree.io; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noai, noimageai">
+<script src="../protection.js?v={CSS_V}"></script>
 <title>{_esc(titre)}</title>
 <meta name="description" content="{_esc(description)}">
 <link rel="canonical" href="{SITE}/{chemin}/">
 <meta property="og:title" content="{_esc(titre)}">
 <meta property="og:description" content="{_esc(description)}">
-<meta property="og:image" content="{SITE}/assets/og-image-v2.png">
+<meta property="og:image" content="{SITE}/assets/og-image-v3.png">
 <link rel="icon" type="image/svg+xml" href="../assets/icons/icon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="../style.css?v={CSS_V}">

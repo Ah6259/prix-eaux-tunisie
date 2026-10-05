@@ -28,9 +28,19 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
 - Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification.**
-- Image d'aperçu des liens partagés : `assets/og-image-v2.png`, volontairement **sans nombre de marques ni noms de magasins**
+- Image d'aperçu des liens partagés : `assets/og-image-v3.png` (05/10 : avec la photo du rayon), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
+
+- **Photo du bandeau bleu (05/10)** : vraie photo discrète derrière le texte (`.hero-photo`, `assets/photo-rayon-eau.jpg`,
+  rayon d'eau en bouteille, JustKronos, CC0, Wikimedia Commons, recadrée + léger flou pour rendre les étiquettes illisibles).
+  Crédit en haut à droite du bandeau (`.credit-photo`) et dans le pied de page ; preuve de licence dans
+  `preuves conditions d'utilisation/2026-10-05/photos/` (ignoré par git). Les photos des bouteilles des marques n'ont pas changé.
+- **Sécurité / anti-copie (05/10, consigne d'Ahmed)** : robots.txt interdit les robots d'IA et aspirateurs (moteurs de recherche permis) ;
+  sur toutes les pages (accueil, guides, 35 marques — via les gabarits de `build_guides.py` / `build_pages.py`) : meta `noai, noimageai`,
+  referrer, **CSP** (scripts : le site + gc.zgo.at + cdnjs ; envois : docs.google.com, formspree.io, goatcounter ; tuiles OpenStreetMap)
+  et `protection.js` (pas de clic droit/glisser sur les photos, source ajoutée au texte copié, anti-iframe). **Aucun script
+  en ligne ni `onerror=` dans les pages** (la CSP les bloque). Nouveau service externe dans app.js → l'ajouter à la CSP (le test le vérifie).
 
 ## Sources de prix
 - **Carrefour** (API GraphQL) et **Géant Drive** (HTML) : lus en direct chaque nuit. Géant : `curl -k` en cas d'erreur de certificat (code 60).
