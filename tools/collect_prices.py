@@ -39,6 +39,8 @@ OUT_JS = ROOT / "data" / "eaux.js"
 OUT_JSON = ROOT / "data" / "eaux.json"
 IMG_CURATED = ROOT / "assets" / "img"          # photos choisies à la main (prioritaires)
 IMG_AUTO = ROOT / "assets" / "img" / "produits"  # photos téléchargées des enseignes
+# photos LIBRES (Open Food Facts, CC BY-SA...) pour les marques sans photo de magasin : dernier recours
+PHOTOS_LIBRES = ROOT / "data" / "photos_libres.json"
 RAW_DIR = ROOT / "tools" / "raw"
 MAX_JOURS_REPRISE = 7   # une source en panne garde ses anciens prix 7 jours au plus
 
@@ -394,6 +396,25 @@ def find_img_curated(imgs, brand_id, litres):
     return "assets/img/" + cands[0][1] + ".jpg"
 
 
+def appliquer_photos_libres(brands):
+    """Marques SANS photo (ni choisie à la main, ni d'enseigne) : photo libre de data/photos_libres.json,
+    avec son crédit (img_credit). Une photo de magasin, si elle existe, reste toujours prioritaire."""
+    try:
+        libres = json.loads(PHOTOS_LIBRES.read_text(encoding="utf-8")).get("photos", {})
+    except (OSError, ValueError):
+        return
+    racine = PHOTOS_LIBRES.parent.parent
+    for b in brands:
+        b.pop("img_credit", None)
+        if (b.get("img") or "").startswith("assets/img/libres/"):  # déjà appliquée : on la réévalue
+            b["img"] = None
+        ph = libres.get(b["id"])
+        if b.get("img") or not ph or not (racine / ph["img"]).exists():
+            continue
+        b["img"] = ph["img"]
+        b["img_credit"] = {k: ph[k] for k in ("credit", "source", "page", "licence", "licence_url")}
+
+
 # ---------------------------------------------------------------- reprise en cas de panne
 def anciennes_offres(ancien, enseignes_cibles):
     """Offres des enseignes données, reconstruites depuis un eaux.json précédent."""
@@ -557,6 +578,7 @@ def main():
             "products": [],
         })
     out_brands.sort(key=lambda b: b["name"])
+    appliquer_photos_libres(out_brands)
 
     data = {
         "updated": date.today().isoformat(),

@@ -1,0 +1,27 @@
+{
+ "_explication": "Photos LIBRES (licence vérifiée, preuves dans « preuves conditions d'utilisation/2026-10-05/photos-marques/ ») pour les marques sans photo de magasin. Utilisées par tools/collect_prices.py SEULEMENT si la marque n'a ni photo choisie à la main ni photo d'enseigne. « sans_image_libre » = marques cherchées le 05/10/2026 (Open Food Facts : API + export complet ; Wikimedia Commons) sans photo libre trouvée.",
+ "photos": {
+  "tiba": {
+   "img": "assets/img/libres/tiba_15l.webp",
+   "source": "Open Food Facts",
+   "page": "https://world.openfoodfacts.org/product/6191316900024",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.fr",
+   "credit": "Photo : Open Food Facts, CC BY-SA"
+  },
+  "royal": {
+   "img": "assets/img/libres/royal_15l.webp",
+   "source": "Open Food Facts",
+   "page": "https://world.openfoodfacts.org/product/6191443200011",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.fr",
+   "credit": "Photo : Open Food Facts, CC BY-SA"
+  }
+ },
+ "sans_image_libre": {
+  "aziz": "aucun produit Aziz sur Open Food Facts ni Wikimedia Commons (05/10/2026)",
+  "bulla-regia": "aucun produit Bulla Régia sur Open Food Facts ni Wikimedia Commons (05/10/2026)",
+  "rayan": "marque devenue Élixir en 2015 ; « Rayan » sur Open Food Facts = thon en conserve",
+  "saha": "aucun produit Saha (eau) sur Open Food Facts ni Wikimedia Commons (05/10/2026)"
+ }
+}

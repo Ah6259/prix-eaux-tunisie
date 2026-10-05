@@ -1041,11 +1041,18 @@
    "source": "Aïn Sokra, Siliana sud",
    "depuis": 2016,
    "note": "Ex-Cristal.",
-   "img": null,
+   "img": "assets/img/libres/royal_15l.webp",
    "types": [
     "plate"
    ],
-   "products": []
+   "products": [],
+   "img_credit": {
+    "credit": "Photo : Open Food Facts, CC BY-SA",
+    "source": "Open Food Facts",
+    "page": "https://world.openfoodfacts.org/product/6191443200011",
+    "licence": "CC BY-SA 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.fr"
+   }
   },
   {
    "id": "sabrine",
@@ -1129,11 +1136,18 @@
    "source": "Tlebt (Kasserine)",
    "depuis": null,
    "note": null,
-   "img": null,
+   "img": "assets/img/libres/tiba_15l.webp",
    "types": [
     "plate"
    ],
-   "products": []
+   "products": [],
+   "img_credit": {
+    "credit": "Photo : Open Food Facts, CC BY-SA",
+    "source": "Open Food Facts",
+    "page": "https://world.openfoodfacts.org/product/6191316900024",
+    "licence": "CC BY-SA 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.fr"
+   }
   },
   {
    "id": "tijen",

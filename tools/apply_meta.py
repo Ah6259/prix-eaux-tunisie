@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """Applique les fiches META de collect_prices.py aux données existantes
-(data/eaux.js + eaux.json) sans relancer le scraping des prix."""
+(data/eaux.js + eaux.json) sans relancer le scraping des prix,
+ainsi que les photos libres (data/photos_libres.json) des marques sans photo."""
 import json
 from pathlib import Path
 
-from collect_prices import META, slug
+from collect_prices import META, appliquer_photos_libres, slug
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_JS = ROOT / "data" / "eaux.js"
@@ -24,6 +25,7 @@ for b in data["brands"]:
     b["id"] = slug(m["name"])
     maj += 1
 
+appliquer_photos_libres(data["brands"])
 OUT_JS.write_text("window.EAUX_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
 OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
 print(f"{maj}/{len(data['brands'])} marques mises à jour -> {OUT_JSON}")

@@ -24,7 +24,7 @@ SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
-CSS_V = "20261005t"
+CSS_V = "20261005u"
 
 # Logo (goutte blanche dans un carré bleu) : même dessin que l'en-tête de l'accueil
 LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" '
@@ -72,6 +72,7 @@ def pied(racine):
   <a href="https://t.me/prixeautunisie" rel="noopener">Alertes promo (Telegram)</a></nav>
   <p class="pied-titre">Sources des prix</p>
   <p class="pied-sources">{SOURCES_HTML}</p>
+  <p class="credit-pied">Photos de bouteilles des marques absentes des boutiques suivies : <a href="https://world.openfoodfacts.org/" rel="noopener">Open Food Facts</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.fr" rel="license noopener">CC BY-SA 3.0</a>.</p>
   <p class="copyright">© 2026 Prix des Eaux de Tunisie — tous droits réservés.</p>
 </div></footer>
 <!-- Statistiques de visite anonymes, sans cookies (GoatCounter) -->

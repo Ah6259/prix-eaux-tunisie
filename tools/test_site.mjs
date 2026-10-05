@@ -130,6 +130,20 @@ const sort = doc.getElementById("sort");
 sort.value = "tds"; sort.dispatchEvent(new window.Event("change"));
 const tds = cartes().map(c => c.querySelector("h3").textContent);
 check("tri par minéralité : cartes réordonnées", tds.length > 12);
+// la 1re carte doit être l'eau AVEC PRIX la moins minéralisée, quel que soit son format (Hayet n'existe qu'en 1 L)
+// résidu sec AFFICHÉ sur chaque carte (« résidu sec 238 mg/L », 1re valeur si plusieurs sources)
+const tdsCarte = c => {
+  const m = (c.querySelector(".compo summary")?.textContent || "").replace(/[\s  ]/g, "").match(/résidusec([\d,]+)/);
+  return m ? parseFloat(m[1].replace(",", ".")) : null;
+};
+const avecPrix = DATA.brands.filter(b => b.products.some(p => Object.keys(p.prices).length));
+const cartesPrix = cartes().filter(c => c.querySelector("table.prices")).map(c => ({ n: c.querySelector("h3").textContent, t: tdsCarte(c) }))
+  .filter(x => x.t != null);
+const plusPetit = Math.min(...cartesPrix.map(x => x.t));
+const hayet = cartesPrix.find(x => x.n === "Hayet");
+check(`tri par résidu sec : 1re carte avec prix = la plus petite valeur (${cartesPrix[0]?.n} ${cartesPrix[0]?.t} mg/L)${hayet ? ", et c'est Hayet" : ""}`,
+  cartesPrix.length > 5 && cartesPrix[0].t === plusPetit && (!hayet || cartesPrix[0].n === "Hayet"));
+check("tri par minéralité : Hayet présente (vendue seulement en 1 L)", !avecPrix.some(b => b.name === "Hayet") || tds.includes("Hayet"));
 sort.value = "prix15"; sort.dispatchEvent(new window.Event("change"));
 
 // ---- panier et commande (FERMÉE : formulaire grisé + tampon) ----------------
@@ -250,6 +264,32 @@ check("Votre avis (Formspree) : formulaire présent", !!doc.getElementById("avis
 tape("safia");
 check("recherche toujours utilisable", !!carte("Safia"));
 tape("");
+// photos des bouteilles : chaque marque a une photo, OU est notée « sans image libre trouvée » ;
+// chaque photo libre (Open Food Facts…) a son crédit sous la photo (accueil + page marque) et en pied de page
+const LIBRES = JSON.parse(lire("data/photos_libres.json"));
+const sansPhoto = DATA.brands.filter(b => !(b.img && existsSync(join(root, b.img))) && !(b.id in LIBRES.sans_image_libre));
+check(`chaque marque a une photo ou est notée sans image libre${sansPhoto.length ? " : " + sansPhoto.map(b => b.name).join(", ") : ""}`, sansPhoto.length === 0);
+for (const [id, ph] of Object.entries(LIBRES.photos)) {
+  check(`photo libre ${id} : fichier présent, ≤ 60 Ko, page et licence notées`,
+    existsSync(join(root, ph.img)) && statSync(join(root, ph.img)).size <= 60000 && /^https:\/\//.test(ph.page) && /^https:\/\/creativecommons\.org\//.test(ph.licence_url) && !!ph.credit);
+}
+const avecCredit = DATA.brands.filter(b => b.img_credit);
+for (const b of DATA.brands.filter(b => Object.values(LIBRES.photos).some(ph => ph.img === b.img)))
+  check(`${b.name} : la photo libre a son crédit dans les données`, !!b.img_credit && b.img_credit.page.startsWith("https://"));
+tape("");
+for (const b of avecCredit) {
+  const c = carte(b.name);
+  const fig = c?.querySelector(".card-head figure.photo-libre");
+  check(`${b.name} : crédit « Photo : ${b.img_credit.source}, CC BY-SA » sous la photo (accueil)`,
+    !!fig && fig.querySelector("img")?.getAttribute("src") === b.img && fig.querySelector(".credit-photo")?.textContent.includes(`Photo : ${b.img_credit.source}, CC BY-SA`)
+    && !!fig.querySelector(`a[href="${b.img_credit.page}"]`));
+  const pm = existsSync(join(root, "marque", b.id, "index.html")) ? lire(`marque/${b.id}/index.html`) : "";
+  check(`${b.name} : photo + crédit sur la page marque`, pm.includes(`../../${b.img}`) && pm.includes(`Photo : ${b.img_credit.source}</a>, `) && pm.includes(b.img_credit.page));
+}
+check("photos sans crédit : aucune (chaque photo libre est créditée)",
+  DATA.brands.every(b => !b.img || !b.img.startsWith("assets/img/libres/") || b.img_credit));
+if (avecCredit.length)
+  check("pied de page : crédit Open Food Facts CC BY-SA", doc.querySelector("footer").textContent.includes("Open Food Facts") && doc.querySelector("footer").textContent.includes("CC BY-SA"));
 // aucun secret ni e-mail privé dans les fichiers suivis par git
 const suivis = execSync("git ls-files", { cwd: root, encoding: "utf8" }).split("\n").filter(f => /\.(html|js|mjs|py|yml|md|txt|json|css|ps1|bat)$/.test(f));
 const fuite = suivis.filter(f => /(api[_-]?key|secret|token|password)\s*[:=]\s*["'][A-Za-z0-9_\-]{16,}|ghp_[A-Za-z0-9]{20,}|AIza[0-9A-Za-z_\-]{30,}|\b\d{8,10}:AA[A-Za-z0-9_\-]{30,}|[A-Za-z0-9._%+-]+@(gmail|yahoo|hotmail|outlook)\.[a-z]+/i.test(lire(f)));

@@ -102,6 +102,12 @@ def page_marque(b):
             + " Composition et livraison à domicile.")
 
     img = f"../../{b['img']}" if b.get("img") else None
+    photo_html = f'<img src="{esc(img)}" alt="Bouteille {esc(nom)}" loading="lazy">' if img else ""
+    cr = b.get("img_credit")
+    if img and cr:  # photo libre (Open Food Facts…) : crédit obligatoire juste sous la photo
+        photo_html = (f'<figure class="photo-libre">{photo_html}<figcaption class="credit-photo">'
+                      f'<a href="{esc(cr["page"])}" rel="noopener">Photo : {esc(cr["source"])}</a>, '
+                      f'<a href="{esc(cr["licence_url"])}" rel="license noopener">CC BY-SA</a></figcaption></figure>')
     # le prix de la stika dans le titre Google : donne envie de cliquer dans les résultats
     titre = (f"Prix {esc(nom)} en Tunisie — stika 1,5 L à {fmt_dt(prix15 * 6)} | Prix des Eaux de Tunisie"
              if prix15 else f"Prix {esc(nom)} en Tunisie — bouteille &amp; stika | Prix des Eaux de Tunisie")
@@ -161,7 +167,7 @@ def page_marque(b):
   <section>
     <div class="card" style="max-width:680px">
       <div class="card-head">
-        {f'<img src="{esc(img)}" alt="Bouteille {esc(nom)}" loading="lazy">' if img else ""}
+        {photo_html}
         <div class="id"><h2 style="margin:0">{esc(nom)}</h2></div>
       </div>
       {f'<div class="meta">{" · ".join(meta_bits)}</div>' if meta_bits else ""}
@@ -170,6 +176,7 @@ def page_marque(b):
     <p class="sub" style="margin-top:10px">Prix relevés le {maj_fr} sur les boutiques en ligne des
     grandes surfaces — indicatifs, ils peuvent varier selon le magasin.
     Stika = pack de 6 bouteilles (12 pour les 50 cl).</p>
+    {f'<p class="credit-pied">Photo de la bouteille : <a href="{esc(cr["page"])}" rel="noopener">{esc(cr["source"])}</a>, licence <a href="{esc(cr["licence_url"])}" rel="license noopener">{esc(cr["licence"])}</a> ; recadrée sur fond blanc.</p>' if img and cr else ""}
     <a class="bouton-wa" href="{wa}" target="_blank" rel="noopener">{ICONE_WA}Partager sur WhatsApp</a>
   </section>
   <section>{compo_html}</section>

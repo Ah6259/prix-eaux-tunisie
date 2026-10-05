@@ -58,6 +58,9 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Monoprix et Jumia exigent une vérification « humain » : **pas de contournement** (demander l'autorisation ou prix signalés).
   Relevé depuis le PC seulement si le site laisse passer un particulier.
 
+- **Photos libres des marques sans magasin** (05/10) : `data/photos_libres.json` (Open Food Facts, CC BY-SA ; images
+  `assets/img/libres/`) appliquées par `collect_prices.appliquer_photos_libres` seulement si aucune photo de magasin ;
+  crédit sous la photo + pied de page ; `sans_image_libre` = marques cherchées sans résultat. Hors ligne : `python tools/apply_meta.py`.
 - **Règle (Ahmed, 04/10)** : chaque nouvelle enseigne ajoutée doit avoir **son logo officiel, dans ses couleurs**
   (robot `logos.yml` avec le champ « sites », puis recadrage dans `assets/logos/` + entrée dans `LOGOS` d'app.js).
 - **Recherche quotidienne de nouvelles sources** (demande d'Ahmed, 04/10) : Routine Claude « Nouvelles sources de prix »

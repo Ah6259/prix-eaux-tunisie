@@ -243,6 +243,16 @@ function renderTop(){
   box.hidden = false;
 }
 
+// photo de la bouteille ; photo libre (Open Food Facts…) : crédit obligatoire juste dessous
+function photoMarque(b){
+  const img = `<img src="${b.img}" alt="Bouteille ${b.name}" loading="lazy">`;
+  const c = b.img_credit;
+  if (!c) return img;
+  return `<figure class="photo-libre">${img}<figcaption class="credit-photo">` +
+    `<a href="${c.page}" target="_blank" rel="noopener">Photo : ${c.source}</a>, ` +
+    `<a href="${c.licence_url}" target="_blank" rel="license noopener">CC BY-SA</a></figcaption></figure>`;
+}
+
 function card(b, prods){
   const meta = [];
   if (b.source) meta.push(`Source : <b>${b.source}</b>`);
@@ -253,7 +263,7 @@ function card(b, prods){
     `<span class="badge${t === "gazeuse" ? " gaz" : ""}">${t === "gazeuse" ? "Gazeuse" : "Plate"}</span>`).join("");
   return `<article class="card" id="m-${b.id}">
     <div class="card-head">
-      ${b.img ? `<img src="${b.img}" alt="Bouteille ${b.name}" loading="lazy">` : ""}
+      ${b.img ? photoMarque(b) : ""}
       <div class="id"><h3><a class="marque-lien" href="marque/${b.id}/">${b.name}</a></h3><div class="badges">${badges}</div></div>
     </div>
     ${meta.length ? `<div class="meta">${meta.join(" · ")}</div>` : ""}
@@ -346,7 +356,10 @@ function render(){
       const parNature = sansType || natSel.includes(brandNature(b));
       // exception eau traitée : quand le filtre « Traitée » est actif, on montre
       // tous ses formats (aucune eau de table n'existe en 1,5 L, le format par défaut)
-      const sansFmt = natSel.includes("table") && brandNature(b) === "table";
+      const sansFmt = (natSel.includes("table") && brandNature(b) === "table")
+        // tri par minéralité (résidu sec) : on compare les EAUX, pas les bouteilles → aucun format ne retire
+        // une marque (ex. Hayet, la moins minéralisée, n'est vendue qu'en 1 L : elle doit rester 1re)
+        || state.sort === "tds";
       return { b, parNature, prods: b.products.filter(p =>
         Object.keys(p.prices).length > 0 &&
         (recherche || ((sansFmt || fmtOk(p)) && (parNature || (gazSel && p.category === "gazeuse"))))) };
@@ -558,7 +571,8 @@ document.getElementById("foot").innerHTML =
   `Prix indicatifs relevés le ${new Date(DATA.updated + "T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}
    sur les boutiques en ligne — ils peuvent varier selon le magasin et la date. Sources :
    ${DATA.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${s.name}</a>`).join(" · ")}.
-   Projet personnel — les visuels de bouteilles proviennent des catalogues des enseignes ;
+   Projet personnel — les visuels de bouteilles proviennent des catalogues des enseignes
+   (photos de quelques marques : Open Food Facts, licence CC BY-SA, crédit sous chaque photo) ;
    les noms, marques et logos des enseignes appartiennent à leurs propriétaires.`;
 
 /* ========================================================================= */

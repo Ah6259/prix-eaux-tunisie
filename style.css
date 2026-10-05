@@ -231,6 +231,9 @@ h2{
   width:64px; height:80px; object-fit:contain; flex:none;
   background:#fff; border-radius:10px; border:1px solid var(--line); padding:4px;
 }
+.photo-libre{margin:0; flex:none; width:64px; text-align:center}
+.credit-photo{font-size:9px; line-height:1.2; color:var(--muted); margin-top:2px}
+.credit-photo a{color:inherit}
 .card-head .id h3{margin:0; font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:18px}
 .badges{display:flex; gap:6px; margin-top:4px; flex-wrap:wrap}
 .badge{font-size:11px; font-weight:600; padding:2px 9px; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
@@ -446,6 +449,7 @@ body.has-cart{padding-bottom:70px}
 @media (max-width:480px){
   .bar-row{grid-template-columns:84px 1fr 74px}
   .card-head img{width:52px; height:66px}
+  .photo-libre{width:52px}
 }
 
 /* hadith sur la sqya (le don de l'eau) */

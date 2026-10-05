@@ -15,6 +15,10 @@ from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# console Windows (cp1252) : sans ceci, l'affichage des ✅ / ❌ fait planter le test
+for _f in (sys.stdout, sys.stderr):
+    if hasattr(_f, "reconfigure"):
+        _f.reconfigure(encoding="utf-8", errors="replace")
 sys.path.insert(0, str(ROOT / "tools"))
 import collect_prices as c  # noqa: E402
 
@@ -222,6 +226,35 @@ def _():
           lambda e, d, m: "Carrefour" in e and "Géant" not in e)
 def _():
     b = Bac(avec_historique=False); d = b.passe({"geant": panne()}, avancer=False); return b, d, b.jour
+
+# photos libres (Open Food Facts) des marques sans photo de magasin : doivent rester après chaque nuit
+LIBRES = json.loads((ROOT / "data" / "photos_libres.json").read_text(encoding="utf-8"))["photos"]
+
+def photos_ok(d):
+    par_id = {b["id"]: b for b in d["brands"]}
+    return all(par_id.get(i, {}).get("img") == ph["img"] and (par_id[i].get("img_credit") or {}).get("page") == ph["page"]
+               for i, ph in LIBRES.items())
+
+@scenario("16. Photos libres (Open Food Facts) après 2 nuits du robot", "photo + crédit gardés pour " + ", ".join(LIBRES),
+          lambda e, d, m: bool(LIBRES) and photos_ok(d))
+def _():
+    b = Bac(); b.passe({}); d = b.passe({}); return b, d, b.jour
+
+@scenario("16b. Une marque à photo libre arrive en magasin avec sa photo", "photo du magasin prioritaire, plus de crédit",
+          lambda e, d, m: (lambda t: t["img"] == "assets/img/produits/test.webp" and "img_credit" not in t)(
+              next(x for x in d["brands"] if x["id"] == next(iter(LIBRES)))))
+def _():
+    b = Bac()
+    cible = next(iter(LIBRES))
+    nom = next(m for m in c.META.values() if c.slug(m["name"]) == cible)["name"]
+    marque = next(k for k, m in c.META.items() if m["name"] == nom)
+    c.telecharger_image = lambda url: "assets/img/produits/test.webp" if url == "http://test/photo.webp" else None
+    base = ok("carrefour")
+    def avec_cible():
+        return base() + [{"enseigne": "carrefour", "marque": marque, "nom": f"{nom} 1.5 L", "volume_l": 1.5,
+                          "nb_unites": 1, "type": "plate", "prix": 0.75, "image_src": "http://test/photo.webp",
+                          "image_locale": None}]
+    d = b.passe({"carrefour": avec_cible}); return b, d, b.jour
 
 
 # ------------------------------------------------------------------ rapport
