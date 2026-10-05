@@ -211,6 +211,10 @@ sur("CSP présente, sans script en ligne permis", s => /http-equiv="Content-Secu
 sur("aucun script dans la page (bloqué par la CSP)", s => !/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>/.test(s) && !/<[a-z]+ [^>]*\son(error|load|click)=/.test(s));
 sur("statistiques GoatCounter (sans cookies) chargées, CSP compatible", s => s.includes('<script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>')
   && /script-src[^;]*https:\/\/gc\.zgo\.at/.test(s) && /connect-src[^;]*https:\/\/prix-eaux-tunisie\.goatcounter\.com/.test(s) && /img-src[^;]*https:\/\/prix-eaux-tunisie\.goatcounter\.com/.test(s));
+// manifeste : id UNIQUE = chemin du site (tous les sites d'Ahmed partagent ah6259.github.io ; sinon « déjà installée »)
+let man = {}; try { man = JSON.parse(lire("manifest.webmanifest")); } catch (e) {}
+check("manifeste présent, id unique = chemin du site, icônes existantes", man.id === "/prix-eaux-tunisie/" && !!man.name && man.display === "standalone"
+  && man.icons?.length > 0 && man.icons.every(i => existsSync(join(root, i.src))) && lire("index.html").includes('rel="manifest"'));
 sur("liens externes en rel=\"noopener\"", s => [...s.matchAll(/<a [^>]*href="https?:\/\/[^"]+"[^>]*>/g)].every(m => /rel="[^"]*noopener/.test(m[0])));
 // la CSP autorise tout ce qu'utilisent la page et app.js (sinon formulaires, statistiques ou carte cassés)
 const csp = lire("index.html").match(/Content-Security-Policy" content="([^"]+)"/)[1];
