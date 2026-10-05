@@ -49,6 +49,7 @@ renouveler. Ce qui se passe en cas de problème (simulé par `python tools/test_
 | Compte Google inactif (supprimé après 2 ans) | Les prix signalés ne sont plus lus ; les anciens disparaissent après 30 jours ; rien ne casse | Gestionnaire de compte inactif Google → personne de confiance |
 | Compte Telegram inactif | Les alertes s'arrêtent si le canal perd son robot | Telegram → Confidentialité → « Supprimer mon compte si absent » : durée maximale ; ajouter un 2ᵉ administrateur |
 | Telegram en panne | Prix publiés quand même ; annonce retentée au passage suivant, sans doublon | — |
+| Un téléphone garde une vieille version du site | `sw.js` (service worker) est en **réseau d'abord** pour les pages et les prix : le cache ne sert que hors connexion | Changer `CACHE_VERSION` dans `sw.js` (vide le cache de tous les téléphones) |
 
 **Données privées** : la liste des fournisseurs, livreurs et grossistes (et leurs robots) est dans un dépôt
 GitHub **privé** séparé (`dispatch-eau-prive`), jamais dans ce dépôt public.
@@ -85,6 +86,7 @@ et lui demander de lire ce README.
 | `battement-de-coeur.yml` | le 1er du mois | empêche GitHub de mettre les robots en pause (60 j) |
 | `instagram.yml` | chaque lundi 9h05 | image « 5 stikas les moins chères » + texte → canal Telegram (pour Instagram) |
 | `telegram-bienvenue.yml` | à la main | message de présentation sur le canal |
+| `tests.yml` | à chaque envoi (push) | YAML des robots + `test_site.mjs` + `test_sw.mjs` + `test_pannes.py` (e-mail de GitHub si échec) |
 | Tâche Windows « PrixEaux-Otrity » (PC d'Ahmed) | chaque jour 12h | relevé Otrity (bloqué par Cloudflare sur GitHub) |
 
 ## Mettre à jour les prix

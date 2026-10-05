@@ -81,6 +81,16 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - **`python tools/test_pannes.py` (16 scénarios) à relancer après toute modification du robot.**
 - **`node tools/test_site.mjs` (61 vérifications de la page d'accueil) à relancer après toute modification du site.**
   Il faut jsdom, installé une fois par PC : `npm install --no-save --no-package-lock jsdom` (node_modules ignoré par git).
+- **`node tools/test_sw.mjs`** (service worker, faux navigateur ; accepte un dossier en argument pour tester une copie sabotée).
+  `tests.yml` lance à chaque push : YAML des robots + test_site.mjs + test_sw.mjs + test_pannes.py (e-mail de GitHub si échec).
+- **Service worker** (05/10/2026, installation complète Chrome/Android + iPhone) : `sw.js` à la racine, portée `/prix-eaux-tunisie/`,
+  enregistré à la fin de `protection.js` (chargé par TOUTES les pages ; https seulement, try/catch ; app.js non touché).
+  **Réseau d'abord** pour les pages HTML et les données (`data/*.js` sans ?v=, JSON : le visiteur voit toujours les prix du jour ;
+  le cache ne sert que hors connexion, sinon page « Hors connexion » FR+AR) ; CSS/JS/images avec `?v=` : cache puis mise à jour.
+  Jamais en cache : non-GET, autres origines (Google Forms, Formspree, GoatCounter, Telegram, OpenStreetMap, polices), autres sites d'Ahmed.
+  Caches `prix-eaux-tunisie-<CACHE_VERSION>` (on ne supprime QUE les nôtres : origine partagée). Vieille version bloquée → changer
+  `CACHE_VERSION`. Manifeste + apple-touch-icon + meta iPhone (`apple-mobile-web-app-capable`, `-title` « Prix Eaux ») sur l'accueil
+  ET dans les gabarits de build_pages.py / build_guides.py (`CSS_V` de build_guides.py = même ?v= que index.html).
 - Toujours lire les « échec » dans les journaux des robots (la reprise des anciens prix masque les pannes).
 
 ## Fonctions

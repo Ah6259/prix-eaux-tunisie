@@ -1,0 +1,27 @@
+# À chaque modification envoyée sur GitHub : tous les tests du site. En cas d'échec, GitHub envoie un e-mail.
+name: Tests
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Fichiers des robots valides (YAML)
+        run: |
+          pip install --quiet pyyaml
+          python -c "import yaml,glob;[yaml.safe_load(open(f,encoding='utf-8')) for f in glob.glob('.github/workflows/*.yml')]"
+      - run: npm install --no-save --no-package-lock jsdom
+      - name: Test du site
+        run: node tools/test_site.mjs
+      - name: Test du service worker (installation sur le telephone)
+        run: node tools/test_sw.mjs
+      - name: Scenarios de panne du robot
+        run: python tools/test_pannes.py

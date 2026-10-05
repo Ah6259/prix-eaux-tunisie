@@ -152,6 +152,15 @@ pour créer n'importe quel autre site.
     de la liste. Même idée pour la carte « la moins chère » : un **petit bouton « Partager »** (flèche)
     sous le prix plutôt qu'un gros bouton, et un texte court (« Stika (6 × 1,5 L) – Géant »)
 
+## 05/10/2026 — Installation complète sur le téléphone (service worker)
+- `sw.js` à la racine (portée `/prix-eaux-tunisie/`), enregistré par `protection.js` (chargé par toutes les pages ; https seulement).
+- Stratégie prudente : **réseau d'abord** pour les pages et les prix (jamais de vieux prix quand Internet marche ; cache seulement
+  hors connexion, sinon page « Hors connexion » FR + AR) ; fichiers `?v=` : cache puis mise à jour en arrière-plan.
+- Jamais en cache : envois (non-GET), autres sites (Google Forms, GoatCounter…), autres sites d'Ahmed sur la même adresse.
+- Manifeste, icône iPhone et meta `apple-mobile-web-app-capable` / `-title` sur toutes les pages (gabarits compris).
+- Test `node tools/test_sw.mjs` (faux navigateur) + nouveau robot `tests.yml` à chaque push ; sabotage vérifié.
+- Vieille version bloquée sur un téléphone : changer `CACHE_VERSION` dans `sw.js`.
+
 ## Pièges rencontrés et leçons (à réutiliser)
 
 - **Cache des téléphones** : après une mise à jour, un téléphone peut garder
