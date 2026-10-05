@@ -107,6 +107,7 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
 <meta property="og:title" content="{_esc(titre)}">
 <meta property="og:description" content="{_esc(description)}">
 <meta property="og:image" content="{SITE}/assets/og-image-v5.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <link rel="icon" type="image/svg+xml" href="../assets/icons/icon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="../style.css?v={CSS_V}">

@@ -184,10 +184,11 @@ else check("preuve de licence de la photo sauvegardée", !!credit?.dataset.sourc
 // ---- image d'aperçu des liens partagés : v4, sans nombre de marques ni noms de magasins -------------
 const guides = ["prix-stika/index.html", "quelle-eau/index.html"];
 const marques = readdirSync(join(root, "marque")).map(m => `marque/${m}/index.html`).filter(f => existsSync(join(root, f)));
-check("image d'aperçu og-image-v5.jpg présente (1200 × 630)", existsSync(join(root, "assets/og-image-v5.jpg")) &&
-  readFileSync(join(root, "assets/og-image-v5.jpg")).readUInt32BE(16) === 1200 && readFileSync(join(root, "assets/og-image-v5.jpg")).readUInt32BE(20) === 630);
-check("accueil et guides : image d'aperçu v4", ["index.html", ...guides].every(f => lire(f).includes("assets/og-image-v5.jpg")));
-check("plus aucune référence aux anciennes images d'aperçu (v2, v3)", ["index.html", ...guides, "tools/build_guides.py"].every(f => !/og-image-v[23]/.test(lire(f))));
+// WhatsApp n'affiche la GRANDE image d'aperçu que si le fichier pèse moins d'environ 300 Ko : JPEG léger obligatoire
+const og = existsSync(join(root, "assets/og-image-v5.jpg")) ? readFileSync(join(root, "assets/og-image-v5.jpg")) : Buffer.alloc(0);
+check("image d'aperçu og-image-v5.jpg : JPEG de moins de 250 Ko (grande image sur WhatsApp)", og.length > 0 && og.length < 250 * 1024 && og[0] === 0xFF && og[1] === 0xD8);
+check("accueil et guides : image d'aperçu v5", ["index.html", ...guides].every(f => lire(f).includes("assets/og-image-v5.jpg")));
+check("plus aucune référence aux anciennes images d'aperçu (v2, v3, v4)", ["index.html", ...guides, "tools/build_guides.py"].every(f => !/og-image-v[234]/.test(lire(f))));
 
 // ---- sécurité, robots d'IA et anti-copie (consigne d'Ahmed du 05/10/2026) --------------------------
 const robots = lire("robots.txt");
