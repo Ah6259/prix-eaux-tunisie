@@ -217,7 +217,7 @@ function renderTop(){
   box.innerHTML = `
     <div class="top-carte">
     <a class="top-gagnant" href="#m-${g.b.id}">
-      <span class="top-label">💧 La moins chère aujourd'hui</span>
+      <span class="top-label"><svg class="ic-goutte" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s-6.5 8.4-6.5 12.6a6.5 6.5 0 0 0 13 0C18.5 11.4 12 3 12 3z"/></svg>La moins chère aujourd'hui</span>
       <span class="top-ligne"><b class="top-nom">${g.b.name}</b>
         <b class="top-prix">${prix(g.m.prix)}</b></span>
       <span class="top-detail">${unite} – ${enseignes(g.m.magasins)}</span>

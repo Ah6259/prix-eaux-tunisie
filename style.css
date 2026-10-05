@@ -2,7 +2,7 @@
   color-scheme:light;
   --bg:#F4F8FA; --surface:#FFFFFF; --ink:#0F2B3D; --muted:#5A7484;
   --accent:#0E7FA8; --accent-soft:#E1F0F6; --best:#128A52; --best-soft:#E3F3EB;
-  --line:#D7E4EB; --chip:#EDF4F8; --shadow:0 1px 3px rgba(15,43,61,.08);
+  --line:#D7E4EB; --chip:#EDF4F8; --shadow:0 1px 2px rgba(15,43,61,.05),0 6px 20px rgba(15,43,61,.06);
   --gaz:#8A5A0E; --gaz-soft:#F6EDDC;
   --chartline:#0E7FA8;  /* validé (contraste, bande de luminosité) sur fond clair */
 }
@@ -10,7 +10,7 @@
   :root:not([data-theme="light"]){
     --bg:#0C1B24; --surface:#132530; --ink:#E6F1F6; --muted:#8FA9B6;
     --accent:#4FB6DC; --accent-soft:#12384A; --best:#4CC38A; --best-soft:#123B2A;
-    --line:#1E3644; --chip:#1A303D; --shadow:0 1px 3px rgba(0,0,0,.35);
+    --line:#1E3644; --chip:#1A303D; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
     --gaz:#E0B160; --gaz-soft:#3A2E14;
     --chartline:#35A0C8;  /* validé sur fond sombre */
     color-scheme:dark;
@@ -19,7 +19,7 @@
 :root[data-theme="dark"]{
   --bg:#0C1B24; --surface:#132530; --ink:#E6F1F6; --muted:#8FA9B6;
   --accent:#4FB6DC; --accent-soft:#12384A; --best:#4CC38A; --best-soft:#123B2A;
-  --line:#1E3644; --chip:#1A303D; --shadow:0 1px 3px rgba(0,0,0,.35);
+  --line:#1E3644; --chip:#1A303D; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
   --gaz:#E0B160; --gaz-soft:#3A2E14;
   --chartline:#35A0C8;
   color-scheme:dark;
@@ -551,7 +551,6 @@ section:has(> #match-open){padding-bottom:6px}
   .sig-cta-txt{display:none}
   .sig-cta-fl{display:inline; font-size:18px; line-height:1; padding:0 4px}
 }
-}
 .collapse .sub{margin-bottom:10px}
 
 /* photos miniatures sur les boutons Stika / Bouteille */
@@ -758,3 +757,142 @@ section:has(> #match-open){padding-bottom:6px}
 #hadith-pop .hadith{padding:14px 18px 12px}
 #hadith-pop .hadith-text{font-size:clamp(18px, 3vw, 24px); line-height:2}
 .hadith.ayat .hadith-text{font-family:"Amiri Quran","Scheherazade New",serif}
+
+/* ========================================================================= */
+/* Habillage « professionnel » (05/10/2026) : en-tête blanc avec logo, bandeau */
+/* bleu, cartes blanches arrondies, badges de confiance, pied de page complet. */
+/* ========================================================================= */
+:root{ --hero1:#0E7FA8; --hero2:#0A5F80; --rayon:16px }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --hero1:#0E5F80; --hero2:#0A3C52 } }
+:root[data-theme="dark"]{ --hero1:#0E5F80; --hero2:#0A3C52 }
+html{-webkit-text-size-adjust:100%}
+body{-webkit-font-smoothing:antialiased}
+
+/* en-tête blanc collant, logo goutte + titre + date du relevé */
+header.site{background:var(--surface); box-shadow:0 1px 0 var(--line),0 4px 14px rgba(15,43,61,.05); border-bottom:0}
+.titre{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); min-width:0}
+.logo-mark{width:38px; height:38px; flex:none; display:block}
+.titre-txt{min-width:0}
+.titre h1{font-size:clamp(19px,3.4vw,25px); line-height:1.15}
+.stats-line{display:flex; align-items:center; gap:6px; margin:3px 0 0; font-weight:500}
+.stats-line:not(:empty)::before{content:""; flex:none; width:7px; height:7px; border-radius:50%; background:var(--best);
+  box-shadow:0 0 0 3px var(--best-soft)}
+.search input{background:var(--bg)}
+.dd-btn{background:var(--bg)}
+.dd-btn.dd-stika{background:var(--best-soft)}
+.dd-btn.dd-actif{background:var(--accent)}
+@media (max-width:560px){
+  .logo-mark{width:32px; height:32px}
+  .titre{gap:8px}
+  .titre h1{font-size:min(20px,5.6vw)}
+}
+
+/* bandeau bleu : ce qu'est le site */
+.hero{background:linear-gradient(160deg,var(--hero1) 0%,var(--hero2) 100%); color:#fff; padding:18px 0 46px}
+.hero .intro{color:rgba(255,255,255,.88); margin:0}
+.hero .intro strong, .hero .intro b{color:#fff}
+.hero .identite{font-size:15px}
+.hero .identite-2{opacity:.92; margin-top:6px; line-height:1.5}
+.hero .identite-ar{color:rgba(255,255,255,.85); margin-top:8px}
+.chevauche{margin-top:-32px; position:relative}
+
+/* la réponse : carte blanche qui chevauche le bandeau */
+.top-reponse{margin-top:0; background:var(--surface); border:1px solid var(--line); border-radius:18px;
+  box-shadow:var(--shadow); padding:10px}
+.top-gagnant{border-radius:13px; padding:12px 14px}
+.top-label{display:inline-flex; align-items:center; gap:5px; text-transform:uppercase; letter-spacing:.04em; font-size:11.5px}
+.ic-goutte{width:14px; height:14px; fill:var(--best); flex:none}
+.top-liste a{background:var(--bg); border-color:transparent}
+.top-liste a:hover{border-color:var(--accent)}
+.top-partage{bottom:11px; right:14px}
+
+/* 3 badges de confiance */
+.confiance{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:14px 0 4px}
+.badge-c{display:flex; flex-direction:column; align-items:center; gap:5px; text-align:center; text-decoration:none;
+  background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:10px 6px;
+  font-size:12px; font-weight:700; color:var(--muted); line-height:1.25}
+a.badge-c:hover{border-color:var(--accent); color:var(--accent)}
+.badge-c svg{width:22px; height:22px; stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+@media (max-width:380px){ .badge-c{font-size:11px; padding:9px 4px} }
+
+/* barres-fenêtres : icône dans une pastille, carte blanche */
+.sig-bar{border-radius:14px; padding:10px 12px; transition:border-color .15s, transform .15s}
+.sig-bar:hover{transform:translateY(-1px)}
+.sig-bar .sig-ico{
+  width:34px; height:34px; border-radius:10px; flex:none; display:grid; place-items:center;
+  background:var(--accent-soft); color:var(--accent)}
+.sig-bar .sig-ico svg{width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.sig-bar .ic-coeur{background:#FCE8EE; color:#D6336C}
+.sig-bar .ic-coeur svg{fill:currentColor; stroke:none}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .sig-bar .ic-coeur{background:#3A1624; color:#F06595} }
+:root[data-theme="dark"] .sig-bar .ic-coeur{background:#3A1624; color:#F06595}
+@media (max-width:560px){
+  .sig-bar .sig-ico{width:30px; height:30px; border-radius:9px}
+  .sig-bar .sig-ico svg{width:17px; height:17px}
+}
+
+/* cartes : rayon et ombre douce partout */
+.card, .compare, .histo, .hadith{border-radius:var(--rayon)}
+.card-head img{border-radius:12px}
+.card-head .id h3{font-size:19px; letter-spacing:-.01em}
+.top-classement #compare-rest{border-radius:14px; box-shadow:var(--shadow)}
+#compare-more{background:var(--surface); box-shadow:var(--shadow)}
+
+/* titres de section */
+section > h2, .liste-tete h2{font-size:20px; font-weight:800}
+.h2-ic{display:flex; align-items:center; gap:8px}
+.h2-ic svg{width:22px; height:22px; fill:none; stroke:var(--accent); stroke-width:2; stroke-linejoin:round}
+
+/* sections repliables (évolution, FAQ, marques) et avis : cartes blanches */
+#histo-section > .histo-fold, .faq > .histo-fold, .marques-nav > .histo-fold, .avis{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--rayon);
+  box-shadow:var(--shadow); padding:14px 16px}
+#histo-section, .faq{padding-block:8px}
+.avis{margin-block:12px 0}
+.marques-nav{border-top:0; margin-top:8px; padding-top:0}
+.histo-fold summary{list-style:none; display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 6px; padding-right:24px; position:relative}
+.histo-fold summary::-webkit-details-marker{display:none}
+.histo-fold summary::after{content:""; position:absolute; right:4px; top:50%; width:8px; height:8px; margin-top:-7px;
+  border-right:2px solid var(--accent); border-bottom:2px solid var(--accent); transform:rotate(45deg); transition:transform .2s}
+.histo-fold[open] summary::after{transform:rotate(-135deg); margin-top:-3px}
+.histo-fold[open] summary{margin-bottom:10px}
+
+/* boutons : légère profondeur */
+.sum-cta, .sig-bouton, .avis-send, .cartbar-btn{box-shadow:0 1px 2px rgba(15,43,61,.15)}
+
+/* pied de page complet */
+footer{background:var(--surface); border-top:1px solid var(--line); margin-top:28px; padding-block:24px 34px}
+.pied-logo{display:flex; align-items:center; gap:8px; margin:0 0 6px; font-family:"Bricolage Grotesque","Figtree",sans-serif;
+  font-weight:800; font-size:16px; color:var(--ink)}
+.pied-logo .logo-mark{width:26px; height:26px}
+.pied-desc{margin:0 0 10px; max-width:68ch}
+.pied-nav{display:flex; flex-wrap:wrap; gap:6px 16px; margin:0 0 16px; padding:12px 0; border-block:1px solid var(--line); font-size:13.5px}
+.pied-nav a{color:var(--ink); font-weight:600}
+.pied-nav a:hover{color:var(--accent)}
+.pied-titre{font-size:12px !important; text-transform:uppercase; letter-spacing:.06em; color:var(--muted);
+  font-family:"Figtree",system-ui,sans-serif !important; font-weight:700 !important; margin:0 0 4px}
+.pied-sources{max-width:80ch}
+.pied-sources p{margin:0 0 6px}
+footer .copyright{margin:14px 0 0}
+
+/* pages générées (marques, guides) : en-tête simple + bandeau bleu */
+.page-hero{padding:20px 0 24px}
+.page-hero h1{color:#fff; font-size:clamp(22px,6vw,32px); line-height:1.15; margin:0}
+.page-hero .fil{margin:0 0 8px; font-size:13px}
+.page-hero .fil a{color:#fff; opacity:.88; text-decoration:none}
+.page-hero .fil a:hover{opacity:1; text-decoration:underline}
+.page-hero .ar{color:rgba(255,255,255,.88) !important; margin:8px 0 0 !important; font-size:15px}
+.page-hero .maj{display:inline-flex; align-items:center; gap:6px; margin-top:12px; font-size:12.5px; font-weight:600;
+  background:rgba(255,255,255,.14); border-radius:999px; padding:4px 12px}
+.page-hero .maj::before{content:""; width:7px; height:7px; border-radius:50%; background:#7CF0BE}
+.bouton-wa{display:inline-flex; align-items:center; gap:8px; margin-top:12px; background:#1FAF5A; color:#fff; font-weight:700;
+  text-decoration:none; padding:9px 18px; border-radius:999px; font-size:14px; box-shadow:0 1px 2px rgba(15,43,61,.15)}
+.bouton-wa svg{width:18px; height:18px; fill:#fff}
+.bouton-wa:hover{filter:brightness(1.05)}
+.h-site{font-family:"Bricolage Grotesque","Figtree",sans-serif; font-weight:800; font-size:clamp(18px,3.2vw,22px);
+  line-height:1.15; margin:0; letter-spacing:-.01em; white-space:nowrap}
+.page-hero + .wrap > section:first-child, .page-hero + .wrap > :first-child{margin-top:4px}
+.page-hero h1{font-size:min(30px,5vw); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-wrap:nowrap}
+.page-hero + .wrap > section:first-child{padding-top:16px}
+.page-hero + .wrap > section:first-child > .intro:first-child{margin-top:0}
+.histo-fold summary h2{font-size:19px}

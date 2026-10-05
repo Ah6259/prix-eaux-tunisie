@@ -13,7 +13,7 @@ from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from build_guides import SOURCES_HTML  # noqa: E402
+from build_guides import SOURCES_HTML, CSS_V, ICONE_WA, entete, bandeau, pied  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://ah6259.github.io/prix-eaux-tunisie"
@@ -133,16 +133,13 @@ def page_marque(b):
 <link rel="canonical" href="{SITE}/marque/{bid}/">
 <link rel="icon" type="image/svg+xml" href="../../assets/icons/icon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../style.css?v={CSS_V}">
 <script type="application/ld+json">{jsonld}</script>
 </head>
 <body>
-<header class="site"><div class="wrap site-inner">
-  <h1>Prix de l'eau {esc(nom)}</h1>
-</div></header>
+{entete("../../")}
+{bandeau("../../", "Prix de l'eau " + esc(nom), "Prix de toutes les eaux minérales en Tunisie", ar, maj_fr)}
 <div class="wrap">
-  <p class="ar" dir="rtl" lang="ar" style="font-size:15px;color:var(--muted);margin:10px 0 0">{ar}</p>
-  <p class="intro" style="margin-top:8px"><a href="../../">← Prix de toutes les eaux minérales en Tunisie</a></p>
   <section>
     <div class="card" style="max-width:680px">
       <div class="card-head">
@@ -155,7 +152,7 @@ def page_marque(b):
     <p class="sub" style="margin-top:10px">Prix relevés le {maj_fr} sur les boutiques en ligne des
     grandes surfaces — indicatifs, ils peuvent varier selon le magasin.
     Stika = pack de 6 bouteilles (12 pour les 50 cl).</p>
-    <a href="{wa}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#25D366;color:#fff;font-weight:700;text-decoration:none;padding:8px 16px;border-radius:999px;font-size:14px">🟢 Partager sur WhatsApp</a>
+    <a class="bouton-wa" href="{wa}" target="_blank" rel="noopener">{ICONE_WA}Partager sur WhatsApp</a>
   </section>
   <section>{compo_html}</section>
   <section>
@@ -166,12 +163,7 @@ def page_marque(b):
     surfaces, à titre indicatif). <a href="https://t.me/prixeautunisie" rel="noopener">Être prévenu de l'ouverture</a>.</p>
   </section>
 </div>
-<footer><div class="wrap">
-  <a href="../../">Comparateur des prix de l'eau en Tunisie</a> — 35 marques, mis à jour chaque jour ·
-  <a href="../../prix-stika/">Prix de la stika aujourd'hui</a> · <a href="../../quelle-eau/">Quelle eau choisir ?</a>
-  <p>{SOURCES_HTML}</p>
-  <p class="copyright">© 2026 Prix des Eaux de Tunisie — tous droits réservés.</p>
-</div></footer>
+{pied("../../")}
 </body>
 </html>
 """
