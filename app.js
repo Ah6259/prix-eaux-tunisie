@@ -73,12 +73,8 @@ function compoBlock(b){
 // écrit par collect_prices.py). Comparée à la date du jour du visiteur : même si tous les
 // robots s'arrêtaient, le site préviendrait que les prix sont anciens.
 const NOMS_SRC = { carrefour: "Carrefour", geant: "Géant", otrity: "Otrity", monoprix: "Monoprix" };
-// sources relevées à la main (Monoprix : captures de l'application, 30 jours max, collect_prices.py) :
-// date du relevé écrite à côté du nom, jamais d'alerte de retard pour elles.
-const RELEVE_MANUEL = nom => {
-  const k = Object.keys(NOMS_SRC).find(x => NOMS_SRC[x] === nom), s = k && (DATA.statut_sources || {})[k];
-  return s && s.manuel && s.dernier_ok ? s.dernier_ok : null;
-};
+// sources relevées à la main (statut_sources.<x>.manuel, ex. Monoprix : captures de l'application,
+// 30 jours max, collect_prices.py) : jamais d'alerte de retard pour elles, date non affichée (choix d'Ahmed).
 // logos officiels des enseignes (assets/logos/), affichés devant le nom du magasin.
 // Géant : le logo est le mot « Géant » lui-même, il remplace le texte.
 // Otrity : logo rapporté par le PC d'Ahmed (Cloudflare bloque GitHub) ; s'il manque, on garde le texte.
@@ -104,12 +100,7 @@ document.addEventListener("error", e => {
     else t.remove();
   }
 }, true);
-// nom du magasin d'un prix du classement (+ « relevé du … » pour un relevé manuel)
-function ensPrix(nom){
-  const d = RELEVE_MANUEL(nom);
-  return d ? `${enseigne(nom)} <small class="releve">(relevé du ${dateCourte(d)})</small>` : enseigne(nom);
-}
-const enseignes = liste => liste.map(ensPrix).join(", ");
+const enseignes = liste => liste.map(enseigne).join(", ");
 const STATUT = DATA.statut_sources || {};
 const dateCourte = d => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
 const joursDepuis = d => Math.floor((Date.now() - new Date(d + "T12:00:00")) / 864e5);
@@ -203,7 +194,7 @@ function prodRow(p, b){
   const offers = Object.entries(p.prices)
     .sort((a,z) => a[1] - z[1])
     .map(([s,v]) => `<span class="offer${multi && best.includes(s) ? " best" : ""}">
-        <span class="store">${ensPrix(s)}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>`)
+        <span class="store">${enseigne(s)}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>`)
     .join("");
   const label = p.format +
                 (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
