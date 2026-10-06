@@ -215,6 +215,10 @@ sys.path.insert(0, str(ROOT / "tools"))
 from build_guides import generer  # noqa: E402
 urls += generer(data, COMPO, SITE, ROOT, maj_fr)
 
+# page vidéo (video/) tirée de quelle-eau/ : mêmes en-tête, pied, CSP et ?v= (tools/page_video.py, réglages page_video.json)
+from page_video import pages_video  # noqa: E402
+urls += [SITE + "/" + c for c in pages_video(str(ROOT))]
+
 # sitemap
 today = date.today().isoformat()
 sm = ['<?xml version="1.0" encoding="UTF-8"?>',
