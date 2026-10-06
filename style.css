@@ -925,3 +925,8 @@ input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-
 
 /* un élément caché par le JS (attribut hidden) reste caché même si une règle lui donne display:flex/grid/block */
 [hidden]{display:none!important}
+
+/* vidéo de présentation : message « Préparation de la vidéo… » et lien discret (outil vidéos) */
+.partage-msg{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;background:#14202e;color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;font-size:.95rem;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:calc(100% - 32px);text-align:center}
+.partage-msg[hidden]{display:none}
+.lien-video{text-align:center;font-size:.9rem;margin:18px 0 6px}.lien-video a{color:inherit;text-decoration:underline}

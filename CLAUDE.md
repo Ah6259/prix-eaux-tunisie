@@ -205,3 +205,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - Titres : « comparateur gratuit » (accueil, 35 pages marques via build_pages.py, guides via build_guides.py).
 - Reste dépendant du PC : relevé Otrity (Cloudflare bloque GitHub) → chercher une autre source accessible depuis GitHub.
 - **Boutons « Partager » harmonisés** (06/10/2026, demande d'Ahmed, pas de doublon dans l'en-tête : le site avait déjà ses boutons) : `protection.js` intercepte tout lien `https://wa.me/?text=` (petit bouton de l'accueil, gros boutons des pages marques et guides) → clic compté `partage/<page>` dans GoatCounter, menu de partage du téléphone (`navigator.share`) s'il existe, sinon le lien WhatsApp s'ouvre normalement. Testé dans test_site.mjs.
+
+- **Vidéo de présentation** (06/10/2026) : `assets/video/presentation.mp4` + `couverture.jpg`, 1080 × 1920, sans musique. Le bouton « Partager » envoie la vidéo + le lien quand le téléphone le permet, sinon le lien seul (`window.partagerVideo`, bloc « vidéo de présentation » en fin de `protection.js`) ; lien « Vidéo de présentation » en bas de l'accueil et de À propos ; test `node tools/test_video.mjs`.
+  Pour la refaire (vraies captures du site, chiffres lus en ligne) : `python fabriquer.py eau` puis `python brancher_partage.py eau` dans le dossier PRIVÉ du PC `videos (outil)/`.
