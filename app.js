@@ -241,7 +241,7 @@ function renderTop(){
     </div>
     <ol class="top-liste" start="2">${rows.slice(1, 5).map(r => `
       <li><a href="#m-${r.b.id}"><span class="top-n">${r.b.name}</span>
-        <span class="top-p">${prix(r.m.prix)}</span><small>${enseignes(r.m.magasins)}</small></a></li>`).join("")}
+        <span class="top-p">${prix(r.m.prix)}</span><small class="top-ens">${r.m.magasins.map(m => `<span>${enseigne(m)}</span>`).join("")}</small></a></li>`).join("")}
     </ol>
 `;
   box.hidden = false;

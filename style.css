@@ -705,12 +705,17 @@ section:has(> #match-open){padding-bottom:6px}
 .top-detail{font-size:12.5px; color:var(--muted)}
 .top-liste{list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:4px; counter-reset:top 1}
 .top-liste li{counter-increment:top}
-.top-liste a{display:flex; align-items:baseline; gap:8px; text-decoration:none; color:var(--ink);
+.top-liste a{display:grid; grid-template-columns:14px minmax(0,1fr) 84px 92px; align-items:center; gap:8px; text-decoration:none; color:var(--ink);
   padding:7px 12px; border-radius:10px; background:var(--surface); border:1px solid var(--line); font-size:14px}
 .top-liste a::before{content:counter(top); color:var(--muted); font-weight:700; min-width:14px}
 .top-n{font-weight:600}
-.top-p{margin-left:auto; font-weight:700; font-variant-numeric:tabular-nums}
-.top-liste small{color:var(--muted); font-size:11.5px; min-width:64px; text-align:right}
+.top-p{font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; text-align:right}
+.top-liste small{color:var(--muted); font-size:11.5px; text-align:right}
+/* magasins au même prix : un par ligne */
+.top-ens{display:flex; flex-direction:column; align-items:flex-end; gap:3px}
+.top-ens > span{white-space:nowrap}
+.top-n{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+@media (max-width:370px){ .top-liste a{grid-template-columns:12px minmax(0,1fr) 70px 80px; gap:6px; padding:7px 9px; font-size:13px} }
 .top-tout{display:block; text-align:center; margin-top:8px; font-size:13px; font-weight:600; color:var(--accent); text-decoration:none}
 
 /* identité + étiquettes « ce que vous pouvez faire » */
