@@ -322,32 +322,36 @@ check("accueil : plus de badges ; « Gratuit, sans inscription » dans l'intro, 
     const h = lire(chemin).replace(/<script[^>]*src="[^"]*"[^>]*><\/script>/g, "");
     const w = new JSDOM(h, { url: adresse, runScripts: "outside-only" }).window;
     w.eval(lire("protection.js"));
-    const comptes = [], partages = [];
+    const comptes = [], partages = [], ouverts = [];
     w.goatcounter = { count: o => comptes.push(o) };
+    w.open = u => { ouverts.push(u); return null; };
     if (avecShare) Object.defineProperty(w.navigator, "share", { value: d => { partages.push(d); return Promise.resolve(); } });
     const a = w.document.querySelector(sel);
     if (!a) return null;
     const ev = new w.MouseEvent("click", { bubbles: true, cancelable: true });
     a.dispatchEvent(ev);
     await new Promise(ok => setTimeout(ok, 0));
-    return { a, ouvert: !ev.defaultPrevented, comptes, partages };
+    return { a, ouvert: !ev.defaultPrevented, comptes, partages, ouverts };
   };
   const URLS = "https://ah6259.github.io/prix-eaux-tunisie/";
   for (const [chemin, sel, adresse] of [["marque/aqualine/index.html", "a.bouton-wa", URLS + "marque/aqualine/"], ["prix-stika/index.html", "a.bouton-wa", URLS + "prix-stika/"], ["quelle-eau/index.html", "a.bouton-wa", URLS + "quelle-eau/"]]) {
     const r = await essai(chemin, sel, adresse, false);
-    check(`${chemin} : sans navigator.share, « Partager » ouvre wa.me avec l'adresse de la page et compte le clic (partage/…)`, !!r && r.ouvert
-      && r.a.href.startsWith("https://wa.me/?text=") && new URL(r.a.href).searchParams.get("text").includes(adresse)
+    // partage par lien (demande d'Ahmed, octobre 2026) : la page vidéo du site + l'adresse de la page dans le texte
+    check(`${chemin} : sans navigator.share, « Partager » ouvre WhatsApp avec la page vidéo + l'adresse de la page et compte le clic (partage/…)`, !!r && r.ouverts.length === 1
+      && r.ouverts[0].startsWith("https://wa.me/?text=") && decodeURIComponent(r.ouverts[0]).includes(adresse) && decodeURIComponent(r.ouverts[0]).includes(URLS + "video/")
       && r.comptes.length === 1 && r.comptes[0].path.startsWith("partage/") && r.comptes[0].event === true);
     const r2 = await essai(chemin, sel, adresse, true);
-    check(`${chemin} : avec navigator.share, menu de partage du téléphone avec l'adresse de la page (WhatsApp pas ouvert en plus)`, !!r2 && !r2.ouvert
-      && r2.partages.length === 1 && r2.partages[0].url === adresse);
+    check(`${chemin} : avec navigator.share, menu de partage : page vidéo (url) + adresse de la page (texte), WhatsApp pas ouvert en plus`, !!r2 && !r2.ouvert
+      && r2.partages.length === 1 && r2.partages[0].url === URLS + "video/" && r2.partages[0].text.includes(adresse) && !r2.ouverts.length);
   }
   // accueil : le petit bouton sous le prix (fabriqué par app.js) passe par le même code
-  const ev = new window.MouseEvent("click", { bubbles: true, cancelable: true }), comptes = [];
+  const ev = new window.MouseEvent("click", { bubbles: true, cancelable: true }), comptes = [], ouv = [];
   window.goatcounter = { count: o => comptes.push(o) };
+  const ancienOpen = window.open; window.open = u => { ouv.push(u); return null; };
   top.querySelector(".top-partage").dispatchEvent(ev);
-  check("accueil : sans navigator.share, le petit bouton « Partager » ouvre wa.me avec l'adresse du site et compte le clic", !ev.defaultPrevented
-    && new URL(top.querySelector(".top-partage").href).searchParams.get("text").includes(URLS) && comptes.length === 1 && comptes[0].path === "partage/");
+  window.open = ancienOpen;
+  check("accueil : sans navigator.share, le petit bouton « Partager » ouvre WhatsApp avec la page vidéo + l'adresse du site et compte le clic", ev.defaultPrevented
+    && ouv.length === 1 && decodeURIComponent(ouv[0]).includes(URLS + "video/") && decodeURIComponent(ouv[0]).includes(URLS) && comptes.length === 1 && comptes[0].path === "partage/");
   check("un seul bouton « Partager » par page (pas de doublon)", (lire("marque/aqualine/index.html").match(/href="https:\/\/wa\.me\/\?text=/g) || []).length === 1
     && (lire("prix-stika/index.html").match(/href="https:\/\/wa\.me\/\?text=/g) || []).length === 1);
 }

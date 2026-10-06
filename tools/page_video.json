@@ -1,0 +1,30 @@
+{
+ "site": "https://ah6259.github.io/prix-eaux-tunisie/",
+ "logo": "assets/icons/icon.svg",
+ "defaut": "fr",
+ "modele": "quelle-eau/index.html",
+ "nom": {
+  "fr": "Prix des Eaux de Tunisie"
+ },
+ "partager": {
+  "fr": "Partager la vidéo · شارك الفيديو"
+ },
+ "pages": [
+  {
+   "chemin": "video/",
+   "video": "presentation",
+   "couverture": "couverture.jpg",
+   "apercu": "apercu-video.jpg",
+   "site": "",
+   "titre": {
+    "fr": "Vidéo de présentation · الفيديو التقديمي"
+   },
+   "description": {
+    "fr": "Vidéo de présentation : le prix de la stika d'eau minérale en magasin, comparé chaque jour, gratuit et sans inscription."
+   },
+   "bouton": {
+    "fr": "Ouvrir le site · افتح الموقع"
+   }
+  }
+ ]
+}
