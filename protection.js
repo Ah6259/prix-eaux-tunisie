@@ -40,6 +40,26 @@
   }
 })();
 
+/* Boutons « Partager » existants (petit bouton de l'accueil, gros boutons des pages marques et guides), harmonisés
+   avec les autres sites d'Ahmed (06/10/2026) : clic compté anonymement « partage/<page> » ; menu de partage du téléphone
+   (navigator.share) s'il existe, sinon le lien WhatsApp (wa.me) s'ouvre normalement. Annulation = rien. */
+document.addEventListener("click", function (e) {
+  var el = e.target && (e.target.nodeType === 1 ? e.target : e.target.parentElement);
+  var a = el && el.closest('a[href^="https://wa.me/?text="]');
+  if (!a) return;
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "partage" + location.pathname.replace("/prix-eaux-tunisie/", "/"), title: "Partage", event: true }); } catch (err) {}
+  if (!navigator.share) return;
+  var texte = "";
+  try { texte = new URL(a.href).searchParams.get("text") || ""; } catch (err) { return; }
+  var m = texte.match(/https?:\/\/\S+/);
+  var url = m ? m[0] : location.href.split("#")[0].split("?")[0];
+  e.preventDefault();
+  navigator.share({ title: document.title.split(" | ")[0], text: texte.replace(url, "").replace(/\s+[—:-]?\s*$/, "").trim(), url: url })["catch"](function (err) {
+    if (err && err.name === "AbortError") return;
+    window.open(a.href, "_blank", "noopener");
+  });
+});
+
 /* Installation sur le téléphone : service worker PRUDENT (sw.js : réseau d'abord pour les pages et les données).
    Seulement en https (jamais en file: pendant les tests locaux). */
 if ("serviceWorker" in navigator && location.protocol === "https:") {

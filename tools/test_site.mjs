@@ -315,5 +315,42 @@ const tuilesSansLien = doc => [...doc.body.querySelectorAll("*")].filter(el => {
 check("accueil : plus de badges ; « Gratuit, sans inscription » dans l'intro, lien vers les sources gardé", !/badge-c|class="confiance"/.test(lire("index.html"))
   && /Gratuit, sans inscription/.test(lire("index.html")) && /<a href="#sources">sources citées<\/a>/.test(lire("index.html")));
 
+// ---- Boutons « Partager » existants, harmonisés avec les autres sites (06/10/2026) ----
+// sans navigator.share : le lien wa.me (avec l'adresse de la page) s'ouvre normalement ; avec : menu de partage du téléphone ; clic compté
+{
+  const essai = async (chemin, sel, adresse, avecShare) => {
+    const h = lire(chemin).replace(/<script[^>]*src="[^"]*"[^>]*><\/script>/g, "");
+    const w = new JSDOM(h, { url: adresse, runScripts: "outside-only" }).window;
+    w.eval(lire("protection.js"));
+    const comptes = [], partages = [];
+    w.goatcounter = { count: o => comptes.push(o) };
+    if (avecShare) Object.defineProperty(w.navigator, "share", { value: d => { partages.push(d); return Promise.resolve(); } });
+    const a = w.document.querySelector(sel);
+    if (!a) return null;
+    const ev = new w.MouseEvent("click", { bubbles: true, cancelable: true });
+    a.dispatchEvent(ev);
+    await new Promise(ok => setTimeout(ok, 0));
+    return { a, ouvert: !ev.defaultPrevented, comptes, partages };
+  };
+  const URLS = "https://ah6259.github.io/prix-eaux-tunisie/";
+  for (const [chemin, sel, adresse] of [["marque/aqualine/index.html", "a.bouton-wa", URLS + "marque/aqualine/"], ["prix-stika/index.html", "a.bouton-wa", URLS + "prix-stika/"], ["quelle-eau/index.html", "a.bouton-wa", URLS + "quelle-eau/"]]) {
+    const r = await essai(chemin, sel, adresse, false);
+    check(`${chemin} : sans navigator.share, « Partager » ouvre wa.me avec l'adresse de la page et compte le clic (partage/…)`, !!r && r.ouvert
+      && r.a.href.startsWith("https://wa.me/?text=") && new URL(r.a.href).searchParams.get("text").includes(adresse)
+      && r.comptes.length === 1 && r.comptes[0].path.startsWith("partage/") && r.comptes[0].event === true);
+    const r2 = await essai(chemin, sel, adresse, true);
+    check(`${chemin} : avec navigator.share, menu de partage du téléphone avec l'adresse de la page (WhatsApp pas ouvert en plus)`, !!r2 && !r2.ouvert
+      && r2.partages.length === 1 && r2.partages[0].url === adresse);
+  }
+  // accueil : le petit bouton sous le prix (fabriqué par app.js) passe par le même code
+  const ev = new window.MouseEvent("click", { bubbles: true, cancelable: true }), comptes = [];
+  window.goatcounter = { count: o => comptes.push(o) };
+  top.querySelector(".top-partage").dispatchEvent(ev);
+  check("accueil : sans navigator.share, le petit bouton « Partager » ouvre wa.me avec l'adresse du site et compte le clic", !ev.defaultPrevented
+    && new URL(top.querySelector(".top-partage").href).searchParams.get("text").includes(URLS) && comptes.length === 1 && comptes[0].path === "partage/");
+  check("un seul bouton « Partager » par page (pas de doublon)", (lire("marque/aqualine/index.html").match(/href="https:\/\/wa\.me\/\?text=/g) || []).length === 1
+    && (lire("prix-stika/index.html").match(/href="https:\/\/wa\.me\/\?text=/g) || []).length === 1);
+}
+
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");
 process.exit(erreurs ? 1 : 0);
