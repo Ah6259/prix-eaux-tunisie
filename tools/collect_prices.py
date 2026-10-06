@@ -13,6 +13,8 @@ Sources :
   (Monoprix retiré le 30/09/2026 : vérifié sur courses.monoprix.tn par Ahmed, barka.tn
    affichait en vente Safia/Marwa/Melina 1,5 L indisponibles et Sabrine 0,660 au lieu de 0,680 ;
    courses.monoprix.tn bloque les robots (403). Ne réintroduire qu'avec une source directe vérifiée.)
+  - Monoprix (depuis le 06/10/2026) : PAS de robot — prix relevés par Ahmed dans l'application
+    Monoprix, écrits dans data/monoprix.json, gardés dans le classement 30 jours (MAX_JOURS_MANUEL).
   (Aziza retiré le 30/09/2026 : barka.tn ne donne que les prix de l'ancienne boutique
    en ligne d'Aziza, fermée — prix périmés, ex. Bargou 0,590 au lieu de ~0,817 en magasin.
    Le site actuel d'Aziza ne publie que des catalogues promo, son API de prix est privée.)
@@ -43,6 +45,7 @@ IMG_AUTO = ROOT / "assets" / "img" / "produits"  # photos téléchargées des en
 PHOTOS_LIBRES = ROOT / "data" / "photos_libres.json"
 RAW_DIR = ROOT / "tools" / "raw"
 MAX_JOURS_REPRISE = 7   # une source en panne garde ses anciens prix 7 jours au plus
+MAX_JOURS_MANUEL = 30   # prix relevés à la main (data/monoprix.json) : 30 jours au plus
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36"
 
@@ -494,6 +497,23 @@ def main():
                 offres += repris
             else:
                 print(f"  -> dernier relevé réussi : {dernier or 'jamais'} — prix {nom} retirés du site")
+    # Monoprix : pas de robot (leur site bloque les robots) ; prix relevés par Ahmed dans
+    # l'application Monoprix (captures d'écran) et écrits dans data/monoprix.json.
+    # Dans le classement pendant MAX_JOURS_MANUEL jours, puis retirés automatiquement.
+    fichier = ROOT / "data" / "monoprix.json"
+    statut.pop("monoprix", None)
+    if fichier.exists():
+        try:
+            rel = json.loads(fichier.read_text(encoding="utf-8"))
+            age = (aujourdhui - date.fromisoformat(rel["date"])).days
+            if 0 <= age <= MAX_JOURS_MANUEL and rel.get("offres"):
+                print(f"Monoprix (relevé manuel du {rel['date']}, {age} j) : {len(rel['offres'])} offres")
+                offres += [dict(o, enseigne="monoprix") for o in rel["offres"]]
+                statut["monoprix"] = {"dernier_ok": rel["date"], "nb": len(rel["offres"]), "manuel": True}
+            else:
+                print(f"Monoprix : relevé manuel du {rel['date']} ({age} j) hors délai : prix retirés")
+        except Exception as e:
+            print(f"! Monoprix : data/monoprix.json illisible ({e}) : ignoré", file=sys.stderr)
     # Même si TOUTES les sources échouent, on écrit le fichier : les prix trop vieux
     # disparaissent et le site affiche un avertissement (voir statut_sources dans app.js)
 
@@ -583,7 +603,7 @@ def main():
     data = {
         "updated": date.today().isoformat(),
         "currency": "DT",
-        "stores": ["Carrefour", "Géant", "Otrity"],
+        "stores": ["Carrefour", "Géant", "Otrity"] + (["Monoprix"] if "monoprix" in statut else []),
         "sources": [
             {"name": "Carrefour Tunisie", "url": "https://www.carrefour.tn"},
             {"name": "Géant Drive Tunisie", "url": "https://www.geantdrive.tn"},

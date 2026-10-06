@@ -24,7 +24,7 @@ import collect_prices as c  # noqa: E402
 
 J0 = date(2026, 10, 1)
 REEL = json.loads((ROOT / "data" / "eaux.json").read_text(encoding="utf-8"))
-NOMS = {"carrefour": "Carrefour", "geant": "Géant", "otrity": "Otrity"}
+NOMS = {"carrefour": "Carrefour", "geant": "Géant", "otrity": "Otrity", "monoprix": "Monoprix"}
 
 
 # ------------------------------------------------------------------ sources simulées
@@ -58,6 +58,14 @@ class Bac:
             self.otrity_local(otrity_local_age)
         if avec_historique:
             self.passe({s: ok(s) for s in ("carrefour", "geant")}, avancer=False)
+
+    def monoprix_manuel(self, age_jours):
+        """Relevé Monoprix fait à la main (captures de l'application) il y a age_jours jours."""
+        (self.tmp / "data" / "monoprix.json").write_text(json.dumps({
+            "date": (self.jour - timedelta(days=age_jours)).isoformat(),
+            "offres": [{"enseigne": "monoprix", "marque": "AQUALINE", "nom": "Eau minérale AQUALINE 1.5L",
+                        "volume_l": 1.5, "nb_unites": 1, "type": "plate", "prix": 0.6, "image_src": None}]}),
+            encoding="utf-8")
 
     def otrity_local(self, age_jours):
         (self.tmp / "data" / "otrity.json").write_text(json.dumps({
@@ -94,6 +102,8 @@ def vu_par_visiteur(data, aujourdhui):
     """Reproduit la logique d'avertissement d'app.js (alerteFraicheur)."""
     avec_prix = {s for b in data["brands"] for p in b["products"] for s in p["prices"]}
     st = data.get("statut_sources") or {}
+    # relevés manuels (Monoprix) : jamais d'alerte de retard, ne comptent pas pour « mis à jour le »
+    st = {k: s for k, s in st.items() if not s.get("manuel")}
     derniers = sorted(s["dernier_ok"] for k, s in st.items() if s.get("dernier_ok") and NOMS[k] in avec_prix)
     derniere = derniers[-1] if derniers else data["updated"]
     if not avec_prix:
@@ -226,6 +236,21 @@ def _():
           lambda e, d, m: "Carrefour" in e and "Géant" not in e)
 def _():
     b = Bac(avec_historique=False); d = b.passe({"geant": panne()}, avancer=False); return b, d, b.jour
+
+@scenario("17. Monoprix relevé à la main il y a 20 jours", "prix Monoprix dans le classement, aucun avertissement",
+          lambda e, d, m: "Monoprix" in e and m == "(aucun avertissement)" and d["statut_sources"]["monoprix"]["manuel"])
+def _():
+    b = Bac(); b.monoprix_manuel(19); d = b.passe({}); return b, d, b.jour
+
+@scenario("17b. Monoprix relevé à la main il y a 31 jours", "prix Monoprix RETIRÉS, pas d'avertissement",
+          lambda e, d, m: "Monoprix" not in e and "monoprix" not in d["statut_sources"] and m == "(aucun avertissement)")
+def _():
+    b = Bac(); b.monoprix_manuel(30); d = b.passe({}); return b, d, b.jour
+
+@scenario("17c. Fichier Monoprix abîmé", "pas de plantage, Monoprix ignoré",
+          lambda e, d, m: "Monoprix" not in e and "Carrefour" in e)
+def _():
+    b = Bac(); (b.tmp / "data" / "monoprix.json").write_text("{pas du json", encoding="utf-8"); d = b.passe({}); return b, d, b.jour
 
 # photos libres (Open Food Facts) des marques sans photo de magasin : doivent rester après chaque nuit
 LIBRES = json.loads((ROOT / "data" / "photos_libres.json").read_text(encoding="utf-8"))["photos"]

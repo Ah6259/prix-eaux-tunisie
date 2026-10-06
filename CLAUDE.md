@@ -57,6 +57,11 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - **Aziza et Monoprix retirés** (30/09/2026) : barka.tn donnait des prix périmés / produits indisponibles.
   Monoprix et Jumia exigent une vérification « humain » : **pas de contournement** (demander l'autorisation ou prix signalés).
   Relevé depuis le PC seulement si le site laisse passer un particulier.
+- **Monoprix revenu (06/10/2026) par relevé MANUEL** : Ahmed envoie des captures de l'application Monoprix,
+  Claude écrit `data/monoprix.json` (date + offres, même format qu'otrity.json) ; `collect_prices.py` les met
+  DANS LE CLASSEMENT **30 jours** (`MAX_JOURS_MANUEL`, décision d'Ahmed) puis les retire ; `statut_sources.monoprix.manuel`
+  = pas d'alerte de retard, « (relevé du …) » écrit à côté du nom (`ensPrix` dans app.js). Pas de logo (site bloqué).
+  Jamais de lecture automatique de l'application (contournement refusé).
 
 - **Photos libres des marques sans magasin** (05/10) : `data/photos_libres.json` (Open Food Facts, CC BY-SA ; images
   `assets/img/libres/`) appliquées par `collect_prices.appliquer_photos_libres` seulement si aucune photo de magasin ;
@@ -81,7 +86,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `statut_sources` dans data/eaux.json ; source en panne → anciens prix gardés **7 jours** max puis retirés ;
   panne aussi si < 50 % d'offres plausibles ou < 30 % du nombre précédent.
 - Le site avertit selon la date du **visiteur** (ℹ️ enseigne ≥ 2 j, ⚠️ tout ≥ 3 j ou aucun prix).
-- **`python tools/test_pannes.py` (16 scénarios) à relancer après toute modification du robot.**
+- **`python tools/test_pannes.py` (21 scénarios) à relancer après toute modification du robot.**
 - **`node tools/test_site.mjs` (139 vérifications de la page d'accueil) à relancer après toute modification du site.**
 - Affichage (06/10/2026) : `[hidden]{display:none!important}` dans style.css + **pas de faux boutons** (badges « Prix relevés / Sources citées / Gratuit » supprimés, info gardée en texte dans le bandeau avec le lien « sources citées ») ; test_site.mjs vérifie les deux (accueil, guides, marques).
   Il faut jsdom, installé une fois par PC : `npm install --no-save --no-package-lock jsdom` (node_modules ignoré par git).
@@ -169,7 +174,7 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 - **Partage** : image d'aperçu JPEG < 250 Ko (`og-image-v7.jpg`, sinon WhatsApp montre une petite vignette), aussi sur
   les 35 pages marques ; pas de traduction automatique (`translate="no"` + meta notranslate).
 - **Statistiques** GoatCounter sur toutes les pages (le même compteur sert aux 5 sites, séparés par chemin).
-- **Tests** : `node tools/test_site.mjs`, `node tools/test_sw.mjs`, `python tools/test_pannes.py` (18 scénarios), lancés
+- **Tests** : `node tools/test_site.mjs`, `node tools/test_sw.mjs`, `python tools/test_pannes.py` (21 scénarios), lancés
   aussi par `tests.yml` à chaque envoi.
 - **Reste à faire (audit du 05/10)** : alerte quand une source de prix tombe en panne ; `data/baisses.js` manquant (404) ;
   texte Google « livrer à domicile » alors que la commande est fermée ; logo Otrity 404 ; `.gitattributes`.

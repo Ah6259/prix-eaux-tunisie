@@ -1,0 +1,56 @@
+{
+ "date": "2026-10-06",
+ "source": "Application Monoprix, relevé par Ahmed (capture d'écran)",
+ "offres": [
+  {
+   "enseigne": "monoprix",
+   "marque": "AQUALINE",
+   "nom": "Eau minérale AQUALINE 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.6,
+   "image_src": null
+  },
+  {
+   "enseigne": "monoprix",
+   "marque": "MELLITI",
+   "nom": "Eau minérale MELLITI 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.61,
+   "image_src": null
+  },
+  {
+   "enseigne": "monoprix",
+   "marque": "CRISTALINE",
+   "nom": "Eau minérale CRISTALINE 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.61,
+   "image_src": null
+  },
+  {
+   "enseigne": "monoprix",
+   "marque": "DELICE",
+   "nom": "Eau minérale DELICE 1,5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.66,
+   "image_src": null
+  },
+  {
+   "enseigne": "monoprix",
+   "marque": "BRIMA",
+   "nom": "Eau de source naturelle BRIMA 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.66,
+   "image_src": null
+  }
+ ]
+}
