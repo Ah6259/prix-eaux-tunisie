@@ -86,6 +86,8 @@ const LOGOS = {
   "Carrefour": { src: "assets/logos/carrefour.png" },
   "Géant":     { src: "assets/logos/geant.png", mot: true },
   "Otrity":    { src: "assets/logos/otrity.png" },
+  // Monoprix : logo officiel envoyé par Ahmed (06/10/2026), le mot « MONOPRIX » blanc sur rouge
+  "Monoprix":  { src: "assets/logos/monoprix.png", mot: true },
 };
 function enseigne(nom){
   const l = LOGOS[nom];

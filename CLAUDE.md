@@ -60,7 +60,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - **Monoprix revenu (06/10/2026) par relevé MANUEL** : Ahmed envoie des captures de l'application Monoprix,
   Claude écrit `data/monoprix.json` (date + offres, même format qu'otrity.json) ; `collect_prices.py` les met
   DANS LE CLASSEMENT **30 jours** (`MAX_JOURS_MANUEL`, décision d'Ahmed) puis les retire ; `statut_sources.monoprix.manuel`
-  = pas d'alerte de retard, « (relevé du …) » écrit à côté du nom (`ensPrix` dans app.js). Pas de logo (site bloqué).
+  = pas d'alerte de retard, « (relevé du …) » écrit à côté du nom (`ensPrix` dans app.js). Logo `assets/logos/monoprix.png` envoyé par Ahmed (mot blanc sur rouge).
   Jamais de lecture automatique de l'application (contournement refusé).
 
 - **Photos libres des marques sans magasin** (05/10) : `data/photos_libres.json` (Open Food Facts, CC BY-SA ; images

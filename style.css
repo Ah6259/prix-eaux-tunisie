@@ -753,6 +753,7 @@ section:has(> #match-open){padding-bottom:6px}
 .ens{display:inline-flex; align-items:center; gap:3px; white-space:nowrap}
 .logo-ens{height:1.15em; width:auto; vertical-align:-0.2em; display:inline-block}
 .logo-mot{height:1.45em; vertical-align:-0.38em}
+.logo-mot[src*="monoprix"]{height:1.05em; vertical-align:-0.15em; border-radius:2px}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .logo-mot{background:#fff; border-radius:4px; padding:1px 3px} }
 
 /* fenêtre Coran + hadith : deux parties (versets, puis paroles du Prophète ﷺ) */
