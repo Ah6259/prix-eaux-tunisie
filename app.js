@@ -220,8 +220,11 @@ function meilleur15(b){
 function renderTop(){
   const box = document.getElementById("top-reponse");
   if (!box) return;
-  const rows = DATA.brands.map(b => ({ b, m: meilleur15(b) })).filter(r => r.m)
-    .sort((a, z) => a.m.prix - z.m.prix);
+  // une ligne par magasin (demande d'Ahmed) : deux magasins au même prix = deux lignes
+  const rows = DATA.brands.flatMap(b => {
+    const m = meilleur15(b);
+    return m ? m.magasins.map(s => ({ b, m: { prix: m.prix, magasins: [s] } })) : [];
+  }).sort((a, z) => a.m.prix - z.m.prix);
   if (!rows.length){ box.hidden = true; return; }
   const stika = state.mode === "stika";
   const prix = v => fmtDT(stika ? v * 6 : v);
