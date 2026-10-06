@@ -328,6 +328,36 @@ window.EAUX_HISTO = {
     "Tijen": 0.68,
     "Vivian": 0.82
    }
+  },
+  {
+   "date": "2026-10-06",
+   "stika15": 3.54,
+   "bouteille15": 0.59,
+   "marques": [
+    "Melina"
+   ],
+   "parMarque": {
+    "Aqualine": 0.6,
+    "Bargou": 0.67,
+    "Beya": 0.66,
+    "Brima": 0.75,
+    "Cristaline": 0.61,
+    "Dima": 0.66,
+    "Délice": 0.65,
+    "Marwa": 0.61,
+    "May": 0.67,
+    "Maïn": 0.6,
+    "Melina": 0.59,
+    "Melliti": 0.61,
+    "Mira": 0.625,
+    "Palma": 0.76,
+    "Pristine": 0.64,
+    "Rim": 0.67,
+    "Sabrine": 0.68,
+    "Safia": 0.69,
+    "Tijen": 0.68,
+    "Vivian": 0.82
+   }
   }
  ]
 };
