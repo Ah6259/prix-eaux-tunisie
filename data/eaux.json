@@ -4,7 +4,8 @@
  "stores": [
   "Carrefour",
   "Géant",
-  "Otrity"
+  "Otrity",
+  "Monoprix"
  ],
  "sources": [
   {
@@ -65,6 +66,7 @@
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
       "Géant": 0.6,
+      "Monoprix": 0.6,
       "Carrefour": 0.63
      }
     },
@@ -193,6 +195,7 @@
      "flavor": null,
      "img": "assets/img/produits/f90bcda67b0d.jpg",
      "prices": {
+      "Monoprix": 0.66,
       "Otrity": 0.75
      }
     }
@@ -241,6 +244,7 @@
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
       "Carrefour": 0.61,
+      "Monoprix": 0.61,
       "Otrity": 0.7083
      }
     },
@@ -380,16 +384,6 @@
    ],
    "products": [
     {
-     "liters": 0.25,
-     "format": "250 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/delice_delio_250ml_pomme.jpg",
-     "prices": {
-      "Géant": 0.3
-     }
-    },
-    {
      "liters": 0.5,
      "format": "500 ml",
      "category": "plate",
@@ -418,7 +412,8 @@
      "img": "assets/img/delice_15l.jpg",
      "prices": {
       "Carrefour": 0.65,
-      "Géant": 0.66
+      "Géant": 0.66,
+      "Monoprix": 0.66
      }
     }
    ]
@@ -759,6 +754,7 @@
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
       "Géant": 0.61,
+      "Monoprix": 0.61,
       "Otrity": 0.7083
      }
     }
@@ -1258,11 +1254,16 @@
   },
   "geant": {
    "dernier_ok": "2026-10-06",
-   "nb": 31
+   "nb": 30
   },
   "otrity": {
    "dernier_ok": "2026-10-06",
    "nb": 9
+  },
+  "monoprix": {
+   "dernier_ok": "2026-10-06",
+   "nb": 5,
+   "manuel": true
   }
  }
 }
