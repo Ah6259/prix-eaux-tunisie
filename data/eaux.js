@@ -512,7 +512,7 @@ window.EAUX_DATA = {
    "source": "Jelma (Sidi Bouzid)",
    "depuis": 1996,
    "note": null,
-   "img": "assets/img/produits/af175984367a.jpg",
+   "img": "assets/img/produits/2ba9322512a7.webp",
    "types": [
     "plate"
    ],
@@ -525,6 +525,16 @@ window.EAUX_DATA = {
      "img": "assets/img/produits/af175984367a.jpg",
      "prices": {
       "Otrity": 0.7167
+     }
+    },
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/2ba9322512a7.webp",
+     "prices": {
+      "Otrity": 0.8167
      }
     }
    ]
@@ -1109,8 +1119,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Géant": 0.69,
-      "Otrity": 0.8333
+      "Géant": 0.69
      }
     }
    ]
@@ -1252,7 +1261,7 @@ window.EAUX_DATA = {
    "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-10-05",
+   "dernier_ok": "2026-10-06",
    "nb": 9
   }
  }
