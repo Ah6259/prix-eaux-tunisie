@@ -295,5 +295,25 @@ const suivis = execSync("git ls-files", { cwd: root, encoding: "utf8" }).split("
 const fuite = suivis.filter(f => /(api[_-]?key|secret|token|password)\s*[:=]\s*["'][A-Za-z0-9_\-]{16,}|ghp_[A-Za-z0-9]{20,}|AIza[0-9A-Za-z_\-]{30,}|\b\d{8,10}:AA[A-Za-z0-9_\-]{30,}|[A-Za-z0-9._%+-]+@(gmail|yahoo|hotmail|outlook)\.[a-z]+/i.test(lire(f)));
 check(`aucun secret ni e-mail privé dans le dépôt${fuite.length ? " : " + fuite.join(", ") : ""}`, fuite.length === 0);
 
+// ---- Affichage : éléments cachés et faux boutons (06/10/2026) ----
+check("style : [hidden]{display:none!important} (un élément caché par le JS ne réapparaît jamais à cause d'un display:flex/grid)",
+      /\[hidden\]\{display:none!important\}/.test(lire("style.css").replace(/\s+/g, "")));
+// Tuiles « icône + petit texte » qui ont l'air de boutons mais ne mènent nulle part (supprimées le 06/10/2026, demande d'Ahmed)
+// (une étiquette en gras dans un encadré qui donne une vraie information, ex. « Coût : 50 DT », n'est pas une tuile)
+const tuilesSansLien = doc => [...doc.body.querySelectorAll("*")].filter(el => {
+  if (/^(a|button|label|summary|svg|h[1-6]|b|strong|em|small|i|option|select|input|textarea|form|header|footer|nav|main|figure|img|section|article)$/i.test(el.tagName)) return false;
+  if (el.closest("a,button,label,summary,header,footer,nav,form,svg,[hidden],template")) return false;
+  const f = el.firstElementChild;
+  if (!f || f.tagName.toLowerCase() !== "svg" || el.querySelector("a,button,input,select,textarea")) return false;
+  const t = el.textContent.replace(/\s+/g, " ").trim();
+  return t.length > 0 && t.length < 90;
+}).map(el => el.textContent.replace(/\s+/g, " ").trim().slice(0, 40));
+{
+  const morts = ["index.html", ...guides, ...marques].flatMap(f => tuilesSansLien(new JSDOM(lire(f)).window.document).map(t => f + " → " + t));
+  check(`accueil, guides et pages marques : aucune carte avec une icône sans lien (pas de faux bouton) ${morts.join(" | ")}`, !morts.length);
+}
+check("accueil : plus de badges ; « Gratuit, sans inscription » dans l'intro, lien vers les sources gardé", !/badge-c|class="confiance"/.test(lire("index.html"))
+  && /Gratuit, sans inscription/.test(lire("index.html")) && /<a href="#sources">sources citées<\/a>/.test(lire("index.html")));
+
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");
 process.exit(erreurs ? 1 : 0);

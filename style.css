@@ -832,15 +832,6 @@ header.site{background:var(--surface); box-shadow:0 1px 0 var(--line),0 4px 14px
 .top-liste a:hover{border-color:var(--accent)}
 .top-partage{bottom:11px; right:14px}
 
-/* 3 badges de confiance */
-.confiance{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:14px 0 4px}
-.badge-c{display:flex; flex-direction:column; align-items:center; gap:5px; text-align:center; text-decoration:none;
-  background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:10px 6px;
-  font-size:12px; font-weight:700; color:var(--muted); line-height:1.25}
-a.badge-c:hover{border-color:var(--accent); color:var(--accent)}
-.badge-c svg{width:22px; height:22px; stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
-@media (max-width:380px){ .badge-c{font-size:11px; padding:9px 4px} }
-
 /* barres-fenêtres : icône dans une pastille, carte blanche */
 .sig-bar{border-radius:14px; padding:10px 12px; transition:border-color .15s, transform .15s}
 .sig-bar:hover{transform:translateY(-1px)}
@@ -928,3 +919,9 @@ footer .copyright{margin:14px 0 0}
 img{-webkit-user-drag:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none}
 .hero, #top-reponse, #compare, #grid, #histo-section, .card, .compo, table, .faq, .baisses{user-select:none; -webkit-user-select:none}
 input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-select:text}
+
+/* lien « sources citées » dans le texte du bandeau (remplace l'ancien badge) : même couleur que le texte, souligné */
+.identite a{color:inherit; text-decoration:underline; text-underline-offset:2px}
+
+/* un élément caché par le JS (attribut hidden) reste caché même si une règle lui donne display:flex/grid/block */
+[hidden]{display:none!important}

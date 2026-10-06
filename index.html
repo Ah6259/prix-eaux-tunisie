@@ -97,7 +97,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261005u">
+<link rel="stylesheet" href="style.css?v=20261006a">
 </head>
 <body>
 
@@ -224,10 +224,10 @@
     <figcaption class="credit-photo" data-source="https://commons.wikimedia.org/wiki/File:Person_pours_water_from_a_bottle_into_a_glass_in_a_kitchen.jpg">Photo <a href="https://commons.wikimedia.org/wiki/File:Person_pours_water_from_a_bottle_into_a_glass_in_a_kitchen.jpg" rel="noopener">Shixart1985</a> · <a href="https://creativecommons.org/licenses/by/2.0/deed.fr" rel="license noopener">CC BY 2.0</a> · Wikimedia Commons</figcaption>
   </figure>
   <div class="wrap">
-  <p class="intro identite">Les <strong>prix de l'eau dans les magasins tunisiens</strong>, comparés chaque jour.
-  <span class="identite-2">Prix <b>indicatifs</b> relevés dans les grandes surfaces et épiceries en ligne, complétés par les prix que vous signalez.
+  <p class="intro identite">Les <strong>prix de l'eau dans les magasins tunisiens</strong>, comparés chaque jour. Gratuit, sans inscription.
+  <span class="identite-2">Prix <b>indicatifs</b> relevés dans les grandes surfaces et épiceries en ligne, complétés par les prix que vous signalez (<a href="#sources">sources citées</a>).
   Pour la future commande, le <b>prix final</b> dépendra du fournisseur et du stock disponible au moment de la livraison.</span></p>
-  <p class="identite-ar" dir="rtl" lang="ar">أسعار الماء المعدني في تونس — قارن ثمن ستيكة الماء في المغازات كل يوم</p>
+  <p class="identite-ar" dir="rtl" lang="ar">أسعار الماء المعدني في تونس — قارن ثمن ستيكة الماء في المغازات كل يوم — مجاني، دون تسجيل</p>
   </div>
 </div>
 
@@ -235,12 +235,6 @@
   <!-- la réponse tout de suite : stika 1,5 L la moins chère + top 5 (app.js : renderTop) -->
   <section class="top-reponse" id="top-reponse" aria-label="Les moins chères aujourd'hui"></section>
   <div class="top-classement" id="compare"></div>
-  <!-- 3 badges de confiance -->
-  <div class="confiance">
-    <div class="badge-c"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Prix relevés chaque jour</span></div>
-    <a class="badge-c" href="#sources"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/></svg><span>Sources citées</span></a>
-    <div class="badge-c"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Gratuit, sans inscription</span></div>
-  </div>
   <p class="alerte-maj" id="alerte-maj" role="status" hidden></p>
 
   <!-- baisses de prix du jour (data/baisses.js, écrit chaque nuit par tools/price_drops.py) -->
