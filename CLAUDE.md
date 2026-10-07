@@ -1,16 +1,5 @@
 # Mémoire du projet — Prix des Eaux de Tunisie
 
-> ## 🔔 À MONTRER À AHMED DÈS LE DÉBUT DE LA PROCHAINE SESSION (demandé le 30/09/2026)
-> Premier message de la session : lui donner ce lien et lui demander si le prépaiement Google est crédité :
-> **https://console.cloud.google.com/billing?project=prix-eau-tunisie**
-> - Si le message « Votre essai sans frais nécessite un prépaiement » a disparu (crédit de 30 $ visible) :
->   1. le guider pour le **plafond de requêtes par jour** : Places API (New) → Quotas (ex. 200 requêtes/jour) ;
->   2. recréer le **budget d'alerte** (échec le 30/09) ;
->   3. lancer le robot sur 5 grossistes : `gh workflow run telephones.yml -R Ah6259/dispatch-eau-prive -f max=5`,
->      vérifier, puis le passage complet.
-> - Sinon : patienter, ne JAMAIS repayer ni cliquer « Créer un compte de facturation ».
-> Supprimer ce bloc une fois ces étapes terminées.
-
 Fichier lu automatiquement par Claude Code au début de chaque session dans ce dossier.
 **À tenir à jour à chaque « update workflow »** (en même temps que le README et le guide).
 Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
@@ -119,7 +108,9 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   les guides (balise dans `pied()` de build_guides.py). Le même compteur `prix-eaux-tunisie.goatcounter.com` sert aussi
   aux autres sites d'Ahmed (outils pratiques, appels d'offres, code de la route, documents, portail), séparés par chemin.
 - Grossistes : 494 grossistes actifs trouvés au Registre National des Entreprises (API publique `rne-api`, recherche par activité),
-  classés par gouvernorat et fiabilité ★. Téléphones : robot Google Places du dépôt privé (clé dans ses secrets).
+  classés par gouvernorat et fiabilité ★. Téléphones : robot Google Places du dépôt privé (clé dans ses secrets),
+  **EN PAUSE depuis le 07/10/2026** (décision d'Ahmed : commande fermée ; lancement à la main seulement ;
+  détails dans le CLAUDE.md du dépôt privé).
 - Fournisseurs / livreurs : **dépôt PRIVÉ `Ah6259/dispatch-eau-prive`** (dossier local `../dispatch-eau-prive`,
   Excel `fournisseurs/fournisseurs-livreurs.xlsx`, données RNE dans `data/rne/`) — ne jamais les mettre dans ce dépôt public.
   Suivi quotidien : application Claude « Dispatch Eau ».
