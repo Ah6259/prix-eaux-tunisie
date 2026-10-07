@@ -384,6 +384,16 @@ window.EAUX_DATA = {
    ],
    "products": [
     {
+     "liters": 0.25,
+     "format": "250 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/delice_delio_250ml_pomme.jpg",
+     "prices": {
+      "Géant": 0.3
+     }
+    },
+    {
      "liters": 0.5,
      "format": "500 ml",
      "category": "plate",
@@ -507,7 +517,7 @@ window.EAUX_DATA = {
    "source": "Jelma (Sidi Bouzid)",
    "depuis": 1996,
    "note": null,
-   "img": "assets/img/produits/2ba9322512a7.webp",
+   "img": "assets/img/produits/af175984367a.jpg",
    "types": [
     "plate"
    ],
@@ -520,16 +530,6 @@ window.EAUX_DATA = {
      "img": "assets/img/produits/af175984367a.jpg",
      "prices": {
       "Otrity": 0.7167
-     }
-    },
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/2ba9322512a7.webp",
-     "prices": {
-      "Otrity": 0.8167
      }
     }
    ]
@@ -645,7 +645,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/marwa_15l.jpg",
      "prices": {
-      "Géant": 0.61
+      "Géant": 0.61,
+      "Otrity": 0.7167
      }
     }
    ]
@@ -1105,7 +1106,8 @@ window.EAUX_DATA = {
      "img": "assets/img/safia_15l.jpg",
      "prices": {
       "Carrefour": 0.43,
-      "Géant": 0.43
+      "Géant": 0.43,
+      "Otrity": 0.5167
      }
     },
     {
@@ -1115,7 +1117,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Géant": 0.69
+      "Géant": 0.69,
+      "Otrity": 0.8333
      }
     }
    ]
@@ -1254,11 +1257,11 @@ window.EAUX_DATA = {
   },
   "geant": {
    "dernier_ok": "2026-10-07",
-   "nb": 30
+   "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-10-06",
-   "nb": 9
+   "dernier_ok": "2026-10-07",
+   "nb": 11
   },
   "monoprix": {
    "dernier_ok": "2026-10-06",

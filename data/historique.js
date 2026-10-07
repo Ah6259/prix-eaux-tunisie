@@ -375,7 +375,6 @@ window.EAUX_HISTO = {
     "Cristaline": 0.61,
     "Dima": 0.66,
     "Délice": 0.65,
-    "Hayet": 0.817,
     "Marwa": 0.61,
     "May": 0.67,
     "Maïn": 0.6,
