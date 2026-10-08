@@ -17,3 +17,8 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 30/09/2026 | monoprix.tn | ⛔ | vérification « humain » |
 | 30/09/2026 | jumia.com.tn | ⛔ | vérification « humain » |
 | 04/10/2026 | geant.tn | 🟢 ? | site principal de Géant Tunisie, lisible par GitHub — vérifier s'il a des prix en ligne (en plus de geantdrive.tn) |
+| 08/10/2026 | geant.tn | ❌ | lisible par GitHub (certificat à ignorer), mais site vitrine : 0 prix, 0 « eau ». Seul geantdrive.tn a des prix (déjà utilisé) |
+| 08/10/2026 | mg.tn (Magasin Général) | ❌ | lisible (certificat à ignorer), mais seulement promotions/catalogues (pas de boutique, 0 « eau »). À revoir si une boutique en ligne apparaît |
+| 08/10/2026 | founa.com | 🖥️ ? | répond 200 mais page vide pour GitHub (114 octets, probablement chargée par JavaScript). robots.txt permissif. À tester depuis le PC d'Ahmed : premier supermarché en ligne tunisien, drive via mg La Marsa |
+| 08/10/2026 | glovoapp.com/tn | ⛔ | mot anti-robot détecté dans la page, appli de livraison (prix par commerçant) — pas de contournement |
+| 08/10/2026 | commerce.gov.tn (ministère du Commerce) | ❌ | page d'accueil sans prix ; plafonds de l'eau en vigueur depuis le 19/08/2026 (presse : Webdo), à chercher en PDF/communiqué plutôt qu'à lire par robot |
