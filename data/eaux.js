@@ -517,19 +517,19 @@ window.EAUX_DATA = {
    "source": "Jelma (Sidi Bouzid)",
    "depuis": 1996,
    "note": null,
-   "img": "assets/img/produits/af175984367a.jpg",
+   "img": "assets/img/produits/2ba9322512a7.webp",
    "types": [
     "plate"
    ],
    "products": [
     {
-     "liters": 1.0,
-     "format": "1 L",
+     "liters": 1.5,
+     "format": "1.5 L",
      "category": "plate",
      "flavor": null,
-     "img": "assets/img/produits/af175984367a.jpg",
+     "img": "assets/img/produits/2ba9322512a7.webp",
      "prices": {
-      "Otrity": 0.7167
+      "Otrity": 0.8167
      }
     }
    ]
@@ -1260,7 +1260,7 @@ window.EAUX_DATA = {
    "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-10-07",
+   "dernier_ok": "2026-10-08",
    "nb": 11
   },
   "monoprix": {
