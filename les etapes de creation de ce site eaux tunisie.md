@@ -262,3 +262,6 @@ pour créer n'importe quel autre site.
 ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 
 - **05/10/2026 (soir)** : nouvelle icône goutte (même famille que les autres sites, logo d'en-tête compris) ; « comparateur gratuit » dans les titres Google. Envoyer les liens WhatsApp depuis le téléphone pour avoir la grande image.
+
+## Pages par magasin pour Google (08/10/2026)
+- Une page par recherche : « prix eau Carrefour », « prix eau Géant »… → `build_guides.py` (`page_magasin`) fabrique chaque nuit `prix-eau-<magasin>/` avec les prix du jour, comparés aux autres magasins, et les ajoute au sitemap et aux pieds de page.

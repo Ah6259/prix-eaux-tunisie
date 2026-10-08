@@ -172,6 +172,9 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 
 ## Visibilité (03/10/2026)
 - Trafic : ~50 % Google, ~50 % Instagram. Partage WhatsApp : petit bouton « Partager » sur l'accueil ; gros bouton sur les pages marques et guides.
+- **Pages par magasin (08/10/2026, plan Google « une page par recherche »)** : `prix-eau-carrefour/`, `prix-eau-geant/`, `prix-eau-monoprix/`,
+  `prix-eau-otrity/` (`page_magasin` de build_guides.py, `MAGASINS`) : bouteille + stika + « ailleurs dès », FAQ JSON-LD, liens dans tous les pieds de page.
+  Plan complet : `plan referencement google.md` du dépôt privé projets-ahmed.
 - Pages guides générées chaque nuit par `tools/build_guides.py` (appelé par build_pages) : `prix-stika/` (FR+AR, FAQ JSON-LD)
   et `quelle-eau/` (sodium, légèreté, calcium, magnésium d'après composition.js). Dans le sitemap et le pied de page.
 - Titres des pages marques avec le prix de la stika ; lignes en arabe (mots latins isolés par U+2068/U+2069).

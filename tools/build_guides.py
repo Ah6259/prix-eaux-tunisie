@@ -4,6 +4,8 @@
   - prix-stika/  : prix de la stika d'eau en Tunisie aujourd'hui (FR + AR), toutes marques
   - quelle-eau/  : quelle eau choisir (peu salée, faiblement minéralisée, calcium, magnésium…)
                    d'après la composition officielle (data/composition.js)
+  - prix-eau-<magasin>/ : prix de l'eau chez Carrefour, Géant, Monoprix, Otrity (08/10/2026, plan Google :
+                   « une page par recherche » — les gens tapent « prix eau carrefour »)
 """
 import json
 import urllib.parse
@@ -20,7 +22,7 @@ def _esc(s):
 SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 '<a href="https://www.carrefour.tn" rel="noopener">Carrefour Tunisie</a> · '
                 '<a href="https://www.geantdrive.tn" rel="noopener">Géant Drive</a> · '
-                '<a href="https://otrity.com" rel="noopener">Otrity</a>. '
+                '<a href="https://otrity.com" rel="noopener">Otrity</a> · Monoprix (application). '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
@@ -64,6 +66,7 @@ def pied(racine):
   <nav class="pied-nav" aria-label="Liens utiles"><a href="{racine}">Comparateur des prix de l'eau</a>
   <a href="{racine}prix-stika/">Prix de la stika aujourd'hui</a>
   <a href="{racine}quelle-eau/">Quelle eau choisir ?</a>
+  {_liens_magasins(racine)}
   <a href="https://t.me/prixeautunisie" rel="noopener">Alertes promo (Telegram)</a></nav>
   <p class="pied-titre">Sources des prix</p>
   <p class="pied-sources">{SOURCES_HTML}</p>
@@ -72,6 +75,14 @@ def pied(racine):
 </div></footer>
 <!-- Statistiques de visite anonymes, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>"""
+
+
+MAGASINS = {"Carrefour": ("prix-eau-carrefour", "كارفور"), "Géant": ("prix-eau-geant", "جيان"),
+            "Monoprix": ("prix-eau-monoprix", "مونوبري"), "Otrity": ("prix-eau-otrity", "أوتريتي")}
+
+
+def _liens_magasins(racine):
+    return "\n  ".join(f'<a href="{racine}{c}/">Prix de l&#39;eau chez {m}</a>' for m, (c, _) in MAGASINS.items())
 
 
 NOMS_COLONNES = {"na": "Sodium", "tds": "Résidu sec", "ca": "Calcium", "mg": "Magnésium"}
@@ -121,6 +132,8 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
   .guide-table th{{font-size:12px; color:var(--muted); border-top:0}}
   .guide-table td.n{{text-align:right; font-variant-numeric:tabular-nums; font-weight:700}}
   .guide-table a{{color:var(--ink); font-weight:600}}
+  .guide-table.magasin{{font-size:13px}} .guide-table.magasin th,.guide-table.magasin td{{padding:7px 6px}}
+  .guide-table.magasin td.n{{white-space:nowrap}} .guide-table small{{display:block; color:var(--muted); font-weight:400}}
   .ar{{font-size:15px; color:var(--muted); margin:4px 0 0}}
   .avert{{background:var(--gaz-soft); color:var(--gaz); border-radius:10px; padding:9px 12px; font-size:13px}}
 </style>
@@ -251,11 +264,83 @@ def page_quelle_eau(data, COMPO, SITE, maj_fr):
                     "أي ماء معدني أختار في تونس؟ ماء للرضيع، قليل الملح، غني بالكالسيوم", maj=maj_fr)
 
 
+def _fmt_l(litres):
+    return (f"{litres:g} L".replace(".", ",") if litres >= 1 else f"{litres * 1000:g} ml")
+
+
+def page_magasin(data, magasin, SITE, maj_fr):
+    """Prix de l'eau chez un magasin : une ligne par produit (marque + format), le moins cher d'abord.
+    Colonne « ailleurs dès » = meilleur prix des autres magasins suivis (pour comparer d'un coup d'œil)."""
+    chemin, nom_ar = MAGASINS[magasin]
+    lignes = []
+    for b in data["brands"]:
+        for p in b.get("products") or []:
+            v = p["prices"].get(magasin)
+            if v is None or p.get("flavor"):
+                continue
+            autres = [x for s, x in p["prices"].items() if s != magasin]
+            lignes.append((b, p, v, min(autres) if autres else None))
+    if len(lignes) < 3:
+        return None
+    def tableau(filtre, titre, fmt=True):
+        sel = sorted((x for x in lignes if filtre(x[1])), key=lambda x: x[2])
+        if not sel:
+            return ""
+        def stika(p, v):
+            n = 12 if p["liters"] <= .75 else 6 if p["liters"] <= GRAND_FORMAT else 1
+            return _dt(v * n) if n > 1 else "—"
+        tr = "".join(f"<tr><td><a href='../marque/{b['id']}/'>{_esc(b['name'])}</a>"
+                     f"{' <small>gazeuse</small>' if p['category'] == 'gazeuse' else ''}"
+                     f"{' <small>' + _fmt_l(p['liters']) + '</small>' if fmt else ''}</td>"
+                     f"<td class='n'>{_dt(v)}</td><td class='n'>{stika(p, v)}</td>"
+                     f"<td class='n'>{_dt(a) if a is not None else '—'}</td></tr>" for b, p, v, a in sel)
+        return (f"<section><h2>{titre}</h2><table class='guide-table magasin'><tr><th>Marque</th><th>Bouteille</th>"
+                f"<th>Stika</th><th>Ailleurs dès</th></tr>{tr}</table></section>")
+    eau15 = sorted((x for x in lignes if abs(x[1]["liters"] - 1.5) < .01 and x[1]["category"] == "plate"), key=lambda x: x[2])
+    if eau15:
+        b0, _, v0, _ = eau15[0]
+        accroche = (f"<strong>Chez {magasin}, la stika d'eau 1,5 L la moins chère aujourd'hui ({maj_fr}) est "
+                    f"{_esc(b0['name'])} à {_dt(v0 * 6)}</strong> (6 bouteilles).")
+        court = f"stika dès {_dt(v0 * 6)}"
+        ar = f"ثمن الماء المعدني في {nom_ar} اليوم — أرخص ستيكة 1,5 لتر: {_iso(b0['name'])} بـ {_iso(_dt(v0 * 6))}"
+        rep_fr = f"Le {maj_fr}, la stika d'eau 1,5 L la moins chère chez {magasin} est {b0['name']} à {_dt(v0 * 6)}."
+        rep_ar = f"أرخص ستيكة ماء 1,5 لتر في {nom_ar} اليوم: {_iso(b0['name'])} بـ {_iso(_dt(v0 * 6))}."
+    else:
+        b0, _, v0, _ = min(lignes, key=lambda x: x[2] / x[1]["liters"])
+        accroche = f"<strong>{len(lignes)} prix d'eau relevés chez {magasin} ({maj_fr}).</strong>"
+        court = f"{len(lignes)} prix"
+        ar = f"ثمن الماء المعدني في {nom_ar} اليوم"
+        rep_fr = f"{len(lignes)} prix d'eau sont relevés chez {magasin} le {maj_fr}."
+        rep_ar = f"أسعار الماء المعدني في {nom_ar} اليوم."
+    autres = " · ".join(f'<a href="../{c}/">{m}</a>' for m, (c, _) in MAGASINS.items() if m != magasin)
+    corps = f"""
+  <section>
+    <p class="intro">{accroche} Les prix sont ceux de la bouteille, et de la stika (6 bouteilles de 1,5 L ou 12 de 0,5 L).
+    Ils sont indicatifs et peuvent varier selon le magasin. La colonne « Ailleurs dès » montre le meilleur prix des autres magasins suivis.</p>
+    {_partage(SITE, chemin, f"💧 Prix de l'eau chez {magasin} aujourd'hui : {court}.")}
+  </section>
+  {tableau(lambda p: abs(p["liters"] - 1.5) < .01 and p["category"] == "plate", "Eau 1,5 L", fmt=False)}
+  {tableau(lambda p: p["liters"] <= .75, "Petites bouteilles (0,5 L et moins)")}
+  {tableau(lambda p: not (abs(p["liters"] - 1.5) < .01 and p["category"] == "plate") and p["liters"] > .75, "Autres formats et eau gazeuse")}
+  <section><p class="sub">Comparer avec : {autres} · <a href="../prix-stika/">toutes les marques</a> · <a href="../">le comparateur</a>.</p></section>"""
+    jsonld = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": f"Quel est le prix de l'eau chez {magasin} en Tunisie ?",
+         "acceptedAnswer": {"@type": "Answer", "text": rep_fr}},
+        {"@type": "Question", "name": f"كم ثمن الماء المعدني في {nom_ar}؟",
+         "acceptedAnswer": {"@type": "Answer", "text": rep_ar}}]}, ensure_ascii=False)
+    return _gabarit(SITE, chemin,
+                    f"Prix de l'eau chez {magasin} Tunisie aujourd'hui — {court}, comparateur gratuit",
+                    f"Prix de l'eau minérale chez {magasin} le {maj_fr} : bouteille et stika, toutes les marques, "
+                    f"comparées aux autres magasins. Comparateur gratuit mis à jour chaque jour.",
+                    f"Prix de l'eau chez {magasin}", corps, jsonld, ar, maj=maj_fr)
+
+
 def generer(data, COMPO, SITE, ROOT, maj_fr):
     """Écrit les pages guides et renvoie leurs URL (pour le sitemap)."""
     urls = []
     for chemin, html in (("prix-stika", page_prix_stika(data, SITE, maj_fr)),
-                         ("quelle-eau", page_quelle_eau(data, COMPO, SITE, maj_fr))):
+                         ("quelle-eau", page_quelle_eau(data, COMPO, SITE, maj_fr)),
+                         *((c, page_magasin(data, m, SITE, maj_fr)) for m, (c, _) in MAGASINS.items())):
         if not html:
             continue
         d = ROOT / chemin
