@@ -213,3 +213,4 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 
 ## Nouveautés
 - 05/10/2026 : nouvelle icône (goutte, famille commune des sites) et mention « comparateur gratuit » dans Google.
+- 08/10/2026 : la recherche quotidienne de nouvelles sources de prix enregistre enfin son carnet (`tools/sources_a_explorer.md`) ; la vérification du matin le contrôle.

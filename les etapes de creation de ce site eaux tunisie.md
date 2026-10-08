@@ -161,8 +161,18 @@ pour créer n'importe quel autre site.
 - Test `node tools/test_sw.mjs` (faux navigateur) + nouveau robot `tests.yml` à chaque push ; sabotage vérifié.
 - Vieille version bloquée sur un téléphone : changer `CACHE_VERSION` dans `sw.js`.
 
+## 07-08/10/2026 — Travailler depuis le téléphone ET l'ordinateur sans conflit
+- Tout le travail hors sites est maintenant sur GitHub, dans un dépôt PRIVÉ (`projets-ahmed`) : rien n'est perdu si le PC tombe
+  en panne, et une session sur le téléphone voit les mêmes fichiers.
+- Règle : **récupérer (git pull) → modifier → renvoyer (git push)**, sur le PC comme sur le téléphone.
+- Les routines Claude dans le cloud doivent avoir leurs dépôts dans leurs SOURCES, être testées une fois tout de suite, et
+  être surveillées sur ce qu'elles ENREGISTRENT (la vérification du matin le contrôle).
+
 ## Pièges rencontrés et leçons (à réutiliser)
 
+- **Une routine « réussie » peut n'avoir rien enregistré** (04-08/10) : vérifier ses commits, pas seulement son statut.
+- **Recopier un fichier depuis le PC peut effacer un travail fait depuis le téléphone** (07/10, moteur des annuaires) :
+  toujours `git pull` avant ; le script de synchronisation refuse maintenant d'écraser.
 - **Cache des téléphones** : après une mise à jour, un téléphone peut garder
   l'ancien `style.css` avec la nouvelle page → affichage cassé (ex. icône géante).
   Solution : charger `style.css?v=NUMERO` et `app.js?v=NUMERO` et **changer le

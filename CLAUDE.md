@@ -204,3 +204,25 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 
 - **Vidéo de présentation** (06/10/2026) : `assets/video/presentation.mp4`, 1080 × 1920, + couverture et aperçu 1200 × 630 (`apercu-video.jpg`). Son de fond : un vrai ruisseau (enregistré par jackthemurray, Freesound 433589, CC0, via Wikimedia Commons ; preuve dans le dossier privé `videos (outil)/preuves musique/`) — demande d'Ahmed, au lieu de la musique des autres sites. Page **`video/`** (lecteur + gros bouton « Ouvrir le site » + Partager, og:video / og:image) : réglages `tools/page_video.json`, fabriquée par node tools/page_video.mjs, à partir de quelle-eau/ (à relancer si cette page change). Le bouton « Partager » envoie un LIEN : la page vidéo + l'adresse du site dans le texte (`window.partagerLien`, bloc « vidéo de présentation » en fin du JS commun), jamais le fichier. Test `node tools/test_video.mjs`.
   Pour la refaire : `python fabriquer.py eau` puis `python brancher_partage.py eau` dans le dossier PRIVÉ du PC `videos (outil)/`.
+
+## Mise à jour du 07-08/10/2026 (à lire en début de session)
+- **Toujours `git pull` avant de travailler** (ici ET dans `../` = dépôt PRIVÉ `Ah6259/projets-ahmed`) : Ahmed modifie aussi
+  ses dépôts depuis le téléphone (sessions Claude en ligne). Ne jamais écraser ces changements en recopiant ou régénérant.
+- **Dépôt PRIVÉ `Ah6259/projets-ahmed` (08/10)** = le dossier parent `_claude code project\` : règles communes, études,
+  listes d'idées, liste de travail (`liste de ce qu'on va developper.md`, rubrique « 🧑 À faire par Ahmed »), preuves,
+  moteur commun des annuaires + robot `annuaires.yml`. Les dépôts des sites sont exclus (`.gitignore`).
+- **E-mail des commits** : dans tout nouveau dépôt, régler `user.email` sur l'adresse « noreply » de GitHub du compte
+  AVANT le premier commit (le réglage général du PC n'est pas le bon).
+- **Routine « Nouvelles sources de prix d'eau »** (chaque jour 9h47) : n'avait AUCUN dépôt dans ses sources du 04 au 08/10
+  (push refusé, 403, recherche perdue, alors qu'elle se disait « réussie »). Corrigé le 08/10 : dépôt prix-eaux-tunisie
+  branché en écriture, test des sites par `gh workflow run tester-source.yml …`, message « ⚠️ ÉCHEC : » en cas de problème ;
+  1er enregistrement réussi le 08/10 (carnet `tools/sources_a_explorer.md`). La vérification du matin contrôle maintenant
+  qu'elle a bien COMMITÉ. Piste en attente d'un « fais » : afficher les prix maximum officiels de l'eau (depuis le
+  19/08/2026 : 0,5 L 0,600 · 1 L 0,800 · 1,5 L 0,850 · 2 L 0,950 DT).
+- **Robot des téléphones des grossistes** (dépôt privé dispatch) : passage complet fait le 07/10 (494/494, 11 téléphones
+  seulement), puis remis en PAUSE ; Google Cloud en essai gratuit, alerte de budget à 1 $, 900 recherches/mois au plus.
+- **Nouveau site « Mes comptes »** (07/10) : https://ah6259.github.io/mes-comptes-tunisie/ (budget familial, gratuit 3 mois,
+  chiffres gardés dans le téléphone, alarmes dans l'agenda du téléphone) — dossier `../mes comptes/site/`.
+- **Tous les sites d'Ahmed** : bouton de paiement commun (or, contour brun, relief, reflet) ; ce site n'a pas de paiement.
+- Indexation Google : les 13 sites sont prêts (plans du site lisibles, Google autorisé) ; statut réel = Search Console
+  (tâches A.1 à A.3 d'Ahmed dans la liste de travail).
