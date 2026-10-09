@@ -950,3 +950,8 @@ input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-
 .btn-video-site{display:block;max-width:360px;margin:0 auto 12px;padding:16px;border-radius:14px;background:var(--accent);color:#fff;font-weight:800;font-size:1.15rem;text-decoration:none}
 .btn-video-partager{display:block;width:100%;max-width:360px;margin:0 auto;padding:13px;border-radius:14px;border:2px solid var(--accent);background:#fff;color:var(--accent);font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit}
 .lien-video{text-align:center;font-size:.9rem;margin:18px 0 6px}.lien-video a{color:inherit;text-decoration:underline}
+
+/* un seul verset sur une ligne (09/10/2026 : la fenêtre Coran + hadith est partie sur Points d'eau Tunisie) */
+.verset-ligne{margin:2px 0 6px;text-align:center;font-family:"Amiri Quran","Scheherazade New",serif;color:var(--ink);
+  font-size:min(22px, 4.6vw);line-height:1.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.verset-ref{font-family:"Amiri",serif;font-size:.62em;color:var(--muted)}

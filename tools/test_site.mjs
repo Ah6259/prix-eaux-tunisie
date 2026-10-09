@@ -59,10 +59,13 @@ clic(plus);
 check("classement complet déplié", doc.getElementById("compare-rest") && !doc.getElementById("compare-rest").hidden);
 clic(doc.getElementById("compare-more"));
 
-// ---- les 4 barres ouvrent leur fenêtre, la croix la ferme -------------------
+// ---- verset : une seule ligne, sans bouton ni fenêtre (09/10/2026, le reste est sur Points d'eau Tunisie) ----
+check("verset « وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ » sur une ligne, sans bouton ni fenêtre ; lien vers Points d'eau Tunisie",
+  !!doc.querySelector("p.verset-ligne") && /كُلَّ شَيْءٍ حَيٍّ/.test(doc.querySelector("p.verset-ligne").textContent)
+  && !doc.getElementById("hadith-open") && !doc.getElementById("hadith-pop") && !!doc.querySelector('a[href="https://ah6259.github.io/points-eau-tunisie/"]'));
+// ---- les 3 barres ouvrent leur fenêtre, la croix la ferme -------------------
 for (const [bouton, fenetre, croix, texte] of [
   ["match-open", "match-pop", "match-close", "préférée"],
-  ["hadith-open", "hadith-pop", "hadith-close", ""],
   ["sig-open", "sig-pop", "sig-close", "Signaler"],
   ["livraison-open", "livraison-pop", "livraison-close", "grandes surfaces"]]) {
   const pop = doc.getElementById(fenetre);

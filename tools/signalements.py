@@ -203,7 +203,7 @@ def main():
     publies, rejets = [], []
     ecrire_votes(reponses, marques)
     for r in reponses:
-        if not r["marque"] or r["marque"].upper().startswith("TEST") or r["format"].strip().upper() == "VOTE":
+        if not r["marque"] or r["marque"].upper().startswith("TEST") or r["format"].strip().upper() == "VOTE" or r["format"].strip().upper().startswith("POINT"):   # POINT… = site Points d'eau Tunisie
             continue
         s, raison = decider(r, marques, par_produit, par_format, publies)
         if raison:
