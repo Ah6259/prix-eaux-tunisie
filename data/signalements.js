@@ -33,5 +33,27 @@ window.EAUX_SIGNALES = [
   "lieu": "Omrane sup",
   "date": "2026-09-30",
   "nb": 1
+ },
+ {
+  "id": "may",
+  "marque": "May",
+  "litres": 2.0,
+  "type": "plate",
+  "prix": 0.9,
+  "magasin": "Magasin Général",
+  "lieu": "Ennasr",
+  "date": "2026-10-08",
+  "nb": 2
+ },
+ {
+  "id": "jannet",
+  "marque": "Jannet",
+  "litres": 2.0,
+  "type": "plate",
+  "prix": 0.84,
+  "magasin": "Magasin Général",
+  "lieu": "Ennasr",
+  "date": "2026-10-08",
+  "nb": 1
  }
 ];
