@@ -34,6 +34,6 @@ jobs:
           git add assets/logos/brut/
           if git diff --cached --quiet; then echo "Rien trouvé."; else
             git commit -m "Logos des enseignes : fichiers bruts téléchargés"
-            git pull --rebase origin main
+            git pull --rebase --autostash origin main
             git push
           fi

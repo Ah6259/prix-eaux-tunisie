@@ -38,6 +38,6 @@ jobs:
             echo "Aucun nouveau signalement."
           else
             git commit -m "Prix signalés par les visiteurs ($(date -u +%Y-%m-%d\ %H:%M))"
-            git pull --rebase origin main
+            git pull --rebase --autostash origin main
             git push
           fi

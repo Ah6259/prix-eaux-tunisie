@@ -26,5 +26,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/battement.txt
           git commit -m "Battement de cœur mensuel ($(date -u +%Y-%m))"
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
           git push
