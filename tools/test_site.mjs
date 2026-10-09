@@ -354,6 +354,14 @@ check("accueil : plus de badges ; « Gratuit, sans inscription » dans l'intro, 
     && ouv.length === 1 && decodeURIComponent(ouv[0]).includes(URLS + "video/") && decodeURIComponent(ouv[0]).includes(URLS) && comptes.length === 1 && comptes[0].path === "partage/");
   check("un seul bouton « Partager » par page (pas de doublon)", (lire("marque/aqualine/index.html").match(/href="https:\/\/wa\.me\/\?text=/g) || []).length === 1
     && (lire("prix-stika/index.html").match(/href="https:\/\/wa\.me\/\?text=/g) || []).length === 1);
+  // bouton Partager de l'EN-TÊTE sur toutes les pages (règle commune à tous les sites ; oubli corrigé le 09/10/2026)
+  const sansBouton = [];
+  for (const chemin of ["index.html", "video/index.html", ...guides, ...marques]) {
+    const r = await essai(chemin, "header.site .partager[data-partager-video]", URLS + chemin.replace(/index\.html$/, ""), false);
+    if (!r || r.a.ownerDocument.querySelectorAll("header.site .partager").length !== 1 || r.ouverts.length !== 1
+      || !decodeURIComponent(r.ouverts[0]).includes(URLS + "video/")) sansBouton.push(chemin);
+  }
+  check(`toutes les pages : un bouton Partager dans l'en-tête qui partage la page vidéo ${sansBouton.join(" | ")}`, !sansBouton.length);
 }
 
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");

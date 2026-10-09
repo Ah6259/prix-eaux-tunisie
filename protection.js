@@ -68,7 +68,8 @@ document.addEventListener("click", function (e) {
     b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
     h.appendChild(b);
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ajouter); else ajouter();
+  ajouter(); // en-tête déjà là (script en bas de page) ; sinon à la fin du chargement — jamais de doublon
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ajouter);
 })();
 
 /* Installation sur le téléphone : service worker PRUDENT (sw.js : réseau d'abord pour les pages et les données).
