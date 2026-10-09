@@ -955,3 +955,10 @@ input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-
 .verset-ligne{margin:2px 0 6px;text-align:center;font-family:"Amiri Quran","Scheherazade New",serif;color:var(--ink);
   font-size:min(22px, 4.6vw);line-height:1.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .verset-ref{font-family:"Amiri",serif;font-size:.62em;color:var(--muted)}
+/* verset posé sur la photo du bandeau (09/10/2026) : blanc, voile sombre pour la lisibilité, crédit photo en bas à droite */
+.hero-bande::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,40,56,.15),rgba(4,40,56,.55) 50%,rgba(4,40,56,.15));pointer-events:none}
+.verset-photo{position:absolute;inset:0;z-index:1;margin:0;display:flex;align-items:center;justify-content:center;gap:.4em;
+  color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.65);font-size:min(30px,5.4vw);line-height:1.2;padding:0 8px}
+.verset-photo .verset-ref{color:rgba(255,255,255,.85)}
+.hero-bande .credit-photo{z-index:2;top:auto;bottom:2px}
+@media (max-width:699px){.hero-bande img{aspect-ratio:auto;height:66px}.verset-photo{padding-bottom:12px;font-size:min(24px,5.6vw)}}

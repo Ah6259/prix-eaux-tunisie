@@ -59,9 +59,9 @@ clic(plus);
 check("classement complet déplié", doc.getElementById("compare-rest") && !doc.getElementById("compare-rest").hidden);
 clic(doc.getElementById("compare-more"));
 
-// ---- verset : une seule ligne, sans bouton ni fenêtre (09/10/2026, le reste est sur Points d'eau Tunisie) ----
-check("verset « وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ » sur une ligne, sans bouton ni fenêtre ; lien vers Points d'eau Tunisie",
-  !!doc.querySelector("p.verset-ligne") && /كُلَّ شَيْءٍ حَيٍّ/.test(doc.querySelector("p.verset-ligne").textContent)
+// ---- verset : une seule ligne, SUR la photo du bandeau (vu en premier), sans bouton ni fenêtre (09/10/2026) ----
+check("verset « وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ » sur la photo du bandeau, une seule fois, sans bouton ni fenêtre ; lien vers Points d'eau Tunisie",
+  doc.querySelectorAll("p.verset-ligne").length === 1 && !!doc.querySelector(".hero-bande p.verset-photo") && /كُلَّ شَيْءٍ حَيٍّ/.test(doc.querySelector("p.verset-ligne").textContent)
   && !doc.getElementById("hadith-open") && !doc.getElementById("hadith-pop") && !!doc.querySelector('a[href="https://ah6259.github.io/points-eau-tunisie/"]'));
 // ---- les 3 barres ouvrent leur fenêtre, la croix la ferme -------------------
 for (const [bouton, fenetre, croix, texte] of [
