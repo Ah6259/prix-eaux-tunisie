@@ -56,6 +56,21 @@ document.addEventListener("click", function (e) {
   window.partagerLien(texte.replace(/https?:\/\/\S+/g, "").replace(/\s+[—:-]?\s*$/, "").trim() || null, m ? m[0] : null);
 });
 
+/* Bouton « Partager » de l'en-tête, sur TOUTES les pages (règle commune à tous les sites, oubli corrigé le 09/10/2026) :
+   même icône que les autres sites ; le clic passe par [data-partager-video] (plus bas) → page vidéo + adresse du site. */
+(function () {
+  function ajouter() {
+    var h = document.querySelector("header.site .site-inner");
+    if (!h || h.querySelector(".partager")) return;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "partager"; b.setAttribute("data-partager-video", "");
+    b.setAttribute("aria-label", "Partager ce site"); b.title = "Partager";
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
+    h.appendChild(b);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ajouter); else ajouter();
+})();
+
 /* Installation sur le téléphone : service worker PRUDENT (sw.js : réseau d'abord pour les pages et les données).
    Seulement en https (jamais en file: pendant les tests locaux). */
 if ("serviceWorker" in navigator && location.protocol === "https:") {

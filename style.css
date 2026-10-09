@@ -72,11 +72,18 @@ h1 .drop{color:var(--accent)}
 .stats-line{margin:2px 0 0; color:var(--muted); font-size:12.5px}
 @media (max-width:560px){
   .site-inner{gap:10px}
-  .titre{flex-basis:100%}
+  .site-inner{position:relative}
+  .titre{flex-basis:100%; padding-inline-end:40px}  /* place pour Partager, en haut à droite */
   .titre h1{white-space:nowrap}              /* titre toujours sur une ligne */
   .search{order:1; flex:1 1 0; min-width:0}  /* recherche à gauche… */
   .tg-btn{order:2}                           /* …bouton Alertes à droite */
+  .partager{position:absolute; top:14px; right:16px; width:32px; height:32px}
 }
+/* bouton Partager de l'en-tête (même icône que les autres sites) */
+.partager{flex:none; border:1px solid var(--line); background:var(--surface); border-radius:999px; width:36px; height:36px;
+  display:inline-flex; align-items:center; justify-content:center; cursor:pointer; padding:0; color:var(--accent)}
+.partager:hover{border-color:var(--accent)}
+.partager svg{width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round}
 /* bouton Telegram « Alertes prix », tout à droite du titre */
 .tg-btn{
   flex:none; display:inline-flex; align-items:center; gap:6px;
