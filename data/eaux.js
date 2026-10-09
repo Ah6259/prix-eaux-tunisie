@@ -173,7 +173,7 @@ window.EAUX_DATA = {
    "source": null,
    "depuis": null,
    "note": null,
-   "img": "assets/img/produits/f90bcda67b0d.jpg",
+   "img": "assets/img/produits/d62fddf4951e.webp",
    "types": [
     "plate"
    ],
@@ -193,10 +193,9 @@ window.EAUX_DATA = {
      "format": "1.5 L",
      "category": "plate",
      "flavor": null,
-     "img": "assets/img/produits/f90bcda67b0d.jpg",
+     "img": null,
      "prices": {
-      "Monoprix": 0.66,
-      "Otrity": 0.75
+      "Monoprix": 0.66
      }
     }
    ]
@@ -645,8 +644,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/marwa_15l.jpg",
      "prices": {
-      "Géant": 0.61,
-      "Otrity": 0.7167
+      "Géant": 0.61
      }
     }
    ]
@@ -1260,8 +1258,8 @@ window.EAUX_DATA = {
    "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-10-08",
-   "nb": 11
+   "dernier_ok": "2026-10-09",
+   "nb": 9
   },
   "monoprix": {
    "dernier_ok": "2026-10-06",
