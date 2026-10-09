@@ -140,6 +140,13 @@ def decider(r, marques, par_produit, par_format, publies):
     }, None
 
 
+def autre_usage(fmt):
+    """Lignes du même Google Forms qui ne sont PAS des prix : VOTE (eau préférée), POINT… (site Points d'eau Tunisie),
+    LIEU-PRIERE… (site Mosquées en Tunisie, 09/10/2026). Le robot des prix les ignore."""
+    f = (fmt or "").strip().upper()
+    return f == "VOTE" or f.startswith("POINT") or f.startswith("LIEU-PRIERE")
+
+
 def ecrire_votes(reponses, marques):
     """Votes « mon eau préférée » : lignes du formulaire avec format = VOTE.
     Champ lieu = jeton anonyme du navigateur (« vote:… ») : un seul vote compté par
@@ -203,7 +210,7 @@ def main():
     publies, rejets = [], []
     ecrire_votes(reponses, marques)
     for r in reponses:
-        if not r["marque"] or r["marque"].upper().startswith("TEST") or r["format"].strip().upper() == "VOTE" or r["format"].strip().upper().startswith("POINT"):   # POINT… = site Points d'eau Tunisie
+        if not r["marque"] or r["marque"].upper().startswith("TEST") or autre_usage(r["format"]):
             continue
         s, raison = decider(r, marques, par_produit, par_format, publies)
         if raison:
