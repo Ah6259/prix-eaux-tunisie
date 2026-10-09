@@ -1,16 +1,6 @@
 {
- "date": "2026-10-08",
+ "date": "2026-10-09",
  "offres": [
-  {
-   "enseigne": "otrity",
-   "marque": "BRIMA",
-   "nom": "Eau minérale Brima 1.5L",
-   "volume_l": 1.5,
-   "nb_unites": 1,
-   "type": "plate",
-   "prix": 0.75,
-   "image_src": "https://otrity.com/wp-content/uploads/2026/09/fff.jpg"
-  },
   {
    "enseigne": "otrity",
    "marque": "HAYET",
@@ -30,16 +20,6 @@
    "type": "plate",
    "prix": 1.0,
    "image_src": "https://otrity.com/wp-content/uploads/2020/10/vignette_jannet_2l.webp"
-  },
-  {
-   "enseigne": "otrity",
-   "marque": "MARWA",
-   "nom": "Eau minérale Marwa 1.5L",
-   "volume_l": 1.5,
-   "nb_unites": 1,
-   "type": "plate",
-   "prix": 0.7167,
-   "image_src": "https://otrity.com/wp-content/uploads/2020/10/eau-minerale-4.webp"
   },
   {
    "enseigne": "otrity",
