@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-10-08",
+ "updated": "2026-10-09",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -422,8 +422,8 @@ window.EAUX_DATA = {
      "img": "assets/img/delice_15l.jpg",
      "prices": {
       "Carrefour": 0.65,
-      "Géant": 0.66,
-      "Monoprix": 0.66
+      "Monoprix": 0.66,
+      "Géant": 0.69
      }
     }
    ]
@@ -1252,11 +1252,11 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-08",
+   "dernier_ok": "2026-10-09",
    "nb": 62
   },
   "geant": {
-   "dernier_ok": "2026-10-08",
+   "dernier_ok": "2026-10-09",
    "nb": 31
   },
   "otrity": {
