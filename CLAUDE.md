@@ -182,8 +182,9 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
   Proposé : message aux journalistes (pénurie d'eau) et textes pour groupes Facebook.
 
 ## Décisions et idées en attente
-- **Nom de domaine : DÉCISION D'AHMED du 09/10/2026 (prise sur le PC) = `dalilservice.com`** (remplace l'ancienne règle
-  « prix-eau.tn au premier annonceur ») : .com acheté chez Cloudflare, un sous-domaine par site (eau., prix-eau., mosquees., code.,
+- **Nom de domaine : DÉCISION D'AHMED du 10/10/2026 = `clicvia.com`** (UN « c », clickvia.com est pris ; remplace dalilservice.com
+  choisi le 09/10 sur le PC, et l'ancienne règle
+  « prix-eau.tn au premier annonceur ») : .com à acheter chez Cloudflare, un sous-domaine par site (eau., prix-eau., mosquees., code.,
   voiture., documents., outils., pros.…), Cloudflare Pages + dépôts privés. Détails : mémoire du PC copiée dans le dépôt privé
   projets-ahmed, `memoire claude/domaine-et-depots-prives.md` (À LIRE avant de parler du domaine, depuis le téléphone aussi).
 - Reporté : publication immédiate des prix signalés (Apps Script onFormSubmit → workflow_dispatch).
