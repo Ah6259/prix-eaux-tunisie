@@ -29,3 +29,8 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 09/10/2026 | tunimarket.tn | ❌ | certificat expiré, 0 mot « eau », 0 Safia : pas de prix d'eau lisibles. À ne pas refaire sauf nouvelle boutique |
 | 09/10/2026 | supermarche.tn | ❌ | test non concluant (erreur, le résultat affiché venait du site précédent) ; rien de trouvé par la recherche web |
 | 09/10/2026 | Recherche web (Safia/Marwa en ligne) | ❌ | aucune boutique en ligne nouvelle trouvée ; seuls des comparatifs de presse (Tuniscope 13/07/2026 : 0,5 L Fourat 0,360 · Safia 0,410 · Marwa 0,430 ; 1,5 L Bargou 0,610 · Marwa 0,640 · Safia 0,720), antérieurs aux plafonds du 19/08 |
+| 10/10/2026 | aziza.tn | ❌ | lisible (200) mais site vitrine des magasins (0 prix, 0 « eau »), pas de boutique en ligne |
+| 10/10/2026 | tunisianet.com.tn | ❌ | lisible (200) mais informatique/électronique : pas d'eau en bouteille |
+| 10/10/2026 | mytek.tn | ⛔ | Cloudflare « Just a moment » (403) ; informatique de toute façon — pas de contournement |
+| 10/10/2026 | ouedkniss.com | ❌ | site algérien d'annonces, pas une source de prix en magasin tunisien |
+| 10/10/2026 | Recherche web (grossistes en ligne, drive, Aqualine/Melliti) | ❌ | rien de nouveau : seulement la presse (pénurie, plafonds du 19/08/2026, Webdo / La Presse) ; aucune boutique en ligne de grossiste trouvée |
