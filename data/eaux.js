@@ -1104,8 +1104,7 @@ window.EAUX_DATA = {
      "img": "assets/img/safia_15l.jpg",
      "prices": {
       "Carrefour": 0.43,
-      "Géant": 0.43,
-      "Otrity": 0.5167
+      "Géant": 0.43
      }
     },
     {
@@ -1115,8 +1114,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Géant": 0.69,
-      "Otrity": 0.8333
+      "Géant": 0.69
      }
     }
    ]
@@ -1258,8 +1256,8 @@ window.EAUX_DATA = {
    "nb": 31
   },
   "otrity": {
-   "dernier_ok": "2026-10-09",
-   "nb": 9
+   "dernier_ok": "2026-10-10",
+   "nb": 7
   },
   "monoprix": {
    "dernier_ok": "2026-10-06",
