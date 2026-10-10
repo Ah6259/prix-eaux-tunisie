@@ -12,7 +12,11 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - « update workflow » = mettre à jour CLAUDE.md + README + guide, puis commit/push.
 
 ## Le site
-- Public : https://ah6259.github.io/prix-eaux-tunisie/ — dépôt `Ah6259/prix-eaux-tunisie` (GitHub Pages, branche main).
+- Public : **https://prix-eau.clicvia.com/** (depuis le 11/10/2026 ; domaine clicvia.com d'Ahmed chez Cloudflare, ligne DNS
+  `CNAME prix-eau → ah6259.github.io` nuage GRIS, fichier `CNAME` du dépôt). L'ancienne adresse https://ah6259.github.io/prix-eaux-tunisie/
+  redirige seule vers la nouvelle (GitHub). Le site est à la RACINE « / » : `BASE_SITE` de protection.js (sw.js, vidéo) ; GoatCounter
+  garde le préfixe `/prix-eaux-tunisie` (`window.goatcounter.path`). Si l'outil vidéo du PC réécrit le bloc VIDEO_SITE, remettre
+  `"base": BASE_SITE` et l'ORIGINE prix-eau.clicvia.com. Dépôt `Ah6259/prix-eaux-tunisie` (GitHub Pages, branche main).
   Doit rester **public** (Pages gratuit). `gh` : "C:\Program Files\GitHub CLI\gh.exe".
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).

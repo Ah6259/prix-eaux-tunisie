@@ -5,7 +5,7 @@ en Tunisie (bouteille et **stika**), relevés automatiquement chez **Carrefour**
 l'épicerie en ligne **Otrity**, complétés par les **prix signalés par les visiteurs**.
 (Aziza et Monoprix retirés le 30/09/2026 : pas de source de prix fiable, voir « Mettre à jour les prix ».)
 
-**Site public : https://ah6259.github.io/prix-eaux-tunisie/**
+**Site public : https://prix-eau.clicvia.com/**
 
 > © 2026 — **Tous droits réservés** (voir [LICENSE](LICENSE)). Ce dépôt est public uniquement pour l'hébergement
 > gratuit du site : aucune réutilisation du code ou des données sans autorisation écrite.

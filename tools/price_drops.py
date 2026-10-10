@@ -26,7 +26,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT_JS = ROOT / "data" / "baisses.js"
 OUT_JSON = ROOT / "data" / "baisses.json"
 CANAL = "@prixeautunisie"
-SITE = "https://ah6259.github.io/prix-eaux-tunisie/"
+SITE = "https://prix-eau.clicvia.com/"
 SEUIL = 0.01          # baisse minimale : 1 %
 MAX_MESSAGE = 12      # lignes max dans le message Telegram
 

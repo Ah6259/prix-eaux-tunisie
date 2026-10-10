@@ -13,7 +13,7 @@ const lire = f => readFileSync(join(root, f), "utf8");
 // les scripts de la page sont lancés un par un ci-dessous ; GoatCounter est retiré
 const html = lire("index.html").replace(/<script[^>]*src="[^"]*"[^>]*><\/script>/g, "");
 
-const dom = new JSDOM(html, { url: "https://ah6259.github.io/prix-eaux-tunisie/", runScripts: "outside-only", pretendToBeVisual: true });
+const dom = new JSDOM(html, { url: "https://prix-eau.clicvia.com/", runScripts: "outside-only", pretendToBeVisual: true });
 const { window } = dom;
 const doc = window.document;
 window.open = () => null;
@@ -239,7 +239,7 @@ sur("statistiques GoatCounter (sans cookies) chargées, CSP compatible", s => s.
   && /script-src[^;]*https:\/\/gc\.zgo\.at/.test(s) && /connect-src[^;]*https:\/\/prix-eaux-tunisie\.goatcounter\.com/.test(s) && /img-src[^;]*https:\/\/prix-eaux-tunisie\.goatcounter\.com/.test(s));
 // manifeste : id UNIQUE = chemin du site (tous les sites d'Ahmed partagent ah6259.github.io ; sinon « déjà installée »)
 let man = {}; try { man = JSON.parse(lire("manifest.webmanifest")); } catch (e) {}
-check("manifeste présent, id unique = chemin du site, icônes existantes", man.id === "/prix-eaux-tunisie/" && !!man.name && man.display === "standalone"
+check("manifeste présent, id unique = chemin du site, icônes existantes", man.id === "/" && !!man.name && man.display === "standalone"
   && man.icons?.length > 0 && man.icons.every(i => existsSync(join(root, i.src))) && lire("index.html").includes('rel="manifest"'));
 sur("liens externes en rel=\"noopener\"", s => [...s.matchAll(/<a [^>]*href="https?:\/\/[^"]+"[^>]*>/g)].every(m => /rel="[^"]*noopener/.test(m[0])));
 // la CSP autorise tout ce qu'utilisent la page et app.js (sinon formulaires, statistiques ou carte cassés)
@@ -336,7 +336,7 @@ check("accueil : plus de badges ; « Gratuit, sans inscription » dans l'intro, 
     await new Promise(ok => setTimeout(ok, 0));
     return { a, ouvert: !ev.defaultPrevented, comptes, partages, ouverts };
   };
-  const URLS = "https://ah6259.github.io/prix-eaux-tunisie/";
+  const URLS = "https://prix-eau.clicvia.com/";
   for (const [chemin, sel, adresse] of [["marque/aqualine/index.html", "a.bouton-wa", URLS + "marque/aqualine/"], ["prix-stika/index.html", "a.bouton-wa", URLS + "prix-stika/"], ["quelle-eau/index.html", "a.bouton-wa", URLS + "quelle-eau/"]]) {
     const r = await essai(chemin, sel, adresse, false);
     // partage par lien (demande d'Ahmed, octobre 2026) : la page vidéo du site + l'adresse de la page dans le texte

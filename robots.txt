@@ -38,4 +38,4 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://ah6259.github.io/prix-eaux-tunisie/sitemap.xml
+Sitemap: https://prix-eau.clicvia.com/sitemap.xml

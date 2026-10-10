@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_guides import SOURCES_HTML, CSS_V, ICONE_WA, entete, bandeau, pied  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = "https://ah6259.github.io/prix-eaux-tunisie"
+SITE = "https://prix-eau.clicvia.com"
 
 data = json.loads((ROOT / "data" / "eaux.json").read_text(encoding="utf-8"))
 compo_js = (ROOT / "data" / "composition.js").read_text(encoding="utf-8")

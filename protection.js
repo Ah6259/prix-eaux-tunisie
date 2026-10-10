@@ -47,7 +47,7 @@ document.addEventListener("click", function (e) {
   var el = e.target && (e.target.nodeType === 1 ? e.target : e.target.parentElement);
   var a = el && el.closest('a[href^="https://wa.me/?text="]');
   if (!a) return;
-  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "partage" + location.pathname.replace("/prix-eaux-tunisie/", "/"), title: "Partage", event: true }); } catch (err) {}
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "partage" + location.pathname.replace(/^\/prix-eaux-tunisie\//, "/"), title: "Partage", event: true }); } catch (err) {}
   // lien vers la page vidéo + adresse du site (window.partagerLien, plus bas) ; le texte du bouton sert de titre
   var texte = "";
   try { texte = new URL(a.href).searchParams.get("text") || ""; } catch (err) { return; }
@@ -74,21 +74,27 @@ document.addEventListener("click", function (e) {
 
 /* Installation sur le téléphone : service worker PRUDENT (sw.js : réseau d'abord pour les pages et les données).
    Seulement en https (jamais en file: pendant les tests locaux). */
+/* Adresse du site (11/10/2026) : prix-eau.clicvia.com (racine « / ») ; l'ancienne adresse ah6259.github.io/prix-eaux-tunisie/
+   redirige vers elle. BASE_SITE = dossier du site selon l'adresse ; GoatCounter garde le préfixe /prix-eaux-tunisie
+   (même compteur pour tous les sites d'Ahmed, séparés par chemin). */
+var BASE_SITE = /\.github\.io$/.test(location.hostname) ? "/prix-eaux-tunisie/" : "/";
+window.goatcounter = window.goatcounter || {};
+window.goatcounter.path = function (p) { return BASE_SITE === "/" ? "/prix-eaux-tunisie" + p : p; };
 if ("serviceWorker" in navigator && location.protocol === "https:") {
   window.addEventListener("load", function () {
-    try { navigator.serviceWorker.register("/prix-eaux-tunisie/sw.js", { scope: "/prix-eaux-tunisie/" })["catch"](function () {}); }
+    try { navigator.serviceWorker.register(BASE_SITE + "sw.js", { scope: BASE_SITE })["catch"](function () {}); }
     catch (e) { /* rien : le site marche sans */ }
   });
 }
 
 /* >>> vidéo de présentation : page video/ partagée par le bouton « Partager » (outil vidéos d'Ahmed) */
-window.VIDEO_SITE = {"base": "/prix-eaux-tunisie/", "defaut": "fr", "nom": {"fr": "Prix des Eaux de Tunisie", "ar": "أسعار الماء المعدني في تونس"}};
+window.VIDEO_SITE = {"base": BASE_SITE, "defaut": "fr", "nom": {"fr": "Prix des Eaux de Tunisie", "ar": "أسعار الماء المعدني في تونس"}};
 /* Bouton « Partager » (demande d'Ahmed, octobre 2026) : partage un LIEN vers la page vidéo du site (qui montre la vidéo
    de présentation, avec un gros bouton « Ouvrir le site ») + l'adresse du site dans le texte. WhatsApp et Facebook
    affichent l'aperçu de la page vidéo (grande image, vidéo lisible sur Facebook). Menu de partage du téléphone, sinon WhatsApp.
    Espace professionnels des annuaires : page « video-pro/ ». Réglages : window.VIDEO_SITE (juste au-dessus). */
 (function () {
-  var S = window.VIDEO_SITE, ORIGINE = "https://ah6259.github.io";
+  var S = window.VIDEO_SITE, ORIGINE = S.base === "/" ? "https://prix-eau.clicvia.com" : "https://ah6259.github.io";
   function langue() { return document.documentElement.lang || S.defaut; }
   function M(o) { return o[langue()] || o[S.defaut] || o.fr; }
   // page vidéo à partager (et page du site correspondante) selon la page où l'on est

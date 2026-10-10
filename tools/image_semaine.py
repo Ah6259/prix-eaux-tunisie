@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "assets" / "instagram"
 CANAL = "@prixeautunisie"
-SITE = "https://ah6259.github.io/prix-eaux-tunisie/"
+SITE = "https://prix-eau.clicvia.com/"
 
 
 def dt(v):
@@ -96,7 +96,7 @@ def photographier(html, sortie):
 def legende(rows, maj):
     """Texte court, le même pour Telegram et Instagram : la liste des prix est déjà dans l'image."""
     return ("💧 Les stikas d'eau les moins chères cette semaine en Tunisie\n"
-            "Tous les prix, chaque jour 👉 ah6259.github.io/prix-eaux-tunisie\n"
+            "Tous les prix, chaque jour 👉 prix-eau.clicvia.com\n"
             "#eau #stika #prix #tunisie #ستيكة #ماء #تونس")
 
 
