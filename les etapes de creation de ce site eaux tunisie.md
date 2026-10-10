@@ -265,3 +265,12 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 
 ## Pages par magasin pour Google (08/10/2026)
 - Une page par recherche : « prix eau Carrefour », « prix eau Géant »… → `build_guides.py` (`page_magasin`) fabrique chaque nuit `prix-eau-<magasin>/` avec les prix du jour, comparés aux autres magasins, et les ajoute au sitemap et aux pieds de page.
+
+## Économiser les minutes des robots GitHub (10/10/2026)
+- Mesurer d'abord : liste des lancements de chaque robot sur 7 jours (durée arrondie à la minute supérieure), × 30/7.
+  Les dépôts publics ne comptent pas ; les dépôts privés ont 2 000 min/mois gratuites.
+- Un robot ne doit commiter que si le contenu change vraiment : comparer l'ancien fichier au nouveau en ignorant la date « maj »
+  (`ecrire_si_change` dans `tools/signalements.py`, testé dans `tools/test_signalements.py`).
+- `tests.yml` : `paths-ignore: ["**.md"]` (pas de tests pour une simple note) + `concurrency … cancel-in-progress: true`
+  (un nouvel envoi annule l'ancien). Un changement commun à plusieurs sites = un seul commit par dépôt.
+- Rapport complet : `audit des robots 2026-10-10.md` dans le dépôt privé projets-ahmed.
