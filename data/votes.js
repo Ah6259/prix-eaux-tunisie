@@ -1,6 +1,6 @@
 // GÉNÉRÉ par tools/signalements.py — votes « mon eau préférée » (un vote par navigateur)
 window.EAUX_VOTES = {
- "maj": "2026-10-09T20:02",
+ "maj": "2026-10-10T00:37",
  "total": 1,
  "classement": [
   {
