@@ -48,6 +48,22 @@ JOURS_MAX = 30
 GRAND_FORMAT = 2.5
 
 
+
+MOTIF_MAJ = re.compile(r'"maj": "[^"]*"')
+
+
+def ecrire_si_change(chemin, texte):
+    """Écrit le fichier seulement si son contenu change AUTREMENT que par la date « maj » (audit des robots du 10/10/2026 :
+    la seule date changeait à chaque passage → un commit et une publication du site toutes les 2 h, pour rien)."""
+    try:
+        ancien = chemin.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        ancien = None
+    if ancien is not None and MOTIF_MAJ.sub('"maj": ""', ancien) == MOTIF_MAJ.sub('"maj": ""', texte):
+        return False
+    chemin.write_text(texte, encoding="utf-8")
+    return True
+
 def norm(s):
     s = unicodedata.normalize("NFD", s or "")
     return "".join(c for c in s if unicodedata.category(c) != "Mn").strip().lower()
@@ -165,11 +181,11 @@ def ecrire_votes(reponses, marques):
         compte[b["id"]] = compte.get(b["id"], {"id": b["id"], "marque": b["name"], "votes": 0})
         compte[b["id"]]["votes"] += 1
     classement = sorted(compte.values(), key=lambda x: (-x["votes"], x["marque"]))
-    OUT_VOTES.write_text(
+    ecrire_si_change(OUT_VOTES,
         "// GÉNÉRÉ par tools/signalements.py — votes « mon eau préférée » (un vote par navigateur)\n"
         "window.EAUX_VOTES = " + json.dumps({"maj": datetime.now().isoformat(timespec="minutes"),
                                              "total": len(par_jeton), "classement": classement},
-                                            ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
+                                            ensure_ascii=False, indent=1) + ";\n")
     print(f"Votes : {len(par_jeton)} votant(s), {len(classement)} marque(s)")
 
 
@@ -232,11 +248,10 @@ def main():
 
     manuels = json.loads(MANUELS.read_text(encoding="utf-8")) if MANUELS.exists() else []
     affiches = manuels + [{k: v for k, v in s.items() if k != "cle"} for s in publies]
-    OUT_JS.write_text(
+    ecrire_si_change(OUT_JS,
         "// GÉNÉRÉ par tools/signalements.py (3×/jour) — ne pas modifier à la main :\n"
         "// ajouter les prix manuels dans data/signalements_manuels.json\n"
-        "window.EAUX_SIGNALES = " + json.dumps(affiches, ensure_ascii=False, indent=1) + ";\n",
-        encoding="utf-8")
+        "window.EAUX_SIGNALES = " + json.dumps(affiches, ensure_ascii=False, indent=1) + ";\n")
 
     nouveaux = [s for s in publies if s["cle"] not in deja_annonces]
     if nouveaux:
@@ -245,11 +260,11 @@ def main():
             deja_annonces.update(s["cle"] for s in nouveaux)
         except Exception as e:   # Telegram en panne : on réessaiera au prochain passage
             print("Échec Telegram :", e)
-    OUT_JSON.write_text(json.dumps({
+    ecrire_si_change(OUT_JSON, json.dumps({
         "maj": datetime.now().isoformat(timespec="minutes"),
         "publies": len(publies), "rejetes": rejets,
         "annonces": sorted(deja_annonces),
-    }, ensure_ascii=False, indent=1), encoding="utf-8")
+    }, ensure_ascii=False, indent=1))
     print(f"{len(publies)} publié(s), {len(rejets)} rejeté(s), {len(nouveaux)} nouveau(x) annoncé(s)")
 
 

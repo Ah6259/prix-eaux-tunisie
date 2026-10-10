@@ -64,6 +64,11 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 ## Robots (GitHub Actions)
 - `maj-prix.yml` ≈ 1h07 Tunis : collect_prices → price_drops (Telegram) → build_history → build_pages → commit.
 - `signalements.yml` toutes les 2 h de 8h05 à 22h05 : prix signalés (Google Forms → CSV) → site + Telegram.
+  Depuis le 10/10/2026 : fichiers réécrits (donc commit + publication) SEULEMENT si un vrai signalement change (`ecrire_si_change`).
+- **Audit des robots du 10/10/2026** (rapport : `audit des robots 2026-10-10.md` du dépôt privé projets-ahmed) : dans TOUS les dépôts,
+  `tests.yml` ne tourne plus pour un envoi qui ne change que des `.md`, et un nouvel envoi annule le précédent ; ménage du gendarme
+  le lundi seulement ; annuaires relus le 1er du mois ; ma-voiture : presse chaque jour, passage complet le lundi ;
+  controle-matin ne refait plus les tests du site Documents.
 - `battement-de-coeur.yml` le 1er du mois (évite la pause GitHub après 60 jours sans activité).
 - `instagram.yml` chaque lundi 9h05 : `tools/image_semaine.py` → image 1080×1350 « les 5 stikas les moins chères »
   + texte (assets/instagram/) envoyés sur le canal Telegram ; Ahmed les repost sur Instagram.
