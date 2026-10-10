@@ -1,5 +1,5 @@
 {
- "date": "2026-10-09",
+ "date": "2026-10-10",
  "offres": [
   {
    "enseigne": "otrity",
@@ -30,16 +30,6 @@
    "type": "plate",
    "prix": 0.7083,
    "image_src": "https://otrity.com/wp-content/uploads/2020/10/eau-minerale-2.webp"
-  },
-  {
-   "enseigne": "otrity",
-   "marque": "SAFIA",
-   "nom": "Eau minérale Safia 0.5L",
-   "volume_l": 0.5,
-   "nb_unites": 1,
-   "type": "plate",
-   "prix": 0.5167,
-   "image_src": "https://otrity.com/wp-content/uploads/2020/09/eau-minerale-7.webp"
   },
   {
    "enseigne": "otrity",
@@ -80,16 +70,6 @@
    "type": "plate",
    "prix": 0.8167,
    "image_src": "https://otrity.com/wp-content/uploads/2020/09/HAYET_1_5_L_f98db598a1.webp"
-  },
-  {
-   "enseigne": "otrity",
-   "marque": "SAFIA",
-   "nom": "Eau minérale Safia 1.5L",
-   "volume_l": 1.5,
-   "nb_unites": 1,
-   "type": "plate",
-   "prix": 0.8333,
-   "image_src": "https://otrity.com/wp-content/uploads/2020/09/eau-minerale-8.webp"
   }
  ]
 }
