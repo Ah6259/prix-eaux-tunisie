@@ -222,6 +222,14 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Vidéo de présentation** (06/10/2026) : `assets/video/presentation.mp4`, 1080 × 1920, + couverture et aperçu 1200 × 630 (`apercu-video.jpg`). Son de fond : un vrai ruisseau (enregistré par jackthemurray, Freesound 433589, CC0, via Wikimedia Commons ; preuve dans le dossier privé `videos (outil)/preuves musique/`) — demande d'Ahmed, au lieu de la musique des autres sites. Page **`video/`** (lecteur + gros bouton « Ouvrir le site » + Partager, og:video / og:image) : réglages `tools/page_video.json`, fabriquée par node tools/page_video.mjs, à partir de quelle-eau/ (à relancer si cette page change). Le bouton « Partager » envoie un LIEN : la page vidéo + l'adresse du site dans le texte (`window.partagerLien`, bloc « vidéo de présentation » en fin du JS commun), jamais le fichier. Test `node tools/test_video.mjs`.
   Pour la refaire : `python fabriquer.py eau` puis `python brancher_partage.py eau` dans le dossier PRIVÉ du PC `videos (outil)/`.
 
+## Mise à jour du 11/10/2026 (autres projets d'Ahmed, à savoir)
+- **Immobilier Tunisie** https://immobilier.clicvia.com/ (dépôt `Ah6259/immobilier-tunis`) : 4 297 annonces, alertes Telegram,
+  dépôt gratuit, vidéo ; mémoire dans son CLAUDE.md et `memoire claude/projet-immobilier.md` (dépôt privé projets-ahmed).
+- **Code de la route** : code Pass partagé OFFERT aux élèves d'Ahmed (1 an, action `offert` du robot privé code-route-pass).
+- **Portail clicvia.com** : nouvel aperçu de partage `og-image-v2.jpg` (17 services). Le site « Le message » (islam) est sur un
+  AUTRE compte GitHub (lemessagelemessage8-lab.github.io), pas encore sur clicvia.com.
+- **Règle d'Ahmed : ne contacter personne** (agences, portails…) : Claude prépare des brouillons, Ahmed décide d'envoyer.
+
 ## Mise à jour du 07-08/10/2026 (à lire en début de session)
 - **Toujours `git pull` avant de travailler** (ici ET dans `../` = dépôt PRIVÉ `Ah6259/projets-ahmed`) : Ahmed modifie aussi
   ses dépôts depuis le téléphone (sessions Claude en ligne). Ne jamais écraser ces changements en recopiant ou régénérant.

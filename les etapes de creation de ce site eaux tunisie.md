@@ -284,3 +284,15 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 4. Attendre le cadenas (quelques minutes à 1 h), puis cocher « Enforce HTTPS » dans Settings → Pages du dépôt.
 5. L'ancienne adresse redirige seule (GitHub). Le site racine (portail) en DERNIER, sinon il entraîne les autres.
 6. Google Search Console : propriété « Domaine » (Cloudflare ajoute la ligne TXT d'un clic), puis envoyer les plans du site.
+
+## Leçons du 11/10/2026 (site immobilier, valables pour tous les sites)
+- **Image de partage WhatsApp** : à chaque changement, NOUVEAU nom de fichier (`og-image-v2.jpg`…) ; modèle HTML 1200 × 630,
+  capture Chromium sans écran DANS UN CADRE (iframe) puis `convert -crop 1200x630` (la capture directe coupe le bas), JPEG < 250 Ko.
+- **Photos libres** : Wikimedia Commons refuse les requêtes directes des sessions Claude en ligne (« 429 ») → chercher avec WebFetch
+  de l'API Commons, télécharger par `Special:FilePath/<fichier>?width=900`, citer auteur + licence sous l'image et au pied de page.
+- **Vidéo de présentation** depuis une session en ligne : l'outil du PC (`videos (outil)/fabriquer.py`) marche avec
+  `FFMPEG=/usr/bin/ffmpeg NAVIGATEUR=/opt/pw-browsers/chromium` et le site servi en local (`python -m http.server`), car Chromium
+  refuse le certificat du proxy ; Pillow s'installe avec l'accord d'Ahmed.
+- **Tests = garde-fou** : un test du site qui échoue bloque la publication du robot (vu le 11/10 avec un nouveau type d'annonce) :
+  corriger le test ou le code, jamais forcer la publication.
+- **Règle d'Ahmed : ne contacter personne** (brouillons seulement, c'est lui qui envoie).
