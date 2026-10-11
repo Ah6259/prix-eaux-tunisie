@@ -34,3 +34,8 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 10/10/2026 | mytek.tn | ⛔ | Cloudflare « Just a moment » (403) ; informatique de toute façon — pas de contournement |
 | 10/10/2026 | ouedkniss.com | ❌ | site algérien d'annonces, pas une source de prix en magasin tunisien |
 | 10/10/2026 | Recherche web (grossistes en ligne, drive, Aqualine/Melliti) | ❌ | rien de nouveau : seulement la presse (pénurie, plafonds du 19/08/2026, Webdo / La Presse) ; aucune boutique en ligne de grossiste trouvée |
+| 11/10/2026 | bazar.tn | ❌ | lisible (200) mais page quasi vide (1,5 Ko, sans titre ni prix) : pas de boutique d'eau |
+| 11/10/2026 | batam.com.tn | ❌ | lisible (200), électroménager/multimédia : pas d'eau en bouteille (le mot anti-robot vient du code de la page, pas d'un vrai blocage) |
+| 11/10/2026 | bolt.eu/fr-tn/food (Bolt Food) | ⛔ | application de livraison, page vitrine sans prix d'eau (0 prix) ; prix par commerçant dans l'appli — pas de lecture automatique |
+| 11/10/2026 | combien-coute.net | ⛔ | Cloudflare « Just a moment » (403) ; c'est de toute façon un site d'estimations, pas un magasin — pas de contournement |
+| 11/10/2026 | Recherche web (courses en ligne, grossistes, Talabat/Bolt/Eat) | ❌ | rien de nouveau : seulement la presse (Tuniscope 13/07, La Presse 19/08 : pénurie, plan du ministère en septembre) ; aucune boutique en ligne nouvelle trouvée |
