@@ -399,6 +399,16 @@ def find_img_curated(imgs, brand_id, litres):
     return "assets/img/" + cands[0][1] + ".jpg"
 
 
+def garder_anciennes_photos(brands, ancien):
+    """Marque sans photo aujourd'hui (ex. Hayet, vendue seulement chez Otrity et absente du relevé du 11/10/2026) :
+    elle garde la dernière photo de magasin connue (fichier toujours présent), plutôt que de rester sans image."""
+    avant = {b.get("id"): b.get("img") for b in (ancien or {}).get("brands", [])}
+    for b in brands:
+        img = avant.get(b["id"])
+        if not b.get("img") and img and not img.startswith("assets/img/libres/") and (ROOT / img).exists():
+            b["img"] = img
+
+
 def appliquer_photos_libres(brands):
     """Marques SANS photo (ni choisie à la main, ni d'enseigne) : photo libre de data/photos_libres.json,
     avec son crédit (img_credit). Une photo de magasin, si elle existe, reste toujours prioritaire."""
@@ -598,6 +608,7 @@ def main():
             "products": [],
         })
     out_brands.sort(key=lambda b: b["name"])
+    garder_anciennes_photos(out_brands, ancien)
     appliquer_photos_libres(out_brands)
 
     data = {

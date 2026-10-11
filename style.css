@@ -801,7 +801,8 @@ header.site{background:var(--surface); box-shadow:0 1px 0 var(--line),0 4px 14px
 @media (max-width:560px){
   .logo-mark{width:32px; height:32px}
   .titre{gap:8px}
-  .titre h1{font-size:min(20px,5.6vw)}
+  .titre h1{font-size:17px}   /* même taille que le nom de Points d eau (11/10/2026, demande d Ahmed) */
+  .stats-line{font-size:12px}
 }
 
 /* bandeau bleu : ce qu'est le site */
