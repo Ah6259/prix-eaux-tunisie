@@ -115,7 +115,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   par gouvernorat, jamais de noms ni d'adresses) — décision d'Ahmed, pas avant.
 - « Votre avis » : Formspree (mwlpakqj). Statistiques : GoatCounter (sans cookies) sur l'accueil, les pages marques et
   les guides (balise dans `pied()` de build_guides.py). Le même compteur `prix-eaux-tunisie.goatcounter.com` sert aussi
-  aux autres sites d'Ahmed (outils pratiques, appels d'offres, code de la route, documents, portail), séparés par chemin.
+  aux autres sites d'Ahmed (outils pratiques, appels d'offres, code de la route, documents, portail), séparés par chemin. Depuis le 11/10/2026, réglage GoatCounter « Votre site » = `clicvia.com` ; chaque site garde son ancien préfixe (`/prix-eaux-tunisie/…`) : les liens du tableau de bord redirigent vers le bon sous-domaine (les lignes `partage/…` sont des clics, pas des pages).
 - Grossistes : 494 grossistes actifs trouvés au Registre National des Entreprises (API publique `rne-api`, recherche par activité),
   classés par gouvernorat et fiabilité ★. Téléphones : robot Google Places du dépôt privé (clé dans ses secrets),
   **EN PAUSE depuis le 07/10/2026** (décision d'Ahmed : commande fermée ; lancement à la main seulement ;
