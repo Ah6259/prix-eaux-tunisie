@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-10",
+ "updated": "2026-10-11",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -588,6 +588,7 @@
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
+      "Géant": 0.62,
       "Carrefour": 0.67
      }
     },
@@ -662,6 +663,16 @@
    ],
    "products": [
     {
+     "liters": 0.75,
+     "format": "750 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/may_tunisia_15l.jpg",
+     "prices": {
+      "Géant": 1.69
+     }
+    },
+    {
      "liters": 1.5,
      "format": "1.5 L",
      "category": "plate",
@@ -670,6 +681,16 @@
      "prices": {
       "Carrefour": 0.67,
       "Géant": 0.67
+     }
+    },
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/may_tunisia_15l.jpg",
+     "prices": {
+      "Géant": 0.9
      }
     }
    ]
@@ -718,6 +739,16 @@
      "img": "assets/img/melina_15l.jpg",
      "prices": {
       "Géant": 0.59
+     }
+    },
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/melina_x.jpg",
+     "prices": {
+      "Géant": 0.76
      }
     }
    ]
@@ -1248,12 +1279,12 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-10",
+   "dernier_ok": "2026-10-11",
    "nb": 62
   },
   "geant": {
-   "dernier_ok": "2026-10-10",
-   "nb": 31
+   "dernier_ok": "2026-10-11",
+   "nb": 36
   },
   "otrity": {
    "dernier_ok": "2026-10-10",
