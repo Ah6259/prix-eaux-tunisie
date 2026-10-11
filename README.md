@@ -212,5 +212,6 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
   mais possible une fois hébergé, ex. GitHub Pages)
 
 ## Nouveautés
+- **11/10/2026 (soir)** : titre de l'en-tête plus petit sur téléphone (17 px) ; une marque absente d'un relevé garde sa dernière photo.
 - 05/10/2026 : nouvelle icône (goutte, famille commune des sites) et mention « comparateur gratuit » dans Google.
 - 08/10/2026 : la recherche quotidienne de nouvelles sources de prix enregistre enfin son carnet (`tools/sources_a_explorer.md`) ; la vérification du matin le contrôle.

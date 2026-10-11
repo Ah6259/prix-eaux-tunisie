@@ -251,3 +251,12 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Tous les sites d'Ahmed** : bouton de paiement commun (or, contour brun, relief, reflet) ; ce site n'a pas de paiement.
 - Indexation Google : les 13 sites sont prêts (plans du site lisibles, Google autorisé) ; statut réel = Search Console
   (tâches A.1 à A.3 d'Ahmed dans la liste de travail).
+
+## Mise à jour du 11/10/2026 (soir)
+- **En-tête** : titre 17 px sur téléphone (comme Points d'eau, demande d'Ahmed), ligne « Mis à jour… » 12 px ; version 20261011b.
+- **`garder_anciennes_photos()`** (collect_prices.py) : une marque sans photo aujourd'hui (Hayet, absente du relevé Otrity du 11/10)
+  garde sa dernière photo de magasin connue ; sinon test_site.mjs échoue (« chaque marque a une photo »).
+- **Aperçu WhatsApp** : ce site avait déjà `og:url` / `og:locale` (grand aperçu) ; Points d'eau, Mosquées, Ma voiture et Outils
+  ne l'avaient pas (petite vignette) → corrigés le 11/10. Règles communes : § 14 de `regles communes a tous les sites.md` (projets-ahmed).
+- Autres sites le même jour : Points d'eau (5 photos qui défilent), Mosquées (photo du bandeau qui change toutes les 3 s,
+  paragraphe d'accueil raccourci), GoatCounter de l'immobilier (préfixe `/immobilier-tunis`, filtrer par ce mot).

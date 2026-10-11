@@ -296,3 +296,14 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - **Tests = garde-fou** : un test du site qui échoue bloque la publication du robot (vu le 11/10 avec un nouveau type d'annonce) :
   corriger le test ou le code, jamais forcer la publication.
 - **Règle d'Ahmed : ne contacter personne** (brouillons seulement, c'est lui qui envoie).
+
+## Leçons du 11/10/2026 (soir) — partage, photos qui bougent, en-tête
+- **Petite vignette WhatsApp** alors que l'image est bonne (1200 × 630, < 250 Ko) : il manquait `og:url`. Chaque page porte
+  `og:type`, `og:url` (= adresse canonique), `og:site_name`, `og:locale` ; puis nouveau nom d'image. Les anciens messages
+  WhatsApp ne changent pas : renvoyer le lien pour vérifier.
+- **Photos qui défilent** : rangée de photos → 2 visibles, défilement seul de droite à gauche ≈ 3 s/photo (copie `li.copie`
+  + animation CSS, `direction:ltr` même en arabe) ; photo unique → diaporama en fondu toutes les 3 s, crédit sous chaque photo.
+  Toujours : pause au toucher, arrêt si « réduire les animations », rien qui bouge sur ordinateur si tout tient à l'écran.
+- **En-tête** : nom du site en 17 px sur téléphone (comme Points d'eau) ; texte d'accueil de 3 lignes au plus.
+- **Donnée manquante un jour** (Hayet absente du relevé Otrity) : la marque garde sa dernière photo (`garder_anciennes_photos`).
+- Toutes ces règles sont aussi dans `regles communes a tous les sites.md` § 14 (dépôt privé projets-ahmed) pour les prochains sites.
