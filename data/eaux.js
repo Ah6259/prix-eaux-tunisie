@@ -516,22 +516,11 @@ window.EAUX_DATA = {
    "source": "Jelma (Sidi Bouzid)",
    "depuis": 1996,
    "note": null,
-   "img": "assets/img/produits/2ba9322512a7.webp",
+   "img": null,
    "types": [
     "plate"
    ],
-   "products": [
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/2ba9322512a7.webp",
-     "prices": {
-      "Otrity": 0.8167
-     }
-    }
-   ]
+   "products": []
   },
   {
    "id": "jannet",
@@ -784,8 +773,7 @@ window.EAUX_DATA = {
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
       "Géant": 0.61,
-      "Monoprix": 0.61,
-      "Otrity": 0.7083
+      "Monoprix": 0.61
      }
     }
    ]
@@ -1287,8 +1275,8 @@ window.EAUX_DATA = {
    "nb": 36
   },
   "otrity": {
-   "dernier_ok": "2026-10-10",
-   "nb": 7
+   "dernier_ok": "2026-10-11",
+   "nb": 5
   },
   "monoprix": {
    "dernier_ok": "2026-10-06",
