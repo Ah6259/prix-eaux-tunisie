@@ -90,7 +90,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Il faut jsdom, installé une fois par PC : `npm install --no-save --no-package-lock jsdom` (node_modules ignoré par git).
 - **`node tools/test_sw.mjs`** (service worker, faux navigateur ; accepte un dossier en argument pour tester une copie sabotée).
   `tests.yml` lance à chaque push : YAML des robots + test_site.mjs + test_sw.mjs + test_pannes.py (e-mail de GitHub si échec).
-- **Service worker** (05/10/2026, installation complète Chrome/Android + iPhone) : `sw.js` à la racine, portée `/prix-eaux-tunisie/`,
+- **Service worker** (05/10/2026, installation complète Chrome/Android + iPhone) : `sw.js` à la racine, portée = dossier du site (`/` sur prix-eau.clicvia.com, `BASE_SITE` de protection.js),
   enregistré à la fin de `protection.js` (chargé par TOUTES les pages ; https seulement, try/catch ; app.js non touché).
   **Réseau d'abord** pour les pages HTML et les données (`data/*.js` sans ?v=, JSON : le visiteur voit toujours les prix du jour ;
   le cache ne sert que hors connexion, sinon page « Hors connexion » FR+AR) ; CSS/JS/images avec `?v=` : cache puis mise à jour.
@@ -169,7 +169,7 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 - **Tri par résidu sec** : le filtre de format ne retire aucune marque (Hayet, vendue seulement en 1 L, est 1re).
 - **Sécurité** : CSP stricte en meta (aucun script en ligne ni attribut `on…=`), meta noai, `protection.js`
   (anti-copie légère, anti-iframe), robots.txt COMMUN au site racine ah6259.github.io (robots d'IA interdits).
-- **Installation sur téléphone** : `manifest.webmanifest` avec `"id": "/prix-eaux-tunisie/"`, service worker `sw.js`
+- **Installation sur téléphone** : `manifest.webmanifest` avec `"id": "/"` (depuis le 11/10/2026), service worker `sw.js`
   (réseau d'abord, cache seulement hors connexion), meta iPhone ; testé (`tools/test_sw.mjs`).
 - **Partage** : image d'aperçu JPEG < 250 Ko (`og-image-v7.jpg`, sinon WhatsApp montre une petite vignette), aussi sur
   les 35 pages marques ; pas de traduction automatique (`translate="no"` + meta notranslate).
@@ -191,11 +191,12 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
   Proposé : message aux journalistes (pénurie d'eau) et textes pour groupes Facebook.
 
 ## Décisions et idées en attente
-- **Nom de domaine : DÉCISION D'AHMED du 10/10/2026 = `clicvia.com`** (UN « c », clickvia.com est pris ; remplace dalilservice.com
-  choisi le 09/10 sur le PC, et l'ancienne règle
-  « prix-eau.tn au premier annonceur ») : .com à acheter chez Cloudflare, un sous-domaine par site (eau., prix-eau., mosquees., code.,
-  voiture., documents., outils., pros.…), Cloudflare Pages + dépôts privés. Détails : mémoire du PC copiée dans le dépôt privé
-  projets-ahmed, `memoire claude/domaine-et-depots-prives.md` (À LIRE avant de parler du domaine, depuis le téléphone aussi).
+- **Nom de domaine clicvia.com : ACHETÉ et EN PLACE (10-11/10/2026)** chez Cloudflare (renouvellement automatique, expire 10/10/2027).
+  Portail = https://clicvia.com/ ; un sous-domaine par site (CNAME → ah6259.github.io, nuage GRIS, fichier `CNAME` dans chaque dépôt,
+  « Enforce HTTPS » coché partout) : prix-eau, eau, mosquees, concours, documents, code, voiture, outils, appels-offres, comptes,
+  conferences, auto-ecoles, avocats, comptables, mariage, pros ; à venir : immobilier. Google Search Console : propriété « Domaine »
+  clicvia.com validée (NE PAS supprimer la ligne TXT google-site-verification). Détails : `memoire claude/domaine-et-depots-prives.md`
+  du dépôt privé projets-ahmed. Passage éventuel en dépôts privés + Cloudflare Pages : plus tard (voir l'audit des minutes).
 - Reporté : publication immédiate des prix signalés (Apps Script onFormSubmit → workflow_dispatch).
 - Idées : README « Nouveaux services » (prochain conseillé : « Quelle eau pour moi ? ») ; comparateur d'autres produits (mis de côté) ;
   vrais logos ; marques manquantes (Ovia…).

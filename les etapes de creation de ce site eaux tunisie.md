@@ -274,3 +274,13 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - `tests.yml` : `paths-ignore: ["**.md"]` (pas de tests pour une simple note) + `concurrency … cancel-in-progress: true`
   (un nouvel envoi annule l'ancien). Un changement commun à plusieurs sites = un seul commit par dépôt.
 - Rapport complet : `audit des robots 2026-10-10.md` dans le dépôt privé projets-ahmed.
+
+## Passer un site sur son propre nom de domaine (10-11/10/2026)
+1. Acheter le domaine chez Cloudflare (clicvia.com, environ 10 $/an, renouvellement automatique, nom caché du public).
+2. Cloudflare → DNS → Add record : `CNAME`, Name = sous-domaine (ex. `prix-eau`), Target = `ah6259.github.io`, nuage GRIS (« DNS only »).
+3. Dans le dépôt : fichier `CNAME` (une ligne : `prix-eau.clicvia.com`), remplacer partout l'ancienne adresse github.io
+   (pages, plan du site, robots.txt, partages, robots, tests), `"id": "/"` dans le manifeste, service worker enregistré sur le
+   dossier du site (`BASE_SITE`), GoatCounter qui garde l'ancien préfixe (`window.goatcounter.path`) ; tests verts, puis envoi.
+4. Attendre le cadenas (quelques minutes à 1 h), puis cocher « Enforce HTTPS » dans Settings → Pages du dépôt.
+5. L'ancienne adresse redirige seule (GitHub). Le site racine (portail) en DERNIER, sinon il entraîne les autres.
+6. Google Search Console : propriété « Domaine » (Cloudflare ajoute la ligne TXT d'un clic), puis envoyer les plans du site.
