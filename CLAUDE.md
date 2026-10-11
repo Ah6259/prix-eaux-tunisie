@@ -226,8 +226,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Immobilier Tunisie** https://immobilier.clicvia.com/ (dépôt `Ah6259/immobilier-tunis`) : 4 297 annonces, alertes Telegram,
   dépôt gratuit, vidéo ; mémoire dans son CLAUDE.md et `memoire claude/projet-immobilier.md` (dépôt privé projets-ahmed).
 - **Code de la route** : code Pass partagé OFFERT aux élèves d'Ahmed (1 an, action `offert` du robot privé code-route-pass).
-- **Portail clicvia.com** : nouvel aperçu de partage `og-image-v2.jpg` (17 services). Le site « Le message » (islam) est sur un
-  AUTRE compte GitHub (lemessagelemessage8-lab.github.io), pas encore sur clicvia.com.
+- **Portail clicvia.com** : aperçu de partage `og-image-v3.jpg` (18 services). Le site « Le message » (islam) est sur un
+  AUTRE compte GitHub (lemessagelemessage8-lab.github.io) : carte sur la page clicvia.com (11/10), pas de sous-domaine.
 - **Règle d'Ahmed : ne contacter personne** (agences, portails…) : Claude prépare des brouillons, Ahmed décide d'envoyer.
 
 ## Mise à jour du 07-08/10/2026 (à lire en début de session)
