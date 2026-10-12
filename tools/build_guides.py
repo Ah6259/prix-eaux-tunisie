@@ -66,7 +66,8 @@ def pied(racine):
   <nav class="pied-nav" aria-label="Liens utiles"><a href="{racine}">Comparateur des prix de l'eau</a>
   <a href="{racine}prix-stika/">Prix de la stika aujourd'hui</a>
   <a href="{racine}quelle-eau/">Quelle eau choisir ?</a>
-  <a href="https://ah6259.github.io/points-eau-tunisie/" rel="noopener">Où trouver de l'eau (sources, majels)</a>
+  <a href="https://eau.clicvia.com/" rel="noopener">Où trouver de l'eau (sources, majels)</a>
+  <a href="https://clicvia.com/" rel="noopener">Tous nos services</a>
   {_liens_magasins(racine)}
   <a href="https://t.me/prixeautunisie" rel="noopener">Alertes promo (Telegram)</a></nav>
   <p class="pied-titre">Sources des prix</p>
