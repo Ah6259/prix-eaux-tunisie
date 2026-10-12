@@ -39,3 +39,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 11/10/2026 | bolt.eu/fr-tn/food (Bolt Food) | ⛔ | application de livraison, page vitrine sans prix d'eau (0 prix) ; prix par commerçant dans l'appli — pas de lecture automatique |
 | 11/10/2026 | combien-coute.net | ⛔ | Cloudflare « Just a moment » (403) ; c'est de toute façon un site d'estimations, pas un magasin — pas de contournement |
 | 11/10/2026 | Recherche web (courses en ligne, grossistes, Talabat/Bolt/Eat) | ❌ | rien de nouveau : seulement la presse (Tuniscope 13/07, La Presse 19/08 : pénurie, plan du ministère en septembre) ; aucune boutique en ligne nouvelle trouvée |
+| 12/10/2026 | talabat.com/tunisia | ⛔ | 404 + mot anti-robot détecté, 0 prix : pas de service Talabat lisible en Tunisie — pas de contournement |
+| 12/10/2026 | glovoapp.com (accueil) | ⛔ | réponse vide (202, 0 octet) pour GitHub ; appli de livraison déjà écartée le 08/10 |
+| 12/10/2026 | courses.tn, supermarche-en-ligne.tn, mgdrive.tn | ❌ | noms de domaine inexistants (introuvables) |
+| 12/10/2026 | Recherche web (Safia/Marwa en ligne, grossistes en ligne) | ❌ | rien de nouveau : presse seulement (Tuniscope 13/07, Webdo 19/08 plafonds, saisies à Sousse) ; EspaceAgro = petites annonces B2B sans prix ni boutique |
