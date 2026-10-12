@@ -929,6 +929,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/primaqua_19l_avec_consigne.jpg",
      "prices": {
+      "Géant": 5.3,
       "Carrefour": 5.35
      }
     }
@@ -1275,7 +1276,7 @@ window.EAUX_DATA = {
    "nb": 36
   },
   "otrity": {
-   "dernier_ok": "2026-10-11",
+   "dernier_ok": "2026-10-12",
    "nb": 5
   },
   "monoprix": {
