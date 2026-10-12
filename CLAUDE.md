@@ -260,3 +260,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   ne l'avaient pas (petite vignette) → corrigés le 11/10. Règles communes : § 14 de `regles communes a tous les sites.md` (projets-ahmed).
 - Autres sites le même jour : Points d'eau (5 photos qui défilent), Mosquées (photo du bandeau qui change toutes les 3 s,
   paragraphe d'accueil raccourci), GoatCounter de l'immobilier (préfixe `/immobilier-tunis`, filtrer par ce mot).
+
+- **Visibilité Google (12/10/2026, règle commune § 8)** : liens vers nos autres sites en `https://<site>.clicvia.com/` (jamais `ah6259.github.io`), lien « Tous nos services » → https://clicvia.com/ dans le pied de page, `robots.txt` avec ligne Sitemap, `sitemap.xml` daté, JSON-LD sur l'accueil, clé IndexNow `377f054ba9c5ed40d6796adc8d87d1e8.txt` à la racine (ne pas supprimer : robot `indexnow` du portail). Contrôle : `node "outils visibilite/controle.mjs"` (dépôt projets-ahmed). Sitemap envoyé dans Search Console par Ahmed le 12/10/2026.
