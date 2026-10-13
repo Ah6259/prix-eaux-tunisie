@@ -24,6 +24,11 @@ Langues : français, arabe.
 
 Le site compte 41 pages au total ; la liste complète est dans le plan du site : https://prix-eau.clicvia.com/sitemap.xml
 
+## Données fraîches (JSON, lisibles par une machine)
+
+Ces fichiers sont produits par les robots du site ; un assistant peut les lire pour répondre avec les données du jour, en citant le site.
+- [Prix de l'eau minérale en bouteille dans les magasins en ligne tunisiens](https://prix-eau.clicvia.com/data/eaux.json) — mis à jour chaque jour. Champs : brands[] : name, products[] (format, prix par magasin) ; stores[] = magasins relevés ; updated = date du relevé ; currency = TND.
+
 ## À savoir
 
 - Prix relevés chaque jour dans les magasins en ligne tunisiens ; la date du relevé est écrite sur chaque page.
