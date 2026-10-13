@@ -43,3 +43,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 12/10/2026 | glovoapp.com (accueil) | ⛔ | réponse vide (202, 0 octet) pour GitHub ; appli de livraison déjà écartée le 08/10 |
 | 12/10/2026 | courses.tn, supermarche-en-ligne.tn, mgdrive.tn | ❌ | noms de domaine inexistants (introuvables) |
 | 12/10/2026 | Recherche web (Safia/Marwa en ligne, grossistes en ligne) | ❌ | rien de nouveau : presse seulement (Tuniscope 13/07, Webdo 19/08 plafonds, saisies à Sousse) ; EspaceAgro = petites annonces B2B sans prix ni boutique |
+| 13/10/2026 | merkado.tn | ⛔ | Cloudflare « Just a moment » (403) pour GitHub, 0 prix lisible — pas de contournement. Boutique en ligne (commande directe du magasin) : à regarder à la main depuis le PC d'Ahmed s'il vend de l'eau (🖥️ ?) |
+| 13/10/2026 | lemarche.tn, bimo.tn, sidiboussaid.tn, tunisie.jumia.com | ❌ | noms de domaine inexistants (introuvables) ; lemarche.tn (fruits/légumes/épicerie fine) de toute façon peu probable pour l'eau |
+| 13/10/2026 | mg.tn (revu) | ❌ | inchangé : certificat invalide, 0 mot « eau », promotions/catalogues seulement |
+| 13/10/2026 | Recherche web (Safia/Marwa en ligne, supermarchés en ligne) | ❌ | rien de nouveau : presse seulement (Tuniscope 13/07, Webdo 19/08) ; Founa (fermé), Farm Trust (bio), lemarche.tn sans eau |
