@@ -1,5 +1,5 @@
 {
- "date": "2026-10-12",
+ "date": "2026-10-13",
  "offres": [
   {
    "enseigne": "otrity",
@@ -10,16 +10,6 @@
    "type": "plate",
    "prix": 0.1583,
    "image_src": "https://otrity.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-01-29-at-19.56.43-10.jpeg"
-  },
-  {
-   "enseigne": "otrity",
-   "marque": "JANNET",
-   "nom": "Eau minérale Jannet 2L",
-   "volume_l": 2.0,
-   "nb_unites": 1,
-   "type": "plate",
-   "prix": 1.0,
-   "image_src": "https://otrity.com/wp-content/uploads/2020/10/vignette_jannet_2l.webp"
   },
   {
    "enseigne": "otrity",
