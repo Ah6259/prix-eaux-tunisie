@@ -541,8 +541,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jannet_2l.jpg",
      "prices": {
-      "Carrefour": 0.83,
-      "Otrity": 1.0
+      "Carrefour": 0.83
      }
     }
    ]
@@ -1275,8 +1274,8 @@ window.EAUX_DATA = {
    "nb": 36
   },
   "otrity": {
-   "dernier_ok": "2026-10-12",
-   "nb": 5
+   "dernier_ok": "2026-10-13",
+   "nb": 4
   },
   "monoprix": {
    "dernier_ok": "2026-10-06",
