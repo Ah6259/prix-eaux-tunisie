@@ -266,3 +266,12 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Google + Bing (12/10/2026)** : sitemap envoyé par Ahmed dans Google Search Console et dans Bing Webmaster Tools (site clicvia.com/), indexation de l'accueil demandée. Pour un nouveau site : mêmes gestes, voir `nouveau site - procedure.md` § 4 étape 5 (dépôt projets-ahmed).
 
 - **Page Facebook Clicvia (12/10/2026)** : https://www.facebook.com/1327283777142447 — le robot `facebook` du dépôt du portail (`Ah6259.github.io`, `tools/facebook.mjs`, chaque jour 18h05) publie tout seul une page de ce site à son tour (titre, description et image `og:image` lus sur la page : les garder soignés). Ahmed ne publie rien à la main. Détail et dépannage : `nouveau site - procedure.md` § 4 étape 6 (dépôt projets-ahmed).
+
+## Mise à jour du 13-14/10/2026 (autres projets d'Ahmed, à savoir)
+- **Immobilier Tunisie** : 10 207 annonces (Tayara lu depuis le 13/10) ; page gratuite **« Où investir ? »**
+  (https://immobilier.clicvia.com/investir/ : rendement des appartements par quartier, maisons/bureaux au m², terrains au m²,
+  calculateur) + **Pass Investisseur payant** (19 DT/mois ou 99 DT/an, essai 7 jours, robot Telegram du dépôt privé
+  immobilier-abonnes, bouton `activer-investisseur`). Modèle d'une partie payante « analyse de données » : règle commune § 11.9.
+- **GoatCounter** : les 18 sites envoient bien leur préfixe et leur titre (vérifié le 13/10) ; « (inconnu) » dans les sources =
+  visiteurs venus de WhatsApp / Instagram / Telegram ou adresse tapée (normal) ; « yahoo.io », « bing.io », « baidu.io » = robots.
+- Liste de travail : 1.12 tester « One MCP » (rétro-ingénierie), 1.13 Pass Investisseur fait.

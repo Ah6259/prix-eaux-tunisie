@@ -307,3 +307,14 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - **En-tête** : nom du site en 17 px sur téléphone (comme Points d'eau) ; texte d'accueil de 3 lignes au plus.
 - **Donnée manquante un jour** (Hayet absente du relevé Otrity) : la marque garde sa dernière photo (`garder_anciennes_photos`).
 - Toutes ces règles sont aussi dans `regles communes a tous les sites.md` § 14 (dépôt privé projets-ahmed) pour les prochains sites.
+
+## Leçons du 13-14/10/2026 — une partie payante à partir des données d'un site
+- **Idée d'Ahmed** : les 10 000 annonces de l'immobilier servent à calculer le rendement locatif → page gratuite (pour Google)
+  + contenu payant (tableau complet, alertes « bonne affaire ») livré par le robot Telegram d'un dépôt PRIVÉ.
+- **Comparer à pièces égales** (S+1, S+2…) quand la surface manque ; **au m²** sinon ; écarter les chiffres invraisemblables
+  (un local à 23 % de rendement = fonds de commerce, pas les murs) et les zones de vacances (loyers meublés).
+- **Toujours dire « prix demandés, chiffres indicatifs, pas un conseil financier »**.
+- **Paiement sans PC** : code client (motif du transfert D17 / IZI) + bouton GitHub « activer-… » depuis le téléphone.
+- **Plus de données sans nouvelle source** : lire la surface écrite dans les titres, lire d'abord les fiches des biens rares,
+  inviter les professionnels à publier gratuitement.
+- Un test qui vérifie « aucune promesse non tenue » doit savoir quelle partie est tenue par un AUTRE dépôt (le rappel du Pass).
