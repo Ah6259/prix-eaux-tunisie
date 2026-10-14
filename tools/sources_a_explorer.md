@@ -47,3 +47,6 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 13/10/2026 | lemarche.tn, bimo.tn, sidiboussaid.tn, tunisie.jumia.com | ❌ | noms de domaine inexistants (introuvables) ; lemarche.tn (fruits/légumes/épicerie fine) de toute façon peu probable pour l'eau |
 | 13/10/2026 | mg.tn (revu) | ❌ | inchangé : certificat invalide, 0 mot « eau », promotions/catalogues seulement |
 | 13/10/2026 | Recherche web (Safia/Marwa en ligne, supermarchés en ligne) | ❌ | rien de nouveau : presse seulement (Tuniscope 13/07, Webdo 19/08) ; Founa (fermé), Farm Trust (bio), lemarche.tn sans eau |
+| 14/10/2026 | unigros.com | ❌ | marketplace B2B (grossistes → détaillants) citée par la presse ; lisible (certificat à ignorer) mais simple redirection, 0 prix, 0 « eau ». unigros.tn n'existe pas |
+| 14/10/2026 | tunisiamarket.tn | ❌ | lisible (200) mais page quasi vide (1 Ko, titre « Tunisia-market.tn »), 0 prix, 0 « eau », pas de robots.txt |
+| 14/10/2026 | Recherche web (Safia/Marwa en ligne, grossistes en ligne WooCommerce) | ❌ | rien de nouveau : presse seulement (Tuniscope 13/07, saisies Sousse, plafonds du 19/08, retour à la normale attendu en septembre) ; aucune boutique d'eau en ligne trouvée |
