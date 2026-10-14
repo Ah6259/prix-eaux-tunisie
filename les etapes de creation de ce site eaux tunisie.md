@@ -318,3 +318,15 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - **Plus de données sans nouvelle source** : lire la surface écrite dans les titres, lire d'abord les fiches des biens rares,
   inviter les professionnels à publier gratuitement.
 - Un test qui vérifie « aucune promesse non tenue » doit savoir quelle partie est tenue par un AUTRE dépôt (le rappel du Pass).
+
+## Leçons du 15/10/2026 — des chiffres sûrs avant tout (erreur « 120 DT la nuit »)
+- **Comment l'erreur est arrivée** : une location à 120 DT la nuit (écrit seulement dans le texte) ; le robot ne lisait que le titre ;
+  une règle de correction a supposé « 120 = 120 000 DT » ; ce faux prix est devenu une « bonne affaire » sur Telegram.
+- **Règle** : on ne devine JAMAIS une valeur ni son unité. Contrôler chaque information (devise, loyer au mois, total ou au m², m²,
+  pièces, étage, date) ; valeur pas sûre = mise de côté (« voir la source »), jamais utilisée dans un calcul ni une alerte.
+- **Une seule porte d'entrée** des données sûres pour TOUTES les IA et tous les calculs, et un test qui bloque un nouveau module
+  qui ne l'utilise pas ; des annonces « pièges » dans les tests vérifient que rien ne change.
+- **Vieux prix** : plus de 6 mois depuis la 1re apparition = jamais utilisé (annonce republiée : garder la date de 1re apparition).
+- **Mesurer avant de garder une règle** : un contrôle trop sévère (prix 4 fois loin du quartier) retirait de vrais prix et l'IA se
+  trompait plus ; à 6 fois elle se trompe moins qu'avant (ventes 27,9 -> 26,0 %).
+- Chaque erreur vue par Ahmed devient un test de régression.

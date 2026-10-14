@@ -275,3 +275,13 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **GoatCounter** : les 18 sites envoient bien leur préfixe et leur titre (vérifié le 13/10) ; « (inconnu) » dans les sources =
   visiteurs venus de WhatsApp / Instagram / Telegram ou adresse tapée (normal) ; « yahoo.io », « bing.io », « baidu.io » = robots.
 - Liste de travail : 1.12 tester « One MCP » (rétro-ingénierie), 1.13 Pass Investisseur fait.
+
+## Mise à jour du 15/10/2026 (immobilier : fiabilité des chiffres, à savoir pour tous les sites)
+- Erreur grave vue par Ahmed : une location Tayara « 120 DT par nuit » envoyée sur Telegram comme vente à 120 000 DT (correction
+  « × 1 000 » devinée). Règles générales ajoutées (`regles communes a tous les sites.md`, dépôt projets-ahmed) : **on ne devine
+  jamais un chiffre ni son unité** (valeur pas sûre = mise de côté) ; **une seule porte d'entrée des données sûres pour toutes les
+  IA** (test qui bloque un module qui ne l'utilise pas) ; **données propres et récentes : un prix de plus de 6 mois n'est jamais
+  utilisé** ; les erreurs vues par Ahmed deviennent des tests de régression. Ce site-ci : prix relevés chaque nuit en magasin
+  (pas de vieux prix) ; la règle s'applique si une IA ou une estimation y est ajoutée.
+- Immobilier : estimation par délégation -> localité officielles ; carte IA du téléphone ; mot « IA » de notre modèle toujours
+  blanc sur bleu #2C5872 (règle générale) ; une seule carte « Voir les annonces » sur l'accueil.

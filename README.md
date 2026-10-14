@@ -212,6 +212,7 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
   mais possible une fois hébergé, ex. GitHub Pages)
 
 ## Nouveautés
+- **15/10/2026** : rien de changé sur ce site ; règles générales ajoutées pour tous les sites (chiffres jamais devinés, porte unique des données sûres pour les IA, prix de plus de 6 mois jamais utilisés).
 - **13-14/10/2026** : rien de changé sur ce site ; autres sites d'Ahmed : « Où investir ? » + Pass Investisseur sur l'immobilier (voir CLAUDE.md).
 - **11/10/2026 (soir)** : titre de l'en-tête plus petit sur téléphone (17 px) ; une marque absente d'un relevé garde sa dernière photo.
 - 05/10/2026 : nouvelle icône (goutte, famille commune des sites) et mention « comparateur gratuit » dans Google.
