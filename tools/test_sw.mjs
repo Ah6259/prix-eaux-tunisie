@@ -24,7 +24,7 @@ const sw = existsSync(join(root, "sw.js")) ? lire("sw.js") : "";
 const js = existsSync(join(root, JS_COMMUN)) ? lire(JS_COMMUN) : "";
 // depuis le 11/10/2026 le site est à la racine de prix-eau.clicvia.com : le dossier (BASE_SITE) dépend de l'adresse
 const reg = js.match(/navigator\.serviceWorker\.register\(\s*BASE_SITE\s*\+\s*["']sw\.js["']\s*,\s*\{\s*scope\s*:\s*BASE_SITE\s*\}\s*\)/);
-const defBase = js.match(/var BASE_SITE = (.+?);\n/);
+const defBase = js.match(/var BASE_SITE = (.+?);\r?\n/);   // \r : fichier en fins de ligne Windows sur le PC
 const base = h => defBase && new Function("location", "return " + defBase[1])({ hostname: h });
 check(`${JS_COMMUN} enregistre sw.js avec la portée du site (/ sur prix-eau.clicvia.com, ${RACINE} sur github.io)`,
   !!reg && base("prix-eau.clicvia.com") === "/" && base("ah6259.github.io") === RACINE);

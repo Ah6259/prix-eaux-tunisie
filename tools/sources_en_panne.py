@@ -12,12 +12,16 @@ from datetime import date, timedelta
 from pathlib import Path
 
 JOURS = 2
+ATTENDUES = ("carrefour", "geant")   # enseignes relevées par le robot sur GitHub (15/10/2026)
 ROOT = Path(__file__).resolve().parent.parent
 
 
 def en_panne(d, jour):
     lim = (jour - timedelta(days=JOURS)).isoformat()
-    return [(k, v.get("dernier_ok")) for k, v in sorted((d.get("statut_sources") or {}).items())
+    st = dict(d.get("statut_sources") or {})
+    for k in ATTENDUES:                    # enseigne qui n'a JAMAIS réussi un relevé (absente du statut) : en panne aussi
+        st.setdefault(k, {})
+    return [(k, v.get("dernier_ok")) for k, v in sorted(st.items())
             if not v.get("manuel") and (v.get("dernier_ok") or "") < lim]
 
 

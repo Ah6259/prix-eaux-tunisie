@@ -44,6 +44,9 @@ IMG_AUTO = ROOT / "assets" / "img" / "produits"  # photos téléchargées des en
 # photos LIBRES (Open Food Facts, CC BY-SA...) pour les marques sans photo de magasin : dernier recours
 PHOTOS_LIBRES = ROOT / "data" / "photos_libres.json"
 RAW_DIR = ROOT / "tools" / "raw"
+# Une enseigne qui donne moins que ce nombre d'offres = lecteur cassé, même au premier relevé (règle commune § 17,
+# incident Tunisie-annonce du 15/10/2026 : 1 annonce gardée, robot vert). Relevés du 14/10/2026 : Carrefour 62, Géant 35, Otrity 4.
+MINIMUM_OFFRES = {"carrefour": 15, "geant": 10, "otrity": 2}
 MAX_JOURS_REPRISE = 7   # une source en panne garde ses anciens prix 7 jours au plus
 MAX_JOURS_MANUEL = 30   # prix relevés à la main (data/monoprix.json) : 30 jours au plus
 
@@ -478,6 +481,8 @@ def main():
             # site modifié qui ne renvoie plus qu'une partie des produits : on ne s'y fie pas
             if prec.get("nb") and len(res) < 0.3 * prec["nb"]:
                 raise RuntimeError(f"résultat suspect : {len(res)} offres contre {prec['nb']} au dernier relevé réussi")
+            if len(res) < MINIMUM_OFFRES.get(cle_src, 0):
+                raise RuntimeError(f"presque rien lu : {len(res)} offres (au moins {MINIMUM_OFFRES[cle_src]} attendues)")
             print(f"{nom}: {len(res)} offres")
             offres += res
             statut[cle_src] = {"dernier_ok": aujourdhui.isoformat(), "nb": len(res)}

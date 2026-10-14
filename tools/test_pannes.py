@@ -237,6 +237,12 @@ def _():
 def _():
     b = Bac(avec_historique=False); d = b.passe({"geant": panne()}, avancer=False); return b, d, b.jour
 
+@scenario("15b. Premier lancement, Géant ne renvoie que 3 produits (lecteur cassé)",
+          "« presque rien lu » : panne (robot rouge après 2 jours), jamais vert avec 3 produits",
+          lambda e, d, m: "Géant" not in e and "geant" not in d["statut_sources"])
+def _():
+    b = Bac(avec_historique=False); d = b.passe({"geant": partiel("geant")}, avancer=False); return b, d, b.jour
+
 @scenario("17. Monoprix relevé à la main il y a 20 jours", "prix Monoprix dans le classement, aucun avertissement",
           lambda e, d, m: "Monoprix" in e and m == "(aucun avertissement)" and d["statut_sources"]["monoprix"]["manuel"])
 def _():
