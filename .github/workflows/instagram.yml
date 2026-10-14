@@ -22,6 +22,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Robot Telegram réglé et valide (sinon ce robot sonne en ÉCHEC, 14/10/2026)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ]; then echo "::error::Secret TELEGRAM_BOT_TOKEN absent : rien ne serait publié"; exit 1; fi
+          r=$(curl -s --max-time 20 "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe")
+          echo "$r" | grep -q '"ok":true' || { echo "::error::Jeton Telegram refusé par Telegram (getMe) : le refaire avec @BotFather"; exit 1; }
       - name: Fabriquer l'image et l'envoyer sur Telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
