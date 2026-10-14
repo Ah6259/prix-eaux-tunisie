@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-10-13",
+ "updated": "2026-10-14",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -456,8 +456,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/fourat_2l.jpg",
      "prices": {
-      "Carrefour": 0.88,
-      "Géant": 0.88
+      "Carrefour": 0.88
      }
     }
    ]
@@ -1266,12 +1265,12 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-13",
+   "dernier_ok": "2026-10-14",
    "nb": 62
   },
   "geant": {
-   "dernier_ok": "2026-10-13",
-   "nb": 36
+   "dernier_ok": "2026-10-14",
+   "nb": 35
   },
   "otrity": {
    "dernier_ok": "2026-10-13",
