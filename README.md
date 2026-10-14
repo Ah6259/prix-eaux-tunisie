@@ -212,6 +212,7 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
   mais possible une fois hébergé, ex. GitHub Pages)
 
 ## Nouveautés
+- **15/10/2026 (nuit)** : rien de changé sur ce site ; autres sites d'Ahmed : Pass Propriétaire de l'immobilier enrichi (voir CLAUDE.md) ; nouvelle règle commune : un calcul fait à deux endroits (robot et page) est vérifié par un test croisé.
 - **15/10/2026** : rien de changé sur ce site ; règles générales ajoutées pour tous les sites (chiffres jamais devinés, porte unique des données sûres pour les IA, prix de plus de 6 mois jamais utilisés).
 - **13-14/10/2026** : rien de changé sur ce site ; autres sites d'Ahmed : « Où investir ? » + Pass Investisseur sur l'immobilier (voir CLAUDE.md).
 - **11/10/2026 (soir)** : titre de l'en-tête plus petit sur téléphone (17 px) ; une marque absente d'un relevé garde sa dernière photo.

@@ -330,3 +330,14 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - **Mesurer avant de garder une règle** : un contrôle trop sévère (prix 4 fois loin du quartier) retirait de vrais prix et l'IA se
   trompait plus ; à 6 fois elle se trompe moins qu'avant (ventes 27,9 -> 26,0 %).
 - Chaque erreur vue par Ahmed devient un test de régression.
+
+## Leçons du 15/10/2026 (nuit) — une offre payante qui vaut son prix, et qui marche vraiment
+- **Pourquoi payer si l'estimation est gratuite ?** (question d'Ahmed) : la partie payante doit donner ce que le gratuit ne donne pas
+  et qui fait gagner du temps ou de l'argent : la valeur de chaque atout, un texte d'annonce prêt (FR + AR), une mise en avant,
+  un suivi chaque semaine. Le gratuit reste gratuit.
+- **Test croisé obligatoire** : un code payé était « empreinté » d'une façon par le robot (Python) et d'une autre par la page (JS) :
+  le client aurait payé sans jamais rien voir. Tout calcul fait à deux endroits a maintenant un test avec la même valeur attendue
+  des deux côtés.
+- **Un jeton plutôt qu'un code** : ce qui part dans une feuille publique (mise en avant) est un jeton qui ne révèle pas le code payé.
+- **Deux robots en même temps** : si l'enregistrement d'un robot échoue (« conflict »), ses données sont perdues pour ce passage :
+  le relancer (vu avec Century 21).

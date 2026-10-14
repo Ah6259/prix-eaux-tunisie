@@ -285,3 +285,11 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   (pas de vieux prix) ; la règle s'applique si une IA ou une estimation y est ajoutée.
 - Immobilier : estimation par délégation -> localité officielles ; carte IA du téléphone ; mot « IA » de notre modèle toujours
   blanc sur bleu #2C5872 (règle générale) ; une seule carte « Voir les annonces » sur l'accueil.
+- **15/10/2026 (nuit) — Immobilier, Pass Propriétaire (29 DT / 30 j)** : 4 avantages ajoutés à l'analyse payée (« Fais 1, 2, 3 et 4 »
+  d'Ahmed ; partie gratuite inchangée) : valeur de chaque atout calculée par l'IA, annonce prête à publier FR + AR, annonce mise en
+  avant 30 jours sur le site (jeton vérifié par le robot), suivi de la concurrence chaque semaine sur Telegram. Détails : CLAUDE.md
+  de immobilier-tunis. **Leçons pour tous les sites** : (1) un calcul fait à DEUX endroits (robot Python + page JS : empreinte d'un
+  code payé) doit avoir un test croisé avec la MÊME valeur attendue — sinon un client payant n'est jamais servi (bug des codes VEN
+  trouvé et corrigé) ; (2) quand un module du site change ses imports, les tests du dépôt privé qui copient ce module doivent copier
+  ses nouvelles dépendances (tests privés rouges sinon) ; (3) deux robots qui écrivent les mêmes pages en même temps : le 2e
+  échoue à l'enregistrement (Century 21 perdu une fois) -> relancer le robot.
