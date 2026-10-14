@@ -264,6 +264,21 @@ const champsSig = [...doc.querySelectorAll("#sig-form input, #sig-form select")]
 check("Signaler un prix : champs utilisables", champsSig.length > 2 && champsSig.every(x => !x.disabled));
 doc.dispatchEvent(new window.KeyboardEvent("keydown", { key: "Escape" }));
 check("Votre avis (Formspree) : formulaire présent", !!doc.getElementById("avis-form")?.getAttribute("action")?.startsWith("https://formspree.io/"));
+// 15/10/2026 (demande d'Ahmed) : e-mail obligatoire, confirmation claire dans la carte « Votre avis »
+{ const fa = doc.getElementById("avis-form"), appels = [], fetchAvant = window.fetch;
+  window.fetch = (u, o) => { appels.push([u, o]); return Promise.resolve({ ok: true, status: 200 }); };
+  check("Votre avis : e-mail obligatoire (required, « obligatoire »)", fa.querySelector("[name=email]").required && /obligatoire/.test(fa.querySelector("[name=email]").placeholder));
+  fa.querySelector("[name=message]").value = "Un prix à corriger";
+  fa.dispatchEvent(new window.Event("submit", { bubbles: true, cancelable: true })); await new Promise(r => setTimeout(r, 20));
+  check("Votre avis : sans e-mail -> refusé, rien envoyé", appels.length === 0 && doc.getElementById("avis-status").className === "err");
+  fa.querySelector("[name=email]").value = "client@example.com";
+  fa.dispatchEvent(new window.Event("submit", { bubbles: true, cancelable: true })); await new Promise(r => setTimeout(r, 30));
+  const mb = doc.getElementById("avis-merci");
+  check("Votre avis : envoyé avec l'e-mail ; « Merci ! Votre avis a bien été envoyé » DANS la carte avec l'adresse, formulaire caché",
+    appels.length === 1 && !!mb && !mb.hidden && doc.getElementById("avis").contains(mb) && /Merci ! Votre avis a bien été envoyé/.test(mb.textContent)
+    && /client@example\.com/.test(mb.textContent) && fa.hidden);
+  mb.querySelector("button").click(); check("Votre avis : « Envoyer un autre message » rouvre le formulaire", !fa.hidden && mb.hidden);
+  window.fetch = fetchAvant; }
 tape("safia");
 check("recherche toujours utilisable", !!carte("Safia"));
 tape("");

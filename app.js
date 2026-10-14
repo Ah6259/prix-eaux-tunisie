@@ -826,8 +826,33 @@ renderCartBar();
   if (!form) return;
   const status = document.getElementById("avis-status");
   const btn = form.querySelector(".avis-send");
+  // 15/10/2026 (demande d'Ahmed) : e-mail obligatoire ; après l'envoi, le formulaire est remplacé DANS la carte « Votre avis »
+  // par une confirmation bien visible, avec l'adresse de réponse
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  let boite = document.getElementById("avis-merci");
+  if (!boite) {
+    boite = document.createElement("div");
+    boite.id = "avis-merci"; boite.className = "avis-merci"; boite.hidden = true; boite.tabIndex = -1;
+    boite.setAttribute("role", "status"); boite.setAttribute("aria-live", "polite");
+    form.parentNode.insertBefore(boite, form.nextSibling);
+  }
+  const merci = mail => {
+    form.reset(); status.className = ""; status.textContent = "";
+    boite.innerHTML = '<p class="avis-merci-titre">✅ Merci ! Votre avis a bien été envoyé.</p><p>Nous l’avons bien reçu et nous vous répondrons à l’adresse : <b>' +
+      esc(mail) + '</b></p><button type="button" class="btn-avis-autre">Envoyer un autre message</button>';
+    boite.querySelector("button").addEventListener("click", () => { boite.hidden = true; form.hidden = false; form.querySelector("[name=message]").focus(); });
+    form.hidden = true; boite.hidden = false;
+    try { boite.focus({ preventScroll: true }); boite.scrollIntoView({ behavior: "smooth", block: "center" }); } catch { /* ancien navigateur */ }
+  };
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const texte = (form.querySelector("[name=message]").value || "").trim();
+    const champMail = form.querySelector("[name=email]"), mail = (champMail.value || "").trim();
+    if (!texte) { status.className = "err"; status.textContent = "Écrivez votre message avant d'envoyer."; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) {
+      status.className = "err"; status.textContent = "Écrivez votre adresse e-mail (obligatoire) pour que nous puissions vous répondre.";
+      champMail.focus(); return;
+    }
     btn.disabled = true;
     status.className = ""; status.textContent = "Envoi…";
     try {
@@ -837,9 +862,7 @@ renderCartBar();
         headers: { "Accept": "application/json" },
       });
       if (r.ok) {
-        form.reset();
-        status.className = "ok";
-        status.textContent = "Merci ! Votre message a bien été envoyé.";
+        merci(mail);
       } else {
         throw new Error();
       }

@@ -97,7 +97,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261011b">
+<link rel="stylesheet" href="style.css?v=20261015a">
 </head>
 <body>
 
@@ -351,7 +351,7 @@
     <form id="avis-form" action="https://formspree.io/f/mwlpakqj" method="POST">
       <div class="avis-row">
         <input type="text" name="nom" placeholder="Votre nom (facultatif)" autocomplete="name">
-        <input type="email" name="email" placeholder="Votre email (facultatif, pour vous répondre)" autocomplete="email">
+        <input type="email" name="email" required placeholder="Votre email (obligatoire, pour vous répondre)" aria-label="Votre email (obligatoire, pour vous répondre)" autocomplete="email">
       </div>
       <textarea name="message" required rows="4" placeholder="Votre message…"></textarea>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
@@ -548,7 +548,7 @@
 <script src="data/votes.js"></script>
 <script src="data/signalements.js?v=20260930a"></script>
 <script src="protection.js?v=20261011b"></script>
-<script src="app.js?v=20261006q"></script>
+<script src="app.js?v=20261015a"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
