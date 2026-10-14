@@ -288,6 +288,13 @@ for reussi, titre, attendu, ens, msg in resultats:
     print(f"{'✅' if reussi else '❌'} {titre}")
     print(f"     attendu : {attendu}")
     print(f"     obtenu  : enseignes affichées = {ens} | visiteur voit : {msg}")
+import sources_en_panne as SP  # noqa: E402
+_st = {"statut_sources": {"carrefour": {"dernier_ok": "2026-10-01"}, "geant": {"dernier_ok": "2026-10-14"},
+                          "monoprix": {"dernier_ok": "2026-09-01", "manuel": True}}}
+_p = [k for k, _ in SP.en_panne(_st, date(2026, 10, 15))]
+resultats.append((_p == ["carrefour"] and "sources_en_panne.py" in (ROOT / ".github" / "workflows" / "maj-prix.yml").read_text(encoding="utf-8"),
+                  "Enseigne en panne depuis plus de 2 jours -> le robot passe en ÉCHEC (e-mail à Ahmed)",
+                  "seule Carrefour signalée (Monoprix manuel ignoré)", str(_p), "—"))
 n_ok = sum(r[0] for r in resultats)
 print(f"\n{n_ok}/{len(resultats)} scénarios réussis")
 sys.exit(0 if n_ok == len(resultats) else 1)
