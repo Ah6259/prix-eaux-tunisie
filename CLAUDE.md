@@ -321,4 +321,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Règle commune (15/10 soir)** : un robot de relevé enregistre ses données AVANT de refaire les pages et de lancer les tests (un test
   qui échoue bloque la publication, jamais la sauvegarde) ; GitHub ne garde qu'UN robot en attente par groupe de concurrence (ici
   `maj-prix`) : ce qui doit suivre un relevé se fait dans le même robot. À vérifier dans maj-prix.yml à la prochaine modification.
+- **Règle commune (15/10 soir) pour TOUTE source, aussi ici (Carrefour, Géant… et toute nouvelle enseigne)** : sources lues en parallèle,
+  chacune enregistrée dès qu'elle a fini, 1 s entre deux pages d'un même site (ou son Crawl-delay), réseau par un module commun, test
+  qui le vérifie. collect_prices.py lit encore les enseignes l'une après l'autre : à adapter à sa prochaine modification.
 
