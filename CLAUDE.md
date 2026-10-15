@@ -293,3 +293,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   trouvé et corrigé) ; (2) quand un module du site change ses imports, les tests du dépôt privé qui copient ce module doivent copier
   ses nouvelles dépendances (tests privés rouges sinon) ; (3) deux robots qui écrivent les mêmes pages en même temps : le 2e
   échoue à l'enregistrement (Century 21 perdu une fois) -> relancer le robot.
+- **Règle générale d'Ahmed (15/10/2026) : tout exemple montré au visiteur porte le tampon « EXEMPLE » / « مثال »** (modèle `.tg-tampon`
+  de l'immobilier ; un vrai résultat calculé n'en porte pas et le dit). Ce site n'a pas d'exemple aujourd'hui ; à appliquer s'il en a un.
