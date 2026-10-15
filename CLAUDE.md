@@ -318,4 +318,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   pas de grand espace autour des boutons du haut, « Comment ça marche ? » compact, espace insécable avant « ? ! : ; » dans les titres ;
   toute page qui calcule suit « 1. À remplir » -> « 2. Votre résultat » (gratuit + payant) -> carte du payant. Leçons immobilier :
   tester aussi sans les données internes (cache privé vide sur GitHub), ne jamais envoyer de pages pendant que le robot de relevé tourne.
+- **Règle commune (15/10 soir)** : un robot de relevé enregistre ses données AVANT de refaire les pages et de lancer les tests (un test
+  qui échoue bloque la publication, jamais la sauvegarde) ; GitHub ne garde qu'UN robot en attente par groupe de concurrence (ici
+  `maj-prix`) : ce qui doit suivre un relevé se fait dans le même robot. À vérifier dans maj-prix.yml à la prochaine modification.
 
