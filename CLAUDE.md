@@ -295,3 +295,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   échoue à l'enregistrement (Century 21 perdu une fois) -> relancer le robot.
 - **Règle générale d'Ahmed (15/10/2026) : tout exemple montré au visiteur porte le tampon « EXEMPLE » / « مثال »** (modèle `.tg-tampon`
   de l'immobilier ; un vrai résultat calculé n'en porte pas et le dit). Ce site n'a pas d'exemple aujourd'hui ; à appliquer s'il en a un.
+- **Règles générales d'expérience du visiteur (Ahmed, 15/10/2026)** : § 19 de `regles communes a tous les sites.md` (projets-ahmed) :
+  « 1. À remplir » (cadre pointillé bleu) / « 2. Le résultat » (cadre vert), cartes compactes repliables, gratuit / payant clairs,
+  tampon EXEMPLE, code facile à trouver, vrais boutons, un test par règle. À appliquer à ce site lors de sa prochaine modification.
