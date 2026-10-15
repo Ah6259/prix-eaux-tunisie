@@ -298,3 +298,15 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Règles générales d'expérience du visiteur (Ahmed, 15/10/2026)** : § 19 de `regles communes a tous les sites.md` (projets-ahmed) :
   « 1. À remplir » (cadre pointillé bleu) / « 2. Le résultat » (cadre vert), cartes compactes repliables, gratuit / payant clairs,
   tampon EXEMPLE, code facile à trouver, vrais boutons, un test par règle. À appliquer à ce site lors de sa prochaine modification.
+
+## Mise à jour du 15/10/2026 (soir) — Immobilier : règles à appliquer à TOUTE analyse d'IA (aussi ce site s'il en a une)
+- **Comparer des choses comparables** (« une pomme et une orange ») : même lieu fin (quartier, au plus délégation officielle), même
+  type ET même sorte (duplex ≠ appartement ordinaire, villa ≠ maison), taille proche, au m² quand la surface est connue ; peu de
+  points très dispersés = pas de verdict. Chaque remarque d'Ahmed sur une contradiction = une règle d'un contrôle quotidien + un test.
+- **Contrôleurs d'une IA** : contrôle de cohérence quotidien (règles écrites), juge par les faits (le verdict s'est-il vérifié ?),
+  IA critique (tâche Claude du matin qui relit un échantillon). La mesure décide de tous les paramètres, même ceux demandés.
+- **% d'erreur d'une IA = interne** : jamais affiché aux visiteurs ; tableau envoyé à Ahmed chaque matin.
+- **Fichier de données chargé avec ?v= : versionné par son CONTENU, jamais par la date** (sinon le téléphone garde l'ancien toute la
+  journée). Ce site : vérifier `data/*.js` (chargés sans ?v= : réseau d'abord, donc OK).
+- Détails : § 18 de `regles communes a tous les sites.md` et `memoire claude/projet-immobilier.md` (dépôt projets-ahmed).
+
