@@ -311,4 +311,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - Détails : § 18 de `regles communes a tous les sites.md` et `memoire claude/projet-immobilier.md` (dépôt projets-ahmed).
 - **Immobilier, noms de quartier (15/10 soir)** : le nom officiel d'une localité est aussi lu dans le LIEN et le titre de l'annonce
   (Ariana Essoghra rangée dans « Raoued ») ; quartier créé dès 1 annonce si le nom officiel est exact, jamais dans une autre délégation.
+- **Règle commune (15/10 soir, Ahmed)** : le classement donné par le SITE SOURCE est sûr (lu en premier, utilisé dès 1 annonce si c'est
+  exactement le nom officiel) ; ce qui manque vient d'un autre FAIT (délégation d'« Agba » lue sur la carte OpenStreetMap à sa position),
+  jamais deviné. Ce site : les prix viennent déjà des sites des magasins eux-mêmes (même principe). Règles communes, fin du § 18.
 
