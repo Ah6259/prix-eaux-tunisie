@@ -314,4 +314,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Règle commune (15/10 soir, Ahmed)** : le classement donné par le SITE SOURCE est sûr (lu en premier, utilisé dès 1 annonce si c'est
   exactement le nom officiel) ; ce qui manque vient d'un autre FAIT (délégation d'« Agba » lue sur la carte OpenStreetMap à sa position),
   jamais deviné. Ce site : les prix viennent déjà des sites des magasins eux-mêmes (même principe). Règles communes, fin du § 18.
+- **Règles communes du 15/10 soir (§ 19, à appliquer ici à la prochaine modification)** : phrase d'accueil sur UNE ligne au téléphone,
+  pas de grand espace autour des boutons du haut, « Comment ça marche ? » compact, espace insécable avant « ? ! : ; » dans les titres ;
+  toute page qui calcule suit « 1. À remplir » -> « 2. Votre résultat » (gratuit + payant) -> carte du payant. Leçons immobilier :
+  tester aussi sans les données internes (cache privé vide sur GitHub), ne jamais envoyer de pages pendant que le robot de relevé tourne.
 
