@@ -50,3 +50,6 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 14/10/2026 | unigros.com | ❌ | marketplace B2B (grossistes → détaillants) citée par la presse ; lisible (certificat à ignorer) mais simple redirection, 0 prix, 0 « eau ». unigros.tn n'existe pas |
 | 14/10/2026 | tunisiamarket.tn | ❌ | lisible (200) mais page quasi vide (1 Ko, titre « Tunisia-market.tn »), 0 prix, 0 « eau », pas de robots.txt |
 | 14/10/2026 | Recherche web (Safia/Marwa en ligne, grossistes en ligne WooCommerce) | ❌ | rien de nouveau : presse seulement (Tuniscope 13/07, saisies Sousse, plafonds du 19/08, retour à la normale attendu en septembre) ; aucune boutique d'eau en ligne trouvée |
+| 15/10/2026 | epicerie.tn | ❌ | lisible (200) mais page minuscule (5 Ko), 0 prix, 0 « eau », 0 Safia : pas de boutique d'eau |
+| 15/10/2026 | sofrimarket.tn, supermarket.tn, eden.tn | ❌ | noms de domaine inexistants (introuvables) |
+| 15/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives/courses en ligne) | ❌ | rien de nouveau : presse seulement (Tuniscope 13/07 et 28/07, AllAfrica 26/08 pénurie/non-respect des prix, Tuniscope 2025 sur carrefour.tn déjà utilisé) ; aucune nouvelle boutique d'eau en ligne |
