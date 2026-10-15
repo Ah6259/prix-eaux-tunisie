@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14",
+ "updated": "2026-10-15",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -666,8 +666,7 @@
      "flavor": null,
      "img": "assets/img/may_tunisia_15l.jpg",
      "prices": {
-      "Carrefour": 0.67,
-      "Géant": 0.67
+      "Carrefour": 0.67
      }
     },
     {
@@ -713,21 +712,11 @@
    "source": "Bargou (Siliana)",
    "depuis": 2007,
    "note": null,
-   "img": "assets/img/melina_15l.jpg",
+   "img": "assets/img/melina_x.jpg",
    "types": [
     "plate"
    ],
    "products": [
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/melina_15l.jpg",
-     "prices": {
-      "Géant": 0.59
-     }
-    },
     {
      "liters": 2.0,
      "format": "2 L",
@@ -1120,8 +1109,7 @@
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Carrefour": 0.43,
-      "Géant": 0.43
+      "Carrefour": 0.43
      }
     },
     {
@@ -1265,12 +1253,12 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-14",
+   "dernier_ok": "2026-10-15",
    "nb": 62
   },
   "geant": {
-   "dernier_ok": "2026-10-14",
-   "nb": 35
+   "dernier_ok": "2026-10-15",
+   "nb": 32
   },
   "otrity": {
    "dernier_ok": "2026-10-13",
