@@ -309,4 +309,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Fichier de données chargé avec ?v= : versionné par son CONTENU, jamais par la date** (sinon le téléphone garde l'ancien toute la
   journée). Ce site : vérifier `data/*.js` (chargés sans ?v= : réseau d'abord, donc OK).
 - Détails : § 18 de `regles communes a tous les sites.md` et `memoire claude/projet-immobilier.md` (dépôt projets-ahmed).
+- **Immobilier, noms de quartier (15/10 soir)** : le nom officiel d'une localité est aussi lu dans le LIEN et le titre de l'annonce
+  (Ariana Essoghra rangée dans « Raoued ») ; quartier créé dès 1 annonce si le nom officiel est exact, jamais dans une autre délégation.
 
