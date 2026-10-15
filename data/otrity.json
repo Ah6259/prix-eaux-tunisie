@@ -1,5 +1,5 @@
 {
- "date": "2026-10-13",
+ "date": "2026-10-15",
  "offres": [
   {
    "enseigne": "otrity",
@@ -13,6 +13,36 @@
   },
   {
    "enseigne": "otrity",
+   "marque": "HAYET",
+   "nom": "Eau minérale Hayet 0.5l",
+   "volume_l": 0.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.5083,
+   "image_src": "https://otrity.com/wp-content/uploads/hayet-1.5.gif"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "BARGOU",
+   "nom": "Eau minérale Bargou 1.5L in",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.75,
+   "image_src": "https://otrity.com/wp-content/uploads/2022/02/6191443100038-1_1.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "JANNET",
+   "nom": "Eau minérale Jannet 2L",
+   "volume_l": 2.0,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 1.0,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/10/vignette_jannet_2l.webp"
+  },
+  {
+   "enseigne": "otrity",
    "marque": "CRISTALINE",
    "nom": "Eau minérale Cristaline 1.5L",
    "volume_l": 1.5,
@@ -20,6 +50,16 @@
    "type": "plate",
    "prix": 0.7083,
    "image_src": "https://otrity.com/wp-content/uploads/2020/10/eau-minerale-2.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "SAFIA",
+   "nom": "Eau minérale Safia 0.5L",
+   "volume_l": 0.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.5167,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/09/eau-minerale-7.webp"
   },
   {
    "enseigne": "otrity",
@@ -40,6 +80,26 @@
    "type": "plate",
    "prix": 0.9333,
    "image_src": "https://otrity.com/wp-content/uploads/2020/09/b2_1.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "MELLITI",
+   "nom": "Eau minérale Melliti 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.7083,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/09/eau-minerale-6.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "SAFIA",
+   "nom": "Eau minérale Safia 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.8333,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/09/eau-minerale-8.webp"
   }
  ]
 }
