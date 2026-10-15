@@ -127,7 +127,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/bargou_15l.jpg",
      "prices": {
-      "Carrefour": 0.67
+      "Carrefour": 0.67,
+      "Otrity": 0.75
      }
     }
    ]
@@ -399,7 +400,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/delice_delio_250ml_pomme.jpg",
      "prices": {
-      "Carrefour": 0.48
+      "Carrefour": 0.51
      }
     },
     {
@@ -409,7 +410,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/delice_1l.jpg",
      "prices": {
-      "Carrefour": 0.68,
+      "Carrefour": 0.73,
       "Géant": 0.73
      }
     },
@@ -420,9 +421,9 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/delice_15l.jpg",
      "prices": {
-      "Carrefour": 0.65,
       "Monoprix": 0.66,
-      "Géant": 0.69
+      "Géant": 0.69,
+      "Carrefour": 0.72
      }
     }
    ]
@@ -481,8 +482,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
      "prices": {
-      "Géant": 0.46,
-      "Carrefour": 0.48
+      "Carrefour": 0.46,
+      "Géant": 0.46
      }
     },
     {
@@ -502,7 +503,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
      "prices": {
-      "Carrefour": 0.62,
+      "Carrefour": 0.64,
       "Géant": 0.69
      }
     }
@@ -515,11 +516,22 @@ window.EAUX_DATA = {
    "source": "Jelma (Sidi Bouzid)",
    "depuis": 1996,
    "note": null,
-   "img": "assets/img/produits/2ba9322512a7.webp",
+   "img": "assets/img/produits/252532bb90d4.jpg",
    "types": [
     "plate"
    ],
-   "products": []
+   "products": [
+    {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/252532bb90d4.jpg",
+     "prices": {
+      "Otrity": 0.5083
+     }
+    }
+   ]
   },
   {
    "id": "jannet",
@@ -540,7 +552,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jannet_2l.jpg",
      "prices": {
-      "Carrefour": 0.83
+      "Carrefour": 0.83,
+      "Otrity": 1.0
      }
     }
    ]
@@ -576,7 +589,7 @@ window.EAUX_DATA = {
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
       "Géant": 0.62,
-      "Carrefour": 0.67
+      "Carrefour": 0.63
      }
     },
     {
@@ -760,7 +773,8 @@ window.EAUX_DATA = {
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
       "Géant": 0.61,
-      "Monoprix": 0.61
+      "Monoprix": 0.61,
+      "Otrity": 0.7083
      }
     }
    ]
@@ -804,8 +818,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/mira_095l.jpg",
      "prices": {
-      "Carrefour": 0.61,
-      "Géant": 0.61
+      "Géant": 0.61,
+      "Carrefour": 0.7
      }
     },
     {
@@ -825,8 +839,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
-      "Carrefour": 0.74,
-      "Géant": 0.74
+      "Géant": 0.74,
+      "Carrefour": 0.84
      }
     }
    ]
@@ -871,7 +885,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/produits/a10da5f9cc3a.webp",
      "prices": {
-      "Carrefour": 0.76
+      "Carrefour": 0.8
      }
     },
     {
@@ -881,7 +895,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/produits/f004e536a900.webp",
      "prices": {
-      "Carrefour": 0.92
+      "Carrefour": 0.95
      }
     }
    ]
@@ -1109,7 +1123,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Carrefour": 0.43
+      "Carrefour": 0.43,
+      "Otrity": 0.5167
      }
     },
     {
@@ -1119,7 +1134,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Géant": 0.69
+      "Géant": 0.69,
+      "Otrity": 0.8333
      }
     }
    ]
@@ -1261,8 +1277,8 @@ window.EAUX_DATA = {
    "nb": 32
   },
   "otrity": {
-   "dernier_ok": "2026-10-13",
-   "nb": 4
+   "dernier_ok": "2026-10-15",
+   "nb": 10
   },
   "monoprix": {
    "dernier_ok": "2026-10-06",
