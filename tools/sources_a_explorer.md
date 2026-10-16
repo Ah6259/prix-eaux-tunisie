@@ -53,3 +53,6 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 15/10/2026 | epicerie.tn | ❌ | lisible (200) mais page minuscule (5 Ko), 0 prix, 0 « eau », 0 Safia : pas de boutique d'eau |
 | 15/10/2026 | sofrimarket.tn, supermarket.tn, eden.tn | ❌ | noms de domaine inexistants (introuvables) |
 | 15/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives/courses en ligne) | ❌ | rien de nouveau : presse seulement (Tuniscope 13/07 et 28/07, AllAfrica 26/08 pénurie/non-respect des prix, Tuniscope 2025 sur carrefour.tn déjà utilisé) ; aucune nouvelle boutique d'eau en ligne |
+| 16/10/2026 | intigo.tn | ❌ | lisible (200) mais plateforme logicielle (robots.txt « INTIGO intigo.net »), 0 « eau », 0 Safia : pas de boutique d'eau |
+| 16/10/2026 | intigo.com.tn, farmtrust.tn | ❌ | injoignables pour GitHub (erreur de connexion) ; Farm Trust = bio, peu probable pour l'eau |
+| 16/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et Webdo 19/08 (déjà notés), Founa (fermé) |
