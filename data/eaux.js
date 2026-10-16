@@ -517,7 +517,7 @@ window.EAUX_DATA = {
    "source": "Jelma (Sidi Bouzid)",
    "depuis": 1996,
    "note": null,
-   "img": "assets/img/produits/252532bb90d4.jpg",
+   "img": "assets/img/produits/2ba9322512a7.webp",
    "types": [
     "plate"
    ],
@@ -530,6 +530,16 @@ window.EAUX_DATA = {
      "img": "assets/img/produits/252532bb90d4.jpg",
      "prices": {
       "Otrity": 0.5083
+     }
+    },
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/2ba9322512a7.webp",
+     "prices": {
+      "Otrity": 0.8167
      }
     }
    ]
@@ -1206,7 +1216,8 @@ window.EAUX_DATA = {
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
       "Carrefour": 0.68,
-      "Géant": 0.68
+      "Géant": 0.68,
+      "Otrity": 0.8333
      }
     }
    ]
@@ -1279,8 +1290,8 @@ window.EAUX_DATA = {
    "nb": 34
   },
   "otrity": {
-   "dernier_ok": "2026-10-15",
-   "nb": 10
+   "dernier_ok": "2026-10-16",
+   "nb": 12
   },
   "monoprix": {
    "dernier_ok": "2026-10-06",
