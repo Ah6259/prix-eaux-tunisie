@@ -5,6 +5,8 @@ name: Telegram - message de bienvenue
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read      # audit de sécurité du 16/10/2026 : ce robot ne fait que lire
 jobs:
   bienvenue:
     runs-on: ubuntu-latest
