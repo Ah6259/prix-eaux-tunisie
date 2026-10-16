@@ -382,5 +382,9 @@ check("accueil : plus de badges ; « Gratuit, sans inscription » dans l'intro, 
   check(`toutes les pages : un bouton Partager dans l'en-tête qui partage la page vidéo ${sansBouton.join(" | ")}`, !sansBouton.length);
 }
 
+// 16/10/2026 — règle commune d'Ahmed : toute cloche d'alerte VIBRE (secousses, immobile si « réduire les animations »)
+check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vibre\{[^}]*animation:cloche-secoue/.test(lire("style.css"))
+  && /prefers-reduced-motion:reduce\)\{\.cloche-vibre\{animation:none/.test(lire("style.css")) && /class="cloche-vibre"[^>]*>🔔/.test(lire("index.html")));
+
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");
 process.exit(erreurs ? 1 : 0);
