@@ -343,3 +343,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   être sans ambiguïté (ex. « 35 marques comparées », pas un total qui mélange autre chose).
 - **Une IA ou une estimation se contrôle par une référence indépendante** (§ 23.10) : si ce site affiche un jour une estimation,
   la comparer chaque jour à un second calcul d'autres sources (rapport interne, écart ≥ 25 % = à regarder, jamais affiché).
+
+## Mise à jour du 19/10/2026 — règle commune § 24 (immobilier, valable ici aussi)
+- **Listes déroulantes lisibles et en couleurs** : la liste native du téléphone ignore les couleurs ; on affiche notre propre liste
+  (catégories en bandeau de couleur, une ligne par choix, une seule langue, nombres « 8 453 »), la vraie `<select>` reste lue.
+  Ce site utilise surtout des boutons-panneaux (`.dd`) : appliquer la même logique s'il ajoute une liste déroulante.
