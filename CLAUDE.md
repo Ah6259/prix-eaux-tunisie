@@ -325,3 +325,9 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   chacune enregistrée dès qu'elle a fini, 1 s entre deux pages d'un même site (ou son Crawl-delay), réseau par un module commun, test
   qui le vérifie. collect_prices.py lit encore les enseignes l'une après l'autre : à adapter à sa prochaine modification.
 
+
+## Mise à jour du 18/10/2026 — règles communes § 22 (retours des premiers visiteurs de l'immobilier, valables ici aussi)
+- Haut de page sans image décorative (on croit devoir la toucher) ; après chaque envoi, vérifier le site EN LIGNE (une publication
+  bloquée par un test rouge ne se voit pas) ; la carte et la recherche montrent les mêmes données ; pas de chiffre (moyenne, estimation,
+  classement) sans un minimum écrit de données du même genre au même endroit ; un chiffre contesté par un visiteur est revérifié sur les
+  vraies données et la règle trouvée devient un test. Détail : § 22 de `regles communes a tous les sites.md` (projets-ahmed).
