@@ -341,3 +341,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   agrégateurs (bigdatis.tn) : jamais extraits sans accord écrit. Détail : § 23 de `regles communes a tous les sites.md` (projets-ahmed).
 - **Un chiffre affiché dit exactement ce qu'il compte** (§ 23.9) : ici, « N marques · N enseignes » et tout nombre du site doivent
   être sans ambiguïté (ex. « 35 marques comparées », pas un total qui mélange autre chose).
+- **Une IA ou une estimation se contrôle par une référence indépendante** (§ 23.10) : si ce site affiche un jour une estimation,
+  la comparer chaque jour à un second calcul d'autres sources (rapport interne, écart ≥ 25 % = à regarder, jamais affiché).
