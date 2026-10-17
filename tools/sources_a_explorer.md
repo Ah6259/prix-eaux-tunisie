@@ -56,3 +56,6 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 16/10/2026 | intigo.tn | ❌ | lisible (200) mais plateforme logicielle (robots.txt « INTIGO intigo.net »), 0 « eau », 0 Safia : pas de boutique d'eau |
 | 16/10/2026 | intigo.com.tn, farmtrust.tn | ❌ | injoignables pour GitHub (erreur de connexion) ; Farm Trust = bio, peu probable pour l'eau |
 | 16/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et Webdo 19/08 (déjà notés), Founa (fermé) |
+| 17/10/2026 | carrefourexpress.tn, tunisiamart.com | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
+| 17/10/2026 | kamioun.com | ❌ | lisible (200) mais plateforme B2B pour épiceries de quartier (application), page « introuvable », noindex, 0 prix, 0 « eau » |
+| 17/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, AllAfrica 26/08 (déjà notés), Founa (fermé) |
