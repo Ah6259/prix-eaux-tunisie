@@ -339,3 +339,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Un nom de lieu générique ne vaut que dans sa ville** (« centre ville » seul ne dit pas quelle ville).
 - **Listes d'autres sites** (famma-dhaw.com…) : lues comme un visiteur pour VÉRIFIER nos listes, jamais leur base privée ;
   agrégateurs (bigdatis.tn) : jamais extraits sans accord écrit. Détail : § 23 de `regles communes a tous les sites.md` (projets-ahmed).
+- **Un chiffre affiché dit exactement ce qu'il compte** (§ 23.9) : ici, « N marques · N enseignes » et tout nombre du site doivent
+  être sans ambiguïté (ex. « 35 marques comparées », pas un total qui mélange autre chose).
