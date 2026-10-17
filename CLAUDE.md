@@ -331,3 +331,11 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   bloquée par un test rouge ne se voit pas) ; la carte et la recherche montrent les mêmes données ; pas de chiffre (moyenne, estimation,
   classement) sans un minimum écrit de données du même genre au même endroit ; un chiffre contesté par un visiteur est revérifié sur les
   vraies données et la règle trouvée devient un test. Détail : § 22 de `regles communes a tous les sites.md` (projets-ahmed).
+
+## Mise à jour du 18/10/2026 (nuit) — règles communes § 23 (immobilier, valables ici aussi)
+- **Le type d'une donnée se vérifie comme un prix** : la catégorie choisie par une source n'est pas une preuve ; elle est comparée au
+  titre et au texte (corrigée si deux disent la même autre chose, écartée si un seul la contredit). Ici : un produit rangé dans
+  « eau » par un magasin doit être vérifié par son nom (pas de soda ni de lot mixte dans le classement).
+- **Un nom de lieu générique ne vaut que dans sa ville** (« centre ville » seul ne dit pas quelle ville).
+- **Listes d'autres sites** (famma-dhaw.com…) : lues comme un visiteur pour VÉRIFIER nos listes, jamais leur base privée ;
+  agrégateurs (bigdatis.tn) : jamais extraits sans accord écrit. Détail : § 23 de `regles communes a tous les sites.md` (projets-ahmed).
