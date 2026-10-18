@@ -12,7 +12,9 @@ function charger(url) { return new Promise(function (r) { var fini = false; f.on
     try {
       var ok = await charger(x.u); await attendre(x.attente || 1200);
       var d = f.contentDocument, w = f.contentWindow;
-      if (!ok || !d || !d.body) { r.err = "page non chargée"; out.push(r); continue; }
+      // 18/10/2026 : une page dont le contenu est là mais qui finit de charger après 8 s (vidéo + service worker) est « lente », pas « cassée »
+      if (!d || !d.body || (!ok && (d.body.innerText || "").replace(/\s+/g, "").length < 200)) { r.err = "page non chargée"; out.push(r); continue; }
+      if (!ok) r.lent = true;
       (x.etapes || []).forEach(function (e) {
         var el = d.querySelector(e.sel);
         if (!el) { r.manque = (r.manque || []).concat(e.sel); return; }
