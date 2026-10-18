@@ -413,3 +413,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   `verif-pass.yml` (projets-ahmed) qui contrôle chaque jour les pages Pass en ligne. Ce site n'a pas de Pass : à appliquer s'il en a un.
   Robot étendu le 18/10 à 10 pages (immobilier, code de la route, documents, outils, ma voiture, appels d'offres, concours, conférences) ;
   contrôle P8 : case du code dans le haut de la page (≤ 1 300 px) ou lien en haut qui y mène.
+- **Règle commune du 18/10/2026 (nuit), lieux à plusieurs délégations** (§ 11.11) : une « délégation » affichée est toujours officielle ;
+  un nom qui en couvre plusieurs (Djerba = Houmet Essouk + Midoun + Ajim) devient un groupe ; test anti-fausse délégation. Ici : à
+  appliquer si le site classe un jour par lieu (magasins par ville).
