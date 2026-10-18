@@ -363,6 +363,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   (Pillow, polices `tools/polices/`) dessine `rapports/AAAA-MM/apercu-<empreinte>.jpg` (titre, mois, marque la moins chère) ; og:image
   (paramètre `og_image` de `_gabarit`) + JSON-LD ; `pip install pillow` dans maj-prix.yml ; repli og-image-v7 sans Pillow ; test dans
   test_rapports.py. Robot `facebook-rafraichir` du portail : Facebook relit chaque matin les pages rapports/ (règle § 25.9).
+- **`og:locale` = `fr_FR` / `ar_AR`, JAMAIS `fr_TN`** (18/10/2026) : Facebook rejetait toute la page (vraie cause du mauvais aperçu) ;
+  corrigé sur tous les sites, test dans test_rapports.py (règle § 25.10).
 - **Robot Facebook du portail** (`Ah6259.github.io/tools/facebook.mjs`) : chaque ARTICLE `rapports/AAAA-MM/(…/)?` des sites (immobilier,
   prix de l'eau, concours, appels d'offres, conférences) est publié UNE fois, deux passages par jour (10h10, 19h10), mémoire
   `donnees/facebook-articles.json` du portail ; bilans d'abord ; sous-pages d'un mois fini jamais rattrapées.

@@ -35,5 +35,8 @@ for _page in sorted(_rac.glob("rapports/[0-9][0-9][0-9][0-9]-[0-9][0-9]/index.ht
     _f = _rac / _m.group(1) if _m else None
     check(f"{_page.parent.name} : image d'aperçu propre à l'article (Facebook), présente et < 250 Ko",
           bool(_f and _f.exists() and _f.stat().st_size < 250_000 and _m.group(1) in _h.split('"@type": "Article"', 1)[-1]))
+# 18/10/2026 : Facebook rejette toute la page si og:locale n'est pas une de ses langues (fr_TN refusé)
+check("og:locale accepté par Facebook (jamais fr_TN / ar_TN) dans l'accueil et les gabarits",
+      not any(_re.search(r"fr_TN|ar_TN", (_rac / f).read_text(encoding="utf-8")) for f in ("index.html", "tools/build_guides.py", "tools/build_pages.py")))
 print(f"\n{ok} vérifications réussies, {ko} échec(s)")
 sys.exit(1 if ko else 0)
