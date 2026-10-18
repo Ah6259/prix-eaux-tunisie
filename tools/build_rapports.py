@@ -110,7 +110,7 @@ def bouton_partage(url, titre):
     from html import escape
     return (f'<div class="rp-partage"><button class="rp-partager" type="button" data-partage-rapport="{escape(url)}" data-titre="{escape(titre)}">'
             f'{ICO_PART}<span class="rp-a-copier">Partager ce rapport</span><span class="rp-copie">Lien copié ✓ — collez-le où vous voulez</span></button>'
-            f'<p class="rp-aide">Facebook, WhatsApp, LinkedIn… : le menu de votre téléphone s’ouvre.</p></div>')
+            '</div>')
 
 
 def page(m, d, prev, courant, ids, SITE, G):
