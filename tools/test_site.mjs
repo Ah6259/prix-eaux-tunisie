@@ -402,7 +402,14 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
     return v.length >= 3 && v.length === x.jours && Math.abs(med(v) - x.med) < 0.0006 && h.includes(dt(x.med)); }));
   check("rapport du mois : JSON-LD Article + FAQ + fil d'Ariane, méthode, « Citer ces chiffres », partage", (() => { const j = JSON.parse(h.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
     return j.some(x => x["@type"] === "Article" && x.dateModified >= x.datePublished) && j.some(x => x["@type"] === "FAQPage") && j.some(x => x["@type"] === "BreadcrumbList"); })()
-    && h.includes("Comment ces chiffres sont calculés") && h.includes("Citer ces chiffres") && h.includes('href="https://wa.me/?text='));
+    && h.includes("Comment ces chiffres sont calculés") && h.includes("Citer ces chiffres"));
+  // partage (18/10/2026, Ahmed) : UN bouton « Partager ce rapport » (menu du téléphone), qui partage la page du RAPPORT, en haut et en bas
+  check("rapports : UN bouton « Partager ce rapport » en haut et en bas (sa propre adresse), pas de lien WhatsApp séparé, signature et description du site",
+    moisRapports.every(x => { const hh = lire(`rapports/${x}/index.html`);
+      return (hh.match(/data-partage-rapport="https:\/\/prix-eau\.clicvia\.com\/rapports\/\d{4}-\d{2}\/"/g) || []).length === 2
+        && hh.includes(`data-partage-rapport="https://prix-eau.clicvia.com/rapports/${x}/"`) && !hh.includes("wa.me/?text=")
+        && hh.includes("Un rapport de <b>Prix des Eaux de Tunisie</b>") && /name="description" content="Prix des Eaux de Tunisie — rapport du mois/.test(hh); })
+    && lire("protection.js").includes('closest("button[data-partage-rapport]")') && lire("protection.js").includes("Rapport du mois de Prix des Eaux de Tunisie (prix-eau.clicvia.com)"));
   check("rapports : premier mois sans fausse évolution (« Premier rapport », pas de colonne Évolution)", (h0 => h0.includes("Premier rapport") && !h0.includes("<th>Évolution</th>"))(lire(`rapports/${ms[0]}/index.html`)));
   check("pied de page des pages générées : lien « Rapports du mois »", lire("prix-stika/index.html").includes('href="../rapports/"') && lire("tools/build_guides.py").includes("Rapports du mois"));
 }

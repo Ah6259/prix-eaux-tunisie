@@ -56,6 +56,22 @@ document.addEventListener("click", function (e) {
   window.partagerLien(texte.replace(/https?:\/\/\S+/g, "").replace(/\s+[—:-]?\s*$/, "").trim() || null, m ? m[0] : null);
 });
 
+/* UN bouton « Partager ce rapport » (rapports du mois, 18/10/2026, Ahmed : « un seul bouton : sur mon téléphone j'ai le choix
+   Facebook, WhatsApp, LinkedIn… ») : partage la page du RAPPORT (pas la page vidéo) avec le nom et l'adresse du site ;
+   menu de partage du téléphone, sinon lien copié. */
+document.addEventListener("click", function (e) {
+  var el = e.target && (e.target.nodeType === 1 ? e.target : e.target.parentElement);
+  var b = el && el.closest("button[data-partage-rapport]");
+  if (!b) return;
+  var lien = b.getAttribute("data-partage-rapport"), titre = b.getAttribute("data-titre") || document.title;
+  var texte = titre + "\nRapport du mois de Prix des Eaux de Tunisie (prix-eau.clicvia.com) : ";
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "partage" + location.pathname, title: "Partage", event: true }); } catch (err) {}
+  if (navigator.share) { navigator.share({ title: titre, text: texte, url: lien })["catch"](function () {}); return; }
+  var fini = function () { b.classList.add("copie-ok"); setTimeout(function () { b.classList.remove("copie-ok"); }, 4000); };
+  try { navigator.clipboard.writeText(texte + lien).then(fini, function () { window.prompt("Copiez le lien :", lien); }); }
+  catch (err) { window.prompt("Copiez le lien :", lien); }
+});
+
 /* Bouton « Partager » de l'en-tête, sur TOUTES les pages (règle commune à tous les sites, oubli corrigé le 09/10/2026) :
    même icône que les autres sites ; le clic passe par [data-partager-video] (plus bas) → page vidéo + adresse du site. */
 (function () {

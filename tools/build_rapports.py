@@ -101,6 +101,18 @@ def _dt(v):
     return f"{v:,.3f}".replace(",", " ").replace(".", ",") + " DT"
 
 
+ICO_PART = ('<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>'
+            '<path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>')
+
+
+def bouton_partage(url, titre):
+    """UN bouton « Partager ce rapport » (menu de partage du téléphone ; protection.js, button[data-partage-rapport])."""
+    from html import escape
+    return (f'<div class="rp-partage"><button class="rp-partager" type="button" data-partage-rapport="{escape(url)}" data-titre="{escape(titre)}">'
+            f'{ICO_PART}<span class="rp-a-copier">Partager ce rapport</span><span class="rp-copie">Lien copié ✓ — collez-le où vous voulez</span></button>'
+            f'<p class="rp-aide">Facebook, WhatsApp, LinkedIn… : le menu de votre téléphone s’ouvre.</p></div>')
+
+
 def page(m, d, prev, courant, ids, SITE, G):
     """HTML du rapport d'un mois (G = module build_guides : gabarit, échappement)."""
     esc, iso = G._esc, G._iso
@@ -140,14 +152,15 @@ def page(m, d, prev, courant, ids, SITE, G):
         bref.append("Premier rapport : l'évolution d'un mois sur l'autre sera affichée à partir du mois prochain.")
     url = f"{SITE}/rapports/{m}/"
     titre = f"Prix de l'eau en bouteille en Tunisie, {mt} : la marque la moins chère est {n1}"
-    desc = (f"Rapport du mois ({mt}) : prix médian de la bouteille d'eau 1,5 L et de la stika pour {len(rang)} marques en Tunisie, "
+    desc = (f"Prix des Eaux de Tunisie — rapport du mois. {mt.capitalize()} : prix médian de la bouteille d'eau 1,5 L et de la stika pour {len(rang)} marques en Tunisie, "
             f"la moins chère ({n1}, {_dt(x1['med'])}), la plus chère, évolution. Calculé chaque jour sur les prix relevés en magasin, gratuit.")
     autres = " · ".join(f"<a href='../{x}/'>{mois_txt(x)}</a>" for x in sorted(G._RAPPORTS_MOIS, reverse=True) if x != m)
     corps = f"""
+  <p class="rp-signature">Un rapport de <b>Prix des Eaux de Tunisie</b> · prix-eau.clicvia.com</p>
+  {bouton_partage(url, titre)}
   <section>
     <p class="intro">Prix de l'eau en bouteille relevés chaque jour dans les grandes surfaces et épiceries en ligne de Tunisie. {statut}</p>
     <ul class="intro">{"".join(f"<li>{b}</li>" for b in bref)}</ul>
-    {G._partage(SITE, f"rapports/{m}", f"💧 Prix de l'eau en Tunisie ({mt}) : la moins chère est {n1} à {_dt(x1['med'])} la bouteille 1,5 L.")}
   </section>
   <section>
     <h2>Toutes les marques : bouteille d'eau plate 1,5 L</h2>
@@ -160,6 +173,7 @@ def page(m, d, prev, courant, ids, SITE, G):
     l'autre moitié plus cher. Une marque n'apparaît qu'avec au moins {MIN_JOURS} jours de prix dans le mois. La stika = 6 bouteilles.
     Prix indicatifs : ils peuvent varier selon le magasin. Aucune estimation : seulement des prix relevés.</p>
   </section>
+  {bouton_partage(url, titre)}
   <section>
     <h2>Citer ces chiffres</h2>
     <p class="intro">Journalistes, blogs : vous pouvez reprendre ces chiffres en citant la source :<br>

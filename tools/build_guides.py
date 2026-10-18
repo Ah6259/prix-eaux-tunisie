@@ -26,7 +26,7 @@ SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
-CSS_V = "20261011b"
+CSS_V = "20261018a"
 
 # Logo (goutte en aplats dans un carré bleu, comme l'icône du téléphone) : même dessin que l'en-tête de l'accueil
 LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1797C4"/><stop offset="1" stop-color="#0A5F80"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg-eau{n})"/><path d="M256 84C256 84 142 236 142 318a114 114 0 0 0 228 0C370 236 256 84 256 84Z" fill="#fff"/><path d="M256 84C256 84 370 236 370 318a114 114 0 0 1-114 114Z" fill="#D5EEF7"/><path d="M150 336Q203 306 256 336T362 336Q356 410 256 432Q156 410 150 336Z" fill="#7FCBE6"/><path d="M256 336Q309 366 362 336Q356 410 256 432Z" fill="#5DB7D9"/></svg>')
@@ -140,6 +140,14 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
   .guide-table.magasin td.n{{white-space:nowrap}} .guide-table small{{display:block; color:var(--muted); font-weight:400}}
   .ar{{font-size:15px; color:var(--muted); margin:4px 0 0}}
   .avert{{background:var(--gaz-soft); color:var(--gaz); border-radius:10px; padding:9px 12px; font-size:13px}}
+  .rp-signature{{margin:4px 0 12px; font-size:14px; color:var(--muted)}}
+  .rp-partage{{margin:14px 0; padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:12px}}
+  .rp-partager{{display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:10px 20px; border:0; border-radius:999px;
+    background:#0A6E95; color:#fff; font:inherit; font-weight:700; font-size:16px; cursor:pointer}}
+  .rp-partager svg{{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round}}
+  .rp-partager .rp-copie{{display:none}} .rp-partager.copie-ok{{background:#2E7D32}}
+  .rp-partager.copie-ok .rp-copie{{display:inline}} .rp-partager.copie-ok .rp-a-copier{{display:none}}
+  .rp-aide{{margin:6px 0 0; font-size:13px; color:var(--muted)}}
 </style>
 </head>
 <body>
