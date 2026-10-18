@@ -382,3 +382,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   plusieurs délégations (Djerba, Kairouan…) devient un groupe « toute l'île / toute la ville ».
 - Test dans les deux sens (toutes les officielles présentes ET rien d'autre), dans TOUS les gouvernorats ; si une carte existe,
   elle va sur le lieu choisi et donne le même nombre que la liste.
+- Un test qui compare nos données à elles-mêmes ne trouve rien : comparer aussi à une AUTRE source (ex. le rangement donné par le site
+  d'origine). Paiement d'un Pass (si un jour) : motif = le code personnel, jamais le nom.

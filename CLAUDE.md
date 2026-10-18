@@ -418,3 +418,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   appliquer si le site classe un jour par lieu (magasins par ville).
   Même règle pour une VILLE partagée entre plusieurs délégations (Kairouan Nord + Sud, Gabès Medina + Ouest + Sud, Béja, Gafsa, Médenine) ;
   contrôle « comme un visiteur » dans les 24 gouvernorats à chaque publication, et la carte suit le filtre (même nombre carte / liste).
+  Leçon (18/10 nuit) : vérifier contre une référence INDÉPENDANTE, jamais contre soi-même (immobilier : contrôle L3 = délégation
+  donnée par la source). Ici : les prix viennent déjà des magasins eux-mêmes ; « même chiffre partout » se vérifie aussi contre la source.
+- **Règle commune Pass § 11.10.9 (18/10/2026, Ahmed)** : motif du paiement = le CODE PERSONNEL, jamais le nom. Ce site n'a pas de Pass.
