@@ -405,3 +405,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Règle commune du 18/10/2026 (nuit), formulaires** : la liste « quel champ pour quel type » est écrite UNE fois pour tout le site ;
   un champ caché est vidé et ignoré ; un test parcourt tous les formulaires. Ici : filtres Stika/Bouteille · Type d'eau · Format —
   à appliquer si un filtre ne vaut que pour certains choix. Détail : § 23 des règles communes (immobilier : `CHAMPS_TYPE`).
+- **Règle commune du 18/10/2026 (nuit), résultats au téléphone** : une ligne par élément d'une liste (texte secondaire coupé par « … »,
+  jamais le prix), messages courts en pleine largeur, mesuré à 390 px dans un vrai navigateur. Ici : top 5 « La moins chère », classement
+  complet, rapports du mois — à vérifier à la prochaine modification. Détail : règles communes (projets-ahmed).

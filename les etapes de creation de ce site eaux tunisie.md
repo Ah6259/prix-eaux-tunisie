@@ -366,3 +366,7 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 ## Étape : une seule règle pour tous les filtres (18/10/2026)
 - Leçon de l'immobilier : la recherche proposait « Pièces » pour un local commercial alors que la page Estimer les cachait. Une règle
   écrite une seule fois, appliquée par tous les formulaires ; un champ caché est vidé ; un test vérifie chaque formulaire.
+
+## Étape : une ligne par élément au téléphone (18/10/2026)
+- Chaque ligne d'une liste de résultats tient sur une ligne à 390 px (le texte secondaire se coupe par « … ») ; les messages sont
+  courts et en pleine largeur. Mesurer dans un vrai navigateur (Chromium sans écran) avant de publier.
