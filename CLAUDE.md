@@ -20,7 +20,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Doit rester **public** (Pages gratuit). `gh` : "C:\Program Files\GitHub CLI\gh.exe".
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
-- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (protection.js et `CSS_V` de build_guides.py : 20261018b ; style.css / app.js : 20261015a).**
+- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (protection.js, `CSS_V` de build_guides.py, style.css, app.js et assets/son.js : 20261018c).**
 - Image d'aperçu des liens partagés : `assets/og-image-v7.jpg` (05/10 : texte à gauche + nouvelle icône goutte + photo NEUTRE de l'eau versée à droite ; modèle `tools/og-image.html`, capture Edge 1200×630 puis JPEG qualité 88 ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
@@ -423,3 +423,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Règle commune Pass § 11.10.9 (18/10/2026, Ahmed)** : motif du paiement = le CODE PERSONNEL, jamais le nom. Ce site n'a pas de Pass.
 - **Règle commune du 18/10/2026, recherche « au son »** : Jerba = Djerba, Houmt = Houmet, Qairouan = Kairouan… même calcul pour ce
   qu'on tape et pour la liste. Ici : à appliquer si le site ajoute une recherche par texte (marques : « Safia » / « Safya »…).
+  **Fait le 18/10/2026** : la case « Chercher une marque » utilise `assets/son.js` (outil commun copié TEL QUEL, chargé avant app.js) :
+  « Maroua » = « Marwa », « Saffia » = « Safia » (l'ancienne recherche « nom qui contient » reste valable) ; test dans test_site.mjs.
+- **Carte Leaflet isolée (règle commune, 18/10/2026)** : `.leaflet-container{isolation:isolate;z-index:0}` dans style.css, menus `.dd-panel`
+  au z-index 1000 (les couches Leaflet, 400+, passaient devant une liste de l'immobilier) ; testé dans test_site.mjs.

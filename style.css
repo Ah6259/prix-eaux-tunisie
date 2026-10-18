@@ -168,7 +168,7 @@ h2{
 .dd-btn.dd-actif i{color:#fff}
 /* panneau qui s'ouvre sous la barre */
 .dd-panel{
-  position:absolute; left:16px; right:16px; top:calc(100% + 4px); z-index:30;
+  position:absolute; left:16px; right:16px; top:calc(100% + 4px); z-index:1000;   /* au-dessus de toute carte Leaflet (règle commune) */
   background:var(--surface); border:1px solid var(--line); border-radius:14px;
   max-width:560px; padding:10px 12px 12px; box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
@@ -439,6 +439,8 @@ body.has-cart{padding-bottom:70px}
   height:260px; border:1px solid var(--line); border-radius:10px; overflow:hidden;
   background:var(--chip);
 }
+/* carte Leaflet isolée (règle commune, 18/10/2026) : ses couches (z-index 400+) ne passent jamais devant les menus, fenêtres et barres */
+.leaflet-container{isolation:isolate;z-index:0}
 .geo-confirm{
   align-self:flex-start; background:var(--best); border-color:var(--best); color:#fff;
   font-weight:700;

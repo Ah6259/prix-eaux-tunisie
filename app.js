@@ -347,6 +347,10 @@ function brandNature(b){
 
 // recherche sans tenir compte des accents ni des majuscules (« delice » trouve « Délice »)
 const sansAccent = s => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+// recherche « au son » (règle commune § 27, 18/10/2026, demande d'Ahmed) : « Saffia » = « Safia », « Maroua » = « Marwa »,
+// Jerba = Djerba… (assets/son.js, outil commun copié tel quel). L'ancienne recherche (nom qui contient le texte) reste valable.
+const SON = window.sonRecherche;
+const trouveMarque = (nom, tape) => sansAccent(nom).includes(sansAccent(tape.trim())) || (!!SON && SON.trouve(SON.cle(nom), tape));
 
 function render(){
   const q = sansAccent(state.q.trim());
@@ -372,7 +376,7 @@ function render(){
         (recherche || ((sansFmt || fmtOk(p)) && (parNature || (gazSel && p.category === "gazeuse"))))) };
     })
     .filter(({ b, parNature, prods }) => {
-      if (recherche) return sansAccent(b.name).includes(q);
+      if (recherche) return trouveMarque(b.name, state.q);
       const typeOk = parNature || (gazSel && b.types.includes("gazeuse"));
       if (!typeOk) return false;
       if (!b.products.length)  // marque sans prix relevé : toujours affichée

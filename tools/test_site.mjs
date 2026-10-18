@@ -27,7 +27,7 @@ const carte = nom => cartes().find(c => c.querySelector("h3")?.textContent === n
 
 // ---- chargement : mêmes fichiers et même ordre que index.html -------------
 for (const f of ["data/eaux.js", "data/composition.js", "data/historique.js", "data/baisses.js",
-                 "data/votes.js", "data/signalements.js", "protection.js", "app.js"]) {
+                 "data/votes.js", "data/signalements.js", "protection.js", "assets/son.js", "app.js"]) {
   if (!existsSync(join(root, f))) continue;
   try { window.eval(lire(f)); }
   catch (e) { erreurs++; console.log(`FAIL chargement de ${f} : ${e.message}`); }
@@ -127,6 +127,25 @@ tape("SAFIA");
 check("recherche sans tenir compte des majuscules", !!carte("Safia"));
 tape("");
 check("recherche effacée : toutes les cartes reviennent", cartes().length > 12);
+// recherche « au son » (règle commune § 27, 18/10/2026, demande d'Ahmed) : deux écritures d'un même nom = même résultat
+{ const S = window.sonRecherche, noms = t => (tape(t), cartes().map(c => c.querySelector("h3").textContent).join("|"));
+  const commun = join(root, "..", "projets-ahmed", "outils communs", "recherche-au-son", "son.js");
+  check("recherche au son : assets/son.js chargé avant app.js (copie identique de l'outil commun quand il est présent)", !!S
+    && /<script src="assets\/son\.js\?v=[^"]+"><\/script>\s*<script src="app\.js\?v=/.test(lire("index.html")) && (!existsSync(commun) || readFileSync(commun, "utf8") === lire("assets/son.js")));
+  const paires = [["Djerba", "Jerba"], ["Kairouan", "Qairouan"], ["Hammamet", "Hamamet"], ["Houmt Souk", "Houmet Essouk"]];
+  check("recherche au son : Djerba = Jerba, Kairouan = Qairouan, Hammamet = Hamamet, Houmt Souk = Houmet Essouk (même résultat)",
+    paires.every(([a, b]) => noms(a) === noms(b)) && paires.every(([a, b]) => S.trouve(S.cle("Eau de " + a), b) && S.trouve(S.cle("Eau de " + b), a)));
+  // paires tirées des VRAIES marques
+  const vraies = [["Marwa", "Maroua"], ["Safia", "Saffia"], ["Melliti", "Meliti"], ["Bulla Régia", "Bula Regia"]]
+    .filter(([a]) => DATA.brands.some(b => b.name === a));
+  check(`recherche au son : ${vraies.map(([a, b]) => `« ${b} » = « ${a} »`).join(", ")} (vraies marques)`,
+    vraies.length >= 3 && vraies.every(([a, b]) => noms(b) === noms(a) && noms(a).split("|").includes(a)));
+  check("recherche au son : une recherche absurde (« zzzzqqq ») ne trouve toujours rien", (tape("zzzzqqq"), cartes().length === 0));
+  tape(""); }
+// carte Leaflet isolée (règle commune, 18/10/2026) : ses couches (z-index 400+) ne passent jamais devant les menus
+{ const css = lire("style.css"), z = (/\.dd-panel\{[^}]*z-index:(\d+)/.exec(css) || [])[1];
+  check("carte Leaflet isolée (.leaflet-container{isolation:isolate;z-index:0}) et menus des filtres (.dd-panel) au z-index ≥ 1000",
+    /\.leaflet-container\{isolation:isolate;z-index:0\}/.test(css) && +z >= 1000); }
 
 // tri par minéralité (TDS)
 const sort = doc.getElementById("sort");
