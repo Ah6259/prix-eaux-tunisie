@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-10-17",
+ "updated": "2026-10-18",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -600,8 +600,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.59,
-      "Géant": 0.59
+      "Carrefour": 0.59
      }
     }
    ]
@@ -1272,12 +1271,12 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-17",
+   "dernier_ok": "2026-10-18",
    "nb": 62
   },
   "geant": {
-   "dernier_ok": "2026-10-17",
-   "nb": 34
+   "dernier_ok": "2026-10-18",
+   "nb": 33
   },
   "otrity": {
    "dernier_ok": "2026-10-17",
