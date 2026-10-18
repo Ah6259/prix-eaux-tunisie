@@ -362,3 +362,7 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 ## Étape : ne jamais deviner un lieu (18/10/2026)
 - Leçon de l'immobilier : « Tunis » seul rangeait 981 annonces au centre-ville. Un lieu vague n'est jamais précis ; une seule fonction
   vérifie les lieux de toutes les sources, et un robot de garde signale chaque jour une concentration anormale.
+
+## Étape : une seule règle pour tous les filtres (18/10/2026)
+- Leçon de l'immobilier : la recherche proposait « Pièces » pour un local commercial alors que la page Estimer les cachait. Une règle
+  écrite une seule fois, appliquée par tous les formulaires ; un champ caché est vidé ; un test vérifie chaque formulaire.

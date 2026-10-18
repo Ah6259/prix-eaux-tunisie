@@ -402,3 +402,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   jamais un lieu précis ; une seule porte de vérification pour toutes les sources ; un garde quotidien signale une source qui range
   anormalement beaucoup au même endroit ; une erreur trouvée = toutes celles de la même cause réparées. Ici : les prix viennent des sites
   des magasins (enseigne sûre) ; à appliquer si une source ou un lieu (magasin, ville) est ajouté. Détail : § 23 des règles communes.
+- **Règle commune du 18/10/2026 (nuit), formulaires** : la liste « quel champ pour quel type » est écrite UNE fois pour tout le site ;
+  un champ caché est vidé et ignoré ; un test parcourt tous les formulaires. Ici : filtres Stika/Bouteille · Type d'eau · Format —
+  à appliquer si un filtre ne vaut que pour certains choix. Détail : § 23 des règles communes (immobilier : `CHAMPS_TYPE`).
