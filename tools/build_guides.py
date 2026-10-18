@@ -66,6 +66,7 @@ def pied(racine):
   <nav class="pied-nav" aria-label="Liens utiles"><a href="{racine}">Comparateur des prix de l'eau</a>
   <a href="{racine}prix-stika/">Prix de la stika aujourd'hui</a>
   <a href="{racine}quelle-eau/">Quelle eau choisir ?</a>
+  <a href="{racine}rapports/">Rapports du mois (prix par marque)</a>
   <a href="https://eau.clicvia.com/" rel="noopener">Où trouver de l'eau (sources, majels)</a>
   <a href="https://clicvia.com/" rel="noopener">Tous nos services</a>
   {_liens_magasins(racine)}
@@ -99,7 +100,7 @@ def _dt(v):
     return f"{v:,.3f}".replace(",", " ").replace(".", ",") + " DT"
 
 
-def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=None, maj=None):
+def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=None, maj=None, racine="../", og_type=None):
     return f"""<!doctype html>
 <html lang="fr" translate="no">
 <head>
@@ -109,24 +110,25 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://prix-eaux-tunisie.goatcounter.com; connect-src 'self' https://docs.google.com https://formspree.io https://prix-eaux-tunisie.goatcounter.com; form-action 'self' https://docs.google.com https://formspree.io; object-src 'none'; base-uri 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="noai, noimageai">
-<script src="../protection.js?v={CSS_V}"></script>
+<script src="{racine}protection.js?v={CSS_V}"></script>
 <title>{_esc(titre)}</title>
 <meta name="description" content="{_esc(description)}">
 <link rel="canonical" href="{SITE}/{chemin}/">
+{f'<meta property="og:type" content="{og_type}">' if og_type else ""}
 <meta property="og:title" content="{_esc(titre)}">
 <meta property="og:description" content="{_esc(description)}">
 <meta property="og:image" content="{SITE}/assets/og-image-v7.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<link rel="icon" type="image/svg+xml" href="../assets/icons/icon.svg">
-<link rel="manifest" href="../manifest.webmanifest">
-<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="{racine}assets/icons/icon.svg">
+<link rel="manifest" href="{racine}manifest.webmanifest">
+<link rel="apple-touch-icon" href="{racine}assets/icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Prix Eaux">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../style.css?v={CSS_V}">
+<link rel="stylesheet" href="{racine}style.css?v={CSS_V}">
 {f'<script type="application/ld+json">{jsonld}</script>' if jsonld else ""}
 <style>
   .guide-table{{width:100%; border-collapse:collapse; font-size:14px; background:var(--surface); border:1px solid var(--line); border-radius:12px}}
@@ -141,12 +143,12 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
 </style>
 </head>
 <body>
-{entete("../")}
-{bandeau("../", _esc(h1), "Comparateur des prix de l'eau en Tunisie", _esc(ar_titre) if ar_titre else None, maj)}
+{entete(racine)}
+{bandeau(racine, _esc(h1), "Comparateur des prix de l'eau en Tunisie", _esc(ar_titre) if ar_titre else None, maj)}
 <div class="wrap">
   {corps}
 </div>
-{pied("../")}
+{pied(racine)}
 </body>
 </html>
 """

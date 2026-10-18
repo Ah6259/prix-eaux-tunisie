@@ -353,3 +353,12 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Visibilité : pas d'articles d'IA en masse ni de liens achetés** (risque de sanction Google pour tout clicvia.com). À la place, des pages
   écrites par nos robots à partir de nos données (immobilier : « Rapports du mois », https://immobilier.clicvia.com/rapports/). Ici, idée
   possible plus tard : un « rapport du mois » des prix de l'eau (évolution par marque, vrais relevés), avec l'accord d'Ahmed.
+- **Rapports du mois de l'eau (18/10/2026, demande d'Ahmed)** : `tools/build_rapports.py` (appelé par build_pages.py, donc chaque nuit par
+  maj-prix.yml) écrit `rapports/` et `rapports/AAAA-MM/` à partir de `data/historique.json` : prix MÉDIAN de la bouteille d'eau plate 1,5 L
+  par marque (au moins 3 jours de prix dans le mois), stika ×6, prix le plus bas, stika la moins chère du mois, évolution (≤ 60 %, même
+  marque les deux mois). Mois en cours recalculé chaque nuit ; mois fini figé (`data/rapports.json`). JSON-LD Article + FAQ, « Citer ces
+  chiffres », bouton Partager ; lien dans les pieds de page (accueil + gabarit `pied()`). `_gabarit` accepte `racine` (pages à 2 niveaux).
+  Tests : `python tools/test_rapports.py` (dans tests.yml) + bloc de test_site.mjs (médianes recalculées depuis l'historique).
+- **Robot Facebook du portail** (`Ah6259.github.io/tools/facebook.mjs`) : chaque ARTICLE `rapports/AAAA-MM/(…/)?` des sites (immobilier,
+  prix de l'eau, concours, appels d'offres, conférences) est publié UNE fois, deux passages par jour (10h10, 19h10), mémoire
+  `donnees/facebook-articles.json` du portail ; bilans d'abord ; sous-pages d'un mois fini jamais rattrapées.

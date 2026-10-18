@@ -34,5 +34,7 @@ jobs:
         run: node tools/test_video.mjs
       - name: Scenarios de panne du robot
         run: python tools/test_pannes.py
+      - name: Rapports du mois (chiffres vrais, mois fini fige)
+        run: python tools/test_rapports.py
       - name: Formats des autres sites ignores par le robot des prix (POINT, LIEU-PRIERE)
         run: python tools/test_signalements.py

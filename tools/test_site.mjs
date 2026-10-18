@@ -224,7 +224,10 @@ const ROBOTS_IA = ["GPTBot", "ClaudeBot", "Claude-Web", "anthropic-ai", "CCBot",
   "cohere-ai", "ImagesiftBot", "HTTrack", "WebCopier", "WebZIP", "Offline Explorer", "wget", "SiteSnagger"];
 for (const ua of ROBOTS_IA) check(`robots.txt interdit ${ua}`, regle(ua) === "interdit");
 check("robots.txt laisse passer Googlebot, Bingbot et les autres", regle("Googlebot") === "permis" && regle("Bingbot") === "permis" && regle("\\*") === "permis");
-const toutesPages = ["index.html", ...guides, ...marques];
+// rapports du mois (18/10/2026, règle commune § 25) : mêmes règles de sécurité que les autres pages
+const moisRapports = existsSync(join(root, "rapports")) ? readdirSync(join(root, "rapports")).filter(m => /^\d{4}-\d{2}$/.test(m)) : [];
+const rapports = ["rapports/index.html", ...moisRapports.map(m => `rapports/${m}/index.html`)].filter(f => existsSync(join(root, f)));
+const toutesPages = ["index.html", ...guides, ...marques, ...rapports];
 const sur = (desc, test) => { const ko = toutesPages.filter(f => !test(lire(f), f));
   check(`${desc} (${toutesPages.length} pages)${ko.length ? " — manque : " + ko.slice(0, 3).join(", ") : ""}`, ko.length === 0); };
 sur("meta noai, noimageai", s => s.includes('<meta name="robots" content="noai, noimageai">'));
@@ -385,6 +388,24 @@ check("accueil : plus de badges ; « Gratuit, sans inscription » dans l'intro, 
 // 16/10/2026 — règle commune d'Ahmed : toute cloche d'alerte VIBRE (secousses, immobile si « réduire les animations »)
 check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vibre\{[^}]*animation:cloche-secoue/.test(lire("style.css"))
   && /prefers-reduced-motion:reduce\)\{\.cloche-vibre\{animation:none/.test(lire("style.css")) && /class="cloche-vibre"[^>]*>🔔/.test(lire("index.html")));
+
+// ---- rapports du mois (18/10/2026, demande d'Ahmed ; règle commune § 25 : articles automatiques mais VRAIS) ----
+{ const H = JSON.parse(lire("data/rapports.json")), HI = JSON.parse(lire("data/historique.json")).serie, ms = Object.keys(H.mois).sort(), m = ms[ms.length - 1], d = H.mois[m];
+  const h = lire(`rapports/${m}/index.html`), sm = lire("sitemap.xml");
+  const dt = v => v.toFixed(3).replace(".", ",") + " DT";
+  check(`rapports du mois : liste + une page par mois (${moisRapports.length}), dans le plan du site avec la date de leurs chiffres`, rapports.length === moisRapports.length + 1 && moisRapports.length >= 1
+    && ms.every(x => sm.includes(`<loc>https://prix-eau.clicvia.com/rapports/${x}/</loc><lastmod>${H.mois[x].au}</lastmod>`)));
+  // chiffres = relevés : la médiane d'une marque est recalculée ici à partir de data/historique.json
+  const med = v => { const s = [...v].sort((a, b) => a - b), n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; };
+  check("rapport du mois : prix médian de chaque marque = médiane de ses prix relevés du mois (au moins 3 jours)", Object.entries(d.marques).every(([nom, x]) => {
+    const v = HI.filter(j => j.date.slice(0, 7) === m && j.parMarque && j.parMarque[nom]).map(j => j.parMarque[nom]);
+    return v.length >= 3 && v.length === x.jours && Math.abs(med(v) - x.med) < 0.0006 && h.includes(dt(x.med)); }));
+  check("rapport du mois : JSON-LD Article + FAQ + fil d'Ariane, méthode, « Citer ces chiffres », partage", (() => { const j = JSON.parse(h.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    return j.some(x => x["@type"] === "Article" && x.dateModified >= x.datePublished) && j.some(x => x["@type"] === "FAQPage") && j.some(x => x["@type"] === "BreadcrumbList"); })()
+    && h.includes("Comment ces chiffres sont calculés") && h.includes("Citer ces chiffres") && h.includes('href="https://wa.me/?text='));
+  check("rapports : premier mois sans fausse évolution (« Premier rapport », pas de colonne Évolution)", (h0 => h0.includes("Premier rapport") && !h0.includes("<th>Évolution</th>"))(lire(`rapports/${ms[0]}/index.html`)));
+  check("pied de page des pages générées : lien « Rapports du mois »", lire("prix-stika/index.html").includes('href="../rapports/"') && lire("tools/build_guides.py").includes("Rapports du mois"));
+}
 
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");
 process.exit(erreurs ? 1 : 0);

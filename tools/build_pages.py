@@ -219,12 +219,18 @@ urls += generer(data, COMPO, SITE, ROOT, maj_fr)
 from page_video import pages_video  # noqa: E402
 urls += [SITE + "/" + c for c in pages_video(str(ROOT))]
 
+# rapports du mois (18/10/2026, règle commune § 25) : rapports/ et rapports/AAAA-MM/, chiffres tirés de data/historique.json
+import build_guides as G  # noqa: E402
+from build_rapports import generer as generer_rapports  # noqa: E402
+urls += generer_rapports(data, SITE, G)          # (url, date des chiffres) : un mois fini garde sa date
+
 # sitemap
 today = date.today().isoformat()
 sm = ['<?xml version="1.0" encoding="UTF-8"?>',
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for i, u in enumerate(urls):
-    sm.append(f"  <url><loc>{u}</loc><lastmod>{today}</lastmod>"
+    u, lm = u if isinstance(u, tuple) else (u, today)
+    sm.append(f"  <url><loc>{u}</loc><lastmod>{lm}</lastmod>"
               f"<changefreq>daily</changefreq><priority>{'1.0' if i == 0 else '0.7'}</priority></url>")
 sm.append("</urlset>")
 (ROOT / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8")
