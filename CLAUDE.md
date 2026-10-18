@@ -359,6 +359,10 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   marque les deux mois). Mois en cours recalculé chaque nuit ; mois fini figé (`data/rapports.json`). JSON-LD Article + FAQ, « Citer ces
   chiffres », bouton Partager ; lien dans les pieds de page (accueil + gabarit `pied()`). `_gabarit` accepte `racine` (pages à 2 niveaux).
   Tests : `python tools/test_rapports.py` (dans tests.yml) + bloc de test_site.mjs (médianes recalculées depuis l'historique).
+- **Image d'aperçu PROPRE à chaque rapport (18/10/2026, Ahmed : au partage, Facebook montrait l'image du site)** : `tools/apercus.py`
+  (Pillow, polices `tools/polices/`) dessine `rapports/AAAA-MM/apercu-<empreinte>.jpg` (titre, mois, marque la moins chère) ; og:image
+  (paramètre `og_image` de `_gabarit`) + JSON-LD ; `pip install pillow` dans maj-prix.yml ; repli og-image-v7 sans Pillow ; test dans
+  test_rapports.py. Robot `facebook-rafraichir` du portail : Facebook relit chaque matin les pages rapports/ (règle § 25.9).
 - **Robot Facebook du portail** (`Ah6259.github.io/tools/facebook.mjs`) : chaque ARTICLE `rapports/AAAA-MM/(…/)?` des sites (immobilier,
   prix de l'eau, concours, appels d'offres, conférences) est publié UNE fois, deux passages par jour (10h10, 19h10), mémoire
   `donnees/facebook-articles.json` du portail ; bilans d'abord ; sous-pages d'un mois fini jamais rattrapées.

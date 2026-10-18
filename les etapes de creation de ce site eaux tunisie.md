@@ -341,3 +341,10 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - **Un jeton plutôt qu'un code** : ce qui part dans une feuille publique (mise en avant) est un jeton qui ne révèle pas le code payé.
 - **Deux robots en même temps** : si l'enregistrement d'un robot échoue (« conflict »), ses données sont perdues pour ce passage :
   le relancer (vu avec Century 21).
+
+## Étape : une image d'aperçu par article (18/10/2026)
+- **Problème** : en partageant un « rapport du mois » sur Facebook, l'aperçu montrait l'image générale du site, pas l'article.
+- **Solution** : le robot dessine une image 1200 × 630 pour chaque rapport (Pillow : `tools/apercus.py`, polices dans `tools/polices/`),
+  avec le mois, le titre et le chiffre clé ; son nom change quand les chiffres changent (Facebook prend alors la nouvelle image).
+- **Facebook garde les aperçus en mémoire** : un robot du portail (`facebook-rafraichir`) lui demande chaque matin de relire les pages.
+  Un partage déjà fait garde l'ancienne image. À la main : outil « Débogueur de partage » de Facebook → « Récupérer à nouveau ».
