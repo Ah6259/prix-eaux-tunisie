@@ -379,3 +379,10 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **18/10/2026 (soir) — partage des rapports, les 5 sites** (immobilier, eau, concours, appels d'offres, conférences) : un seul bouton
   « Partager ce rapport » sous la signature et en bas, sans phrase d'aide, texte partagé SANS adresse (Facebook prenait l'adresse du
   texte et montrait l'accueil). Règle commune § 25.7-8 (projets-ahmed).
+
+## Mise à jour du 18/10/2026 (soir) — VISITEUR SIMULÉ (règle générale, tous les sites)
+- `tools/visiteur_simule.py` + `tools/visiteur_simule.html` (copie IDENTIQUE dans chaque dépôt ; source : règles communes § 26, projets-ahmed) :
+  liens/images internes morts sur toutes les pages, puis Chromium à 390 px sur les pages du plan du site : page plus large que l'écran,
+  image cassée, « NaN / undefined », page vide ; scénarios du site dans `tools/scenarios-visiteur.json` (prix affichés de l'accueil, guides,
+  rapport du mois). Lancé par `tests.yml` à chaque envoi (rouge = e-mail). 1re trouvaille : tableau du rapport du mois trop large sur
+  téléphone (436 px) -> `.tableau-defile` + tableau serré sous 480 px (gabarit de build_guides.py).

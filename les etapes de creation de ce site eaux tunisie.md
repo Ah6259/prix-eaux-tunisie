@@ -348,3 +348,9 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   avec le mois, le titre et le chiffre clé ; son nom change quand les chiffres changent (Facebook prend alors la nouvelle image).
 - **Facebook garde les aperçus en mémoire** : un robot du portail (`facebook-rafraichir`) lui demande chaque matin de relire les pages.
   Un partage déjà fait garde l'ancienne image. À la main : outil « Débogueur de partage » de Facebook → « Récupérer à nouveau ».
+
+## Étape : le visiteur simulé (18/10/2026)
+- Un robot fait le visiteur avant les vrais visiteurs : il ouvre chaque page comme un téléphone (390 px), vérifie que rien ne dépasse
+  de l'écran, qu'aucune image n'est cassée, qu'aucun lien interne n'est mort, qu'aucun « NaN » ne s'affiche, et lit les prix affichés.
+- Lancer : `python3 tools/visiteur_simule.py` (aussi à chaque envoi sur GitHub). Scénarios propres au site : `tools/scenarios-visiteur.json`.
+- Il a trouvé dès le 1er passage le tableau du rapport du mois trop large sur téléphone (corrigé).

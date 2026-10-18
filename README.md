@@ -90,7 +90,7 @@ et lui demander de lire ce README.
 | `battement-de-coeur.yml` | le 1er du mois | empêche GitHub de mettre les robots en pause (60 j) |
 | `instagram.yml` | chaque lundi 9h05 | image « 5 stikas les moins chères » + texte → canal Telegram (pour Instagram) |
 | `telegram-bienvenue.yml` | à la main | message de présentation sur le canal |
-| `tests.yml` | à chaque envoi (push) | YAML des robots + `test_site.mjs` + `test_sw.mjs` + `test_pannes.py` (e-mail de GitHub si échec) |
+| `tests.yml` | à chaque envoi (push) | YAML des robots + `test_site.mjs` + `test_sw.mjs` + `test_pannes.py` + **visiteur simulé** (`visiteur_simule.py` : le site vu comme un visiteur sur téléphone) (e-mail de GitHub si échec) |
 | Tâche Windows « PrixEaux-Otrity » (PC d'Ahmed) | chaque jour 12h | relevé Otrity (bloqué par Cloudflare sur GitHub) |
 
 ## Mettre à jour les prix
@@ -212,6 +212,7 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
   mais possible une fois hébergé, ex. GitHub Pages)
 
 ## Nouveautés
+- **18/10/2026** : rapports du mois (image d'aperçu par article, partage) ; **visiteur simulé** sur tous les sites (règle générale) : il a trouvé le tableau du rapport trop large sur téléphone (corrigé).
 - **15/10/2026 (nuit)** : rien de changé sur ce site ; autres sites d'Ahmed : Pass Propriétaire de l'immobilier enrichi (voir CLAUDE.md) ; nouvelle règle commune : un calcul fait à deux endroits (robot et page) est vérifié par un test croisé.
 - **15/10/2026** : rien de changé sur ce site ; règles générales ajoutées pour tous les sites (chiffres jamais devinés, porte unique des données sûres pour les IA, prix de plus de 6 mois jamais utilisés).
 - **13-14/10/2026** : rien de changé sur ce site ; autres sites d'Ahmed : « Où investir ? » + Pass Investisseur sur l'immobilier (voir CLAUDE.md).

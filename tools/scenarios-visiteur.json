@@ -1,0 +1,24 @@
+[
+ {
+  "page": "",
+  "nom": "accueil : la moins chère aujourd'hui (prix affiché)",
+  "lire": "#top-reponse",
+  "attente": 2000
+ },
+ {
+  "page": "",
+  "nom": "accueil : classement des marques (prix affichés)",
+  "lire": "#grid",
+  "attente": 2000
+ },
+ {
+  "page": "prix-stika/",
+  "nom": "guide prix de la stika (prix affiché)",
+  "lire": "table"
+ },
+ {
+  "page": "rapports/2026-10/",
+  "nom": "rapport d'octobre (tableau des prix)",
+  "lire": "table"
+ }
+]

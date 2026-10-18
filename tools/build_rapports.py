@@ -166,7 +166,7 @@ def page(m, d, prev, courant, ids, SITE, G):
   </section>
   <section>
     <h2>Toutes les marques : bouteille d'eau plate 1,5 L</h2>
-    <table class="guide-table magasin"><tr><th>#</th><th>Marque</th><th>Prix médian</th><th>Stika (×6)</th><th>Le plus bas</th>{"<th>Évolution</th>" if prev else ""}</tr>{lignes}</table>
+    <div class="tableau-defile"><table class="guide-table magasin"><tr><th>#</th><th>Marque</th><th>Prix médian</th><th>Stika (×6)</th><th>Le plus bas</th>{"<th>Évol.</th>" if prev else ""}</tr>{lignes}</table></div>
   </section>
   <section>
     <h2>Comment ces chiffres sont calculés</h2>

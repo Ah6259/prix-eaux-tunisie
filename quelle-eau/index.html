@@ -33,6 +33,9 @@
   .guide-table th{font-size:12px; color:var(--muted); border-top:0}
   .guide-table td.n{text-align:right; font-variant-numeric:tabular-nums; font-weight:700}
   .guide-table a{color:var(--ink); font-weight:600}
+  /* 18/10/2026 (visiteur simulé : tableau du rapport plus large que l'écran du téléphone) : serré sur petit écran, jamais de débordement */
+  @media (max-width:480px){ .guide-table{font-size:12.5px} .guide-table th,.guide-table td{padding:6px 5px} .guide-table small{display:block;font-size:10.5px} }
+  .tableau-defile{max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}
   .guide-table.magasin{font-size:13px} .guide-table.magasin th,.guide-table.magasin td{padding:7px 6px}
   .guide-table.magasin td.n{white-space:nowrap} .guide-table small{display:block; color:var(--muted); font-weight:400}
   .ar{font-size:15px; color:var(--muted); margin:4px 0 0}
