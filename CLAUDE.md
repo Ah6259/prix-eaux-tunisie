@@ -411,3 +411,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Règle commune du 18/10/2026 (nuit), Pass** (§ 11.10 des règles communes) : la case pour taper un code est TOUJOURS visible (même si le
   téléphone a gardé un autre code), le code tapé remplace l'ancien, pas d'« essai gratuit » faux, encart du code court ; robot commun
   `verif-pass.yml` (projets-ahmed) qui contrôle chaque jour les pages Pass en ligne. Ce site n'a pas de Pass : à appliquer s'il en a un.
+  Robot étendu le 18/10 à 10 pages (immobilier, code de la route, documents, outils, ma voiture, appels d'offres, concours, conférences) ;
+  contrôle P8 : case du code dans le haut de la page (≤ 1 300 px) ou lien en haut qui y mène.
