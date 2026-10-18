@@ -362,3 +362,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Robot Facebook du portail** (`Ah6259.github.io/tools/facebook.mjs`) : chaque ARTICLE `rapports/AAAA-MM/(…/)?` des sites (immobilier,
   prix de l'eau, concours, appels d'offres, conférences) est publié UNE fois, deux passages par jour (10h10, 19h10), mémoire
   `donnees/facebook-articles.json` du portail ; bilans d'abord ; sous-pages d'un mois fini jamais rattrapées.
+
+## Mise à jour du 18/10/2026 — Immobilier : annonces Facebook via Apify (à savoir)
+- Procédure complète (connecteur Apify, accord d'Ahmed avant chaque run payant, budget 5 $/mois, scripts, règles Facebook /
+  données personnelles) : `immobilier/facebook-apify/PROCEDURE.md` du dépôt privé projets-ahmed. Prochaine collecte : 18/11/2026.
