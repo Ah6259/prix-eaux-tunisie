@@ -26,5 +26,14 @@ check("un mois FINI n'est plus jamais modifié", h["mois"]["2026-09"]["marques"]
 check("le mois en cours est recalculé chaque jour", h["mois"]["2026-10"]["au"] == "2026-10-04" and h["mois"]["2026-10"]["jours"] == 4)
 check("date de publication gardée (1er jour où la page a existé)", h["mois"]["2026-10"]["debut"] == "2026-10-03")
 check("mois précédent de janvier = décembre", R.mois_precedent("2027-01") == "2026-12")
+import re as _re
+from pathlib import Path as _P
+_rac = _P(__file__).resolve().parent.parent
+for _page in sorted(_rac.glob("rapports/[0-9][0-9][0-9][0-9]-[0-9][0-9]/index.html")):
+    _h = _page.read_text(encoding="utf-8")
+    _m = _re.search(r'og:image" content="https://prix-eau\.clicvia\.com/(rapports/\d{4}-\d{2}/apercu-[0-9a-f]{8}\.jpg)"', _h)
+    _f = _rac / _m.group(1) if _m else None
+    check(f"{_page.parent.name} : image d'aperçu propre à l'article (Facebook), présente et < 250 Ko",
+          bool(_f and _f.exists() and _f.stat().st_size < 250_000 and _m.group(1) in _h.split('"@type": "Article"', 1)[-1]))
 print(f"\n{ok} vérifications réussies, {ko} échec(s)")
 sys.exit(1 if ko else 0)

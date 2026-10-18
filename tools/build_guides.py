@@ -100,7 +100,7 @@ def _dt(v):
     return f"{v:,.3f}".replace(",", " ").replace(".", ",") + " DT"
 
 
-def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=None, maj=None, racine="../", og_type=None):
+def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=None, maj=None, racine="../", og_type=None, og_image=None):
     return f"""<!doctype html>
 <html lang="fr" translate="no">
 <head>
@@ -117,7 +117,7 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
 {f'<meta property="og:type" content="{og_type}">' if og_type else ""}
 <meta property="og:title" content="{_esc(titre)}">
 <meta property="og:description" content="{_esc(description)}">
-<meta property="og:image" content="{SITE}/assets/og-image-v7.jpg">
+<meta property="og:image" content="{SITE}/{og_image or 'assets/og-image-v7.jpg'}">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">

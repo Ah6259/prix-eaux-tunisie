@@ -26,6 +26,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Pillow (images d'aperçu des rapports du mois)
+        run: pip install -q pillow
+
       - name: Scraper les prix (Carrefour + Géant Drive + barka.tn)
         run: python tools/collect_prices.py
 

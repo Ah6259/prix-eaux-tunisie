@@ -13,6 +13,8 @@ Règles :
 - évolution d'un mois sur l'autre seulement pour une marque présente les deux mois (chacun avec MIN_JOURS jours), écart ≤ 60 %.
 """
 import json
+import os
+import sys
 import statistics
 from pathlib import Path
 
@@ -180,10 +182,12 @@ def page(m, d, prev, courant, ids, SITE, G):
     <em>Source : Prix des Eaux de Tunisie, « {esc(titre)} », {url}</em></p>
     {f'<p class="intro">Autres mois : {autres} · <a href="../">tous les rapports</a></p>' if autres else '<p class="intro"><a href="../">Tous les rapports</a></p>'}
   </section>"""
+    img = apercu(m, f"Prix de l’eau en bouteille en Tunisie", mt, f"La moins chère : {n1} · {_dt(x1['med'])}",
+                 f"Bouteille 1,5 L, prix médian · {len(rang)} marques comparées")
     ld = [{"@context": "https://schema.org", "@type": "Article", "headline": titre[:110], "inLanguage": ["fr", "ar"],
            "datePublished": d.get("debut") or d["au"], "dateModified": max(d["au"], d.get("debut") or ""), "url": url,
            "author": {"@type": "Organization", "name": "Prix des Eaux de Tunisie", "url": SITE + "/"},
-           "publisher": {"@type": "Organization", "name": "Prix des Eaux de Tunisie", "url": SITE + "/"}, "image": SITE + "/assets/og-image-v7.jpg"},
+           "publisher": {"@type": "Organization", "name": "Prix des Eaux de Tunisie", "url": SITE + "/"}, "image": SITE + "/" + img},
           {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
               {"@type": "Question", "name": f"Quelle est l'eau en bouteille la moins chère en Tunisie en {mt} ?",
                "acceptedAnswer": {"@type": "Answer", "text": f"{n1}, avec un prix médian de {_dt(x1['med'])} la bouteille de 1,5 L ({_dt(x1['med'] * 6)} la stika de 6)."}},
@@ -194,7 +198,24 @@ def page(m, d, prev, courant, ids, SITE, G):
               {"@type": "ListItem", "position": 2, "name": "Rapports du mois", "item": SITE + "/rapports/"},
               {"@type": "ListItem", "position": 3, "name": mt, "item": url}]}]
     return G._gabarit(SITE, f"rapports/{m}", titre + " | Prix des Eaux de Tunisie", desc, f"Prix de l'eau en Tunisie : {mt}", corps,
-                      json.dumps(ld, ensure_ascii=False), f"أسعار الماء المعدني في تونس: {iso(ma)}", racine="../../", og_type="article")
+                      json.dumps(ld, ensure_ascii=False), f"أسعار الماء المعدني في تونس: {iso(ma)}", racine="../../", og_type="article", og_image=img)
+
+
+def apercu(m, titre_img, mt, chiffre, sous):
+    """Image d'aperçu propre à l'article (18/10/2026 : au partage, Facebook montrait l'image du site). Le nom dépend du contenu :
+    quand les chiffres changent, nouvelle adresse, donc Facebook prend la nouvelle image. Sans Pillow : image générale du site."""
+    import hashlib
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import apercus as AP
+    cle = hashlib.sha1(f"{titre_img}|{m}|{chiffre}|{sous}".encode()).hexdigest()[:8]
+    rel = f"rapports/{m}/apercu-{cle}.jpg"
+    racine = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    dossier = os.path.join(racine, "rapports", m)
+    os.makedirs(dossier, exist_ok=True)
+    for f in os.listdir(dossier):
+        if f.startswith("apercu-") and f != os.path.basename(rel):
+            os.remove(os.path.join(dossier, f))
+    return rel if AP.fabriquer(os.path.join(racine, rel), titre_img, mt, chiffre, sous) else "assets/og-image-v7.jpg"
 
 
 def page_liste(hist, courant, SITE, G):
