@@ -398,3 +398,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   TOUTES les pages qui l'utilisent. Doublon retiré seulement s'il est SÛR. Détail : § 18 de `regles communes a tous les sites.md`.
 - Ailleurs le même jour : immobilier modèle v10 (m² appris), favoris, médianes contradictoires corrigées, page investisseur vérifiée,
   rendement avec les loyers non meublés (IM.17), lieux de même nom expliqués (niveau écrit dans « Où ? »).
+- **Règle commune du 18/10/2026 (soir), lieux** : un lieu VAGUE donné par une source (vide, « Autres villes », nom du gouvernorat seul) n'est
+  jamais un lieu précis ; une seule porte de vérification pour toutes les sources ; un garde quotidien signale une source qui range
+  anormalement beaucoup au même endroit ; une erreur trouvée = toutes celles de la même cause réparées. Ici : les prix viennent des sites
+  des magasins (enseigne sûre) ; à appliquer si une source ou un lieu (magasin, ville) est ajouté. Détail : § 23 des règles communes.

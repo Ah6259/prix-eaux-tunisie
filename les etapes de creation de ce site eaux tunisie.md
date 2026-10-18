@@ -358,3 +358,7 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 ## Étape : revérifier toutes les pages après une amélioration (18/10/2026)
 - Quand un calcul change (prix le moins cher, rapport du mois…), relire TOUTES les pages qui l'affichent : elles doivent dire la même
   chose. Leçon de l'immobilier : une page « bonnes affaires » contredisait l'avis affiché sur l'annonce elle-même.
+
+## Étape : ne jamais deviner un lieu (18/10/2026)
+- Leçon de l'immobilier : « Tunis » seul rangeait 981 annonces au centre-ville. Un lieu vague n'est jamais précis ; une seule fonction
+  vérifie les lieux de toutes les sources, et un robot de garde signale chaque jour une concentration anormale.
