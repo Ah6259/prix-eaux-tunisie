@@ -102,7 +102,13 @@ def serveur():
         def log_message(self, *a, **k):
             pass
     h = functools.partial(Muet, directory=RACINE)
-    s = socketserver.TCPServer(("127.0.0.1", 0), h)
+
+    class Serveur(socketserver.ThreadingTCPServer):
+        daemon_threads = True
+
+        def handle_error(self, *a):          # navigateur qui coupe une connexion (vidéo) : sans importance, pas de message
+            pass
+    s = Serveur(("127.0.0.1", 0), h)
     threading.Thread(target=s.serve_forever, daemon=True).start()
     return s, s.server_address[1]
 
