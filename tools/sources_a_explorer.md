@@ -59,3 +59,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 17/10/2026 | carrefourexpress.tn, tunisiamart.com | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
 | 17/10/2026 | kamioun.com | ❌ | lisible (200) mais plateforme B2B pour épiceries de quartier (application), page « introuvable », noindex, 0 prix, 0 « eau » |
 | 17/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, AllAfrica 26/08 (déjà notés), Founa (fermé) |
+| 18/10/2026 | market.tn | ❌ | lisible (200) mais page vide (21 octets), 0 prix, 0 « eau » |
+| 18/10/2026 | hypermarche.tn, grossiste.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
+| 18/10/2026 | baraka.tn | ❌ | lisible (200, 78 Ko) mais 0 mot « eau », 0 Safia, 1 « prix » : pas de boutique d'eau |
+| 18/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07, Webdo 19/08, AllAfrica 26/08 (déjà notés), Founa (fermé) |
