@@ -390,3 +390,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   de la page, et chercher avec `sonRecherche.cle()` (la liste) et `sonRecherche.trouve()` (ce que tape le visiteur) : « Maroua » trouve
   « Marwa ». Ne jamais modifier la copie : corriger l'outil commun puis recopier partout. Test : 3 paires d'écritures + « zzzzqqq » = 0.
 - Carte (si un jour) : `.leaflet-container{isolation:isolate;z-index:0}` et menus au z-index 1000 ; la carte suit le lieu choisi.
+- Carte avec plusieurs niveaux de zoom (si un jour) : à chaque niveau, les bulles comptent TOUT (ce qui n'a pas de position plus
+  précise garde une bulle « reste ») ; test : le total est le même à chaque niveau.

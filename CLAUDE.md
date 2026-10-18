@@ -427,3 +427,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   « Maroua » = « Marwa », « Saffia » = « Safia » (l'ancienne recherche « nom qui contient » reste valable) ; test dans test_site.mjs.
 - **Carte Leaflet isolée (règle commune, 18/10/2026)** : `.leaflet-container{isolation:isolate;z-index:0}` dans style.css, menus `.dd-panel`
   au z-index 1000 (les couches Leaflet, 400+, passaient devant une liste de l'immobilier) ; testé dans test_site.mjs.
+- **Règle commune § 28.6 (18/10/2026, immobilier)** : aucun élément ne disparaît quand on zoome sur une carte (bulle « reste » en
+  pointillés au niveau au-dessus ; test : même total à chaque niveau). Ici : à appliquer si le site affiche un jour une carte (magasins).
