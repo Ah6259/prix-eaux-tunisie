@@ -408,3 +408,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Règle commune du 18/10/2026 (nuit), résultats au téléphone** : une ligne par élément d'une liste (texte secondaire coupé par « … »,
   jamais le prix), messages courts en pleine largeur, mesuré à 390 px dans un vrai navigateur. Ici : top 5 « La moins chère », classement
   complet, rapports du mois — à vérifier à la prochaine modification. Détail : règles communes (projets-ahmed).
+- **Règle commune du 18/10/2026 (nuit), Pass** (§ 11.10 des règles communes) : la case pour taper un code est TOUJOURS visible (même si le
+  téléphone a gardé un autre code), le code tapé remplace l'ancien, pas d'« essai gratuit » faux, encart du code court ; robot commun
+  `verif-pass.yml` (projets-ahmed) qui contrôle chaque jour les pages Pass en ligne. Ce site n'a pas de Pass : à appliquer s'il en a un.

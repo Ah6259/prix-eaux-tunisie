@@ -370,3 +370,7 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 ## Étape : une ligne par élément au téléphone (18/10/2026)
 - Chaque ligne d'une liste de résultats tient sur une ligne à 390 px (le texte secondaire se coupe par « … ») ; les messages sont
   courts et en pleine largeur. Mesurer dans un vrai navigateur (Chromium sans écran) avant de publier.
+
+## Étape : une partie payante avec un code (règle du 18/10/2026)
+- Si ce site a un jour un Pass : la case du code toujours visible, le code tapé remplace l'ancien, aucun texte faux (« essai gratuit »),
+  encart court avec un bouton « Copier mon lien », et une ligne ajoutée dans `pass.json` du robot commun des Pass (projets-ahmed).
