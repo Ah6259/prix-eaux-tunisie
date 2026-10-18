@@ -256,6 +256,37 @@ check("CSP : carte Leaflet (cdnjs + tuiles OpenStreetMap) autorisée", dir("scri
 const domainesAppJs = [...new Set([...lire("app.js").matchAll(/(?:url|src|href)\s*[:=]\s*["'`](https:\/\/[^/"'`$]+)/g)].map(m => m[1]))]
   .filter(d => !/wa\.me|t\.me|maps\.google|ah6259\.github\.io/.test(d));   // simples liens, rien n'est chargé
 check(`CSP : chaque domaine chargé par app.js est autorisé (${domainesAppJs.join(", ")})`, domainesAppJs.length > 1 && domainesAppJs.every(d => csp.includes(d)));
+// ---- 18/10/2026 (règle VS.9, tous les sites qui affichent des images d'autres sites) : chaque image d'un autre site est autorisée
+//      par la CSP (img-src) de SA page : balises <img>/<source>, fonds de carte et images citées par les scripts chargés (données
+//      comprises). Sinon l'image est cassée chez tous les visiteurs (vu sur Mosquées : 144 photos de thumb.wikimedia.org bloquées).
+{
+  const pagesHtml = [];
+  (function parcourir(d) {
+    for (const n of readdirSync(join(root, d))) {
+      const p = d ? d + "/" + n : n;
+      if (n.startsWith(".") || ["node_modules", "tools"].includes(n) || /preuves/i.test(n)) continue;
+      if (statSync(join(root, p)).isDirectory()) parcourir(p); else if (n.endsWith(".html")) pagesHtml.push(p);
+    }
+  })("");
+  const imgSrc = h => ((/http-equiv="Content-Security-Policy" content="[^"]*?img-src([^;"]*)/.exec(h) || [])[1] || "").trim().split(/\s+/).filter(Boolean);
+  const permis = (srcs, url) => {
+    let u; try { u = new URL(url.replace(/\{s\}/g, "a").replace(/\{[a-z]+\}/g, "0")); } catch (e) { return false; }
+    return srcs.some(s => s === "*" || s === "https:" || s === u.origin || (s.startsWith("https://*.") && u.protocol === "https:" && u.host.endsWith(s.slice(9))));
+  };
+  const IMG = /https:\/\/[a-z0-9.-]+\.[a-z]{2,}\/[^\s"'`<>()\\]*?\.(?:png|jpe?g|webp|gif|svg|avif)\b/gi;
+  const cache = new Map(), lireJs = f => { if (!cache.has(f)) cache.set(f, existsSync(join(root, f)) ? (lire(f).match(IMG) || []).filter(u => !/\/wiki\//.test(u)) : []); return cache.get(f); };
+  const bloquees = new Set(); let vues = 0;
+  for (const p of pagesHtml) {
+    const h = lire(p), csp = imgSrc(h), dossier = dirname(p);
+    const urls = [...h.matchAll(/<(?:img|source)\b[^>]*?\s(?:src|srcset)="([^"]+)"/g)]
+      .flatMap(m => m[1].split(",").map(x => x.trim().split(/\s+/)[0])).filter(u => /^https:\/\//.test(u));
+    for (const m of h.matchAll(/<script\b[^>]*\ssrc="(?!https?:|\/\/)([^"?#]+)/g))
+      urls.push(...lireJs(m[1].startsWith("/") ? m[1].slice(1) : join(dossier, m[1]).replace(/\\/g, "/")));
+    for (const u of urls) { vues++; if (!permis(csp, u)) bloquees.add(p + " -> " + u.slice(0, 90)); }
+  }
+  check(`chaque image d'un autre site (balise, carte, script, données) est autorisée par la CSP img-src de sa page (${vues} vues, ${pagesHtml.length} pages) ${[...bloquees].slice(0, 3).join(" | ")}`,
+    pagesHtml.length > 0 && !bloquees.size);
+}
 const prot = lire("protection.js");
 check("anti-copie : clic droit et glisser bloqués sur les photos", prot.includes('"contextmenu"') && prot.includes('"dragstart"') && /img\{[^}]*-webkit-touch-callout:none/.test(css));
 check("anti-copie : source ajoutée au texte copié", prot.includes('"copy"') && prot.includes("© tous droits réservés"));

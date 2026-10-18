@@ -386,3 +386,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   image cassée, « NaN / undefined », page vide ; scénarios du site dans `tools/scenarios-visiteur.json` (prix affichés de l'accueil, guides,
   rapport du mois). Lancé par `tests.yml` à chaque envoi (rouge = e-mail). 1re trouvaille : tableau du rapport du mois trop large sur
   téléphone (436 px) -> `.tableau-defile` + tableau serré sous 480 px (gabarit de build_guides.py).
+
+- **Test CSP des images (18/10/2026, VS.9, tous les sites qui affichent des images d'autres sites)** : test_site.mjs vérifie que
+  chaque image d'un autre site (balise `<img>`, fond de carte OpenStreetMap, image citée par un script ou par `data/*.js`) est autorisée
+  par la CSP `img-src` de SA page (cas vu sur Mosquées : 144 photos bloquées). Aucune violation ici (photos des bouteilles locales).
+  Nouvelle image externe (ex. photo d'un magasin) = l'ajouter à `img-src` (gabarits de build_guides.py / build_pages.py aussi).
