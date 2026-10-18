@@ -416,3 +416,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Règle commune du 18/10/2026 (nuit), lieux à plusieurs délégations** (§ 11.11) : une « délégation » affichée est toujours officielle ;
   un nom qui en couvre plusieurs (Djerba = Houmet Essouk + Midoun + Ajim) devient un groupe ; test anti-fausse délégation. Ici : à
   appliquer si le site classe un jour par lieu (magasins par ville).
+  Même règle pour une VILLE partagée entre plusieurs délégations (Kairouan Nord + Sud, Gabès Medina + Ouest + Sud, Béja, Gafsa, Médenine) ;
+  contrôle « comme un visiteur » dans les 24 gouvernorats à chaque publication, et la carte suit le filtre (même nombre carte / liste).

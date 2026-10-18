@@ -375,3 +375,10 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Si ce site a un jour un Pass : la case du code toujours visible, le code tapé remplace l'ancien, aucun texte faux (« essai gratuit »),
   encart court avec un bouton « Copier mon lien », et une ligne ajoutée dans `pass.json` du robot commun des Pass (projets-ahmed).
   Le robot vérifie aussi (P8) que la case du code est dans le HAUT de la page, ou qu'un lien en haut (« 🔑 J'ai déjà un code ») y mène.
+
+## Étape : des listes de lieux justes (règle du 18/10/2026)
+- Si ce site classe un jour par lieu (magasins par ville) : chaque « délégation » affichée vient de la liste officielle de La Poste ;
+  un lieu est rattaché par un fait (même nom écrit autrement, ou position sur OpenStreetMap), jamais deviné ; un nom qui couvre
+  plusieurs délégations (Djerba, Kairouan…) devient un groupe « toute l'île / toute la ville ».
+- Test dans les deux sens (toutes les officielles présentes ET rien d'autre), dans TOUS les gouvernorats ; si une carte existe,
+  elle va sur le lieu choisi et donne le même nombre que la liste.
