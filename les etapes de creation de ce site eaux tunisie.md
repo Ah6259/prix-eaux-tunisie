@@ -384,3 +384,9 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   elle va sur le lieu choisi et donne le même nombre que la liste.
 - Un test qui compare nos données à elles-mêmes ne trouve rien : comparer aussi à une AUTRE source (ex. le rangement donné par le site
   d'origine). Paiement d'un Pass (si un jour) : motif = le code personnel, jamais le nom.
+
+## Étape : une recherche qui comprend toutes les écritures (règle du 18/10/2026)
+- Copier l'outil commun `son.js` (dépôt projets-ahmed, `outils communs/recherche-au-son/`) dans `assets/`, le charger avant le script
+  de la page, et chercher avec `sonRecherche.cle()` (la liste) et `sonRecherche.trouve()` (ce que tape le visiteur) : « Maroua » trouve
+  « Marwa ». Ne jamais modifier la copie : corriger l'outil commun puis recopier partout. Test : 3 paires d'écritures + « zzzzqqq » = 0.
+- Carte (si un jour) : `.leaflet-container{isolation:isolate;z-index:0}` et menus au z-index 1000 ; la carte suit le lieu choisi.
