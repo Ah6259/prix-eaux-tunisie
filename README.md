@@ -213,6 +213,7 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 
 ## Nouveautés
 - **18/10/2026** : rapports du mois (image d'aperçu par article, partage) ; **visiteur simulé** sur tous les sites (règle générale) : il a trouvé le tableau du rapport trop large sur téléphone (corrigé).
+- **18/10/2026 (soir)** : test « chaque image d'un autre site est autorisée par la CSP » (VS.9) ; règle commune « même chiffre, même verdict partout » : après chaque amélioration d'un calcul, revérifier toutes les pages qui l'affichent.
 - **15/10/2026 (nuit)** : rien de changé sur ce site ; autres sites d'Ahmed : Pass Propriétaire de l'immobilier enrichi (voir CLAUDE.md) ; nouvelle règle commune : un calcul fait à deux endroits (robot et page) est vérifié par un test croisé.
 - **15/10/2026** : rien de changé sur ce site ; règles générales ajoutées pour tous les sites (chiffres jamais devinés, porte unique des données sûres pour les IA, prix de plus de 6 mois jamais utilisés).
 - **13-14/10/2026** : rien de changé sur ce site ; autres sites d'Ahmed : « Où investir ? » + Pass Investisseur sur l'immobilier (voir CLAUDE.md).

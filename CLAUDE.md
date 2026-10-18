@@ -396,4 +396,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - Toute page qui juge ou compare (ici : « la moins chère », baisses Telegram, rapports du mois, pages magasins/marques) utilise le MÊME
   calcul ; deux pages ne donnent jamais deux chiffres différents pour la même chose. Après chaque amélioration d'un calcul, revérifier
   TOUTES les pages qui l'utilisent. Doublon retiré seulement s'il est SÛR. Détail : § 18 de `regles communes a tous les sites.md`.
-- Ailleurs le même jour : immobilier modèle v10 (m² appris), favoris, médianes contradictoires corrigées, page investisseur vérifiée.
+- Ailleurs le même jour : immobilier modèle v10 (m² appris), favoris, médianes contradictoires corrigées, page investisseur vérifiée,
+  rendement avec les loyers non meublés (IM.17), lieux de même nom expliqués (niveau écrit dans « Où ? »).
