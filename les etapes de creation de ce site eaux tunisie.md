@@ -354,3 +354,7 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   de l'écran, qu'aucune image n'est cassée, qu'aucun lien interne n'est mort, qu'aucun « NaN » ne s'affiche, et lit les prix affichés.
 - Lancer : `python3 tools/visiteur_simule.py` (aussi à chaque envoi sur GitHub). Scénarios propres au site : `tools/scenarios-visiteur.json`.
 - Il a trouvé dès le 1er passage le tableau du rapport du mois trop large sur téléphone (corrigé).
+
+## Étape : revérifier toutes les pages après une amélioration (18/10/2026)
+- Quand un calcul change (prix le moins cher, rapport du mois…), relire TOUTES les pages qui l'affichent : elles doivent dire la même
+  chose. Leçon de l'immobilier : une page « bonnes affaires » contredisait l'avis affiché sur l'annonce elle-même.

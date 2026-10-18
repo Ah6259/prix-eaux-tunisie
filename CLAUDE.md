@@ -391,3 +391,9 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   chaque image d'un autre site (balise `<img>`, fond de carte OpenStreetMap, image citée par un script ou par `data/*.js`) est autorisée
   par la CSP `img-src` de SA page (cas vu sur Mosquées : 144 photos bloquées). Aucune violation ici (photos des bouteilles locales).
   Nouvelle image externe (ex. photo d'un magasin) = l'ajouter à `img-src` (gabarits de build_guides.py / build_pages.py aussi).
+
+## Mise à jour du 18/10/2026 (soir) — règle commune « même chiffre, même verdict partout » (immobilier, valable ici aussi)
+- Toute page qui juge ou compare (ici : « la moins chère », baisses Telegram, rapports du mois, pages magasins/marques) utilise le MÊME
+  calcul ; deux pages ne donnent jamais deux chiffres différents pour la même chose. Après chaque amélioration d'un calcul, revérifier
+  TOUTES les pages qui l'utilisent. Doublon retiré seulement s'il est SÛR. Détail : § 18 de `regles communes a tous les sites.md`.
+- Ailleurs le même jour : immobilier modèle v10 (m² appris), favoris, médianes contradictoires corrigées, page investisseur vérifiée.
