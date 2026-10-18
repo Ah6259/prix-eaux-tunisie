@@ -370,3 +370,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   de Tunisie » et en bas) : `button[data-partage-rapport]` géré par protection.js (menu de partage du téléphone, sinon lien copié) —
   il partage la page du RAPPORT ; ne pas utiliser un lien wa.me sur ces pages (protection.js le transforme en partage de la page VIDÉO).
   Groupes Facebook : jamais par un robot ; Ahmed partage lui-même.
+- **18/10/2026 (soir) — partage des rapports, les 5 sites** (immobilier, eau, concours, appels d'offres, conférences) : un seul bouton
+  « Partager ce rapport » sous la signature et en bas, sans phrase d'aide, texte partagé SANS adresse (Facebook prenait l'adresse du
+  texte et montrait l'accueil). Règle commune § 25.7-8 (projets-ahmed).
