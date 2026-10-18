@@ -64,7 +64,7 @@ document.addEventListener("click", function (e) {
   var b = el && el.closest("button[data-partage-rapport]");
   if (!b) return;
   var lien = b.getAttribute("data-partage-rapport"), titre = b.getAttribute("data-titre") || document.title;
-  var texte = titre + "\nRapport du mois de Prix des Eaux de Tunisie (prix-eau.clicvia.com) : ";
+  var texte = titre + "\nRapport du mois de Prix des Eaux de Tunisie : ";   // AUCUNE adresse ici : Facebook montrerait l'accueil
   try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "partage" + location.pathname, title: "Partage", event: true }); } catch (err) {}
   if (navigator.share) { navigator.share({ title: titre, text: texte, url: lien })["catch"](function () {}); return; }
   var fini = function () { b.classList.add("copie-ok"); setTimeout(function () { b.classList.remove("copie-ok"); }, 4000); };

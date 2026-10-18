@@ -409,7 +409,7 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
       return (hh.match(/data-partage-rapport="https:\/\/prix-eau\.clicvia\.com\/rapports\/\d{4}-\d{2}\/"/g) || []).length === 2
         && hh.includes(`data-partage-rapport="https://prix-eau.clicvia.com/rapports/${x}/"`) && !hh.includes("wa.me/?text=")
         && hh.includes("Un rapport de <b>Prix des Eaux de Tunisie</b>") && /name="description" content="Prix des Eaux de Tunisie — rapport du mois/.test(hh); })
-    && lire("protection.js").includes('closest("button[data-partage-rapport]")') && lire("protection.js").includes("Rapport du mois de Prix des Eaux de Tunisie (prix-eau.clicvia.com)"));
+    && lire("protection.js").includes('closest("button[data-partage-rapport]")') && lire("protection.js").includes("Rapport du mois de Prix des Eaux de Tunisie : ") && !lire("protection.js").includes("Prix des Eaux de Tunisie (prix-eau.clicvia.com)"));
   check("rapports : premier mois sans fausse évolution (« Premier rapport », pas de colonne Évolution)", (h0 => h0.includes("Premier rapport") && !h0.includes("<th>Évolution</th>"))(lire(`rapports/${ms[0]}/index.html`)));
   check("pied de page des pages générées : lien « Rapports du mois »", lire("prix-stika/index.html").includes('href="../rapports/"') && lire("tools/build_guides.py").includes("Rapports du mois"));
 }
