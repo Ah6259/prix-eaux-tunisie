@@ -421,3 +421,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   Leçon (18/10 nuit) : vérifier contre une référence INDÉPENDANTE, jamais contre soi-même (immobilier : contrôle L3 = délégation
   donnée par la source). Ici : les prix viennent déjà des magasins eux-mêmes ; « même chiffre partout » se vérifie aussi contre la source.
 - **Règle commune Pass § 11.10.9 (18/10/2026, Ahmed)** : motif du paiement = le CODE PERSONNEL, jamais le nom. Ce site n'a pas de Pass.
+- **Règle commune du 18/10/2026, recherche « au son »** : Jerba = Djerba, Houmt = Houmet, Qairouan = Kairouan… même calcul pour ce
+  qu'on tape et pour la liste. Ici : à appliquer si le site ajoute une recherche par texte (marques : « Safia » / « Safya »…).
