@@ -348,3 +348,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Listes déroulantes lisibles et en couleurs** : la liste native du téléphone ignore les couleurs ; on affiche notre propre liste
   (catégories en bandeau de couleur, une ligne par choix, une seule langue, nombres « 8 453 »), la vraie `<select>` reste lue.
   Ce site utilise surtout des boutons-panneaux (`.dd`) : appliquer la même logique s'il ajoute une liste déroulante.
+
+## Mise à jour du 18/10/2026 — règle commune § 25 (immobilier, valable ici aussi)
+- **Visibilité : pas d'articles d'IA en masse ni de liens achetés** (risque de sanction Google pour tout clicvia.com). À la place, des pages
+  écrites par nos robots à partir de nos données (immobilier : « Rapports du mois », https://immobilier.clicvia.com/rapports/). Ici, idée
+  possible plus tard : un « rapport du mois » des prix de l'eau (évolution par marque, vrais relevés), avec l'accord d'Ahmed.
