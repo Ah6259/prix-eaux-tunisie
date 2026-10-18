@@ -133,10 +133,11 @@ check("recherche effacée : toutes les cartes reviennent", cartes().length > 12)
   check("recherche au son : assets/son.js chargé avant app.js (copie identique de l'outil commun quand il est présent)", !!S
     && /<script src="assets\/son\.js\?v=[^"]+"><\/script>\s*<script src="app\.js\?v=/.test(lire("index.html")) && (!existsSync(commun) || readFileSync(commun, "utf8") === lire("assets/son.js")));
   const paires = [["Djerba", "Jerba"], ["Kairouan", "Qairouan"], ["Hammamet", "Hamamet"], ["Houmt Souk", "Houmet Essouk"]];
-  check("recherche au son : Djerba = Jerba, Kairouan = Qairouan, Hammamet = Hamamet, Houmt Souk = Houmet Essouk (même résultat)",
-    paires.every(([a, b]) => noms(a) === noms(b)) && paires.every(([a, b]) => S.trouve(S.cle("Eau de " + a), b) && S.trouve(S.cle("Eau de " + b), a)));
+  check("recherche au son : Djerba = Jerba, Kairouan = Qairouan, Hammamet = Hamamet, Houmt Souk = Houmet Essouk (même résultat), « demisssion » = « Démission »",
+    paires.every(([a, b]) => noms(a) === noms(b)) && paires.every(([a, b]) => S.trouve(S.cle("Eau de " + a), b) && S.trouve(S.cle("Eau de " + b), a))
+    && S.trouve(S.cle("Démission"), "demisssion"));
   // paires tirées des VRAIES marques
-  const vraies = [["Marwa", "Maroua"], ["Safia", "Saffia"], ["Melliti", "Meliti"], ["Bulla Régia", "Bula Regia"]]
+  const vraies = [["Marwa", "Maroua"], ["Safia", "Saffia"], ["Safia", "Safffia"], ["Melliti", "Meliti"], ["Bulla Régia", "Bula Regia"]]
     .filter(([a]) => DATA.brands.some(b => b.name === a));
   check(`recherche au son : ${vraies.map(([a, b]) => `« ${b} » = « ${a} »`).join(", ")} (vraies marques)`,
     vraies.length >= 3 && vraies.every(([a, b]) => noms(b) === noms(a) && noms(a).split("|").includes(a)));
