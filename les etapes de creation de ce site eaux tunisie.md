@@ -399,3 +399,6 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Avant d'envoyer un changement d'en-tête, de recherche ou de boutons : capture agrandie (×2) de la zone, regardée.
 - Chaque dépôt a son `CLAUDE.md` (mémoire lue automatiquement au début d'une session) : sans lui, une session démarre sans connaître
   les règles (cas du portail, corrigé le 19/10/2026).
+- Le visiteur simulé regarde aussi les pages sur un écran d'ordinateur (1280 px) et signale deux blocs posés l'un sur l'autre (l'un est
+  caché) : une page peut être parfaite sur téléphone et cassée sur PC (cas de l'immobilier, 19/10/2026).
+- Pas de faux boutons : une case qui ressemble à un bouton (fond, bordure, chiffre) doit mener quelque part, sinon le visiteur clique pour rien.

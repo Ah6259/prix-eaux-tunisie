@@ -434,3 +434,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **19/10/2026** : le portail (dépôt Ah6259.github.io) a enfin son `CLAUDE.md` (sa mémoire n'était que dans son README) ; tous les dépôts d'Ahmed
   ont maintenant un CLAUDE.md (règle de la procédure « nouveau site »).
 - **19/10/2026 — règle commune « plus grand = plus cher »** (§ 18, immobilier) : une estimation ne donne jamais le même prix à un bien plus grand ; pente apprise sur les vraies données. Ici : à appliquer si le site estime un jour un prix par format (1,5 L vs 6 L).
+- **19/10/2026 (soir) — Visiteur simulé aussi sur PC (règle commune § 29.bis)** : il revoit 12 pages à 1280 px et signale les « éléments
+  posés l'un sur l'autre » (l'accueil de l'immobilier était cassé sur PC sans que personne ne le voie) ; ce site : 0 anomalie. Rappel :
+  pas de faux boutons (une case qui ressemble à un bouton mène quelque part) ; un test de fichier chiffré ne cherche pas de mots dedans.
