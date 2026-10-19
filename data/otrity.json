@@ -1,5 +1,5 @@
 {
- "date": "2026-10-17",
+ "date": "2026-10-19",
  "offres": [
   {
    "enseigne": "otrity",
@@ -10,16 +10,6 @@
    "type": "plate",
    "prix": 0.1583,
    "image_src": "https://otrity.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-01-29-at-19.56.43-10.jpeg"
-  },
-  {
-   "enseigne": "otrity",
-   "marque": "HAYET",
-   "nom": "Eau minérale Hayet 0.5l",
-   "volume_l": 0.5,
-   "nb_unites": 1,
-   "type": "plate",
-   "prix": 0.5083,
-   "image_src": "https://otrity.com/wp-content/uploads/hayet-1.5.gif"
   },
   {
    "enseigne": "otrity",
@@ -40,16 +30,6 @@
    "type": "plate",
    "prix": 0.8333,
    "image_src": "https://otrity.com/wp-content/uploads/2020/10/eau-minerale-10.webp"
-  },
-  {
-   "enseigne": "otrity",
-   "marque": "JANNET",
-   "nom": "Eau minérale Jannet 2L",
-   "volume_l": 2.0,
-   "nb_unites": 1,
-   "type": "plate",
-   "prix": 1.0,
-   "image_src": "https://otrity.com/wp-content/uploads/2020/10/vignette_jannet_2l.webp"
   },
   {
    "enseigne": "otrity",
