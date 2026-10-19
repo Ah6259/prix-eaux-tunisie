@@ -392,3 +392,8 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Carte (si un jour) : `.leaflet-container{isolation:isolate;z-index:0}` et menus au z-index 1000 ; la carte suit le lieu choisi.
 - Carte avec plusieurs niveaux de zoom (si un jour) : à chaque niveau, les bulles comptent TOUT (ce qui n'a pas de position plus
   précise garde une bulle « reste ») ; test : le total est le même à chaque niveau.
+
+## Étape : vérifier les espaces comme un œil (règle du 19/10/2026)
+- Le visiteur simulé (`python3 tools/visiteur_simule.py`, copie identique de l'outil commun) signale deux éléments qui se touchent,
+  un petit élément aux espaces inégaux, un bouton pris entre deux autres qui n'est pas centré. Rouge = corriger le CSS avant d'envoyer.
+- Avant d'envoyer un changement d'en-tête, de recherche ou de boutons : capture agrandie (×2) de la zone, regardée.
