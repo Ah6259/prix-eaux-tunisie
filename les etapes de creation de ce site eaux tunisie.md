@@ -402,3 +402,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Le visiteur simulé regarde aussi les pages sur un écran d'ordinateur (1280 px) et signale deux blocs posés l'un sur l'autre (l'un est
   caché) : une page peut être parfaite sur téléphone et cassée sur PC (cas de l'immobilier, 19/10/2026).
 - Pas de faux boutons : une case qui ressemble à un bouton (fond, bordure, chiffre) doit mener quelque part, sinon le visiteur clique pour rien.
+- Après chaque envoi, regarder le résultat du robot « Tests » sur GitHub : un robot rouge non regardé peut le rester des jours
+  (cas du site Mosquées, 18-19/10/2026 : une page fabriquée n'avait pas été enregistrée).

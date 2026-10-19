@@ -437,3 +437,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **19/10/2026 (soir) — Visiteur simulé aussi sur PC (règle commune § 29.bis)** : il revoit 12 pages à 1280 px et signale les « éléments
   posés l'un sur l'autre » (l'accueil de l'immobilier était cassé sur PC sans que personne ne le voie) ; ce site : 0 anomalie. Rappel :
   pas de faux boutons (une case qui ressemble à un bouton mène quelque part) ; un test de fichier chiffré ne cherche pas de mots dedans.
+- **19/10/2026 (soir) — Leçon de Mosquées (règle commune § 29.bis.6)** : après chaque envoi, regarder le résultat du robot Tests ;
+  un fichier fabriqué (ici : pages des marques, guides, rapports, `?v=`) est refait et enregistré dans le même envoi que son changement.
