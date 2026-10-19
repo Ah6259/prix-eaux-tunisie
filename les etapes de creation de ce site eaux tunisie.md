@@ -408,3 +408,7 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   a une langue choisie à l'avance.
 - Un site qui reprend des informations d'autres sites revérifie régulièrement ses liens, n'affiche jamais une fiche vide, et passe
   au rouge (e-mail) si une source change sa présentation.
+- Recherche par texte : le nom exact tapé passe avant les noms qui le contiennent, eux-mêmes avant les ressemblances « au son » ;
+  un test tape le nom de CHAQUE élément de la liste (ici les 35 marques) et vérifie qu'il est proposé en premier.
+- Phrases : un nombre ne se sépare jamais de son unité (DT, %, L, cl…) ni le « × » de « 6 × 1,5 L » : une seule fonction
+  (`protection.js`, espace insécable dans tout le texte affiché) et un test ; seulement les phrases, pas les boutons ni les titres.

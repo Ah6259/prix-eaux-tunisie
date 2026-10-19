@@ -142,7 +142,18 @@ check("recherche effacée : toutes les cartes reviennent", cartes().length > 12)
   check(`recherche au son : ${vraies.map(([a, b]) => `« ${b} » = « ${a} »`).join(", ")} (vraies marques)`,
     vraies.length >= 3 && vraies.every(([a, b]) => noms(b) === noms(a) && noms(a).split("|").includes(a)));
   check("recherche au son : une recherche absurde (« zzzzqqq ») ne trouve toujours rien", (tape("zzzzqqq"), cartes().length === 0));
+  // règle commune § 27.8 et 27.11 (19/10/2026) : on tape le nom de CHAQUE marque -> elle est trouvée et proposée EN PREMIER
+  const malPlacees = DATA.brands.filter(b => (tape(b.name), (cartes()[0] || { querySelector: () => null }).querySelector("h3")?.textContent !== b.name)).map(b => b.name);
+  check(`recherche : le nom de chacune des ${DATA.brands.length} marques la met en premier${malPlacees.length ? " — mal placées : " + malPlacees.join(", ") : ""}`, !malPlacees.length);
   tape(""); }
+// phrases sans coupure illogique (règle commune § 30, 19/10/2026) : un nombre et son unité ne se séparent jamais à l'écran
+// (protection.js : espace insécable dans tout le texte affiché, y compris celui fabriqué par app.js)
+await new Promise(r => setTimeout(r, 20));   // l'observateur de protection.js passe juste après chaque changement
+{ const texteVu = doc.body.textContent, mauvais = (texteVu.match(/\d (DT|%|L|cl|ml|mg|دينار)(?![A-Za-zÀ-ÿ])|\d × \d/g) || []);
+  const essai = doc.createElement("p"); essai.textContent = "Stika 6 × 1,5 L à 4,500 DT, 10 % de moins, 33 cl, 2 Lac"; doc.body.appendChild(essai);
+  window.collerUnites && window.collerUnites(essai);
+  check(`nombre + unité jamais coupés à l'écran (« 4,500 DT », « 10 % », « 6 × 1,5 L ») : ${mauvais.length} cas sur l'accueil ${mauvais.slice(0, 3).join(" | ")}`,
+    !mauvais.length && essai.textContent === "Stika 6\u00a0×\u00a01,5\u00a0L à 4,500\u00a0DT, 10\u00a0% de moins, 33\u00a0cl, 2 Lac"); essai.remove(); }
 // carte Leaflet isolée (règle commune, 18/10/2026) : ses couches (z-index 400+) ne passent jamais devant les menus
 { const css = lire("style.css"), z = (/\.dd-panel\{[^}]*z-index:(\d+)/.exec(css) || [])[1];
   check("carte Leaflet isolée (.leaflet-container{isolation:isolate;z-index:0}) et menus des filtres (.dd-panel) au z-index ≥ 1000",

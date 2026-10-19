@@ -385,7 +385,11 @@ function render(){
     });
   const key = { prix15: brand15, prixL: brandPerL, tds: brandTds }[state.sort];
   // les marques sans aucun prix affiché restent toujours en bas, quel que soit le tri
+  // recherche (règle commune § 27.8, 19/10/2026) : le nom EXACT d'abord (« Safia » avant « Safia Light »), puis les noms qui
+  // CONTIENNENT le texte tapé, puis les ressemblances « au son » ; ensuite le tri choisi
+  const rang = b => !recherche ? 0 : sansAccent(b.name).trim() === q ? 0 : sansAccent(b.name).includes(q) ? 1 : 2;
   list = list.slice().sort((a,z) =>
+    (rang(a.b) - rang(z.b)) ||
     (!a.prods.length - !z.prods.length) ||
     (key ? (key(a.b) ?? 9999) - (key(z.b) ?? 9999)
          : a.b.name.localeCompare(z.b.name, "fr")));

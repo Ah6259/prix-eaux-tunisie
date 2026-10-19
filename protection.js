@@ -103,6 +103,37 @@ if ("serviceWorker" in navigator && location.protocol === "https:") {
   });
 }
 
+/* Phrases sans coupure illogique (règle commune § 30, 19/10/2026, Ahmed : « un pourcentage à la fin de la ligne qui revient sur la
+   deuxième ligne ») : dans TOUT le texte affiché (pages écrites par les robots ET texte fabriqué par app.js), un nombre reste collé à
+   son unité (0,850 DT, 10 %, 1,5 L, 33 cl, 12 mg) et « 6 × 1,5 L » ne se coupe pas autour du « × ». Espace insécable seulement :
+   aucun mot n'est changé ; jamais dans les champs à remplir, les scripts ni les styles. */
+(function () {
+  var UNITE = /(\d) (?=(?:DT|%|L|ml|cl|mg|km|[Ll]itres?|د\.ت|دينار|لتر|مل)(?![A-Za-zÀ-ÿ]))/g, FOIS = /(\d) × (?=\d)/g;
+  function coller(racine) {
+    if (!racine || !document.createTreeWalker) return;
+    var w = document.createTreeWalker(racine, 4, { acceptNode: function (n) {
+      var p = n.parentNode && n.parentNode.nodeName;
+      return /^(SCRIPT|STYLE|TEXTAREA|NOSCRIPT)$/.test(p || "") || !/\d /.test(n.nodeValue) ? 2 : 1; } });
+    var n, l = [];
+    while ((n = w.nextNode())) l.push(n);
+    for (var i = 0; i < l.length; i++) {
+      var t = l[i].nodeValue.replace(UNITE, "$1\u00a0").replace(FOIS, "$1\u00a0×\u00a0");
+      if (t !== l[i].nodeValue) l[i].nodeValue = t;
+    }
+  }
+  window.collerUnites = coller;
+  function tout() { coller(document.body); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", tout); else tout();
+  try {
+    new MutationObserver(function (m) {
+      for (var i = 0; i < m.length; i++) {
+        if (m[i].type === "characterData") { if (/\d /.test(m[i].target.nodeValue || "")) coller(m[i].target.parentNode); }
+        else for (var j = 0; j < m[i].addedNodes.length; j++) coller(m[i].addedNodes[j].nodeType === 3 ? m[i].addedNodes[j].parentNode : m[i].addedNodes[j]);
+      }
+    }).observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+  } catch (x) {}
+})();
+
 /* >>> vidéo de présentation : page video/ partagée par le bouton « Partager » (outil vidéos d'Ahmed) */
 window.VIDEO_SITE = {"base": BASE_SITE, "defaut": "fr", "nom": {"fr": "Prix des Eaux de Tunisie", "ar": "أسعار الماء المعدني في تونس"}};
 /* Bouton « Partager » (demande d'Ahmed, octobre 2026) : partage un LIEN vers la page vidéo du site (qui montre la vidéo
