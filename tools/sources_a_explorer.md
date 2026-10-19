@@ -63,3 +63,5 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 18/10/2026 | hypermarche.tn, grossiste.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
 | 18/10/2026 | baraka.tn | ❌ | lisible (200, 78 Ko) mais 0 mot « eau », 0 Safia, 1 « prix » : pas de boutique d'eau |
 | 18/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07, Webdo 19/08, AllAfrica 26/08 (déjà notés), Founa (fermé) |
+| 19/10/2026 | sfbt.com.tn, mgdrive.com.tn, epicerie-en-ligne.tn, ubuy.com.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
+| 19/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, AllAfrica 26/08 (déjà notés), Founa (fermé), carrefour.tn déjà utilisé |
