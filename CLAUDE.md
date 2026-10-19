@@ -439,3 +439,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   pas de faux boutons (une case qui ressemble à un bouton mène quelque part) ; un test de fichier chiffré ne cherche pas de mots dedans.
 - **19/10/2026 (soir) — Leçon de Mosquées (règle commune § 29.bis.6)** : après chaque envoi, regarder le résultat du robot Tests ;
   un fichier fabriqué (ici : pages des marques, guides, rapports, `?v=`) est refait et enregistré dans le même envoi que son changement.
+- **19/10/2026 (fin) — règles communes du soir (immobilier, valables ici)** : messages Telegram dans UNE seule langue par personne
+  (langue du site au clic `…_ar`, `/ar` `/fr`, sinon celle de Telegram) ; le CANAL de ce site (un message pour tous) attend le choix
+  d'Ahmed (français, arabe ou un canal par langue, liste de travail TG.1) ; liens vers d'autres sites revérifiés chaque semaine
+  (disparu = retiré) ; jamais de carte vide ; robot rouge si une source arrive vide (format changé) ; lecture de secours schema.org,
+  jamais un chiffre deviné. Ici : les prix viennent des magasins (une offre sans prix n'est déjà jamais affichée).

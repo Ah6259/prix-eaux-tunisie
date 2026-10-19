@@ -404,3 +404,7 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Pas de faux boutons : une case qui ressemble à un bouton (fond, bordure, chiffre) doit mener quelque part, sinon le visiteur clique pour rien.
 - Après chaque envoi, regarder le résultat du robot « Tests » sur GitHub : un robot rouge non regardé peut le rester des jours
   (cas du site Mosquées, 18-19/10/2026 : une page fabriquée n'avait pas été enregistrée).
+- Messages Telegram : une seule langue par message (celle choisie par la personne), écrits clairement ; un canal (message pour tous)
+  a une langue choisie à l'avance.
+- Un site qui reprend des informations d'autres sites revérifie régulièrement ses liens, n'affiche jamais une fiche vide, et passe
+  au rouge (e-mail) si une source change sa présentation.
