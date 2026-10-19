@@ -521,18 +521,7 @@ window.EAUX_DATA = {
    "types": [
     "plate"
    ],
-   "products": [
-    {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/252532bb90d4.jpg",
-     "prices": {
-      "Otrity": 0.5083
-     }
-    }
-   ]
+   "products": []
   },
   {
    "id": "jannet",
@@ -553,8 +542,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jannet_2l.jpg",
      "prices": {
-      "Carrefour": 0.83,
-      "Otrity": 1.0
+      "Carrefour": 0.83
      }
     }
    ]
@@ -1280,8 +1268,8 @@ window.EAUX_DATA = {
    "nb": 34
   },
   "otrity": {
-   "dernier_ok": "2026-10-17",
-   "nb": 11
+   "dernier_ok": "2026-10-19",
+   "nb": 9
   },
   "monoprix": {
    "dernier_ok": "2026-10-06",
