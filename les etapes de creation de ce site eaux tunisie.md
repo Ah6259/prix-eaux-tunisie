@@ -397,3 +397,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Le visiteur simulé (`python3 tools/visiteur_simule.py`, copie identique de l'outil commun) signale deux éléments qui se touchent,
   un petit élément aux espaces inégaux, un bouton pris entre deux autres qui n'est pas centré. Rouge = corriger le CSS avant d'envoyer.
 - Avant d'envoyer un changement d'en-tête, de recherche ou de boutons : capture agrandie (×2) de la zone, regardée.
+- Chaque dépôt a son `CLAUDE.md` (mémoire lue automatiquement au début d'une session) : sans lui, une session démarre sans connaître
+  les règles (cas du portail, corrigé le 19/10/2026).
