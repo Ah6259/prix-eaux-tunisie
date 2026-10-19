@@ -452,3 +452,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   `protection.js` (toutes les pages) colle chaque nombre à son unité dans TOUT le texte affiché (`window.collerUnites`, espace
   insécable avant DT, %, L, cl, ml, mg, دينار… et autour de « × » ; observateur pour le texte fabriqué par app.js) ; test dans
   test_site.mjs ; versions 20261020a.
+- **20/10/2026 — règles communes (immobilier, valables ici)** : mesurer ce que la SOURCE montre et que nous ne montrons pas (ici : un
+  produit, un prix ou une photo présent chez le magasin mais absent de notre site) -> robot rouge au-delà de 20 % ; photo d'un site sans
+  https par un relais https (wsrv.nl) ; **une limite est dite tout de suite, en haut du message, avec les solutions** (Claude ne décide
+  jamais seul que c'est impossible). Rien de changé sur ce site.

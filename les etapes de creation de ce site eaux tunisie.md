@@ -412,3 +412,6 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   un test tape le nom de CHAQUE élément de la liste (ici les 35 marques) et vérifie qu'il est proposé en premier.
 - Phrases : un nombre ne se sépare jamais de son unité (DT, %, L, cl…) ni le « × » de « 6 × 1,5 L » : une seule fonction
   (`protection.js`, espace insécable dans tout le texte affiché) et un test ; seulement les phrases, pas les boutons ni les titres.
+- Un robot compare ce que la source montre (produit, prix, photo) à ce que le site affiche, et passe au rouge (e-mail) si l'écart dépasse
+  20 % : le problème est vu avant qu'un visiteur ne le trouve.
+- Quand une limite empêche de faire une demande, la dire tout de suite avec les solutions possibles, et laisser le propriétaire choisir.
