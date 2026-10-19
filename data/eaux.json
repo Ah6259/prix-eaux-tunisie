@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-18",
+ "updated": "2026-10-19",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -600,7 +600,8 @@
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.59
+      "Carrefour": 0.59,
+      "Géant": 0.59
      }
     }
    ]
@@ -1271,12 +1272,12 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-18",
+   "dernier_ok": "2026-10-19",
    "nb": 62
   },
   "geant": {
-   "dernier_ok": "2026-10-18",
-   "nb": 33
+   "dernier_ok": "2026-10-19",
+   "nb": 34
   },
   "otrity": {
    "dernier_ok": "2026-10-17",
