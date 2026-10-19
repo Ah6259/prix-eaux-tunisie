@@ -20,7 +20,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Doit rester **public** (Pages gratuit). `gh` : "C:\Program Files\GitHub CLI\gh.exe".
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
-- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (protection.js, `CSS_V` de build_guides.py, style.css, app.js et assets/son.js : 20261018d).**
+- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (protection.js, `CSS_V` de build_guides.py, style.css, app.js et assets/son.js : 20261019a).**
 - Image d'aperçu des liens partagés : `assets/og-image-v7.jpg` (05/10 : texte à gauche + nouvelle icône goutte + photo NEUTRE de l'eau versée à droite ; modèle `tools/og-image.html`, capture Edge 1200×630 puis JPEG qualité 88 ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
@@ -429,3 +429,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   au z-index 1000 (les couches Leaflet, 400+, passaient devant une liste de l'immobilier) ; testé dans test_site.mjs.
 - **Règle commune § 28.6 (18/10/2026, immobilier)** : aucun élément ne disparaît quand on zoome sur une carte (bulle « reste » en
   pointillés au niveau au-dessus ; test : même total à chaque niveau). Ici : à appliquer si le site affiche un jour une carte (magasins).
+
+- **19/10/2026 — Visiteur simulé : contrôle des ESPACES (règle commune § 29)** : bouton « Voir le classement complet » pas centré (8 px sous la carte, 20 px au-dessus de la barre suivante) → 20 px des deux côtés (`.top-classement .compare-toggle`) ; version 20261019a ; 0 anomalie.
