@@ -433,3 +433,4 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **19/10/2026 — Visiteur simulé : contrôle des ESPACES (règle commune § 29)** : bouton « Voir le classement complet » pas centré (8 px sous la carte, 20 px au-dessus de la barre suivante) → 20 px des deux côtés (`.top-classement .compare-toggle`) ; version 20261019a ; 0 anomalie.
 - **19/10/2026** : le portail (dépôt Ah6259.github.io) a enfin son `CLAUDE.md` (sa mémoire n'était que dans son README) ; tous les dépôts d'Ahmed
   ont maintenant un CLAUDE.md (règle de la procédure « nouveau site »).
+- **19/10/2026 — règle commune « plus grand = plus cher »** (§ 18, immobilier) : une estimation ne donne jamais le même prix à un bien plus grand ; pente apprise sur les vraies données. Ici : à appliquer si le site estime un jour un prix par format (1,5 L vs 6 L).
