@@ -444,3 +444,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   d'Ahmed (français, arabe ou un canal par langue, liste de travail TG.1) ; liens vers d'autres sites revérifiés chaque semaine
   (disparu = retiré) ; jamais de carte vide ; robot rouge si une source arrive vide (format changé) ; lecture de secours schema.org,
   jamais un chiffre deviné. Ici : les prix viennent des magasins (une offre sans prix n'est déjà jamais affichée).
+- **19/10/2026 (nuit) — règles communes § 27.7-12 et § 30 (immobilier, valables ici)** : recherche par texte = vrai nom avant ses
+  autres écritures, nom exact d'abord, ville ajoutable, script qui tape CHAQUE nom de la liste (ici : les 35 marques) ; phrases sans
+  coupure illogique (nombre + unité « 0,850 DT », « 6 × 1,5 L », « 10 % » jamais séparés : espace insécable), SEULEMENT les phrases,
+  pas les boutons ni les titres (Ahmed). À appliquer à la prochaine modification de ce site.
