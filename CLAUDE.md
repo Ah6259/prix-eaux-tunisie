@@ -468,3 +468,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   après le commit et AVANT chaque push : `python3 ../projets-ahmed/"outils communs/comme-github/essai_comme_github.py" . -- node tools/test_site.mjs`
   (dernier commit, sans historique, sans dossiers voisins ; « ÉCHEC » = ne pas envoyer) ; un test ne lit un fichier d'un autre dépôt que s'il
   existe (ici : `son.js` de projets-ahmed, déjà protégé par `existsSync`). Rien de changé sur ce site.
+- **20/10/2026 (fin d'après-midi)** : Outils pratiques — lien vers TUNIMPOT (simulateur officiel du ministère des Finances, Google Play) sur la
+  page « Impôt sur le revenu » (demande d'Ahmed). Leçon pour tous les sites : un lien vers un outil officiel est vérifié (existe, éditeur,
+  répond) avant d'être mis ; jamais de lien mort. Rien de changé sur ce site.

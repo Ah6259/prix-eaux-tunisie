@@ -422,3 +422,4 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   existe : sinon le propriétaire reçoit un e-mail pour chaque robot rouge, même ceux qui seront réparés seuls.
 - Avant d'envoyer, rejouer les tests dans une copie neuve du dernier commit, sans les dossiers voisins (comme le fait GitHub) :
   un test qui passe chez soi peut planter sur GitHub s'il lit un fichier d'un autre dossier.
+- Un lien vers une application ou un site officiel se vérifie avant d'être ajouté (existe-t-il ? qui l'édite ? le lien répond-il ?) ; pas de lien mort.
