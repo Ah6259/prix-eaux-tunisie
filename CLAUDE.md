@@ -475,3 +475,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   en `pipefail` ; on décide sur son CODE DE SORTIE, jamais derrière un `| tail`) et § 33.6 (un filtre de sécurité s'applique à tous les
   chemins ET à la mémoire des jours passés). Ici : à appliquer si un filtre de données est ajouté (ex. produit « eau » vérifié par son nom).
   Rien de changé sur ce site.
+- **20/10/2026 (nuit)** : immobilier : 17 666 annonces en ligne ; règle commune § 34 (pages et données publiées ENSEMBLE : empreinte des
+  données vérifiée avant publication, limite de temps des robots = 2 fois leur durée) et § 35 (un fait absent du texte = « non » seulement
+  si le texte a été lu ; détection contrôlée sur un échantillon). Ici : maj-prix.yml relève, fabrique et enregistre dans le même robot
+  (conforme au § 34) ; § 35 à appliquer si un produit est classé d'après son texte (ex. « eau gazeuse »). Rien de changé sur ce site.

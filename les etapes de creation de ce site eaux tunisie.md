@@ -426,3 +426,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Une règle qui écarte des données douteuses s'écrit une seule fois et s'applique partout : à chaque chemin de lecture, et aussi à ce
   que le robot garde des jours précédents.
 - Avant d'envoyer, décider sur le code de sortie des tests (jamais sur un affichage raccourci par « | tail »).
+- Ne jamais publier des pages qui ne vont pas avec les données : noter une empreinte des données dans les pages, et la vérifier avant de publier.
+- Un mot absent d'un texte (« meublé », « gazeuse »…) ne vaut « non » que si le texte complet a été lu ; sinon c'est « inconnu ».
