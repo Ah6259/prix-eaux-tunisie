@@ -65,3 +65,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 18/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07, Webdo 19/08, AllAfrica 26/08 (déjà notés), Founa (fermé) |
 | 19/10/2026 | sfbt.com.tn, mgdrive.com.tn, epicerie-en-ligne.tn, ubuy.com.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
 | 19/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, AllAfrica 26/08 (déjà notés), Founa (fermé), carrefour.tn déjà utilisé |
+| 20/10/2026 | founa.com | ❌ | lisible (200) mais page minuscule (114 octets), 0 prix, 0 « eau » ; le drive Founa est fermé (déjà noté) |
+| 20/10/2026 | kolchi.tn, souq.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
+| 20/10/2026 | livraison.tn | ❌ | 404 (19 octets), 0 prix, 0 « eau » |
+| 20/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (déjà notés), Founa (fermé) |
