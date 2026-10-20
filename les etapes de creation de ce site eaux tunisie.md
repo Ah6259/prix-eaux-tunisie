@@ -418,3 +418,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Un robot en échec est le travail de l'assistant, pas du propriétaire : une tâche planifiée trouve les robots rouges, répare
   (3 essais au plus) et ne prévient le propriétaire que si elle n'y arrive pas ou si une décision humaine est nécessaire.
 - Un test qui tire un cas au hasard dans les vraies données doit écarter les cas pièges connus, sinon il bloque un jour la publication à tort.
+- Couper les e-mails d'échec de GitHub (Settings → Notifications → Actions → décocher « Email ») une fois que la tâche de réparation
+  existe : sinon le propriétaire reçoit un e-mail pour chaque robot rouge, même ceux qui seront réparés seuls.
