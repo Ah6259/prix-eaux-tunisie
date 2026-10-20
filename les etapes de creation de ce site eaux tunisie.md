@@ -415,3 +415,6 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Un robot compare ce que la source montre (produit, prix, photo) à ce que le site affiche, et passe au rouge (e-mail) si l'écart dépasse
   20 % : le problème est vu avant qu'un visiteur ne le trouve.
 - Quand une limite empêche de faire une demande, la dire tout de suite avec les solutions possibles, et laisser le propriétaire choisir.
+- Un robot en échec est le travail de l'assistant, pas du propriétaire : une tâche planifiée trouve les robots rouges, répare
+  (3 essais au plus) et ne prévient le propriétaire que si elle n'y arrive pas ou si une décision humaine est nécessaire.
+- Un test qui tire un cas au hasard dans les vraies données doit écarter les cas pièges connus, sinon il bloque un jour la publication à tort.

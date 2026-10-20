@@ -456,3 +456,9 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   produit, un prix ou une photo présent chez le magasin mais absent de notre site) -> robot rouge au-delà de 20 % ; photo d'un site sans
   https par un relais https (wsrv.nl) ; **une limite est dite tout de suite, en haut du message, avec les solutions** (Claude ne décide
   jamais seul que c'est impossible). Rien de changé sur ce site.
+- **20/10/2026 — robots rouges (règle commune § 33, Ahmed : « je ne veux être alerté que si tu n'as pas pu régler »)** : tâche
+  Claude « Réparer les robots rouges » (6h53 et 18h53, consignes `consignes des taches/reparer-robots-rouges.md` de projets-ahmed) :
+  cherche les robots en échec de TOUS les dépôts, répare (3 essais), « Réparé seul » au journal ; sinon « À VOIR PAR AHMED » (e-mail).
+  Les e-mails « Run failed » viennent de GitHub : Ahmed peut les couper (Settings → Notifications → Actions). Cas du jour : robot des
+  appels d'offres bloqué à tort par le test de recherche au son (« ettudes » lu comme l'article) → test corrigé là, et dans Concours et
+  Conférences. Rien de changé sur ce site. Mes comptes : pas de Pass pour le moment (site à tester et améliorer d'abord, PA.2).
