@@ -492,3 +492,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   filtre « Local », IA sur les seuls locaux) ; bug grave corrigé (avis de l'IA d'une AUTRE annonce sur 14 339 cartes, listes alignées par
   position après un filtre). Règles communes § 35.6-7. Ici : à vérifier si une page aligne deux listes (prix ↔ marques) après un filtre.
   Rien de changé sur ce site.
+- **20/10/2026 (nuit, fin)** : sur le PC (Windows), après `git pull` : l'outil « essai comme GitHub » (projets-ahmed) marche aussi sous
+  Windows (bash de Git pour Windows, jonction au lieu d'un lien symbolique, node_modules du dépôt jamais touchés) ; les tests de
+  l'immobilier demandent `pip install pyflakes` une fois par PC (à proposer à Ahmed avant d'installer). Rien de changé sur ce site.

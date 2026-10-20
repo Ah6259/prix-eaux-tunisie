@@ -437,3 +437,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   le vérifier par un test (sinon une ligne reçoit les données d'une autre).
 - Quand un type a plusieurs sortes (local seul, murs + fonds, fonds de commerce), les lire dans le texte, les afficher et les
   proposer dans le filtre, plutôt que de retirer les annonces.
+- Un outil écrit sur un serveur Linux doit aussi marcher sur le PC Windows du propriétaire (chemins, bash, liens de dossiers) ;
+  le vérifier ou le prévoir avant de dire « tout est prêt sur le PC ».

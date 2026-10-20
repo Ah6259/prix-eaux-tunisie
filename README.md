@@ -225,6 +225,7 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - **18/10/2026 (fin de nuit)** : rien de changé sur ce site ; règles communes : vérifier contre une référence indépendante (contrôle L3 de l'immobilier) ; motif du paiement des Pass = code personnel.
 - **18/10/2026 (nuit)** : rien de changé sur ce site ; règles communes : code Pass (robot commun, 10 pages) et lieux (une « délégation » affichée est toujours officielle ; Djerba et les villes partagées = groupes ; la carte suit le filtre).
 - **19/10/2026** : rien de changé sur ce site ; règles communes du soir : Telegram en une seule langue, liens revérifiés, jamais de carte vide ; règle ajoutée : regarder le robot Tests après chaque envoi ; le visiteur simulé commun vérifie aussi les pages sur PC (1280 px) et les éléments cachés par un autre (0 anomalie ici).
+- **20/10/2026 (nuit, fin)** : rien de changé sur ce site ; l'outil commun « essai comme GitHub » marche aussi sur le PC Windows.
 - **20/10/2026 (nuit)** : rien de changé sur ce site ; règles communes : pages et données toujours publiées ensemble, et un fait absent d'un texte ne vaut « non » que si le texte a été lu.
 - **20/10/2026 (après-midi)** : rien de changé sur ce site ; avant chaque envoi, les tests sont rejoués comme sur GitHub (sans les dossiers voisins), pour tous les sites.
 - **20/10/2026** : rien de changé sur ce site ; une tâche Claude répare seule les robots en échec de tous les sites (2 fois par jour), Ahmed n'est prévenu que si elle n'y arrive pas (e-mails d'échec de GitHub coupés).
