@@ -482,3 +482,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **20/10/2026 (nuit), règle commune § 35.5 (Ahmed)** : toute source est lue EN ENTIER (titre + description complète de chaque fiche, pas
   seulement la carte de la liste). Ici : les magasins donnent nom + format + prix (pas de description) ; si une source donne un texte
   (eau gazeuse, pack mixte…), il est lu avant de classer le produit. Rien de changé sur ce site.
+- **20/10/2026 (nuit)** : immobilier — décision d'Ahmed : une donnée dont un fait important est encore inconnu (villa louée non lue) reste
+  VISIBLE mais n'est pas apprise par l'IA tant que son texte n'est pas lu (règle commune § 35.3). Rien de changé sur ce site.

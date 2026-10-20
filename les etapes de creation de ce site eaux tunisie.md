@@ -430,3 +430,4 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Un mot absent d'un texte (« meublé », « gazeuse »…) ne vaut « non » que si le texte complet a été lu ; sinon c'est « inconnu ».
 - Chaque source se lit en entier : titre et description complète de chaque fiche, pas seulement la ligne de la liste ; une nouvelle
   source n'est branchée qu'avec cette lecture et un test.
+- Une donnée dont un fait important est encore inconnu reste affichée, mais n'entre pas dans un calcul ou un apprentissage tant que le fait n'est pas connu.
