@@ -488,3 +488,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   pages, grands portails 1 s, pause selon le temps de réponse, arrêt après 3 coupures de suite, plafond de pages par passage, une page
   lue une seule fois (modèle : robot/commun.py de l'immobilier). Ici : Carrefour et Géant = grands sites, lus une fois par nuit ; seule
   pause de 0,5 s dans `collect_prices.py` = ancienne source barka (retirée le 30/09) — à mettre à 1 s si elle revient. Rien de changé sur ce site.
+- **20/10/2026 (nuit, fin)** : immobilier — locaux commerciaux : local seul / murs + fonds / fonds de commerce (lus dans le texte, étiquette,
+  filtre « Local », IA sur les seuls locaux) ; bug grave corrigé (avis de l'IA d'une AUTRE annonce sur 14 339 cartes, listes alignées par
+  position après un filtre). Règles communes § 35.6-7. Ici : à vérifier si une page aligne deux listes (prix ↔ marques) après un filtre.
+  Rien de changé sur ce site.

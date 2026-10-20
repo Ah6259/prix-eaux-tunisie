@@ -433,3 +433,7 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Une donnée dont un fait important est encore inconnu reste affichée, mais n'entre pas dans un calcul ou un apprentissage tant que le fait n'est pas connu.
 - Ne jamais fatiguer un site que l'on lit : au moins 3 s entre deux pages pour un petit site, une pause plus longue s'il répond
   lentement, arrêt jusqu'au lendemain après 3 coupures, et chaque page lue une seule fois.
+- Ne jamais associer deux listes par leur position quand l'une a été filtrée : rattacher chaque information à son identifiant, et
+  le vérifier par un test (sinon une ligne reçoit les données d'une autre).
+- Quand un type a plusieurs sortes (local seul, murs + fonds, fonds de commerce), les lire dans le texte, les afficher et les
+  proposer dans le filtre, plutôt que de retirer les annonces.
