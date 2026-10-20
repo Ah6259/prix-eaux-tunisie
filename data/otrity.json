@@ -1,5 +1,5 @@
 {
- "date": "2026-10-19",
+ "date": "2026-10-20",
  "offres": [
   {
    "enseigne": "otrity",
@@ -10,6 +10,16 @@
    "type": "plate",
    "prix": 0.1583,
    "image_src": "https://otrity.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-01-29-at-19.56.43-10.jpeg"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "HAYET",
+   "nom": "Eau minérale Hayet 0.5l",
+   "volume_l": 0.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.5083,
+   "image_src": "https://otrity.com/wp-content/uploads/hayet-1.5.gif"
   },
   {
    "enseigne": "otrity",
@@ -43,16 +53,6 @@
   },
   {
    "enseigne": "otrity",
-   "marque": "SAFIA",
-   "nom": "Eau minérale Safia 0.5L",
-   "volume_l": 0.5,
-   "nb_unites": 1,
-   "type": "plate",
-   "prix": 0.5167,
-   "image_src": "https://otrity.com/wp-content/uploads/2020/09/eau-minerale-7.webp"
-  },
-  {
-   "enseigne": "otrity",
    "marque": "GARCI",
    "nom": "Eau minérale Garci 1L",
    "volume_l": 1.0,
@@ -80,6 +80,16 @@
    "type": "plate",
    "prix": 0.7083,
    "image_src": "https://otrity.com/wp-content/uploads/2020/09/eau-minerale-6.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "HAYET",
+   "nom": "Eau minérale Hayet 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.8167,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/09/HAYET_1_5_L_f98db598a1.webp"
   },
   {
    "enseigne": "otrity",
