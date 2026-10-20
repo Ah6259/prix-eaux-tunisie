@@ -428,3 +428,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Avant d'envoyer, décider sur le code de sortie des tests (jamais sur un affichage raccourci par « | tail »).
 - Ne jamais publier des pages qui ne vont pas avec les données : noter une empreinte des données dans les pages, et la vérifier avant de publier.
 - Un mot absent d'un texte (« meublé », « gazeuse »…) ne vaut « non » que si le texte complet a été lu ; sinon c'est « inconnu ».
+- Chaque source se lit en entier : titre et description complète de chaque fiche, pas seulement la ligne de la liste ; une nouvelle
+  source n'est branchée qu'avec cette lecture et un test.

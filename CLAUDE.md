@@ -479,3 +479,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   données vérifiée avant publication, limite de temps des robots = 2 fois leur durée) et § 35 (un fait absent du texte = « non » seulement
   si le texte a été lu ; détection contrôlée sur un échantillon). Ici : maj-prix.yml relève, fabrique et enregistre dans le même robot
   (conforme au § 34) ; § 35 à appliquer si un produit est classé d'après son texte (ex. « eau gazeuse »). Rien de changé sur ce site.
+- **20/10/2026 (nuit), règle commune § 35.5 (Ahmed)** : toute source est lue EN ENTIER (titre + description complète de chaque fiche, pas
+  seulement la carte de la liste). Ici : les magasins donnent nom + format + prix (pas de description) ; si une source donne un texte
+  (eau gazeuse, pack mixte…), il est lu avant de classer le produit. Rien de changé sur ce site.
