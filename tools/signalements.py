@@ -61,7 +61,7 @@ def ecrire_si_change(chemin, texte):
         ancien = None
     if ancien is not None and MOTIF_MAJ.sub('"maj": ""', ancien) == MOTIF_MAJ.sub('"maj": ""', texte):
         return False
-    chemin.write_text(texte, encoding="utf-8")
+    chemin.write_text(texte, encoding="utf-8", newline="\n")
     return True
 
 def norm(s):

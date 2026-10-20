@@ -87,7 +87,7 @@ def chrome():
 def photographier(html, sortie):
     with tempfile.TemporaryDirectory() as d:
         page = Path(d) / "image.html"
-        page.write_text(html, encoding="utf-8")
+        page.write_text(html, encoding="utf-8", newline="\n")
         subprocess.run([chrome(), "--headless=new", "--disable-gpu", "--no-sandbox", "--hide-scrollbars",
                         f"--user-data-dir={d}/profil", "--virtual-time-budget=6000", "--window-size=1080,1350",
                         f"--screenshot={sortie}", page.as_uri()], check=True, capture_output=True, timeout=120)
@@ -126,7 +126,7 @@ def main():
     image = OUT / "semaine.png"
     photographier(html_image(rows, maj), image)
     texte = legende(rows, maj)
-    (OUT / "legende.txt").write_text(texte, encoding="utf-8")
+    (OUT / "legende.txt").write_text(texte, encoding="utf-8", newline="\n")
     print(f"Image : {image} ({image.stat().st_size // 1024} Ko)\n\n{texte}")
     if "--sans-telegram" not in sys.argv:
         envoyer_telegram(image, texte)

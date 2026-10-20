@@ -25,7 +25,7 @@ def fetch(url, dest):
             # chaîne TLS incomplète sur certains sites .tn (échec sous Linux/GitHub Actions)
             resp = urllib.request.urlopen(req, timeout=30, context=ssl._create_unverified_context())
         data = resp.read().decode("utf-8", errors="ignore")
-        dest.write_text(data, encoding="utf-8")
+        dest.write_text(data, encoding="utf-8", newline="\n")
         time.sleep(0.8)
         return data
     except Exception as e:
@@ -91,5 +91,5 @@ for brand in BRANDS:
         n += 1
     print(f"{brand:14} -> {n} offers")
 
-(SCRATCH / "barka_products.json").write_text(json.dumps(all_rows, ensure_ascii=False, indent=1), encoding="utf-8")
+(SCRATCH / "barka_products.json").write_text(json.dumps(all_rows, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
 print(f"\nTOTAL: {len(all_rows)} offers saved")

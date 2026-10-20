@@ -69,8 +69,8 @@ for data in releves:
 serie = [{"date": d, **jours[d]} for d in sorted(jours)]
 data = {"note": "Prix relevés quotidiennement depuis le 2026-09-25", "serie": serie}
 
-OUT_JS.write_text("window.EAUX_HISTO = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
-OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+OUT_JS.write_text("window.EAUX_HISTO = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8", newline="\n")
+OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
 print(f"{len(serie)} jours -> {OUT_JSON}")
 for j in serie:
     print(f"  {j['date']}  stika 1,5 L : {j['stika15']} DT ({', '.join(j['marques'])})")

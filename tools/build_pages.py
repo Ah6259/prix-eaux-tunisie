@@ -199,7 +199,7 @@ urls = [f"{SITE}/"]
 for b in data["brands"]:
     d = ROOT / "marque" / b["id"]
     d.mkdir(parents=True, exist_ok=True)
-    (d / "index.html").write_text(page_marque(b), encoding="utf-8")
+    (d / "index.html").write_text(page_marque(b), encoding="utf-8", newline="\n")
     urls.append(f"{SITE}/marque/{b['id']}/")
 
 # pages de marques disparues de la liste : on les retire
@@ -233,7 +233,7 @@ for i, u in enumerate(urls):
     sm.append(f"  <url><loc>{u}</loc><lastmod>{lm}</lastmod>"
               f"<changefreq>daily</changefreq><priority>{'1.0' if i == 0 else '0.7'}</priority></url>")
 sm.append("</urlset>")
-(ROOT / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8")
+(ROOT / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8", newline="\n")
 
 # liens statiques sur l'accueil (entre <!--MARQUES--> et <!--/MARQUES-->)
 index = ROOT / "index.html"
@@ -255,6 +255,6 @@ noms = ", ".join(b["name"] for b in data["brands"])
 html = re.sub(r'("text": ")\d+ marques vendues en Tunisie : [^"]*(")',
               lambda m: m.group(1) + f"{nb} marques vendues en Tunisie : {noms}." + m.group(2),
               html)
-index.write_text(html, encoding="utf-8")
+index.write_text(html, encoding="utf-8", newline="\n")
 
 print(f"{len(data['brands'])} pages marque générées · sitemap {len(urls)} URLs · liens accueil : {lien_accueil}")

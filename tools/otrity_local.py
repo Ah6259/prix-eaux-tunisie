@@ -78,7 +78,7 @@ def main():
         sys.exit(1)
 
     OUT.write_text(json.dumps({"date": datetime.date.today().isoformat(), "offres": offres},
-                              ensure_ascii=False, indent=1), encoding="utf-8")
+                              ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
     log(f"{len(offres)} offres Otrity relevées")
     nouveau_logo = chercher_logo()
 

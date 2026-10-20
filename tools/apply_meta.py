@@ -26,6 +26,6 @@ for b in data["brands"]:
     maj += 1
 
 appliquer_photos_libres(data["brands"])
-OUT_JS.write_text("window.EAUX_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
-OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+OUT_JS.write_text("window.EAUX_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8", newline="\n")
+OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
 print(f"{maj}/{len(data['brands'])} marques mises à jour -> {OUT_JSON}")

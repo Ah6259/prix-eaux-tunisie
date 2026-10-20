@@ -250,7 +250,7 @@ def carrefour():
         price_range{minimum_price{final_price{value} regular_price{value}}}}}}"""
     q = re.sub(r"\s+", " ", q)  # le pare-feu de Carrefour rejette les requêtes multi-lignes
     items = json.loads(http_get("https://www.carrefour.tn/graphql", {"query": q}))["data"]["products"]["items"]
-    (RAW_DIR / "carrefour.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
+    (RAW_DIR / "carrefour.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
     out = []
     for it in items:
         nom = it["name"].strip()
@@ -273,7 +273,7 @@ def carrefour():
 # ---------------------------------------------------------------- Géant
 def geant():
     h = http_get("https://www.geantdrive.tn/tunis-city/11-eaux?resultsPerPage=100").decode("utf-8", errors="replace")
-    (RAW_DIR / "geant.html").write_text(h, encoding="utf-8")
+    (RAW_DIR / "geant.html").write_text(h, encoding="utf-8", newline="\n")
     out = []
     for bloc in h.split('<article class="product-miniature')[1:]:
         g = lambda pat: (re.search(pat, bloc, re.S) or [None, None])[1]
@@ -304,7 +304,7 @@ def otrity():
     ensuite par les garde-fous de prix au litre."""
     items = json.loads(http_get("https://otrity.com/wp-json/wc/store/v1/products",
                                 {"category": 1261, "per_page": 100}))
-    (RAW_DIR / "otrity.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
+    (RAW_DIR / "otrity.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
     out = []
     for it in items:
         nom = html.unescape(it.get("name") or "").strip()
@@ -375,7 +375,7 @@ def barka(requetes=("eau minerale", "eau gazeuse", "eau de source"), max_pages=4
             if not token or pages_sans_eau >= 3:
                 break
             time.sleep(0.5)
-    (RAW_DIR / "barka.json").write_text(json.dumps(brut, ensure_ascii=False, indent=1), encoding="utf-8")
+    (RAW_DIR / "barka.json").write_text(json.dumps(brut, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
     return out
 
 
@@ -630,8 +630,8 @@ def main():
         "statut_sources": statut,
     }
 
-    OUT_JS.write_text("window.EAUX_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
-    OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+    OUT_JS.write_text("window.EAUX_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8", newline="\n")
+    OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
 
     n_prod = sum(len(b["products"]) for b in out_brands)
     n_off = sum(len(p["prices"]) for b in out_brands for p in b["products"])

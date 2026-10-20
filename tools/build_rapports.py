@@ -242,7 +242,7 @@ def generer(data, SITE, G, fichier=None):
     hist = mettre_a_jour(lire(), serie)
     if not hist["mois"]:
         return []
-    FICHIER.write_text(json.dumps(hist, ensure_ascii=False, separators=(",", ":"), sort_keys=True) + "\n", encoding="utf-8")
+    FICHIER.write_text(json.dumps(hist, ensure_ascii=False, separators=(",", ":"), sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     ids = {b["name"]: b["id"] for b in data["brands"]}
     courant = max(hist["mois"])
     G._RAPPORTS_MOIS = list(hist["mois"])
@@ -250,8 +250,8 @@ def generer(data, SITE, G, fichier=None):
     for m, d in sorted(hist["mois"].items()):
         dossier = ROOT / "rapports" / m
         dossier.mkdir(parents=True, exist_ok=True)
-        (dossier / "index.html").write_text(page(m, d, hist["mois"].get(mois_precedent(m)), courant, ids, SITE, G), encoding="utf-8")
+        (dossier / "index.html").write_text(page(m, d, hist["mois"].get(mois_precedent(m)), courant, ids, SITE, G), encoding="utf-8", newline="\n")
         urls.append((f"{SITE}/rapports/{m}/", d["au"]))
-    (ROOT / "rapports" / "index.html").write_text(page_liste(hist, courant, SITE, G), encoding="utf-8")
+    (ROOT / "rapports" / "index.html").write_text(page_liste(hist, courant, SITE, G), encoding="utf-8", newline="\n")
     urls.insert(0, (f"{SITE}/rapports/", hist["mois"][courant]["au"]))
     return urls

@@ -360,6 +360,6 @@ def generer(data, COMPO, SITE, ROOT, maj_fr):
             continue
         d = ROOT / chemin
         d.mkdir(exist_ok=True)
-        (d / "index.html").write_text(html, encoding="utf-8")
+        (d / "index.html").write_text(html, encoding="utf-8", newline="\n")
         urls.append(f"{SITE}/{chemin}/")
     return urls

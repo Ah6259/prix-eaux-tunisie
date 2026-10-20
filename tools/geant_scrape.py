@@ -39,5 +39,5 @@ for b in blocks:
     })
 
 dest = HERE / "geant_products.json"
-dest.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+dest.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
 print(f"{len(out)} produits -> {dest}")

@@ -36,7 +36,7 @@ for nom, base in SITES.items():
     if not html:
         continue
     html = html.decode("utf-8", errors="ignore")
-    (DOSSIER / f"{nom}-page.html").write_text(html[:400000])
+    (DOSSIER / f"{nom}-page.html").write_text(html[:400000], newline="\n")
     urls = []
     # icônes du site, image de partage, et toute image dont le nom/alt/classe contient « logo »
     for m in re.finditer(r'<link[^>]+rel="[^"]*icon[^"]*"[^>]*>', html, re.I):

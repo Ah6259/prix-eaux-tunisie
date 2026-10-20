@@ -135,8 +135,8 @@ def main():
     if not baisses:
         return
     data = {"date": actuel.get("updated"), "baisses": baisses}
-    OUT_JS.write_text("window.EAUX_BAISSES = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
-    OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+    OUT_JS.write_text("window.EAUX_BAISSES = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8", newline="\n")
+    OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
     try:
         telegram(message(baisses))
     except Exception as e:   # une panne Telegram ne doit pas bloquer la mise à jour du site

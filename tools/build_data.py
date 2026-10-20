@@ -208,8 +208,8 @@ data = {
 
 (PROJECT / "data").mkdir(exist_ok=True)
 js = "window.EAUX_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n"
-(PROJECT / "data" / "eaux.js").write_text(js, encoding="utf-8")
-(PROJECT / "data" / "eaux.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+(PROJECT / "data" / "eaux.js").write_text(js, encoding="utf-8", newline="\n")
+(PROJECT / "data" / "eaux.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
 
 n_prod = sum(len(b["products"]) for b in out_brands)
 n_off = sum(len(p["prices"]) for b in out_brands for p in b["products"])
