@@ -463,3 +463,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   un robot rouge ne prévient plus personne par e-mail, seule la tâche « Réparer les robots rouges » les traite. Cas du jour : robot des
   appels d'offres bloqué à tort par le test de recherche au son (« ettudes » lu comme l'article) → test corrigé là, et dans Concours et
   Conférences. Rien de changé sur ce site. Mes comptes : pas de Pass pour le moment (site à tester et améliorer d'abord, PA.2).
+- **20/10/2026 (après-midi) — tester comme GitHub (règle commune § 33.5, Ahmed : « pour toujours l'éviter », tous les sites)** : le relevé
+  de l'immobilier a été bloqué toute la journée par un test qui lisait un dossier voisin (présent chez Claude, absent sur GitHub). Désormais,
+  après le commit et AVANT chaque push : `python3 ../projets-ahmed/"outils communs/comme-github/essai_comme_github.py" . -- node tools/test_site.mjs`
+  (dernier commit, sans historique, sans dossiers voisins ; « ÉCHEC » = ne pas envoyer) ; un test ne lit un fichier d'un autre dépôt que s'il
+  existe (ici : `son.js` de projets-ahmed, déjà protégé par `existsSync`). Rien de changé sur ce site.
