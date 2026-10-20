@@ -423,3 +423,6 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Avant d'envoyer, rejouer les tests dans une copie neuve du dernier commit, sans les dossiers voisins (comme le fait GitHub) :
   un test qui passe chez soi peut planter sur GitHub s'il lit un fichier d'un autre dossier.
 - Un lien vers une application ou un site officiel se vérifie avant d'être ajouté (existe-t-il ? qui l'édite ? le lien répond-il ?) ; pas de lien mort.
+- Une règle qui écarte des données douteuses s'écrit une seule fois et s'applique partout : à chaque chemin de lecture, et aussi à ce
+  que le robot garde des jours précédents.
+- Avant d'envoyer, décider sur le code de sortie des tests (jamais sur un affichage raccourci par « | tail »).

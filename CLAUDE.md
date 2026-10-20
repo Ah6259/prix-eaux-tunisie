@@ -471,3 +471,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **20/10/2026 (fin d'après-midi)** : Outils pratiques — lien vers TUNIMPOT (simulateur officiel du ministère des Finances, Google Play) sur la
   page « Impôt sur le revenu » (demande d'Ahmed). Leçon pour tous les sites : un lien vers un outil officiel est vérifié (existe, éditeur,
   répond) avant d'être mis ; jamais de lien mort. Rien de changé sur ce site.
+- **20/10/2026 (soir)** : immobilier relancé (17 666 annonces) ; règles communes § 33.5 (l'outil « essai comme GitHub » lance les tests
+  en `pipefail` ; on décide sur son CODE DE SORTIE, jamais derrière un `| tail`) et § 33.6 (un filtre de sécurité s'applique à tous les
+  chemins ET à la mémoire des jours passés). Ici : à appliquer si un filtre de données est ajouté (ex. produit « eau » vérifié par son nom).
+  Rien de changé sur ce site.
