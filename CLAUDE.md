@@ -484,3 +484,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   (eau gazeuse, pack mixte…), il est lu avant de classer le produit. Rien de changé sur ce site.
 - **20/10/2026 (nuit)** : immobilier — décision d'Ahmed : une donnée dont un fait important est encore inconnu (villa louée non lue) reste
   VISIBLE mais n'est pas apprise par l'IA tant que son texte n'est pas lu (règle commune § 35.3). Rien de changé sur ce site.
+- **20/10/2026 (nuit), règle commune § 36 (Ahmed : « ne pas fatiguer les sites par notre lecture »)** : petits sites >= 3 s entre deux
+  pages, grands portails 1 s, pause selon le temps de réponse, arrêt après 3 coupures de suite, plafond de pages par passage, une page
+  lue une seule fois (modèle : robot/commun.py de l'immobilier). Ici : Carrefour et Géant = grands sites, lus une fois par nuit ; seule
+  pause de 0,5 s dans `collect_prices.py` = ancienne source barka (retirée le 30/09) — à mettre à 1 s si elle revient. Rien de changé sur ce site.

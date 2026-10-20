@@ -431,3 +431,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Chaque source se lit en entier : titre et description complète de chaque fiche, pas seulement la ligne de la liste ; une nouvelle
   source n'est branchée qu'avec cette lecture et un test.
 - Une donnée dont un fait important est encore inconnu reste affichée, mais n'entre pas dans un calcul ou un apprentissage tant que le fait n'est pas connu.
+- Ne jamais fatiguer un site que l'on lit : au moins 3 s entre deux pages pour un petit site, une pause plus longue s'il répond
+  lentement, arrêt jusqu'au lendemain après 3 coupures, et chaque page lue une seule fois.
