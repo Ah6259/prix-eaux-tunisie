@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-10-20",
+ "updated": "2026-10-21",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -940,7 +940,6 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/primaqua_19l_avec_consigne.jpg",
      "prices": {
-      "Géant": 5.3,
       "Carrefour": 5.35
      }
     }
@@ -1281,11 +1280,11 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-20",
+   "dernier_ok": "2026-10-21",
    "nb": 62
   },
   "geant": {
-   "dernier_ok": "2026-10-20",
+   "dernier_ok": "2026-10-21",
    "nb": 34
   },
   "otrity": {
