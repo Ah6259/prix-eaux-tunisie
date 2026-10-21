@@ -940,6 +940,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/primaqua_19l_avec_consigne.jpg",
      "prices": {
+      "Géant": 5.3,
       "Carrefour": 5.35
      }
     }
@@ -1134,7 +1135,8 @@ window.EAUX_DATA = {
      "img": "assets/img/safia_15l.jpg",
      "prices": {
       "Carrefour": 0.43,
-      "Géant": 0.43
+      "Géant": 0.43,
+      "Otrity": 0.5167
      }
     },
     {
@@ -1214,8 +1216,7 @@ window.EAUX_DATA = {
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
       "Carrefour": 0.68,
-      "Géant": 0.68,
-      "Otrity": 0.8333
+      "Géant": 0.68
      }
     }
    ]
@@ -1288,7 +1289,7 @@ window.EAUX_DATA = {
    "nb": 34
   },
   "otrity": {
-   "dernier_ok": "2026-10-20",
+   "dernier_ok": "2026-10-21",
    "nb": 10
   },
   "monoprix": {
