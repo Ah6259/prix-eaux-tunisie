@@ -37,6 +37,7 @@ def pages_video(root, cfg=None):
               f'<meta property="og:video:height" content="1920">\n<meta name="twitter:card" content="summary_large_image">\n')
         h = re.sub(r'<script type="application/ld\+json">[\s\S]*?</script>\s*', "", modele)
         h = re.sub(r'<link rel="canonical"[^>]*>\s*', "", h)
+        h = re.sub(r'<link rel="alternate" hreflang[^>]*>\s*', "", h)   # la page vidéo n'est pas une traduction de la page modèle
         h = re.sub(r'<meta (property="og:[^"]*"|name="twitter:[^"]*")[^>]*>\s*', "", h)
         h = re.sub(r"<title>[\s\S]*?</title>", lambda m: f"<title>{_esc(titre)} | {_esc(nom)}</title>", h, count=1)
         h = re.sub(r'(<meta name="description" content=")[^"]*(")', lambda m: m.group(1) + _esc(desc) + m.group(2), h, count=1)
@@ -56,7 +57,8 @@ def pages_video(root, cfg=None):
                  '  <div class="video-tete">' + (f'<img src="{r}{cfg["logo"]}" alt="" width="52" height="52">' if cfg.get("logo") else "")
                  + f'<p class="video-nom"{_txt(cfg["nom"], D)}</p></div>\n'
                  f'  <h1{_txt(p["titre"], D)}</h1>\n'
-                 f'  <video class="video-lecteur" controls playsinline preload="metadata" width="1080" height="1920" poster="{r}assets/video/{p["couverture"]}" src="{r}assets/video/{p["video"]}.mp4"{src} autoplay muted></video>\n'
+                 + (f'  <p class="video-texte"{_txt(p["texte"], D)}</p>\n' if p.get("texte") else "")
+                 + f'  <video class="video-lecteur" controls playsinline preload="{p.get("preload") or cfg.get("preload") or "metadata"}" width="1080" height="1920" poster="{r}assets/video/{p["couverture"]}" src="{r}assets/video/{p["video"]}.mp4"{src} autoplay muted></video>\n'
                  f'  <button class="btn-video-son" type="button"{_txt({l: SON.get(l, SON["fr"]) for l in cfg["partager"]}, D)}</button>\n'
                  f'  <a class="btn-video-site" href="{r}{p["site"]}"{_txt(p["bouton"], D)}</a>\n'
                  f'  <button class="btn-video-partager" type="button" data-partager-video{_txt(cfg["partager"], D)}</button>\n'
