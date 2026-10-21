@@ -69,3 +69,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 20/10/2026 | kolchi.tn, souq.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
 | 20/10/2026 | livraison.tn | ❌ | 404 (19 octets), 0 prix, 0 « eau » |
 | 20/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (déjà notés), Founa (fermé) |
+| 21/10/2026 | shopping.tn | ❌ | lisible (200, certificat à ignorer) mais catalogue d'achats généraliste : 0 « eau », 0 Safia, 3 « prix » — pas de prix d'eau |
+| 21/10/2026 | grocery.tn, dealmarket.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
+| 21/10/2026 | superette.tn | ❌ | injoignable pour GitHub (délai dépassé) |
+| 21/10/2026 | Recherche web (Safia/Marwa en ligne, supermarché en ligne pack 6 × 1,5 L) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, La Presse 19/08 (déjà notés) ; combien-coute.net déjà écarté (Cloudflare) |
