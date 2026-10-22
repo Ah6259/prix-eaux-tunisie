@@ -73,3 +73,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 21/10/2026 | grocery.tn, dealmarket.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
 | 21/10/2026 | superette.tn | ❌ | injoignable pour GitHub (délai dépassé) |
 | 21/10/2026 | Recherche web (Safia/Marwa en ligne, supermarché en ligne pack 6 × 1,5 L) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, La Presse 19/08 (déjà notés) ; combien-coute.net déjà écarté (Cloudflare) |
+| 22/10/2026 | monoprix.tn (www) | ⛔ | lisible (200) mais page minuscule (3 Ko), 0 « eau » ; déjà écarté (vérification « humain » / relevé manuel) |
+| 22/10/2026 | pharma-shop.tn | ❌ | lisible (200, PrestaShop) mais parapharmacie : 0 Safia, pas d'eau en bouteille |
+| 22/10/2026 | tunisiamall.tn, expert-tunisie.tn, cdiscount.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
+| 22/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, WebManagerCenter 23/08 (pénurie, 31 usines), Nabeul saisies 12/08 — presse seulement |
