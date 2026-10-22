@@ -501,3 +501,9 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   écrite (ici : bouteille / stika, jamais mélangées) ; jamais de commentaire `//` au milieu d'une ligne de JavaScript. Le visiteur
   simulé commun a une nouvelle version (`outils communs/visiteur-simule/` de projets-ahmed, IM.36) : à recopier ici à la prochaine
   modification. Documents Tunisie : étapes de l'accueil avec pastilles 1-2-3 (demande d'Ahmed). Rien de changé sur ce site.
+- **22/10/2026 (soir) — immobilier (à savoir, règles valables ici)** : un avis ou un verdict n'est jamais donné quand les prix comparés
+  sont très dispersés (3e quart ≥ 2,5 × le 1er : « prix très variés ») ; une barre ou une fourchette calculée par l'IA dit qu'elle vient
+  de l'IA ; les nombres d'un menu = le vrai résultat avec les filtres choisis (un seul test des filtres pour la liste et les menus) ;
+  accords par téléphone d'Ahmed avec des sites d'annonces (trace écrite à garder). Ici : « La moins chère » et les rapports du mois
+  utilisent déjà les vrais prix relevés. Pour reprendre sur le PC : `git pull` dans chaque dépôt (immobilier-tunis, projets-ahmed, ce
+  dépôt), tout est envoyé. Rien de changé sur ce site.
