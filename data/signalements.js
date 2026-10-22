@@ -55,5 +55,16 @@ window.EAUX_SIGNALES = [
   "lieu": "Ennasr",
   "date": "2026-10-08",
   "nb": 1
+ },
+ {
+  "id": "tijen",
+  "marque": "Tijen",
+  "litres": 1.5,
+  "type": "plate",
+  "prix": 0.69,
+  "magasin": "Magasin Général",
+  "lieu": "Ariana",
+  "date": "2026-10-22",
+  "nb": 1
  }
 ];
