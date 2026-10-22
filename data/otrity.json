@@ -1,5 +1,5 @@
 {
- "date": "2026-10-21",
+ "date": "2026-10-22",
  "offres": [
   {
    "enseigne": "otrity",
@@ -14,12 +14,12 @@
   {
    "enseigne": "otrity",
    "marque": "HAYET",
-   "nom": "Eau minérale Hayet 0.5l",
-   "volume_l": 0.5,
+   "nom": "Eau minérale Hayet 1L",
+   "volume_l": 1.0,
    "nb_unites": 1,
    "type": "plate",
-   "prix": 0.5083,
-   "image_src": "https://otrity.com/wp-content/uploads/hayet-1.5.gif"
+   "prix": 0.7167,
+   "image_src": "https://otrity.com/wp-content/uploads/hayet-1.25L.jpg"
   },
   {
    "enseigne": "otrity",
@@ -30,6 +30,16 @@
    "type": "plate",
    "prix": 0.75,
    "image_src": "https://otrity.com/wp-content/uploads/2022/02/6191443100038-1_1.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "MARWA",
+   "nom": "Eau minérale Marwa 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.7167,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/10/eau-minerale-4.webp"
   },
   {
    "enseigne": "otrity",
