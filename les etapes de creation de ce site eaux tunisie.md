@@ -439,3 +439,6 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   proposer dans le filtre, plutôt que de retirer les annonces.
 - Un outil écrit sur un serveur Linux doit aussi marcher sur le PC Windows du propriétaire (chemins, bash, liens de dossiers) ;
   le vérifier ou le prévoir avant de dire « tout est prêt sur le PC ».
+- (22/10/2026, leçon de l'immobilier) Après avoir branché une nouvelle source de données, regarder la publication du lendemain :
+  une donnée inhabituelle (lien de photo avec une apostrophe, lieu en double, prix très dispersés) peut bloquer les contrôles. Chaque
+  cas trouvé devient un test, et un même lieu écrit de deux façons (français / arabe) est fusionné.

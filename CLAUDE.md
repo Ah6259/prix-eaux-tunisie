@@ -495,3 +495,9 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **20/10/2026 (nuit, fin)** : sur le PC (Windows), après `git pull` : l'outil « essai comme GitHub » (projets-ahmed) marche aussi sous
   Windows (bash de Git pour Windows, jonction au lieu d'un lien symbolique, node_modules du dépôt jamais touchés) ; les tests de
   l'immobilier demandent `pip install pyflakes` une fois par PC (à proposer à Ahmed avant d'installer). Rien de changé sur ce site.
+- **22/10/2026 — règle commune § 41 (immobilier, valable ici)** : un lieu ou un nom en double (français / arabe, même son) est fusionné ;
+  un contrôle compare des choses comparables (jamais une alerte grave sur des prix trop dispersés) ; après une nouvelle source,
+  regarder la publication suivante ; un outil de test ne s'arrête jamais sans rien dire ; un prix n'est montré que dans son unité
+  écrite (ici : bouteille / stika, jamais mélangées) ; jamais de commentaire `//` au milieu d'une ligne de JavaScript. Le visiteur
+  simulé commun a une nouvelle version (`outils communs/visiteur-simule/` de projets-ahmed, IM.36) : à recopier ici à la prochaine
+  modification. Documents Tunisie : étapes de l'accueil avec pastilles 1-2-3 (demande d'Ahmed). Rien de changé sur ce site.
