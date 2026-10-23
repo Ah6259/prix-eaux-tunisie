@@ -44,6 +44,11 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 
 ## Sources de prix
 - **Carrefour** (API GraphQL) et **Géant Drive** (HTML) : lus en direct chaque nuit. Géant : `curl -k` en cas d'erreur de certificat (code 60).
+- **Stock vérifié (23/10/2026, règle commune § 43)** : un prix n'est gardé que si le produit est EN STOCK. Carrefour : l'API sans en-tête
+  `Store` = catalogue « default » (63 eaux), PAS un magasin → `collect_prices.carrefour()` lit CHAQUE magasin (`availableStores`, ~39) ;
+  vendu nulle part = pas de prix ; sinon prix le plus courant + `magasins` [N, M] (« dans N magasins sur M » sous le prix).
+  Géant : `quantity_product` 0 = écarté. Otrity : `is_in_stock`. Chaque format porte `non_dispo` = enseignes lues EN DIRECT ce jour
+  qui ne le vendent pas → « non disponible » (jamais une enseigne en panne ni Monoprix manuel). Test `tools/test_disponibilite.py`.
 - **Otrity** (épicerie en ligne, prix = stika livrée ÷ 6 ou 12) : Cloudflare bloque GitHub → relevé depuis le PC
   d'Ahmed par la tâche Windows « PrixEaux-Otrity » (12h, `tools/otrity_local.py` → `data/otrity.json`, ignoré après 3 jours).
   Nouveau PC : `tools/installer_pc.ps1`.
@@ -197,6 +202,9 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
   conferences, auto-ecoles, avocats, comptables, mariage, pros ; à venir : immobilier. Google Search Console : propriété « Domaine »
   clicvia.com validée (NE PAS supprimer la ligne TXT google-site-verification). Détails : `memoire claude/domaine-et-depots-prives.md`
   du dépôt privé projets-ahmed. Passage éventuel en dépôts privés + Cloudflare Pages : plus tard (voir l'audit des minutes).
+- **EN ATTENTE D'AHMED (23/10/2026)** : Aqualine 1,5 L reste affichée chez Carrefour (vendue dans 26 magasins sur 39, pas dans celui
+  d'Ahmed). Choix proposé : (1, conseillé) le visiteur choisit « mon Carrefour » une fois (gardé dans le téléphone) et voit prix + stock
+  de SON magasin ; (2) prix Carrefour seulement si vendu partout / presque partout. Ne rien faire avant sa réponse.
 - Reporté : publication immédiate des prix signalés (Apps Script onFormSubmit → workflow_dispatch).
 - Idées : README « Nouveaux services » (prochain conseillé : « Quelle eau pour moi ? ») ; comparateur d'autres produits (mis de côté) ;
   vrais logos ; marques manquantes (Ovia…).
