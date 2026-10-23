@@ -204,7 +204,7 @@ def page_prix_stika(data, SITE, maj_fr):
   <section>
     <p class="intro"><strong>Aujourd'hui ({maj_fr}), la stika d'eau 1,5 L la moins chère en Tunisie est
     {_esc(g['name'])} à {_dt(pg * 6)}</strong> (6 bouteilles, chez {_esc(', '.join(mg))}).
-    Les prix ci-dessous sont relevés chaque jour dans les grandes surfaces et épiceries en ligne ;
+    Les prix ci-dessous sont relevés chaque jour sur les boutiques en ligne des grandes surfaces (Carrefour, Géant) ;
     ils sont indicatifs et peuvent varier selon le magasin.</p>
     {_partage(SITE, "prix-stika", f"💧 Stika d'eau la moins chère aujourd'hui : {g['name']} {_dt(pg * 6)}.")}
   </section>

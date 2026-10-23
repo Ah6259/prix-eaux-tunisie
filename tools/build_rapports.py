@@ -161,7 +161,7 @@ def page(m, d, prev, courant, ids, SITE, G):
   <p class="rp-signature">Un rapport de <b>Prix des Eaux de Tunisie</b> · prix-eau.clicvia.com</p>
   {bouton_partage(url, titre)}
   <section>
-    <p class="intro">Prix de l'eau en bouteille relevés chaque jour dans les grandes surfaces et épiceries en ligne de Tunisie. {statut}</p>
+    <p class="intro">Prix de l'eau en bouteille relevés chaque jour sur les boutiques en ligne des grandes surfaces de Tunisie (Carrefour, Géant). {statut}</p>
     <ul class="intro">{"".join(f"<li>{b}</li>" for b in bref)}</ul>
   </section>
   <section>

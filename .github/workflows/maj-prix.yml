@@ -29,7 +29,7 @@ jobs:
       - name: Pillow (images d'aperçu des rapports du mois)
         run: pip install -q pillow
 
-      - name: Scraper les prix (Carrefour + Géant Drive + barka.tn)
+      - name: Scraper les prix (Carrefour magasin par magasin + Géant Drive)
         run: python tools/collect_prices.py
 
       - name: Reconstruire l'historique des prix
