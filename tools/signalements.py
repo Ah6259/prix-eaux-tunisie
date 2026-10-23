@@ -21,6 +21,12 @@ il écarte seulement l'invraisemblable) :
 
 Les entrées manuelles (data/signalements_manuels.json) sont toujours publiées.
 
+Feuille illisible (23/10/2026, règles communes § 17 et § 38 : aucun robot vert qui ne fait rien) : erreur réseau, page HTML
+(connexion Google) au lieu du CSV, réponse vide ou sans les bonnes colonnes. La feuille est relue 2 fois (2 min puis 4 min) ;
+toujours illisible : rien n'est modifié sur le site, la date de début de la panne est notée dans data/signalements.json
+(« feuille_illisible_depuis ») et le robot passe au ROUGE quand la panne dure plus de 2 jours (comme sources_en_panne.py).
+Une feuille lisible sans nouveau signalement reste VERTE.
+
 Usage : python tools/signalements.py        (TELEGRAM_BOT_TOKEN pour publier sur le canal)
 """
 import csv
@@ -29,6 +35,7 @@ import json
 import re
 import statistics
 import sys
+import time
 import unicodedata
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -46,6 +53,10 @@ MANUELS = ROOT / "data" / "signalements_manuels.json"
 OUT_VOTES = ROOT / "data" / "votes.js"
 JOURS_MAX = 30
 GRAND_FORMAT = 2.5
+COLONNES = ("horodateur", "marque", "format", "prix", "date")   # colonnes sans lesquelles la feuille est inutilisable
+ATTENTES = (120, 240)       # § 38 : relire 2 min puis 4 min plus tard
+BUDGET_S = 8 * 60           # § 38 : pas de nouvel essai au-delà de 8 min de relectures
+JOURS_PANNE = 2             # § 17 : rouge si la feuille est illisible depuis plus de 2 jours
 
 
 
@@ -82,8 +93,45 @@ def cle_produit(s):
     return (s["id"], s["litres"], s["type"])
 
 
-def lire_reponses():
-    txt = http_get(CSV_URL).decode("utf-8")
+class FeuilleIllisible(Exception):
+    pass
+
+
+def verifier_csv(brut):
+    """Texte du CSV, ou FeuilleIllisible si ce n'est pas le tableau attendu (page HTML, vide, colonnes manquantes)."""
+    try:
+        txt = brut.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        raise FeuilleIllisible("réponse qui n'est pas du texte UTF-8")
+    debut = txt.lstrip()[:300].lower()
+    if not debut:
+        raise FeuilleIllisible("réponse vide")
+    if debut.startswith("<") or "<html" in debut:
+        raise FeuilleIllisible("page web (HTML) reçue au lieu du tableau CSV (feuille dépubliée ou page de connexion Google ?)")
+    lignes = list(csv.reader(io.StringIO(txt)))
+    entete = {norm(x) for x in (lignes[0] if lignes else [])}
+    manque = [c for c in COLONNES if c not in entete]
+    if manque:
+        raise FeuilleIllisible("colonnes manquantes : " + ", ".join(manque))
+    return txt
+
+
+def lire_feuille(lecteur, attendre=time.sleep, horloge=time.monotonic):
+    """Lit et vérifie la feuille ; relit 2 fois (2 min puis 4 min) si elle est illisible (§ 38). FeuilleIllisible sinon."""
+    debut = horloge()
+    for i in range(len(ATTENTES) + 1):
+        try:
+            return verifier_csv(lecteur())
+        except Exception as e:
+            erreur = e
+        if i == len(ATTENTES) or horloge() - debut + ATTENTES[i] > BUDGET_S:
+            break
+        print(f"  Feuille illisible ({erreur}) : nouvel essai dans {ATTENTES[i] // 60} min")
+        attendre(ATTENTES[i])
+    raise FeuilleIllisible(str(erreur))
+
+
+def analyser(txt):
     lignes = list(csv.reader(io.StringIO(txt)))
     entete = [norm(x) for x in lignes[0]]
     col = {nom: i for i, nom in enumerate(entete)}
@@ -94,6 +142,23 @@ def lire_reponses():
         out.append({k: g(k) for k in ("horodateur", "marque", "format", "eau", "prix", "unite",
                                      "magasin", "lieu", "date")})
     return out
+
+
+def lire_reponses(lecteur=None, attendre=time.sleep):
+    return analyser(lire_feuille(lecteur or (lambda: http_get(CSV_URL)), attendre))
+
+
+def panne_feuille(etat, erreur, maintenant):
+    """Feuille illisible : note le début de la panne dans l'état, renvoie (code de sortie, message)."""
+    depuis = etat.get("feuille_illisible_depuis") or maintenant.isoformat(timespec="minutes")
+    etat["feuille_illisible_depuis"] = depuis
+    jours = (maintenant - datetime.fromisoformat(depuis)).total_seconds() / 86400
+    if jours >= JOURS_PANNE:
+        return 1, (f"ÉCHEC Feuille des signalements illisible : {erreur} — depuis le {depuis.replace('T', ' à ')} "
+                   f"(plus de {JOURS_PANNE} jours). Rien n'est modifié sur le site ; vérifier que le tableau Google des "
+                   f"réponses est toujours « publié sur le Web » en CSV.")
+    return 0, (f"! Feuille des signalements illisible : {erreur} — rien n'est modifié (panne depuis le "
+               f"{depuis.replace('T', ' à ')} ; robot rouge si elle dure plus de {JOURS_PANNE} jours).")
 
 
 def references(data):
@@ -208,7 +273,10 @@ def message(nouveaux):
     return "📍 <b>Prix signalés par les visiteurs</b>\n" + "\n".join("• " + ligne(s) for s in nouveaux) + "\n" + lien
 
 
-def main():
+def main(lecteur=None, attendre=time.sleep, maintenant=None):
+    for _f in (sys.stdout, sys.stderr):
+        if hasattr(_f, "reconfigure"):
+            _f.reconfigure(encoding="utf-8", errors="replace")
     data = json.loads((ROOT / "data" / "eaux.json").read_text(encoding="utf-8"))
     marques = {norm(b["name"]): b for b in data["brands"]}
     marques.update({norm(b["id"]): b for b in data["brands"]})
@@ -217,12 +285,14 @@ def main():
     deja_annonces = set(etat.get("annonces", []))
 
     try:
-        reponses = lire_reponses()
-    except Exception as e:
-        # tableau Google supprimé / dépublié / Google en panne : on ne touche à rien.
-        # Les prix déjà publiés disparaissent seuls du site après 30 jours (app.js).
-        print(f"! Tableau des signalements illisible ({e}) : rien n'est modifié.")
-        return
+        reponses = lire_reponses(lecteur, attendre)
+    except FeuilleIllisible as e:
+        # tableau Google supprimé / dépublié / Google en panne : on ne touche pas au site (les prix déjà publiés
+        # disparaissent seuls après 30 jours, app.js) ; seule la date de début de la panne est notée.
+        code, texte = panne_feuille(etat, e, maintenant or datetime.now())
+        print(texte)
+        ecrire_si_change(OUT_JSON, json.dumps(etat, ensure_ascii=False, indent=1))
+        return code
     publies, rejets = [], []
     ecrire_votes(reponses, marques)
     for r in reponses:
@@ -265,8 +335,10 @@ def main():
         "publies": len(publies), "rejetes": rejets,
         "annonces": sorted(deja_annonces),
     }, ensure_ascii=False, indent=1))
-    print(f"{len(publies)} publié(s), {len(rejets)} rejeté(s), {len(nouveaux)} nouveau(x) annoncé(s)")
+    print(f"Feuille lue : {len(reponses)} réponse(s). {len(publies)} publié(s), {len(rejets)} rejeté(s), "
+          f"{len(nouveaux)} nouveau(x) annoncé(s)")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -110,6 +110,10 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - Prix signalés 100 % automatiques : Google Forms (SIG_FORM dans app.js, champ « magazin » [sic]) → `tools/signalements.py`
   (plausibilité, ≤ 40 % de la médiane, doublons = « confirmé ») → affichés 30 jours, hors classement.
   Ajouts manuels : `data/signalements_manuels.json`.
+  **Feuille illisible (23/10/2026, § 17 + § 38)** : erreur réseau, page HTML (connexion Google), réponse vide ou colonnes
+  manquantes = relue 2 fois (2 puis 4 min) ; toujours illisible : site non touché, début noté dans `data/signalements.json`
+  (`feuille_illisible_depuis`), robot ROUGE si la panne dure plus de 2 jours. Feuille lisible sans nouveau signalement = vert.
+  Testé dans `tools/test_signalements.py` (sans réseau).
   Prix ≥ 100 lu en millimes (3900 = 3,900 DT). Les barres « Gagnant du match », hadith et « Signaler un prix »
   ouvrent chacune une FENÊTRE (help-pop) ; celle de Signaler = section formulaire dépliable + derniers prix signalés.
 - Vote « mon eau préférée » (fenêtre Gagnant du match) : envoyé au même Google Forms avec format = VOTE et un jeton

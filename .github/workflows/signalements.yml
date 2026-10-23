@@ -17,6 +17,7 @@ concurrency:
 jobs:
   signalements:
     runs-on: ubuntu-latest
+    timeout-minutes: 20      # relectures de la feuille comprises (2 + 4 min, règle § 38)
     steps:
       - uses: actions/checkout@v4
 
