@@ -77,3 +77,5 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 22/10/2026 | pharma-shop.tn | ❌ | lisible (200, PrestaShop) mais parapharmacie : 0 Safia, pas d'eau en bouteille |
 | 22/10/2026 | tunisiamall.tn, expert-tunisie.tn, cdiscount.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
 | 22/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, WebManagerCenter 23/08 (pénurie, 31 usines), Nabeul saisies 12/08 — presse seulement |
+| 23/10/2026 | foodealz.com, foodealz.tn, maxi-mg.tn, carrefourmarket.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) ; Foodealz cité par la presse en 2020 (livraison de courses), probablement disparu |
+| 23/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux supermarchés en ligne) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, Founa (fermé), Carrefour Market Ben Arous (nov. 2024, déjà couvert par Carrefour) |
