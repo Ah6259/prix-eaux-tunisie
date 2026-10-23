@@ -39,26 +39,6 @@ window.EAUX_DATA = {
    ],
    "products": [
     {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/aqualine_15l.jpg",
-     "prices": {
-      "Carrefour": 0.4
-     }
-    },
-    {
-     "liters": 1.0,
-     "format": "1 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/aqualine_15l.jpg",
-     "prices": {
-      "Carrefour": 0.61
-     }
-    },
-    {
      "liters": 1.5,
      "format": "1.5 L",
      "category": "plate",
@@ -68,17 +48,16 @@ window.EAUX_DATA = {
       "Géant": 0.6,
       "Monoprix": 0.6,
       "Carrefour": 0.63
-     }
-    },
-    {
-     "liters": 2.0,
-     "format": "2 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/aqualine_15l.jpg",
-     "prices": {
-      "Carrefour": 0.78
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       26,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     }
    ]
   },
@@ -129,7 +108,16 @@ window.EAUX_DATA = {
      "prices": {
       "Carrefour": 0.67,
       "Otrity": 0.75
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       1,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Géant"
+     ]
     }
    ]
   },
@@ -153,7 +141,11 @@ window.EAUX_DATA = {
      "img": "assets/img/beya_15l.jpg",
      "prices": {
       "Géant": 0.42
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 1.5,
@@ -163,7 +155,11 @@ window.EAUX_DATA = {
      "img": "assets/img/beya_15l.jpg",
      "prices": {
       "Géant": 0.66
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     }
    ]
   },
@@ -180,16 +176,6 @@ window.EAUX_DATA = {
    ],
    "products": [
     {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/d62fddf4951e.webp",
-     "prices": {
-      "Carrefour": 0.47
-     }
-    },
-    {
      "liters": 1.5,
      "format": "1.5 L",
      "category": "plate",
@@ -197,7 +183,12 @@ window.EAUX_DATA = {
      "img": null,
      "prices": {
       "Monoprix": 0.66
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Géant",
+      "Otrity"
+     ]
     }
    ]
   },
@@ -234,7 +225,17 @@ window.EAUX_DATA = {
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
       "Carrefour": 0.4
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       3,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Géant",
+      "Otrity"
+     ]
     },
     {
      "liters": 1.5,
@@ -246,7 +247,16 @@ window.EAUX_DATA = {
       "Carrefour": 0.61,
       "Monoprix": 0.61,
       "Otrity": 0.7083
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       23,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Géant"
+     ]
     },
     {
      "liters": 2.0,
@@ -255,9 +265,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
-      "Carrefour": 0.8,
       "Géant": 0.81
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     }
    ]
   },
@@ -268,41 +281,11 @@ window.EAUX_DATA = {
    "source": "Hajeb El Ayoun (Kairouan)",
    "depuis": 2018,
    "note": null,
-   "img": "assets/img/produits/2df55c3e5df9.webp",
+   "img": "assets/img/produits/d1aeeb2cec92.webp",
    "types": [
     "plate"
    ],
    "products": [
-    {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/2df55c3e5df9.webp",
-     "prices": {
-      "Carrefour": 0.46
-     }
-    },
-    {
-     "liters": 1.65,
-     "format": "1.65 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/507c2c4a3e7b.webp",
-     "prices": {
-      "Carrefour": 0.72
-     }
-    },
-    {
-     "liters": 1.75,
-     "format": "1.75 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/2f238ed5ca4a.webp",
-     "prices": {
-      "Carrefour": 0.76
-     }
-    },
     {
      "liters": 2.0,
      "format": "2 L",
@@ -312,17 +295,16 @@ window.EAUX_DATA = {
      "prices": {
       "Carrefour": 0.8,
       "Otrity": 0.9333
-     }
-    },
-    {
-     "liters": 2.25,
-     "format": "2.25 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/ceb67f3e0c00.webp",
-     "prices": {
-      "Carrefour": 0.76
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       2,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Géant"
+     ]
     }
    ]
   },
@@ -345,19 +327,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/dima_15l.jpg",
      "prices": {
-      "Carrefour": 0.45,
       "Géant": 0.56
-     }
-    },
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/dima_15l.jpg",
-     "prices": {
-      "Carrefour": 0.66
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 2.0,
@@ -367,7 +342,17 @@ window.EAUX_DATA = {
      "img": "assets/img/dima_15l.jpg",
      "prices": {
       "Carrefour": 0.78
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       9,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Géant",
+      "Otrity"
+     ]
     }
    ]
   },
@@ -391,17 +376,11 @@ window.EAUX_DATA = {
      "img": "assets/img/delice_delio_250ml_pomme.jpg",
      "prices": {
       "Géant": 0.3
-     }
-    },
-    {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/delice_delio_250ml_pomme.jpg",
-     "prices": {
-      "Carrefour": 0.51
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 1.0,
@@ -410,9 +389,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/delice_1l.jpg",
      "prices": {
-      "Carrefour": 0.73,
       "Géant": 0.73
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 1.5,
@@ -424,7 +406,16 @@ window.EAUX_DATA = {
       "Monoprix": 0.66,
       "Géant": 0.69,
       "Carrefour": 0.72
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       1,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     }
    ]
   },
@@ -441,16 +432,6 @@ window.EAUX_DATA = {
    ],
    "products": [
     {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/fourat_2l.jpg",
-     "prices": {
-      "Carrefour": 0.36
-     }
-    },
-    {
      "liters": 2.0,
      "format": "2 L",
      "category": "plate",
@@ -459,7 +440,16 @@ window.EAUX_DATA = {
      "prices": {
       "Carrefour": 0.88,
       "Géant": 0.88
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       19,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     }
    ]
   },
@@ -483,9 +473,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
      "prices": {
-      "Carrefour": 0.46,
       "Géant": 0.46
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 1.0,
@@ -495,7 +488,11 @@ window.EAUX_DATA = {
      "img": "assets/img/garci_1l.jpg",
      "prices": {
       "Otrity": 0.9167
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Géant"
+     ]
     },
     {
      "liters": 1.0,
@@ -504,9 +501,18 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
      "prices": {
-      "Carrefour": 0.64,
+      "Carrefour": 0.66,
       "Géant": 0.69
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       11,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     }
    ]
   },
@@ -530,7 +536,11 @@ window.EAUX_DATA = {
      "img": "assets/img/produits/af175984367a.jpg",
      "prices": {
       "Otrity": 0.7167
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Géant"
+     ]
     },
     {
      "liters": 1.5,
@@ -540,7 +550,11 @@ window.EAUX_DATA = {
      "img": "assets/img/produits/2ba9322512a7.webp",
      "prices": {
       "Otrity": 0.8167
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Géant"
+     ]
     }
    ]
   },
@@ -564,7 +578,17 @@ window.EAUX_DATA = {
      "img": "assets/img/jannet_2l.jpg",
      "prices": {
       "Carrefour": 0.83
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       31,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Géant",
+      "Otrity"
+     ]
     }
    ]
   },
@@ -575,22 +599,12 @@ window.EAUX_DATA = {
    "source": "Koutine (Médenine)",
    "depuis": 1989,
    "note": "Eau de table (traitée par osmose inverse).",
-   "img": "assets/img/jektiss_x.jpg",
+   "img": "assets/img/jektiss_1l.jpg",
    "types": [
     "gazeuse",
     "plate"
    ],
    "products": [
-    {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "gazeuse",
-     "flavor": null,
-     "img": "assets/img/jektiss_x.jpg",
-     "prices": {
-      "Carrefour": 0.45
-     }
-    },
     {
      "liters": 1.0,
      "format": "1 L",
@@ -598,9 +612,18 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Géant": 0.62,
-      "Carrefour": 0.63
-     }
+      "Carrefour": 0.62,
+      "Géant": 0.62
+     },
+     "magasins": {
+      "Carrefour": [
+       5,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     },
     {
      "liters": 1.0,
@@ -611,7 +634,16 @@ window.EAUX_DATA = {
      "prices": {
       "Carrefour": 0.59,
       "Géant": 0.59
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       5,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     }
    ]
   },
@@ -634,19 +666,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/marwa_15l.jpg",
      "prices": {
-      "Carrefour": 0.4,
       "Géant": 0.4
-     }
-    },
-    {
-     "liters": 0.75,
-     "format": "750 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/marwa_15l.jpg",
-     "prices": {
-      "Carrefour": 0.46
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 1.5,
@@ -657,7 +682,10 @@ window.EAUX_DATA = {
      "prices": {
       "Géant": 0.61,
       "Otrity": 0.7167
-     }
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
     }
    ]
   },
@@ -681,17 +709,11 @@ window.EAUX_DATA = {
      "img": "assets/img/may_tunisia_15l.jpg",
      "prices": {
       "Géant": 1.69
-     }
-    },
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/may_tunisia_15l.jpg",
-     "prices": {
-      "Carrefour": 0.67
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 2.0,
@@ -701,7 +723,11 @@ window.EAUX_DATA = {
      "img": "assets/img/may_tunisia_15l.jpg",
      "prices": {
       "Géant": 0.9
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     }
    ]
   },
@@ -716,18 +742,7 @@ window.EAUX_DATA = {
    "types": [
     "plate"
    ],
-   "products": [
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/4e4f22bb6f87.webp",
-     "prices": {
-      "Carrefour": 0.6
-     }
-    }
-   ]
+   "products": []
   },
   {
    "id": "melina",
@@ -749,7 +764,11 @@ window.EAUX_DATA = {
      "img": "assets/img/melina_x.jpg",
      "prices": {
       "Géant": 0.76
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     }
    ]
   },
@@ -772,9 +791,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/melliti_15l.jpg",
      "prices": {
-      "Carrefour": 0.4,
       "Géant": 0.4
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 1.5,
@@ -786,7 +808,10 @@ window.EAUX_DATA = {
       "Géant": 0.61,
       "Monoprix": 0.61,
       "Otrity": 0.7083
-     }
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
     }
    ]
   },
@@ -797,31 +822,11 @@ window.EAUX_DATA = {
    "source": "Hajeb El Ayoun (Kairouan)",
    "depuis": 2018,
    "note": null,
-   "img": "assets/img/mira_15l.jpg",
+   "img": "assets/img/mira_095l.jpg",
    "types": [
     "plate"
    ],
    "products": [
-    {
-     "liters": 0.25,
-     "format": "250 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/mira_2l.jpg",
-     "prices": {
-      "Carrefour": 0.37
-     }
-    },
-    {
-     "liters": 0.4,
-     "format": "400 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/mira_2l.jpg",
-     "prices": {
-      "Carrefour": 0.39
-     }
-    },
     {
      "liters": 0.95,
      "format": "950 ml",
@@ -829,19 +834,18 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/mira_095l.jpg",
      "prices": {
-      "Géant": 0.61,
-      "Carrefour": 0.7
-     }
-    },
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/mira_15l.jpg",
-     "prices": {
-      "Carrefour": 0.625
-     }
+      "Carrefour": 0.61,
+      "Géant": 0.61
+     },
+     "magasins": {
+      "Carrefour": [
+       2,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     },
     {
      "liters": 2.0,
@@ -852,7 +856,16 @@ window.EAUX_DATA = {
      "prices": {
       "Géant": 0.74,
       "Carrefour": 0.84
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       4,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     }
    ]
   },
@@ -865,51 +878,9 @@ window.EAUX_DATA = {
    "note": null,
    "img": "assets/img/produits/a10da5f9cc3a.webp",
    "types": [
-    "gazeuse",
     "plate"
    ],
-   "products": [
-    {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "gazeuse",
-     "flavor": null,
-     "img": "assets/img/produits/e8ce8d8e6e67.webp",
-     "prices": {
-      "Carrefour": 0.8
-     }
-    },
-    {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/322c6eeed7e7.webp",
-     "prices": {
-      "Carrefour": 0.5
-     }
-    },
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/a10da5f9cc3a.webp",
-     "prices": {
-      "Carrefour": 0.8
-     }
-    },
-    {
-     "liters": 2.0,
-     "format": "2 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/f004e536a900.webp",
-     "prices": {
-      "Carrefour": 0.95
-     }
-    }
-   ]
+   "products": []
   },
   {
    "id": "primaqua",
@@ -930,9 +901,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/primaqua_6l.jpg",
      "prices": {
-      "Carrefour": 2.34,
       "Géant": 2.39
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 19.0,
@@ -942,7 +916,16 @@ window.EAUX_DATA = {
      "img": "assets/img/primaqua_19l_avec_consigne.jpg",
      "prices": {
       "Carrefour": 5.35
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       3,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     }
    ]
   },
@@ -959,16 +942,6 @@ window.EAUX_DATA = {
    ],
    "products": [
     {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/pristine_980ml.jpg",
-     "prices": {
-      "Carrefour": 0.43
-     }
-    },
-    {
      "liters": 0.98,
      "format": "980 ml",
      "category": "plate",
@@ -976,17 +949,11 @@ window.EAUX_DATA = {
      "img": "assets/img/pristine_980ml.jpg",
      "prices": {
       "Géant": 0.68
-     }
-    },
-    {
-     "liters": 1.0,
-     "format": "1 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/pristine_980ml.jpg",
-     "prices": {
-      "Carrefour": 0.62
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 1.5,
@@ -995,9 +962,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/pristine_15l.jpg",
      "prices": {
-      "Carrefour": 0.64,
       "Géant": 0.67
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 2.0,
@@ -1006,9 +976,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/pristine_2l.jpg",
      "prices": {
-      "Carrefour": 0.79,
       "Géant": 0.8
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     }
    ]
   },
@@ -1032,41 +1005,24 @@ window.EAUX_DATA = {
    "source": null,
    "depuis": null,
    "note": null,
-   "img": "assets/img/produits/ffd03e3f94f9.webp",
+   "img": "assets/img/produits/927068016b2a.jpg",
    "types": [
     "plate"
    ],
    "products": [
     {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/27db4ab3d625.webp",
-     "prices": {
-      "Carrefour": 0.43
-     }
-    },
-    {
      "liters": 1.5,
      "format": "1.5 L",
      "category": "plate",
      "flavor": null,
-     "img": "assets/img/produits/ffd03e3f94f9.webp",
+     "img": "assets/img/produits/927068016b2a.jpg",
      "prices": {
-      "Carrefour": 0.67,
       "Géant": 0.69
-     }
-    },
-    {
-     "liters": 2.0,
-     "format": "2 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/be3428661094.webp",
-     "prices": {
-      "Carrefour": 0.86
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     }
    ]
   },
@@ -1111,7 +1067,16 @@ window.EAUX_DATA = {
      "prices": {
       "Carrefour": 0.68,
       "Géant": 0.68
-     }
+     },
+     "magasins": {
+      "Carrefour": [
+       17,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Otrity"
+     ]
     }
    ]
   },
@@ -1134,10 +1099,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/safia_15l.jpg",
      "prices": {
-      "Carrefour": 0.43,
       "Géant": 0.43,
       "Otrity": 0.5167
-     }
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
     },
     {
      "liters": 1.5,
@@ -1148,7 +1115,10 @@ window.EAUX_DATA = {
      "prices": {
       "Géant": 0.69,
       "Otrity": 0.8333
-     }
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
     }
    ]
   },
@@ -1204,9 +1174,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
-      "Carrefour": 0.44,
       "Géant": 0.44
-     }
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Otrity"
+     ]
     },
     {
      "liters": 1.5,
@@ -1216,7 +1189,14 @@ window.EAUX_DATA = {
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
       "Carrefour": 0.68,
-      "Géant": 0.68
+      "Géant": 0.68,
+      "Otrity": 0.8333
+     },
+     "magasins": {
+      "Carrefour": [
+       30,
+       39
+      ]
      }
     }
    ]
@@ -1232,38 +1212,7 @@ window.EAUX_DATA = {
    "types": [
     "plate"
    ],
-   "products": [
-    {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/576043c7945c.webp",
-     "prices": {
-      "Carrefour": 0.38
-     }
-    },
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/86a2e56fd2b8.webp",
-     "prices": {
-      "Carrefour": 0.82
-     }
-    },
-    {
-     "liters": 2.0,
-     "format": "2 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/produits/ac9ed07fe7f8.webp",
-     "prices": {
-      "Carrefour": 0.9
-     }
-    }
-   ]
+   "products": []
   },
   {
    "id": "elixir",
@@ -1282,14 +1231,15 @@ window.EAUX_DATA = {
  "statut_sources": {
   "carrefour": {
    "dernier_ok": "2026-10-23",
-   "nb": 62
+   "nb": 17,
+   "par_magasin": true
   },
   "geant": {
    "dernier_ok": "2026-10-23",
    "nb": 34
   },
   "otrity": {
-   "dernier_ok": "2026-10-22",
+   "dernier_ok": "2026-10-23",
    "nb": 11
   },
   "monoprix": {

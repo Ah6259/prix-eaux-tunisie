@@ -194,8 +194,13 @@ function prodRow(p, b){
   const offers = Object.entries(p.prices)
     .sort((a,z) => a[1] - z[1])
     .map(([s,v]) => `<span class="offer${multi && best.includes(s) ? " best" : ""}">
-        <span class="store">${enseigne(s)}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>`)
-    .join("");
+        <span class="store">${enseigne(s)}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>` +
+        // vendu dans une partie des magasins seulement (Carrefour : stock différent d'un magasin à l'autre)
+        (p.magasins && p.magasins[s] ? `<small class="offer-mag">dans ${p.magasins[s][0]} magasin${p.magasins[s][0] > 1 ? "s" : ""} sur ${p.magasins[s][1]}</small>` : ""))
+    .join("") +
+    // enseignes vérifiées aujourd'hui qui ne vendent pas ce format (collect_prices.py, 23/10/2026)
+    (p.non_dispo || []).map(s => `<span class="offer na">
+        <span class="store">${enseigne(s)}</span><span class="p">non disponible</span></span>`).join("");
   const label = p.format +
                 (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
                 (p.category === "gazeuse" ? ` <small>· gazeuse</small>` : "");

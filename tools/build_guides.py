@@ -26,7 +26,7 @@ SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
-CSS_V = "20261020b"
+CSS_V = "20261023a"
 
 # Logo (goutte en aplats dans un carré bleu, comme l'icône du téléphone) : même dessin que l'en-tête de l'accueil
 LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1797C4"/><stop offset="1" stop-color="#0A5F80"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg-eau{n})"/><path d="M256 84C256 84 142 236 142 318a114 114 0 0 0 228 0C370 236 256 84 256 84Z" fill="#fff"/><path d="M256 84C256 84 370 236 370 318a114 114 0 0 1-114 114Z" fill="#D5EEF7"/><path d="M150 336Q203 306 256 336T362 336Q356 410 256 432Q156 410 150 336Z" fill="#7FCBE6"/><path d="M256 336Q309 366 362 336Q356 410 256 432Z" fill="#5DB7D9"/></svg>')
@@ -283,6 +283,12 @@ def _fmt_l(litres):
     return (f"{litres:g} L".replace(".", ",") if litres >= 1 else f"{litres * 1000:g} ml")
 
 
+def _mag(p, magasin):
+    """Vendu dans une partie des magasins de l'enseigne seulement (Carrefour, 23/10/2026)."""
+    m = (p.get("magasins") or {}).get(magasin)
+    return f"<br><small>dans {m[0]} magasin{'s' if m[0] > 1 else ''} sur {m[1]}</small>" if m else ""
+
+
 def page_magasin(data, magasin, SITE, maj_fr):
     """Prix de l'eau chez un magasin : une ligne par produit (marque + format), le moins cher d'abord.
     Colonne « ailleurs dès » = meilleur prix des autres magasins suivis (pour comparer d'un coup d'œil)."""
@@ -307,7 +313,7 @@ def page_magasin(data, magasin, SITE, maj_fr):
         tr = "".join(f"<tr><td><a href='../marque/{b['id']}/'>{_esc(b['name'])}</a>"
                      f"{' <small>gazeuse</small>' if p['category'] == 'gazeuse' else ''}"
                      f"{' <small>' + _fmt_l(p['liters']) + '</small>' if fmt else ''}</td>"
-                     f"<td class='n'>{_dt(v)}</td><td class='n'>{stika(p, v)}</td>"
+                     f"<td class='n'>{_dt(v)}{_mag(p, magasin)}</td><td class='n'>{stika(p, v)}</td>"
                      f"<td class='n'>{_dt(a) if a is not None else '—'}</td></tr>" for b, p, v, a in sel)
         return (f"<section><h2>{titre}</h2><table class='guide-table magasin'><tr><th>Marque</th><th>Bouteille</th>"
                 f"<th>Stika</th><th>Ailleurs dès</th></tr>{tr}</table></section>")

@@ -53,7 +53,12 @@ def page_marque(b):
     for p in sorted(prods, key=lambda p: (p["liters"], p["category"])):
         mini = min(p["prices"].values())
         gagnant = min(p["prices"], key=p["prices"].get)
-        offres = " · ".join(f"{esc(s)} {fmt_dt(v)}" for s, v in sorted(p["prices"].items(), key=lambda x: x[1]))
+        mag = p.get("magasins") or {}
+        offres = " · ".join(f"{esc(s)} {fmt_dt(v)}" + (f" <small>(dans {mag[s][0]} magasin{'s' if mag[s][0] > 1 else ''} sur {mag[s][1]})</small>"
+                                                        if s in mag else "")
+                            for s, v in sorted(p["prices"].items(), key=lambda x: x[1]))
+        # enseignes vérifiées ce jour qui ne vendent pas ce format (23/10/2026)
+        offres += "".join(f" · {esc(s)} <small>non disponible</small>" for s in p.get("non_dispo") or [])
         n = taille_stika(p["liters"])
         stika = fmt_dt(mini * n) + f" <small>(×{n})</small>" if p["liters"] <= GRAND_FORMAT else "—"
         gaz = " gazeuse" if p["category"] == "gazeuse" else ""

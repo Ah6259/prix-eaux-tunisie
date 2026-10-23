@@ -46,19 +46,21 @@ PHOTOS_LIBRES = ROOT / "data" / "photos_libres.json"
 RAW_DIR = ROOT / "tools" / "raw"
 # Une enseigne qui donne moins que ce nombre d'offres = lecteur cassé, même au premier relevé (règle commune § 17,
 # incident Tunisie-annonce du 15/10/2026 : 1 annonce gardée, robot vert). Relevés du 14/10/2026 : Carrefour 62, Géant 35, Otrity 4.
-MINIMUM_OFFRES = {"carrefour": 15, "geant": 10, "otrity": 2}
+# Carrefour lu magasin par magasin depuis le 23/10/2026 : 17 eaux vendues dans au moins un magasin.
+MINIMUM_OFFRES = {"carrefour": 8, "geant": 10, "otrity": 2}
 MAX_JOURS_REPRISE = 7   # une source en panne garde ses anciens prix 7 jours au plus
 MAX_JOURS_MANUEL = 30   # prix relevés à la main (data/monoprix.json) : 30 jours au plus
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36"
 
 
-def http_get(url, params=None, timeout=60):
+def http_get(url, params=None, timeout=60, headers=None):
     """GET via curl : les sites visés refusent python-requests (403 Carrefour,
     chaîne de certificats incomplète chez Géant) mais acceptent curl."""
     if params:
         url += "?" + urlencode({k: v for k, v in params.items() if v is not None})
     cmd = ["curl", "-sSL", "--fail", "-A", UA, "-H", "Accept-Language: fr-FR,fr;q=0.9",
+           *[x for k, v in (headers or {}).items() for x in ("-H", f"{k}: {v}")],
            "--max-time", str(timeout), url]
     r = subprocess.run(cmd, capture_output=True, timeout=timeout + 10)
     if r.returncode == 60:
@@ -243,17 +245,56 @@ def telecharger_image(url):
 
 
 # ---------------------------------------------------------------- Carrefour
-def carrefour():
-    q = """{products(filter:{category_uid:{eq:"Mzc1Nw=="}},pageSize:200){items{
-        name sku url_key short_description{html}
-        small_image{url}
-        price_range{minimum_price{final_price{value} regular_price{value}}}}}}"""
+CARREFOUR_GQL = "https://www.carrefour.tn/graphql"
+CARREFOUR_EAUX = 'category_uid:{eq:"Mzc1Nw=="}'
+CARREFOUR_MIN_MAGASINS = 10  # moins de magasins lus = relevé refusé (source en panne)
+
+
+def carrefour_gql(q, magasin=None):
     q = re.sub(r"\s+", " ", q)  # le pare-feu de Carrefour rejette les requêtes multi-lignes
-    items = json.loads(http_get("https://www.carrefour.tn/graphql", {"query": q}))["data"]["products"]["items"]
+    h = {"Store": magasin} if magasin else None
+    return json.loads(http_get(CARREFOUR_GQL, {"query": q}, headers=h))["data"]
+
+
+def carrefour():
+    """Carrefour : le catalogue « par défaut » de l'API (63 eaux) n'est PAS un magasin : c'est la liste de
+    tous les produits possibles. Chaque vrai magasin (≈ 39 : Carrefour Market, hypers, « Livraison »)
+    n'en vend que 5 à 12, et un produit absent de ses rayons n'apparaît tout simplement pas.
+    23/10/2026 (Ahmed) : Aqualine 1,5 L affichée chez Carrefour à 0,630 alors qu'elle était indisponible
+    dans son magasin -> on lit CHAQUE magasin : une eau vendue dans aucun magasin n'a pas de prix
+    Carrefour (« non disponible » sur le site) ; sinon prix le plus courant + nombre de magasins."""
+    q = f"""{{products(filter:{{{CARREFOUR_EAUX}}},pageSize:200){{items{{
+        name sku url_key short_description{{html}}
+        small_image{{url}}
+        price_range{{minimum_price{{final_price{{value}} regular_price{{value}}}}}}}}}}}}"""
+    items = carrefour_gql(q)["products"]["items"]
     (RAW_DIR / "carrefour.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
+    magasins = [m["store_code"] for m in carrefour_gql("{availableStores{store_code}}")["availableStores"]
+                if m["store_code"] != "default"]
+    q_mag = f"""{{products(filter:{{{CARREFOUR_EAUX}}},pageSize:200){{items{{
+        sku stock_status price_range{{minimum_price{{final_price{{value}}}}}}}}}}}}"""
+    prix_mag, lus, rate = {}, 0, []
+    for code in magasins:
+        try:
+            its = carrefour_gql(q_mag, code)["products"]["items"]
+        except Exception as e:
+            rate.append(f"{code} ({e})")
+            continue
+        lus += 1
+        for it in its:
+            if it.get("stock_status") == "IN_STOCK":
+                prix_mag.setdefault(it["sku"], []).append(it["price_range"]["minimum_price"]["final_price"]["value"])
+        time.sleep(0.3)
+    if lus < max(CARREFOUR_MIN_MAGASINS, 0.66 * len(magasins)):
+        raise RuntimeError(f"magasins Carrefour illisibles : {lus} lus sur {len(magasins)} ({'; '.join(rate[:3])})")
+    if rate:
+        print(f"  Carrefour : {len(rate)} magasin(s) illisible(s) ignoré(s)")
     out = []
     for it in items:
         nom = it["name"].strip()
+        prix = prix_mag.get(it["sku"])
+        if not prix:  # au catalogue mais vendu dans aucun magasin
+            continue
         desc = re.sub(r"<[^>]+>", " ", it["short_description"]["html"] or "")
         m = re.search(r"(?:minerale|gazeifiee|source)\s+(.+?)(?:\s+\d.*)?$", sans_accents(nom), re.I)
         marque = m.group(1) if m else nom
@@ -261,10 +302,11 @@ def carrefour():
         if not marque or not est_eau(nom, marque):
             continue
         vol, nb = parse_volume(nom, desc)
+        courant = min(set(prix), key=lambda v: (-prix.count(v), v))  # prix le plus courant (égalité : le plus bas)
         out.append({
             "enseigne": "carrefour", "marque": marque, "nom": nom,
             "volume_l": vol, "nb_unites": nb, "type": type_eau(nom, desc),
-            "prix": it["price_range"]["minimum_price"]["final_price"]["value"],
+            "prix": courant, "magasins": [len(prix), lus],
             "image_src": it["small_image"]["url"],
         })
     return out
@@ -282,6 +324,11 @@ def geant():
         desc = re.sub(r"<[^>]+>", " ", g(r'itemprop="description"[^>]*>(.*?)</div>') or "")
         desc = html.unescape(re.sub(r"\s+", " ", desc)).strip()
         prix = parse_prix(g(r'class="price">([^<]+)<'))
+        # Géant n'affiche que les produits en stock, avec la quantité (champ caché « quantity_product ») :
+        # par sécurité, une quantité 0 ou négative = produit non disponible (23/10/2026)
+        stock = g(r'value="(-?\d+)" class="[^"]*quantity_product')
+        if stock is not None and int(stock) <= 0:
+            continue
         if not nom or prix is None or not est_eau(nom, marque):
             continue
         vol, nb = parse_volume(nom, desc)
@@ -464,6 +511,7 @@ def main():
     if ancien and not statut:
         statut = {k: {"dernier_ok": ancien.get("updated"), "nb": 0} for k in ("carrefour", "geant", "otrity")}
     offres = []
+    lues = set()  # enseignes lues EN DIRECT ce jour (pas les reprises) : un produit absent chez elles = « non disponible »
     sources = (("Carrefour", carrefour, "carrefour"), ("Géant", geant, "geant"),
                ("Otrity", otrity, "otrity"))
     for nom, f, cle_src in sources:
@@ -479,13 +527,17 @@ def main():
                 raise RuntimeError(f"données incohérentes : seulement {len(valides)} offres "
                                    f"plausibles sur {len(res)}")
             # site modifié qui ne renvoie plus qu'une partie des produits : on ne s'y fie pas
-            if prec.get("nb") and len(res) < 0.3 * prec["nb"]:
+            # (Carrefour : lu magasin par magasin depuis le 23/10/2026, beaucoup moins d'offres qu'avant : normal)
+            if prec.get("nb") and (cle_src != "carrefour" or prec.get("par_magasin")) and len(res) < 0.3 * prec["nb"]:
                 raise RuntimeError(f"résultat suspect : {len(res)} offres contre {prec['nb']} au dernier relevé réussi")
             if len(res) < MINIMUM_OFFRES.get(cle_src, 0):
                 raise RuntimeError(f"presque rien lu : {len(res)} offres (au moins {MINIMUM_OFFRES[cle_src]} attendues)")
             print(f"{nom}: {len(res)} offres")
             offres += res
+            lues.add(cle_src)
             statut[cle_src] = {"dernier_ok": aujourdhui.isoformat(), "nb": len(res)}
+            if cle_src == "carrefour":
+                statut[cle_src]["par_magasin"] = True
         except Exception as e:
             print(f"! {nom} en échec : {e}", file=sys.stderr)
             if cle_src == "otrity":
@@ -498,6 +550,7 @@ def main():
                     if age <= 3 and rel.get("offres"):
                         print(f"  -> relevé local du {rel['date']} : {len(rel['offres'])} offres")
                         offres += rel["offres"]
+                        lues.add(cle_src)
                         statut[cle_src] = {"dernier_ok": rel["date"], "nb": len(rel["offres"])}
                     else:
                         print(f"  -> relevé local du {rel['date']} trop ancien ({age} j) : ignoré")
@@ -538,10 +591,13 @@ def main():
         if not o["marque"] or o["volume_l"] is None or o["nb_unites"] != 1:
             continue
         cle = (o["marque"], o["type"], o["volume_l"])
-        p = produits.setdefault(cle, {"offres": {}, "images": {}})
+        p = produits.setdefault(cle, {"offres": {}, "images": {}, "magasins": {}, "vus": set()})
+        p["vus"].add(o["enseigne"])
         cur = p["offres"].get(o["enseigne"])
         if cur is None or o["prix"] < cur:
             p["offres"][o["enseigne"]] = o["prix"]
+            if o.get("magasins"):
+                p["magasins"][o["enseigne"]] = o["magasins"]
             if o.get("image_src"):
                 p["images"][o["enseigne"]] = o["image_src"]
             elif o.get("image_locale"):
@@ -583,11 +639,20 @@ def main():
                         break
         if not img and p["images"].get("locale") and (ROOT / p["images"]["locale"]).exists():
             img = p["images"]["locale"]
-        b["products"].append({
+        prod = {
             "liters": litres, "format": fmt_affiche(litres), "category": typ, "flavor": None,
             "img": img,
             "prices": {ENSEIGNES[e]: round(v, 4) for e, v in sorted(p["offres"].items(), key=lambda x: x[1])},
-        })
+        }
+        # vendu dans une partie des magasins seulement (Carrefour) : [nombre de magasins, magasins lus]
+        partiel = {ENSEIGNES[e]: m for e, m in p["magasins"].items() if e in p["offres"] and m[0] < m[1]}
+        if partiel:
+            prod["magasins"] = partiel
+        # enseignes lues aujourd'hui qui ne vendent pas ce format : « non disponible » sur le site (23/10/2026)
+        absentes = [ENSEIGNES[e] for e in ("carrefour", "geant", "otrity") if e in lues and e not in p["vus"]]
+        if absentes:
+            prod["non_dispo"] = absentes
+        b["products"].append(prod)
 
     out_brands = []
     for name in sorted(brands):

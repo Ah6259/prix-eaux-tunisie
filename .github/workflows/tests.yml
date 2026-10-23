@@ -34,6 +34,8 @@ jobs:
         run: node tools/test_video.mjs
       - name: Scenarios de panne du robot
         run: python tools/test_pannes.py
+      - name: Eaux non disponibles (Carrefour magasin par magasin, stock Geant, mention non disponible)
+        run: python tools/test_disponibilite.py
       - name: Rapports du mois (chiffres vrais, mois fini fige)
         run: python tools/test_rapports.py
       - name: Visiteur simule (comme un visiteur sur telephone, avant le vrai visiteur - regle generale du 18/10/2026)
