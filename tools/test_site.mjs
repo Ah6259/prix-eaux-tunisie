@@ -201,7 +201,8 @@ check("panier vide après 3 × −", doc.getElementById("cartbar").hidden === tr
 
 // ---- bas de page -------------------------------------------------------------
 const pied = doc.getElementById("foot").textContent;
-check("pied de page : sources Carrefour, Géant, Otrity", ["Carrefour", "Géant", "Otrity"].every(s => pied.includes(s)));
+check("pied de page : sources Carrefour et Géant, et seulement elles (Otrity, Monoprix retirés le 23/10/2026)",
+  ["Carrefour", "Géant"].every(s => pied.includes(s)) && !/otrity|monoprix/i.test(pied));
 check("pied de page : marques et logos à leurs propriétaires", pied.includes("appartiennent à leurs propriétaires"));
 check("FAQ : nombre de marques", doc.getElementById("faq-nb-marques").textContent === String(DATA.brands.length));
 check("courbe d'évolution des prix", !!doc.querySelector("#histo svg"));
@@ -474,6 +475,46 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
     && lire("protection.js").includes('closest("button[data-partage-rapport]")') && lire("protection.js").includes("Rapport du mois de Prix des Eaux de Tunisie : ") && !lire("protection.js").includes("Prix des Eaux de Tunisie (prix-eau.clicvia.com)"));
   check("rapports : premier mois sans fausse évolution (« Premier rapport », pas de colonne Évolution)", (h0 => h0.includes("Premier rapport") && !h0.includes("<th>Évolution</th>"))(lire(`rapports/${ms[0]}/index.html`)));
   check("pied de page des pages générées : lien « Rapports du mois »", lire("prix-stika/index.html").includes('href="../rapports/"') && lire("tools/build_guides.py").includes("Rapports du mois"));
+}
+
+// ---- 23/10/2026 (décision d'Ahmed : le site doit être AUTONOME) : Otrity et Monoprix RETIRÉS du comparateur, partout -----------
+//      (règle commune § 21 : un test sur TOUTES les pages construites). Seule exception : la liste « Magasin » du formulaire
+//      « Signaler un prix » (un visiteur peut signaler un prix vu dans n'importe quel magasin, hors classement).
+{
+  const RETIREES = /otrity|monoprix/i;
+  const PAGES_RETIREES = ["prix-eau-otrity", "prix-eau-monoprix"];
+  const pagesSite = [];
+  (function parcourir(d) {
+    for (const n of readdirSync(join(root, d))) {
+      const p = d ? d + "/" + n : n;
+      if (n.startsWith(".") || ["node_modules", "tools"].includes(n) || /preuves/i.test(n)) continue;
+      if (statSync(join(root, p)).isDirectory()) parcourir(p); else if (n.endsWith(".html")) pagesSite.push(p);
+    }
+  })("");
+  const sansFormulaire = s => s.replace(/<select name="magasin"[\s\S]*?<\/select>/, "");
+  const avecRetirees = pagesSite.filter(f => !PAGES_RETIREES.some(c => f.startsWith(c + "/")) && RETIREES.test(sansFormulaire(lire(f))));
+  check(`aucune enseigne retirée (Otrity, Monoprix) dans les pages (${pagesSite.length} pages)${avecRetirees.length ? " — encore dans : " + avecRetirees.slice(0, 5).join(", ") : ""}`,
+    pagesSite.length > 40 && !avecRetirees.length);
+  const fichiers = ["data/eaux.json", "data/eaux.js", "sitemap.xml", "llms.txt", "manifest.webmanifest", "robots.txt"].filter(f => existsSync(join(root, f)));
+  check(`aucune enseigne retirée dans ${fichiers.join(", ")}`, fichiers.length === 6 && fichiers.every(f => !RETIREES.test(lire(f))));
+  const J = JSON.parse(lire("data/eaux.json"));
+  check("data/eaux.json : enseignes suivies = Carrefour et Géant seulement (stores, statut_sources, prix, non disponible)",
+    JSON.stringify(J.stores) === '["Carrefour","Géant"]' && Object.keys(J.statut_sources || {}).every(k => ["carrefour", "geant"].includes(k))
+    && J.brands.every(b => b.products.every(p => [...Object.keys(p.prices), ...(p.non_dispo || [])].every(s => ["Carrefour", "Géant"].includes(s)))));
+  check("app.js : plus de nom ni de logo d'enseigne retirée", !/["']?(otrity|monoprix)["']?\s*:/i.test(lire("app.js")) && !/logos\/(otrity|monoprix)/.test(lire("app.js")));
+  check("accueil affiché : aucune enseigne retirée (hors liste du formulaire « Signaler un prix »)",
+    !RETIREES.test([...doc.body.querySelectorAll("*")].filter(e => !e.closest('select[name="magasin"]') && !e.children.length).map(e => e.textContent).join(" ")));
+  check("robot des prix : ne lit plus data/otrity.json ni data/monoprix.json, fichiers retirés du dépôt",
+    !/(otrity|monoprix)\.json/.test(lire("tools/collect_prices.py")) && !existsSync(join(root, "data/otrity.json")) && !existsSync(join(root, "data/monoprix.json"))
+    && !existsSync(join(root, "tools/otrity_local.py")));
+  // anciennes pages des enseignes retirées : pas de 404 pour Google, mais une page courte en noindex, hors du plan du site
+  for (const c of PAGES_RETIREES) {
+    const f = `${c}/index.html`, h = existsSync(join(root, f)) ? lire(f) : "";
+    check(`${c}/ : page « n'est plus suivi » en noindex, liens vers l'accueil et les magasins suivis, aucun prix`,
+      /<meta name="robots" content="noindex, follow, noai, noimageai">/.test(h) && h.includes("n'est plus suivi par le comparateur")
+      && h.includes('href="../"') && h.includes('href="../prix-eau-carrefour/"') && h.includes('href="../prix-eau-geant/"')
+      && !/\d,\d{3}(&nbsp;|\s| )DT/.test(h) && !lire("sitemap.xml").includes(c));
+  }
 }
 
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");

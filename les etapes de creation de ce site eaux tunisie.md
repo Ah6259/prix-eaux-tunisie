@@ -442,3 +442,11 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - (22/10/2026, leçon de l'immobilier) Après avoir branché une nouvelle source de données, regarder la publication du lendemain :
   une donnée inhabituelle (lien de photo avec une apostrophe, lieu en double, prix très dispersés) peut bloquer les contrôles. Chaque
   cas trouvé devient un test, et un même lieu écrit de deux façons (français / arabe) est fusionné.
+
+## Étape : retirer une enseigne qui ne se lit pas toute seule (23/10/2026)
+- Règle : le site doit être **autonome** (rien sur le PC, rien à la main). Une enseigne que GitHub ne peut pas lire seul
+  (Otrity : Cloudflare ; Monoprix : relevé à la main) est **retirée** du comparateur, sans contournement.
+- Retirer PARTOUT : collecte, statut des sources, affichage (noms, logos), pages construites (pieds de page, FAQ, JSON-LD,
+  textes), plan du site, llms.txt, manifeste, Telegram, tests ; un test vérifie qu'elle n'apparaît plus dans AUCUNE page.
+- Son ancienne page n'est pas supprimée (pas de 404 pour Google) : page courte « … n'est plus suivi » en `noindex`, avec des
+  liens vers l'accueil et les magasins suivis, hors du plan du site et sans lien vers elle. L'historique des prix passés est gardé.

@@ -20,7 +20,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Doit rester **public** (Pages gratuit). `gh` : "C:\Program Files\GitHub CLI\gh.exe".
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
-- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (protection.js, `CSS_V` de build_guides.py, style.css, app.js et assets/son.js : 20261020a).**
+- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (`CSS_V` de build_guides.py, style.css et app.js : 20261023b ; protection.js et assets/son.js : 20261020b).**
 - Image d'aperçu des liens partagés : `assets/og-image-v7.jpg` (05/10 : texte à gauche + nouvelle icône goutte + photo NEUTRE de l'eau versée à droite ; modèle `tools/og-image.html`, capture Edge 1200×630 puis JPEG qualité 88 ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
@@ -43,23 +43,32 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   en ligne ni `onerror=` dans les pages** (la CSP les bloque). Nouveau service externe dans app.js → l'ajouter à la CSP (le test le vérifie).
 
 ## Sources de prix
-- **Carrefour** (API GraphQL) et **Géant Drive** (HTML) : lus en direct chaque nuit. Géant : `curl -k` en cas d'erreur de certificat (code 60).
+- **Carrefour** (API GraphQL) et **Géant Drive** (HTML) : lus en direct chaque nuit par GitHub. Géant : `curl -k` en cas d'erreur de certificat (code 60).
+  **Ce sont les DEUX seules enseignes du comparateur depuis le 23/10/2026.**
+- **DÉCISION D'AHMED (23/10/2026) : le site doit être AUTONOME (rien sur le PC, rien à la main) → Otrity et Monoprix RETIRÉS
+  du comparateur.** Otrity : Cloudflare bloque GitHub, y compris l'API wp-json (il n'était lu que depuis le PC d'Ahmed par la
+  tâche Windows « PrixEaux-Otrity » et `tools/otrity_local.py`). Monoprix : relevé à la main par captures (`data/monoprix.json`),
+  courses.monoprix.tn bloqué par Cloudflare MÊME depuis le PC. **Pas de contournement.** Retirés : collecte (`collect_prices.py` :
+  `ENSEIGNES`/`SUIVIES` = carrefour, geant ; statut_sources nettoyé des enseignes retirées), affichage (app.js `NOMS_SRC`/`LOGOS`,
+  logos supprimés), pages (`MAGASINS` de build_guides.py, pieds de page, FAQ, JSON-LD, textes, sitemap, llms.txt, manifeste),
+  Telegram. Fichiers supprimés (gardés dans l'historique git) : `tools/otrity_local.py`, `tools/installer_pc.ps1`,
+  `data/otrity.json`, `data/monoprix.json`, `assets/logos/otrity.png` et `monoprix.png`, `tools/barka_scrape.py`, `tools/build_data.py`.
+  `data/historique.json` gardé tel quel (prix passés). Anciennes pages `prix-eau-monoprix/` et `prix-eau-otrity/` : courte page
+  « … n'est plus suivi par le comparateur » en **noindex**, liens vers l'accueil et les 2 magasins suivis, hors du plan du site et
+  sans aucun lien vers elles (`RETIRES` + `page_retiree()` de build_guides.py, refaites chaque nuit ; pas de 404 pour Google).
+  Exception voulue : la liste « Magasin » du formulaire « Signaler un prix » garde Monoprix (un visiteur peut signaler un prix vu
+  dans n'importe quel magasin, hors classement). Tests : `test_site.mjs` (aucune enseigne retirée dans les pages construites,
+  data/eaux.json, sitemap, llms.txt, manifeste ; pages retirées en noindex), `test_pannes.py` (scénarios 14-14c + code du robot),
+  `test_disponibilite.py`. Réintroduire une enseigne seulement si GitHub la lit seul (robot `tester-source.yml`).
 - **Stock vérifié (23/10/2026, règle commune § 43)** : un prix n'est gardé que si le produit est EN STOCK. Carrefour : l'API sans en-tête
   `Store` = catalogue « default » (63 eaux), PAS un magasin → `collect_prices.carrefour()` lit CHAQUE magasin (`availableStores`, ~39) ;
   vendu nulle part = pas de prix ; sinon prix le plus courant + `magasins` [N, M] (« dans N magasins sur M » sous le prix).
-  Géant : `quantity_product` 0 = écarté. Otrity : `is_in_stock`. Chaque format porte `non_dispo` = enseignes lues EN DIRECT ce jour
-  qui ne le vendent pas → « non disponible » (jamais une enseigne en panne ni Monoprix manuel). Test `tools/test_disponibilite.py`.
-- **Otrity** (épicerie en ligne, prix = stika livrée ÷ 6 ou 12) : Cloudflare bloque GitHub → relevé depuis le PC
-  d'Ahmed par la tâche Windows « PrixEaux-Otrity » (12h, `tools/otrity_local.py` → `data/otrity.json`, ignoré après 3 jours).
-  Nouveau PC : `tools/installer_pc.ps1`.
-- **Aziza et Monoprix retirés** (30/09/2026) : barka.tn donnait des prix périmés / produits indisponibles.
-  Monoprix et Jumia exigent une vérification « humain » : **pas de contournement** (demander l'autorisation ou prix signalés).
-  Relevé depuis le PC seulement si le site laisse passer un particulier.
-- **Monoprix revenu (06/10/2026) par relevé MANUEL** : Ahmed envoie des captures de l'application Monoprix,
-  Claude écrit `data/monoprix.json` (date + offres, même format qu'otrity.json) ; `collect_prices.py` les met
-  DANS LE CLASSEMENT **30 jours** (`MAX_JOURS_MANUEL`, décision d'Ahmed) puis les retire ; `statut_sources.monoprix.manuel`
-  = pas d'alerte de retard ; la date du relevé n'est PAS affichée (choix d'Ahmed, 06/10). Logo `assets/logos/monoprix.png` envoyé par Ahmed (mot blanc sur rouge).
-  Jamais de lecture automatique de l'application (contournement refusé).
+  Géant : `quantity_product` 0 = écarté. Chaque format porte `non_dispo` = enseignes lues EN DIRECT ce jour
+  qui ne le vendent pas → « non disponible » (jamais une enseigne en panne). Test `tools/test_disponibilite.py`.
+- **Historique (avant le 23/10/2026)** : Otrity (épicerie en ligne, stika livrée ÷ 6 ou 12) relevé depuis le PC d'Ahmed ;
+  Aziza et Monoprix retirés le 30/09/2026 (barka.tn : prix périmés) ; Monoprix revenu le 06/10/2026 par relevé MANUEL
+  (captures, 30 jours dans le classement). Tout cela est arrêté (voir la décision du 23/10/2026 ci-dessus).
+  Jumia exige une vérification « humain » : **pas de contournement**.
 
 - **Photos libres des marques sans magasin** (05/10) : `data/photos_libres.json` (Open Food Facts, CC BY-SA ; images
   `assets/img/libres/`) appliquées par `collect_prices.appliquer_photos_libres` seulement si aucune photo de magasin ;
@@ -89,7 +98,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `statut_sources` dans data/eaux.json ; source en panne → anciens prix gardés **7 jours** max puis retirés ;
   panne aussi si < 50 % d'offres plausibles ou < 30 % du nombre précédent.
 - Le site avertit selon la date du **visiteur** (ℹ️ enseigne ≥ 2 j, ⚠️ tout ≥ 3 j ou aucun prix).
-- **`python tools/test_pannes.py` (21 scénarios) à relancer après toute modification du robot.**
+- **`python tools/test_pannes.py` (23 scénarios) à relancer après toute modification du robot.**
 - **`node tools/test_site.mjs` (139 vérifications de la page d'accueil) à relancer après toute modification du site.**
 - Affichage (06/10/2026) : `[hidden]{display:none!important}` dans style.css + **pas de faux boutons** (badges « Prix relevés / Sources citées / Gratuit » supprimés, info gardée en texte dans le bandeau avec le lien « sources citées ») ; test_site.mjs vérifie les deux (accueil, guides, marques).
   Il faut jsdom, installé une fois par PC : `npm install --no-save --no-package-lock jsdom` (node_modules ignoré par git).
@@ -163,8 +172,7 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
   chacun ouvre un petit panneau (`.dd` / `.dd-panel`) ; le bouton affiche le choix actuel. Le tri est au-dessus de la liste des marques.
 - **Logos des enseignes (04/10)** devant le nom du magasin (`LOGOS` / `enseigne()` dans app.js, fichiers `assets/logos/`) :
   Carrefour = icône + nom ; Géant = logo de geant.tn (figurine verte + « Géant » rouge) à la place du texte. Téléchargés depuis les sites par le robot
-  manuel `logos.yml` (`tools/chercher_logos.py`). Otrity : bloqué pour GitHub → `tools/otrity_local.py` rapporte une fois
-  `assets/logos/otrity.png` depuis le PC (sinon le nom reste en texte).
+  manuel `logos.yml` (`tools/chercher_logos.py`). (Logos Otrity et Monoprix supprimés le 23/10/2026 : enseignes retirées.)
 - Prochaine amélioration conseillée : cartes compactes.
 - **Règle** : demander l'accord d'Ahmed avant de modifier le site (sauf s'il dit « fais »).
 
@@ -190,8 +198,9 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
 
 ## Visibilité (03/10/2026)
 - Trafic : ~50 % Google, ~50 % Instagram. Partage WhatsApp : petit bouton « Partager » sur l'accueil ; gros bouton sur les pages marques et guides.
-- **Pages par magasin (08/10/2026, plan Google « une page par recherche »)** : `prix-eau-carrefour/`, `prix-eau-geant/`, `prix-eau-monoprix/`,
-  `prix-eau-otrity/` (`page_magasin` de build_guides.py, `MAGASINS`) : bouteille + stika + « ailleurs dès », FAQ JSON-LD, liens dans tous les pieds de page.
+- **Pages par magasin (08/10/2026, plan Google « une page par recherche »)** : `prix-eau-carrefour/`, `prix-eau-geant/`
+  (`page_magasin` de build_guides.py, `MAGASINS`) : bouteille + stika + « ailleurs dès », FAQ JSON-LD, liens dans tous les pieds de page.
+  `prix-eau-monoprix/` et `prix-eau-otrity/` : pages « n'est plus suivi » en noindex depuis le 23/10/2026 (`RETIRES`).
   Plan complet : `plan referencement google.md` du dépôt privé projets-ahmed.
 - Pages guides générées chaque nuit par `tools/build_guides.py` (appelé par build_pages) : `prix-stika/` (FR+AR, FAQ JSON-LD)
   et `quelle-eau/` (sodium, légèreté, calcium, magnésium d'après composition.js). Dans le sitemap et le pied de page.
@@ -228,7 +237,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - Logo d'en-tête = même goutte, en ligne dans index.html et dans `LOGO_SVG` de `tools/build_guides.py` (pages marques et guides).
 - Icône adaptative Android dédiée : `assets/icons/icon-maskable-512.png` (le manifeste ne réutilise plus icon-512).
 - Titres : « comparateur gratuit » (accueil, 35 pages marques via build_pages.py, guides via build_guides.py).
-- Reste dépendant du PC : relevé Otrity (Cloudflare bloque GitHub) → chercher une autre source accessible depuis GitHub.
+- Plus rien ne dépend du PC depuis le 23/10/2026 (Otrity retiré).
 - **Boutons « Partager » harmonisés** (06/10/2026, demande d'Ahmed, pas de doublon dans l'en-tête : le site avait déjà ses boutons) : `protection.js` intercepte tout lien `https://wa.me/?text=` (petit bouton de l'accueil, gros boutons des pages marques et guides) → clic compté `partage/<page>` dans GoatCounter, menu de partage du téléphone (`navigator.share`) s'il existe, sinon le lien WhatsApp s'ouvre normalement. Testé dans test_site.mjs.
 
 - **Vidéo de présentation** (06/10/2026) : `assets/video/presentation.mp4`, 1080 × 1920, + couverture et aperçu 1200 × 630 (`apercu-video.jpg`). Son de fond : un vrai ruisseau (enregistré par jackthemurray, Freesound 433589, CC0, via Wikimedia Commons ; preuve dans le dossier privé `videos (outil)/preuves musique/`) — demande d'Ahmed, au lieu de la musique des autres sites. Page **`video/`** (lecteur + gros bouton « Ouvrir le site » + Partager, og:video / og:image) : réglages `tools/page_video.json`, fabriquée par node tools/page_video.mjs, à partir de quelle-eau/ (à relancer si cette page change). Le bouton « Partager » envoie un LIEN : la page vidéo + l'adresse du site dans le texte (`window.partagerLien`, bloc « vidéo de présentation » en fin du JS commun), jamais le fichier. Test `node tools/test_video.mjs`.

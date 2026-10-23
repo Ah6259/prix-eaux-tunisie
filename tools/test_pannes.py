@@ -24,7 +24,9 @@ import collect_prices as c  # noqa: E402
 
 J0 = date(2026, 10, 1)
 REEL = json.loads((ROOT / "data" / "eaux.json").read_text(encoding="utf-8"))
-NOMS = {"carrefour": "Carrefour", "geant": "Géant", "otrity": "Otrity", "monoprix": "Monoprix"}
+NOMS = {"carrefour": "Carrefour", "geant": "Géant"}
+# Enseignes RETIRÉES le 23/10/2026 (décision d'Ahmed : site autonome) : ne doivent plus jamais revenir
+RETIREES = {"otrity": "Otrity", "monoprix": "Monoprix"}
 
 
 # ------------------------------------------------------------------ sources simulées
@@ -44,7 +46,7 @@ def marques_inconnues(src):
 
 class Bac:
     """Un « dossier data » temporaire + une horloge simulée."""
-    def __init__(self, avec_historique=True, otrity_local_age=0):
+    def __init__(self, avec_historique=True):
         self.tmp = Path(tempfile.mkdtemp())
         (self.tmp / "data").mkdir()
         c.ROOT = self.tmp
@@ -54,26 +56,11 @@ class Bac:
         c.IMG_AUTO = self.tmp / "img"
         c.telecharger_image = lambda url: None
         self.jour = J0
-        if otrity_local_age is not None:
-            self.otrity_local(otrity_local_age)
         if avec_historique:
             self.passe({s: ok(s) for s in ("carrefour", "geant")}, avancer=False)
 
-    def monoprix_manuel(self, age_jours):
-        """Relevé Monoprix fait à la main (captures de l'application) il y a age_jours jours."""
-        (self.tmp / "data" / "monoprix.json").write_text(json.dumps({
-            "date": (self.jour - timedelta(days=age_jours)).isoformat(),
-            "offres": [{"enseigne": "monoprix", "marque": "AQUALINE", "nom": "Eau minérale AQUALINE 1.5L",
-                        "volume_l": 1.5, "nb_unites": 1, "type": "plate", "prix": 0.6, "image_src": None}]}),
-            encoding="utf-8")
-
-    def otrity_local(self, age_jours):
-        (self.tmp / "data" / "otrity.json").write_text(json.dumps({
-            "date": (self.jour - timedelta(days=age_jours)).isoformat(),
-            "offres": offres_reelles("otrity")}), encoding="utf-8")
-
     def passe(self, comportements, avancer=True):
-        """Un passage du robot (une nuit). Otrity est toujours bloqué (comme sur GitHub)."""
+        """Un passage du robot (une nuit)."""
         if avancer:
             self.jour += timedelta(days=1)
         jour = self.jour
@@ -83,7 +70,6 @@ class Bac:
         c.date = FausseDate
         c.carrefour = comportements.get("carrefour", ok("carrefour"))
         c.geant = comportements.get("geant", ok("geant"))
-        c.otrity = panne("403 Cloudflare")
         sortie = sys.stdout
         sys.stdout = sys.stderr = open(self.tmp / "journal.txt", "a", encoding="utf-8")
         try:
@@ -102,8 +88,8 @@ def vu_par_visiteur(data, aujourdhui):
     """Reproduit la logique d'avertissement d'app.js (alerteFraicheur)."""
     avec_prix = {s for b in data["brands"] for p in b["products"] for s in p["prices"]}
     st = data.get("statut_sources") or {}
-    # relevés manuels (Monoprix) : jamais d'alerte de retard, ne comptent pas pour « mis à jour le »
-    st = {k: s for k, s in st.items() if not s.get("manuel")}
+    # relevés manuels : jamais d'alerte de retard (aucun depuis le 23/10/2026) ; enseigne inconnue d'app.js : ignorée
+    st = {k: s for k, s in st.items() if not s.get("manuel") and k in NOMS}
     derniers = sorted(s["dernier_ok"] for k, s in st.items() if s.get("dernier_ok") and NOMS[k] in avec_prix)
     derniere = derniers[-1] if derniers else data["updated"]
     if not avec_prix:
@@ -140,8 +126,8 @@ def scenario(titre, attendu, verifie):
     return deco
 
 
-@scenario("1. Tout fonctionne", "3 enseignes, aucun avertissement",
-          lambda e, d, m: e == ["Carrefour", "Géant", "Otrity"] and m == "(aucun avertissement)")
+@scenario("1. Tout fonctionne", "2 enseignes (Carrefour, Géant), aucun avertissement",
+          lambda e, d, m: e == ["Carrefour", "Géant"] and m == "(aucun avertissement)")
 def _():
     b = Bac(); d = b.passe({}); return b, d, b.jour
 
@@ -204,21 +190,21 @@ def _():
 @scenario("10. Toutes les sources en panne 2 nuits", "prix gardés + mention du retard",
           lambda e, d, m: "Carrefour" in e and "Géant" in e and m.startswith(("ℹ️", "⚠️")))
 def _():
-    b = Bac(otrity_local_age=None)
+    b = Bac()
     for _ in range(2): d = b.passe({"carrefour": panne(), "geant": panne()})
     return b, d, b.jour
 
 @scenario("11. Toutes les sources en panne 3 nuits", "⚠️ « non mis à jour depuis le … »",
           lambda e, d, m: m.startswith("⚠️ prix non mis à jour"))
 def _():
-    b = Bac(otrity_local_age=None)
+    b = Bac()
     for _ in range(3): d = b.passe({"carrefour": panne(), "geant": panne()})
     return b, d, b.jour
 
 @scenario("12. Toutes les sources en panne 10 nuits", "aucun prix + ⚠️ « indisponibles »",
           lambda e, d, m: e == [] and m.startswith("⚠️ prix momentanément"))
 def _():
-    b = Bac(otrity_local_age=None)
+    b = Bac()
     for _ in range(10): d = b.passe({"carrefour": panne(), "geant": panne()})
     return b, d, b.jour
 
@@ -227,10 +213,52 @@ def _():
 def _():
     b = Bac(); d = b.passe({}); return b, d, b.jour + timedelta(days=20)
 
-@scenario("14. PC d'Ahmed éteint 5 jours (Otrity)", "prix Otrity retirés, les autres intacts",
-          lambda e, d, m: e == ["Carrefour", "Géant"])
+def avec_retirees(base):
+    """eaux.json d'avant le 23/10/2026 : prix Otrity + Monoprix et leur statut (Monoprix « manuel »)."""
+    d = json.loads(json.dumps(base))
+    for b in d["brands"]:
+        for p in b["products"]:
+            if abs(p["liters"] - 1.5) < .01:
+                p["prices"].update({"Otrity": 0.8333, "Monoprix": 0.7})
+                p["non_dispo"] = ["Otrity"]
+    d["stores"] = ["Carrefour", "Géant", "Otrity", "Monoprix"]
+    d["statut_sources"].update({"otrity": {"dernier_ok": d["updated"], "nb": 4},
+                                "monoprix": {"dernier_ok": d["updated"], "nb": 9, "manuel": True}})
+    return d
+
+def sans_retirees(d):
+    """Aucune trace d'Otrity ni de Monoprix : prix, « non disponible », magasins, statut, liste des enseignes, sources."""
+    texte = json.dumps({k: d[k] for k in ("brands", "stores", "sources", "statut_sources")}, ensure_ascii=False).lower()
+    return (set(d["statut_sources"]) <= set(NOMS) and d["stores"] == ["Carrefour", "Géant"]
+            and not any(n.lower() in texte or k in texte for k, n in RETIREES.items()))
+
+@scenario("14. Ancien relevé avec Otrity et Monoprix (avant le 23/10/2026)",
+          "après une nuit : seulement Carrefour et Géant, aucune trace des enseignes retirées (prix, statut, non disponible)",
+          lambda e, d, m: e == ["Carrefour", "Géant"] and sans_retirees(d) and m == "(aucun avertissement)")
 def _():
-    b = Bac(otrity_local_age=5); d = b.passe({}); return b, d, b.jour
+    b = Bac()
+    c.OUT_JSON.write_text(json.dumps(avec_retirees(json.loads(c.OUT_JSON.read_text(encoding="utf-8")))), encoding="utf-8")
+    d = b.passe({}); return b, d, b.jour
+
+@scenario("14b. Même ancien relevé, Carrefour en panne (reprise des anciens prix)",
+          "la reprise ne ramène JAMAIS Otrity ni Monoprix",
+          lambda e, d, m: e == ["Carrefour", "Géant"] and sans_retirees(d))
+def _():
+    b = Bac()
+    c.OUT_JSON.write_text(json.dumps(avec_retirees(json.loads(c.OUT_JSON.read_text(encoding="utf-8")))), encoding="utf-8")
+    d = b.passe({"carrefour": panne()}); return b, d, b.jour
+
+@scenario("14c. Vieux fichiers data/otrity.json et data/monoprix.json restés sur le disque",
+          "ignorés : le robot ne lit plus que Carrefour et Géant",
+          lambda e, d, m: e == ["Carrefour", "Géant"] and sans_retirees(d))
+def _():
+    b = Bac()
+    offre = {"marque": "AQUALINE", "nom": "Eau minérale AQUALINE 1.5L", "volume_l": 1.5, "nb_unites": 1,
+             "type": "plate", "prix": 0.6, "image_src": None}
+    for k in RETIREES:
+        (b.tmp / "data" / f"{k}.json").write_text(json.dumps({"date": b.jour.isoformat(),
+                                                             "offres": [dict(offre, enseigne=k)]}), encoding="utf-8")
+    d = b.passe({}); return b, d, b.jour
 
 @scenario("15. Premier lancement, sans historique, Géant en panne", "pas de plantage, Carrefour seul",
           lambda e, d, m: "Carrefour" in e and "Géant" not in e)
@@ -242,21 +270,6 @@ def _():
           lambda e, d, m: "Géant" not in e and "geant" not in d["statut_sources"])
 def _():
     b = Bac(avec_historique=False); d = b.passe({"geant": partiel("geant")}, avancer=False); return b, d, b.jour
-
-@scenario("17. Monoprix relevé à la main il y a 20 jours", "prix Monoprix dans le classement, aucun avertissement",
-          lambda e, d, m: "Monoprix" in e and m == "(aucun avertissement)" and d["statut_sources"]["monoprix"]["manuel"])
-def _():
-    b = Bac(); b.monoprix_manuel(19); d = b.passe({}); return b, d, b.jour
-
-@scenario("17b. Monoprix relevé à la main il y a 31 jours", "prix Monoprix RETIRÉS, pas d'avertissement",
-          lambda e, d, m: "Monoprix" not in e and "monoprix" not in d["statut_sources"] and m == "(aucun avertissement)")
-def _():
-    b = Bac(); b.monoprix_manuel(30); d = b.passe({}); return b, d, b.jour
-
-@scenario("17c. Fichier Monoprix abîmé", "pas de plantage, Monoprix ignoré",
-          lambda e, d, m: "Monoprix" not in e and "Carrefour" in e)
-def _():
-    b = Bac(); (b.tmp / "data" / "monoprix.json").write_text("{pas du json", encoding="utf-8"); d = b.passe({}); return b, d, b.jour
 
 # photos libres (Open Food Facts) des marques sans photo de magasin : doivent rester après chaque nuit
 LIBRES = json.loads((ROOT / "data" / "photos_libres.json").read_text(encoding="utf-8"))["photos"]
@@ -296,11 +309,19 @@ for reussi, titre, attendu, ens, msg in resultats:
     print(f"     obtenu  : enseignes affichées = {ens} | visiteur voit : {msg}")
 import sources_en_panne as SP  # noqa: E402
 _st = {"statut_sources": {"carrefour": {"dernier_ok": "2026-10-01"}, "geant": {"dernier_ok": "2026-10-14"},
-                          "monoprix": {"dernier_ok": "2026-09-01", "manuel": True}}}
+                          "releve_main": {"dernier_ok": "2026-09-01", "manuel": True}}}
 _p = [k for k, _ in SP.en_panne(_st, date(2026, 10, 15))]
 resultats.append((_p == ["carrefour"] and "sources_en_panne.py" in (ROOT / ".github" / "workflows" / "maj-prix.yml").read_text(encoding="utf-8"),
                   "Enseigne en panne depuis plus de 2 jours -> le robot passe en ÉCHEC (e-mail à Ahmed)",
-                  "seule Carrefour signalée (Monoprix manuel ignoré)", str(_p), "—"))
+                  "seule Carrefour signalée (source « manuel » ignorée)", str(_p), "—"))
+# le code du robot ne lit plus aucune enseigne retirée (23/10/2026) : ni fonction, ni fichier de relevé
+_src = (ROOT / "tools" / "collect_prices.py").read_text(encoding="utf-8")
+_code = "\n".join(l for l in _src.splitlines() if not l.lstrip().startswith("#"))
+_code = _code.split('"""', 2)[-1]   # sans le texte d'explication du haut du fichier
+_lit = [k for k in RETIREES if f"def {k}(" in _code or f"{k}.json" in _code or f'"{k}"' in _code]
+resultats.append((not _lit and set(c.ENSEIGNES) == set(NOMS) and set(c.MINIMUM_OFFRES) <= set(NOMS),
+                  "Le robot ne lit plus Otrity ni Monoprix (retirés le 23/10/2026)",
+                  "aucune fonction, aucun fichier, aucune clé d'enseigne retirée dans collect_prices.py", str(_lit or "rien"), "—"))
 n_ok = sum(r[0] for r in resultats)
 print(f"\n{n_ok}/{len(resultats)} scénarios réussis")
 sys.exit(0 if n_ok == len(resultats) else 1)

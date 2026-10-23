@@ -12,7 +12,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 |---|---|---|---|
 | 04/10/2026 | carrefour.tn | ✅ | API GraphQL, chaque nuit |
 | 04/10/2026 | geantdrive.tn | ✅ | HTML, chaque nuit (`curl -k`) |
-| 04/10/2026 | otrity.com | ✅ 🖥️ | Cloudflare bloque GitHub → relevé depuis le PC |
+| 04/10/2026 | otrity.com | ⛔ (retiré le 23/10/2026) | Cloudflare bloque GitHub → était relevé depuis le PC ; retiré du comparateur le 23/10/2026 (site autonome) |
 | 30/09/2026 | barka.tn (Aziza, Monoprix) | ⛔ | prix périmés / produits indisponibles, retiré |
 | 30/09/2026 | monoprix.tn | ⛔ | vérification « humain » |
 | 30/09/2026 | jumia.com.tn | ⛔ | vérification « humain » |
@@ -79,3 +79,5 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 22/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, WebManagerCenter 23/08 (pénurie, 31 usines), Nabeul saisies 12/08 — presse seulement |
 | 23/10/2026 | foodealz.com, foodealz.tn, maxi-mg.tn, carrefourmarket.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) ; Foodealz cité par la presse en 2020 (livraison de courses), probablement disparu |
 | 23/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux supermarchés en ligne) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, Founa (fermé), Carrefour Market Ben Arous (nov. 2024, déjà couvert par Carrefour) |
+| 23/10/2026 | otrity.com (API wp-json/wc/store) | ⛔ | Cloudflare bloque aussi l'API wp-json pour GitHub (vérifié ce jour) : lisible seulement depuis le PC d'Ahmed → **retiré du comparateur** (décision d'Ahmed : site autonome, rien sur le PC). Pas de contournement. À reprendre seulement si GitHub peut le lire (robot `tester-source.yml`) |
+| 23/10/2026 | courses.monoprix.tn | ⛔ | Cloudflare bloque même depuis le PC d'Ahmed ; le relevé à la main par captures (data/monoprix.json) est arrêté → **Monoprix retiré du comparateur** (décision d'Ahmed : rien à la main). Pas de contournement |

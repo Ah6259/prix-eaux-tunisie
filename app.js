@@ -72,18 +72,15 @@ function compoBlock(b){
 // fraîcheur des prix : date du dernier relevé RÉUSSI de chaque enseigne (statut_sources,
 // écrit par collect_prices.py). Comparée à la date du jour du visiteur : même si tous les
 // robots s'arrêtaient, le site préviendrait que les prix sont anciens.
-const NOMS_SRC = { carrefour: "Carrefour", geant: "Géant", otrity: "Otrity", monoprix: "Monoprix" };
-// sources relevées à la main (statut_sources.<x>.manuel, ex. Monoprix : captures de l'application,
-// 30 jours max, collect_prices.py) : jamais d'alerte de retard pour elles, date non affichée (choix d'Ahmed).
+// Enseignes suivies : seulement celles que GitHub lit seul chaque nuit (Monoprix et Otrity retirés le 23/10/2026,
+// décision d'Ahmed : le site doit être autonome, sans relevé à la main ni depuis le PC).
+const NOMS_SRC = { carrefour: "Carrefour", geant: "Géant" };
+// (statut_sources.<x>.manuel = source relevée à la main : jamais d'alerte de retard ; aucune aujourd'hui)
 // logos officiels des enseignes (assets/logos/), affichés devant le nom du magasin.
 // Géant : le logo est le mot « Géant » lui-même, il remplace le texte.
-// Otrity : logo rapporté par le PC d'Ahmed (Cloudflare bloque GitHub) ; s'il manque, on garde le texte.
 const LOGOS = {
   "Carrefour": { src: "assets/logos/carrefour.png" },
   "Géant":     { src: "assets/logos/geant.png", mot: true },
-  "Otrity":    { src: "assets/logos/otrity.png" },
-  // Monoprix : logo officiel envoyé par Ahmed (06/10/2026), le mot « MONOPRIX » blanc sur rouge
-  "Monoprix":  { src: "assets/logos/monoprix.png", mot: true },
 };
 function enseigne(nom){
   const l = LOGOS[nom];
@@ -120,8 +117,7 @@ const majCourte = dateCourte(derniereMaj);
     msg = `⚠️ Les prix n'ont pas pu être mis à jour depuis le ${majCourte} : ils sont peut-être dépassés.`;
   } else {
     const enRetard = Object.entries(STATUT)
-      // en retard = dernier relevé réussi il y a 2 jours ou plus (1 jour est normal :
-      // Otrity est relevé à midi depuis le PC d'Ahmed, les autres la nuit)
+      // en retard = dernier relevé réussi il y a 2 jours ou plus (1 jour est normal : relevé la nuit)
       .filter(([k, s]) => s && s.dernier_ok && !s.manuel && joursDepuis(s.dernier_ok) >= 2 && enseignesAvecPrix.has(NOMS_SRC[k]))
       .map(([k, s]) => `${NOMS_SRC[k]} du ${dateCourte(s.dernier_ok)}`);
     if (enRetard.length)
@@ -130,7 +126,7 @@ const majCourte = dateCourte(derniereMaj);
   el.textContent = msg;
   el.hidden = !msg;
 })();
-// petite ligne sous le titre : « Mis à jour le 29 sept. · 35 marques · 4 enseignes »
+// petite ligne sous le titre : « Mis à jour le 29 sept. · 35 marques · 2 enseignes »
 const nEnseignes = new Set(DATA.brands.flatMap(b => b.products.flatMap(p => Object.keys(p.prices)))).size;
 document.getElementById("stats").textContent =
   `Mis à jour le ${majCourte} · ${DATA.brands.length} marques · ${nEnseignes} enseignes`;

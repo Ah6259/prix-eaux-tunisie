@@ -4,8 +4,11 @@
   - prix-stika/  : prix de la stika d'eau en Tunisie aujourd'hui (FR + AR), toutes marques
   - quelle-eau/  : quelle eau choisir (peu salée, faiblement minéralisée, calcium, magnésium…)
                    d'après la composition officielle (data/composition.js)
-  - prix-eau-<magasin>/ : prix de l'eau chez Carrefour, Géant, Monoprix, Otrity (08/10/2026, plan Google :
+  - prix-eau-<magasin>/ : prix de l'eau chez Carrefour et Géant (08/10/2026, plan Google :
                    « une page par recherche » — les gens tapent « prix eau carrefour »)
+  - prix-eau-monoprix/, prix-eau-otrity/ : enseignes RETIRÉES le 23/10/2026 (décision d'Ahmed : site autonome,
+                   ces prix ne se lisaient pas depuis GitHub) -> courte page « n'est plus suivi » en noindex,
+                   hors du plan du site et sans lien (pas de 404 pour Google) : page_retiree() / RETIRES
 """
 import json
 import urllib.parse
@@ -21,12 +24,11 @@ def _esc(s):
 # Mention des sources en bas de chaque page (les CGU de Carrefour demandent de citer la source)
 SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 '<a href="https://www.carrefour.tn" rel="noopener">Carrefour Tunisie</a> · '
-                '<a href="https://www.geantdrive.tn" rel="noopener">Géant Drive</a> · '
-                '<a href="https://otrity.com" rel="noopener">Otrity</a> · Monoprix (application). '
+                '<a href="https://www.geantdrive.tn" rel="noopener">Géant Drive</a>. '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
-CSS_V = "20261023a"
+CSS_V = "20261023b"
 
 # Logo (goutte en aplats dans un carré bleu, comme l'icône du téléphone) : même dessin que l'en-tête de l'accueil
 LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1797C4"/><stop offset="1" stop-color="#0A5F80"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg-eau{n})"/><path d="M256 84C256 84 142 236 142 318a114 114 0 0 0 228 0C370 236 256 84 256 84Z" fill="#fff"/><path d="M256 84C256 84 370 236 370 318a114 114 0 0 1-114 114Z" fill="#D5EEF7"/><path d="M150 336Q203 306 256 336T362 336Q356 410 256 432Q156 410 150 336Z" fill="#7FCBE6"/><path d="M256 336Q309 366 362 336Q356 410 256 432Z" fill="#5DB7D9"/></svg>')
@@ -80,8 +82,10 @@ def pied(racine):
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>"""
 
 
-MAGASINS = {"Carrefour": ("prix-eau-carrefour", "كارفور"), "Géant": ("prix-eau-geant", "جيان"),
-            "Monoprix": ("prix-eau-monoprix", "مونوبري"), "Otrity": ("prix-eau-otrity", "أوتريتي")}
+MAGASINS = {"Carrefour": ("prix-eau-carrefour", "كارفور"), "Géant": ("prix-eau-geant", "جيان")}
+# Enseignes retirées du comparateur (23/10/2026, décision d'Ahmed : le site doit être autonome) : Otrity bloque GitHub
+# (Cloudflare, API wp-json comprise), Monoprix bloque même le PC. Leur ancienne page reste en ligne, courte et en noindex.
+RETIRES = {"Monoprix": ("prix-eau-monoprix", "مونوبري"), "Otrity": ("prix-eau-otrity", "أوتريتي")}
 
 
 def _liens_magasins(racine):
@@ -100,7 +104,7 @@ def _dt(v):
     return f"{v:,.3f}".replace(",", " ").replace(".", ",") + " DT"
 
 
-def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=None, maj=None, racine="../", og_type=None, og_image=None):
+def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=None, maj=None, racine="../", og_type=None, og_image=None, noindex=False):
     return f"""<!doctype html>
 <html lang="fr" translate="no">
 <head>
@@ -109,7 +113,7 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://prix-eaux-tunisie.goatcounter.com; connect-src 'self' https://docs.google.com https://formspree.io https://prix-eaux-tunisie.goatcounter.com; form-action 'self' https://docs.google.com https://formspree.io; object-src 'none'; base-uri 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="robots" content="noai, noimageai">
+<meta name="robots" content="{'noindex, follow, ' if noindex else ''}noai, noimageai">
 <script src="{racine}protection.js?v={CSS_V}"></script>
 <title>{_esc(titre)}</title>
 <meta name="description" content="{_esc(description)}">
@@ -356,8 +360,31 @@ def page_magasin(data, magasin, SITE, maj_fr):
                     f"Prix de l'eau chez {magasin}", corps, jsonld, ar, maj=maj_fr)
 
 
+def page_retiree(magasin, SITE):
+    """Ancienne page d'une enseigne retirée du comparateur (23/10/2026) : courte, en noindex (Google l'oublie sans
+    tomber sur une erreur 404), avec un lien vers l'accueil et vers les magasins encore suivis. Aucun prix."""
+    chemin, nom_ar = RETIRES[magasin]
+    suivis = " · ".join(f'<a href="../{c}/">Prix de l&#39;eau chez {m}</a>' for m, (c, _) in MAGASINS.items())
+    corps = f"""
+  <section>
+    <p class="intro"><strong>{_esc(magasin)} n'est plus suivi par le comparateur.</strong> Ses prix ne pouvaient pas être
+    relevés automatiquement chaque jour : pour ne jamais afficher un prix ancien ou incertain, nous l'avons retiré.</p>
+    <p class="ar" dir="rtl" lang="ar">لم نعد نتابع أسعار {nom_ar} في المقارن.</p>
+    <p class="sub">Magasins suivis chaque jour : {suivis}.</p>
+    <p class="sub"><a href="../">Voir le comparateur des prix de l&#39;eau</a> · <a href="../prix-stika/">prix de la stika aujourd&#39;hui</a>.</p>
+  </section>"""
+    return _gabarit(SITE, chemin, f"{magasin} n'est plus suivi — Prix des Eaux de Tunisie",
+                    f"{magasin} n'est plus suivi par le comparateur des prix de l'eau. Voir les prix chez Carrefour et Géant.",
+                    f"{magasin} n'est plus suivi", corps, noindex=True)
+
+
 def generer(data, COMPO, SITE, ROOT, maj_fr):
     """Écrit les pages guides et renvoie leurs URL (pour le sitemap)."""
+    # enseignes retirées : page courte en noindex, jamais dans le plan du site (23/10/2026)
+    for m, (c, _) in RETIRES.items():
+        d = ROOT / c
+        d.mkdir(exist_ok=True)
+        (d / "index.html").write_text(page_retiree(m, SITE), encoding="utf-8", newline="\n")
     urls = []
     for chemin, html in (("prix-stika", page_prix_stika(data, SITE, maj_fr)),
                          ("quelle-eau", page_quelle_eau(data, COMPO, SITE, maj_fr)),

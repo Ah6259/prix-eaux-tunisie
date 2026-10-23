@@ -5,11 +5,10 @@ import re, subprocess, pathlib, urllib.parse
 
 import os
 # Sites à visiter : par défaut les enseignes suivies ; sinon la liste donnée au lancement
-# (champ « sites » du robot logos.yml, ex. « geant=https://www.geant.tn/ monoprix=https://www.monoprix.tn/ »).
+# (champ « sites » du robot logos.yml, ex. « geant=https://www.geant.tn/ »).
 SITES = dict(x.split("=", 1) for x in os.environ.get("SITES", "").split()) or {
     "carrefour": "https://www.carrefour.tn/",
     "geant": "https://www.geantdrive.tn/",
-    "otrity": "https://otrity.com/",
 }
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
 DOSSIER = pathlib.Path("assets/logos/brut")

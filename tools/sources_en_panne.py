@@ -4,7 +4,8 @@
 Quand une enseigne ne répond plus, collect_prices.py reprend ses anciens prix quelques jours puis les retire : c'est voulu,
 mais le robot restait VERT et personne n'était prévenu (même défaut que Century 21 sur le site Immobilier, 12-15/10/2026).
 Lancé APRÈS la publication par maj-prix.yml : une enseigne automatique dont le dernier relevé réussi date de plus de JOURS
-jours -> échec (GitHub prévient Ahmed par e-mail). Monoprix (relevé à la main, « manuel ») n'est pas concerné.
+jours -> échec (GitHub prévient Ahmed par e-mail). Une source relevée à la main (« manuel ») ne serait pas concernée ;
+il n'y en a plus depuis le 23/10/2026 (Monoprix et Otrity retirés : le site doit être autonome).
 """
 import json
 import sys

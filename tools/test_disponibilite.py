@@ -11,7 +11,7 @@ Vérifie, sans rien télécharger :
      un produit « OUT_OF_STOCK » ne compte pas ; le prix retenu est le plus courant.
   2. Géant : une quantité en stock à 0 = produit écarté.
   3. Le site reçoit « non_dispo » : enseignes lues ce jour qui ne vendent pas ce format
-     (jamais une enseigne en panne ni Monoprix, relevé à la main).
+     (jamais une enseigne en panne ce jour-là).
 
 Usage : python tools/test_disponibilite.py
 """
@@ -117,15 +117,17 @@ c.MINIMUM_OFFRES = {}
 c.carrefour = lambda: [offre("carrefour", "AQUALINE", 1.5, 0.63, magasins=[26, 39]),
                        offre("carrefour", "TIJEN", 1.5, 0.68, magasins=[39, 39])]
 c.geant = lambda: [offre("geant", "AQUALINE", 1.5, 0.60), offre("geant", "SAFIA", 1.5, 0.69)]
-def _panne(): raise RuntimeError("403 Cloudflare")
-c.otrity = _panne                           # Otrity en panne, pas de relevé local : jamais « non disponible »
-sortie, sys.stdout = sys.stdout, open(TMP / "journal.txt", "w", encoding="utf-8")
-try:
-    c.main()
-finally:
-    sys.stdout.close()
-    sys.stdout = sortie
-data = json.loads(c.OUT_JSON.read_text(encoding="utf-8"))
+def passage():
+    sortie, sys.stdout = sys.stdout, open(TMP / "journal.txt", "a", encoding="utf-8")
+    try:
+        c.main()
+    finally:
+        sys.stdout.close()
+        sys.stdout = sortie
+    return json.loads(c.OUT_JSON.read_text(encoding="utf-8"))
+
+
+data = passage()
 P = {(b["name"], p["liters"]): p for b in data["brands"] for p in b["products"]}
 aq, sa, ti = P.get(("Aqualine", 1.5)), P.get(("Safia", 1.5)), P.get(("Tijen", 1.5))
 verifie("site : Aqualine 1,5 L Carrefour « dans 26 magasins sur 39 »",
@@ -134,8 +136,15 @@ verifie("site : Safia 1,5 L vendue chez Géant seulement -> Carrefour « non dis
         sa and sa.get("non_dispo") == ["Carrefour"], sa)
 verifie("site : vendu dans tous les magasins -> pas de mention « N magasins sur M »",
         ti and "magasins" not in ti, ti)
-verifie("site : une enseigne en panne (Otrity) n'est jamais dite « non disponible »",
-        all("Otrity" not in (p.get("non_dispo") or []) for p in P.values()), P)
+# nuit suivante : Géant en panne (prix de la veille repris) -> jamais « non disponible » chez Géant
+def _panne(): raise RuntimeError("403 Cloudflare")
+c.geant = _panne
+P2 = {(b["name"], p["liters"]): p for b in passage()["brands"] for p in b["products"]}
+verifie("site : une enseigne en panne (Géant) n'est jamais dite « non disponible »",
+        all("Géant" not in (p.get("non_dispo") or []) for p in P2.values())
+        and "Géant" in (P2.get(("Safia", 1.5)) or {}).get("prices", {}), P2)
+verifie("site : seules les enseignes suivies (Carrefour, Géant) apparaissent, jamais Otrity ni Monoprix",
+        all(set(p["prices"]) | set(p.get("non_dispo") or []) <= {"Carrefour", "Géant"} for p in list(P.values()) + list(P2.values())))
 
 # le site affiche bien ces informations (app.js, pages marque, pages magasin)
 app = (ROOT / "app.js").read_text(encoding="utf-8")

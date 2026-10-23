@@ -1,9 +1,10 @@
 # Prix des Eaux de Tunisie
 
 Site web (et base d'une future app) qui compare les prix des marques d'eau minérale vendues
-en Tunisie (bouteille et **stika**), relevés automatiquement chez **Carrefour**, **Géant** et
-l'épicerie en ligne **Otrity**, complétés par les **prix signalés par les visiteurs**.
-(Aziza et Monoprix retirés le 30/09/2026 : pas de source de prix fiable, voir « Mettre à jour les prix ».)
+en Tunisie (bouteille et **stika**), relevés automatiquement chaque nuit par GitHub chez **Carrefour** (magasin par
+magasin) et **Géant Drive**, complétés par les **prix signalés par les visiteurs**. Le site est **autonome** : rien sur le PC,
+rien à la main. (Aziza retiré le 30/09/2026 ; **Otrity et Monoprix retirés le 23/10/2026** : ils ne se lisaient pas depuis
+GitHub, voir « Mettre à jour les prix ».)
 
 **Site public : https://prix-eau.clicvia.com/**
 
@@ -18,7 +19,7 @@ Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
 > site installable (manifeste + service worker), Votre avis, GoatCounter, aperçu WhatsApp léger. Détails : CLAUDE.md.
 
 
-- 35 marques (26 avec prix), ~95 prix relevés chaque jour (Carrefour, Géant, Otrity)
+- 35 marques (26 avec prix), prix relevés chaque jour (Carrefour, Géant)
 - Carte « 💧 La moins chère aujourd'hui » (« Stika (6 × 1,5 L) – Géant ») + petit bouton « Partager »
   (WhatsApp) sous le prix, top 5, classement complet ; recherche
 - Menu fixe en haut : **3 boutons sur une ligne** qui ouvrent chacun un panneau — **Stika/Bouteille**
@@ -49,7 +50,7 @@ renouveler. Ce qui se passe en cas de problème (simulé par `python tools/test_
 | Un site renvoie des prix absurdes (millimes, produits manquants, marques inconnues) | Détecté (« incohérent » / « suspect ») : traité comme une panne | Idem |
 | Toutes les sources en panne | Bandeau ⚠️ « prix non mis à jour depuis le … » dès 3 jours ; plus aucun prix après 7 jours | Idem, ou chercher de nouvelles sources |
 | Robots GitHub arrêtés | Le site compare la date des prix à la date du visiteur : ⚠️ affiché quand même. Un « battement de cœur » mensuel empêche GitHub de mettre les robots en pause (60 jours sans activité) | Onglet **Actions** du dépôt → réactiver les workflows |
-| PC d'Ahmed éteint, volé ou en panne | Seuls les prix **Otrity** disparaissent (après 3 jours) ; tout le reste continue | Sur un nouveau PC : `tools/installer_pc.ps1`. En cas de **vol** : changer le mot de passe GitHub et révoquer les sessions (github.com → Settings → Sessions / Applications), fermer les sessions Telegram et Google de l'appareil volé |
+| PC d'Ahmed éteint, volé ou en panne | Rien ne change : depuis le 23/10/2026 aucun prix ne dépend du PC | En cas de **vol** : changer le mot de passe GitHub et révoquer les sessions (github.com → Settings → Sessions / Applications), fermer les sessions Telegram et Google de l'appareil volé |
 | Compte Google inactif (supprimé après 2 ans) | Les prix signalés ne sont plus lus ; les anciens disparaissent après 30 jours ; rien ne casse | Gestionnaire de compte inactif Google → personne de confiance |
 | Compte Telegram inactif | Les alertes s'arrêtent si le canal perd son robot | Telegram → Confidentialité → « Supprimer mon compte si absent » : durée maximale ; ajouter un 2ᵉ administrateur |
 | Telegram en panne | Prix publiés quand même ; annonce retentée au passage suivant, sans doublon | — |
@@ -71,14 +72,12 @@ et lui demander de lire ce README.
 | `style.css` | Tout le style (thème clair/sombre) |
 | `app.js` | Rendu, filtres, avertissement de fraîcheur, prix signalés, panier |
 | `data/eaux.js` / `eaux.json` | Prix (généré — ne pas éditer), avec `statut_sources` |
-| `data/otrity.json` | Relevé Otrity fait depuis le PC d'Ahmed |
 | `data/signalements*.js/json`, `data/votes.js` | Prix signalés et votes (générés) ; `signalements_manuels.json` = ajouts à la main |
 | `data/baisses.*`, `historique.*`, `composition.js` | Baisses du jour, historique, composition |
-| `tools/collect_prices.py` | Collecte des prix (Carrefour, Géant, Otrity) + garde-fous |
+| `tools/collect_prices.py` | Collecte des prix (Carrefour, Géant) + garde-fous |
 | `tools/price_drops.py` | Baisses de prix → site + Telegram |
 | `tools/signalements.py` | Décision automatique sur les prix signalés → site + Telegram |
-| `tools/otrity_local.py`, `tools/installer_pc.ps1` | Relevé Otrity depuis le PC / réinstallation sur un nouveau PC |
-| `tools/test_pannes.py` | **Simulateur de pannes (16 scénarios) — à relancer après toute modification du robot** |
+| `tools/test_pannes.py` | **Simulateur de pannes (23 scénarios) — à relancer après toute modification du robot** |
 | `tools/build_history.py`, `tools/build_pages.py` | Historique, pages par marque, sitemap |
 
 ## Robots (GitHub Actions)
@@ -91,7 +90,6 @@ et lui demander de lire ce README.
 | `instagram.yml` | chaque lundi 9h05 | image « 5 stikas les moins chères » + texte → canal Telegram (pour Instagram) |
 | `telegram-bienvenue.yml` | à la main | message de présentation sur le canal |
 | `tests.yml` | à chaque envoi (push) | YAML des robots + `test_site.mjs` + `test_sw.mjs` + `test_pannes.py` + **visiteur simulé** (`visiteur_simule.py` : le site vu comme un visiteur sur téléphone) (e-mail de GitHub si échec) |
-| Tâche Windows « PrixEaux-Otrity » (PC d'Ahmed) | chaque jour 12h | relevé Otrity (bloqué par Cloudflare sur GitHub) |
 
 ## Mettre à jour les prix
 
@@ -107,14 +105,14 @@ python tools/collect_prices.py
 ```
 
 Notes :
-- Sources : Carrefour en direct (API GraphQL), Géant Drive en direct. **Monoprix n'est plus
-  suivi** (30/09/2026) : barka.tn affichait des produits indisponibles et des prix faux
-  (vérifié sur courses.monoprix.tn, qui bloque les robots). **Aziza n'est plus suivi** (30/09/2026) : barka.tn ne donne que les
+- Sources : Carrefour en direct (API GraphQL, chaque magasin), Géant Drive en direct. **Monoprix et Otrity ne sont plus
+  suivis (23/10/2026, décision d'Ahmed : le site doit être autonome)** : Otrity n'était lisible que depuis le PC d'Ahmed
+  (Cloudflare bloque GitHub, API wp-json comprise) et Monoprix n'était relevé qu'à la main (courses.monoprix.tn bloqué par
+  Cloudflare même depuis le PC). Pas de contournement. Leurs anciennes pages `prix-eau-monoprix/` et `prix-eau-otrity/`
+  disent « n'est plus suivi » (noindex, hors du plan du site). **Aziza n'est plus suivi** (30/09/2026) : barka.tn ne donne que les
   prix de l'ancienne boutique en ligne d'Aziza, fermée (prix périmés, signalés par un client) ;
   le site actuel d'Aziza ne publie que des catalogues promo et son API de prix est privée.
-  **Otrity** : épicerie en ligne (prix de la stika livrée), lue depuis le PC d'Ahmed car
-  Cloudflare bloque GitHub. Monoprix et Jumia exigent une vérification « humain » :
-  on ne contourne pas (demander l'autorisation, ou prix signalés).
+  Jumia exige une vérification « humain » : on ne contourne pas (demander l'autorisation, ou prix signalés).
 - Source en panne : ses derniers prix sont gardés **7 jours au plus**, puis retirés ; un résultat
   incohérent (prix en millimes, marques inconnues, trop peu de produits) compte comme une panne.
 - Garde-fous : marques d'eau connues uniquement (`MARQUES_EAU`), packs/fardeaux écartés
@@ -122,8 +120,8 @@ Notes :
   au double de l'offre la moins chère écartés.
 - Les métadonnées des marques (source, société, notes) sont dans `META` en tête de
   `tools/collect_prices.py`.
-- Les anciens scripts `geant_scrape.py`, `barka_scrape.py` et `build_data.py` sont conservés
-  pour référence mais ne sont plus utilisés.
+- L'ancien script `geant_scrape.py` est conservé pour référence mais n'est plus utilisé (`barka_scrape.py` et
+  `build_data.py`, qui lisaient encore Monoprix, supprimés le 23/10/2026 ; ils restent dans l'historique git).
 
 ## Déploiement (GitHub Pages)
 
@@ -135,7 +133,6 @@ Le dépôt `Ah6259/prix-eau-tunisie` n'est qu'une **redirection** vers ce site :
 
 - [Carrefour Tunisie](https://www.carrefour.tn) — prix (API GraphQL) et images
 - [Géant Drive Tunisie](https://www.geantdrive.tn) — prix et images
-- [Otrity](https://otrity.com/categorie-produit/boissons/eaux/) — épicerie en ligne (stika livrée)
 - Prix signalés par les visiteurs (Google Forms d'Ahmed)
 - [Office du Thermalisme via Babnet](https://www.babnet.net/festivaldetail-287073.asp) — composition des eaux
 - [Wikipédia — Eaux minérales en Tunisie](https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie) — liste des marques

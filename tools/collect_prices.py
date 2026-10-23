@@ -8,13 +8,11 @@ de ce site (marques -> produits -> prix par enseigne).
 Sources :
   - Carrefour Tunisie : API GraphQL (catégorie « Eaux ») — en direct
   - Géant Drive       : page catégorie « Eaux » (HTML PrestaShop) — en direct
-  - Otrity            : épicerie en ligne, API WooCommerce — prix de la stika LIVRÉE (ajouté le 30/09/2026)
-  - Barka.tn          : comparateur — N'EST PLUS UTILISÉ (fonction barka() gardée pour référence)
-  (Monoprix retiré le 30/09/2026 : vérifié sur courses.monoprix.tn par Ahmed, barka.tn
-   affichait en vente Safia/Marwa/Melina 1,5 L indisponibles et Sabrine 0,660 au lieu de 0,680 ;
-   courses.monoprix.tn bloque les robots (403). Ne réintroduire qu'avec une source directe vérifiée.)
-  - Monoprix (depuis le 06/10/2026) : PAS de robot — prix relevés par Ahmed dans l'application
-    Monoprix, écrits dans data/monoprix.json, gardés dans le classement 30 jours (MAX_JOURS_MANUEL).
+  (Otrity et Monoprix RETIRÉS le 23/10/2026, décision d'Ahmed : le site doit être AUTONOME, rien sur le PC,
+   rien à la main. Otrity : Cloudflare bloque GitHub, API wp-json comprise (il n'était lu que depuis le PC d'Ahmed).
+   Monoprix : relevé à la main par captures ; courses.monoprix.tn bloqué par Cloudflare même depuis le PC.
+   Pas de contournement. Leur code reste dans l'historique git.)
+  (Barka.tn retiré le 30/09/2026 : prix périmés, produits indisponibles.)
   (Aziza retiré le 30/09/2026 : barka.tn ne donne que les prix de l'ancienne boutique
    en ligne d'Aziza, fermée — prix périmés, ex. Bargou 0,590 au lieu de ~0,817 en magasin.
    Le site actuel d'Aziza ne publie que des catalogues promo, son API de prix est privée.)
@@ -45,11 +43,10 @@ IMG_AUTO = ROOT / "assets" / "img" / "produits"  # photos téléchargées des en
 PHOTOS_LIBRES = ROOT / "data" / "photos_libres.json"
 RAW_DIR = ROOT / "tools" / "raw"
 # Une enseigne qui donne moins que ce nombre d'offres = lecteur cassé, même au premier relevé (règle commune § 17,
-# incident Tunisie-annonce du 15/10/2026 : 1 annonce gardée, robot vert). Relevés du 14/10/2026 : Carrefour 62, Géant 35, Otrity 4.
+# incident Tunisie-annonce du 15/10/2026 : 1 annonce gardée, robot vert). Relevés du 14/10/2026 : Carrefour 62, Géant 35.
 # Carrefour lu magasin par magasin depuis le 23/10/2026 : 17 eaux vendues dans au moins un magasin.
-MINIMUM_OFFRES = {"carrefour": 8, "geant": 10, "otrity": 2}
+MINIMUM_OFFRES = {"carrefour": 8, "geant": 10}
 MAX_JOURS_REPRISE = 7   # une source en panne garde ses anciens prix 7 jours au plus
-MAX_JOURS_MANUEL = 30   # prix relevés à la main (data/monoprix.json) : 30 jours au plus
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36"
 
@@ -133,7 +130,9 @@ META = {
     "RIM":       {"name": "Rim", "company": None, "source": None, "depuis": None, "note": None},
 }
 
-ENSEIGNES = {"carrefour": "Carrefour", "geant": "Géant", "otrity": "Otrity", "monoprix": "Monoprix", "aziza": "Aziza"}
+# Enseignes suivies = celles que GitHub lit seul chaque nuit (Otrity et Monoprix retirés le 23/10/2026)
+ENSEIGNES = {"carrefour": "Carrefour", "geant": "Géant"}
+SUIVIES = tuple(ENSEIGNES)
 
 # id de marque -> préfixe des photos choisies à la main dans assets/img
 IMG_STEMS = {
@@ -341,91 +340,6 @@ def geant():
     return out
 
 
-# ---------------------------------------------------------------- Otrity
-def otrity():
-    """otrity.com : épicerie en ligne (livraison le jour même), WooCommerce.
-    API publique « Store API », catégorie Eaux = 1261. Les prix affichés sont ceux
-    de la STIKA LIVRÉE (le conditionnement n'est pas écrit : « Safia 1.5L » à 5,000 DT) ;
-    on les ramène au prix par bouteille (÷ 6, ou ÷ 12 pour ≤ 0,75 L) comme les autres
-    enseignes. Les incohérences (ex. une bouteille vendue à l'unité) sont écartées
-    ensuite par les garde-fous de prix au litre."""
-    items = json.loads(http_get("https://otrity.com/wp-json/wc/store/v1/products",
-                                {"category": 1261, "per_page": 100}))
-    (RAW_DIR / "otrity.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
-    out = []
-    for it in items:
-        nom = html.unescape(it.get("name") or "").strip()
-        desc = html.unescape(re.sub(r"<[^>]+>", " ", it.get("short_description") or ""))
-        marque = trouver_marque("", nom)
-        if not it.get("is_in_stock") or not marque or not est_eau(nom, marque):
-            continue
-        vol, _ = parse_volume(nom)
-        pr = it.get("prices") or {}
-        if not vol or not pr.get("price"):
-            continue
-        prix_pack = int(pr["price"]) / 10 ** int(pr.get("currency_minor_unit", 0))
-        n = 12 if vol <= 0.75 else 6 if vol <= 2.5 else 1
-        t = sans_accents(f"{nom} {desc}").lower()
-        typ = "gazeuse" if re.search(r"gazeuse|gazeifiee|petillant", t) and not re.search(r"non gaz|plate", t) else "plate"
-        out.append({
-            "enseigne": "otrity", "marque": marque, "nom": nom,
-            "volume_l": vol, "nb_unites": 1, "type": typ,
-            "prix": round(prix_pack / n, 4),   # 4 décimales : 6 × 0,8333 = 5,000 (et non 4,998)
-            "image_src": ((it.get("images") or [{}])[0]).get("src"),
-        })
-    return out
-
-
-# ---------------------------------------------------------------- Barka (Monoprix)
-def barka(requetes=("eau minerale", "eau gazeuse", "eau de source"), max_pages=40):
-    vus, out, brut = set(), [], []
-
-    def ajouter(bp):
-        shop = sans_accents(bp.get("shop_name") or "").lower()
-        prix = parse_prix(bp.get("product_price"))
-        nom, marque = (bp.get("name") or "").strip(), bp.get("brand") or ""
-        taille = " ".join(bp.get("size") or [])
-        if shop != "monoprix":   # Aziza exclu : prix périmés (voir en tête)
-            return
-        # les packs/fardeaux sont écartés : le site affiche la stika comme 6 × la bouteille
-        if re.search(r"fardeau|\blot\b|\bpack\b|\d\s*[x×*]\s*\d", sans_accents(f"{nom} {taille}").lower()):
-            return
-        if not prix or not est_eau(nom, marque):
-            return
-        cle = (shop, bp.get("_id") or bp.get("product_url"))
-        if cle in vus:
-            return
-        vus.add(cle)
-        vol, nb = parse_volume(taille, nom, bp.get("description") or "")
-        out.append({
-            "enseigne": shop, "marque": trouver_marque(marque, nom), "nom": nom,
-            "volume_l": vol, "nb_unites": nb, "type": type_eau(nom, bp.get("category") or ""),
-            "prix": prix,
-            "image_src": bp.get("imageSrc"),
-        })
-
-    recherches = [(q, max_pages) for q in requetes] + [(f"eau {m.lower()}", 2) for m in sorted(MARQUES_EAU)]
-    for q, n_pages in recherches:
-        token, pages_sans_eau = None, 0
-        for _ in range(n_pages):
-            d = json.loads(http_get("https://barka.tn/api/search", {"q": q, "per_page": 20, "searchAfter": token}))
-            brut.extend(d.get("products", []))
-            eau_sur_page = False
-            for p in d.get("products", []):
-                bp = p["base_product"]
-                if est_eau(bp.get("name") or "", bp.get("brand") or ""):
-                    eau_sur_page = True
-                for x in [bp] + (p.get("matches") or []):
-                    ajouter(x)
-            token = (d.get("meta") or {}).get("nextPageToken")
-            pages_sans_eau = 0 if eau_sur_page else pages_sans_eau + 1
-            if not token or pages_sans_eau >= 3:
-                break
-            time.sleep(0.5)
-    (RAW_DIR / "barka.json").write_text(json.dumps(brut, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
-    return out
-
-
 # ---------------------------------------------------------------- images choisies à la main
 def images_curated():
     """{préfixe de nom de fichier -> chemin} des photos de assets/img (hors produits/)."""
@@ -450,7 +364,7 @@ def find_img_curated(imgs, brand_id, litres):
 
 
 def garder_anciennes_photos(brands, ancien):
-    """Marque sans photo aujourd'hui (ex. Hayet, vendue seulement chez Otrity et absente du relevé du 11/10/2026) :
+    """Marque sans photo aujourd'hui (ex. Hayet, absente du relevé du 11/10/2026) :
     elle garde la dernière photo de magasin connue (fichier toujours présent), plutôt que de rester sans image."""
     avant = {b.get("id"): b.get("img") for b in (ancien or {}).get("brands", [])}
     for b in brands:
@@ -507,13 +421,13 @@ def main():
     aujourdhui = date.today()
     # État de chaque source : date du dernier relevé réussi + nombre d'offres trouvées.
     # (au premier passage, on suppose que le relevé précédent était réussi)
-    statut = dict((ancien or {}).get("statut_sources") or {})
+    # seulement les enseignes suivies : une enseigne retirée (Otrity, Monoprix, 23/10/2026) disparaît du statut
+    statut = {k: v for k, v in ((ancien or {}).get("statut_sources") or {}).items() if k in SUIVIES}
     if ancien and not statut:
-        statut = {k: {"dernier_ok": ancien.get("updated"), "nb": 0} for k in ("carrefour", "geant", "otrity")}
+        statut = {k: {"dernier_ok": ancien.get("updated"), "nb": 0} for k in SUIVIES}
     offres = []
     lues = set()  # enseignes lues EN DIRECT ce jour (pas les reprises) : un produit absent chez elles = « non disponible »
-    sources = (("Carrefour", carrefour, "carrefour"), ("Géant", geant, "geant"),
-               ("Otrity", otrity, "otrity"))
+    sources = (("Carrefour", carrefour, "carrefour"), ("Géant", geant, "geant"))
     for nom, f, cle_src in sources:
         prec = statut.get(cle_src) or {}
         try:
@@ -540,21 +454,6 @@ def main():
                 statut[cle_src]["par_magasin"] = True
         except Exception as e:
             print(f"! {nom} en échec : {e}", file=sys.stderr)
-            if cle_src == "otrity":
-                # bloqué par Cloudflare sur GitHub : relevé fait depuis le PC d'Ahmed
-                # (tools/otrity_local.py), utilisé seulement s'il a 3 jours ou moins
-                fichier = ROOT / "data" / "otrity.json"
-                if fichier.exists():
-                    rel = json.loads(fichier.read_text(encoding="utf-8"))
-                    age = (aujourdhui - date.fromisoformat(rel["date"])).days
-                    if age <= 3 and rel.get("offres"):
-                        print(f"  -> relevé local du {rel['date']} : {len(rel['offres'])} offres")
-                        offres += rel["offres"]
-                        lues.add(cle_src)
-                        statut[cle_src] = {"dernier_ok": rel["date"], "nb": len(rel["offres"])}
-                    else:
-                        print(f"  -> relevé local du {rel['date']} trop ancien ({age} j) : ignoré")
-                continue
             # Source en panne : on reprend ses prix du dernier relevé réussi, mais JAMAIS
             # plus de MAX_JOURS_REPRISE jours (au-delà, ses prix disparaissent du site)
             dernier = prec.get("dernier_ok")
@@ -565,23 +464,6 @@ def main():
                 offres += repris
             else:
                 print(f"  -> dernier relevé réussi : {dernier or 'jamais'} — prix {nom} retirés du site")
-    # Monoprix : pas de robot (leur site bloque les robots) ; prix relevés par Ahmed dans
-    # l'application Monoprix (captures d'écran) et écrits dans data/monoprix.json.
-    # Dans le classement pendant MAX_JOURS_MANUEL jours, puis retirés automatiquement.
-    fichier = ROOT / "data" / "monoprix.json"
-    statut.pop("monoprix", None)
-    if fichier.exists():
-        try:
-            rel = json.loads(fichier.read_text(encoding="utf-8"))
-            age = (aujourdhui - date.fromisoformat(rel["date"])).days
-            if 0 <= age <= MAX_JOURS_MANUEL and rel.get("offres"):
-                print(f"Monoprix (relevé manuel du {rel['date']}, {age} j) : {len(rel['offres'])} offres")
-                offres += [dict(o, enseigne="monoprix") for o in rel["offres"]]
-                statut["monoprix"] = {"dernier_ok": rel["date"], "nb": len(rel["offres"]), "manuel": True}
-            else:
-                print(f"Monoprix : relevé manuel du {rel['date']} ({age} j) hors délai : prix retirés")
-        except Exception as e:
-            print(f"! Monoprix : data/monoprix.json illisible ({e}) : ignoré", file=sys.stderr)
     # Même si TOUTES les sources échouent, on écrit le fichier : les prix trop vieux
     # disparaissent et le site affiche un avertissement (voir statut_sources dans app.js)
 
@@ -632,7 +514,7 @@ def main():
         })
         img = find_img_curated(imgs, b["id"], litres)
         if not img:  # pas de photo choisie à la main : celle de l'enseigne (Carrefour d'abord)
-            for e in ("carrefour", "geant", "otrity"):
+            for e in SUIVIES:
                 if p["images"].get(e):
                     img = telecharger_image(p["images"][e])
                     if img:
@@ -649,7 +531,7 @@ def main():
         if partiel:
             prod["magasins"] = partiel
         # enseignes lues aujourd'hui qui ne vendent pas ce format : « non disponible » sur le site (23/10/2026)
-        absentes = [ENSEIGNES[e] for e in ("carrefour", "geant", "otrity") if e in lues and e not in p["vus"]]
+        absentes = [ENSEIGNES[e] for e in SUIVIES if e in lues and e not in p["vus"]]
         if absentes:
             prod["non_dispo"] = absentes
         b["products"].append(prod)
@@ -684,11 +566,10 @@ def main():
     data = {
         "updated": date.today().isoformat(),
         "currency": "DT",
-        "stores": ["Carrefour", "Géant", "Otrity"] + (["Monoprix"] if "monoprix" in statut else []),
+        "stores": [ENSEIGNES[e] for e in SUIVIES],
         "sources": [
             {"name": "Carrefour Tunisie", "url": "https://www.carrefour.tn"},
             {"name": "Géant Drive Tunisie", "url": "https://www.geantdrive.tn"},
-            {"name": "Otrity (épicerie en ligne, livraison)", "url": "https://otrity.com/categorie-produit/boissons/eaux/"},
             {"name": "Wikipédia — Eaux minérales en Tunisie", "url": "https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie"},
         ],
         "brands": out_brands,
