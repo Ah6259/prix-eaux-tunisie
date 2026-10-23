@@ -1,16 +1,6 @@
 {
- "date": "2026-10-22",
+ "date": "2026-10-23",
  "offres": [
-  {
-   "enseigne": "otrity",
-   "marque": "HAYET",
-   "nom": "Eau minérale Hayet 0.75L",
-   "volume_l": 0.75,
-   "nb_unites": 1,
-   "type": "plate",
-   "prix": 0.1583,
-   "image_src": "https://otrity.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-01-29-at-19.56.43-10.jpeg"
-  },
   {
    "enseigne": "otrity",
    "marque": "HAYET",
@@ -30,6 +20,16 @@
    "type": "plate",
    "prix": 0.75,
    "image_src": "https://otrity.com/wp-content/uploads/2022/02/6191443100038-1_1.webp"
+  },
+  {
+   "enseigne": "otrity",
+   "marque": "TIJEN",
+   "nom": "Eau minérale Tijen 1.5L",
+   "volume_l": 1.5,
+   "nb_unites": 1,
+   "type": "plate",
+   "prix": 0.8333,
+   "image_src": "https://otrity.com/wp-content/uploads/2020/10/eau-minerale-10.webp"
   },
   {
    "enseigne": "otrity",
