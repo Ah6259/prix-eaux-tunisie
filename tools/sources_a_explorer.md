@@ -81,3 +81,6 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 23/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux supermarchés en ligne) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, Founa (fermé), Carrefour Market Ben Arous (nov. 2024, déjà couvert par Carrefour) |
 | 23/10/2026 | otrity.com (API wp-json/wc/store) | ⛔ | Cloudflare bloque aussi l'API wp-json pour GitHub (vérifié ce jour) : lisible seulement depuis le PC d'Ahmed → **retiré du comparateur** (décision d'Ahmed : site autonome, rien sur le PC). Pas de contournement. À reprendre seulement si GitHub peut le lire (robot `tester-source.yml`) |
 | 23/10/2026 | courses.monoprix.tn | ⛔ | Cloudflare bloque même depuis le PC d'Ahmed ; le relevé à la main par captures (data/monoprix.json) est arrêté → **Monoprix retiré du comparateur** (décision d'Ahmed : rien à la main). Pas de contournement |
+| 24/10/2026 | monmarche.tn, cityfood.tn, ecomarket.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
+| 24/10/2026 | achatenligne.tn | ❌ | injoignable pour GitHub (délai dépassé) |
+| 24/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, La Presse 19/08 (déjà notés), Founa (fermé) |
