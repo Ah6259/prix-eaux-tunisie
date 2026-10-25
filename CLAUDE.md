@@ -550,3 +550,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **RÈGLE D'AHMED (25/10/2026, règle commune § 44, TOUS les sites) : la page qui explique le fonctionnement du site est mise à jour à
   CHAQUE modification visible, dans le même envoi, et contrôlée par un test** (modèle : liste `FONCTIONS` de test_site.mjs de
   l'immobilier). Ici : à créer / brancher à la prochaine modification de ce site (pas encore de test).
+- **25/10/2026 (fin)** : page « Comment fonctionne le site ? » créée ICI (prix-eau.clicvia.com/a-propos/, `page_a_propos()` de
+  build_guides.py, test FONCTIONS dans test_site.mjs, voir plus haut) et sur les 18 autres sites (§ 44). Immobilier : tri par nouveautés /
+  baisses de prix ; collecte Facebook mensuelle pour les gouvernorats faibles (objectif 200 puis 300 annonces).
