@@ -537,3 +537,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   robot ni sur un lien partagé), badges « Prix baissé », alertes e-mail Brevo (endormies). Leçons : après une fusion de branches, refaire ET
   enregistrer les fichiers fabriqués (ici : pages des marques, guides, rapports) ; étiquettes côte à côte espacées par `gap`, jamais par
   une marge en plus (le visiteur simulé voit des espaces inégaux). Rien de changé sur ce site.
+- **25/10/2026 (nuit) — immobilier (règle valable ici)** : le texte d'une source peut contredire sa rubrique (ventes rangées en location :
+  « Av », « Avendre », « 230 md ») ; en cas de doute la donnée n'est pas affichée ni utilisée ; une marchandise n'est jamais un bien.
+  Ici : un produit rangé dans « eau » par un magasin doit être vérifié par son nom (§ 23). Rien de changé sur ce site.
