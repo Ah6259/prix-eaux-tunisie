@@ -540,3 +540,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **25/10/2026 (nuit) — immobilier (règle valable ici)** : le texte d'une source peut contredire sa rubrique (ventes rangées en location :
   « Av », « Avendre », « 230 md ») ; en cas de doute la donnée n'est pas affichée ni utilisée ; une marchandise n'est jamais un bien.
   Ici : un produit rangé dans « eau » par un magasin doit être vérifié par son nom (§ 23). Rien de changé sur ce site.
+- **RÈGLE D'AHMED (25/10/2026, règle commune § 44, TOUS les sites) : la page qui explique le fonctionnement du site est mise à jour à
+  CHAQUE modification visible, dans le même envoi, et contrôlée par un test** (modèle : liste `FONCTIONS` de test_site.mjs de
+  l'immobilier). Ici : à créer / brancher à la prochaine modification de ce site (pas encore de test).
