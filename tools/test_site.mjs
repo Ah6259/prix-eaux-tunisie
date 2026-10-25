@@ -517,5 +517,58 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
   }
 }
 
+// ---- 25/10/2026 (RÈGLE d'Ahmed, règle commune § 44 : « la page Comment fonctionne le site doit être mise à jour chaque fois qu'on
+//      modifie le site ») : chaque fonction visible du site (repère dans le code ou les pages) doit être expliquée dans a-propos/
+//      (page fabriquée par page_a_propos() de tools/build_guides.py). Nouvelle fonction = une ligne ici + son explication dans la page.
+{
+  const APF = "a-propos/index.html", ap = existsSync(join(root, APF)) ? lire(APF) : "";
+  const acc = lire("index.html"), js = lire("app.js"), prot = lire("protection.js"), ex = f => existsSync(join(root, f));
+  const FONCTIONS = [
+    ["carte « La moins chère aujourd'hui » + top 5", /id="top-reponse"/.test(acc), /La moins chère aujourd.hui[\s\S]*top.5/],
+    ["bouton Partager", /top-partage/.test(js), /Partager/],
+    ["classement complet", /compare-more/.test(js), /Voir le classement complet/],
+    ["filtre Stika / Bouteille", /id="dd-mode-btn"/.test(acc), /Stika \/ Bouteille/],
+    ["filtre Type d'eau", /id="dd-type-btn"/.test(acc), /Type d.eau/],
+    ["filtre Format", /id="dd-format-btn"/.test(acc), /« Format »/],
+    ["recherche de marque (au son)", /id="q"/.test(acc) && ex("assets/son.js"), /Chercher une marque[\s\S]{0,80}mal écrit/],
+    ["tri des marques", /id="sort"/.test(acc), /Trier/],
+    ["fiches des marques (prix par magasin, flèche ↓)", /id="grid"/.test(acc), /marque par marque[\s\S]{0,200}flèche/],
+    ["composition de l'eau", /Composition/.test(js), /Composition/],
+    ["« dans N magasins sur M » (Carrefour)", /offer-mag/.test(js), /dans N magasins sur M/],
+    ["« non disponible »", /non disponible/.test(js), /non disponible/],
+    ["avertissement des prix anciens", /id="alerte-maj"/.test(acc), /un message vous prévient/],
+    ["baisses de prix du jour", /id="baisses"/.test(acc), /Baisses de prix du jour/],
+    ["évolution des prix", /id="histo"/.test(acc), /Évolution des prix/],
+    ["vote « L'eau préférée des clients »", /id="match-open"/.test(acc), /L.eau préférée des clients/],
+    ["signaler un prix", /id="sig-open"/.test(acc), /Signaler un prix vu en magasin/],
+    ["prix signalés (vérifiés, hors classement)", ex("data/signalements.js"), /prix signalés[\s\S]{0,120}hors classement/],
+    ["commande & livraison (bientôt)", /id="livraison-open"/.test(acc), /Commande &amp; livraison/],
+    ["alertes Telegram", /t\.me\/prixeautunisie/.test(acc), /Alertes \/ PROMO[\s\S]{0,40}Telegram/],
+    ["questions fréquentes", /class="faq"/.test(acc), /Questions fréquentes/],
+    ["votre avis", /id="avis-form"/.test(acc), /Votre avis/],
+    ["pages des marques", ex("marque"), /Une page par marque/],
+    ["pages des magasins", ex("prix-eau-carrefour/index.html") && ex("prix-eau-geant/index.html"), /href="\.\.\/prix-eau-carrefour\/"[\s\S]*href="\.\.\/prix-eau-geant\/"/],
+    ["prix de la stika", ex("prix-stika/index.html"), /href="\.\.\/prix-stika\/"/],
+    ["quelle eau choisir", ex("quelle-eau/index.html"), /href="\.\.\/quelle-eau\/"/],
+    ["rapports du mois", ex("rapports/index.html"), /href="\.\.\/rapports\/"[^<]*>Rapports du mois<\/a> :/],
+    ["vidéo de présentation", ex("video/index.html"), /href="\.\.\/video\/"/],
+    ["installation sur le téléphone / hors connexion", ex("manifest.webmanifest") && ex("sw.js") && /serviceWorker/.test(prot), /installer sur votre téléphone[\s\S]{0,200}sans connexion/],
+    ["statistiques anonymes sans cookies", /goatcounter/.test(acc), /sans cookies/],
+    ["gratuit, sans inscription", true, /gratuit<\/b>, sans inscription/],
+    ["vos données", true, /<h2>Vos données<\/h2>/],
+    ["mises à jour automatiques", true, /<h2>Mises à jour automatiques<\/h2>/],
+    ["site indépendant", true, /<h2>Site indépendant<\/h2>[\s\S]{0,80}non officiel/]];
+  const manque = FONCTIONS.filter(([, sur, re]) => sur && !re.test(ap)).map(([n]) => n);
+  check(`page « Comment fonctionne le site ? » à jour : chaque fonction du site y est expliquée (${FONCTIONS.length} fonctions)` + (manque.length ? " — manque : " + manque.join(", ") : ""),
+    !!ap && manque.length === 0);
+  check("a-propos/ : titre « Comment fonctionne le site ? » + arabe « كيف يعمل الموقع؟ », indexable, dans le plan du site, refaite chaque nuit par build_guides.py",
+    /<h1>Comment fonctionne le site \?<\/h1>/.test(ap) && ap.includes("كيف يعمل الموقع؟") && !/noindex/.test(ap)
+    && lire("sitemap.xml").includes("https://prix-eau.clicvia.com/a-propos/") && /def page_a_propos/.test(lire("tools/build_guides.py")));
+  const sansLien = ["prix-stika", "quelle-eau", "prix-eau-carrefour", "prix-eau-geant", "rapports", "video", "marque/safia"]
+    .filter(c => !/href="(\.\.\/)+a-propos\/"/.test(lire(c + "/index.html")));
+  check("lien « Comment fonctionne le site ? » : accueil (sous les barres + pied de page) et pied de page des pages fabriquées" + (sansLien.length ? " — manque : " + sansLien.join(", ") : ""),
+    !!doc.querySelector('.lien-comment a[href="a-propos/"]') && !!doc.querySelector('footer a[href="a-propos/"]') && !sansLien.length);
+}
+
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");
 process.exit(erreurs ? 1 : 0);

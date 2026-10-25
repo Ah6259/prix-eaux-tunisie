@@ -981,3 +981,7 @@ input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-
 .cloche-vibre{display:inline-block;transform-origin:50% 12%;animation:cloche-secoue 12s ease-in-out 1s 3}
 @keyframes cloche-secoue{0%,25%,100%{transform:rotate(0)}2.5%,7.5%,12.5%,17.5%,22.5%{transform:rotate(14deg)}5%,10%,15%,20%{transform:rotate(-14deg)}}
 @media (prefers-reduced-motion:reduce){.cloche-vibre{animation:none}}
+/* lien vers la page « Comment fonctionne le site ? » (25/10/2026, règle commune § 44) */
+.lien-comment{margin:4px 0 0; text-align:center; font-size:14px}
+.lien-comment a{color:var(--accent); font-weight:600}
+.lien-comment span{color:var(--muted); margin-inline-start:6px}

@@ -20,7 +20,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Doit rester **public** (Pages gratuit). `gh` : "C:\Program Files\GitHub CLI\gh.exe".
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
-- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (`CSS_V` de build_guides.py, style.css et app.js : 20261023b ; protection.js et assets/son.js : 20261020b).**
+- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (`CSS_V` de build_guides.py et style.css : 20261025a ; app.js : 20261023b ; protection.js et assets/son.js : 20261020b).**
 - Image d'aperçu des liens partagés : `assets/og-image-v7.jpg` (05/10 : texte à gauche + nouvelle icône goutte + photo NEUTRE de l'eau versée à droite ; modèle `tools/og-image.html`, capture Edge 1200×630 puis JPEG qualité 88 ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
@@ -41,6 +41,13 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   referrer, **CSP** (scripts : le site + gc.zgo.at + cdnjs ; envois : docs.google.com, formspree.io, goatcounter ; tuiles OpenStreetMap)
   et `protection.js` (pas de clic droit/glisser sur les photos, source ajoutée au texte copié, anti-iframe). **Aucun script
   en ligne ni `onerror=` dans les pages** (la CSP les bloque). Nouveau service externe dans app.js → l'ajouter à la CSP (le test le vérifie).
+
+- **RÈGLE D'AHMED (25/10/2026, règle commune § 44) : la page « Comment fonctionne le site ? » (`a-propos/`, titre arabe
+  « كيف يعمل الموقع؟ ») est mise à jour à CHAQUE modification visible, dans le même envoi** ; elle est fabriquée chaque nuit par
+  `page_a_propos()` de `tools/build_guides.py` (modifier le générateur, jamais seulement le HTML), dans le plan du site, liée par
+  `.lien-comment` sur l'accueil (sous les barres) et dans tous les pieds de page. Test `FONCTIONS` de `tools/test_site.mjs`
+  (34 fonctions : repère dans le code -> phrase attendue dans la page) : nouvelle fonction = une ligne + son explication.
+  Rien d'interne ni d'enseigne retirée dans cette page (Otrity, Monoprix : le test le vérifie).
 
 ## Sources de prix
 - **Carrefour** (API GraphQL) et **Géant Drive** (HTML) : lus en direct chaque nuit par GitHub. Géant : `curl -k` en cas d'erreur de certificat (code 60).
@@ -99,7 +106,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   panne aussi si < 50 % d'offres plausibles ou < 30 % du nombre précédent.
 - Le site avertit selon la date du **visiteur** (ℹ️ enseigne ≥ 2 j, ⚠️ tout ≥ 3 j ou aucun prix).
 - **`python tools/test_pannes.py` (23 scénarios) à relancer après toute modification du robot.**
-- **`node tools/test_site.mjs` (139 vérifications de la page d'accueil) à relancer après toute modification du site.**
+- **`node tools/test_site.mjs` (172 vérifications : accueil et pages fabriquées) à relancer après toute modification du site.**
 - Affichage (06/10/2026) : `[hidden]{display:none!important}` dans style.css + **pas de faux boutons** (badges « Prix relevés / Sources citées / Gratuit » supprimés, info gardée en texte dans le bandeau avec le lien « sources citées ») ; test_site.mjs vérifie les deux (accueil, guides, marques).
   Il faut jsdom, installé une fois par PC : `npm install --no-save --no-package-lock jsdom` (node_modules ignoré par git).
 - **`node tools/test_sw.mjs`** (service worker, faux navigateur ; accepte un dossier en argument pour tester une copie sabotée).

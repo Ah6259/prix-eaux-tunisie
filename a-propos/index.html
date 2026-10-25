@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr" translate="no">
+<head>
+<meta charset="utf-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://prix-eaux-tunisie.goatcounter.com; connect-src 'self' https://docs.google.com https://formspree.io https://prix-eaux-tunisie.goatcounter.com; form-action 'self' https://docs.google.com https://formspree.io; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noai, noimageai">
+<script src="../protection.js?v=20261025a"></script>
+<title>Comment fonctionne le site ? — Prix des Eaux de Tunisie, comparateur gratuit</title>
+<meta name="description" content="Comment fonctionne Prix des Eaux de Tunisie : d'où viennent les prix de l'eau (Carrefour, Géant), comment utiliser le comparateur, vos données, mises à jour chaque jour. Gratuit.">
+<link rel="canonical" href="https://prix-eau.clicvia.com/a-propos/">
+
+<meta property="og:title" content="Comment fonctionne le site ? — Prix des Eaux de Tunisie, comparateur gratuit">
+<meta property="og:description" content="Comment fonctionne Prix des Eaux de Tunisie : d'où viennent les prix de l'eau (Carrefour, Géant), comment utiliser le comparateur, vos données, mises à jour chaque jour. Gratuit.">
+<meta property="og:image" content="https://prix-eau.clicvia.com/assets/og-image-v7.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/icon.svg">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Prix Eaux">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../style.css?v=20261025a">
+
+<style>
+  .guide-table{width:100%; border-collapse:collapse; font-size:14px; background:var(--surface); border:1px solid var(--line); border-radius:12px}
+  .guide-table th,.guide-table td{padding:7px 10px; border-top:1px solid var(--line); text-align:left}
+  .guide-table th{font-size:12px; color:var(--muted); border-top:0}
+  .guide-table td.n{text-align:right; font-variant-numeric:tabular-nums; font-weight:700}
+  .guide-table a{color:var(--ink); font-weight:600}
+  /* 18/10/2026 (visiteur simulé : tableau du rapport plus large que l'écran du téléphone) : serré sur petit écran, jamais de débordement */
+  @media (max-width:480px){ .guide-table{font-size:12.5px} .guide-table th,.guide-table td{padding:6px 5px} .guide-table small{display:block;font-size:10.5px} }
+  .tableau-defile{max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .guide-table.magasin{font-size:13px} .guide-table.magasin th,.guide-table.magasin td{padding:7px 6px}
+  .guide-table.magasin td.n{white-space:nowrap} .guide-table small{display:block; color:var(--muted); font-weight:400}
+  /* 25/10/2026 (visiteur simulé : « dans 26 magasins sur 39 » élargissait le tableau de Carrefour à 399 px) : cette ligne peut passer à la ligne */
+  .guide-table.magasin td.n small{white-space:normal}
+  .ar{font-size:15px; color:var(--muted); margin:4px 0 0}
+  .avert{background:var(--gaz-soft); color:var(--gaz); border-radius:10px; padding:9px 12px; font-size:13px}
+  .rp-signature{margin:4px 0 12px; font-size:14px; color:var(--muted)}
+  .rp-partage{margin:12px 0 16px}
+  .rp-partager{display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:10px 20px; border:0; border-radius:999px;
+    background:#0A6E95; color:#fff; font:inherit; font-weight:700; font-size:16px; cursor:pointer}
+  .rp-partager svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round}
+  .rp-partager .rp-copie{display:none} .rp-partager.copie-ok{background:#2E7D32}
+  .rp-partager.copie-ok .rp-copie{display:inline} .rp-partager.copie-ok .rp-a-copier{display:none}
+  .rp-aide{margin:6px 0 0; font-size:13px; color:var(--muted)}
+  .ap-liste{margin:6px 0 0; padding-left:20px; font-size:14.5px; line-height:1.55; max-width:68ch}
+  .ap-liste li{margin:5px 0} .ap-liste.ar{padding-left:0; padding-right:20px; color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap site-inner">
+  <a class="titre" href="../"><svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg-eau" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1797C4"/><stop offset="1" stop-color="#0A5F80"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg-eau)"/><path d="M256 84C256 84 142 236 142 318a114 114 0 0 0 228 0C370 236 256 84 256 84Z" fill="#fff"/><path d="M256 84C256 84 370 236 370 318a114 114 0 0 1-114 114Z" fill="#D5EEF7"/><path d="M150 336Q203 306 256 336T362 336Q356 410 256 432Q156 410 150 336Z" fill="#7FCBE6"/><path d="M256 336Q309 366 362 336Q356 410 256 432Z" fill="#5DB7D9"/></svg><div class="titre-txt"><p class="h-site">Prix des Eaux de Tunisie</p><p class="stats-line">Comparateur indépendant</p></div></a>
+</div></header>
+<div class="hero page-hero"><div class="wrap">
+  <p class="fil"><a href="../">← Comparateur des prix de l'eau en Tunisie</a></p>
+  <h1>Comment fonctionne le site ?</h1>
+  <p class="ar" dir="rtl" lang="ar">كيف يعمل الموقع؟</p>
+  <span class="maj">Prix relevés le 25/10/2026</span>
+</div></div>
+<div class="wrap">
+  
+  <section>
+    <p class="intro"><strong>Prix des Eaux de Tunisie compare chaque jour le prix de l'eau en bouteille dans les magasins
+    tunisiens</strong> : 35 marques, la bouteille et la stika (6 bouteilles, ou 12 pour les petites de 0,5 L).
+    Gratuit, sans inscription, en français avec des lignes en arabe. Derniers prix relevés le 25/10/2026.</p>
+  </section>
+  <section><h2>D'où viennent les prix</h2><ul class="ap-liste"><li>Des boutiques en ligne de <b>Carrefour et Géant</b> : un robot lit leurs prix automatiquement chaque nuit (<a href="../prix-eau-carrefour/">Carrefour</a> · <a href="../prix-eau-geant/">Géant</a>).</li><li>Un prix n'est gardé que si le produit est <b>en stock</b>. Chez Carrefour, le site lit chaque magasin et écrit « dans N magasins sur M » sous le prix.</li><li>Un produit qu'une enseigne ne vend pas aujourd'hui est marqué « non disponible ».</li><li>Si une boutique ne répond pas, ses derniers prix restent affichés 7 jours au plus, puis ils sont retirés.</li><li>Si les prix datent de plusieurs jours, un message vous prévient en haut de la page.</li><li>La composition des eaux (sodium, calcium, résidu sec…) vient du tableau officiel de l'Office du Thermalisme.</li><li>Les <b>prix signalés</b> par les visiteurs sont vérifiés automatiquement, affichés 30 jours avec leur date, hors classement.</li><li>Les prix sont <b>indicatifs</b> : ils peuvent changer selon le magasin et les promotions.</li></ul></section>
+  <section><h2>Comment s'en servir (page d'accueil)</h2><ul class="ap-liste"><li><b>La moins chère aujourd'hui</b> : la carte verte montre tout de suite la stika la moins chère, puis le top 5 ; bouton « Partager » pour l'envoyer.</li><li>« <b>Voir le classement complet</b> » : toutes les marques, de la moins chère à la plus chère.</li><li><b>Filtres</b> : trois boutons « Stika / Bouteille », « Type d'eau » (minérale, source, traitée, gazeuse) et « Format ».</li><li><b>Chercher une marque</b> : tapez son nom, même mal écrit (Maroua trouve Marwa).</li><li><b>Trier</b> les marques par nom, par prix de la bouteille de 1,5 L, par prix au litre ou par minéralité.</li><li><b>Les prix, marque par marque</b> : chaque fiche montre le prix de chaque format dans chaque magasin ; la flèche ↓ marque le moins cher ; « Composition » ouvre le détail de l'eau.</li><li><b>Baisses de prix du jour</b> : la liste apparaît quand un prix a baissé d'au moins 1 % depuis le relevé précédent.</li><li><b>Évolution des prix</b> : la courbe de la stika la moins chère, jour par jour.</li><li><b>L'eau préférée des clients</b> : votez pour votre eau (un vote par téléphone ou ordinateur) et voyez le classement.</li><li><b>Signaler un prix vu en magasin</b> : marque, format, prix, magasin et date ; il est publié après vérification, sur la fiche de la marque et sur Telegram.</li><li><b>Commande &amp; livraison (bientôt)</b> : les boutons « + » préparent un panier, mais la commande n'est pas encore ouverte.</li><li><b>Alertes / PROMO</b> : le canal Telegram envoie les baisses de prix et les prix signalés.</li><li><b>Questions fréquentes</b> et <b>Votre avis</b> (formulaire pour nous écrire) en bas de la page.</li></ul></section>
+  <section><h2>Les autres pages</h2><ul class="ap-liste"><li>Une page par marque (prix de la bouteille et de la stika, composition, source).</li><li>Une page par magasin : <a href="../prix-eau-carrefour/">Carrefour</a> · <a href="../prix-eau-geant/">Géant</a>, avec le meilleur prix ailleurs pour comparer.</li><li><a href="../prix-stika/">Prix de la stika aujourd&#39;hui</a> : toutes les marques, de la moins chère à la plus chère.</li><li><a href="../quelle-eau/">Quelle eau choisir ?</a> : eaux peu salées, légères, riches en calcium ou en magnésium.</li><li><a href="../rapports/">Rapports du mois</a> : prix médian par marque et évolution, calculés sur les prix relevés chaque jour.</li><li><a href="../video/">Vidéo de présentation</a> du site, à partager.</li></ul></section>
+  <section><h2>Gratuit, sur votre téléphone</h2><ul class="ap-liste"><li>Le site est <b>entièrement gratuit</b>, sans inscription et sans paiement.</li><li>Vous pouvez l'<b>installer sur votre téléphone</b> comme une application (menu du navigateur : « Ajouter à l'écran d'accueil ») ; sans connexion, il montre les derniers prix déjà vus.</li><li>Les pages de prix ont un bouton « Partager » (WhatsApp ou menu de partage du téléphone).</li></ul></section>
+  <section><h2>Vos données</h2><ul class="ap-liste"><li>Aucun compte, aucun nom demandé pour voir les prix.</li><li>Statistiques de visite <b>anonymes, sans cookies</b> (GoatCounter).</li><li>Votre panier reste dans votre téléphone. Votre vote est compté avec un code anonyme créé par votre navigateur, jamais avec votre nom.</li><li>« Signaler un prix » ne demande aucun nom ; la ville est facultative.</li><li>« Votre avis » demande un e-mail seulement pour pouvoir vous répondre.</li></ul></section>
+  <section><h2>Mises à jour automatiques</h2><ul class="ap-liste"><li>Les prix sont relus <b>chaque nuit</b> par un robot, et toutes les pages sont refaites avec les nouveaux prix.</li><li>Les prix signalés et les votes sont comptés toutes les 2 heures, de 8 h à 22 h.</li><li>Le rapport du mois en cours est recalculé chaque nuit ; un mois fini ne change plus.</li><li>Cette page est mise à jour à chaque changement du site.</li></ul></section>
+  <section><h2>Site indépendant</h2><ul class="ap-liste"><li>Site <b>non officiel</b>, sans lien avec les magasins ni avec les marques citées. Les noms et logos appartiennent à leurs propriétaires.</li><li>Nous ne vendons pas d'eau aujourd'hui : nous comparons les prix pour vous aider à payer moins cher.</li></ul></section>
+  <section><h2>بالعربية</h2><ul class="ap-liste ar" dir="rtl" lang="ar"><li>يقارن الموقع كل يوم ثمن الماء المعدني في مغازات تونس: ⁨35⁩ علامة، القارورة والستيكة.</li><li>الأسعار تُقرأ آليًا كل ليلة من المتاجر الإلكترونية لـ⁨Carrefour⁩ و⁨Géant⁩، فقط إذا كان المنتوج متوفرًا. الأسعار تقريبية.</li><li>يمكنك البحث عن علامة، التصفية حسب النوع والحجم، التصويت لمائك المفضل، والإبلاغ عن سعر رأيته في المغازة.</li><li>الموقع مجاني، دون تسجيل، ودون ملفات تعريف (cookies). موقع مستقل وغير رسمي.</li></ul></section>
+  <section><p class="sub"><a href="../">Retour au comparateur des prix de l&#39;eau</a> · <a href="../prix-stika/">prix de la stika aujourd&#39;hui</a>.</p></section>
+</div>
+<footer><div class="wrap pied">
+  <p class="pied-logo"><svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg-eau-pied" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1797C4"/><stop offset="1" stop-color="#0A5F80"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg-eau-pied)"/><path d="M256 84C256 84 142 236 142 318a114 114 0 0 0 228 0C370 236 256 84 256 84Z" fill="#fff"/><path d="M256 84C256 84 370 236 370 318a114 114 0 0 1-114 114Z" fill="#D5EEF7"/><path d="M150 336Q203 306 256 336T362 336Q356 410 256 432Q156 410 150 336Z" fill="#7FCBE6"/><path d="M256 336Q309 366 362 336Q356 410 256 432Z" fill="#5DB7D9"/></svg>Prix des Eaux de Tunisie</p>
+  <p class="pied-desc">Comparateur indépendant des prix de l'eau en bouteille en Tunisie.
+  Site non officiel, sans lien avec les enseignes ni avec les marques citées.</p>
+  <nav class="pied-nav" aria-label="Liens utiles"><a href="../">Comparateur des prix de l'eau</a>
+  <a href="../prix-stika/">Prix de la stika aujourd'hui</a>
+  <a href="../quelle-eau/">Quelle eau choisir ?</a>
+  <a href="../rapports/">Rapports du mois (prix par marque)</a>
+  <a href="../a-propos/">Comment fonctionne le site ?</a>
+  <a href="https://eau.clicvia.com/" rel="noopener">Où trouver de l'eau (sources, majels)</a>
+  <a href="https://clicvia.com/" rel="noopener">Tous nos services</a>
+  <a href="../prix-eau-carrefour/">Prix de l&#39;eau chez Carrefour</a>
+  <a href="../prix-eau-geant/">Prix de l&#39;eau chez Géant</a>
+  <a href="https://t.me/prixeautunisie" rel="noopener">Alertes promo (Telegram)</a></nav>
+  <p class="pied-titre">Sources des prix</p>
+  <p class="pied-sources">Prix indicatifs relevés sur les boutiques en ligne : <a href="https://www.carrefour.tn" rel="noopener">Carrefour Tunisie</a> · <a href="https://www.geantdrive.tn" rel="noopener">Géant Drive</a>. Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.</p>
+  <p class="credit-pied">Photos de bouteilles des marques absentes des boutiques suivies : <a href="https://world.openfoodfacts.org/" rel="noopener">Open Food Facts</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.fr" rel="license noopener">CC BY-SA 3.0</a>.</p>
+  <p class="copyright">© 2026 Prix des Eaux de Tunisie — tous droits réservés.</p>
+</div></footer>
+<!-- Statistiques de visite anonymes, sans cookies (GoatCounter) -->
+<script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

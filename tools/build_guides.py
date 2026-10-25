@@ -28,7 +28,7 @@ SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
-CSS_V = "20261023b"
+CSS_V = "20261025a"
 
 # Logo (goutte en aplats dans un carré bleu, comme l'icône du téléphone) : même dessin que l'en-tête de l'accueil
 LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1797C4"/><stop offset="1" stop-color="#0A5F80"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg-eau{n})"/><path d="M256 84C256 84 142 236 142 318a114 114 0 0 0 228 0C370 236 256 84 256 84Z" fill="#fff"/><path d="M256 84C256 84 370 236 370 318a114 114 0 0 1-114 114Z" fill="#D5EEF7"/><path d="M150 336Q203 306 256 336T362 336Q356 410 256 432Q156 410 150 336Z" fill="#7FCBE6"/><path d="M256 336Q309 366 362 336Q356 410 256 432Z" fill="#5DB7D9"/></svg>')
@@ -69,6 +69,7 @@ def pied(racine):
   <a href="{racine}prix-stika/">Prix de la stika aujourd'hui</a>
   <a href="{racine}quelle-eau/">Quelle eau choisir ?</a>
   <a href="{racine}rapports/">Rapports du mois (prix par marque)</a>
+  <a href="{racine}a-propos/">Comment fonctionne le site ?</a>
   <a href="https://eau.clicvia.com/" rel="noopener">Où trouver de l'eau (sources, majels)</a>
   <a href="https://clicvia.com/" rel="noopener">Tous nos services</a>
   {_liens_magasins(racine)}
@@ -145,6 +146,8 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
   .tableau-defile{{max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}}
   .guide-table.magasin{{font-size:13px}} .guide-table.magasin th,.guide-table.magasin td{{padding:7px 6px}}
   .guide-table.magasin td.n{{white-space:nowrap}} .guide-table small{{display:block; color:var(--muted); font-weight:400}}
+  /* 25/10/2026 (visiteur simulé : « dans 26 magasins sur 39 » élargissait le tableau de Carrefour à 399 px) : cette ligne peut passer à la ligne */
+  .guide-table.magasin td.n small{{white-space:normal}}
   .ar{{font-size:15px; color:var(--muted); margin:4px 0 0}}
   .avert{{background:var(--gaz-soft); color:var(--gaz); border-radius:10px; padding:9px 12px; font-size:13px}}
   .rp-signature{{margin:4px 0 12px; font-size:14px; color:var(--muted)}}
@@ -155,6 +158,8 @@ def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=
   .rp-partager .rp-copie{{display:none}} .rp-partager.copie-ok{{background:#2E7D32}}
   .rp-partager.copie-ok .rp-copie{{display:inline}} .rp-partager.copie-ok .rp-a-copier{{display:none}}
   .rp-aide{{margin:6px 0 0; font-size:13px; color:var(--muted)}}
+  .ap-liste{{margin:6px 0 0; padding-left:20px; font-size:14.5px; line-height:1.55; max-width:68ch}}
+  .ap-liste li{{margin:5px 0}} .ap-liste.ar{{padding-left:0; padding-right:20px; color:var(--ink)}}
 </style>
 </head>
 <body>
@@ -378,6 +383,88 @@ def page_retiree(magasin, SITE):
                     f"{magasin} n'est plus suivi", corps, noindex=True)
 
 
+def page_a_propos(data, SITE, maj_fr):
+    """« Comment fonctionne le site ? » (25/10/2026, règle commune § 44 d'Ahmed) : à quoi sert le site, d'où viennent les prix,
+    chaque fonction visible (une ligne chacune), gratuit, vos données, mises à jour, site indépendant.
+    RÈGLE : à mettre à jour à CHAQUE modification visible du site, dans le même envoi ; test FONCTIONS de tools/test_site.mjs."""
+    import collect_prices as CP   # noqa: E402  (mêmes chiffres que le robot : jamais écrits deux fois)
+    import signalements as SG     # noqa: E402
+    N = "\u00a0"
+    nb = len(data["brands"])
+    mags = " et ".join(data.get("stores") or MAGASINS)
+    liens_mag = " · ".join(f'<a href="../{c}/">{m}</a>' for m, (c, _) in MAGASINS.items())
+
+    def bloc(titre, lignes, ar=False):
+        lis = "".join(f"<li>{x}</li>" for x in lignes)
+        attr = ' class="ap-liste ar" dir="rtl" lang="ar"' if ar else ' class="ap-liste"'
+        return f"<section><h2>{titre}</h2><ul{attr}>{lis}</ul></section>"
+
+    corps = f"""
+  <section>
+    <p class="intro"><strong>Prix des Eaux de Tunisie compare chaque jour le prix de l'eau en bouteille dans les magasins
+    tunisiens</strong> : {nb}{N}marques, la bouteille et la stika (6{N}bouteilles, ou 12 pour les petites de 0,5{N}L).
+    Gratuit, sans inscription, en français avec des lignes en arabe. Derniers prix relevés le {maj_fr}.</p>
+  </section>
+  {bloc("D'où viennent les prix", [
+        f"Des boutiques en ligne de <b>{mags}</b> : un robot lit leurs prix automatiquement chaque nuit ({liens_mag}).",
+        "Un prix n'est gardé que si le produit est <b>en stock</b>. Chez Carrefour, le site lit chaque magasin et écrit « dans N magasins sur M » sous le prix.",
+        "Un produit qu'une enseigne ne vend pas aujourd'hui est marqué « non disponible ».",
+        f"Si une boutique ne répond pas, ses derniers prix restent affichés {CP.MAX_JOURS_REPRISE}{N}jours au plus, puis ils sont retirés.",
+        "Si les prix datent de plusieurs jours, un message vous prévient en haut de la page.",
+        "La composition des eaux (sodium, calcium, résidu sec…) vient du tableau officiel de l'Office du Thermalisme.",
+        f"Les <b>prix signalés</b> par les visiteurs sont vérifiés automatiquement, affichés {SG.JOURS_MAX}{N}jours avec leur date, hors classement.",
+        "Les prix sont <b>indicatifs</b> : ils peuvent changer selon le magasin et les promotions."])}
+  {bloc("Comment s'en servir (page d'accueil)", [
+        "<b>La moins chère aujourd'hui</b> : la carte verte montre tout de suite la stika la moins chère, puis le top{N}5 ; bouton « Partager » pour l'envoyer.".replace("{N}", N),
+        "« <b>Voir le classement complet</b> » : toutes les marques, de la moins chère à la plus chère.",
+        "<b>Filtres</b> : trois boutons « Stika / Bouteille », « Type d'eau » (minérale, source, traitée, gazeuse) et « Format ».",
+        "<b>Chercher une marque</b> : tapez son nom, même mal écrit (Maroua trouve Marwa).",
+        "<b>Trier</b> les marques par nom, par prix de la bouteille de 1,5{N}L, par prix au litre ou par minéralité.".replace("{N}", N),
+        "<b>Les prix, marque par marque</b> : chaque fiche montre le prix de chaque format dans chaque magasin ; la flèche ↓ marque le moins cher ; « Composition » ouvre le détail de l'eau.",
+        "<b>Baisses de prix du jour</b> : la liste apparaît quand un prix a baissé d'au moins 1{N}% depuis le relevé précédent.".replace("{N}", N),
+        "<b>Évolution des prix</b> : la courbe de la stika la moins chère, jour par jour.",
+        "<b>L'eau préférée des clients</b> : votez pour votre eau (un vote par téléphone ou ordinateur) et voyez le classement.",
+        "<b>Signaler un prix vu en magasin</b> : marque, format, prix, magasin et date ; il est publié après vérification, sur la fiche de la marque et sur Telegram.",
+        "<b>Commande &amp; livraison (bientôt)</b> : les boutons « + » préparent un panier, mais la commande n'est pas encore ouverte.",
+        "<b>Alertes / PROMO</b> : le canal Telegram envoie les baisses de prix et les prix signalés.",
+        "<b>Questions fréquentes</b> et <b>Votre avis</b> (formulaire pour nous écrire) en bas de la page."])}
+  {bloc("Les autres pages", [
+        "Une page par marque (prix de la bouteille et de la stika, composition, source).",
+        f"Une page par magasin : {liens_mag}, avec le meilleur prix ailleurs pour comparer.",
+        '<a href="../prix-stika/">Prix de la stika aujourd&#39;hui</a> : toutes les marques, de la moins chère à la plus chère.',
+        '<a href="../quelle-eau/">Quelle eau choisir ?</a> : eaux peu salées, légères, riches en calcium ou en magnésium.',
+        '<a href="../rapports/">Rapports du mois</a> : prix médian par marque et évolution, calculés sur les prix relevés chaque jour.',
+        '<a href="../video/">Vidéo de présentation</a> du site, à partager.'])}
+  {bloc("Gratuit, sur votre téléphone", [
+        "Le site est <b>entièrement gratuit</b>, sans inscription et sans paiement.",
+        "Vous pouvez l'<b>installer sur votre téléphone</b> comme une application (menu du navigateur : « Ajouter à l'écran d'accueil ») ; sans connexion, il montre les derniers prix déjà vus.",
+        "Les pages de prix ont un bouton « Partager » (WhatsApp ou menu de partage du téléphone)."])}
+  {bloc("Vos données", [
+        "Aucun compte, aucun nom demandé pour voir les prix.",
+        "Statistiques de visite <b>anonymes, sans cookies</b> (GoatCounter).",
+        "Votre panier reste dans votre téléphone. Votre vote est compté avec un code anonyme créé par votre navigateur, jamais avec votre nom.",
+        "« Signaler un prix » ne demande aucun nom ; la ville est facultative.",
+        "« Votre avis » demande un e-mail seulement pour pouvoir vous répondre."])}
+  {bloc("Mises à jour automatiques", [
+        "Les prix sont relus <b>chaque nuit</b> par un robot, et toutes les pages sont refaites avec les nouveaux prix.",
+        "Les prix signalés et les votes sont comptés toutes les 2{N}heures, de 8{N}h à 22{N}h.".replace("{N}", N),
+        "Le rapport du mois en cours est recalculé chaque nuit ; un mois fini ne change plus.",
+        "Cette page est mise à jour à chaque changement du site."])}
+  {bloc("Site indépendant", [
+        "Site <b>non officiel</b>, sans lien avec les magasins ni avec les marques citées. Les noms et logos appartiennent à leurs propriétaires.",
+        "Nous ne vendons pas d'eau aujourd'hui : nous comparons les prix pour vous aider à payer moins cher."])}
+  {bloc("بالعربية", [
+        f"يقارن الموقع كل يوم ثمن الماء المعدني في مغازات تونس: {_iso(nb)} علامة، القارورة والستيكة.",
+        f"الأسعار تُقرأ آليًا كل ليلة من المتاجر الإلكترونية لـ{_iso('Carrefour')} و{_iso('Géant')}، فقط إذا كان المنتوج متوفرًا. الأسعار تقريبية.",
+        "يمكنك البحث عن علامة، التصفية حسب النوع والحجم، التصويت لمائك المفضل، والإبلاغ عن سعر رأيته في المغازة.",
+        "الموقع مجاني، دون تسجيل، ودون ملفات تعريف (cookies). موقع مستقل وغير رسمي."], ar=True)}
+  <section><p class="sub"><a href="../">Retour au comparateur des prix de l&#39;eau</a> · <a href="../prix-stika/">prix de la stika aujourd&#39;hui</a>.</p></section>"""
+    return _gabarit(SITE, "a-propos", "Comment fonctionne le site ? — Prix des Eaux de Tunisie, comparateur gratuit",
+                    "Comment fonctionne Prix des Eaux de Tunisie : d'où viennent les prix de l'eau (Carrefour, Géant), "
+                    "comment utiliser le comparateur, vos données, mises à jour chaque jour. Gratuit.",
+                    "Comment fonctionne le site ?", corps, None, "كيف يعمل الموقع؟", maj=maj_fr)
+
+
 def generer(data, COMPO, SITE, ROOT, maj_fr):
     """Écrit les pages guides et renvoie leurs URL (pour le sitemap)."""
     # enseignes retirées : page courte en noindex, jamais dans le plan du site (23/10/2026)
@@ -388,6 +475,7 @@ def generer(data, COMPO, SITE, ROOT, maj_fr):
     urls = []
     for chemin, html in (("prix-stika", page_prix_stika(data, SITE, maj_fr)),
                          ("quelle-eau", page_quelle_eau(data, COMPO, SITE, maj_fr)),
+                         ("a-propos", page_a_propos(data, SITE, maj_fr)),
                          *((c, page_magasin(data, m, SITE, maj_fr)) for m, (c, _) in MAGASINS.items())):
         if not html:
             continue

@@ -27,6 +27,9 @@ Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
   plusieurs choix), **Format** (plusieurs choix) ; le tri est au-dessus de la liste des marques
 - **Composition minéralogique** de 32 eaux (Office du Thermalisme, `data/composition.js`)
 - **Historique des prix**, pages par marque (`marque/<slug>/`), FAQ, SEO, PWA
+- **Page « Comment fonctionne le site ? »** (`a-propos/`, 25/10/2026, règle commune § 44) : fabriquée chaque nuit par
+  `page_a_propos()` de `tools/build_guides.py`, liée depuis l'accueil et tous les pieds de page ; à tenir à jour à chaque
+  modification visible (test `FONCTIONS` de `tools/test_site.mjs`)
 - **Alertes** : baisses de prix ≥ 1 % publiées chaque nuit sur le canal Telegram
   https://t.me/prixeautunisie + bandeau « Baisses de prix aujourd'hui »
 - **Prix signalés par les visiteurs** (Google Forms → robot toutes les 2 h → site + Telegram)

@@ -450,3 +450,11 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   textes), plan du site, llms.txt, manifeste, Telegram, tests ; un test vérifie qu'elle n'apparaît plus dans AUCUNE page.
 - Son ancienne page n'est pas supprimée (pas de 404 pour Google) : page courte « … n'est plus suivi » en `noindex`, avec des
   liens vers l'accueil et les magasins suivis, hors du plan du site et sans lien vers elle. L'historique des prix passés est gardé.
+
+## Page « Comment fonctionne le site ? » (25/10/2026, règle commune § 44)
+- Chaque site a une page qui explique son fonctionnement : à quoi il sert, d'où viennent les données, chaque fonction visible
+  (une ligne chacune), gratuit ou payant, vos données, mises à jour automatiques, site indépendant. Rien d'inventé.
+- Ici : `a-propos/`, fabriquée chaque nuit par `page_a_propos()` de `tools/build_guides.py` (mêmes en-tête, pied, CSP), dans le
+  plan du site, liée depuis l'accueil et tous les pieds de page.
+- Un test (`FONCTIONS` de `tools/test_site.mjs`) bloque la publication si une fonction du site n'y est pas expliquée :
+  nouvelle fonction = une ligne dans la liste + son explication dans la page, dans le même envoi.
