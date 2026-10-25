@@ -528,3 +528,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   accords par téléphone d'Ahmed avec des sites d'annonces (trace écrite à garder). Ici : « La moins chère » et les rapports du mois
   utilisent déjà les vrais prix relevés. Pour reprendre sur le PC : `git pull` dans chaque dépôt (immobilier-tunis, projets-ahmed, ce
   dépôt), tout est envoyé. Rien de changé sur ce site.
+- **25/10/2026 — minutes GitHub à 90 % (tous les projets)** : seuls les dépôts PRIVÉS comptent (2 000 min/mois, limite de dépense 0 $ :
+  GitHub arrête les robots privés, ne facture rien) ; ce site est public, donc gratuit. Corrigé : ia-interne (immobilier) tous les 3 jours
+  dès le 01/11, robot Pipeline de FATMA en pause jusqu'au 01/11. Leçons communes : un robot long (> 15 min) dans un dépôt privé = rare
+  ou dans un dépôt public ; un test ne dépend jamais de l'ordre des données du jour ; un identifiant n'est jamais coupé sans empreinte.
+  Rien de changé sur ce site.
