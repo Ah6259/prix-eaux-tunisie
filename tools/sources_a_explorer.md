@@ -84,3 +84,6 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 24/10/2026 | monmarche.tn, cityfood.tn, ecomarket.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
 | 24/10/2026 | achatenligne.tn | ❌ | injoignable pour GitHub (délai dépassé) |
 | 24/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, La Presse 19/08 (déjà notés), Founa (fermé) |
+| 25/10/2026 | zenbio.tn, panierfrais.tn, epiceriedirecte.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
+| 25/10/2026 | casamarket.tn | ❌ | lisible (200, 314 Ko) mais 0 mot « eau », 0 Safia, 1 « prix » : pas de boutique d'eau |
+| 25/10/2026 | Recherche web (Safia/Marwa en ligne, courses en ligne pack 6 × 1,5 L) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, La Presse 19/08 et 29/08, AllAfrica 26/08 (déjà notés), combien-coute.net déjà écarté (Cloudflare) |
