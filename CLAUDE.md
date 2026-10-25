@@ -533,3 +533,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   dès le 01/11, robot Pipeline de FATMA en pause jusqu'au 01/11. Leçons communes : un robot long (> 15 min) dans un dépôt privé = rare
   ou dans un dépôt public ; un test ne dépend jamais de l'ordre des données du jour ; un identifiant n'est jamais coupé sans empreinte.
   Rien de changé sur ce site.
+- **25/10/2026 (soir) — immobilier (à savoir, leçons valables ici)** : affiche publicitaire en fenêtre (une fois par jour, jamais pour un
+  robot ni sur un lien partagé), badges « Prix baissé », alertes e-mail Brevo (endormies). Leçons : après une fusion de branches, refaire ET
+  enregistrer les fichiers fabriqués (ici : pages des marques, guides, rapports) ; étiquettes côte à côte espacées par `gap`, jamais par
+  une marge en plus (le visiteur simulé voit des espaces inégaux). Rien de changé sur ce site.
