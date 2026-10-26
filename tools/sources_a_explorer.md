@@ -87,3 +87,5 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 25/10/2026 | zenbio.tn, panierfrais.tn, epiceriedirecte.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
 | 25/10/2026 | casamarket.tn | ❌ | lisible (200, 314 Ko) mais 0 mot « eau », 0 Safia, 1 « prix » : pas de boutique d'eau |
 | 25/10/2026 | Recherche web (Safia/Marwa en ligne, courses en ligne pack 6 × 1,5 L) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, La Presse 19/08 et 29/08, AllAfrica 26/08 (déjà notés), combien-coute.net déjà écarté (Cloudflare) |
+| 26/10/2026 | mercuremarket.tn, mercure-market.tn, mercuremarket.com.tn, ulysse.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) ; « Mercure Market » cité par un article non daté, lancement non confirmé |
+| 26/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux supermarchés en ligne 2026) | ❌ | rien de nouveau : Tuniscope 13/07 (déjà noté), Founa (fermé), Merkado/lemarche/Farm Trust (déjà vus) ; aucun drive Aziza/Monoprix |
