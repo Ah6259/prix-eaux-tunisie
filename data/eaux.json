@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-26",
+ "updated": "2026-10-27",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -199,7 +199,7 @@
      },
      "magasins": {
       "Carrefour": [
-       3,
+       1,
        39
       ]
      },
@@ -218,7 +218,7 @@
      },
      "magasins": {
       "Carrefour": [
-       20,
+       17,
        39
       ]
      },
@@ -401,7 +401,7 @@
      },
      "magasins": {
       "Carrefour": [
-       19,
+       17,
        39
       ]
      }
@@ -446,7 +446,7 @@
      },
      "magasins": {
       "Carrefour": [
-       12,
+       15,
        39
       ]
      }
@@ -519,15 +519,17 @@
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.62,
-      "Géant": 0.62
+      "Carrefour": 0.62
      },
      "magasins": {
       "Carrefour": [
        5,
        39
       ]
-     }
+     },
+     "non_dispo": [
+      "Géant"
+     ]
     },
     {
      "liters": 1.0,
@@ -749,7 +751,7 @@
      },
      "magasins": {
       "Carrefour": [
-       4,
+       3,
        39
       ]
      }
@@ -949,7 +951,7 @@
      },
      "magasins": {
       "Carrefour": [
-       17,
+       14,
        39
       ]
      }
@@ -1066,7 +1068,7 @@
      },
      "magasins": {
       "Carrefour": [
-       30,
+       29,
        39
       ]
      }
@@ -1102,13 +1104,13 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-26",
+   "dernier_ok": "2026-10-27",
    "nb": 17,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-10-26",
-   "nb": 34
+   "dernier_ok": "2026-10-27",
+   "nb": 33
   }
  }
 }
