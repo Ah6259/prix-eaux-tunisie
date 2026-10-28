@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-10-27",
+ "updated": "2026-10-28",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -44,7 +44,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       26,
+       25,
        39
       ]
      }
@@ -199,7 +199,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       1,
+       7,
        39
       ]
      },
@@ -446,7 +446,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       15,
+       17,
        39
       ]
      }
@@ -489,7 +489,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       30,
+       29,
        39
       ]
      },
@@ -746,7 +746,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
-      "Géant": 0.74,
+      "Géant": 0.77,
       "Carrefour": 0.84
      },
      "magasins": {
@@ -951,7 +951,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       14,
+       13,
        39
       ]
      }
@@ -1068,7 +1068,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       29,
+       28,
        39
       ]
      }
@@ -1104,12 +1104,12 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-27",
+   "dernier_ok": "2026-10-28",
    "nb": 17,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-10-27",
+   "dernier_ok": "2026-10-28",
    "nb": 33
   }
  }
