@@ -91,3 +91,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 26/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux supermarchés en ligne 2026) | ❌ | rien de nouveau : Tuniscope 13/07 (déjà noté), Founa (fermé), Merkado/lemarche/Farm Trust (déjà vus) ; aucun drive Aziza/Monoprix |
 | 27/10/2026 | uniprix.tn, epicerie-tunisie.com, tunisiafood.tn, sbkmarket.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
 | 27/10/2026 | Recherche web (Safia/Marwa en ligne, drive pack 6 × 1,5 L) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (déjà notés), combien-coute.net déjà écarté (Cloudflare) |
+| 28/10/2026 | drive.tn, tunisiedrive.com, e-courses.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
+| 28/10/2026 | shop.tn | ❌ | lisible (200, 267 Ko) mais boutique généraliste : 0 « eau », 0 Safia, 6 « prix » — pas de prix d'eau |
+| 28/10/2026 | aziza.tn | ❌ | lisible (200, 12 Ko) mais site vitrine des magasins : 0 « eau », 0 prix (Aziza déjà retiré le 30/09) |
+| 28/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives octobre 2026) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (déjà notés), Founa (fermé), Mercure Market (magasins physiques, déjà vu) |
