@@ -95,3 +95,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 28/10/2026 | shop.tn | ❌ | lisible (200, 267 Ko) mais boutique généraliste : 0 « eau », 0 Safia, 6 « prix » — pas de prix d'eau |
 | 28/10/2026 | aziza.tn | ❌ | lisible (200, 12 Ko) mais site vitrine des magasins : 0 « eau », 0 prix (Aziza déjà retiré le 30/09) |
 | 28/10/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives octobre 2026) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (déjà notés), Founa (fermé), Mercure Market (magasins physiques, déjà vu) |
+| 29/10/2026 | elaoula.com | ❌ | injoignable pour GitHub (erreur TLS) ; boutique de produits tunisiens pour les Tunisiens de l'étranger (épicerie, artisanat), peu probable pour l'eau |
+| 29/10/2026 | tunisiemarket.com | 🟡 | lisible (200, 12 Ko), boutique Shopify, robots.txt permissif ; page d'accueil sans « eau » ni prix. À creuser au prochain test : /products.json ou /collections pour voir s'il vend de l'eau |
+| 29/10/2026 | managers.tn | ❌ | site de presse économique (mot anti-robot dans le code seulement), 0 « eau » |
+| 29/10/2026 | Recherche web (Safia/Marwa en ligne, nouvelles boutiques de courses) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, saisies Bizerte (presse) |
