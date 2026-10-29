@@ -1,28 +1,28 @@
 {
- "date": "2026-10-15",
+ "date": "2026-10-29",
  "baisses": [
   {
-   "id": "jektiss",
-   "marque": "Jektiss",
-   "format": "1 L",
-   "litres": 1.0,
-   "gazeuse": true,
+   "id": "mira",
+   "marque": "Mira",
+   "format": "2 L",
+   "litres": 2.0,
+   "gazeuse": false,
    "saveur": null,
    "enseigne": "Carrefour",
-   "avant": 0.67,
-   "prix": 0.63,
-   "pct": 6.0
+   "avant": 0.84,
+   "prix": 0.74,
+   "pct": 11.9
   },
   {
-   "id": "garci",
-   "marque": "Garci",
-   "format": "500 ml",
-   "litres": 0.5,
-   "gazeuse": true,
+   "id": "delice",
+   "marque": "Délice",
+   "format": "1.5 L",
+   "litres": 1.5,
+   "gazeuse": false,
    "saveur": null,
    "enseigne": "Carrefour",
-   "avant": 0.48,
-   "prix": 0.46,
+   "avant": 0.72,
+   "prix": 0.69,
    "pct": 4.2
   }
  ]

@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28",
+ "updated": "2026-10-29",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -44,10 +44,23 @@
      },
      "magasins": {
       "Carrefour": [
-       25,
+       23,
        39
       ]
      }
+    },
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/aqualine_15l.jpg",
+     "prices": {
+      "Géant": 0.73
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
     }
    ]
   },
@@ -161,7 +174,27 @@
    "types": [
     "plate"
    ],
-   "products": []
+   "products": [
+    {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/d62fddf4951e.webp",
+     "prices": {
+      "Carrefour": 0.47
+     },
+     "magasins": {
+      "Carrefour": [
+       1,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Géant"
+     ]
+    }
+   ]
   },
   {
    "id": "bulla-regia",
@@ -195,17 +228,15 @@
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
-      "Carrefour": 0.4
+      "Carrefour": 0.4,
+      "Géant": 0.4
      },
      "magasins": {
       "Carrefour": [
        7,
        39
       ]
-     },
-     "non_dispo": [
-      "Géant"
-     ]
+     }
     },
     {
      "liters": 1.5,
@@ -365,8 +396,8 @@
      "flavor": null,
      "img": "assets/img/delice_15l.jpg",
      "prices": {
-      "Géant": 0.69,
-      "Carrefour": 0.72
+      "Carrefour": 0.69,
+      "Géant": 0.69
      },
      "magasins": {
       "Carrefour": [
@@ -446,7 +477,7 @@
      },
      "magasins": {
       "Carrefour": [
-       17,
+       18,
        39
       ]
      }
@@ -656,6 +687,19 @@
    ],
    "products": [
     {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/melina_x.jpg",
+     "prices": {
+      "Géant": 0.4
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
+    },
+    {
      "liters": 2.0,
      "format": "2 L",
      "category": "plate",
@@ -746,8 +790,8 @@
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
-      "Géant": 0.77,
-      "Carrefour": 0.84
+      "Carrefour": 0.74,
+      "Géant": 0.77
      },
      "magasins": {
       "Carrefour": [
@@ -790,11 +834,15 @@
      "flavor": null,
      "img": "assets/img/primaqua_6l.jpg",
      "prices": {
+      "Carrefour": 2.34,
       "Géant": 2.39
      },
-     "non_dispo": [
-      "Carrefour"
-     ]
+     "magasins": {
+      "Carrefour": [
+       3,
+       39
+      ]
+     }
     },
     {
      "liters": 19.0,
@@ -951,7 +999,7 @@
      },
      "magasins": {
       "Carrefour": [
-       13,
+       16,
        39
       ]
      }
@@ -1068,7 +1116,7 @@
      },
      "magasins": {
       "Carrefour": [
-       28,
+       29,
        39
       ]
      }
@@ -1104,13 +1152,13 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-28",
-   "nb": 17,
+   "dernier_ok": "2026-10-29",
+   "nb": 19,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-10-28",
-   "nb": 33
+   "dernier_ok": "2026-10-29",
+   "nb": 36
   }
  }
 }
