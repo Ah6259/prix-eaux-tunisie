@@ -99,3 +99,5 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 29/10/2026 | tunisiemarket.com | 🟡 | lisible (200, 12 Ko), boutique Shopify, robots.txt permissif ; page d'accueil sans « eau » ni prix. À creuser au prochain test : /products.json ou /collections pour voir s'il vend de l'eau |
 | 29/10/2026 | managers.tn | ❌ | site de presse économique (mot anti-robot dans le code seulement), 0 « eau » |
 | 29/10/2026 | Recherche web (Safia/Marwa en ligne, nouvelles boutiques de courses) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08, saisies Bizerte (presse) |
+| 30/10/2026 | tunisiemarket.com (/products.json) | ⛔ | 403 pour GitHub : page « Verifying your connection » (protection anti-robot) ; pas de contournement |
+| 30/10/2026 | Recherche web (Safia/Marwa en ligne, packs livrés) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (plafond 0,850 DT), AllAfrica (déjà notés) |
