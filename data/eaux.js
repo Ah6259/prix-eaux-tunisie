@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-10-29",
+ "updated": "2026-10-30",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -170,7 +170,7 @@ window.EAUX_DATA = {
    "source": null,
    "depuis": null,
    "note": null,
-   "img": "assets/img/produits/d62fddf4951e.webp",
+   "img": "assets/img/produits/3fa485b35ef5.webp",
    "types": [
     "plate"
    ],
@@ -189,6 +189,19 @@ window.EAUX_DATA = {
        1,
        39
       ]
+     },
+     "non_dispo": [
+      "Géant"
+     ]
+    },
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/3fa485b35ef5.webp",
+     "prices": {
+      "Carrefour": 0.65
      },
      "non_dispo": [
       "Géant"
@@ -249,7 +262,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       17,
+       20,
        39
       ]
      },
@@ -520,7 +533,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       29,
+       30,
        39
       ]
      },
@@ -1116,7 +1129,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       29,
+       28,
        39
       ]
      }
@@ -1152,12 +1165,12 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-29",
-   "nb": 19,
+   "dernier_ok": "2026-10-30",
+   "nb": 20,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-10-29",
+   "dernier_ok": "2026-10-30",
    "nb": 36
   }
  }
