@@ -1023,6 +1023,30 @@ window.EAUX_HISTO = {
     "Safia": 0.69,
     "Tijen": 0.68
    }
+  },
+  {
+   "date": "2026-10-31",
+   "stika15": 3.6,
+   "bouteille15": 0.6,
+   "marques": [
+    "Aqualine"
+   ],
+   "parMarque": {
+    "Aqualine": 0.6,
+    "Bargou": 0.67,
+    "Beya": 0.66,
+    "Brima": 0.65,
+    "Cristaline": 0.61,
+    "Délice": 0.69,
+    "Marwa": 0.61,
+    "Melliti": 0.61,
+    "Palma": 0.76,
+    "Pristine": 0.67,
+    "Rim": 0.69,
+    "Sabrine": 0.68,
+    "Safia": 0.69,
+    "Tijen": 0.68
+   }
   }
  ]
 };

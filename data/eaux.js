@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -56,11 +56,15 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/aqualine_15l.jpg",
      "prices": {
-      "Géant": 0.73
+      "Géant": 0.73,
+      "Carrefour": 0.78
      },
-     "non_dispo": [
-      "Carrefour"
-     ]
+     "magasins": {
+      "Carrefour": [
+       1,
+       39
+      ]
+     }
     }
    ]
   },
@@ -182,17 +186,15 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/produits/d62fddf4951e.webp",
      "prices": {
-      "Carrefour": 0.47
+      "Carrefour": 0.47,
+      "Géant": 0.47
      },
      "magasins": {
       "Carrefour": [
        1,
        39
       ]
-     },
-     "non_dispo": [
-      "Géant"
-     ]
+     }
     },
     {
      "liters": 1.5,
@@ -390,6 +392,19 @@ window.EAUX_DATA = {
      ]
     },
     {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/delice_delio_250ml_pomme.jpg",
+     "prices": {
+      "Géant": 0.48
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
+    },
+    {
      "liters": 1.0,
      "format": "1 L",
      "category": "plate",
@@ -445,7 +460,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       17,
+       18,
        39
       ]
      }
@@ -826,7 +841,27 @@ window.EAUX_DATA = {
    "types": [
     "plate"
    ],
-   "products": []
+   "products": [
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/a10da5f9cc3a.webp",
+     "prices": {
+      "Carrefour": 0.76
+     },
+     "magasins": {
+      "Carrefour": [
+       3,
+       39
+      ]
+     },
+     "non_dispo": [
+      "Géant"
+     ]
+    }
+   ]
   },
   {
    "id": "primaqua",
@@ -871,7 +906,10 @@ window.EAUX_DATA = {
        3,
        39
       ]
-     }
+     },
+     "non_dispo": [
+      "Géant"
+     ]
     }
    ]
   },
@@ -1129,7 +1167,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       28,
+       31,
        39
       ]
      }
@@ -1165,13 +1203,13 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-30",
-   "nb": 20,
+   "dernier_ok": "2026-10-31",
+   "nb": 22,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-10-30",
-   "nb": 36
+   "dernier_ok": "2026-10-31",
+   "nb": 37
   }
  }
 };
