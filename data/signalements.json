@@ -1,7 +1,26 @@
 {
- "maj": "2026-10-22T17:54",
- "publies": 6,
- "rejetes": [],
+ "maj": "2026-10-31T00:35",
+ "publies": 3,
+ "rejetes": [
+  {
+   "horodateur": "30/09/2026 10:58:17",
+   "marque": "Sabrine",
+   "prix": "0,68",
+   "raison": "prix vu il y a plus de 30 jours"
+  },
+  {
+   "horodateur": "30/09/2026 11:08:02",
+   "marque": "Aziz",
+   "prix": "3900",
+   "raison": "prix vu il y a plus de 30 jours"
+  },
+  {
+   "horodateur": "30/09/2026 14:36:42",
+   "marque": "Royal",
+   "prix": "3900",
+   "raison": "prix vu il y a plus de 30 jours"
+  }
+ ],
  "annonces": [
   "08/10/2026 21:41:49",
   "08/10/2026 21:44:00",
