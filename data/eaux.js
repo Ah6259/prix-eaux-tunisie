@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-10-31",
+ "updated": "2026-11-01",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -243,15 +243,17 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
-      "Carrefour": 0.4,
-      "Géant": 0.4
+      "Carrefour": 0.4
      },
      "magasins": {
       "Carrefour": [
        7,
        39
       ]
-     }
+     },
+     "non_dispo": [
+      "Géant"
+     ]
     },
     {
      "liters": 1.5,
@@ -505,7 +507,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       18,
+       17,
        39
       ]
      }
@@ -548,7 +550,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       30,
+       28,
        39
       ]
      },
@@ -578,17 +580,15 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.62
+      "Carrefour": 0.62,
+      "Géant": 0.62
      },
      "magasins": {
       "Carrefour": [
-       5,
+       8,
        39
       ]
-     },
-     "non_dispo": [
-      "Géant"
-     ]
+     }
     },
     {
      "liters": 1.0,
@@ -602,7 +602,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       5,
+       8,
        39
       ]
      }
@@ -853,7 +853,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       3,
+       4,
        39
       ]
      },
@@ -906,10 +906,7 @@ window.EAUX_DATA = {
        3,
        39
       ]
-     },
-     "non_dispo": [
-      "Géant"
-     ]
+     }
     }
    ]
   },
@@ -1203,13 +1200,13 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-10-31",
+   "dernier_ok": "2026-11-01",
    "nb": 22,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-10-31",
-   "nb": 37
+   "dernier_ok": "2026-11-01",
+   "nb": 38
   }
  }
 };
