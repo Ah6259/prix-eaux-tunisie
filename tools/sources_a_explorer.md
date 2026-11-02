@@ -107,3 +107,8 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 01/11/2026 | ooredoo.tn | ❌ | opérateur télécom (PrestaShop), 0 « eau », pas d'eau en bouteille |
 | 01/11/2026 | wiki-prix.com | ❌ | nom de domaine inexistant (introuvable pour GitHub) |
 | 01/11/2026 | Recherche web (Safia/Marwa en ligne, nouveaux drives 2026) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 02/08 (déjà notés), Founa drive (2019, fermé) |
+| 02/11/2026 | tunisianet.com.tn | ❌ | lisible (200, 190 Ko, PrestaShop) mais boutique informatique : 0 Safia, 2 « eau » seulement — pas d'eau en bouteille |
+| 02/11/2026 | fatales.tn | ❌ | lisible (200, 560 Ko, PrestaShop) mais parfums/cosmétiques (« eau de parfum ») : 0 Safia, pas d'eau en bouteille |
+| 02/11/2026 | magasin-general.com.tn | ❌ | nom de domaine inexistant (introuvable pour GitHub) |
+| 02/11/2026 | mg.tn, founa.com (revus) | ❌ | inchangés : mg.tn certificat invalide + 0 « eau » ; founa.com page vide (114 octets), enseigne fermée |
+| 02/11/2026 | Recherche web (Safia/Marwa en ligne, nouveaux supermarchés en ligne novembre 2026) | ❌ | rien de nouveau : Tuniscope 13/07 (déjà noté : Marwa 1,5 L 0,640 DT, Safia 0,720 DT), Founa (fermé), combien-coute.net (écarté), articles Businessnews non datés/payants |
