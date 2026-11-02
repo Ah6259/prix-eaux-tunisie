@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-01",
+ "updated": "2026-11-02",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -394,19 +394,6 @@
      ]
     },
     {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/delice_delio_250ml_pomme.jpg",
-     "prices": {
-      "Géant": 0.48
-     },
-     "non_dispo": [
-      "Carrefour"
-     ]
-    },
-    {
      "liters": 1.0,
      "format": "1 L",
      "category": "plate",
@@ -507,7 +494,7 @@
      },
      "magasins": {
       "Carrefour": [
-       17,
+       18,
        39
       ]
      }
@@ -550,7 +537,7 @@
      },
      "magasins": {
       "Carrefour": [
-       28,
+       27,
        39
       ]
      },
@@ -1164,7 +1151,7 @@
      },
      "magasins": {
       "Carrefour": [
-       31,
+       28,
        39
       ]
      }
@@ -1200,13 +1187,13 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-01",
+   "dernier_ok": "2026-11-02",
    "nb": 22,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-01",
-   "nb": 38
+   "dernier_ok": "2026-11-02",
+   "nb": 37
   }
  }
 }
