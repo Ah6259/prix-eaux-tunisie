@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-11-02",
+ "updated": "2026-11-03",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -44,7 +44,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       23,
+       21,
        39
       ]
      }
@@ -247,7 +247,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       7,
+       5,
        39
       ]
      },
@@ -394,6 +394,19 @@ window.EAUX_DATA = {
      ]
     },
     {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/delice_delio_250ml_pomme.jpg",
+     "prices": {
+      "Géant": 0.48
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
+    },
+    {
      "liters": 1.0,
      "format": "1 L",
      "category": "plate",
@@ -449,7 +462,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       18,
+       16,
        39
       ]
      }
@@ -494,7 +507,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       18,
+       17,
        39
       ]
      }
@@ -537,7 +550,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       27,
+       25,
        39
       ]
      },
@@ -805,12 +818,12 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
-      "Carrefour": 0.74,
+      "Carrefour": 0.76,
       "Géant": 0.77
      },
      "magasins": {
       "Carrefour": [
-       3,
+       2,
        39
       ]
      }
@@ -1034,7 +1047,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       16,
+       12,
        39
       ]
      }
@@ -1133,11 +1146,15 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/tijen_15l.jpg",
      "prices": {
+      "Carrefour": 0.44,
       "Géant": 0.44
      },
-     "non_dispo": [
-      "Carrefour"
-     ]
+     "magasins": {
+      "Carrefour": [
+       1,
+       39
+      ]
+     }
     },
     {
      "liters": 1.5,
@@ -1187,13 +1204,13 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-02",
-   "nb": 22,
+   "dernier_ok": "2026-11-03",
+   "nb": 23,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-02",
-   "nb": 37
+   "dernier_ok": "2026-11-03",
+   "nb": 38
   }
  }
 };
