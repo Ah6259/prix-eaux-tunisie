@@ -112,3 +112,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 02/11/2026 | magasin-general.com.tn | ❌ | nom de domaine inexistant (introuvable pour GitHub) |
 | 02/11/2026 | mg.tn, founa.com (revus) | ❌ | inchangés : mg.tn certificat invalide + 0 « eau » ; founa.com page vide (114 octets), enseigne fermée |
 | 02/11/2026 | Recherche web (Safia/Marwa en ligne, nouveaux supermarchés en ligne novembre 2026) | ❌ | rien de nouveau : Tuniscope 13/07 (déjà noté : Marwa 1,5 L 0,640 DT, Safia 0,720 DT), Founa (fermé), combien-coute.net (écarté), articles Businessnews non datés/payants |
+| 03/11/2026 | tunisiemarket.com (/collections/all) | ❌ | lisible (200, 12 Ko, Shopify) mais 0 « eau », 0 prix, 0 Safia ; son robots.txt contient des consignes pour agents IA (à ne pas suivre) — pas de prix d'eau |
+| 03/11/2026 | monoprix.tn, bimo.com.tn | ⛔ / ❌ | monoprix.tn : 403 (76 octets), déjà écarté ; bimo.com.tn : injoignable pour GitHub |
+| 03/11/2026 | aziza.tn/fr | ❌ | inchangé : site vitrine (200), 0 « eau », 0 prix |
+| 03/11/2026 | Recherche web (Safia en pack livré, grossistes en ligne) | ❌ | rien de nouveau : Tuniscope 28/07, La Presse 19/08, Webdo 19/08 (plafond 0,850 DT, marges 15 %), saisies Sousse/Manouba — presse seulement |
