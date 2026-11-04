@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-11-03",
+ "updated": "2026-11-04",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -266,7 +266,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       20,
+       15,
        39
       ]
      },
@@ -358,7 +358,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       9,
+       6,
        39
       ]
      },
@@ -550,7 +550,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       25,
+       27,
        39
       ]
      },
@@ -789,11 +789,24 @@ window.EAUX_DATA = {
    "source": "Hajeb El Ayoun (Kairouan)",
    "depuis": 2018,
    "note": null,
-   "img": "assets/img/mira_095l.jpg",
+   "img": "assets/img/mira_2l.jpg",
    "types": [
     "plate"
    ],
    "products": [
+    {
+     "liters": 0.4,
+     "format": "400 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/mira_2l.jpg",
+     "prices": {
+      "Géant": 0.39
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
+    },
     {
      "liters": 0.95,
      "format": "950 ml",
@@ -1047,7 +1060,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       12,
+       11,
        39
       ]
      }
@@ -1204,13 +1217,13 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-03",
+   "dernier_ok": "2026-11-04",
    "nb": 23,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-03",
-   "nb": 38
+   "dernier_ok": "2026-11-04",
+   "nb": 39
   }
  }
 };
