@@ -116,3 +116,6 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 03/11/2026 | monoprix.tn, bimo.com.tn | ⛔ / ❌ | monoprix.tn : 403 (76 octets), déjà écarté ; bimo.com.tn : injoignable pour GitHub |
 | 03/11/2026 | aziza.tn/fr | ❌ | inchangé : site vitrine (200), 0 « eau », 0 prix |
 | 03/11/2026 | Recherche web (Safia en pack livré, grossistes en ligne) | ❌ | rien de nouveau : Tuniscope 28/07, La Presse 19/08, Webdo 19/08 (plafond 0,850 DT, marges 15 %), saisies Sousse/Manouba — presse seulement |
+| 04/11/2026 | tunisiecourses.com, supermarche-tunisie.com, monoprix.com.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
+| 04/11/2026 | tayara.tn | ❌ | lisible (200, 262 Ko) mais petites annonces entre particuliers (« eau » 34 fois = bruit), 0 Safia : pas de prix de magasin fiables |
+| 04/11/2026 | Recherche web (Safia/Marwa en ligne, plafonds du ministère) | ❌ | rien de nouveau : Webdo 12/09 (eau de retour en rayon, achats rationnés), Business News 19-20/08 (plafonds 0,600 / 0,800 / 0,850 / 0,950 DT, marge 15 %), Tuniscope 28/07 — presse seulement ; carrefour.tn robots.txt permissif (déjà utilisé) |
