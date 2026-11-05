@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04",
+ "updated": "2026-11-05",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -247,7 +247,7 @@
      },
      "magasins": {
       "Carrefour": [
-       5,
+       4,
        39
       ]
      },
@@ -502,12 +502,12 @@
      "flavor": null,
      "img": "assets/img/garci_1l.jpg",
      "prices": {
-      "Carrefour": 0.66,
+      "Carrefour": 0.63,
       "Géant": 0.69
      },
      "magasins": {
       "Carrefour": [
-       17,
+       26,
        39
       ]
      }
@@ -550,7 +550,7 @@
      },
      "magasins": {
       "Carrefour": [
-       27,
+       28,
        39
       ]
      },
@@ -866,7 +866,7 @@
      },
      "magasins": {
       "Carrefour": [
-       4,
+       5,
        39
       ]
      },
@@ -1060,7 +1060,7 @@
      },
      "magasins": {
       "Carrefour": [
-       11,
+       16,
        39
       ]
      }
@@ -1164,7 +1164,7 @@
      },
      "magasins": {
       "Carrefour": [
-       1,
+       9,
        39
       ]
      }
@@ -1217,12 +1217,12 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-04",
+   "dernier_ok": "2026-11-05",
    "nb": 23,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-04",
+   "dernier_ok": "2026-11-05",
    "nb": 39
   }
  }

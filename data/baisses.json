@@ -1,29 +1,17 @@
 {
- "date": "2026-10-29",
+ "date": "2026-11-05",
  "baisses": [
   {
-   "id": "mira",
-   "marque": "Mira",
-   "format": "2 L",
-   "litres": 2.0,
+   "id": "garci",
+   "marque": "Garci",
+   "format": "1 L",
+   "litres": 1.0,
    "gazeuse": false,
    "saveur": null,
    "enseigne": "Carrefour",
-   "avant": 0.84,
-   "prix": 0.74,
-   "pct": 11.9
-  },
-  {
-   "id": "delice",
-   "marque": "Délice",
-   "format": "1.5 L",
-   "litres": 1.5,
-   "gazeuse": false,
-   "saveur": null,
-   "enseigne": "Carrefour",
-   "avant": 0.72,
-   "prix": 0.69,
-   "pct": 4.2
+   "avant": 0.66,
+   "prix": 0.63,
+   "pct": 4.5
   }
  ]
 }
