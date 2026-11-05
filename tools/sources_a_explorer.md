@@ -119,3 +119,5 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 04/11/2026 | tunisiecourses.com, supermarche-tunisie.com, monoprix.com.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
 | 04/11/2026 | tayara.tn | ❌ | lisible (200, 262 Ko) mais petites annonces entre particuliers (« eau » 34 fois = bruit), 0 Safia : pas de prix de magasin fiables |
 | 04/11/2026 | Recherche web (Safia/Marwa en ligne, plafonds du ministère) | ❌ | rien de nouveau : Webdo 12/09 (eau de retour en rayon, achats rationnés), Business News 19-20/08 (plafonds 0,600 / 0,800 / 0,850 / 0,950 DT, marge 15 %), Tuniscope 28/07 — presse seulement ; carrefour.tn robots.txt permissif (déjà utilisé) |
+| 05/11/2026 | safia.com.tn, aqualine.com.tn, sotumag.com, alloresto.tn, tunisiaboutique.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
+| 05/11/2026 | Recherche web (Safia/Marwa en ligne, packs livrés novembre 2026) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (plafonds), Business News, combien-coute.net (écarté, Cloudflare) — presse seulement |
