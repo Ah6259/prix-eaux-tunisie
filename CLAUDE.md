@@ -222,9 +222,12 @@ quota gratuit, carte bancaire exigée par Google → plafond de dépense) + Page
   conferences, auto-ecoles, avocats, comptables, mariage, pros ; à venir : immobilier. Google Search Console : propriété « Domaine »
   clicvia.com validée (NE PAS supprimer la ligne TXT google-site-verification). Détails : `memoire claude/domaine-et-depots-prives.md`
   du dépôt privé projets-ahmed. Passage éventuel en dépôts privés + Cloudflare Pages : plus tard (voir l'audit des minutes).
-- **EN ATTENTE D'AHMED (23/10/2026)** : Aqualine 1,5 L reste affichée chez Carrefour (vendue dans 26 magasins sur 39, pas dans celui
-  d'Ahmed). Choix proposé : (1, conseillé) le visiteur choisit « mon Carrefour » une fois (gardé dans le téléphone) et voit prix + stock
-  de SON magasin ; (2) prix Carrefour seulement si vendu partout / presque partout. Ne rien faire avant sa réponse.
+- **FAIT le 07/11/2026 (« fais tout » d'Ahmed, option 1) : « Mon Carrefour »** : le robot garde le prix de chaque eau dans CHAQUE
+  magasin Carrefour qui l'a en stock (`par_mag` des produits) et le nom des 40 magasins (`magasins_carrefour` de eaux.json, API
+  `availableStores{store_code store_name}`). Site : liste « 🛒 Mon Carrefour » au-dessus du classement (`#mon-carrefour`, app.js
+  `MON_CARREFOUR`, localStorage « mon-carrefour ») ; prix Carrefour = celui du magasin choisi, eau absente de son stock = « non
+  disponible » ; sans choix : comme avant. Visible après le 1er relevé de nuit qui contient `par_mag`. Tests : test_site.mjs (données
+  inventées), test_disponibilite.py ; page « Comment fonctionne le site ? » (FONCTIONS) ; versions 20261107a (style.css, app.js, CSS_V).
 - Reporté : publication immédiate des prix signalés (Apps Script onFormSubmit → workflow_dispatch).
 - Idées : README « Nouveaux services » (prochain conseillé : « Quelle eau pour moi ? ») ; comparateur d'autres produits (mis de côté) ;
   vrais logos ; marques manquantes (Ovia…).
