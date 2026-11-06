@@ -140,7 +140,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   par gouvernorat, jamais de noms ni d'adresses) — décision d'Ahmed, pas avant.
 - « Votre avis » : Formspree (mwlpakqj). Statistiques : GoatCounter (sans cookies) sur l'accueil, les pages marques et
   les guides (balise dans `pied()` de build_guides.py). Le même compteur `prix-eaux-tunisie.goatcounter.com` sert aussi
-  aux autres sites d'Ahmed (outils pratiques, appels d'offres, code de la route, documents, portail), séparés par chemin. Depuis le 11/10/2026, réglage GoatCounter « Votre site » = `clicvia.com` ; chaque site garde son ancien préfixe (`/prix-eaux-tunisie/…`) : les liens du tableau de bord redirigent vers le bon sous-domaine (les lignes `partage/…` sont des clics, pas des pages).
+  aux autres sites d'Ahmed (outils pratiques, appels d'offres, code de la route, documents, portail), séparés par chemin. **06/11/2026 : Mon agent immobilier** (https://monagent.clicvia.com/, préfixe `/mon-agent-immobilier`) n'y était pas (aucune balise + CSP qui bloquait `gc.zgo.at`) : corrigé, voir plus bas. Depuis le 11/10/2026, réglage GoatCounter « Votre site » = `clicvia.com` ; chaque site garde son ancien préfixe (`/prix-eaux-tunisie/…`) : les liens du tableau de bord redirigent vers le bon sous-domaine (les lignes `partage/…` sont des clics, pas des pages).
 - Grossistes : 494 grossistes actifs trouvés au Registre National des Entreprises (API publique `rne-api`, recherche par activité),
   classés par gouvernorat et fiabilité ★. Téléphones : robot Google Places du dépôt privé (clé dans ses secrets),
   **EN PAUSE depuis le 07/10/2026** (décision d'Ahmed : commande fermée ; lancement à la main seulement ;
@@ -553,3 +553,15 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **25/10/2026 (fin)** : page « Comment fonctionne le site ? » créée ICI (prix-eau.clicvia.com/a-propos/, `page_a_propos()` de
   build_guides.py, test FONCTIONS dans test_site.mjs, voir plus haut) et sur les 18 autres sites (§ 44). Immobilier : tri par nouveautés /
   baisses de prix ; collecte Facebook mensuelle pour les gouvernorats faibles (objectif 200 puis 300 annonces).
+
+## Mise à jour du 06/11/2026 — GoatCounter manquant sur Mon agent immobilier (leçon pour TOUT nouveau site)
+- Constat d'Ahmed : https://monagent.clicvia.com/ absent de GoatCounter. Causes : (1) aucune balise du compteur ; (2) la CSP
+  (`script-src 'self'`, `connect-src 'self'`) aurait bloqué `gc.zgo.at` et l'envoi des visites ; (3) son test exigeait « aucun script externe ».
+- Corrigé dans le dépôt PRIVÉ `Ah6259/mai-moteur` (modèle de la page + tests) ET le dépôt PUBLIC `Ah6259/mon-agent-immobilier` (site) :
+  `assets/stats.js` (préfixe `/mon-agent-immobilier`, chargé SANS defer avant count.js : pas de script en ligne), balise
+  `data-goatcounter=…/count` + `gc.zgo.at/count.js`, CSP `script-src 'self' https://gc.zgo.at` et `connect-src 'self'
+  https://prix-eaux-tunisie.goatcounter.com`. Test « statistiques : GoatCounter présent » (vérifié par sabotage) ; jsdom ne charge
+  jamais count.js (aucune fausse visite). Le robot `maj` de Mon agent ne réécrit que la version des données et la date de la page.
+- **Règle pour tout nouveau site** : compteur + préfixe propre + CSP + test dès la 1re publication (voir le guide, étape 13).
+  Ne JAMAIS publier `tools/publier.py` de mai-moteur sur le dépôt public sans vérifier les données : il recopie `donnees/`
+  (celles du dépôt privé peuvent être plus anciennes que celles du robot).
