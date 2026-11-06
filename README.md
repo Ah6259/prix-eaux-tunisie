@@ -39,7 +39,7 @@ Dépôt GitHub : https://github.com/Ah6259/prix-eaux-tunisie
   et remettre le texte de la barre panier dans `app.js`
 - **Gagnant du match** (fenêtre) : par le prix (stika 1,5 L la moins chère) et **par le vote des clients**
   (un vote par navigateur via le Google Forms, décompte automatique toutes les 2 h → `data/votes.js`)
-- **Votre avis** (Formspree), « الماء في القرآن الكريم والحديث النبوي » (fenêtre : 5 versets + 4 hadiths sur l'eau, en arabe), statistiques privées GoatCounter
+- **Votre avis** (Formspree), « الماء في القرآن الكريم والحديث النبوي » (fenêtre : 5 versets + 4 hadiths sur l'eau, en arabe), statistiques privées GoatCounter (compteur commun à tous les sites d'Ahmed, un préfixe par site ; Mon agent immobilier ajouté le 06/11/2026)
 
 ## Plan de continuité — si Ahmed n'est plus disponible
 

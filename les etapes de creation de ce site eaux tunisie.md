@@ -46,6 +46,10 @@ pour créer n'importe quel autre site.
 
 13. **Statistiques privées** : compte GoatCounter (gratuit) + une ligne de
     script invisible → voir ses visiteurs (pays, appareils, provenance)
+    **Pour un nouveau site (leçon du 06/11/2026, Mon agent immobilier oublié)** : le même compteur pour tous les sites,
+    mais un PRÉFIXE par site (`window.goatcounter.path`, dans un petit fichier .js chargé avant count.js), autoriser
+    `gc.zgo.at` (scripts) et `<compte>.goatcounter.com` (envois) dans la CSP, et un test qui bloque la publication si
+    le compteur manque. Vérifier dans le tableau de bord GoatCounter dès le premier jour que les visites arrivent.
 14. **SEO sur la page** : titre riche en mots-clés, meta description,
     vrai texte visible (intro + section FAQ avec les questions que les gens
     tapent dans Google), données structurées JSON-LD (WebSite, FAQPage),
