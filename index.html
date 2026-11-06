@@ -97,7 +97,7 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Amiri+Quran&family=Amiri:wght@700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261025a">
+<link rel="stylesheet" href="style.css?v=20261107a">
 </head>
 <body>
 
@@ -235,6 +235,9 @@
 
 <div class="wrap chevauche">
   <!-- la réponse tout de suite : stika 1,5 L la moins chère + top 5 (app.js : renderTop) -->
+  <!-- « Mon Carrefour » (07/11/2026) : prix et stock du magasin choisi (app.js : MON_CARREFOUR) -->
+  <p class="mon-carrefour" id="mon-carrefour-ligne" hidden><label for="mon-carrefour">🛒 Mon Carrefour :</label>
+    <select id="mon-carrefour"><option value="">Tous les magasins</option></select></p>
   <section class="top-reponse" id="top-reponse" aria-label="Les moins chères aujourd'hui"></section>
   <div class="top-classement" id="compare"></div>
   <p class="alerte-maj" id="alerte-maj" role="status" hidden></p>
@@ -550,7 +553,7 @@
 <script src="data/signalements.js?v=20260930a"></script>
 <script src="protection.js?v=20261020b"></script>
 <script src="assets/son.js?v=20261020b"></script>
-<script src="app.js?v=20261023b"></script>
+<script src="app.js?v=20261107a"></script>
 <!-- Mesure d'audience privée (GoatCounter) : invisible pour les visiteurs,
      statistiques consultables uniquement sur prix-eaux-tunisie.goatcounter.com -->
 <script data-goatcounter="https://prix-eaux-tunisie.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

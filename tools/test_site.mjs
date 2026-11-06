@@ -536,6 +536,7 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
     ["composition de l'eau", /Composition/.test(js), /Composition/],
     ["« dans N magasins sur M » (Carrefour)", /offer-mag/.test(js), /dans N magasins sur M/],
     ["« non disponible »", /non disponible/.test(js), /non disponible/],
+    ["« Mon Carrefour » (prix et stock du magasin choisi)", /id="mon-carrefour"/.test(acc), /Mon Carrefour[\s\S]{0,120}CE magasin/],
     ["avertissement des prix anciens", /id="alerte-maj"/.test(acc), /un message vous prévient/],
     ["baisses de prix du jour", /id="baisses"/.test(acc), /Baisses de prix du jour/],
     ["évolution des prix", /id="histo"/.test(acc), /Évolution des prix/],
@@ -568,6 +569,32 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
     .filter(c => !/href="(\.\.\/)+a-propos\/"/.test(lire(c + "/index.html")));
   check("lien « Comment fonctionne le site ? » : accueil (sous les barres + pied de page) et pied de page des pages fabriquées" + (sansLien.length ? " — manque : " + sansLien.join(", ") : ""),
     !!doc.querySelector('.lien-comment a[href="a-propos/"]') && !!doc.querySelector('footer a[href="a-propos/"]') && !sansLien.length);
+}
+
+// ---- « Mon Carrefour » (07/11/2026, choix d'Ahmed) : données INVENTÉES (règle § 37) : un magasin qui n'a pas une eau en stock =
+// « non disponible » chez Carrefour ; un magasin qui l'a = SON prix ; sans choix = comme avant ; choix inconnu = ignoré
+{
+  const eaux = JSON.parse(JSON.stringify(window.EAUX_DATA));
+  const cible = eaux.brands.flatMap(b => b.products.map(p => ({ b, p }))).find(x => x.p.prices && x.p.prices.Carrefour != null);
+  eaux.magasins_carrefour = { mag_a: "Carrefour Market A", mag_b: "Carrefour Market B" };
+  eaux.brands.forEach(b => b.products.forEach(p => { if (p.prices && p.prices.Carrefour != null) p.par_mag = { Carrefour: { mag_a: p.prices.Carrefour } }; }));
+  cible.p.par_mag = { Carrefour: { mag_a: 0.777 } };            // vendue seulement au magasin A, à 0,777
+  const ouvrir = choix => {
+    const d = new JSDOM(html, { url: "https://prix-eau.clicvia.com/", runScripts: "outside-only", pretendToBeVisual: true });
+    d.window.open = () => null; d.window.fetch = async () => ({ ok: true, json: async () => ({}), text: async () => "" });
+    if (choix) d.window.localStorage.setItem("mon-carrefour", choix);
+    d.window.eval("window.EAUX_DATA = " + JSON.stringify(eaux) + ";");
+    for (const f of ["data/composition.js", "data/historique.js", "data/baisses.js", "data/votes.js", "data/signalements.js", "protection.js", "assets/son.js", "app.js"])
+      if (existsSync(join(root, f))) d.window.eval(lire(f));
+    return d.window;
+  };
+  const prod = w => w.EAUX_DATA.brands.find(b => b.id === cible.b.id).products.find(p => p.format === cible.p.format && p.category === cible.p.category);
+  const wa = ouvrir("mag_a"), wb = ouvrir("mag_b"), w0 = ouvrir(""), wx = ouvrir("inconnu");
+  const sel = wa.document.getElementById("mon-carrefour");
+  check("« Mon Carrefour » : liste des magasins affichée ; magasin A = SON prix ; magasin B (pas en stock) = « non disponible » chez Carrefour ; sans choix ou choix inconnu = inchangé",
+    !!sel && !wa.document.getElementById("mon-carrefour-ligne").hidden && sel.options.length === 3 && sel.value === "mag_a"
+    && prod(wa).prices.Carrefour === 0.777 && prod(wb).prices.Carrefour === undefined && (prod(wb).non_dispo || []).includes("Carrefour")
+    && prod(w0).prices.Carrefour === cible.p.prices.Carrefour && prod(wx).prices.Carrefour === cible.p.prices.Carrefour);
 }
 
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");

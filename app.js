@@ -1,4 +1,32 @@
 const DATA = window.EAUX_DATA;
+/* MON CARREFOUR (07/11/2026, choix d'Ahmed) : le stock change d'un magasin Carrefour à l'autre (Aqualine 1,5 L vendue dans 21 magasins
+   sur 39, pas dans celui d'Ahmed). Le visiteur choisit SON magasin une fois (gardé dans le téléphone, clé « mon-carrefour ») : les prix
+   Carrefour deviennent ceux de ce magasin ; une eau qu'il n'a pas en stock = « non disponible » chez Carrefour. Données : par_mag du robot
+   (tools/collect_prices.py). Sans choix : comme avant (prix le plus courant + « dans N magasins sur M »). */
+const MON_CARREFOUR = (() => {
+  let c = "";
+  try { c = localStorage.getItem("mon-carrefour") || ""; } catch (e) {}
+  return c && DATA && DATA.magasins_carrefour && DATA.magasins_carrefour[c] ? c : "";
+})();
+if (MON_CARREFOUR) (DATA.brands || []).forEach(b => (b.products || []).forEach(p => {
+  const pm = p.par_mag && p.par_mag.Carrefour;
+  if (!pm || !p.prices || p.prices.Carrefour == null) return;      // ancien relevé sans le détail par magasin : inchangé
+  if (pm[MON_CARREFOUR] != null) p.prices.Carrefour = pm[MON_CARREFOUR];
+  else { delete p.prices.Carrefour; p.non_dispo = (p.non_dispo || []).concat("Carrefour"); }
+  if (p.magasins) delete p.magasins.Carrefour;
+}));
+function monCarrefourChoix() {
+  const ligne = document.getElementById("mon-carrefour-ligne"), sel = document.getElementById("mon-carrefour"), noms = DATA && DATA.magasins_carrefour;
+  if (!ligne || !sel || !noms || !Object.keys(noms).length) return;
+  Object.entries(noms).forEach(([c, n]) => { const o = document.createElement("option"); o.value = c; o.textContent = n; sel.appendChild(o); });
+  sel.value = MON_CARREFOUR;
+  ligne.hidden = false;
+  sel.addEventListener("change", () => {
+    try { if (sel.value) localStorage.setItem("mon-carrefour", sel.value); else localStorage.removeItem("mon-carrefour"); } catch (e) {}
+    location.reload();                                               // tout le classement est refait avec les prix de ce magasin
+  });
+}
+monCarrefourChoix();             // app.js est chargé en bas de la page : la liste existe déjà
 // Commande en ligne : false tant qu'il n'y a pas de fournisseur partenaire (formulaire grisé
 // + tampon « En cours de développement » ; les boutons « + » et « Commander » restent visibles,
 // choix d'Ahmed du 03/10/2026).
