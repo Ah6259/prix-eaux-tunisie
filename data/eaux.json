@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05",
+ "updated": "2026-11-06",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -507,7 +507,7 @@
      },
      "magasins": {
       "Carrefour": [
-       26,
+       27,
        39
       ]
      }
@@ -580,12 +580,12 @@
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.62,
-      "Géant": 0.62
+      "Géant": 0.62,
+      "Carrefour": 0.63
      },
      "magasins": {
       "Carrefour": [
-       8,
+       5,
        39
       ]
      }
@@ -602,7 +602,7 @@
      },
      "magasins": {
       "Carrefour": [
-       8,
+       5,
        39
       ]
      }
@@ -801,11 +801,15 @@
      "flavor": null,
      "img": "assets/img/mira_2l.jpg",
      "prices": {
+      "Carrefour": 0.39,
       "Géant": 0.39
      },
-     "non_dispo": [
-      "Carrefour"
-     ]
+     "magasins": {
+      "Carrefour": [
+       1,
+       39
+      ]
+     }
     },
     {
      "liters": 0.95,
@@ -1060,7 +1064,7 @@
      },
      "magasins": {
       "Carrefour": [
-       16,
+       13,
        39
       ]
      }
@@ -1164,7 +1168,7 @@
      },
      "magasins": {
       "Carrefour": [
-       9,
+       7,
        39
       ]
      }
@@ -1181,7 +1185,7 @@
      },
      "magasins": {
       "Carrefour": [
-       28,
+       27,
        39
       ]
      }
@@ -1217,12 +1221,12 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-05",
-   "nb": 23,
+   "dernier_ok": "2026-11-06",
+   "nb": 24,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-05",
+   "dernier_ok": "2026-11-06",
    "nb": 39
   }
  }
