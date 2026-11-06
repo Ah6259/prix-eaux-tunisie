@@ -84,6 +84,10 @@ verifie("Carrefour : Aqualine vendue dans 2 magasins sur 3 -> prix 0,630 + [2, 3
 ga = next((o for n, o in res.items() if "GARCI" in n), None)
 verifie("Carrefour : prix différents selon le magasin -> le plus courant (0,660)",
         ga is not None and ga["prix"] == 0.66 and ga["magasins"] == [3, 3], ga)
+# 07/11/2026 (« mon Carrefour ») : prix de CHAQUE magasin qui l'a en stock (pas d'Aqualine à l'Aouina, Garci moins cher à l'Aouina)
+verifie("Carrefour : prix magasin par magasin (par_mag) : Aqualine absente de l'Aouina, Garci 0,620 à l'Aouina ; noms des magasins gardés",
+        aq["par_mag"] == {"marsa": 0.63, "ariana": 0.63} and ga["par_mag"] == {"marsa": 0.66, "ariana": 0.66, "aouina": 0.62}
+        and set(c.CARREFOUR_NOMS) == set(MAGASINS), (aq.get("par_mag"), ga.get("par_mag"), c.CARREFOUR_NOMS))
 
 
 # ------------------------------------------------------------------ 2. Géant : stock à 0

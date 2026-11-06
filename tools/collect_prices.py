@@ -249,6 +249,9 @@ CARREFOUR_EAUX = 'category_uid:{eq:"Mzc1Nw=="}'
 CARREFOUR_MIN_MAGASINS = 10  # moins de magasins lus = relevé refusé (source en panne)
 
 
+CARREFOUR_NOMS = {}   # 07/11/2026 (« mon Carrefour ») : code du magasin -> son nom, rempli par carrefour()
+
+
 def carrefour_gql(q, magasin=None):
     q = re.sub(r"\s+", " ", q)  # le pare-feu de Carrefour rejette les requêtes multi-lignes
     h = {"Store": magasin} if magasin else None
@@ -268,11 +271,15 @@ def carrefour():
         price_range{{minimum_price{{final_price{{value}} regular_price{{value}}}}}}}}}}}}"""
     items = carrefour_gql(q)["products"]["items"]
     (RAW_DIR / "carrefour.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
-    magasins = [m["store_code"] for m in carrefour_gql("{availableStores{store_code}}")["availableStores"]
-                if m["store_code"] != "default"]
+    # 07/11/2026 (« mon Carrefour », choix d'Ahmed) : on garde aussi le NOM de chaque magasin et le prix de chaque eau DANS chaque
+    # magasin qui l'a en stock (« par_mag ») : le visiteur choisit son Carrefour et voit son prix et son stock
+    liste = carrefour_gql("{availableStores{store_code store_name}}")["availableStores"]
+    magasins = [m["store_code"] for m in liste if m["store_code"] != "default"]
+    CARREFOUR_NOMS.clear()
+    CARREFOUR_NOMS.update({m["store_code"]: (m.get("store_name") or m["store_code"]).strip() for m in liste if m["store_code"] != "default"})
     q_mag = f"""{{products(filter:{{{CARREFOUR_EAUX}}},pageSize:200){{items{{
         sku stock_status price_range{{minimum_price{{final_price{{value}}}}}}}}}}}}"""
-    prix_mag, lus, rate = {}, 0, []
+    prix_mag, par_mag, lus, rate = {}, {}, 0, []
     for code in magasins:
         try:
             its = carrefour_gql(q_mag, code)["products"]["items"]
@@ -282,7 +289,9 @@ def carrefour():
         lus += 1
         for it in its:
             if it.get("stock_status") == "IN_STOCK":
-                prix_mag.setdefault(it["sku"], []).append(it["price_range"]["minimum_price"]["final_price"]["value"])
+                v = it["price_range"]["minimum_price"]["final_price"]["value"]
+                prix_mag.setdefault(it["sku"], []).append(v)
+                par_mag.setdefault(it["sku"], {})[code] = v
         time.sleep(0.3)
     if lus < max(CARREFOUR_MIN_MAGASINS, 0.66 * len(magasins)):
         raise RuntimeError(f"magasins Carrefour illisibles : {lus} lus sur {len(magasins)} ({'; '.join(rate[:3])})")
@@ -305,7 +314,7 @@ def carrefour():
         out.append({
             "enseigne": "carrefour", "marque": marque, "nom": nom,
             "volume_l": vol, "nb_unites": nb, "type": type_eau(nom, desc),
-            "prix": courant, "magasins": [len(prix), lus],
+            "prix": courant, "magasins": [len(prix), lus], "par_mag": par_mag.get(it["sku"], {}),
             "image_src": it["small_image"]["url"],
         })
     return out
@@ -407,6 +416,7 @@ def anciennes_offres(ancien, enseignes_cibles):
                         "enseigne": ens, "marque": marque, "nom": f"{b['name']} {p['format']}",
                         "volume_l": p["liters"], "nb_unites": 1, "type": p["category"],
                         "prix": prix, "image_src": None, "image_locale": p.get("img"),
+                        **({"par_mag": p["par_mag"][store]} if (p.get("par_mag") or {}).get(store) else {}),
                     })
     return out
 
@@ -473,13 +483,15 @@ def main():
         if not o["marque"] or o["volume_l"] is None or o["nb_unites"] != 1:
             continue
         cle = (o["marque"], o["type"], o["volume_l"])
-        p = produits.setdefault(cle, {"offres": {}, "images": {}, "magasins": {}, "vus": set()})
+        p = produits.setdefault(cle, {"offres": {}, "images": {}, "magasins": {}, "par_mag": {}, "vus": set()})
         p["vus"].add(o["enseigne"])
         cur = p["offres"].get(o["enseigne"])
         if cur is None or o["prix"] < cur:
             p["offres"][o["enseigne"]] = o["prix"]
             if o.get("magasins"):
                 p["magasins"][o["enseigne"]] = o["magasins"]
+            if o.get("par_mag"):
+                p["par_mag"][o["enseigne"]] = o["par_mag"]
             if o.get("image_src"):
                 p["images"][o["enseigne"]] = o["image_src"]
             elif o.get("image_locale"):
@@ -530,6 +542,10 @@ def main():
         partiel = {ENSEIGNES[e]: m for e, m in p["magasins"].items() if e in p["offres"] and m[0] < m[1]}
         if partiel:
             prod["magasins"] = partiel
+        # prix et stock de chaque magasin (« mon Carrefour ») : {enseigne: {code magasin: prix}}, seulement les magasins qui l'ont en stock
+        pm = {ENSEIGNES[e]: {c: round(v, 4) for c, v in sorted(m.items())} for e, m in p["par_mag"].items() if e in p["offres"] and m}
+        if pm:
+            prod["par_mag"] = pm
         # enseignes lues aujourd'hui qui ne vendent pas ce format : « non disponible » sur le site (23/10/2026)
         absentes = [ENSEIGNES[e] for e in SUIVIES if e in lues and e not in p["vus"]]
         if absentes:
@@ -575,6 +591,10 @@ def main():
         "brands": out_brands,
         "statut_sources": statut,
     }
+    # noms des magasins Carrefour lus aujourd'hui (sinon ceux du dernier relevé) : liste « Mon Carrefour » du site
+    noms = dict(CARREFOUR_NOMS) or dict((ancien or {}).get("magasins_carrefour") or {})
+    if noms:
+        data["magasins_carrefour"] = dict(sorted(noms.items(), key=lambda x: x[1].lower()))
 
     OUT_JS.write_text("window.EAUX_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8", newline="\n")
     OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
