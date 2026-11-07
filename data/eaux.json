@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06",
+ "updated": "2026-11-07",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -47,6 +47,31 @@
        21,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "Khzema": 0.63,
+       "ariana": 0.63,
+       "bizerte": 0.63,
+       "bizerte_lcv": 0.63,
+       "borj_cedria": 0.63,
+       "cun": 0.63,
+       "ennasr_1": 0.63,
+       "ksarsaid": 0.63,
+       "ksarsaid_lcv": 0.63,
+       "lac2": 0.63,
+       "manzah9": 0.63,
+       "marsa": 0.63,
+       "marsa_express": 0.63,
+       "mof_lcv": 0.63,
+       "mos": 0.63,
+       "sahloul": 0.63,
+       "sfax_express": 0.63,
+       "sfax_mall": 0.63,
+       "sousse_express": 0.63,
+       "sousse_livraison": 0.63,
+       "tunis_livraison": 0.63
+      }
      }
     },
     {
@@ -64,6 +89,11 @@
        1,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "sahloul": 0.78
+      }
      }
     }
    ]
@@ -105,27 +135,7 @@
    "types": [
     "plate"
    ],
-   "products": [
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/bargou_15l.jpg",
-     "prices": {
-      "Carrefour": 0.67
-     },
-     "magasins": {
-      "Carrefour": [
-       1,
-       39
-      ]
-     },
-     "non_dispo": [
-      "Géant"
-     ]
-    }
-   ]
+   "products": []
   },
   {
    "id": "beya",
@@ -194,6 +204,11 @@
        1,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "borj_cedria": 0.47
+      }
      }
     },
     {
@@ -204,6 +219,49 @@
      "img": "assets/img/produits/3fa485b35ef5.webp",
      "prices": {
       "Carrefour": 0.65
+     },
+     "par_mag": {
+      "Carrefour": {
+       "Khzema": 0.65,
+       "aouina": 0.65,
+       "ariana": 0.65,
+       "bizerte": 0.65,
+       "bizerte_lcv": 0.65,
+       "borj_cedria": 0.65,
+       "boumhal": 0.65,
+       "boumhal_lcv": 0.65,
+       "cun": 0.65,
+       "djerba": 0.65,
+       "ennasr_1": 0.65,
+       "gabes": 0.65,
+       "gabes_lcv": 0.65,
+       "gammarth": 0.65,
+       "gazelle": 0.65,
+       "hammamet": 0.66,
+       "ksarsaid": 0.65,
+       "ksarsaid_lcv": 0.65,
+       "lac2": 0.65,
+       "mahdia": 0.65,
+       "mahdia_lcv": 0.65,
+       "manar_city": 0.65,
+       "manar_city_lcv": 0.65,
+       "manzah9": 0.65,
+       "marsa": 0.65,
+       "marsa_express": 0.65,
+       "midoun_lcv": 0.65,
+       "mof_lcv": 0.65,
+       "mos": 0.65,
+       "mourouj": 0.65,
+       "mrezgua_lcv": 0.66,
+       "sahloul": 0.65,
+       "sfax_express": 0.65,
+       "sfax_jadida": 0.65,
+       "sfax_lafrane": 0.65,
+       "sfax_mall": 0.65,
+       "sousse_express": 0.65,
+       "sousse_livraison": 0.65,
+       "tunis_livraison": 0.65
+      }
      },
      "non_dispo": [
       "Géant"
@@ -251,6 +309,14 @@
        39
       ]
      },
+     "par_mag": {
+      "Carrefour": {
+       "borj_cedria": 0.4,
+       "marsa": 0.4,
+       "marsa_express": 0.4,
+       "tunis_livraison": 0.4
+      }
+     },
      "non_dispo": [
       "Géant"
      ]
@@ -269,6 +335,25 @@
        15,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "ariana": 0.61,
+       "bizerte": 0.61,
+       "bizerte_lcv": 0.61,
+       "borj_cedria": 0.61,
+       "cun": 0.61,
+       "gabes": 0.61,
+       "gabes_lcv": 0.61,
+       "gammarth": 0.61,
+       "gazelle": 0.61,
+       "hammamet": 0.61,
+       "marsa": 0.61,
+       "marsa_express": 0.61,
+       "mrezgua_lcv": 0.61,
+       "sfax_lafrane": 0.61,
+       "tunis_livraison": 0.61
+      }
      },
      "non_dispo": [
       "Géant"
@@ -316,6 +401,12 @@
        39
       ]
      },
+     "par_mag": {
+      "Carrefour": {
+       "marsa": 0.8,
+       "tunis_livraison": 0.8
+      }
+     },
      "non_dispo": [
       "Géant"
      ]
@@ -361,6 +452,16 @@
        6,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "hammamet": 0.78,
+       "marsa": 0.78,
+       "marsa_express": 0.78,
+       "mourouj": 0.78,
+       "mrezgua_lcv": 0.78,
+       "tunis_livraison": 0.78
+      }
      },
      "non_dispo": [
       "Géant"
@@ -434,6 +535,11 @@
        1,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "mof_lcv": 0.69
+      }
      }
     }
    ]
@@ -465,6 +571,26 @@
        16,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "ariana": 0.88,
+       "bizerte": 0.88,
+       "bizerte_lcv": 0.88,
+       "boumhal": 0.88,
+       "boumhal_lcv": 0.88,
+       "cun": 0.88,
+       "gabes": 0.88,
+       "gabes_lcv": 0.88,
+       "gammarth": 0.88,
+       "mof_lcv": 0.88,
+       "mourouj": 0.88,
+       "sahloul": 0.88,
+       "sfax_express": 0.88,
+       "sfax_jadida": 0.88,
+       "sfax_lafrane": 0.88,
+       "sfax_mall": 0.88
+      }
      }
     }
    ]
@@ -507,9 +633,42 @@
      },
      "magasins": {
       "Carrefour": [
-       27,
+       29,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "aouina": 0.63,
+       "ariana": 0.62,
+       "borj_cedria": 0.62,
+       "boumhal": 0.63,
+       "boumhal_lcv": 0.63,
+       "gabes": 0.66,
+       "gabes_lcv": 0.66,
+       "gammarth": 0.62,
+       "gazelle": 0.63,
+       "hammamet": 0.65,
+       "lac2": 0.63,
+       "mahdia": 0.62,
+       "mahdia_lcv": 0.62,
+       "manar_city": 0.63,
+       "manar_city_lcv": 0.63,
+       "manzah9": 0.63,
+       "marsa": 0.64,
+       "marsa_express": 0.64,
+       "mof_lcv": 0.66,
+       "mos": 0.64,
+       "mourouj": 0.63,
+       "mrezgua_lcv": 0.65,
+       "sahloul": 0.64,
+       "sfax_express": 0.66,
+       "sfax_lafrane": 0.66,
+       "sfax_mall": 0.66,
+       "sousse_express": 0.64,
+       "sousse_livraison": 0.64,
+       "tunis_livraison": 0.64
+      }
      }
     }
    ]
@@ -550,9 +709,46 @@
      },
      "magasins": {
       "Carrefour": [
-       28,
+       33,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "aouina": 0.83,
+       "boumhal": 0.83,
+       "boumhal_lcv": 0.83,
+       "cun": 0.83,
+       "djerba": 0.83,
+       "ennasr_1": 0.83,
+       "gabes": 0.83,
+       "gabes_lcv": 0.83,
+       "gammarth": 0.83,
+       "gazelle": 0.83,
+       "hammamet": 0.84,
+       "ksarsaid": 0.83,
+       "ksarsaid_lcv": 0.83,
+       "lac2": 0.83,
+       "mahdia": 0.83,
+       "mahdia_lcv": 0.83,
+       "manar_city": 0.83,
+       "manar_city_lcv": 0.83,
+       "manzah9": 0.83,
+       "marsa": 0.83,
+       "marsa_express": 0.83,
+       "midoun_lcv": 0.83,
+       "mof_lcv": 0.83,
+       "mos": 0.84,
+       "mourouj": 0.83,
+       "mrezgua_lcv": 0.84,
+       "sahloul": 0.84,
+       "sfax_express": 0.83,
+       "sfax_lafrane": 0.83,
+       "sfax_mall": 0.83,
+       "sousse_express": 0.84,
+       "sousse_livraison": 0.84,
+       "tunis_livraison": 0.83
+      }
      },
      "non_dispo": [
       "Géant"
@@ -580,14 +776,26 @@
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Géant": 0.62,
-      "Carrefour": 0.63
+      "Carrefour": 0.62,
+      "Géant": 0.62
      },
      "magasins": {
       "Carrefour": [
-       5,
+       8,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "djerba": 0.69,
+       "marsa": 0.63,
+       "marsa_express": 0.63,
+       "midoun_lcv": 0.69,
+       "mos": 0.62,
+       "sousse_express": 0.62,
+       "sousse_livraison": 0.62,
+       "tunis_livraison": 0.63
+      }
      }
     },
     {
@@ -602,9 +810,21 @@
      },
      "magasins": {
       "Carrefour": [
-       5,
+       8,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "djerba": 0.59,
+       "marsa": 0.59,
+       "marsa_express": 0.59,
+       "midoun_lcv": 0.59,
+       "mos": 0.59,
+       "sousse_express": 0.59,
+       "sousse_livraison": 0.59,
+       "tunis_livraison": 0.59
+      }
      }
     }
    ]
@@ -809,6 +1029,11 @@
        1,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "boumhal": 0.39
+      }
      }
     },
     {
@@ -826,6 +1051,12 @@
        2,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "mof_lcv": 0.61,
+       "sfax_mall": 0.61
+      }
      }
     },
     {
@@ -843,6 +1074,12 @@
        2,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "manzah9": 0.76,
+       "marsa_express": 0.76
+      }
      }
     }
    ]
@@ -874,6 +1111,15 @@
        39
       ]
      },
+     "par_mag": {
+      "Carrefour": {
+       "aouina": 0.76,
+       "marsa": 0.76,
+       "marsa_express": 0.76,
+       "mourouj": 0.76,
+       "tunis_livraison": 0.76
+      }
+     },
      "non_dispo": [
       "Géant"
      ]
@@ -904,9 +1150,19 @@
      },
      "magasins": {
       "Carrefour": [
-       3,
+       6,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "marsa": 2.34,
+       "marsa_express": 2.34,
+       "mof_lcv": 2.34,
+       "sfax_express": 2.34,
+       "sfax_mall": 2.34,
+       "tunis_livraison": 2.34
+      }
      }
     },
     {
@@ -923,6 +1179,13 @@
        3,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "marsa": 5.35,
+       "marsa_express": 5.35,
+       "tunis_livraison": 5.35
+      }
      }
     }
    ]
@@ -1064,9 +1327,29 @@
      },
      "magasins": {
       "Carrefour": [
-       13,
+       16,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "ariana": 0.68,
+       "borj_cedria": 0.68,
+       "boumhal": 0.68,
+       "boumhal_lcv": 0.68,
+       "cun": 0.68,
+       "gammarth": 0.68,
+       "gazelle": 0.68,
+       "lac2": 0.68,
+       "mahdia": 0.68,
+       "mahdia_lcv": 0.68,
+       "manar_city": 0.68,
+       "manar_city_lcv": 0.68,
+       "manzah9": 0.68,
+       "sahloul": 0.68,
+       "sfax_jadida": 0.68,
+       "sfax_lafrane": 0.68
+      }
      }
     }
    ]
@@ -1168,9 +1451,26 @@
      },
      "magasins": {
       "Carrefour": [
-       7,
+       13,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "ariana": 0.44,
+       "cun": 0.44,
+       "gammarth": 0.44,
+       "gazelle": 0.44,
+       "ksarsaid": 0.44,
+       "ksarsaid_lcv": 0.44,
+       "lac2": 0.44,
+       "mahdia": 0.44,
+       "mahdia_lcv": 0.44,
+       "manar_city": 0.44,
+       "manar_city_lcv": 0.44,
+       "manzah9": 0.44,
+       "sahloul": 0.44
+      }
      }
     },
     {
@@ -1188,6 +1488,37 @@
        27,
        39
       ]
+     },
+     "par_mag": {
+      "Carrefour": {
+       "aouina": 0.68,
+       "ariana": 0.68,
+       "boumhal": 0.68,
+       "boumhal_lcv": 0.68,
+       "cun": 0.68,
+       "gabes": 0.68,
+       "gabes_lcv": 0.68,
+       "gammarth": 0.68,
+       "gazelle": 0.68,
+       "hammamet": 0.69,
+       "ksarsaid": 0.68,
+       "ksarsaid_lcv": 0.68,
+       "lac2": 0.68,
+       "mahdia": 0.68,
+       "mahdia_lcv": 0.68,
+       "marsa": 0.68,
+       "marsa_express": 0.68,
+       "mof_lcv": 0.68,
+       "mos": 0.68,
+       "mrezgua_lcv": 0.69,
+       "sfax_express": 0.68,
+       "sfax_jadida": 0.68,
+       "sfax_lafrane": 0.68,
+       "sfax_mall": 0.68,
+       "sousse_express": 0.68,
+       "sousse_livraison": 0.68,
+       "tunis_livraison": 0.68
+      }
      }
     }
    ]
@@ -1221,13 +1552,54 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-06",
-   "nb": 24,
+   "dernier_ok": "2026-11-07",
+   "nb": 23,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-06",
+   "dernier_ok": "2026-11-07",
    "nb": 39
   }
+ },
+ "magasins_carrefour": {
+  "bizerte_lcv": "Bizerte Livrée Chez Vous",
+  "boumhal_lcv": "Boumhal Livrée Chez Vous",
+  "marsa": "Carrefour La Marsa",
+  "sfax_mall": "Carrefour Mall Of Sfax",
+  "mos": "Carrefour Mall of Sousse",
+  "ariana": "Carrefour Market Ariana",
+  "bizerte": "Carrefour Market Bizerte",
+  "borj_cedria": "Carrefour Market Borj Cédria",
+  "boumhal": "Carrefour Market Boumhal",
+  "cun": "Carrefour Market Centre Urbaine Nord",
+  "djerba": "Carrefour Market Djerba Midoun",
+  "gabes": "Carrefour Market Gabès",
+  "gammarth": "Carrefour Market Gammarth",
+  "Khzema": "Carrefour Market Khzema Sousse",
+  "ksarsaid": "Carrefour Market Ksar Said",
+  "aouina": "Carrefour Market l'Aouina",
+  "gazelle": "Carrefour Market La Gazelle",
+  "mahdia": "Carrefour Market Mahdia",
+  "manar_city": "Carrefour Market Manar City",
+  "manzah9": "Carrefour Market Manzah 9",
+  "mourouj": "Carrefour Market Mourouj 1",
+  "hammamet": "Carrefour Market Mrezga Hammamet",
+  "sahloul": "Carrefour Market Sahloul Sousse",
+  "sfax_jadida": "Carrefour Market Sfax Jadida",
+  "sfax_lafrane": "Carrefour Market Sfax Lafrane",
+  "lac2": "Carrefour Market Tunisia Mall",
+  "ennasr_1": "CE Ennasr 1",
+  "midoun_lcv": "Djerba Midoun Livraison",
+  "gabes_lcv": "Gabès Livraison",
+  "marsa_express": "Hyper La Marsa Express",
+  "tunis_livraison": "Hyper La Marsa Livraison",
+  "ksarsaid_lcv": "Ksarsaid Livraison",
+  "mahdia_lcv": "Mahdia Livraison",
+  "sfax_express": "Mall Of Sfax Express",
+  "mof_lcv": "Mall Of Sfax Livraison",
+  "sousse_express": "Mall Of Sousse Express",
+  "sousse_livraison": "Mall Of Sousse Livraison",
+  "manar_city_lcv": "Manar City Livraison",
+  "mrezgua_lcv": "Mrezgua Livraison"
  }
 }

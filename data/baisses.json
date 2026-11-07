@@ -1,17 +1,17 @@
 {
- "date": "2026-11-05",
+ "date": "2026-11-07",
  "baisses": [
   {
-   "id": "garci",
-   "marque": "Garci",
+   "id": "jektiss",
+   "marque": "Jektiss",
    "format": "1 L",
    "litres": 1.0,
-   "gazeuse": false,
+   "gazeuse": true,
    "saveur": null,
    "enseigne": "Carrefour",
-   "avant": 0.66,
-   "prix": 0.63,
-   "pct": 4.5
+   "avant": 0.63,
+   "prix": 0.62,
+   "pct": 1.6
   }
  ]
 }
