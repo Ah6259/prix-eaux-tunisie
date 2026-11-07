@@ -123,3 +123,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 05/11/2026 | Recherche web (Safia/Marwa en ligne, packs livrés novembre 2026) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (plafonds), Business News, combien-coute.net (écarté, Cloudflare) — presse seulement |
 | 06/11/2026 | farmtrust.tn, ayemzmen.tn, freshmarket.tn, mesvivres.tn, supermarche.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) |
 | 06/11/2026 | Recherche web (Safia/Marwa en ligne, nouveaux supermarchés en ligne 2026) | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (plafond 0,850 DT), Founa (fermé), Glovo/Monoprix (déjà vus), Carrefour.tn (déjà utilisé) |
+| 07/11/2026 | yassir.com | ❌ | lisible (200, 154 Ko) mais site vitrine de l'application : 0 « eau », 0 prix ; livraison de courses dans l'appli seulement, pas de catalogue lisible |
+| 07/11/2026 | mytek.tn | ⛔ | 403 anti-robot pour GitHub (informatique, pas d'eau) ; pas de contournement |
+| 07/11/2026 | glovoapp.com/tn (revu) | ❌ | inchangé : réponse 202 vide (0 octet), pas de prix lisible |
+| 07/11/2026 | Recherche web (Safia/Marwa en ligne, nouveau drive 2026) | ❌ | rien de nouveau : Webdo (plafonds 0,500/0,750/0,900 DT, ancien barème), Founa drive 2019 (fermé), Monoprix appli (écarté) — presse seulement |
