@@ -100,6 +100,9 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `logos.yml` (manuel) : télécharge les logos d'une enseigne ; `tester-source.yml` (manuel) : vérifie si GitHub peut lire un site.
 - `telegram-bienvenue.yml` manuel. Groupe de concurrence commun `maj-prix`. Secret : `TELEGRAM_BOT_TOKEN`.
 - Relancer à la main : `gh workflow run maj-prix.yml -R Ah6259/prix-eaux-tunisie`.
+- **08/11/2026 (règle commune § 55)** : les 5 robots qui enregistrent font `git pull --rebase -X theirs` : un conflit avec un envoi fait
+  pendant leur passage est réglé par git lui-même (la version du robot l'emporte), plus jamais « à relancer à la main ». Contrôle du
+  lundi dans projets-ahmed (`outils communs/envoi-robot/controle_robots.py`).
 
 ## Robustesse
 - `statut_sources` dans data/eaux.json ; source en panne → anciens prix gardés **7 jours** max puis retirés ;
