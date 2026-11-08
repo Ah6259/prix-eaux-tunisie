@@ -1,6 +1,6 @@
 {
- "maj": "2026-10-31T00:35",
- "publies": 3,
+ "maj": "2026-11-08T00:17",
+ "publies": 1,
  "rejetes": [
   {
    "horodateur": "30/09/2026 10:58:17",
@@ -18,6 +18,24 @@
    "horodateur": "30/09/2026 14:36:42",
    "marque": "Royal",
    "prix": "3900",
+   "raison": "prix vu il y a plus de 30 jours"
+  },
+  {
+   "horodateur": "08/10/2026 21:41:49",
+   "marque": "May",
+   "prix": "5400",
+   "raison": "prix vu il y a plus de 30 jours"
+  },
+  {
+   "horodateur": "08/10/2026 21:42:47",
+   "marque": "May",
+   "prix": "5400",
+   "raison": "prix vu il y a plus de 30 jours"
+  },
+  {
+   "horodateur": "08/10/2026 21:44:00",
+   "marque": "Jannet",
+   "prix": "5040",
    "raison": "prix vu il y a plus de 30 jours"
   }
  ],
