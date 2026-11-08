@@ -127,3 +127,8 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 07/11/2026 | mytek.tn | ⛔ | 403 anti-robot pour GitHub (informatique, pas d'eau) ; pas de contournement |
 | 07/11/2026 | glovoapp.com/tn (revu) | ❌ | inchangé : réponse 202 vide (0 octet), pas de prix lisible |
 | 07/11/2026 | Recherche web (Safia/Marwa en ligne, nouveau drive 2026) | ❌ | rien de nouveau : Webdo (plafonds 0,500/0,750/0,900 DT, ancien barème), Founa drive 2019 (fermé), Monoprix appli (écarté) — presse seulement |
+| 08/11/2026 | bakoo.tn | ❌ | lisible (117 Ko) mais boutique de cadeaux/produits du terroir : 0 « eau », 0 Safia — pas de prix d'eau |
+| 08/11/2026 | espaceagro.com | ❌ | injoignable pour GitHub (délai dépassé) ; petites annonces B2B déjà vues le 12/10 |
+| 08/11/2026 | destockplus.com | ❌ | lisible (200) mais déstockage export en euros, 0 « eau » à l'accueil : pas de prix de détail tunisiens |
+| 08/11/2026 | eshop.tn, ladoucheur.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
+| 08/11/2026 | Recherche web (Safia en ligne, grossistes en ligne) | ❌ | rien de nouveau : résultats hors Tunisie (Carrefour Égypte/Émirats), annonces export B2B (EspaceAgro, Destockplus), plafonds déjà notés |
