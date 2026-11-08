@@ -114,7 +114,7 @@ def page_marque(b):
                       f'<a href="{esc(cr["licence_url"])}" rel="license noopener">CC BY-SA</a></figcaption></figure>')
     # le prix de la stika dans le titre Google : donne envie de cliquer dans les résultats
     titre = (f"Prix {esc(nom)} — stika 1,5 L à {fmt_dt(prix15 * 6)} | comparateur gratuit"      # <= 70 caractères (SEO)
-             if prix15 else f"Prix {esc(nom)} en Tunisie — bouteille &amp; stika | comparateur gratuit")
+             if prix15 else f"Prix {esc(nom)} — bouteille et stika | comparateur gratuit")
     iso = lambda x: "⁨" + x + "⁩"   # mots latins isolés dans la phrase arabe
     ar = (f"سعر ماء {iso(esc(nom))} في تونس — ستيكة 1,5 لتر ابتداءً من {iso(fmt_dt(prix15 * 6))}" if prix15
           else f"سعر ماء {iso(esc(nom))} في تونس")
