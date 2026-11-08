@@ -261,7 +261,7 @@ const moisRapports = existsSync(join(root, "rapports")) ? readdirSync(join(root,
 const rapports = ["rapports/index.html", ...moisRapports.map(m => `rapports/${m}/index.html`)].filter(f => existsSync(join(root, f)));
 const toutesPages = ["index.html", ...guides, ...marques, ...rapports];
 // 08/11/2026 (plan SEO d'Ahmed, tous les sites) : titre <= 70 caractères et description <= 170 sur chaque page (Google coupe au-delà)
-{ const dec = x => x.replace(/&#x27;|&#39;|&apos;/g, "’").replace(/&amp;/g, "&").replace(/&quot;/g, "\\""), longs = [];
+{ const dec = x => x.replace(/&#x27;|&#39;|&apos;/g, "’").replace(/&amp;/g, "&").replace(/&quot;/g, '"'), longs = [];
   for (const p of toutesPages) { const h = lire(p); const t = dec((h.match(/<title>([^<]*)<\/title>/) || [])[1] || ""), d = dec((h.match(/<meta name="description" content="([^"]*)"/) || [])[1] || "");
     if (t.length > 70 || t.length < 10) longs.push(`${p} titre ${t.length}`); if (d.length > 170 || d.length < 40) longs.push(`${p} description ${d.length}`); }
   check("SEO : titre de 10 à 70 caractères et description de 40 à 170 sur chaque page" + (longs.length ? " — " + longs.slice(0, 4).join(" ; ") : ""), longs.length === 0); }
