@@ -105,7 +105,31 @@ def _dt(v):
     return f"{v:,.3f}".replace(",", " ").replace(".", ",") + " DT"
 
 
+def _titre_seo(t, maxi=70):
+    """SEO (08/11/2026) : Google coupe les titres vers 60-70 caractères -> le suffixe « | Prix des Eaux de Tunisie » saute si le titre dépasse."""
+    if len(t) <= maxi:
+        return t
+    court = t.split(" | ")[0].strip()
+    if len(court) <= maxi:
+        return court
+    t = court
+    for sep in (" : ", " — ", " (", " – "):
+        i = t.rfind(sep, 0, maxi)
+        if i >= 25:
+            return t[:i].rstrip(" ,;:—-")
+    return t[:maxi - 1].rsplit(" ", 1)[0].rstrip(" ,;:—-(") + "…"
+
+
+def _desc_seo(d, maxi=165):
+    if len(d) <= maxi:
+        return d
+    coupe = d[:maxi]
+    i = coupe.rfind(". ")
+    return coupe[:i + 1] if i >= 60 else coupe[:maxi - 1].rsplit(" ", 1)[0].rstrip(" ,;:—-(") + "…"
+
+
 def _gabarit(SITE, chemin, titre, description, h1, corps, jsonld=None, ar_titre=None, maj=None, racine="../", og_type=None, og_image=None, noindex=False):
+    titre, description = _titre_seo(titre), _desc_seo(description)
     return f"""<!doctype html>
 <html lang="fr" translate="no">
 <head>
