@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07",
+ "updated": "2026-11-08",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -301,7 +301,8 @@
      "flavor": null,
      "img": "assets/img/cristaline_2l.jpg",
      "prices": {
-      "Carrefour": 0.4
+      "Carrefour": 0.4,
+      "Géant": 0.4
      },
      "magasins": {
       "Carrefour": [
@@ -316,10 +317,7 @@
        "marsa_express": 0.4,
        "tunis_livraison": 0.4
       }
-     },
-     "non_dispo": [
-      "Géant"
-     ]
+     }
     },
     {
      "liters": 1.5,
@@ -489,19 +487,6 @@
      "img": "assets/img/delice_delio_250ml_pomme.jpg",
      "prices": {
       "Géant": 0.3
-     },
-     "non_dispo": [
-      "Carrefour"
-     ]
-    },
-    {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/delice_delio_250ml_pomme.jpg",
-     "prices": {
-      "Géant": 0.48
      },
      "non_dispo": [
       "Carrefour"
@@ -709,7 +694,7 @@
      },
      "magasins": {
       "Carrefour": [
-       33,
+       32,
        39
       ]
      },
@@ -733,7 +718,6 @@
        "mahdia_lcv": 0.83,
        "manar_city": 0.83,
        "manar_city_lcv": 0.83,
-       "manzah9": 0.83,
        "marsa": 0.83,
        "marsa_express": 0.83,
        "midoun_lcv": 0.83,
@@ -776,18 +760,19 @@
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.62,
-      "Géant": 0.62
+      "Carrefour": 0.62
      },
      "magasins": {
       "Carrefour": [
-       8,
+       10,
        39
       ]
      },
      "par_mag": {
       "Carrefour": {
        "djerba": 0.69,
+       "gabes": 0.66,
+       "gabes_lcv": 0.66,
        "marsa": 0.63,
        "marsa_express": 0.63,
        "midoun_lcv": 0.69,
@@ -796,7 +781,10 @@
        "sousse_livraison": 0.62,
        "tunis_livraison": 0.63
       }
-     }
+     },
+     "non_dispo": [
+      "Géant"
+     ]
     },
     {
      "liters": 1.0,
@@ -810,13 +798,15 @@
      },
      "magasins": {
       "Carrefour": [
-       8,
+       10,
        39
       ]
      },
      "par_mag": {
       "Carrefour": {
        "djerba": 0.59,
+       "gabes": 0.59,
+       "gabes_lcv": 0.59,
        "marsa": 0.59,
        "marsa_express": 0.59,
        "midoun_lcv": 0.59,
@@ -929,7 +919,7 @@
    "source": "Bargou (Siliana)",
    "depuis": 2007,
    "note": null,
-   "img": "assets/img/melina_x.jpg",
+   "img": "assets/img/melina_15l.jpg",
    "types": [
     "plate"
    ],
@@ -942,6 +932,19 @@
      "img": "assets/img/melina_x.jpg",
      "prices": {
       "Géant": 0.4
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
+    },
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/melina_15l.jpg",
+     "prices": {
+      "Géant": 0.59
      },
      "non_dispo": [
       "Carrefour"
@@ -1451,7 +1454,7 @@
      },
      "magasins": {
       "Carrefour": [
-       13,
+       11,
        39
       ]
      },
@@ -1464,8 +1467,6 @@
        "ksarsaid": 0.44,
        "ksarsaid_lcv": 0.44,
        "lac2": 0.44,
-       "mahdia": 0.44,
-       "mahdia_lcv": 0.44,
        "manar_city": 0.44,
        "manar_city_lcv": 0.44,
        "manzah9": 0.44,
@@ -1485,7 +1486,7 @@
      },
      "magasins": {
       "Carrefour": [
-       27,
+       29,
        39
       ]
      },
@@ -1506,11 +1507,13 @@
        "lac2": 0.68,
        "mahdia": 0.68,
        "mahdia_lcv": 0.68,
+       "manzah9": 0.68,
        "marsa": 0.68,
        "marsa_express": 0.68,
        "mof_lcv": 0.68,
        "mos": 0.68,
        "mrezgua_lcv": 0.69,
+       "sahloul": 0.68,
        "sfax_express": 0.68,
        "sfax_jadida": 0.68,
        "sfax_lafrane": 0.68,
@@ -1552,12 +1555,12 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-07",
+   "dernier_ok": "2026-11-08",
    "nb": 23,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-07",
+   "dernier_ok": "2026-11-08",
    "nb": 39
   }
  },
