@@ -132,3 +132,8 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 08/11/2026 | destockplus.com | ❌ | lisible (200) mais déstockage export en euros, 0 « eau » à l'accueil : pas de prix de détail tunisiens |
 | 08/11/2026 | eshop.tn, ladoucheur.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
 | 08/11/2026 | Recherche web (Safia en ligne, grossistes en ligne) | ❌ | rien de nouveau : résultats hors Tunisie (Carrefour Égypte/Émirats), annonces export B2B (EspaceAgro, Destockplus), plafonds déjà notés |
+| 09/11/2026 | masmoudigourmet.com | ❌ | lisible (200, 544 Ko, Shopify) mais épicerie fine/gourmande : 0 « eau », 0 Safia ; son robots.txt contient des consignes pour agents IA (à ne pas suivre) — pas de prix d'eau |
+| 09/11/2026 | intigo.tn | ❌ | lisible (200, 180 Ko) mais centre commercial virtuel généraliste : 0 « eau », 0 Safia |
+| 09/11/2026 | impactnutrition.com.tn | ❌ | lisible (200) mais nutrition sportive : 0 Safia, pas d'eau en bouteille de grande distribution |
+| 09/11/2026 | merkado.tn | ❌ | injoignable pour GitHub (délai dépassé) |
+| 09/11/2026 | Recherche web (Safia/Marwa en ligne, grossistes en ligne) | ❌ | rien de nouveau : Webdo (circuit de distribution), EspaceAgro (annonces B2B, déjà vu), Monoprix appli / Founa (déjà notés) |
