@@ -137,3 +137,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 09/11/2026 | impactnutrition.com.tn | ❌ | lisible (200) mais nutrition sportive : 0 Safia, pas d'eau en bouteille de grande distribution |
 | 09/11/2026 | merkado.tn | ❌ | injoignable pour GitHub (délai dépassé) |
 | 09/11/2026 | Recherche web (Safia/Marwa en ligne, grossistes en ligne) | ❌ | rien de nouveau : Webdo (circuit de distribution), EspaceAgro (annonces B2B, déjà vu), Monoprix appli / Founa (déjà notés) |
+| 10/11/2026 | spacenet.tn | ❌ | lisible (200, 1,1 Mo, PrestaShop, 0 Safia) ; produits d'entretien/hygiène, pas d'eau en bouteille ; mot anti-robot dans le code seulement |
+| 10/11/2026 | primini.tn | ❌ | lisible (200, 1,2 Mo) mais agrégateur/comparateur de 150 000 produits (para/pharmacie), 0 Safia ; agrégateur = jamais extrait sans accord écrit (règle § 23) |
+| 10/11/2026 | petitfute.com | ⛔ | 403 anti-robot pour GitHub (annuaire, pas de prix) ; pas de contournement |
+| 10/11/2026 | Recherche web (Safia/Marwa en ligne, épiceries en ligne livraison) | ❌ | rien de nouveau : Monoprix appli (écarté), Founa 2019 (fermé), plafonds du ministère (19/08) déjà notés, Tunisie Numérique (stock régulateur 2027, presse) |
