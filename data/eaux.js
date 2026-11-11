@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-11-10",
+ "updated": "2026-11-11",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -490,19 +490,6 @@ window.EAUX_DATA = {
      ]
     },
     {
-     "liters": 0.5,
-     "format": "500 ml",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/delice_delio_250ml_pomme.jpg",
-     "prices": {
-      "Géant": 0.48
-     },
-     "non_dispo": [
-      "Carrefour"
-     ]
-    },
-    {
      "liters": 1.0,
      "format": "1 L",
      "category": "plate",
@@ -626,7 +613,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       21,
+       22,
        39
       ]
      },
@@ -638,6 +625,7 @@ window.EAUX_DATA = {
        "boumhal_lcv": 0.63,
        "gabes": 0.66,
        "gabes_lcv": 0.66,
+       "gammarth": 0.62,
        "lac2": 0.63,
        "mahdia": 0.62,
        "mahdia_lcv": 0.62,
@@ -694,7 +682,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       32,
+       33,
        39
       ]
      },
@@ -724,6 +712,7 @@ window.EAUX_DATA = {
        "midoun_lcv": 0.83,
        "mof_lcv": 0.83,
        "mos": 0.84,
+       "mourouj": 0.83,
        "mrezgua_lcv": 0.84,
        "sahloul": 0.84,
        "sfax_express": 0.83,
@@ -760,8 +749,7 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/jektiss_1l.jpg",
      "prices": {
-      "Carrefour": 0.62,
-      "Géant": 0.62
+      "Carrefour": 0.62
      },
      "magasins": {
       "Carrefour": [
@@ -779,7 +767,10 @@ window.EAUX_DATA = {
        "sousse_express": 0.62,
        "sousse_livraison": 0.62
       }
-     }
+     },
+     "non_dispo": [
+      "Géant"
+     ]
     },
     {
      "liters": 1.0,
@@ -1325,7 +1316,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       16,
+       17,
        39
       ]
      },
@@ -1342,6 +1333,7 @@ window.EAUX_DATA = {
        "mahdia_lcv": 0.68,
        "manzah9": 0.68,
        "mof_lcv": 0.68,
+       "mourouj": 0.68,
        "sahloul": 0.68,
        "sfax_express": 0.68,
        "sfax_jadida": 0.68,
@@ -1458,12 +1450,12 @@ window.EAUX_DATA = {
        "ariana": 0.44,
        "boumhal": 0.44,
        "boumhal_lcv": 0.44,
+       "cun": 0.44,
        "gammarth": 0.44,
        "gazelle": 0.44,
-       "ksarsaid": 0.44,
-       "ksarsaid_lcv": 0.44,
        "lac2": 0.44,
        "manzah9": 0.44,
+       "mourouj": 0.44,
        "sahloul": 0.44
       }
      }
@@ -1480,7 +1472,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       27,
+       28,
        39
       ]
      },
@@ -1504,6 +1496,7 @@ window.EAUX_DATA = {
        "marsa_express": 0.68,
        "mof_lcv": 0.68,
        "mos": 0.68,
+       "mourouj": 0.68,
        "mrezgua_lcv": 0.69,
        "sahloul": 0.68,
        "sfax_express": 0.68,
@@ -1547,13 +1540,13 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-10",
+   "dernier_ok": "2026-11-11",
    "nb": 24,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-10",
-   "nb": 41
+   "dernier_ok": "2026-11-11",
+   "nb": 39
   }
  },
  "magasins_carrefour": {
