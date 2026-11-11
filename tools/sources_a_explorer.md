@@ -141,3 +141,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 10/11/2026 | primini.tn | ❌ | lisible (200, 1,2 Mo) mais agrégateur/comparateur de 150 000 produits (para/pharmacie), 0 Safia ; agrégateur = jamais extrait sans accord écrit (règle § 23) |
 | 10/11/2026 | petitfute.com | ⛔ | 403 anti-robot pour GitHub (annuaire, pas de prix) ; pas de contournement |
 | 10/11/2026 | Recherche web (Safia/Marwa en ligne, épiceries en ligne livraison) | ❌ | rien de nouveau : Monoprix appli (écarté), Founa 2019 (fermé), plafonds du ministère (19/08) déjà notés, Tunisie Numérique (stock régulateur 2027, presse) |
+| 11/11/2026 | lamma.tn | ❌ | lisible (200, 247 Ko, robots.txt permissif) mais c'est un annuaire de prestataires d'événements, sans rapport avec l'appli de livraison Lamma (rachetée par Appetito en 2022) : 0 « eau », 0 Safia |
+| 11/11/2026 | lamma.app | ❌ | injoignable pour GitHub (connexion coupée, erreur TLS) ; appli de livraison rapide Lamma, aucune source récente qui la dit encore active en Tunisie |
+| 11/11/2026 | sabrine.com.tn, melliti.com.tn, marwa.com.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) : pas de boutique en ligne des marques d'eau |
+| 11/11/2026 | Recherche web (Safia pack 6 × 1,5 L livré, supermarchés en ligne 2026, WooCommerce eau) | ❌ | rien de nouveau : Open Food Facts (fiche Safia, sans prix), résultats hors Tunisie (Carrefour Émirats/Égypte), Founa (fermé), Monoprix appli et Glovo (déjà vus) |
