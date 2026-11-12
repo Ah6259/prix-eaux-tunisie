@@ -145,3 +145,7 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 11/11/2026 | lamma.app | ❌ | injoignable pour GitHub (connexion coupée, erreur TLS) ; appli de livraison rapide Lamma, aucune source récente qui la dit encore active en Tunisie |
 | 11/11/2026 | sabrine.com.tn, melliti.com.tn, marwa.com.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) : pas de boutique en ligne des marques d'eau |
 | 11/11/2026 | Recherche web (Safia pack 6 × 1,5 L livré, supermarchés en ligne 2026, WooCommerce eau) | ❌ | rien de nouveau : Open Food Facts (fiche Safia, sans prix), résultats hors Tunisie (Carrefour Émirats/Égypte), Founa (fermé), Monoprix appli et Glovo (déjà vus) |
+| 12/11/2026 | capsafood.com | ❌ | lisible (200) mais le domaine appartient à un groupe laitier espagnol (Central Lechera Asturiana), pas à l'appli tunisienne Capsa Food (restaurants) : 0 « eau », 0 prix |
+| 12/11/2026 | thunderexpress.tn, monepicerie.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) ; Thunder Express = appli de livraison de repas à Sousse |
+| 12/11/2026 | livrili.tn | ❌ | lisible (200, 2,7 Ko) mais simple « Livrili Dashboard » (espace de connexion d'un service de livraison), 0 « eau », 0 prix |
+| 12/11/2026 | Recherche web (Safia pack 6 × 1,5 L livré, épiceries en ligne Sousse/Sfax, Marwa « ajouter au panier ») | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (plafonds), Monoprix appli, Founa (fermé), Jumia Food (fermé fin 2023) ; résultats hors Tunisie (Carrefour Émirats/Égypte) |
