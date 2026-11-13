@@ -149,3 +149,8 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 12/11/2026 | thunderexpress.tn, monepicerie.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) ; Thunder Express = appli de livraison de repas à Sousse |
 | 12/11/2026 | livrili.tn | ❌ | lisible (200, 2,7 Ko) mais simple « Livrili Dashboard » (espace de connexion d'un service de livraison), 0 « eau », 0 prix |
 | 12/11/2026 | Recherche web (Safia pack 6 × 1,5 L livré, épiceries en ligne Sousse/Sfax, Marwa « ajouter au panier ») | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (plafonds), Monoprix appli, Founa (fermé), Jumia Food (fermé fin 2023) ; résultats hors Tunisie (Carrefour Émirats/Égypte) |
+| 13/11/2026 | ubuy.tn | ⛔ | Cloudflare « Just a moment » (403) pour GitHub ; de toute façon produits importés (ex. eau américaine LIFEWTR à 56 TND), pas l'eau des magasins tunisiens — pas de contournement |
+| 13/11/2026 | approzagaya.odoo.com | ❌ | 404 : la boutique Odoo n'existe plus (base « approzagaya » introuvable) ; trouvée par la recherche web (rayon épicerie), origine tunisienne non confirmée |
+| 13/11/2026 | tounsimarket.tn | ❌ | lisible (200, 110 Ko, robots.txt permissif) mais 0 « eau », 0 Safia, 1 « prix » à l'accueil : pas de prix d'eau |
+| 13/11/2026 | kiffekiff.tn | ❌ | nom de domaine inexistant (introuvable pour GitHub) |
+| 13/11/2026 | Recherche web (Safia/Sabrine/Aqualine en ligne, épiceries en ligne Tunis, nouveaux supermarchés en ligne 2026) | ❌ | rien de nouveau : Tuniscope 13/07 (Aqualine 0,660 · Safia/Sabrine 0,720 DT, déjà noté), Open Food Facts (Sabrine, sans prix), Monoprix appli / Founa / Lamma / Glovo (déjà vus), résultats hors Tunisie (Carrefour Émirats/Égypte) |
