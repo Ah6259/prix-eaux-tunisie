@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-11-13",
+ "updated": "2026-11-14",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -219,6 +219,12 @@ window.EAUX_DATA = {
      "prices": {
       "Carrefour": 0.65
      },
+     "magasins": {
+      "Carrefour": [
+       37,
+       39
+      ]
+     },
      "par_mag": {
       "Carrefour": {
        "Khzema": 0.65,
@@ -232,8 +238,6 @@ window.EAUX_DATA = {
        "cun": 0.65,
        "djerba": 0.65,
        "ennasr_1": 0.65,
-       "gabes": 0.65,
-       "gabes_lcv": 0.65,
        "gammarth": 0.65,
        "gazelle": 0.65,
        "hammamet": 0.66,
@@ -305,17 +309,22 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       6,
+       11,
        39
       ]
      },
      "par_mag": {
       "Carrefour": {
        "borj_cedria": 0.4,
+       "boumhal": 0.4,
+       "boumhal_lcv": 0.4,
        "gazelle": 0.4,
        "marsa": 0.4,
        "marsa_express": 0.4,
+       "mof_lcv": 0.4,
+       "sfax_express": 0.4,
        "sfax_lafrane": 0.4,
+       "sfax_mall": 0.4,
        "tunis_livraison": 0.4
       }
      }
@@ -679,14 +688,14 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       34,
+       33,
        39
       ]
      },
      "par_mag": {
       "Carrefour": {
-       "aouina": 0.83,
        "ariana": 0.83,
+       "borj_cedria": 0.83,
        "boumhal": 0.83,
        "boumhal_lcv": 0.83,
        "cun": 0.83,
@@ -710,7 +719,6 @@ window.EAUX_DATA = {
        "midoun_lcv": 0.83,
        "mof_lcv": 0.83,
        "mos": 0.84,
-       "mourouj": 0.83,
        "mrezgua_lcv": 0.84,
        "sahloul": 0.84,
        "sfax_express": 0.83,
@@ -903,7 +911,7 @@ window.EAUX_DATA = {
    "source": "Bargou (Siliana)",
    "depuis": 2007,
    "note": null,
-   "img": "assets/img/melina_15l.jpg",
+   "img": "assets/img/melina_x.jpg",
    "types": [
     "plate"
    ],
@@ -916,19 +924,6 @@ window.EAUX_DATA = {
      "img": "assets/img/melina_x.jpg",
      "prices": {
       "Géant": 0.4
-     },
-     "non_dispo": [
-      "Carrefour"
-     ]
-    },
-    {
-     "liters": 1.5,
-     "format": "1.5 L",
-     "category": "plate",
-     "flavor": null,
-     "img": "assets/img/melina_15l.jpg",
-     "prices": {
-      "Géant": 0.59
      },
      "non_dispo": [
       "Carrefour"
@@ -1442,7 +1437,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       22,
+       23,
        39
       ]
      },
@@ -1452,6 +1447,8 @@ window.EAUX_DATA = {
        "borj_cedria": 0.44,
        "boumhal": 0.44,
        "boumhal_lcv": 0.44,
+       "gabes": 0.44,
+       "gabes_lcv": 0.44,
        "gammarth": 0.44,
        "gazelle": 0.44,
        "ksarsaid": 0.44,
@@ -1464,7 +1461,6 @@ window.EAUX_DATA = {
        "manzah9": 0.44,
        "mof_lcv": 0.44,
        "mos": 0.44,
-       "mourouj": 0.44,
        "sahloul": 0.44,
        "sfax_express": 0.44,
        "sfax_mall": 0.44,
@@ -1485,7 +1481,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       30,
+       31,
        39
       ]
      },
@@ -1493,10 +1489,11 @@ window.EAUX_DATA = {
       "Carrefour": {
        "aouina": 0.68,
        "ariana": 0.68,
-       "borj_cedria": 0.68,
        "boumhal": 0.68,
        "boumhal_lcv": 0.68,
        "cun": 0.68,
+       "gabes": 0.68,
+       "gabes_lcv": 0.68,
        "gammarth": 0.68,
        "gazelle": 0.68,
        "hammamet": 0.69,
@@ -1555,13 +1552,13 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-13",
+   "dernier_ok": "2026-11-14",
    "nb": 24,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-13",
-   "nb": 39
+   "dernier_ok": "2026-11-14",
+   "nb": 38
   }
  },
  "magasins_carrefour": {
