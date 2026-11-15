@@ -462,3 +462,9 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   plan du site, liée depuis l'accueil et tous les pieds de page.
 - Un test (`FONCTIONS` de `tools/test_site.mjs`) bloque la publication si une fonction du site n'y est pas expliquée :
   nouvelle fonction = une ligne dans la liste + son explication dans la page, dans le même envoi.
+
+## Reprendre le travail sur le PC après des sessions en ligne (15/11/2026)
+- Les sessions Claude en ligne (téléphone) travaillent sur une branche puis la fusionnent dans `main`.
+- Sur le PC, avant tout : `git checkout main` puis `git pull` (ici ET dans le dossier parent projets-ahmed).
+- Ne jamais recopier d'anciens fichiers du PC par-dessus : les robots enregistrent aussi chaque nuit.
+- Un robot qui parle à un service extérieur (Telegram…) fait plusieurs essais avant de sonner rouge (leçon du 13/11).

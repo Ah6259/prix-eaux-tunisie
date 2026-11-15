@@ -571,3 +571,17 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Règle pour tout nouveau site** : compteur + préfixe propre + CSP + test dès la 1re publication (voir le guide, étape 13).
   Ne JAMAIS publier `tools/publier.py` de mai-moteur sur le dépôt public sans vérifier les données : il recopie `donnees/`
   (celles du dépôt privé peuvent être plus anciennes que celles du robot).
+
+## Mise à jour du 08-15/11/2026 (à lire en reprenant sur le PC : faire `git pull` d'abord)
+- **SEO (08/11, contrôle commun)** : titres et descriptions courts sur l'accueil, les 35 pages marques, guides, rapports et
+  `a-propos/` (bornes dans les gabarits de build_guides.py / build_pages.py, test sur toutes les pages) ; plus aucune promesse
+  de livraison dans les textes Google (commande fermée).
+- **Robots Telegram (13/11)** : `instagram.yml` et `telegram-bienvenue.yml` font 4 essais avant de sonner rouge si Telegram ne
+  répond pas (délai dépassé du 13/11).
+- **Recherche de sources (15/11)** : outil `tester-source.yml` corrigé (ne réutilise plus la page du site précédent quand un site
+  ne répond pas ; le mot « captcha » d'un formulaire de contact n'est plus pris pour un barrage). Pistes notées dans
+  `tools/sources_a_explorer.md` : **MG (mg.tn)** lisible mais ~50 produits de ses marques propres seulement et conditions qui
+  interdisent la copie → **décision d'Ahmed** ; **Mazraa Market** existe mais injoignable depuis GitHub (sans doute réservé
+  aux connexions tunisiennes) → pas lisible sans le PC, donc non ; **elsabuy.tn** lisible mais petite place de marché, en
+  réserve ; Aziza, Monoprix, Jumia : toujours non. Rien n'a été ajouté au site.
+- Branches des sessions en ligne fusionnées dans `main` (PR #7 à #11) : sur le PC, `git checkout main && git pull` suffit.
