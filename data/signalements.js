@@ -11,5 +11,16 @@ window.EAUX_SIGNALES = [
   "lieu": "Ariana",
   "date": "2026-10-22",
   "nb": 1
+ },
+ {
+  "id": "mira",
+  "marque": "Mira",
+  "litres": 1.0,
+  "type": "plate",
+  "prix": 0.6,
+  "magasin": "Carrefour",
+  "lieu": "Manar",
+  "date": "2026-11-15",
+  "nb": 1
  }
 ];
