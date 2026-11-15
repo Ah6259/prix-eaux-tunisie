@@ -24,9 +24,12 @@ jobs:
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36"
           for u in $URLS; do
             echo "=================== $u"
+            rm -f page.html   # jamais la page du site précédent si celui-ci ne répond pas
             code=$(curl -sSL -m 30 -A "$UA" -o page.html -w "%{http_code}" "$u" || curl -sSLk -m 30 -A "$UA" -o page.html -w "%{http_code}" "$u" || echo ERREUR)
             echo "CODE HTTP : $code   TAILLE : $(wc -c < page.html 2>/dev/null) octets"
-            grep -qiE "just a moment|cf-chl|captcha|are you human|verify you are" page.html 2>/dev/null && echo "BLOCAGE ANTI-ROBOT DÉTECTÉ"
+            # Cloudflare = toujours un barrage ; « captcha » seulement sur une petite page (un formulaire de contact en a aussi)
+            if grep -qiE "just a moment|cf-chl|attention required" page.html 2>/dev/null; then echo "BLOCAGE ANTI-ROBOT DÉTECTÉ"
+            elif [ "$(wc -c < page.html 2>/dev/null || echo 0)" -lt 30000 ] && grep -qiE "captcha|are you human|verify you are" page.html 2>/dev/null; then echo "BLOCAGE ANTI-ROBOT DÉTECTÉ"; fi
             echo "TITRE : $(grep -oiE '<title[^>]*>[^<]*' page.html | head -1 | sed 's/<title[^>]*>//')"
             echo "MOTS : eau=$(grep -oiE '\beau\b|\beaux\b' page.html | wc -l) prix/DT=$(grep -oiE 'prix|[0-9],[0-9]{3} ?(dt|tnd)|TND' page.html | wc -l) safia=$(grep -oi safia page.html | wc -l) wp-json=$(grep -oi wp-json page.html | wc -l) graphql=$(grep -oi graphql page.html | wc -l)"
             base=$(echo "$u" | grep -oE '^https?://[^/]+')
