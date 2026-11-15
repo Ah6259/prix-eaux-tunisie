@@ -581,7 +581,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Recherche de sources (15/11)** : outil `tester-source.yml` corrigé (ne réutilise plus la page du site précédent quand un site
   ne répond pas ; le mot « captcha » d'un formulaire de contact n'est plus pris pour un barrage). Pistes notées dans
   `tools/sources_a_explorer.md` : **MG (mg.tn)** lisible mais ~50 produits de ses marques propres seulement et conditions qui
-  interdisent la copie → **décision d'Ahmed** ; **Mazraa Market** existe mais injoignable depuis GitHub (sans doute réservé
+  interdisent la copie ; Ahmed a dit « oui » le 15/11 mais **MG ne vend AUCUNE eau en bouteille en ligne** (recherche « eau » vérifiée) → non ajouté, à retester ; **Mazraa Market** existe mais injoignable depuis GitHub (sans doute réservé
   aux connexions tunisiennes) → pas lisible sans le PC, donc non ; **elsabuy.tn** lisible mais petite place de marché, en
   réserve ; Aziza, Monoprix, Jumia : toujours non. Rien n'a été ajouté au site.
 - Branches des sessions en ligne fusionnées dans `main` (PR #7 à #11) : sur le PC, `git checkout main && git pull` suffit.
