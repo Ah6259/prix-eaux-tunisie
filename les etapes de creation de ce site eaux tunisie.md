@@ -468,3 +468,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Sur le PC, avant tout : `git checkout main` puis `git pull` (ici ET dans le dossier parent projets-ahmed).
 - Ne jamais recopier d'anciens fichiers du PC par-dessus : les robots enregistrent aussi chaque nuit.
 - Un robot qui parle à un service extérieur (Telegram…) fait plusieurs essais avant de sonner rouge (leçon du 13/11).
+- Avant de créer une page ou un site : vérifier qu'il n'existe pas déjà (mémoire de projets-ahmed, portail clicvia.com).
+  Leçon du 15/11 : un tableau de bord des snacks a failli être refait alors qu'il était déjà sur clicvia.com/tableau-bord/prix-snacks/.
