@@ -27,7 +27,9 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: |
           if [ -z "$TELEGRAM_BOT_TOKEN" ]; then echo "::error::Secret TELEGRAM_BOT_TOKEN absent : rien ne serait publié"; exit 1; fi
-          r=$(curl -s --max-time 20 "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe")
+          # Panne réseau passagère (curl code 28 du 13/11/2026) : 4 essais espacés, jamais rouge pour un délai dépassé
+          r=$(curl -s --max-time 20 --retry 3 --retry-delay 20 --retry-all-errors "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe" || true)
+          if [ -z "$r" ]; then echo "::warning::Telegram injoignable pour le moment (4 essais) : contrôle du jeton sauté, nouvel essai au prochain passage"; exit 0; fi
           echo "$r" | grep -q '"ok":true' || { echo "::error::Jeton Telegram refusé par Telegram (getMe) : le refaire avec @BotFather"; exit 1; }
       - name: Fabriquer l'image et l'envoyer sur Telegram
         env:

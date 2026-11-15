@@ -132,6 +132,31 @@ Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisi
 | 08/11/2026 | destockplus.com | ❌ | lisible (200) mais déstockage export en euros, 0 « eau » à l'accueil : pas de prix de détail tunisiens |
 | 08/11/2026 | eshop.tn, ladoucheur.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) |
 | 08/11/2026 | Recherche web (Safia en ligne, grossistes en ligne) | ❌ | rien de nouveau : résultats hors Tunisie (Carrefour Égypte/Émirats), annonces export B2B (EspaceAgro, Destockplus), plafonds déjà notés |
+| 09/11/2026 | masmoudigourmet.com | ❌ | lisible (200, 544 Ko, Shopify) mais épicerie fine/gourmande : 0 « eau », 0 Safia ; son robots.txt contient des consignes pour agents IA (à ne pas suivre) — pas de prix d'eau |
+| 09/11/2026 | intigo.tn | ❌ | lisible (200, 180 Ko) mais centre commercial virtuel généraliste : 0 « eau », 0 Safia |
+| 09/11/2026 | impactnutrition.com.tn | ❌ | lisible (200) mais nutrition sportive : 0 Safia, pas d'eau en bouteille de grande distribution |
+| 09/11/2026 | merkado.tn | ❌ | injoignable pour GitHub (délai dépassé) |
+| 09/11/2026 | Recherche web (Safia/Marwa en ligne, grossistes en ligne) | ❌ | rien de nouveau : Webdo (circuit de distribution), EspaceAgro (annonces B2B, déjà vu), Monoprix appli / Founa (déjà notés) |
+| 10/11/2026 | spacenet.tn | ❌ | lisible (200, 1,1 Mo, PrestaShop, 0 Safia) ; produits d'entretien/hygiène, pas d'eau en bouteille ; mot anti-robot dans le code seulement |
+| 10/11/2026 | primini.tn | ❌ | lisible (200, 1,2 Mo) mais agrégateur/comparateur de 150 000 produits (para/pharmacie), 0 Safia ; agrégateur = jamais extrait sans accord écrit (règle § 23) |
+| 10/11/2026 | petitfute.com | ⛔ | 403 anti-robot pour GitHub (annuaire, pas de prix) ; pas de contournement |
+| 10/11/2026 | Recherche web (Safia/Marwa en ligne, épiceries en ligne livraison) | ❌ | rien de nouveau : Monoprix appli (écarté), Founa 2019 (fermé), plafonds du ministère (19/08) déjà notés, Tunisie Numérique (stock régulateur 2027, presse) |
+| 11/11/2026 | lamma.tn | ❌ | lisible (200, 247 Ko, robots.txt permissif) mais c'est un annuaire de prestataires d'événements, sans rapport avec l'appli de livraison Lamma (rachetée par Appetito en 2022) : 0 « eau », 0 Safia |
+| 11/11/2026 | lamma.app | ❌ | injoignable pour GitHub (connexion coupée, erreur TLS) ; appli de livraison rapide Lamma, aucune source récente qui la dit encore active en Tunisie |
+| 11/11/2026 | sabrine.com.tn, melliti.com.tn, marwa.com.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) : pas de boutique en ligne des marques d'eau |
+| 11/11/2026 | Recherche web (Safia pack 6 × 1,5 L livré, supermarchés en ligne 2026, WooCommerce eau) | ❌ | rien de nouveau : Open Food Facts (fiche Safia, sans prix), résultats hors Tunisie (Carrefour Émirats/Égypte), Founa (fermé), Monoprix appli et Glovo (déjà vus) |
+| 12/11/2026 | capsafood.com | ❌ | lisible (200) mais le domaine appartient à un groupe laitier espagnol (Central Lechera Asturiana), pas à l'appli tunisienne Capsa Food (restaurants) : 0 « eau », 0 prix |
+| 12/11/2026 | thunderexpress.tn, monepicerie.tn | ❌ | noms de domaine inexistants (introuvables pour GitHub) ; Thunder Express = appli de livraison de repas à Sousse |
+| 12/11/2026 | livrili.tn | ❌ | lisible (200, 2,7 Ko) mais simple « Livrili Dashboard » (espace de connexion d'un service de livraison), 0 « eau », 0 prix |
+| 12/11/2026 | Recherche web (Safia pack 6 × 1,5 L livré, épiceries en ligne Sousse/Sfax, Marwa « ajouter au panier ») | ❌ | rien de nouveau : Tuniscope 13/07 et 28/07, Webdo 19/08 (plafonds), Monoprix appli, Founa (fermé), Jumia Food (fermé fin 2023) ; résultats hors Tunisie (Carrefour Émirats/Égypte) |
+| 13/11/2026 | ubuy.tn | ⛔ | Cloudflare « Just a moment » (403) pour GitHub ; de toute façon produits importés (ex. eau américaine LIFEWTR à 56 TND), pas l'eau des magasins tunisiens — pas de contournement |
+| 13/11/2026 | approzagaya.odoo.com | ❌ | 404 : la boutique Odoo n'existe plus (base « approzagaya » introuvable) ; trouvée par la recherche web (rayon épicerie), origine tunisienne non confirmée |
+| 13/11/2026 | tounsimarket.tn | ❌ | lisible (200, 110 Ko, robots.txt permissif) mais 0 « eau », 0 Safia, 1 « prix » à l'accueil : pas de prix d'eau |
+| 13/11/2026 | kiffekiff.tn | ❌ | nom de domaine inexistant (introuvable pour GitHub) |
+| 13/11/2026 | Recherche web (Safia/Sabrine/Aqualine en ligne, épiceries en ligne Tunis, nouveaux supermarchés en ligne 2026) | ❌ | rien de nouveau : Tuniscope 13/07 (Aqualine 0,660 · Safia/Sabrine 0,720 DT, déjà noté), Open Food Facts (Sabrine, sans prix), Monoprix appli / Founa / Lamma / Glovo (déjà vus), résultats hors Tunisie (Carrefour Émirats/Égypte) |
+| 15/11/2026 | tunisiepromo.com | ⛔ | 200 mais page d'attente anti-robot « One moment, please... » (rechargement après 5 s), 0 « eau », 0 prix — pas de contournement. Site de catalogues promo supposé, contenu non confirmé |
+| 15/11/2026 | lapromo.tn, promotions.tn, marchand.tn, zeta-market.tn | ❌ | injoignables pour GitHub (erreur de connexion / domaine inexistant) ; la taille affichée pour les 3 derniers vient du site précédent (page non remplacée par le robot) |
+| 15/11/2026 | Recherche web (Safia 1,5 L en ligne, pack Marwa 6 × 1,5 L « ajouter au panier », catalogues promo, courses en ligne Sfax/Sousse) | ❌ | rien de nouveau : Tuniscope 13/07 et fin août (rationnement 2 packs), AllAfrica 26/08, promo Aziza DIMA 15/08 (presse), Monoprix appli / Founa / Thunder Express (déjà vus), combien-coute.net (écarté, Cloudflare), résultats hors Tunisie (Carrefour Émirats/Égypte, Talabat Koweït) |
 | 15/11/2026 | mg.tn (MG, Magasin Général) | ❌ | lisible (200, PrestaShop) mais vitrine de ses marques propres (MG J'aime, Koll Youm) SANS AUCUN prix affiché ; conditions : toute copie du contenu interdite. Prix seulement dans l'appli MyMG (écartée : pas d'extraction d'appli) |
 | 15/11/2026 | aziza.tn, aziza.com.tn | ❌ | aziza.tn = liste des magasins sans prix ; aziza.com.tn = « Index of / » (vide) ; l'appli Aziza montre seulement la disponibilité |
 | 15/11/2026 | Mazraa Market (mazraamarket.tn / .com) | ❌ | aucun site trouvé (noms de domaine inexistants) : magasins + réseaux sociaux seulement |
