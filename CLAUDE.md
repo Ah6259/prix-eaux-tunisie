@@ -585,3 +585,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   aux connexions tunisiennes) → pas lisible sans le PC, donc non ; **elsabuy.tn** lisible mais petite place de marché, en
   réserve ; Aziza, Monoprix, Jumia : toujours non. Rien n'a été ajouté au site.
 - Branches des sessions en ligne fusionnées dans `main` (PR #7 à #11) : sur le PC, `git checkout main && git pull` suffit.
+- **15/11 (nuit)** : MG revérifié pour l'eau : aucune eau en bouteille en ligne -> non ajouté (PR #13). À savoir : le site PRIVÉ
+  « Prix des gaufrettes, biscuits et chips » existe déjà (https://clicvia.com/tableau-bord/prix-snacks/, robot dans projets-ahmed,
+  fiche `memoire claude/projet-prix-snacks.md`) : ne jamais en créer un autre. MG y attend la décision d'Ahmed (19 produits, stock non indiqué).
