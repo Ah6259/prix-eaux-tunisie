@@ -236,3 +236,4 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - 08/10/2026 : la recherche quotidienne de nouvelles sources de prix enregistre enfin son carnet (`tools/sources_a_explorer.md`) ; la vérification du matin le contrôle.
 - 22/10/2026 : rien de changé sur ce site ; règles communes § 41 (doublons fusionnés, contrôles comparables, prix dans son unité écrite).
 - **08-15/11/2026** : titres et descriptions Google raccourcis sur toutes les pages (sans promesse de livraison) ; robots Telegram plus patients (4 essais) ; recherche de nouvelles sources : MG en attente de la décision d'Ahmed, Mazraa Market illisible depuis GitHub, rien d'ajouté au site.
+- **15/11/2026 (nuit)** : rien de changé sur ce site ; MG ajouté au site privé des prix snacks (clicvia.com/tableau-bord/prix-snacks/), avec l'explication « stock non indiqué par MG ».

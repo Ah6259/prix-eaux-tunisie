@@ -587,4 +587,4 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - Branches des sessions en ligne fusionnées dans `main` (PR #7 à #11) : sur le PC, `git checkout main && git pull` suffit.
 - **15/11 (nuit)** : MG revérifié pour l'eau : aucune eau en bouteille en ligne -> non ajouté (PR #13). À savoir : le site PRIVÉ
   « Prix des gaufrettes, biscuits et chips » existe déjà (https://clicvia.com/tableau-bord/prix-snacks/, robot dans projets-ahmed,
-  fiche `memoire claude/projet-prix-snacks.md`) : ne jamais en créer un autre. MG y attend la décision d'Ahmed (19 produits, stock non indiqué).
+  fiche `memoire claude/projet-prix-snacks.md`) : ne jamais en créer un autre. MG y a été AJOUTÉ le 15/11 (décision d'Ahmed : 19 produits de ses marques, mention « stock non indiqué par MG » expliquée sur la page).
