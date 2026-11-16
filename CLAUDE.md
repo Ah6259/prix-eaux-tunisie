@@ -597,3 +597,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   appels-offres-abonnes, concours-abonnes (tableau-bord : rien à faire, publié par son robot).
 - **16/11 (1h)** : relevé des snacks relancé à la main pour afficher MG tout de suite ; prochains contrôles (matin du 16/11) : ia-interne
   vert en quelques secondes (PAUSE), bilan des abonnés dans pass / alertes, partie « Minutes GitHub » du tableau de bord après 9h45.
+- **16/11 (nuit, 1h-2h)** : site des snacks amélioré (tri des produits, blocs du haut avec un nom et le même style, période choisie dans
+  le bloc des chiffres, toutes les marques dans les courbes, filtres à PLUSIEURS choix avec cases à cocher et un choix par ligne) ;
+  chaque amélioration publiée « page seule » (~1 min 40, sans relire les magasins) ; règles générales § 56 + modèle « suivi de prix »
+  (projets-ahmed). Ce site-ci n'a pas changé. Sur le PC : `git checkout main` puis `git pull` dans les mêmes dépôts que ci-dessus.
