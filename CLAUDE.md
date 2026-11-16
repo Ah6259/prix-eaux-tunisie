@@ -588,3 +588,10 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **15/11 (nuit)** : MG revérifié pour l'eau : aucune eau en bouteille en ligne -> non ajouté (PR #13). À savoir : le site PRIVÉ
   « Prix des gaufrettes, biscuits et chips » existe déjà (https://clicvia.com/tableau-bord/prix-snacks/, robot dans projets-ahmed,
   fiche `memoire claude/projet-prix-snacks.md`) : ne jamais en créer un autre. MG y a été AJOUTÉ le 15/11 (décision d'Ahmed : 19 produits de ses marques, mention « stock non indiqué par MG » expliquée sur la page).
+- **16/11 (nuit) — minutes GitHub privées** (audit d'Ahmed : 1 464 / 2 000 au 15/11) : ce dépôt est PUBLIC, ses robots sont
+  gratuits (rien à changer ici). Ailleurs : ia-interne de l'immobilier en pause jusqu'au 30/11 puis tous les 3 jours, bilans des
+  abonnés rangés dans pass / alertes, page des snacks publiée seule ; compteur et prévision sur https://clicvia.com/tableau-bord/
+  (partie « Minutes GitHub »). Détail : CLAUDE.md de projets-ahmed. Robots Documents/Immobilier rouges du 15/11 : réparés le soir même.
+- **Reprendre sur le PC** : `git checkout main` puis `git pull` dans CHAQUE dépôt touché le 15-16/11 : prix-eaux-tunisie, projets-ahmed
+  (`_claude code project`), immobilier-abonnes, voiture-pass, outils-pass, code-route-pass, documents-pass, conferences-abonnes,
+  appels-offres-abonnes, concours-abonnes (tableau-bord : rien à faire, publié par son robot).
