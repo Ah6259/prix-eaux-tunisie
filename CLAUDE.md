@@ -595,3 +595,5 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **Reprendre sur le PC** : `git checkout main` puis `git pull` dans CHAQUE dépôt touché le 15-16/11 : prix-eaux-tunisie, projets-ahmed
   (`_claude code project`), immobilier-abonnes, voiture-pass, outils-pass, code-route-pass, documents-pass, conferences-abonnes,
   appels-offres-abonnes, concours-abonnes (tableau-bord : rien à faire, publié par son robot).
+- **16/11 (1h)** : relevé des snacks relancé à la main pour afficher MG tout de suite ; prochains contrôles (matin du 16/11) : ia-interne
+  vert en quelques secondes (PAUSE), bilan des abonnés dans pass / alertes, partie « Minutes GitHub » du tableau de bord après 9h45.
