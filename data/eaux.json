@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15",
+ "updated": "2026-11-16",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -309,7 +309,7 @@
      },
      "magasins": {
       "Carrefour": [
-       11,
+       14,
        39
       ]
      },
@@ -319,6 +319,9 @@
        "boumhal": 0.4,
        "boumhal_lcv": 0.4,
        "gazelle": 0.4,
+       "manar_city": 0.4,
+       "manar_city_lcv": 0.4,
+       "manzah9": 0.4,
        "marsa": 0.4,
        "marsa_express": 0.4,
        "mof_lcv": 0.4,
@@ -624,7 +627,7 @@
      },
      "magasins": {
       "Carrefour": [
-       25,
+       29,
        39
       ]
      },
@@ -635,9 +638,12 @@
        "boumhal": 0.63,
        "boumhal_lcv": 0.63,
        "cun": 0.63,
+       "ennasr_1": 0.62,
        "gabes": 0.64,
        "gabes_lcv": 0.64,
        "gammarth": 0.62,
+       "gazelle": 0.63,
+       "hammamet": 0.64,
        "ksarsaid": 0.62,
        "ksarsaid_lcv": 0.62,
        "lac2": 0.63,
@@ -650,6 +656,7 @@
        "marsa_express": 0.64,
        "mof_lcv": 0.66,
        "mourouj": 0.63,
+       "mrezgua_lcv": 0.64,
        "sahloul": 0.64,
        "sfax_express": 0.66,
        "sfax_lafrane": 0.66,
@@ -696,18 +703,16 @@
      },
      "magasins": {
       "Carrefour": [
-       34,
+       29,
        39
       ]
      },
      "par_mag": {
       "Carrefour": {
        "aouina": 0.83,
-       "ariana": 0.83,
        "borj_cedria": 0.83,
        "boumhal": 0.83,
        "boumhal_lcv": 0.83,
-       "cun": 0.83,
        "djerba": 0.83,
        "ennasr_1": 0.83,
        "gabes": 0.83,
@@ -723,8 +728,6 @@
        "manar_city": 0.83,
        "manar_city_lcv": 0.83,
        "manzah9": 0.83,
-       "marsa": 0.83,
-       "marsa_express": 0.83,
        "midoun_lcv": 0.83,
        "mof_lcv": 0.83,
        "mos": 0.84,
@@ -734,8 +737,7 @@
        "sfax_lafrane": 0.83,
        "sfax_mall": 0.83,
        "sousse_express": 0.84,
-       "sousse_livraison": 0.84,
-       "tunis_livraison": 0.83
+       "sousse_livraison": 0.84
       }
      },
      "non_dispo": [
@@ -1318,7 +1320,7 @@
      },
      "magasins": {
       "Carrefour": [
-       22,
+       21,
        39
       ]
      },
@@ -1329,7 +1331,6 @@
        "boumhal": 0.68,
        "boumhal_lcv": 0.68,
        "cun": 0.68,
-       "gammarth": 0.68,
        "gazelle": 0.68,
        "ksarsaid": 0.68,
        "ksarsaid_lcv": 0.68,
@@ -1448,7 +1449,7 @@
      },
      "magasins": {
       "Carrefour": [
-       26,
+       22,
        39
       ]
      },
@@ -1467,10 +1468,6 @@
        "ksarsaid": 0.44,
        "ksarsaid_lcv": 0.44,
        "lac2": 0.44,
-       "mahdia": 0.44,
-       "mahdia_lcv": 0.44,
-       "manar_city": 0.44,
-       "manar_city_lcv": 0.44,
        "manzah9": 0.44,
        "mof_lcv": 0.44,
        "mos": 0.44,
@@ -1566,12 +1563,12 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-15",
+   "dernier_ok": "2026-11-16",
    "nb": 24,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-15",
+   "dernier_ok": "2026-11-16",
    "nb": 38
   }
  },
