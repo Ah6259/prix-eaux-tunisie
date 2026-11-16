@@ -620,3 +620,6 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   projets-ahmed, robot controle-visibilite : besoin estimé > 1 800 min = défaut au carnet) ; économies PROVISOIRES jusqu'au 30/11
   (alertes immobilier 3 fois par jour, verif-pass un jour sur deux), notées dans `tableau de bord/reglages-provisoires.json` : l'audit
   signale quand les remettre. Ce dépôt est public (gratuit) : rien changé ici.
+- **16/11 (fin de nuit)** : robot controle-matin (documents-tunisie-robot) ROUGE : la routine du matin a dit « poussé » mais son compte
+  rendu n'est jamais arrivé (2e fois après le 12/11). Correction prête (A.13, `consignes des taches/verification-matin-sites.md`) mais
+  SEUL Ahmed peut modifier cette routine (Claude refusé) : geste urgent en tête de `memoire claude/a-faire-sur-le-pc.md`. Ce site : rien.
