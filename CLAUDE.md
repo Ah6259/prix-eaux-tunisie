@@ -616,3 +616,7 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   LISIBLE PAR GITHUB avant d'être envoyé : `python3 "../projets-ahmed/outils communs/envoi-robot/controle_robots.py" --local .` ;
   jamais « : » suivi d'une espace dans un nom d'étape (robot illisible = ne tourne plus, sans rouge). Contrôle commun chaque jour
   (robot controle-visibilite), tous les dépôts le lundi. Ce site-ci : robots tous lisibles, rien changé.
+- **16/11 (nuit, « fais » d'Ahmed)** : AUDIT DES MINUTES GitHub au début de chaque mois (`tableau de bord/audit_minutes.py` de
+  projets-ahmed, robot controle-visibilite : besoin estimé > 1 800 min = défaut au carnet) ; économies PROVISOIRES jusqu'au 30/11
+  (alertes immobilier 3 fois par jour, verif-pass un jour sur deux), notées dans `tableau de bord/reglages-provisoires.json` : l'audit
+  signale quand les remettre. Ce dépôt est public (gratuit) : rien changé ici.
