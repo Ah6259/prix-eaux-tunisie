@@ -601,3 +601,9 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   le bloc des chiffres, toutes les marques dans les courbes, filtres à PLUSIEURS choix avec cases à cocher et un choix par ligne) ;
   chaque amélioration publiée « page seule » (~1 min 40, sans relire les magasins) ; règles générales § 56 + modèle « suivi de prix »
   (projets-ahmed). Ce site-ci n'a pas changé. Sur le PC : `git checkout main` puis `git pull` dans les mêmes dépôts que ci-dessus.
+- **16/11 (journée) — tableau de bord privé : « Dépenses et abonnements »** (https://clicvia.com/tableau-bord/, demande d'Ahmed) : fichier
+  `tableau de bord/depenses.json` de projets-ahmed (abonnements, paiements de la carte, JAMAIS de numéro de carte ni de compte) lu par
+  `collecte.py` ; total par mois / par an (≈ 101 $/mois : Claude 100 $, domaine clicvia.com 10,46 $/an ; ChatGPT ARRÊTÉ ; Google Cloud
+  = paiement UNIQUE de 30 $ le 03/10) ; à côté de la partie « Minutes GitHub ». Ajouter une dépense = une ligne dans depenses.json.
+  Ce site-ci n'a pas changé. Ouverts : robot controle-visibilite rouge (SEO de The Message, autre compte GitHub, depuis le PC) ;
+  Mazraa Market depuis le PC ; consigne du week-end 14-15/11. Sur le PC : `git checkout main` puis `git pull` dans tous les dépôts.

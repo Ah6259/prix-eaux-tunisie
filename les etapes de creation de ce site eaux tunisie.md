@@ -481,3 +481,4 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Toute liste de prix a un menu « Trier » (moins cher / plus cher, prix à l'unité, remises, baisses / hausses, nouveautés) ; sans la donnée = à la fin.
 - Chaque filtre permet plusieurs choix : cases à cocher, un choix par ligne, recherche, « Tout cocher » ; jamais le menu natif à choix multiple.
 - Un chiffre se lit après le choix dont il dépend (la période dans le titre du bloc des chiffres) ; chaque bloc a un nom et le même style.
+- Tableau de bord privé : les dépenses (abonnements, paiements) sont écrites dans UN fichier (depenses.json) et totalisées par mois et par an ; jamais de numéro de carte ni de compte.

@@ -239,3 +239,4 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - **15/11/2026 (nuit)** : rien de changé sur ce site ; MG ajouté au site privé des prix snacks (clicvia.com/tableau-bord/prix-snacks/), avec l'explication « stock non indiqué par MG ».
 - **16/11/2026** : rien de changé sur ce site (dépôt public, robots gratuits) ; audit des minutes GitHub des dépôts privés et compteur sur le tableau de bord privé.
 - **16/11/2026 (nuit)** : rien de changé sur ce site ; site privé des snacks : tri, filtres à plusieurs choix, période dans le bloc des chiffres (règles générales des sites de prix).
+- **16/11/2026 (journée)** : rien de changé sur ce site ; tableau de bord privé : partie « Dépenses et abonnements » (depenses.json de projets-ahmed, jamais de numéro de carte).
