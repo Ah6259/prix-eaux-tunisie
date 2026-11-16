@@ -242,3 +242,4 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - **16/11/2026 (nuit)** : rien de changé sur ce site ; site privé des snacks : tri, filtres à plusieurs choix, période dans le bloc des chiffres (règles générales des sites de prix).
 - **16/11/2026 (journée)** : rien de changé sur ce site ; tableau de bord privé : partie « Dépenses et abonnements » (depenses.json de projets-ahmed, jamais de numéro de carte).
 - **16/11/2026 (soir)** : rien de changé sur ce site ; The Message : réparation SEO prête, à publier depuis le PC.
+- **16/11/2026 (nuit)** : rien de changé sur ce site ; règle commune § 57 (robots lisibles par GitHub, contrôlés avant envoi et chaque jour).

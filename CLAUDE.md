@@ -611,3 +611,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   est PRÊTE (`Le message/a-publier/2026-11-08-pages-google.bundle`) : sur le PC, dire « publie le bundle de The Message ». Ce site-ci : rien.
 - **16/11 (fin)** : tout ce qui attend le PC est dans UNE liste : `memoire claude/a-faire-sur-le-pc.md` de projets-ahmed (montrée par `debut de session.py`) : The Message, Mazraa Market, ANETI, A.13, A.10, Search Console.
 - **16/11 (soir) — Mazraa Market : NON** : Mazraa Market n'est PAS sur Prix des Eaux (décision d'Ahmed du 16/11/2026 : « laisse de côté ») : son rayon « EAU MINERALE », lu depuis le PC le 16/11, n'a que 4 eaux (Safia 0,5 L, Melliti 0,5 L, Tijen 1,5 L pack de 6, Cristaline 1,5 L pack de 6), TOUTES « En Rupture » → rien à afficher (règle § 43 : prix seulement en stock) ; prix douteux (pack de 6 Tijen à 0,675 DT = sans doute le prix d'une bouteille) ; et le site n'est lisible que depuis le PC d'Ahmed (fermé à GitHub). Ne pas le reproposer sauf si Ahmed le redemande ; s'il revient : ajouter « EAU MINERALE » à MAZRAA_RAYONS de tools/mazraa_pc.py (prix snacks) et contrôler le prix des packs.
+- **16/11 (nuit)** : tableau de bord : rythme des minutes = état ACTUEL des robots automatiques (142 -> ~38 min/jour ; test
+  `tableau de bord/test_collecte.py` avant chaque publication). **Règle commune § 57** : un robot (.github/workflows) doit être
+  LISIBLE PAR GITHUB avant d'être envoyé : `python3 "../projets-ahmed/outils communs/envoi-robot/controle_robots.py" --local .` ;
+  jamais « : » suivi d'une espace dans un nom d'étape (robot illisible = ne tourne plus, sans rouge). Contrôle commun chaque jour
+  (robot controle-visibilite), tous les dépôts le lundi. Ce site-ci : robots tous lisibles, rien changé.
