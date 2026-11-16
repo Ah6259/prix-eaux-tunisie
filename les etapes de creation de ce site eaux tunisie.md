@@ -476,3 +476,8 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Un robot lourd va dans un dépôt public si ses données peuvent l'être ; un petit travail quotidien se range dans un robot existant
   (chaque robot lancé coûte au moins 1 minute) ; on ne relance jamais un relevé complet pour publier une simple retouche de page.
 - Le compteur et la date d'épuisement prévue sont sur le tableau de bord privé (clicvia.com/tableau-bord/).
+
+## Listes et filtres d'un site de prix (16/11/2026, règles générales § 56)
+- Toute liste de prix a un menu « Trier » (moins cher / plus cher, prix à l'unité, remises, baisses / hausses, nouveautés) ; sans la donnée = à la fin.
+- Chaque filtre permet plusieurs choix : cases à cocher, un choix par ligne, recherche, « Tout cocher » ; jamais le menu natif à choix multiple.
+- Un chiffre se lit après le choix dont il dépend (la période dans le titre du bloc des chiffres) ; chaque bloc a un nom et le même style.
