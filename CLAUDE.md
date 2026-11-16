@@ -609,3 +609,4 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   Mazraa Market depuis le PC ; consigne du week-end 14-15/11. Sur le PC : `git checkout main` puis `git pull` dans tous les dépôts.
 - **16/11 (soir)** : robot controle-visibilite (projets-ahmed) rouge = 123 défauts SEO de The Message depuis le 09/11 ; la réparation
   est PRÊTE (`Le message/a-publier/2026-11-08-pages-google.bundle`) : sur le PC, dire « publie le bundle de The Message ». Ce site-ci : rien.
+- **16/11 (fin)** : tout ce qui attend le PC est dans UNE liste : `memoire claude/a-faire-sur-le-pc.md` de projets-ahmed (montrée par `debut de session.py`) : The Message, Mazraa Market, ANETI, A.13, A.10, Search Console.
