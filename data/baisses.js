@@ -1,12 +1,12 @@
 window.EAUX_BAISSES = {
- "date": "2026-11-07",
+ "date": "2026-11-17",
  "baisses": [
   {
-   "id": "jektiss",
-   "marque": "Jektiss",
+   "id": "garci",
+   "marque": "Garci",
    "format": "1 L",
    "litres": 1.0,
-   "gazeuse": true,
+   "gazeuse": false,
    "saveur": null,
    "enseigne": "Carrefour",
    "avant": 0.63,
