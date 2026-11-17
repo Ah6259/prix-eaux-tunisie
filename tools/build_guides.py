@@ -72,6 +72,8 @@ def pied(racine):
   <a href="{racine}a-propos/">Comment fonctionne le site ?</a>
   <a href="https://eau.clicvia.com/" rel="noopener">Où trouver de l'eau (sources, majels)</a>
   <a href="https://clicvia.com/" rel="noopener">Tous nos services</a>
+  <a href="https://clicvia.com/confidentialite/" rel="noopener">Confidentialité</a>
+  <a href="https://clicvia.com/conditions/" rel="noopener">Conditions d'utilisation</a>
   {_liens_magasins(racine)}
   <a href="https://t.me/prixeautunisie" rel="noopener">Alertes promo (Telegram)</a></nav>
   <p class="pied-titre">Sources des prix</p>
@@ -469,7 +471,8 @@ def page_a_propos(data, SITE, maj_fr):
         "Statistiques de visite <b>anonymes, sans cookies</b> (GoatCounter).",
         "Votre panier reste dans votre téléphone. Votre vote est compté avec un code anonyme créé par votre navigateur, jamais avec votre nom.",
         "« Signaler un prix » ne demande aucun nom ; la ville est facultative.",
-        "« Votre avis » demande un e-mail seulement pour pouvoir vous répondre."])}
+        "« Votre avis » demande un e-mail seulement pour pouvoir vous répondre.",
+        'Les règles communes à tous nos sites sont en bas de chaque page : <a href="https://clicvia.com/confidentialite/" rel="noopener">Confidentialité</a> et <a href="https://clicvia.com/conditions/" rel="noopener">Conditions d&#39;utilisation</a>.'])}
   {bloc("Mises à jour automatiques", [
         "Les prix sont relus <b>chaque nuit</b> par un robot, et toutes les pages sont refaites avec les nouveaux prix.",
         "Les prix signalés et les votes sont comptés toutes les 2{N}heures, de 8{N}h à 22{N}h.".replace("{N}", N),

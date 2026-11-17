@@ -602,5 +602,17 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
     && prod(w0).prices.Carrefour === cible.p.prices.Carrefour && prod(wx).prices.Carrefour === cible.p.prices.Carrefour);
 }
 
+// 17/11/2026 (liste des « 20 points » d'Ahmed, règles communes § 55 et § 58) : page 404 commune + liens Confidentialité / Conditions
+{ const h404 = existsSync(join(root, "404.html")) ? lire("404.html") : "", j404 = existsSync(join(root, "404.js")) ? lire("404.js") : "";
+  check("page 404 commune à la racine publiée (404.html qui charge /404.js « Recherche de la page »)",
+    /<title>Page introuvable — [^<]+<\/title>/.test(h404) && h404.includes('<script src="/404.js"></script>') && j404.includes("Recherche de la page"));
+  const autres = ["a-propos/index.html", "video/index.html", "prix-eau-carrefour/index.html", "prix-eau-geant/index.html",
+    "prix-eau-monoprix/index.html", "prix-eau-otrity/index.html"].filter(f => existsSync(join(root, f)));
+  const sansLiens = [...toutesPages, ...autres].filter(f => { const pied = (lire(f).match(/<footer[\s\S]*?<\/footer>/) || [""])[0];
+    return !/<a href="https:\/\/clicvia\.com\/confidentialite\/"[^>]*>Confidentialité<\/a>/.test(pied)
+      || !/<a href="https:\/\/clicvia\.com\/conditions\/"[^>]*>Conditions d'utilisation<\/a>/.test(pied); });
+  check(`liens « Confidentialité » et « Conditions d'utilisation » (clicvia.com) dans le pied de chaque page (${toutesPages.length + autres.length} pages)`
+    + (sansLiens.length ? " — manque : " + sansLiens.slice(0, 3).join(", ") : ""), sansLiens.length === 0); }
+
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");
 process.exit(erreurs ? 1 : 0);
