@@ -483,3 +483,12 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - Un chiffre se lit après le choix dont il dépend (la période dans le titre du bloc des chiffres) ; chaque bloc a un nom et le même style.
 - Tableau de bord privé : les dépenses (abonnements, paiements) sont écrites dans UN fichier (depenses.json) et totalisées par mois et par an ; jamais de numéro de carte ni de compte.
 - Avant d'envoyer un robot modifié : vérifier qu'il est lisible par GitHub (`controle_robots.py --local`) ; jamais « : » suivi d'une espace dans un nom d'étape.
+
+## Mode sombre et mode clair lisibles (21/11/2026, capture d'Ahmed : « on ne peut pas lire les mots en mode black »)
+- En mode sombre, la couleur principale d'un site devient claire : un texte BLANC posé dessus devient illisible. Toujours une variable
+  « texte sur la couleur » (blanc en clair, foncé en sombre) ; jamais un fond ou un texte écrit en dur dans un bloc qui a un mode sombre ;
+  jamais `var(--x)` d'une variable que le site ne définit pas (le rond numéroté du paiement était invisible).
+- Contrôle avant chaque mise en ligne : `node "outils visibilite/mode_sombre.mjs" <adresse>` (sombre, seuil 3) et
+  `node "outils visibilite/mode_sombre.mjs" --clair --seuil 4.5 <adresse>` (clair) ; il ouvre les `<details>` et suit les pages payantes.
+  Il fait partie du contrôle complet (point 14). Une couleur trop pâle se fonce d'un cran (même teinte), jamais un nouveau design.
+- Un site trop chargé au téléphone se lit mal : une phrase de moins vaut mieux qu'un paragraphe (Hygiène & Maison, 20/11).

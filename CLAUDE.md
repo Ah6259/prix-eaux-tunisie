@@ -635,3 +635,11 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   `--accent` #0E7FA8 → #0B6E93, `--best` #128A52 → #0F7A48, `--muted` #5A7484 → #506878 ; bouton « Alertes » #229ED9 → #1877AB (survol #13628D) ;
   rouge « PROMO » / « bientôt » #E53935 → #C62828 ; « Stika » choisi (dd-panel) en `--on-accent` (blanc illisible en sombre). Sombre inchangé.
   Contrôle `mode_sombre.mjs --clair --seuil 4.5` : 57 → 0 (accueil + fenêtres .help-pop, 35 marques, guides, magasins, rapports, vidéo) ; sombre : 0. Version 20261121b.
+
+## Update workflow du 21/11/2026 (session en ligne, téléphone)
+- Faits aujourd'hui sur les sites d'Ahmed : mode sombre ET clair lisibles sur 13 sites (règle commune § 65, outil `mode_sombre.mjs` avec
+  `--clair --seuil 4.5`, point 14 du contrôle complet) ; Prix Hygiène & Maison allégé + turquoise (logo v3, aperçu og-image-v4, partage `?v4`) ;
+  outil vidéo réparé (Code de la route, Points d'eau) ; motif du paiement « nom + téléphone » gardé pour les Pass à code donné APRÈS paiement
+  (décision d'Ahmed, § 11.10.9).
+- Contrôle complet du 21/11 sur ce site : seule anomalie = **pas d'adresse arabe séparée** (`ar/`, § 8 point 9) — proposé à Ahmed (A).
+- Sur le PC : `git checkout main` puis `git pull` (ici, projets-ahmed et les 13 dépôts touchés).
