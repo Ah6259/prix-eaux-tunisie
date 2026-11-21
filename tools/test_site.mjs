@@ -268,7 +268,7 @@ const toutesPages = ["index.html", ...guides, ...marques, ...rapports];
 const sur = (desc, test) => { const ko = toutesPages.filter(f => !test(lire(f), f));
   check(`${desc} (${toutesPages.length} pages)${ko.length ? " — manque : " + ko.slice(0, 3).join(", ") : ""}`, ko.length === 0); };
 sur("meta noai, noimageai", s => s.includes('<meta name="robots" content="noai, noimageai">'));
-sur("pas de traduction automatique (translate=\"no\" + meta google notranslate)", s => /<html lang="fr" translate="no">/.test(s) && s.includes('<meta name="google" content="notranslate">'));
+sur("pas de traduction automatique (translate=\"no\" + meta google notranslate)", s => /<html lang="fr" translate="no"[ >]/.test(s) && s.includes('<meta name="google" content="notranslate">'));
 sur("referrer strict-origin-when-cross-origin", s => s.includes('<meta name="referrer" content="strict-origin-when-cross-origin">'));
 sur("script anti-copie protection.js chargé", s => /<script src="(\.\.\/)*protection\.js\?v=/.test(s));
 sur("CSP présente, sans script en ligne permis", s => /http-equiv="Content-Security-Policy" content="[^"]*script-src 'self'/.test(s) && !/script-src[^;]*unsafe/.test(s));
@@ -563,12 +563,13 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
     ["gratuit, sans inscription", true, /gratuit<\/b>, sans inscription/],
     ["vos données", true, /<h2>Vos données<\/h2>/],
     ["mises à jour automatiques", true, /<h2>Mises à jour automatiques<\/h2>/],
-    ["site indépendant", true, /<h2>Site indépendant<\/h2>[\s\S]{0,80}non officiel/]];
+    ["site indépendant", true, /<h2>Site indépendant<\/h2>[\s\S]{0,80}non officiel/],
+    ["une adresse par langue (ar/)", ex("ar/index.html") && /class="langue-btn"/.test(acc), /Une adresse par langue[\s\S]{0,120}en arabe \(dans ar\/\)/]];
   const manque = FONCTIONS.filter(([, sur, re]) => sur && !re.test(ap)).map(([n]) => n);
   check(`page « Comment fonctionne le site ? » à jour : chaque fonction du site y est expliquée (${FONCTIONS.length} fonctions)` + (manque.length ? " — manque : " + manque.join(", ") : ""),
     !!ap && manque.length === 0);
-  check("a-propos/ : titre « Comment fonctionne le site ? » + arabe « كيف يعمل الموقع؟ », indexable, dans le plan du site, refaite chaque nuit par build_guides.py",
-    /<h1>Comment fonctionne le site \?<\/h1>/.test(ap) && ap.includes("كيف يعمل الموقع؟") && !/noindex/.test(ap)
+  check("a-propos/ : titre « Comment fonctionne le site ? » (et ar/a-propos/ « كيف يعمل الموقع؟ »), indexable, dans le plan du site, refaite chaque nuit par build_guides.py",
+    /<h1>Comment fonctionne le site \?<\/h1>/.test(ap) && existsSync(join(root, "ar/a-propos/index.html")) && /<h1>كيف يعمل الموقع؟<\/h1>/.test(lire("ar/a-propos/index.html")) && !/noindex/.test(ap)
     && lire("sitemap.xml").includes("https://prix-eau.clicvia.com/a-propos/") && /def page_a_propos/.test(lire("tools/build_guides.py")));
   const sansLien = ["prix-stika", "quelle-eau", "prix-eau-carrefour", "prix-eau-geant", "rapports", "video", "marque/safia"]
     .filter(c => !/href="(\.\.\/)+a-propos\/"/.test(lire(c + "/index.html")));
@@ -600,6 +601,116 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
     !!sel && !wa.document.getElementById("mon-carrefour-ligne").hidden && sel.options.length === 3 && sel.value === "mag_a"
     && prod(wa).prices.Carrefour === 0.777 && prod(wb).prices.Carrefour === undefined && (prod(wb).non_dispo || []).includes("Carrefour")
     && prod(w0).prices.Carrefour === cible.p.prices.Carrefour && prod(wx).prices.Carrefour === cible.p.prices.Carrefour);
+}
+
+
+// ---- UNE ADRESSE PAR LANGUE (21/11/2026, demande d'Ahmed ; règle commune § 8 point 9) : chaque page publique existe en français à son
+//      adresse et en arabe dans ar/<même chemin> (tools/langues.py), chacune dans UNE langue, qui se citent (hreflang fr / ar / x-default),
+//      avec son canonical, son bouton de langue (vrai lien vers l'autre adresse), des liens qui marchent, des titres arabes uniques.
+{
+  const SITE = "https://prix-eau.clicvia.com/";
+  const frPages = ["index.html", ...guides, "prix-eau-carrefour/index.html", "prix-eau-geant/index.html", "a-propos/index.html", ...marques, ...rapports]
+    .filter(f => existsSync(join(root, f)));
+  const chemin = f => f.replace(/index\.html$/, "");
+  const manquantes = frPages.filter(f => !existsSync(join(root, "ar/" + f)));
+  check(`une adresse par langue : chaque page française a sa page arabe dans ar/ (${frPages.length} pages)` + (manquantes.length ? " — manque : " + manquantes.slice(0, 4).join(", ") : ""),
+    frPages.length >= 45 && !manquantes.length);
+  const arPages = frPages.filter(f => existsSync(join(root, "ar/" + f))).map(f => "ar/" + f);
+  const STOP = /(?<![\p{L}'’])(le|la|les|des|du|de|et|est|pour|avec|dans|sur|une|un|aux|au|par|prix|eau|eaux|bouteilles?|chez|aujourd'hui|voir|votre|vous|nous|plus|moins|marques?|source|stika)(?![\p{L}'’])/iu;
+  const texte = (h, lang) => {
+    h = h.replace(/<head>[\s\S]*?<\/head>/, "").replace(/<(script|style)\b[\s\S]*?<\/\1>/g, " ").replace(/<a class="langue-btn"[\s\S]*?<\/a>/g, " ");
+    if (lang === "ar") h = h.replace(/<bdi>[\s\S]*?<\/bdi>/g, " ").replace(/<select name="magasin"[\s\S]*?<\/select>/g, " ");
+    else h = h.replace(/<p class="verset-ligne[\s\S]*?<\/p>/g, " ");          // seule exception voulue : le verset sur la photo du bandeau
+    return h.replace(/<[^>]+>/g, " ").replace(/&[a-z]+;|&#\d+;/g, " ");
+  };
+  const arabeSurFr = frPages.filter(f => /[؀-ۿ]/.test(texte(lire(f), "fr")));
+  check("pages françaises : aucun texte arabe affiché (seuls le bouton « العربية » et le verset du bandeau)" + (arabeSurFr.length ? " — encore : " + arabeSurFr.slice(0, 4).join(", ") : ""), !arabeSurFr.length);
+  const frSurAr = arPages.map(f => { const m = texte(lire(f), "ar").match(STOP); return m ? `${f} (« ${m[0]} »)` : ""; }).filter(Boolean);
+  check("pages arabes : aucun mot français affiché (noms de marques, magasins et lieux isolés permis)" + (frSurAr.length ? " — encore : " + frSurAr.slice(0, 4).join(", ") : ""), !frSurAr.length);
+  const tete = (f, lang) => {
+    const h = lire(f), c = chemin(f.replace(/^ar\//, "")), fr = SITE + c, ar = SITE + "ar/" + c;
+    const ok = h.includes(`<link rel="alternate" hreflang="fr" href="${fr}">`) && h.includes(`<link rel="alternate" hreflang="ar" href="${ar}">`)
+      && h.includes(`<link rel="alternate" hreflang="x-default" href="${fr}">`) && h.includes(`<link rel="canonical" href="${lang === "ar" ? ar : fr}">`)
+      && h.includes(`<meta property="og:url" content="${lang === "ar" ? ar : fr}">`) && (h.match(/rel="alternate" hreflang=/g) || []).length === 3
+      && h.includes(`<meta property="og:locale" content="${lang === "ar" ? "ar_AR" : "fr_FR"}">`)
+      && (lang === "ar" ? /<html lang="ar" dir="rtl" translate="no"[^>]* data-langue-fixe="ar"/.test(h) : /<html lang="fr" translate="no"[^>]* data-langue-fixe="fr"/.test(h));
+    return ok ? "" : f;
+  };
+  const tetesKo = [...frPages.map(f => tete(f, "fr")), ...arPages.map(f => tete(f, "ar"))].filter(Boolean);
+  check("hreflang fr / ar / x-default réciproques, canonical et og:url propres à chaque langue, og:locale, <html lang / dir> (toutes les pages)"
+    + (tetesKo.length ? " — à revoir : " + tetesKo.slice(0, 4).join(", ") : ""), !tetesKo.length);
+  // bouton de langue : un vrai lien vers l'autre adresse de la MÊME page
+  const resoudre = (f, href) => { const base = f.split("/").slice(0, -1); for (const x of href.split(/[?#]/)[0].split("/")) { if (!x || x === ".") continue; if (x === "..") base.pop(); else base.push(x); }
+    const p = base.join("/"); return href.split(/[?#]/)[0].endsWith("/") || href === "" ? (p ? p + "/" : "") + "index.html" : p; };
+  const boutonsKo = [...frPages, ...arPages].filter(f => { const m = lire(f).match(/<a class="langue-btn" href="([^"]*)" hreflang="(fr|ar)"/);
+    return !m || resoudre(f, m[1]) !== (f.startsWith("ar/") ? f.slice(3) : "ar/" + f) || m[2] !== (f.startsWith("ar/") ? "fr" : "ar"); });
+  check("bouton de langue de chaque page = lien vers la même page dans l'autre langue" + (boutonsKo.length ? " — à revoir : " + boutonsKo.slice(0, 4).join(", ") : ""), !boutonsKo.length);
+  // liens et fichiers des pages arabes : tout ce qui est relatif existe (pages restées dans ar/, fichiers pris à la racine)
+  const morts = [];
+  for (const f of arPages) {
+    const h = lire(f).replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, "");
+    for (const m of h.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
+      const u = m[1];
+      if (/^([a-z]+:|\/\/|#|\?|\/)/i.test(u)) continue;
+      if (!existsSync(join(root, resoudre(f, u)))) morts.push(`${f} → ${u}`);
+    }
+  }
+  check("pages arabes : chaque lien et chaque fichier relatif existe (pages dans ar/, style, scripts, images à la racine)" + (morts.length ? " — morts : " + morts.slice(0, 4).join(", ") : ""), !morts.length);
+  const titresAr = arPages.filter(f => !f.includes("prix-eau-")).map(f => (lire(f).match(/<title>([^<]*)<\/title>/) || [, ""])[1]);
+  const descAr = arPages.map(f => (lire(f).match(/<meta name="description" content="([^"]*)"/) || [, ""])[1]);
+  check("pages arabes : titres en arabe, uniques, de 10 à 70 caractères ; descriptions de 40 à 170",
+    titresAr.every(t => /[؀-ۿ]/.test(t) && t.length >= 10 && t.length <= 70) && new Set(titresAr).size === titresAr.length
+    && descAr.every(d => /[؀-ۿ]/.test(d) && d.length >= 40 && d.length <= 170));
+  const jsonKo = arPages.filter(f => [...lire(f).matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].some(m => { try { JSON.parse(m[1]); return false; } catch { return true; } }));
+  const jsonFrAr = frPages.filter(f => [...lire(f).matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].some(m => /[؀-ۿ]/.test(m[1])));
+  check("données Google (JSON-LD) : lisibles sur les pages arabes, sans arabe sur les pages françaises", !jsonKo.length && !jsonFrAr.length);
+  const sm = lire("sitemap.xml");
+  check("plan du site : chaque page française ET sa page arabe (ar/…), pas les pages retirées",
+    frPages.every(f => sm.includes(`<loc>${SITE}${chemin(f)}</loc>`) && sm.includes(`<loc>${SITE}ar/${chemin(f)}</loc>`)) && !/ar\/prix-eau-(monoprix|otrity)/.test(sm)
+    && !existsSync(join(root, "ar/prix-eau-monoprix")) && !existsSync(join(root, "ar/video")));
+  check("pages retirées (Monoprix, Otrity) et vidéo : une seule adresse, sans bouton de langue ni hreflang",
+    ["prix-eau-monoprix/index.html", "prix-eau-otrity/index.html", "video/index.html"].every(f => !/langue-btn|hreflang|data-langue-fixe/.test(lire(f))));
+  check("formulaire « Signaler un prix » de la page arabe : valeurs envoyées en français (lues par tools/signalements.py), texte en arabe",
+    /<option value="1,5 L" selected>1,5 لتر<\/option>/.test(lire("ar/index.html")) && /<option value="une stika">ستيكة<\/option>/.test(lire("ar/index.html"))
+    && /<option value="Plate">عادي<\/option>/.test(lire("ar/index.html")) && /<option value="Autre">مغازة أخرى<\/option>/.test(lire("ar/index.html")));
+
+  // accueil arabe dans jsdom : app.js écrit le classement, la carte « الأرخص اليوم » et les cartes EN ARABE, images prises à la racine
+  const htmlAr = lire("ar/index.html").replace(/<script[^>]*src="[^"]*"[^>]*><\/script>/g, "");
+  const dAr = new JSDOM(htmlAr, { url: SITE + "ar/", runScripts: "outside-only", pretendToBeVisual: true });
+  dAr.window.open = () => null; dAr.window.fetch = async () => ({ ok: true, json: async () => ({}), text: async () => "" });
+  for (const f of ["data/eaux.js", "data/composition.js", "data/historique.js", "data/baisses.js", "data/votes.js", "data/signalements.js", "protection.js", "assets/son.js", "assets/textes-ar.js", "app.js"])
+    if (existsSync(join(root, f))) { try { dAr.window.eval(lire(f)); } catch (e) { check(`ar/ : chargement de ${f} (${e.message})`, false); } }
+  const da = dAr.window.document;
+  const corpsAr = [...da.body.querySelectorAll("*")].filter(e => !e.children.length && !e.closest("bdi, select, script, style, .langue-btn")).map(e => e.textContent).join(" ");
+  const motFr = corpsAr.match(STOP);
+  check("accueil arabe (jsdom) : classement, carte « الأرخص اليوم », cartes des marques et pied de page écrits par app.js en arabe" + (motFr ? ` — mot français : « ${motFr[0]} »` : ""),
+    /الأرخص اليوم/.test(da.getElementById("top-reponse").textContent) && /علامة/.test(da.getElementById("stats").textContent)
+    && da.querySelectorAll("#grid .card").length > 5 && /سعر/.test(da.getElementById("grid").textContent) && !motFr && /أسعار تقريبية/.test(da.getElementById("foot").textContent));
+  const imgs = [...da.querySelectorAll("#grid img, #top-reponse img")].map(i => i.getAttribute("src")).filter(Boolean);
+  check("accueil arabe : photos des bouteilles et logos des magasins pris à la racine (../assets/…)", imgs.length > 5 && imgs.every(u => u.startsWith("../") && existsSync(join(root, u.slice(3).split("?")[0]))));
+  // protection.js : renvois de langue (crochet window.allerVers)
+  const essai = (page, url, { referrer = "", garde = "", ua = "" } = {}) => {
+    const h = lire(page).replace(/<script[^>]*src="[^"]*"[^>]*><\/script>/g, "");
+    const d = new JSDOM(h, { url, referrer: referrer || undefined, runScripts: "outside-only", pretendToBeVisual: true });
+    if (ua) Object.defineProperty(d.window.navigator, "userAgent", { value: ua });
+    let vers = null; d.window.allerVers = u => { vers = u; };
+    if (garde) d.window.localStorage.setItem("langue", garde);
+    d.window.eval(lire("protection.js"));
+    return { vers, w: d.window };
+  };
+  check("ancien lien « ?lang=ar » sur une page française → page arabe (mêmes autres paramètres, même ancre)", essai("index.html", SITE + "?lang=ar&x=1#avis").vers === "ar/?x=1#avis"
+    && essai("marque/safia/index.html", SITE + "marque/safia/?lang=ar").vers === "../../ar/marque/safia/");
+  check("langue gardée : renvoi seulement en venant d'une page du site, jamais depuis Google, jamais pour un robot",
+    essai("index.html", SITE, { referrer: SITE + "ar/prix-stika/", garde: "ar" }).vers === "ar/"
+    && essai("index.html", SITE, { referrer: "https://www.google.com/", garde: "ar" }).vers === null
+    && essai("index.html", SITE, { garde: "ar" }).vers === null
+    && essai("index.html", SITE, { referrer: SITE + "ar/", garde: "ar", ua: "Mozilla/5.0 (compatible; Googlebot/2.1)" }).vers === null
+    && essai("ar/index.html", SITE + "ar/", { referrer: SITE, garde: "ar" }).vers === null);
+  { const { w } = essai("ar/prix-stika/index.html", SITE + "ar/prix-stika/?x=2#top"); let vers = null; w.allerVers = u => { vers = u; };
+    w.document.querySelector("a.langue-btn").dispatchEvent(new w.MouseEvent("click", { bubbles: true, cancelable: true }));
+    check("bouton de langue : ouvre l'autre adresse avec les mêmes paramètres et la même ancre, et retient le choix", vers === "../../prix-stika/?x=2#top" && w.localStorage.getItem("langue") === "fr"); }
+  check("robot de nuit : enregistre aussi les pages arabes (ar/) ; langues.py ne refait jamais une page arabe sans sa page française",
+    /git add [^\n]*\bar\//.test(lire(".github/workflows/maj-prix.yml")) && /def nettoyer/.test(lire("tools/langues.py")) && /LG\.ecrire_tout/.test(lire("tools/build_pages.py")));
 }
 
 // 17/11/2026 (liste des « 20 points » d'Ahmed, règles communes § 55 et § 58) : page 404 commune + liens Confidentialité / Conditions

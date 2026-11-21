@@ -1,3 +1,41 @@
+/* UNE ADRESSE PAR LANGUE (21/11/2026, règle commune § 8 point 9 ; méthode de Code de la route et d'Alerte Concours) : chaque page existe
+   en français (son adresse) et en arabe (ar/…), écrites par tools/langues.py. Sur ces pages (<html data-langue-fixe>), la langue est
+   celle de l'ADRESSE ; le bouton de langue (a.langue-btn, vrai lien) ouvre l'autre adresse en gardant les paramètres et l'ancre, et
+   retient le choix. Un ancien lien « ?lang=ar » mène à la page arabe ; un visiteur VENU D'UNE PAGE DU SITE qui avait choisi l'autre
+   langue est renvoyé vers elle. Jamais d'après la langue du téléphone seule, jamais pour un robot (Google, aperçus de partage,
+   navigateur piloté) ni dans un cadre. window.allerVers = crochet des tests. */
+(function () {
+  var h = document.documentElement, FIXE = h.getAttribute("data-langue-fixe"), autre = h.getAttribute("data-autre-langue");
+  function lire() { try { var l = localStorage.getItem("langue"); return l === "fr" || l === "ar" ? l : ""; } catch (e) { return ""; } }
+  function garder(l) { try { localStorage.setItem("langue", l); } catch (e) {} }
+  function adresse() {
+    var q = "";
+    try { var p = new URLSearchParams(location.search); p["delete"]("lang"); q = p.toString(); } catch (e) {}
+    return autre + (q ? "?" + q : "") + location.hash;
+  }
+  function aller(u) { if (window.allerVers) return window.allerVers(u); try { location.replace(u); } catch (e) {} }
+  var demande = "";
+  try { demande = new URLSearchParams(location.search).get("lang") || ""; } catch (e) {}
+  if (!FIXE) {                                   // page à une seule adresse (video/) : ?lang=ar met ses textes en arabe
+    if (demande === "ar") h.setAttribute("lang", "ar");
+    return;
+  }
+  var robot = false;
+  try { robot = navigator.webdriver === true || window.top !== window.self
+    || /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|preview|lighthouse|headless/i.test(navigator.userAgent || ""); } catch (e) { robot = true; }
+  var duSite = (document.referrer || "").indexOf(location.origin + "/") === 0;
+  var voulue = (demande === "fr" || demande === "ar") ? demande : (duSite ? lire() : "");
+  if (autre && voulue && voulue !== FIXE && !robot) { aller(adresse()); return; }
+  document.addEventListener("click", function (e) {
+    var el = e.target && (e.target.nodeType === 1 ? e.target : e.target.parentElement);
+    var a = el && el.closest && el.closest("a.langue-btn");
+    if (!a || !autre) return;
+    e.preventDefault();
+    garder(FIXE === "ar" ? "fr" : "ar");
+    aller(adresse());
+  });
+})();
+
 /* Protection légère contre la copie — commune à toutes les pages (consigne d'Ahmed, 05/10/2026)
    - photos : pas de clic droit ni de glisser-déposer ;
    - contenus de valeur (prix, classements, compositions) : non sélectionnables (style.css) et, si on les copie
@@ -24,8 +62,8 @@
     if (!sel || sel.isCollapsed || !e.clipboardData) return;
     var n = element(sel.anchorNode);
     if (!n || n.closest(COPIABLE) || !n.closest(PROTEGE)) return;
-    e.clipboardData.setData("text/plain", sel.toString() + "\n\nSource : " + location.href.split("?")[0].split("#")[0] +
-      " — © tous droits réservés");
+    e.clipboardData.setData("text/plain", sel.toString() + (document.documentElement.lang === "ar" ? "\n\nالمصدر: " : "\n\nSource : ") + location.href.split("?")[0].split("#")[0] +
+      (document.documentElement.lang === "ar" ? " — © جميع الحقوق محفوظة" : " — © tous droits réservés"));
     e.preventDefault();
   });
 
@@ -64,12 +102,14 @@ document.addEventListener("click", function (e) {
   var b = el && el.closest("button[data-partage-rapport]");
   if (!b) return;
   var lien = b.getAttribute("data-partage-rapport"), titre = b.getAttribute("data-titre") || document.title;
-  var texte = titre + "\nRapport du mois de Prix des Eaux de Tunisie : ";   // AUCUNE adresse ici : Facebook montrerait l'accueil
+  var ar = document.documentElement.lang === "ar";
+  var texte = titre + (ar ? "\nتقرير الشهر من أسعار الماء في تونس: " : "\nRapport du mois de Prix des Eaux de Tunisie : ");   // AUCUNE adresse ici : Facebook montrerait l'accueil
   try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "partage" + location.pathname, title: "Partage", event: true }); } catch (err) {}
   if (navigator.share) { navigator.share({ title: titre, text: texte, url: lien })["catch"](function () {}); return; }
   var fini = function () { b.classList.add("copie-ok"); setTimeout(function () { b.classList.remove("copie-ok"); }, 4000); };
-  try { navigator.clipboard.writeText(texte + lien).then(fini, function () { window.prompt("Copiez le lien :", lien); }); }
-  catch (err) { window.prompt("Copiez le lien :", lien); }
+  var copiez = ar ? "انسخ الرابط:" : "Copiez le lien :";
+  try { navigator.clipboard.writeText(texte + lien).then(fini, function () { window.prompt(copiez, lien); }); }
+  catch (err) { window.prompt(copiez, lien); }
 });
 
 /* Bouton « Partager » de l'en-tête, sur TOUTES les pages (règle commune à tous les sites, oubli corrigé le 09/10/2026) :
@@ -80,7 +120,8 @@ document.addEventListener("click", function (e) {
     if (!h || h.querySelector(".partager")) return;
     var b = document.createElement("button");
     b.type = "button"; b.className = "partager"; b.setAttribute("data-partager-video", "");
-    b.setAttribute("aria-label", "Partager ce site"); b.title = "Partager";
+    var ar = document.documentElement.lang === "ar";
+    b.setAttribute("aria-label", ar ? "شارك هذا الموقع" : "Partager ce site"); b.title = ar ? "شارك" : "Partager";
     b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
     h.appendChild(b);
   }
@@ -180,7 +221,7 @@ window.VIDEO_SITE = {"base": BASE_SITE, "defaut": "fr", "nom": {"fr": "Prix des 
     }
     // lien discret « Vidéo de présentation » en bas de l'accueil et de À propos -> la page vidéo
     var p = location.pathname.replace(/index\.html$/, "");
-    if (p === S.base || p === S.base + "a-propos/") {
+    if (p === S.base || p === S.base + "a-propos/" || p === S.base + "ar/" || p === S.base + "ar/a-propos/") {
       var b = document.getElementById("lien-video");
       if (!b) {
         b = document.createElement("p"); b.id = "lien-video"; b.className = "lien-video"; b.appendChild(document.createElement("a"));

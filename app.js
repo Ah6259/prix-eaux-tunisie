@@ -1,4 +1,12 @@
 const DATA = window.EAUX_DATA;
+/* UNE ADRESSE PAR LANGUE (21/11/2026) : cette page existe en français (/) et en arabe (/ar/, fabriquée par tools/langues.py).
+   La langue est celle de la page (<html lang>) ; T(fr, ar) choisit le texte ; RACINE = dossier des fichiers (« ../ » sur la page arabe). */
+const AR = document.documentElement.lang === "ar";
+const T = (fr, ar) => AR ? ar : fr;
+const RACINE = document.documentElement.getAttribute("data-racine") || "";
+const LOC = AR ? "ar-TN-u-nu-latn" : "fr-FR";               // dates en arabe de Tunisie (جانفي، فيفري…), chiffres latins
+const TXT_AR = window.TEXTES_AR || { notes: {}, cats: {} };   // assets/textes-ar.js (page arabe seulement)
+const isoAr = s => AR ? "\u2068" + s + "\u2069" : s;          // nom latin isolé dans une phrase arabe
 /* MON CARREFOUR (07/11/2026, choix d'Ahmed) : le stock change d'un magasin Carrefour à l'autre (Aqualine 1,5 L vendue dans 21 magasins
    sur 39, pas dans celui d'Ahmed). Le visiteur choisit SON magasin une fois (gardé dans le téléphone, clé « mon-carrefour ») : les prix
    Carrefour deviennent ceux de ce magasin ; une eau qu'il n'a pas en stock = « non disponible » chez Carrefour. Données : par_mag du robot
@@ -32,7 +40,8 @@ monCarrefourChoix();             // app.js est chargé en bas de la page : la li
 // choix d'Ahmed du 03/10/2026).
 const COMMANDE_OUVERTE = false;
 if (!COMMANDE_OUVERTE) document.documentElement.classList.add("commande-fermee");
-const fmtDT = v => v.toLocaleString("fr-FR",{minimumFractionDigits:3, maximumFractionDigits:3}) + " DT";
+const fmtDT = v => v.toLocaleString("fr-FR",{minimumFractionDigits:3, maximumFractionDigits:3}) + T(" DT", " د.ت");
+const litresTxt = l => String(l).replace(".", ",") + T(" L", " لتر");
 
 /* helpers ---------------------------------------------------------------- */
 const plain = p => !p.flavor;
@@ -40,11 +49,11 @@ const plain = p => !p.flavor;
 const tailleStika = liters => (liters <= 0.75 ? 12 : 6);
 const GRAND_FORMAT = 2.5;   // au-delà : bidons et bonbonnes, pas de stika
 const FORMATS = [
-  { id: "petit",    nom: "≤ 0,75 L", test: p => p.liters <= 0.75 },
-  { id: "1",        nom: "1 L",      test: p => p.liters > 0.75 && p.liters < 1.25 },
-  { id: "1.5",      nom: "1,5 L",    test: p => p.liters >= 1.25 && p.liters < 1.6 },
-  { id: "2",        nom: "2 L",      test: p => p.liters >= 1.6 && p.liters <= GRAND_FORMAT },
-  { id: "bonbonne", nom: "≥ 5 L",    test: p => p.liters > GRAND_FORMAT },
+  { id: "petit",    nom: T("≤ 0,75 L", "≤ 0,75 لتر"), test: p => p.liters <= 0.75 },
+  { id: "1",        nom: T("1 L", "1 لتر"),      test: p => p.liters > 0.75 && p.liters < 1.25 },
+  { id: "1.5",      nom: T("1,5 L", "1,5 لتر"),    test: p => p.liters >= 1.25 && p.liters < 1.6 },
+  { id: "2",        nom: T("2 L", "2 لتر"),      test: p => p.liters >= 1.6 && p.liters <= GRAND_FORMAT },
+  { id: "bonbonne", nom: T("≥ 5 L", "≥ 5 لتر"),    test: p => p.liters > GRAND_FORMAT },
 ];
 function minPrice(prod){ return Math.min(...Object.values(prod.prices)); }
 function bestStores(prod){
@@ -70,29 +79,30 @@ function compoBlock(b){
   if (!entries) return "";
   const g = COMPO.guide;
   const ROWS = [
-    ["tds", "Résidu sec (TDS)", "mg/L"], ["ca", "Calcium", "mg/L"], ["mg", "Magnésium", "mg/L"],
-    ["na", "Sodium", "mg/L"], ["k", "Potassium", "mg/L"], ["hco3", "Bicarbonates", "mg/L"],
-    ["so4", "Sulfates", "mg/L"], ["cl", "Chlorures", "mg/L"], ["no3", "Nitrates", "mg/L"],
-    ["f", "Fluorures", "mg/L"], ["ph", "pH", ""],
+    ["tds", T("Résidu sec (TDS)", "البقايا الجافة (TDS)")], ["ca", T("Calcium", "الكالسيوم")], ["mg", T("Magnésium", "المغنيزيوم")],
+    ["na", T("Sodium", "الصوديوم")], ["k", T("Potassium", "البوتاسيوم")], ["hco3", T("Bicarbonates", "البيكربونات")],
+    ["so4", T("Sulfates", "الكبريتات")], ["cl", T("Chlorures", "الكلوريد")], ["no3", T("Nitrates", "النترات")],
+    ["f", T("Fluorures", "الفلوريد")], ["ph", T("pH", "درجة الحموضة pH"), ""],
   ];
   const over = (k, v) => k === "ph"
     ? (v < g.ph[0] || v > g.ph[1])
     : (g[k] != null && v > g[k]);
   const fmtv = v => v.toLocaleString("fr-FR", { maximumFractionDigits: 2 });
   const head = entries.length > 1
-    ? `<tr><th></th>${entries.map(e => `<th>${e.src}</th>`).join("")}</tr>`
+    ? `<tr><th></th>${entries.map(e => `<th><bdi>${e.src}</bdi></th>`).join("")}</tr>`
     : "";
-  const rows = ROWS.map(([k, label, unit]) =>
+  const rows = ROWS.map(([k, label, unit = T("mg/L", "مغ/لتر")]) =>
     `<tr><td>${label}${unit ? ` <small>${unit}</small>` : ""}</td>` +
     entries.map(e => `<td class="cv${over(k, e[k]) ? " over" : ""}">${fmtv(e[k])}</td>`).join("") +
     `</tr>`).join("");
-  const cats = [...new Set(entries.map(e => COMPO.cats[e.cat]))].join(" · ");
-  const srcs = entries.length === 1 ? ` — ${entries[0].src}` : "";
+  const cats = [...new Set(entries.map(e => (AR ? TXT_AR.cats : COMPO.cats)[e.cat] || COMPO.cats[e.cat]))].join(" · ");
+  const srcs = entries.length === 1 ? ` — <bdi>${entries[0].src}</bdi>` : "";
   return `<details class="compo">
-    <summary>Composition <small>· résidu sec ${entries.map(e => fmtv(e.tds)).join(" / ")} mg/L</small></summary>
+    <summary>${T("Composition", "التركيبة")} <small>· ${T("résidu sec", "البقايا الجافة")} ${entries.map(e => fmtv(e.tds)).join(" / ")} ${T("mg/L", "مغ/لتر")}</small></summary>
     <table class="compo-table">${head}${rows}</table>
-    <p class="compo-src">${cats}${srcs} · valeurs <span class="over-demo">surlignées</span> au-dessus du
-    repère OMS/UE · source : <a href="${COMPO.credit.url}" target="_blank" rel="noopener">${COMPO.credit.name}</a></p>
+    <p class="compo-src">${cats}${srcs} · ${T(`valeurs <span class="over-demo">surlignées</span> au-dessus du
+    repère OMS/UE · source : <a href="${COMPO.credit.url}" target="_blank" rel="noopener">${COMPO.credit.name}</a>`,
+    `القيم <span class="over-demo">الملوّنة</span> أعلى من مرجع منظمة الصحة العالمية / الاتحاد الأوروبي · المصدر: <a href="${COMPO.credit.url}" target="_blank" rel="noopener">ديوان المياه المعدنية (ماي 2024)</a>`)}</p>
   </details>`;
 }
 
@@ -107,8 +117,8 @@ const NOMS_SRC = { carrefour: "Carrefour", geant: "Géant" };
 // logos officiels des enseignes (assets/logos/), affichés devant le nom du magasin.
 // Géant : le logo est le mot « Géant » lui-même, il remplace le texte.
 const LOGOS = {
-  "Carrefour": { src: "assets/logos/carrefour.png" },
-  "Géant":     { src: "assets/logos/geant.png", mot: true },
+  "Carrefour": { src: RACINE + "assets/logos/carrefour.png" },
+  "Géant":     { src: RACINE + "assets/logos/geant.png", mot: true },
 };
 function enseigne(nom){
   const l = LOGOS[nom];
@@ -125,9 +135,9 @@ document.addEventListener("error", e => {
     else t.remove();
   }
 }, true);
-const enseignes = liste => liste.map(enseigne).join(", ");
+const enseignes = liste => liste.map(enseigne).join(T(", ", "، "));
 const STATUT = DATA.statut_sources || {};
-const dateCourte = d => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+const dateCourte = d => new Date(d + "T12:00:00").toLocaleDateString(LOC, { day: "numeric", month: AR ? "long" : "short" });
 const joursDepuis = d => Math.floor((Date.now() - new Date(d + "T12:00:00")) / 864e5);
 const enseignesAvecPrix = new Set(DATA.brands.flatMap(b => b.products.flatMap(p => Object.keys(p.prices))));
 const derniersOk = Object.entries(STATUT)
@@ -140,16 +150,18 @@ const majCourte = dateCourte(derniereMaj);
   if (!el) return;
   let msg = "";
   if (!enseignesAvecPrix.size) {
-    msg = "⚠️ Les prix sont momentanément indisponibles : les sites des magasins n'ont pas pu être lus. Réessayez plus tard.";
+    msg = T("⚠️ Les prix sont momentanément indisponibles : les sites des magasins n'ont pas pu être lus. Réessayez plus tard.",
+            "⚠️ الأسعار غير متوفرة مؤقتًا: لم نتمكّن من قراءة مواقع المغازات. أعد المحاولة لاحقًا.");
   } else if (joursDepuis(derniereMaj) >= 3) {
-    msg = `⚠️ Les prix n'ont pas pu être mis à jour depuis le ${majCourte} : ils sont peut-être dépassés.`;
+    msg = T(`⚠️ Les prix n'ont pas pu être mis à jour depuis le ${majCourte} : ils sont peut-être dépassés.`,
+            `⚠️ لم نتمكّن من تحديث الأسعار منذ ${majCourte}: قد تكون قديمة.`);
   } else {
     const enRetard = Object.entries(STATUT)
       // en retard = dernier relevé réussi il y a 2 jours ou plus (1 jour est normal : relevé la nuit)
       .filter(([k, s]) => s && s.dernier_ok && !s.manuel && joursDepuis(s.dernier_ok) >= 2 && enseignesAvecPrix.has(NOMS_SRC[k]))
-      .map(([k, s]) => `${NOMS_SRC[k]} du ${dateCourte(s.dernier_ok)}`);
+      .map(([k, s]) => T(`${NOMS_SRC[k]} du ${dateCourte(s.dernier_ok)}`, `${isoAr(NOMS_SRC[k])} بتاريخ ${dateCourte(s.dernier_ok)}`));
     if (enRetard.length)
-      msg = `ℹ️ Prix ${enRetard.join(", ")} (site momentanément indisponible).`;
+      msg = T(`ℹ️ Prix ${enRetard.join(", ")} (site momentanément indisponible).`, `ℹ️ أسعار ${enRetard.join("، ")} (الموقع غير متاح مؤقتًا).`);
   }
   el.textContent = msg;
   el.hidden = !msg;
@@ -157,7 +169,8 @@ const majCourte = dateCourte(derniereMaj);
 // petite ligne sous le titre : « Mis à jour le 29 sept. · 35 marques · 2 enseignes »
 const nEnseignes = new Set(DATA.brands.flatMap(b => b.products.flatMap(p => Object.keys(p.prices)))).size;
 document.getElementById("stats").textContent =
-  `Mis à jour le ${majCourte} · ${DATA.brands.length} marques · ${nEnseignes} enseignes`;
+  T(`Mis à jour le ${majCourte} · ${DATA.brands.length} marques · ${nEnseignes} enseignes`,
+    `تحديث ${majCourte} · ${DATA.brands.length} علامة · ${nEnseignes} مغازات`);
 
 /* état global — au chargement : stikas de 1,5 L, les moins chères d'abord -- */
 // filtres multi-sélection : listes vides = aucun filtre, tout est affiché
@@ -190,11 +203,11 @@ function renderCompare(){
         <path d="M6 3h12v2h3v3c0 2.5-2 4.5-4.4 4.9A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.6-3A5 5 0 0 1 3 8V5h3V3zm-1 4v1a3 3 0 0 0 1.6 2.6A9 9 0 0 1 6 7H5zm14 0h-1a9 9 0 0 1-.6 3.6A3 3 0 0 0 19 8V7z"/>
       </svg>
       <span class="winner-name">${r.name}</span>
-      <span class="winner-price">${fmtDT(stika ? r.p * 6 : r.p)} <small>${stika ? "la stika (×6)" : "la bouteille"}</small></span>
+      <span class="winner-price">${fmtDT(stika ? r.p * 6 : r.p)} <small>${stika ? T("la stika (×6)", "الستيكة (×6)") : T("la bouteille", "القارورة")}</small></span>
     </div>`;
   const btnLabel = () => state.compareOpen
-    ? "Masquer le classement complet"
-    : `Voir le classement complet (${rows.length} marques)`;
+    ? T("Masquer le classement complet", "إخفاء الترتيب الكامل")
+    : T(`Voir le classement complet (${rows.length} marques)`, `شاهد الترتيب الكامل (${rows.length} علامة)`);
   // sous la carte « La moins chère » du haut : seulement le classement complet, à la demande
   document.getElementById("compare").innerHTML =
     (others.length ? `
@@ -220,19 +233,19 @@ function prodRow(p, b){
     .map(([s,v]) => `<span class="offer${multi && best.includes(s) ? " best" : ""}">
         <span class="store">${enseigne(s)}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>` +
         // vendu dans une partie des magasins seulement (Carrefour : stock différent d'un magasin à l'autre)
-        (p.magasins && p.magasins[s] ? `<small class="offer-mag">dans ${p.magasins[s][0]} magasin${p.magasins[s][0] > 1 ? "s" : ""} sur ${p.magasins[s][1]}</small>` : ""))
+        (p.magasins && p.magasins[s] ? `<small class="offer-mag">${T(`dans ${p.magasins[s][0]} magasin${p.magasins[s][0] > 1 ? "s" : ""} sur ${p.magasins[s][1]}`, `في ${p.magasins[s][0]} مغازة من ${p.magasins[s][1]}`)}</small>` : ""))
     .join("") +
     // enseignes vérifiées aujourd'hui qui ne vendent pas ce format (collect_prices.py, 23/10/2026)
     (p.non_dispo || []).map(s => `<span class="offer na">
-        <span class="store">${enseigne(s)}</span><span class="p">non disponible</span></span>`).join("");
-  const label = p.format +
-                (p.flavor ? ` <small>· ${p.flavor}</small>` : "") +
-                (p.category === "gazeuse" ? ` <small>· gazeuse</small>` : "");
+        <span class="store">${enseigne(s)}</span><span class="p">${T("non disponible", "غير متوفر")}</span></span>`).join("");
+  const label = (AR ? (p.liters >= 1 ? litresTxt(p.liters) : `${Math.round(p.liters * 100)} صل`) : p.format) +
+                (p.flavor ? ` <small>· <bdi>${p.flavor}</bdi></small>` : "") +
+                (p.category === "gazeuse" ? ` <small>· ${T("gazeuse", "غازي")}</small>` : "");
   const stika = state.mode === "stika" && p.liters <= GRAND_FORMAT;
-  const unite = stika ? `<small class="nb">stika ×${tailleStika(p.liters)}</small>`
-    : (state.mode === "stika" ? `<small class="nb">à l'unité</small>` : "");
-  const add = `<button type="button" class="addbtn" title="Ajouter à la commande"
-      aria-label="Ajouter ${b.name} ${p.format} à la commande"
+  const unite = stika ? `<small class="nb">${T("stika", "ستيكة")} ×${tailleStika(p.liters)}</small>`
+    : (state.mode === "stika" ? `<small class="nb">${T("à l'unité", "بالوحدة")}</small>` : "");
+  const add = `<button type="button" class="addbtn" title="${T("Ajouter à la commande", "أضف إلى الطلبية")}"
+      aria-label="${T(`Ajouter ${b.name} ${p.format} à la commande`, `أضف ${b.name} ${litresTxt(p.liters)} إلى الطلبية`)}"
       data-bid="${b.id}" data-liters="${p.liters}" data-category="${p.category}" data-flavor="${p.flavor || ""}">+</button>`;
   return `<tr><td class="addc">${add}</td><td class="fmt">${label}${unite ? "<br>" + unite : ""}</td>
     <td><span class="offer-list">${offers}</span></td></tr>`;
@@ -257,19 +270,20 @@ function renderTop(){
   if (!rows.length){ box.hidden = true; return; }
   const stika = state.mode === "stika";
   const prix = v => fmtDT(stika ? v * 6 : v);
-  const unite = stika ? "Stika (6 × 1,5 L)" : "Bouteille 1,5 L";
+  const unite = stika ? T("Stika (6 × 1,5 L)", "ستيكة (6 × 1,5 لتر)") : T("Bouteille 1,5 L", "قارورة 1,5 لتر");
   const [g] = rows;
   box.innerHTML = `
     <div class="top-carte">
     <a class="top-gagnant" href="#m-${g.b.id}">
-      <span class="top-label"><svg class="ic-goutte" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s-6.5 8.4-6.5 12.6a6.5 6.5 0 0 0 13 0C18.5 11.4 12 3 12 3z"/></svg>La moins chère aujourd'hui</span>
+      <span class="top-label"><svg class="ic-goutte" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s-6.5 8.4-6.5 12.6a6.5 6.5 0 0 0 13 0C18.5 11.4 12 3 12 3z"/></svg>${T("La moins chère aujourd'hui", "الأرخص اليوم")}</span>
       <span class="top-ligne"><b class="top-nom">${g.b.name}</b>
         <b class="top-prix">${prix(g.m.prix)}</b></span>
       <span class="top-detail">${unite} – ${enseignes(g.m.magasins)}</span>
     </a>
     <!-- petit bouton de partage WhatsApp, posé sous le prix (dans la carte verte) -->
-    <a class="top-partage" target="_blank" rel="noopener" aria-label="Partager sur WhatsApp" title="Partager sur WhatsApp" href="https://wa.me/?text=${encodeURIComponent(
-      `💧 L'eau la moins chère aujourd'hui : ${g.b.name} ${prix(g.m.prix)} ${stika ? "la stika" : "la bouteille"} (chez ${g.m.magasins.join(", ")}). Comparez toutes les marques : https://prix-eau.clicvia.com/`)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"/></svg>Partager</a>
+    <a class="top-partage" target="_blank" rel="noopener" aria-label="${T("Partager sur WhatsApp", "شارك على واتساب")}" title="${T("Partager sur WhatsApp", "شارك على واتساب")}" href="https://wa.me/?text=${encodeURIComponent(T(
+      `💧 L'eau la moins chère aujourd'hui : ${g.b.name} ${prix(g.m.prix)} ${stika ? "la stika" : "la bouteille"} (chez ${g.m.magasins.join(", ")}). Comparez toutes les marques : https://prix-eau.clicvia.com/`,
+      `💧 أرخص ماء اليوم: ${isoAr(g.b.name)} ${prix(g.m.prix)} ${stika ? "للستيكة" : "للقارورة"} (في ${isoAr(g.m.magasins.join(", "))}). قارن كل العلامات: https://prix-eau.clicvia.com/ar/`))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"/></svg>${T("Partager", "شارك")}</a>
     </div>
     <ol class="top-liste" start="2">${rows.slice(1, 5).map(r => `
       <li><a href="#m-${r.b.id}"><span class="top-n">${r.b.name}</span>
@@ -281,22 +295,22 @@ function renderTop(){
 
 // photo de la bouteille ; photo libre (Open Food Facts…) : crédit obligatoire juste dessous
 function photoMarque(b){
-  const img = `<img src="${b.img}" alt="Bouteille ${b.name}" loading="lazy">`;
+  const img = `<img src="${RACINE}${b.img}" alt="${T("Bouteille", "قارورة")} ${b.name}" loading="lazy">`;
   const c = b.img_credit;
   if (!c) return img;
   return `<figure class="photo-libre">${img}<figcaption class="credit-photo">` +
-    `<a href="${c.page}" target="_blank" rel="noopener">Photo : ${c.source}</a>, ` +
+    `<a href="${c.page}" target="_blank" rel="noopener">${T("Photo", "صورة")} : ${c.source}</a>, ` +
     `<a href="${c.licence_url}" target="_blank" rel="license noopener">CC BY-SA</a></figcaption></figure>`;
 }
 
 function card(b, prods){
   const meta = [];
-  if (b.source) meta.push(`Source : <b>${b.source}</b>`);
-  if (b.company) meta.push(`${b.company}`);
-  if (b.depuis) meta.push(`Commercialisée depuis <b>${b.depuis}</b>`);
-  if (b.note) meta.push(b.note);
+  if (b.source) meta.push(T(`Source : <b>${b.source}</b>`, `العين: <b><bdi>${b.source}</bdi></b>`));
+  if (b.company) meta.push(AR ? `<bdi>${b.company}</bdi>` : `${b.company}`);
+  if (b.depuis) meta.push(T(`Commercialisée depuis <b>${b.depuis}</b>`, `في السوق منذ <b>${b.depuis}</b>`));
+  if (b.note && (!AR || TXT_AR.notes[b.id])) meta.push(AR ? TXT_AR.notes[b.id] : b.note);   // note sans traduction : pas sur la page arabe
   const badges = b.types.map(t =>
-    `<span class="badge${t === "gazeuse" ? " gaz" : ""}">${t === "gazeuse" ? "Gazeuse" : "Plate"}</span>`).join("");
+    `<span class="badge${t === "gazeuse" ? " gaz" : ""}">${t === "gazeuse" ? T("Gazeuse", "غازي") : T("Plate", "عادي")}</span>`).join("");
   return `<article class="card" id="m-${b.id}">
     <div class="card-head">
       ${b.img ? photoMarque(b) : ""}
@@ -305,19 +319,19 @@ function card(b, prods){
     ${meta.length ? `<div class="meta">${meta.join(" · ")}</div>` : ""}
     ${compoBlock(b)}
     ${prods.length ? `<table class="prices">
-      <tr><th></th><th>Format</th>${state.mode === "stika"
-        ? "<th>Prix stika par enseigne</th>"
-        : "<th>Prix bouteille par enseigne</th>"}</tr>
+      <tr><th></th><th>${T("Format", "الحجم")}</th>${state.mode === "stika"
+        ? `<th>${T("Prix stika par enseigne", "سعر الستيكة حسب المغازة")}</th>`
+        : `<th>${T("Prix bouteille par enseigne", "سعر القارورة حسب المغازة")}</th>`}</tr>
       ${prods.slice().sort((a,z) =>
           (a.liters - z.liters) ||
           ((a.category === "gazeuse") - (z.category === "gazeuse")) ||
           (a.flavor || "").localeCompare(z.flavor || "")
         ).map(p => prodRow(p, b)).join("")}
     </table>` : `<div class="noprice">
-      <button type="button" class="addbtn" title="Commander (prix à confirmer)"
-        aria-label="Ajouter ${b.name} à la commande, prix à confirmer sur WhatsApp"
+      <button type="button" class="addbtn" title="${T("Commander (prix à confirmer)", "اطلب (السعر يُؤكَّد لاحقًا)")}"
+        aria-label="${T(`Ajouter ${b.name} à la commande, prix à confirmer sur WhatsApp`, `أضف ${b.name} إلى الطلبية، السعر يُؤكَّد على واتساب`)}"
         data-generic="${b.id}">+</button>
-      <span>Prix non disponible pour le moment dans les enseignes suivies${COMMANDE_OUVERTE ? " — commandez, le prix vous sera confirmé sur WhatsApp" : ""}.</span>
+      <span>${T("Prix non disponible pour le moment dans les enseignes suivies", "السعر غير متوفر حاليًا في المغازات المتابَعة")}${COMMANDE_OUVERTE ? T(" — commandez, le prix vous sera confirmé sur WhatsApp", " — اطلب، وسنؤكّد لك السعر على واتساب") : ""}.</span>
     </div>`}
     ${signalesBlock(b)}
   </article>`;
@@ -336,17 +350,17 @@ function renderDerniersSignales(){
     .filter(s => (now - new Date(s.date + "T12:00:00")) / 864e5 <= JOURS_SIGNALE)
     .sort((a, z) => z.date.localeCompare(a.date));
   if (!recents.length){
-    box.innerHTML = `<p class="sig-vide">Aucun prix signalé ces 30 derniers jours : soyez le premier !</p>`;
+    box.innerHTML = `<p class="sig-vide">${T("Aucun prix signalé ces 30 derniers jours : soyez le premier !", "لا سعر مبلَّغ عنه في الأيام الثلاثين الأخيرة: كن الأول!")}</p>`;
     return;
   }
   const nomMarque = id => (DATA.brands.find(b => b.id === id) || {}).name || id;
-  box.innerHTML = `<p class="sig-titre">Derniers prix signalés par les visiteurs</p><ul>` + recents.map(s => {
+  box.innerHTML = `<p class="sig-titre">${T("Derniers prix signalés par les visiteurs", "آخر الأسعار التي بلّغ عنها الزوار")}</p><ul>` + recents.map(s => {
     const stika = state.mode === "stika" && s.litres <= GRAND_FORMAT;
-    const vu = new Date(s.date + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
-    return `<li><b>${s.marque || nomMarque(s.id)} ${String(s.litres).replace(".", ",")} L${s.type === "gazeuse" ? " gazeuse" : ""}</b>
-      · ${enseigne(s.magasin)}${s.lieu ? ` <small>(${s.lieu})</small>` : ""} :
-      <b class="sig-prix">${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? " la stika" : ""}
-      <small>· vu le ${vu}${s.nb > 1 ? ` · confirmé par ${s.nb} visiteurs` : ""}</small></li>`;
+    const vu = dateCourte(s.date);
+    return `<li><b><bdi>${s.marque || nomMarque(s.id)}</bdi> ${litresTxt(s.litres)}${s.type === "gazeuse" ? T(" gazeuse", " غازي") : ""}</b>
+      · ${enseigne(s.magasin)}${s.lieu ? ` <small>(<bdi>${s.lieu}</bdi>)</small>` : ""} :
+      <b class="sig-prix">${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? T(" la stika", " للستيكة") : ""}
+      <small>· ${T("vu le", "شوهد يوم")} ${vu}${s.nb > 1 ? T(` · confirmé par ${s.nb} visiteurs`, ` · أكّده ${s.nb} زوار`) : ""}</small></li>`;
   }).join("") + `</ul>`;
 }
 
@@ -357,13 +371,13 @@ function signalesBlock(b){
     .sort((a, z) => z.date.localeCompare(a.date));
   const lignes = recents.map(s => {
     const stika = state.mode === "stika" && s.litres <= GRAND_FORMAT;
-    const vu = new Date(s.date + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
-    return `<li>${enseigne(s.magasin)}${s.lieu ? ` <small>(${s.lieu})</small>` : ""} · ${String(s.litres).replace(".", ",")} L${s.type === "gazeuse" ? " gazeuse" : ""} :
-      <b>${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? " la stika" : ""} <small>· vu le ${vu}${s.nb > 1 ? ` · confirmé par ${s.nb} visiteurs` : ""}</small></li>`;
+    const vu = dateCourte(s.date);
+    return `<li>${enseigne(s.magasin)}${s.lieu ? ` <small>(<bdi>${s.lieu}</bdi>)</small>` : ""} · ${litresTxt(s.litres)}${s.type === "gazeuse" ? T(" gazeuse", " غازي") : ""} :
+      <b>${fmtDT(dispPrice(s.prix, s.litres))}</b>${stika ? T(" la stika", " للستيكة") : ""} <small>· ${T("vu le", "شوهد يوم")} ${vu}${s.nb > 1 ? T(` · confirmé par ${s.nb} visiteurs`, ` · أكّده ${s.nb} زوار`) : ""}</small></li>`;
   }).join("");
   return `<div class="signales">
-    ${lignes ? `<p class="sig-titre">📍 Prix signalés par les visiteurs</p><ul>${lignes}</ul>` : ""}
-    <button type="button" class="sig-btn" data-signaler="${b.id}">📍 Signaler un prix vu en magasin</button>
+    ${lignes ? `<p class="sig-titre">📍 ${T("Prix signalés par les visiteurs", "أسعار بلّغ عنها الزوار")}</p><ul>${lignes}</ul>` : ""}
+    <button type="button" class="sig-btn" data-signaler="${b.id}">📍 ${T("Signaler un prix vu en magasin", "بلّغ عن سعر رأيته في المغازة")}</button>
   </div>`;
 }
 
@@ -435,16 +449,17 @@ function renderBaisses(){
   const B = window.EAUX_BAISSES, box = document.getElementById("baisses-list");
   if (!B || B.date !== DATA.updated || !B.baisses.length){ box.hidden = true; return; }
   const ligne = x => {
-    const nom = `${x.marque} ${x.format.replace(".", ",")}${x.gazeuse ? " gazeuse" : ""}${x.saveur ? " " + x.saveur : ""}`;
+    const nom = AR ? `<bdi>${x.marque}</bdi> ${x.format.replace(".", ",").replace(/ ?L$/, " لتر")}${x.gazeuse ? " غازي" : ""}${x.saveur ? " <bdi>" + x.saveur + "</bdi>" : ""}`
+                   : `${x.marque} ${x.format.replace(".", ",")}${x.gazeuse ? " gazeuse" : ""}${x.saveur ? " " + x.saveur : ""}`;
     // toujours le prix de la stika (bidons et bonbonnes : prix à l'unité)
     const n = x.litres <= GRAND_FORMAT ? tailleStika(x.litres) : 1;
-    return `<li><b>${n > 1 ? "Stika " : ""}${nom}</b>${n > 1 ? ` <small>(×${n})</small>` : ""} chez ${x.enseigne} :
+    return `<li><b>${n > 1 ? T("Stika ", "ستيكة ") : ""}${nom}</b>${n > 1 ? ` <small>(×${n})</small>` : ""} ${T("chez", "في")} ${isoAr(x.enseigne)} :
       <s>${fmtDT(x.avant * n)}</s> → <b class="bx-p">${fmtDT(x.prix * n)}</b>
       <span class="bx-pct">−${String(x.pct).replace(".", ",")} %</span></li>`;
   };
   const top = B.baisses.slice(0, 3), reste = B.baisses.slice(3);
-  box.innerHTML = `<h2>📉 Baisses de prix aujourd'hui</h2><ul>${top.map(ligne).join("")}</ul>` +
-    (reste.length ? `<details><summary>+ ${reste.length} autre${reste.length > 1 ? "s" : ""} baisse${reste.length > 1 ? "s" : ""}</summary><ul>${reste.map(ligne).join("")}</ul></details>` : "");
+  box.innerHTML = `<h2>📉 ${T("Baisses de prix aujourd'hui", "تخفيضات الأسعار اليوم")}</h2><ul>${top.map(ligne).join("")}</ul>` +
+    (reste.length ? `<details><summary>+ ${T(`${reste.length} autre${reste.length > 1 ? "s" : ""} baisse${reste.length > 1 ? "s" : ""}`, `${reste.length} تخفيضات أخرى`)}</summary><ul>${reste.map(ligne).join("")}</ul></details>` : "");
   box.hidden = false;
 }
 
@@ -462,7 +477,7 @@ document.querySelectorAll("#controls .chipbtn[data-type]").forEach(btn => btn.ad
 // puces de filtre par format de bouteille (1,5 L actif au chargement)
 document.getElementById("format-controls").innerHTML = FORMATS.map(f =>
   `<button class="chipbtn" data-format="${f.id}" aria-pressed="${state.formats.includes(f.id)}">${f.nom}</button>`).join("") +
-  `<button class="chipbtn chip-help" id="format-help" aria-label="Comprendre les formats de bouteille" title="Comprendre les formats de bouteille">?</button>`;
+  `<button class="chipbtn chip-help" id="format-help" aria-label="${T("Comprendre les formats de bouteille", "ما هي أحجام القوارير؟")}" title="${T("Comprendre les formats de bouteille", "ما هي أحجام القوارير؟")}">?</button>`;
 document.querySelectorAll("#format-controls .chipbtn[data-format]").forEach(btn => btn.addEventListener("click", () => {
   btn.setAttribute("aria-pressed", btn.getAttribute("aria-pressed") !== "true");
   state.formats = [...document.querySelectorAll('#format-controls .chipbtn[data-format][aria-pressed="true"]')]
@@ -479,19 +494,19 @@ document.querySelectorAll("#mode-controls .chipbtn").forEach(btn => btn.addEvent
 
 /* barre des filtres : 3 boutons (Stika/Bouteille, Type d'eau, Format) ----
    chaque bouton ouvre son panneau ; le texte du bouton montre le choix actuel */
-const NOMS_TYPES = { minerale:"Minérale", source:"Source", table:"Traitée", gazeuse:"Gazeuse" };
+const NOMS_TYPES = AR ? { minerale:"معدني", source:"ماء عين", table:"معالَج", gazeuse:"غازي" } : { minerale:"Minérale", source:"Source", table:"Traitée", gazeuse:"Gazeuse" };
 function majBoutonsFiltres(){
   const stika = state.mode === "stika";
-  document.getElementById("dd-mode-txt").textContent = stika ? "Stika" : "Bouteille";
-  document.getElementById("dd-mode-ic").src = `assets/icons/${stika ? "stika-pack" : "bouteille"}.png`;
+  document.getElementById("dd-mode-txt").textContent = stika ? T("Stika", "ستيكة") : T("Bouteille", "قارورة");
+  document.getElementById("dd-mode-ic").src = `${RACINE}assets/icons/${stika ? "stika-pack" : "bouteille"}.png`;
   document.getElementById("dd-mode-btn").classList.toggle("dd-stika", stika);
   const t = state.types;
   document.getElementById("dd-type-txt").textContent =
-    !t.length ? "Type d'eau" : t.length === 1 ? NOMS_TYPES[t[0]] : `${t.length} types`;
+    !t.length ? T("Type d'eau", "نوع الماء") : t.length === 1 ? NOMS_TYPES[t[0]] : T(`${t.length} types`, `${t.length} أنواع`);
   document.getElementById("dd-type-btn").classList.toggle("dd-actif", t.length > 0);
   const f = FORMATS.filter(x => state.formats.includes(x.id));
   document.getElementById("dd-format-txt").textContent =
-    !f.length ? "Format" : f.length === 1 ? f[0].nom : `${f.length} formats`;
+    !f.length ? T("Format", "الحجم") : f.length === 1 ? f[0].nom : T(`${f.length} formats`, `${f.length} أحجام`);
 }
 const ddPaires = ["mode", "type", "format"].map(k =>
   [document.getElementById(`dd-${k}-btn`), document.getElementById(`dd-${k}`)]);
@@ -526,7 +541,7 @@ render();
   const min = rows[0].p;
   const winners = rows.filter(r => r.p === min).map(r => r.name);
   const list = winners.length > 1
-    ? winners.slice(0, -1).join(", ") + " et " + winners[winners.length - 1]
+    ? winners.slice(0, -1).join(T(", ", "، ")) + T(" et ", " و") + winners[winners.length - 1]
     : winners[0];
   const el = (id, txt) => { const e = document.getElementById(id); if (e) e.textContent = txt; };
   el("faq-min", fmtDT(min));
@@ -555,7 +570,7 @@ render();
   const lo = vLo - pad, hi = vHi + pad;
   const x = i => m.l + (pts.length === 1 ? iw / 2 : i * iw / (pts.length - 1));
   const y = v => m.t + ih - (v - lo) / (hi - lo) * ih;
-  const dShort = s => new Date(s + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+  const dShort = s => new Date(s + "T12:00:00").toLocaleDateString(LOC, { day: "numeric", month: "short" });
   const ticks = [vLo, (vLo + vHi) / 2, vHi].filter((v, i, a) => a.indexOf(v) === i);
   const grid = ticks.map(v => `
     <line class="gline" x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}"/>
@@ -567,7 +582,7 @@ render();
   const marks = pts.map((p, i) => `<circle class="pt" data-i="${i}" cx="${x(i).toFixed(1)}" cy="${y(p.stika15).toFixed(1)}" r="4"/>`).join("");
   const last = pts[pts.length - 1];
   box.innerHTML = `
-    <svg viewBox="0 0 ${W} ${HT}" role="img" aria-label="Prix de la stika 1,5 L la moins chère, jour par jour">
+    <svg viewBox="0 0 ${W} ${HT}" role="img" aria-label="${T("Prix de la stika 1,5 L la moins chère, jour par jour", "سعر أرخص ستيكة 1,5 لتر، يومًا بيوم")}" dir="ltr">
       ${grid}
       <path class="serie" d="${path}"/>
       ${marks}
@@ -577,9 +592,9 @@ render();
     </svg>
     <div class="histo-tip" id="histo-tip" hidden></div>
     <details class="histo-table">
-      <summary>Voir les valeurs</summary>
+      <summary>${T("Voir les valeurs", "شاهد القيم")}</summary>
       <table>
-        <tr><th>Date</th><th>Stika 1,5 L la moins chère</th><th>Marque(s)</th></tr>
+        <tr><th>${T("Date", "التاريخ")}</th><th>${T("Stika 1,5 L la moins chère", "أرخص ستيكة 1,5 لتر")}</th><th>${T("Marque(s)", "العلامة")}</th></tr>
         ${pts.map(p => `<tr><td>${dShort(p.date)}</td><td>${fmtDT(p.stika15)}</td><td>${p.marques.join(", ")}</td></tr>`).join("")}
       </table>
     </details>`;
@@ -587,7 +602,7 @@ render();
   box.querySelectorAll(".pt").forEach(c => {
     const show = () => {
       const p = pts[+c.dataset.i];
-      tip.innerHTML = `<b>${fmtDT(p.stika15)}</b> la stika · ${dShort(p.date)}<br><small>${p.marques.join(", ")}</small>`;
+      tip.innerHTML = `<b>${fmtDT(p.stika15)}</b> ${T("la stika", "للستيكة")} · ${dShort(p.date)}<br><small>${p.marques.join(", ")}</small>`;
       const r = c.getBoundingClientRect(), b = box.getBoundingClientRect();
       tip.hidden = false;
       tip.style.left = Math.min(Math.max(r.left - b.left, 60), b.width - 80) + "px";
@@ -603,21 +618,28 @@ render();
 (function(){
   const noms = DATA.brands.map(b => b.name);
   const el = (id, txt) => { const e = document.getElementById(id); if (e) e.textContent = txt; };
-  el("intro-autres", `${Math.max(noms.length - 5, 0)} autres marques`);
+  el("intro-autres", T(`${Math.max(noms.length - 5, 0)} autres marques`, `${Math.max(noms.length - 5, 0)} علامات أخرى`));
   el("faq-nb-marques", noms.length);
   el("faq-marques-liste", noms.length > 1
-    ? noms.slice(0, -1).join(", ") + " et " + noms[noms.length - 1]
+    ? noms.slice(0, -1).join(T(", ", "، ")) + T(" et ", " و") + noms[noms.length - 1]
     : noms.join(""));
 })();
 
 /* footer ----------------------------------------------------------------- */
-document.getElementById("foot").innerHTML =
-  `Prix indicatifs relevés le ${new Date(DATA.updated + "T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}
+const NOMS_SOURCES_AR = { "Carrefour Tunisie": "Carrefour", "Géant Drive Tunisie": "Géant Drive", "Wikipédia — Eaux minérales en Tunisie": "ويكيبيديا (بالفرنسية)" };
+const dateLongue = new Date(DATA.updated + "T12:00:00").toLocaleDateString(LOC, {day:"numeric",month:"long",year:"numeric"});
+const liensSources = DATA.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${AR ? (NOMS_SOURCES_AR[s.name] || s.name.split(" ")[0]) : s.name}</a>`).join(" · ");
+document.getElementById("foot").innerHTML = T(
+  `Prix indicatifs relevés le ${dateLongue}
    sur les boutiques en ligne — ils peuvent varier selon le magasin et la date. Sources :
-   ${DATA.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${s.name}</a>`).join(" · ")}.
+   ${liensSources}.
    Projet personnel — les visuels de bouteilles proviennent des catalogues des enseignes
    (photos de quelques marques : Open Food Facts, licence CC BY-SA, crédit sous chaque photo) ;
-   les noms, marques et logos des enseignes appartiennent à leurs propriétaires.`;
+   les noms, marques et logos des enseignes appartiennent à leurs propriétaires.`,
+  `أسعار تقريبية مقروءة يوم ${dateLongue} من المتاجر الإلكترونية — قد تتغيّر حسب المغازة والتاريخ. المصادر:
+   ${liensSources}.
+   مشروع شخصي — صور القوارير مأخوذة من كتالوجات المغازات (صور بعض العلامات: Open Food Facts، رخصة CC BY-SA، المصدر تحت كل صورة)؛
+   أسماء المغازات وعلاماتها وشعاراتها ملك لأصحابها.`);
 
 /* ========================================================================= */
 /* Commande : panier + envoi WhatsApp                                        */
@@ -662,15 +684,15 @@ function addGenericToCart(bid){
 }
 
 function unitLabel(item){
-  if (item.unit === "generique") return "au choix";
-  return item.unit === "stika" ? `stika (${tailleStika(item.liters)} bouteilles)` : "bouteille";
+  if (item.unit === "generique") return T("au choix", "حسب الاختيار");
+  return item.unit === "stika" ? T(`stika (${tailleStika(item.liters)} bouteilles)`, `ستيكة (${tailleStika(item.liters)} قوارير)`) : T("bouteille", "قارورة");
 }
 
 function cartLines(){
   return cart.map(item => {
     const found = findProduct(item.bid, item.liters, item.category, item.flavor);
     if (!found) return null;
-    return { ...item, nom: found.b.name, format: found.p ? found.p.format : "(format à confirmer)",
+    return { ...item, nom: found.b.name, format: found.p ? (AR ? litresTxt(found.p.liters) : found.p.format) : T("(format à confirmer)", "(الحجم يُؤكَّد لاحقًا)"),
              gaz: item.category === "gazeuse", unitLabel: unitLabel(item) };
   }).filter(Boolean);
 }
@@ -683,9 +705,9 @@ function renderCartBar(){
   document.body.classList.toggle("has-cart", n > 0);
   if (n){
     document.getElementById("cartbar-info").innerHTML =
-      `${n} article${n > 1 ? "s" : ""} · commande bientôt disponible`;
+      T(`${n} article${n > 1 ? "s" : ""} · commande bientôt disponible`, `${n} منتوج · الطلب متاح قريبًا`);
     document.getElementById("cart-open").innerHTML =
-      `Commander 🛒 <span class="cart-count">${n}</span>`;
+      `${T("Commander", "اطلب")} 🛒 <span class="cart-count">${n}</span>`;
   }
 }
 
@@ -693,27 +715,28 @@ function renderOrderItems(){
   const box = document.getElementById("order-items");
   const lines = cartLines();
   if (!lines.length){
-    box.innerHTML = `<p class="order-empty">Votre commande est vide — ajoutez des produits avec le bouton +.</p>`;
+    box.innerHTML = `<p class="order-empty">${T("Votre commande est vide — ajoutez des produits avec le bouton +.", "طلبيتك فارغة — أضف منتوجات بزر +.")}</p>`;
     document.getElementById("order-total").textContent = "";
     return;
   }
   box.innerHTML = lines.map(l => `
     <div class="order-item">
-      <span class="oi-name">${l.nom} ${l.format}${l.gaz ? " gazeuse" : ""}${l.flavor ? " " + l.flavor : ""}
-        ${l.liters != null && l.liters <= GRAND_FORMAT ? `<select class="oi-unit" data-unit="${l.key}" aria-label="Unité">
-          <option value="stika"${l.unit === "stika" ? " selected" : ""}>stika (${tailleStika(l.liters)} bouteilles)</option>
-          <option value="bouteille"${l.unit === "bouteille" ? " selected" : ""}>bouteille à l'unité</option>
+      <span class="oi-name"><bdi>${l.nom}</bdi> ${l.format}${l.gaz ? T(" gazeuse", " غازي") : ""}${l.flavor ? " " + l.flavor : ""}
+        ${l.liters != null && l.liters <= GRAND_FORMAT ? `<select class="oi-unit" data-unit="${l.key}" aria-label="${T("Unité", "الوحدة")}">
+          <option value="stika"${l.unit === "stika" ? " selected" : ""}>${T(`stika (${tailleStika(l.liters)} bouteilles)`, `ستيكة (${tailleStika(l.liters)} قوارير)`)}</option>
+          <option value="bouteille"${l.unit === "bouteille" ? " selected" : ""}>${T("bouteille à l'unité", "قارورة بالوحدة")}</option>
         </select>` : `<small>${l.unitLabel}</small>`}</span>
       <span class="qty">
-        <button type="button" data-dec="${l.key}" aria-label="Une ${l.unitLabel} de moins">−</button>
+        <button type="button" data-dec="${l.key}" aria-label="${T(`Une ${l.unitLabel} de moins`, "واحد أقل")}">−</button>
         <b>${l.qty}</b>
-        <button type="button" data-inc="${l.key}" aria-label="Une ${l.unitLabel} de plus">+</button>
+        <button type="button" data-inc="${l.key}" aria-label="${T(`Une ${l.unitLabel} de plus`, "واحد أكثر")}">+</button>
       </span>
     </div>`).join("");
   document.getElementById("order-total").innerHTML =
-    `Les prix affichés sur le site sont ceux des grandes surfaces, mis à jour chaque jour,
+    T(`Les prix affichés sur le site sont ceux des grandes surfaces, mis à jour chaque jour,
      à titre indicatif. Le prix final peut varier selon la disponibilité : nous vous le
-     confirmons sur WhatsApp avec les frais de livraison.`;
+     confirmons sur WhatsApp avec les frais de livraison.`,
+      "الأسعار المعروضة في الموقع هي أسعار المغازات الكبرى، تُحدَّث كل يوم، للإرشاد فقط. السعر النهائي قد يتغيّر حسب التوفّر: نؤكّده لك على واتساب مع مصاريف التوصيل.");
 }
 
 let geoPos = null;          // position CONFIRMÉE par le client (sinon null)
@@ -816,17 +839,17 @@ document.getElementById("order-items").addEventListener("click", e => {
 
 document.getElementById("o-geo").addEventListener("click", async () => {
   const status = document.getElementById("o-geo-status");
-  status.textContent = "Localisation…";
+  status.textContent = T("Localisation…", "تحديد الموقع…");
   try { await loadLeaflet(); }
-  catch (e) { status.textContent = "Carte indisponible — décrivez précisément l'adresse."; return; }
+  catch (e) { status.textContent = T("Carte indisponible — décrivez précisément l'adresse.", "الخريطة غير متاحة — اكتب العنوان بدقّة."); return; }
   const manuel = () => {   // GPS refusé ou en échec : placement du repère à la main
-    status.textContent = "Placez le repère sur la carte, puis confirmez.";
+    status.textContent = T("Placez le repère sur la carte, puis confirmez.", "ضع العلامة على الخريطة، ثم أكّد.");
     showGeoMap(36.8065, 10.1815, 11);  // Tunis par défaut
   };
   if (!navigator.geolocation) return manuel();
   navigator.geolocation.getCurrentPosition(
     pos => {
-      status.textContent = "Vérifiez le repère, ajustez-le si besoin, puis confirmez.";
+      status.textContent = T("Vérifiez le repère, ajustez-le si besoin, puis confirmez.", "تحقّق من العلامة، حرّكها إن لزم، ثم أكّد.");
       showGeoMap(pos.coords.latitude, pos.coords.longitude, 17);
     },
     manuel,
@@ -838,7 +861,7 @@ document.getElementById("o-geo-confirm").addEventListener("click", () => {
   const ll = geoMarker.getLatLng();
   geoPos = { lat: ll.lat.toFixed(6), lng: ll.lng.toFixed(6) };
   document.getElementById("geo-box").hidden = true;
-  document.getElementById("o-geo-status").textContent = "Position confirmée ✓ (cliquez pour modifier)";
+  document.getElementById("o-geo-status").textContent = T("Position confirmée ✓ (cliquez pour modifier)", "تم تأكيد الموقع ✓ (انقر للتعديل)");
 });
 
 document.getElementById("order-form").addEventListener("submit", e => {
@@ -847,7 +870,7 @@ document.getElementById("order-form").addEventListener("submit", e => {
   const tel = document.getElementById("o-tel").value.replace(/\D/g, "");
   if (tel.length < 8){
     document.getElementById("o-tel").focus();
-    document.getElementById("o-tel").setCustomValidity("Numéro de téléphone incomplet");
+    document.getElementById("o-tel").setCustomValidity(T("Numéro de téléphone incomplet", "رقم الهاتف غير مكتمل"));
     document.getElementById("order-form").reportValidity();
     document.getElementById("o-tel").setCustomValidity("");
     return;
@@ -875,8 +898,9 @@ renderCartBar();
   }
   const merci = mail => {
     form.reset(); status.className = ""; status.textContent = "";
-    boite.innerHTML = '<p class="avis-merci-titre">✅ Merci ! Votre avis a bien été envoyé.</p><p>Nous l’avons bien reçu et nous vous répondrons à l’adresse : <b>' +
-      esc(mail) + '</b></p><button type="button" class="btn-avis-autre">Envoyer un autre message</button>';
+    boite.innerHTML = '<p class="avis-merci-titre">' + T("✅ Merci ! Votre avis a bien été envoyé.", "✅ شكرًا! تم إرسال رأيك.") + '</p><p>' +
+      T("Nous l’avons bien reçu et nous vous répondrons à l’adresse : ", "وصلنا وسنجيبك على العنوان: ") + '<b>' +
+      esc(mail) + '</b></p><button type="button" class="btn-avis-autre">' + T("Envoyer un autre message", "أرسل رسالة أخرى") + '</button>';
     boite.querySelector("button").addEventListener("click", () => { boite.hidden = true; form.hidden = false; form.querySelector("[name=message]").focus(); });
     form.hidden = true; boite.hidden = false;
     try { boite.focus({ preventScroll: true }); boite.scrollIntoView({ behavior: "smooth", block: "center" }); } catch { /* ancien navigateur */ }
@@ -885,13 +909,13 @@ renderCartBar();
     e.preventDefault();
     const texte = (form.querySelector("[name=message]").value || "").trim();
     const champMail = form.querySelector("[name=email]"), mail = (champMail.value || "").trim();
-    if (!texte) { status.className = "err"; status.textContent = "Écrivez votre message avant d'envoyer."; return; }
+    if (!texte) { status.className = "err"; status.textContent = T("Écrivez votre message avant d'envoyer.", "اكتب رسالتك قبل الإرسال."); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) {
-      status.className = "err"; status.textContent = "Écrivez votre adresse e-mail (obligatoire) pour que nous puissions vous répondre.";
+      status.className = "err"; status.textContent = T("Écrivez votre adresse e-mail (obligatoire) pour que nous puissions vous répondre.", "اكتب بريدك الإلكتروني (إجباري) لنتمكّن من الرد عليك.");
       champMail.focus(); return;
     }
     btn.disabled = true;
-    status.className = ""; status.textContent = "Envoi…";
+    status.className = ""; status.textContent = T("Envoi…", "جارٍ الإرسال…");
     try {
       const r = await fetch(form.action, {
         method: "POST",
@@ -905,7 +929,7 @@ renderCartBar();
       }
     } catch {
       status.className = "err";
-      status.textContent = "Échec de l'envoi — réessayez, ou plus tard.";
+      status.textContent = T("Échec de l'envoi — réessayez, ou plus tard.", "فشل الإرسال — أعد المحاولة لاحقًا.");
     } finally {
       btn.disabled = false;
     }
@@ -926,8 +950,8 @@ const SIG_FORM = {
   const form = document.getElementById("sig-form");
   if (!pop || !form) return;
   const sel = document.getElementById("sig-marque");
-  sel.innerHTML = `<option value="">— choisir —</option>` + DATA.brands.slice().sort((a, z) => a.name.localeCompare(z.name, "fr"))
-    .map(b => `<option value="${b.name}">${b.name}</option>`).join("") + `<option>Autre marque</option>`;
+  sel.innerHTML = `<option value="">${T("— choisir —", "— اختر —")}</option>` + DATA.brands.slice().sort((a, z) => a.name.localeCompare(z.name, "fr"))
+    .map(b => `<option value="${b.name}">${b.name}</option>`).join("") + `<option value="Autre marque">${T("Autre marque", "علامة أخرى")}</option>`;
   const status = document.getElementById("sig-status");
   const ouvrir = id => {
     const b = DATA.brands.find(x => x.id === id);
@@ -952,7 +976,7 @@ const SIG_FORM = {
     const f = new FormData(form);
     const btn = form.querySelector(".avis-send");
     btn.disabled = true;
-    status.className = ""; status.textContent = "Envoi…";
+    status.className = ""; status.textContent = T("Envoi…", "جارٍ الإرسال…");
     try {
       if (!f.get("_gotcha")) {          // champ piège rempli = robot : on ne transmet pas
         const corps = new URLSearchParams();
@@ -963,12 +987,12 @@ const SIG_FORM = {
       }
       form.reset();
       status.className = "ok";
-      status.textContent = "Merci ! Le prix sera vérifié puis publié dans quelques heures.";
+      status.textContent = T("Merci ! Le prix sera vérifié puis publié dans quelques heures.", "شكرًا! سيُراجَع السعر ثم يُنشر خلال ساعات.");
       setTimeout(() => { document.getElementById("sig-form-sec").open = false; }, 2500);
       setTimeout(fermer, 2500);
     } catch {
       status.className = "err";
-      status.textContent = "Échec de l'envoi — réessayez plus tard.";
+      status.textContent = T("Échec de l'envoi — réessayez plus tard.", "فشل الإرسال — أعد المحاولة لاحقًا.");
     } finally {
       btn.disabled = false;
     }
@@ -989,22 +1013,23 @@ const SIG_FORM = {
   const box = document.getElementById("vote-classement");
   const status = document.getElementById("vote-status");
   const total = VOTES.total || 0;
+  const voirVotes = () => T(`Voir le classement des votes (${total} votant${total > 1 ? "s" : ""})`, `شاهد ترتيب الأصوات (${total} مصوّت)`);
   if (!total){
     box.innerHTML = "";          // pas encore de vote : rien à afficher
   } else {
     // comme pour le prix : le(s) gagnant(s) sur une ligne, puis le classement complet à la demande
     const cl = VOTES.classement;
-    const nb = v => `${v.votes} vote${v.votes > 1 ? "s" : ""} · ${Math.round(v.votes * 100 / total)} %`;
+    const nb = v => T(`${v.votes} vote${v.votes > 1 ? "s" : ""}`, `${v.votes} صوت`) + ` · ${Math.round(v.votes * 100 / total)} %`;
     const gagnants = cl.filter(v => v.votes === cl[0].votes);
     box.innerHTML =
       `<div class="winners">` + gagnants.map(v => `<div class="winner vote-win">
         <span class="vote-coeur" aria-hidden="true">❤️</span>
         <span class="winner-name">${v.marque}</span>
-        <span class="winner-price">${v.votes} vote${v.votes > 1 ? "s" : ""} <small>(${Math.round(v.votes * 100 / total)} %)</small></span></div>`).join("") + `</div>`;
+        <span class="winner-price">${T(`${v.votes} vote${v.votes > 1 ? "s" : ""}`, `${v.votes} صوت`)} <small>(${Math.round(v.votes * 100 / total)} %)</small></span></div>`).join("") + `</div>`;
     // cadre identique à « par le prix » : gagnant, puis bouton du classement et liste
     document.getElementById("vote-cadre").hidden = false;
     document.getElementById("vote-plus").innerHTML =
-      `<div class="compare-toggle"><button type="button" class="chipbtn" id="vote-more">Voir le classement des votes (${total} votant${total > 1 ? "s" : ""})</button></div>` +
+      `<div class="compare-toggle"><button type="button" class="chipbtn" id="vote-more">${voirVotes()}</button></div>` +
       `<ol class="vote-liste" id="vote-rest" hidden>` + cl.map((v, i) =>
         `<li><span class="vote-rang">${i + 1}</span><b>${v.marque}</b><span class="vote-nb">${nb(v)}</span></li>`
       ).join("") + `</ol>`;
@@ -1012,28 +1037,28 @@ const SIG_FORM = {
     btn.addEventListener("click", () => {
       const rest = document.getElementById("vote-rest");
       rest.hidden = !rest.hidden;
-      btn.textContent = rest.hidden ? `Voir le classement des votes (${total} votant${total > 1 ? "s" : ""})` : "Masquer le classement des votes";
+      btn.textContent = rest.hidden ? voirVotes() : T("Masquer le classement des votes", "إخفاء ترتيب الأصوات");
     });
   }
-  sel.innerHTML = `<option value="">— mon eau préférée —</option>` + DATA.brands.slice()
+  sel.innerHTML = `<option value="">${T("— mon eau préférée —", "— مائي المفضّل —")}</option>` + DATA.brands.slice()
     .sort((a, z) => a.name.localeCompare(z.name, "fr"))
     .map(b => `<option value="${b.name}">${b.name}</option>`).join("");
   const mien = lire("vote-marque");
-  if (mien){ sel.value = mien; status.textContent = `Votre vote : ${mien}.`; }
+  if (mien){ sel.value = mien; status.textContent = T(`Votre vote : ${mien}.`, `صوتك: ${isoAr(mien)}.`); }
   document.getElementById("vote-btn").addEventListener("click", async () => {
     const marque = sel.value;
-    if (!marque){ status.textContent = "Choisissez d'abord une marque."; return; }
+    if (!marque){ status.textContent = T("Choisissez d'abord une marque.", "اختر علامة أولًا."); return; }
     const corps = new URLSearchParams();
     const vide = { marque, format: "VOTE", eau: "", prix: "", unite: "", magasin: "", lieu: jeton,
                    date: new Date().toISOString().slice(0, 10) };
     Object.entries(SIG_FORM.champs).forEach(([nom, entry]) => corps.append(entry, vide[nom] || ""));
-    status.textContent = "Envoi…";
+    status.textContent = T("Envoi…", "جارٍ الإرسال…");
     try {
       await fetch(SIG_FORM.url, { method: "POST", mode: "no-cors", body: corps });
       ecrire("vote-marque", marque);
-      status.textContent = `Merci ! Votre vote pour ${marque} sera compté au prochain décompte (dans les 2 heures).`;
+      status.textContent = T(`Merci ! Votre vote pour ${marque} sera compté au prochain décompte (dans les 2 heures).`, `شكرًا! صوتك لـ${isoAr(marque)} سيُحسب في العدّ القادم (خلال ساعتين).`);
     } catch (e) {
-      status.textContent = "Échec de l'envoi — réessayez plus tard.";
+      status.textContent = T("Échec de l'envoi — réessayez plus tard.", "فشل الإرسال — أعد المحاولة لاحقًا.");
     }
   });
 })();

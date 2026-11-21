@@ -212,6 +212,7 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
   mais possible une fois hébergé, ex. GitHub Pages)
 
 ## Nouveautés
+- **21/11/2026** : **une adresse par langue** : chaque page existe en français (son adresse) et en arabe (`ar/…`, ex. https://prix-eau.clicvia.com/ar/), écrite dans sa langue pour Google, avec hreflang, bouton « العربية / Français » en haut ; fabriquée chaque nuit par `tools/langues.py` (ne jamais modifier `ar/` à la main) ; versions 20261121c.
 - **18/10/2026** : rapports du mois (image d'aperçu par article, partage) ; **visiteur simulé** sur tous les sites (règle générale) : il a trouvé le tableau du rapport trop large sur téléphone (corrigé).
 - **18/10/2026 (soir)** : test « chaque image d'un autre site est autorisée par la CSP » (VS.9) ; règle commune « même chiffre, même verdict partout » : après chaque amélioration d'un calcul, revérifier toutes les pages qui l'affichent.
 - **18/10/2026 (nuit)** : règle commune « un lieu vague n'est jamais un lieu précis » (une seule vérification pour toutes les sources, garde quotidien). Et : une seule règle des champs pour tous les formulaires (un champ caché est vidé). Et : une ligne par élément dans les résultats au téléphone. Et : règle commune des Pass (case du code toujours visible) + robot commun qui les contrôle chaque jour.

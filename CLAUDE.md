@@ -20,7 +20,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Doit rester **public** (Pages gratuit). `gh` : "C:\Program Files\GitHub CLI\gh.exe".
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
-- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (`CSS_V` de build_guides.py et style.css : 20261121b ; app.js : 20261107a ; protection.js et assets/son.js : 20261020b).**
+- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (`CSS_V` de build_guides.py, style.css, app.js et protection.js : 20261121c ; assets/son.js : 20261020b ; assets/textes-ar.js prend le ?v= d'app.js).**
 - Image d'aperçu des liens partagés : `assets/og-image-v7.jpg` (05/10 : texte à gauche + nouvelle icône goutte + photo NEUTRE de l'eau versée à droite ; modèle `tools/og-image.html`, capture Edge 1200×630 puis JPEG qualité 88 ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
@@ -643,3 +643,32 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   (décision d'Ahmed, § 11.10.9).
 - Contrôle complet du 21/11 sur ce site : seule anomalie = **pas d'adresse arabe séparée** (`ar/`, § 8 point 9) — proposé à Ahmed (A).
 - Sur le PC : `git checkout main` puis `git pull` (ici, projets-ahmed et les 13 dépôts touchés).
+
+## 21/11/2026 — UNE ADRESSE PAR LANGUE (demande d'Ahmed, règle commune § 8 point 9 ; méthode de Code de la route et d'Alerte Concours)
+- Chaque page publique existe en FRANÇAIS à son adresse et en ARABE dans `ar/<même chemin>` : accueil (`ar/`), 35 marques, prix-stika,
+  quelle-eau, 2 magasins, a-propos, rapports (liste + chaque mois). Chaque page n'a qu'UNE langue (FR : seuls le verset du bandeau et le
+  bouton « العربية » sont en arabe ; AR : noms de marques, magasins et lieux en lettres latines, isolés par `<bdi>` ou U+2068/2069).
+  hreflang fr / ar / x-default (= fr) sur les deux, canonical / og:url / og:locale propres, `<html lang dir data-langue-fixe data-autre-langue data-racine>`.
+  Pas de version arabe : `prix-eau-monoprix/`, `prix-eau-otrity/` (noindex) et `video/` (une seule adresse, `?lang=ar`).
+- **`tools/langues.py`** : `ajouter(chemin, fr, ar)` puis `ecrire_tout()` (écrit `<chemin>/` et `ar/<chemin>/` une fois toutes les pages
+  connues : un lien vers une page qui existe en arabe reste dans `ar/`, tout le reste — style, scripts, data, images, vidéo — est pris à la
+  racine), `finir()` (hreflang, canonical, bouton, police Noto Sans Arabic), `accueil_ar()` (ar/index.html tiré d'index.html par la liste
+  `ACCUEIL` : morceau EXACT d'index.html -> traduction ; un morceau manquant est affiché « ATTENTION » par build_pages.py et le test trouve
+  le français), `nettoyer()` (retire une page arabe seulement si sa page française a disparu), `page_unique()` (video/).
+  Générateurs : `page_marque(b, lang)` (build_pages.py), `page_prix_stika / page_quelle_eau / page_magasin / page_a_propos(…, lang)`,
+  `entete / bandeau / pied / _gabarit(…, lang)` (build_guides.py), `page / page_ar / page_liste(…, lang)` (build_rapports.py ; l'image
+  d'aperçu du rapport est la même dans les deux langues). Le plan du site liste chaque page FR puis sa page AR.
+- **NE JAMAIS MODIFIER `ar/` À LA MAIN** : tout est refait chaque nuit par `python tools/build_pages.py` (maj-prix.yml, qui fait `git add ar/`).
+  Une phrase ajoutée à `index.html` = sa traduction dans `ACCUEIL` de tools/langues.py, dans le même envoi.
+- **app.js** : `AR`, `T(fr, ar)`, `RACINE` (préfixe des images : « ../ » sur la page arabe), dates `ar-TN` (جانفي، فيفري… chiffres latins),
+  prix « 3,540 د.ت ». Notes des marques en arabe : `assets/textes-ar.js` (chargé par ar/index.html, lu aussi par build_pages.py) ; une note
+  française sans traduction n'est pas affichée sur la page arabe. Formulaire « Signaler un prix » de la page arabe : texte arabe mais
+  VALEURS françaises (`<option value="1,5 L">1,5 لتر</option>`), lues par tools/signalements.py.
+- **protection.js** : bouton `a.langue-btn` (vrai lien ; au téléphone « ع » / « Fr ») -> autre adresse avec les mêmes paramètres et l'ancre,
+  choix gardé (`localStorage` « langue ») ; ancien `?lang=ar` -> `ar/` ; langue gardée renvoyée SEULEMENT en venant d'une page du site, jamais
+  pour un robot (UA, webdriver) ni dans un cadre ; `window.allerVers` = crochet des tests. Textes du partage des rapports et de la copie en arabe.
+- style.css : `.langue-btn` + bloc `html[dir="rtl"]` (fin du fichier). Service worker inchangé (pages ar/ = réseau d'abord comme les autres).
+- Tests : bloc « UNE ADRESSE PAR LANGUE » de tools/test_site.mjs (pages AR présentes, aucun arabe sur les pages FR, aucun mot français sur les
+  pages AR, hreflang réciproques, bouton de langue, liens des pages AR, titres arabes uniques ≤ 70, JSON-LD, plan du site, accueil arabe rendu
+  par app.js dans jsdom, renvois ?lang=ar / langue gardée / robot) + ligne « Une adresse par langue » dans FONCTIONS (a-propos FR et AR).
+  Contrôles du 21/11 : visiteur simulé ANOMALIES 0 ; mode sombre (seuil 3) et clair (seuil 4,5) : 0 sur /, /ar/, ar/marque/safia/, ar/prix-stika/, ar/rapports/2026-11/.

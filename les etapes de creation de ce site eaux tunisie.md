@@ -492,3 +492,13 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   `node "outils visibilite/mode_sombre.mjs" --clair --seuil 4.5 <adresse>` (clair) ; il ouvre les `<details>` et suit les pages payantes.
   Il fait partie du contrôle complet (point 14). Une couleur trop pâle se fonce d'un cran (même teinte), jamais un nouveau design.
 - Un site trop chargé au téléphone se lit mal : une phrase de moins vaut mieux qu'un paragraphe (Hygiène & Maison, 20/11).
+
+## Une adresse par langue (21/11/2026, règle commune § 8 point 9)
+- Chaque page publique existe en français à son adresse et en arabe dans `ar/<même chemin>` (Google lit une page arabe à part entière).
+- Pages fabriquées : chaque générateur (`build_pages.py`, `build_guides.py`, `build_rapports.py`) écrit la page dans les deux langues ;
+  `tools/langues.py` les range (`ajouter()` puis `ecrire_tout()`), ajoute hreflang fr / ar / x-default, canonical, og:locale,
+  bouton de langue, et corrige les liens de la page arabe (fichiers pris à la racine).
+- Accueil (écrit à la main) : `ar/index.html` est fabriqué à partir d'`index.html` par la liste `ACCUEIL` de `tools/langues.py`
+  (une phrase française ajoutée à l'accueil = sa traduction dans cette liste, sinon le test la trouve sur la page arabe).
+- `app.js` écrit ses textes dans la langue de la page (`T(fr, ar)`), `protection.js` gère le bouton de langue et l'ancien `?lang=ar`.
+- Test : bloc « UNE ADRESSE PAR LANGUE » de `tools/test_site.mjs`.

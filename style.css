@@ -994,3 +994,52 @@ input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-
 .mon-carrefour{margin:8px 0 4px;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .mon-carrefour select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid #b9cbe0;max-width:100%}
 .mon-carrefour label{background:var(--surface);color:var(--ink);padding:3px 10px;border-radius:999px}  /* lisible même posé sur le bandeau bleu (21/11/2026) */
+
+/* UNE ADRESSE PAR LANGUE (21/11/2026) : bouton de langue de l'en-tête (vrai lien vers l'autre adresse : « العربية » sur les pages
+   françaises, « Français » sur les pages arabes dans ar/) et mise en page de droite à gauche des pages arabes (html[dir=rtl]) */
+.langue-btn{flex:none; display:inline-flex; align-items:center; justify-content:center; min-height:32px; padding:4px 12px; border-radius:999px;
+  border:1px solid var(--line); background:var(--surface); color:var(--accent); font-weight:700; font-size:14px; text-decoration:none; line-height:1.2}
+.langue-btn:hover{border-color:var(--accent)}
+.langue-btn[lang="ar"]{font-family:"Noto Sans Arabic","Figtree",system-ui,sans-serif; font-size:15px}
+@media (max-width:560px){
+  .titre{padding-inline-end:150px}
+  .langue-btn{position:absolute; top:14px; right:56px; min-height:32px; padding:3px 10px; font-size:13px}
+  .langue-btn[lang="ar"]{font-size:14px}
+}
+html[lang="ar"] body{font-family:"Figtree","Noto Sans Arabic",system-ui,sans-serif}
+html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] .h-site, html[lang="ar"] .pied-logo{font-family:"Bricolage Grotesque","Noto Sans Arabic",sans-serif; letter-spacing:0}
+html[dir="rtl"] .search svg{left:auto; right:12px}
+html[dir="rtl"] .search input{padding:9px 36px 9px 12px}
+html[dir="rtl"] .baisses-list .bx-pct{margin-left:0; margin-right:4px}
+html[dir="rtl"] .winner-price, html[dir="rtl"] .top-prix, html[dir="rtl"] .vote-nb{margin-left:0; margin-right:auto}
+html[dir="rtl"] .liste-tete h2{margin-right:0; margin-left:auto}
+html[dir="rtl"] .histo-table th, html[dir="rtl"] table.prices th{text-align:right}
+html[dir="rtl"] .compo-table .cv, html[dir="rtl"] .offer .p, html[dir="rtl"] .stika-cell, html[dir="rtl"] .order-item .oi-price,
+html[dir="rtl"] .top-p, html[dir="rtl"] .top-liste small, html[dir="rtl"] table.prices th:last-child{text-align:left}
+html[dir="rtl"] table.prices th:last-child{padding-right:0; padding-left:16px}
+html[dir="rtl"] td.addc{padding-right:inherit; padding-left:0}
+html[dir="rtl"] .chipbtn .ic-photo{margin-right:0; margin-left:6px}
+html[dir="rtl"] .etapes-cmd{padding-left:0; padding-right:20px}
+html[dir="rtl"] .livraison-cle{border-left:0; border-right:4px solid var(--gaz)}
+html[dir="rtl"] #livraison-titre{margin-right:0; margin-left:28px}
+html[dir="rtl"] .top-carte .top-detail{padding-right:0; padding-left:104px}
+html[dir="rtl"] .top-partage{right:auto; left:16px}
+@media (max-width:560px){ html[dir="rtl"] .top-partage{left:14px} }
+html[dir="rtl"] .help-close{right:auto; left:10px}
+html[dir="rtl"] .histo-fold summary{padding-right:0; padding-left:24px}
+html[dir="rtl"] .histo-fold summary::after{right:auto; left:4px}
+html[dir="rtl"] .credit-photo{right:auto; left:3px}
+html[dir="rtl"] .avis .hp, html[dir="rtl"] #sig-form .hp{left:auto; right:-9999px}
+html[dir="rtl"] .page-hero h1{line-height:1.35}
+@media (max-width:560px){
+  html[dir="rtl"] .titre{padding-inline-end:150px}
+  html[dir="rtl"] .partager{right:auto; left:16px}
+  html[dir="rtl"] .langue-btn{right:auto; left:56px}
+}
+/* au téléphone, bouton de langue court (« ع » / « Fr ») : le titre et la ligne « Mis à jour… » gardent leur place */
+.langue-btn .lb-court{display:none}
+@media (max-width:560px){
+  .langue-btn{min-width:34px; padding:3px 8px}
+  .langue-btn .lb-long{display:none} .langue-btn .lb-court{display:inline}
+  .titre, html[dir="rtl"] .titre{padding-inline-end:88px}
+}
