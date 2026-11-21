@@ -243,3 +243,6 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - **16/11/2026 (journée)** : rien de changé sur ce site ; tableau de bord privé : partie « Dépenses et abonnements » (depenses.json de projets-ahmed, jamais de numéro de carte).
 - **16/11/2026 (soir)** : rien de changé sur ce site ; The Message : réparation SEO prête, à publier depuis le PC.
 - **16/11/2026 (nuit)** : rien de changé sur ce site ; règle commune § 57 (robots lisibles par GitHub, contrôlés avant envoi et chaque jour).
+- **21/11/2026** : site lisible en mode sombre ET en mode clair (boutons, fenêtres, verset, couleurs un cran plus foncées ; style 20261121b).
+  Sur tous les sites d'Ahmed : règle commune § 65 et contrôle `mode_sombre.mjs` (projets-ahmed). Autres sites : Prix Hygiène & Maison allégé
+  et passé au turquoise (hygiene.clicvia.com), outil vidéo réparé (Code de la route, Points d'eau). Reste : une adresse arabe séparée (`ar/`) pour ce site.
