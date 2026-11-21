@@ -14,6 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_guides import SOURCES_HTML, CSS_V, ICONE_WA, entete, bandeau, pied  # noqa: E402
+import langues as LG  # noqa: E402  (une adresse par langue : pages françaises + ar/)
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://prix-eau.clicvia.com"
@@ -43,7 +44,16 @@ def esc(s):
     return str(s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def page_marque(b):
+COMPO_ROWS_AR = {"tds": "البقايا الجافة (TDS)", "ca": "الكالسيوم", "mg": "المغنيزيوم", "na": "الصوديوم", "k": "البوتاسيوم",
+                 "hco3": "البيكربونات", "so4": "الكبريتات", "cl": "الكلوريد", "no3": "النترات", "f": "الفلوريد", "ph": "درجة الحموضة pH"}
+# textes arabes des données des marques (notes, catégories officielles) : assets/textes-ar.js, aussi chargé par ar/index.html
+TEXTES_AR = json.loads(re.search(r"window\.TEXTES_AR\s*=\s*({.*})\s*;", (ROOT / "assets" / "textes-ar.js").read_text(encoding="utf-8"), re.S).group(1))
+
+
+def page_marque(b, lang="fr"):
+    """Page d'une marque, en français (marque/<id>/) ou en arabe (ar/marque/<id>/, rangée par tools/langues.py)."""
+    T = lambda fr, ar: ar if lang == "ar" else fr
+    D = lambda v: LG.dt(v, lang)
     bid, nom = b["id"], b["name"]
     compo = COMPO["waters"].get(bid)
     prods = b.get("products") or []
@@ -51,49 +61,58 @@ def page_marque(b):
     # tableau des prix
     lignes = []
     for p in sorted(prods, key=lambda p: (p["liters"], p["category"])):
-        mini = min(p["prices"].values())
-        gagnant = min(p["prices"], key=p["prices"].get)
         mag = p.get("magasins") or {}
-        offres = " · ".join(f"{esc(s)} {fmt_dt(v)}" + (f" <small>(dans {mag[s][0]} magasin{'s' if mag[s][0] > 1 else ''} sur {mag[s][1]})</small>"
-                                                        if s in mag else "")
+        dans = (lambda s: f" <small>(في {mag[s][0]} مغازة من {mag[s][1]})</small>") if lang == "ar" else \
+            (lambda s: f" <small>(dans {mag[s][0]} magasin{'s' if mag[s][0] > 1 else ''} sur {mag[s][1]})</small>")
+        nom_s = (lambda s: f"<bdi>{esc(s)}</bdi>") if lang == "ar" else esc
+        offres = " · ".join(f"{nom_s(s)} {D(v)}" + (dans(s) if s in mag else "")
                             for s, v in sorted(p["prices"].items(), key=lambda x: x[1]))
+        mini = min(p["prices"].values())
         # enseignes vérifiées ce jour qui ne vendent pas ce format (23/10/2026)
-        offres += "".join(f" · {esc(s)} <small>non disponible</small>" for s in p.get("non_dispo") or [])
+        offres += "".join(f" · {esc(s)} <small>{T('non disponible', 'غير متوفر')}</small>" for s in p.get("non_dispo") or [])
         n = taille_stika(p["liters"])
-        stika = fmt_dt(mini * n) + f" <small>(×{n})</small>" if p["liters"] <= GRAND_FORMAT else "—"
-        gaz = " gazeuse" if p["category"] == "gazeuse" else ""
-        lignes.append(f"<tr><td class='fmt'>{esc(p['format'])}{gaz}</td>"
-                      f"<td>{offres}</td><td style='text-align:right'>{stika}</td></tr>")
-    tableau = (f"<table class='prices'><tr><th>Format</th><th>Prix bouteille par enseigne</th>"
-               f"<th>Stika</th></tr>{''.join(lignes)}</table>") if lignes else \
-        "<p><em>Prix non disponible pour le moment dans les enseignes que nous suivons " \
-        "(Carrefour, Géant).</em></p>"
+        stika = D(mini * n) + f" <small>(×{n})</small>" if p["liters"] <= GRAND_FORMAT else "—"
+        gaz = T(" gazeuse", " غازي") if p["category"] == "gazeuse" else ""
+        fmt = esc(p['format']) if lang != "ar" else LG.litres(p["liters"], "ar") if p["liters"] >= 1 else f"{p['liters'] * 100:g} صل"
+        lignes.append(f"<tr><td class='fmt'>{fmt}{gaz}</td>"
+                      f"<td>{offres}</td><td style='text-align:end'>{stika}</td></tr>")
+    tableau = (f"<table class='prices'><tr><th>{T('Format', 'الحجم')}</th><th>{T('Prix bouteille par enseigne', 'سعر القارورة حسب المغازة')}</th>"
+               f"<th>{T('Stika', 'الستيكة')}</th></tr>{''.join(lignes)}</table>") if lignes else \
+        T("<p><em>Prix non disponible pour le moment dans les enseignes que nous suivons (Carrefour, Géant).</em></p>",
+          "<p><em>السعر غير متوفر حاليًا في المغازات التي نتابعها (Carrefour وGéant).</em></p>")
 
     # composition
     compo_html = ""
     if compo:
-        cols = "".join(f"<th>{esc(e['src'])}</th>" for e in compo) if len(compo) > 1 else ""
+        cols = "".join(f"<th><bdi>{esc(e['src'])}</bdi></th>" for e in compo) if len(compo) > 1 else ""
         head = f"<tr><th></th>{cols}</tr>" if cols else ""
+        unite = T(" <small>mg/L</small>", " <small>مغ/لتر</small>")
         rows = "".join(
-            f"<tr><td>{lab}{' <small>mg/L</small>' if k != 'ph' else ''}</td>" +
-            "".join(f"<td style='text-align:right'>{e[k]}</td>" for e in compo) + "</tr>"
+            f"<tr><td>{COMPO_ROWS_AR[k] if lang == 'ar' else lab}{unite if k != 'ph' else ''}</td>" +
+            "".join(f"<td style='text-align:end'>{e[k]}</td>" for e in compo) + "</tr>"
             for k, lab in COMPO_ROWS)
-        cats = " · ".join(sorted({COMPO['cats'][str(e['cat'])] for e in compo}))
-        compo_html = f"""
+        cats = " · ".join(sorted({(TEXTES_AR["cats"] if lang == "ar" else COMPO['cats'])[str(e['cat'])] for e in compo}))
+        compo_html = T(f"""
   <h2>Composition de l'eau {esc(nom)}</h2>
   <p class="sub">{esc(cats)} — d'après les fiches de l'Office National du Thermalisme
-   (<a href="{COMPO['credit']['url']}" rel="noopener">source</a>), en mg/L sauf pH.</p>
+   (<a href="{COMPO['credit']['url']}" rel="noopener">source</a>), en mg/L sauf pH.</p>""", f"""
+  <h2>تركيبة ماء {LG.iso(esc(nom))}</h2>
+  <p class="sub">{esc(cats)} — حسب جداول الديوان الوطني للمياه المعدنية والاستشفاء بالمياه
+   (<a href="{COMPO['credit']['url']}" rel="noopener">المصدر</a>)، بالمليغرام في اللتر ما عدا درجة الحموضة.</p>""") + \
+            f"""
   <div class="compo" style="margin:0"><table class="compo-table">{head}{rows}</table></div>"""
 
     meta_bits = []
     if b.get("source"):
-        meta_bits.append(f"Source : <b>{esc(b['source'])}</b>")
+        meta_bits.append(T(f"Source : <b>{esc(b['source'])}</b>", f"العين: <b><bdi>{esc(b['source'])}</bdi></b>"))
     if b.get("company"):
-        meta_bits.append(esc(b["company"]))
+        meta_bits.append(esc(b["company"]) if lang != "ar" else f"<bdi>{esc(b['company'])}</bdi>")
     if b.get("depuis"):
-        meta_bits.append(f"Commercialisée depuis <b>{b['depuis']}</b>")
+        meta_bits.append(T(f"Commercialisée depuis <b>{b['depuis']}</b>", f"في السوق منذ <b>{b['depuis']}</b>"))
     if b.get("note"):
-        meta_bits.append(esc(b["note"]))
+        note = esc(b["note"]) if lang != "ar" else TEXTES_AR["notes"].get(bid)
+        if note:
+            meta_bits.append(note)
 
     prix15 = None
     c15 = [min(p["prices"].values()) for p in prods
@@ -101,30 +120,38 @@ def page_marque(b):
     if c15:
         prix15 = min(c15)
     # SEO (08/11/2026) : description <= 165 caractères (Google coupe au-delà), sans promesse de livraison (commande fermée)
-    desc = (f"Prix de l'eau {nom} en Tunisie : bouteille et stika chez Géant et Carrefour, mis à jour chaque jour."
-            + (f" 1,5 L dès {fmt_dt(prix15).replace(chr(160), ' ')}." if prix15 else "")
-            + " Composition, comparateur gratuit.")
+    if lang == "ar":
+        desc = (f"سعر ماء {LG.iso(nom)} في تونس: القارورة والستيكة في Géant وCarrefour، يُحدَّث كل يوم."
+                + (f" قارورة 1,5 لتر من {LG.iso(D(prix15))}." if prix15 else "")
+                + " التركيبة، مقارن مجاني.")
+    else:
+        desc = (f"Prix de l'eau {nom} en Tunisie : bouteille et stika chez Géant et Carrefour, mis à jour chaque jour."
+                + (f" 1,5 L dès {D(prix15).replace(chr(160), ' ')}." if prix15 else "")
+                + " Composition, comparateur gratuit.")
 
     img = f"../../{b['img']}" if b.get("img") else None
-    photo_html = f'<img src="{esc(img)}" alt="Bouteille {esc(nom)}" loading="lazy">' if img else ""
+    photo_html = f'<img src="{esc(img)}" alt="{T("Bouteille", "قارورة")} {esc(nom)}" loading="lazy">' if img else ""
     cr = b.get("img_credit")
     if img and cr:  # photo libre (Open Food Facts…) : crédit obligatoire juste sous la photo
         photo_html = (f'<figure class="photo-libre">{photo_html}<figcaption class="credit-photo">'
-                      f'<a href="{esc(cr["page"])}" rel="noopener">Photo : {esc(cr["source"])}</a>, '
+                      f'<a href="{esc(cr["page"])}" rel="noopener">{T("Photo", "صورة")} : {esc(cr["source"])}</a>, '
                       f'<a href="{esc(cr["licence_url"])}" rel="license noopener">CC BY-SA</a></figcaption></figure>')
     # le prix de la stika dans le titre Google : donne envie de cliquer dans les résultats
-    titre = (f"Prix {esc(nom)} — stika 1,5 L à {fmt_dt(prix15 * 6)} | comparateur gratuit"      # <= 70 caractères (SEO)
-             if prix15 else f"Prix {esc(nom)} — bouteille et stika | comparateur gratuit")
-    iso = lambda x: "⁨" + x + "⁩"   # mots latins isolés dans la phrase arabe
-    ar = (f"سعر ماء {iso(esc(nom))} في تونس — ستيكة 1,5 لتر ابتداءً من {iso(fmt_dt(prix15 * 6))}" if prix15
-          else f"سعر ماء {iso(esc(nom))} في تونس")
-    wa = "https://wa.me/?text=" + urllib.parse.quote(
-        f"💧 Prix de l'eau {nom}" + (f" : stika 1,5 L à {fmt_dt(prix15 * 6)}" if prix15 else "") + f" — {SITE}/marque/{bid}/")
+    if lang == "ar":
+        titre = (f"سعر ماء {LG.iso(esc(nom))} — ستيكة 1,5 لتر بـ {LG.iso(D(prix15 * 6))} | مقارن مجاني" if prix15
+                 else f"سعر ماء {LG.iso(esc(nom))} — القارورة والستيكة | مقارن مجاني")
+        wa_txt = f"💧 سعر ماء {nom}" + (f": ستيكة 1,5 لتر بـ {D(prix15 * 6)}" if prix15 else "") + f" — {SITE}/ar/marque/{bid}/"
+    else:
+        titre = (f"Prix {esc(nom)} — stika 1,5 L à {D(prix15 * 6)} | comparateur gratuit"      # <= 70 caractères (SEO)
+                 if prix15 else f"Prix {esc(nom)} — bouteille et stika | comparateur gratuit")
+        wa_txt = f"💧 Prix de l'eau {nom}" + (f" : stika 1,5 L à {D(prix15 * 6)}" if prix15 else "") + f" — {SITE}/marque/{bid}/"
+    wa = "https://wa.me/?text=" + urllib.parse.quote(wa_txt)
 
     jsonld = json.dumps({
         "@context": "https://schema.org",
         "@type": "Product",
-        "name": f"Eau minérale {nom}",
+        "name": T(f"Eau minérale {nom}", f"ماء معدني {nom}"),
+        **({"inLanguage": "ar"} if lang == "ar" else {}),
         "brand": {"@type": "Brand", "name": nom},
         **({"image": f"{SITE}/{b['img']}"} if b.get("img") else {}),
         **({"offers": {"@type": "AggregateOffer", "priceCurrency": "TND",
@@ -133,8 +160,27 @@ def page_marque(b):
                        "offerCount": sum(len(p["prices"]) for p in prods)}} if prods else {}),
     }, ensure_ascii=False)
 
+    html_tag = '<html lang="ar" dir="rtl" translate="no">' if lang == "ar" else '<html lang="fr" translate="no">'
+    bas = T(f"""<p class="sub" style="margin-top:10px">Prix relevés le {maj_fr} sur les boutiques en ligne des
+    grandes surfaces — indicatifs, ils peuvent varier selon le magasin.
+    Stika = pack de 6 bouteilles (12 pour les 50 cl).</p>""", f"""<p class="sub" style="margin-top:10px">أسعار مقروءة يوم {maj_fr} من المتاجر
+    الإلكترونية للمغازات الكبرى — تقريبية، وقد تتغيّر حسب المغازة. الستيكة = علبة من 6 قوارير (12 للقوارير 50 صل).</p>""")
+    credit = ""
+    if img and cr:
+        credit = T(f'<p class="credit-pied">Photo de la bouteille : <a href="{esc(cr["page"])}" rel="noopener">{esc(cr["source"])}</a>, licence <a href="{esc(cr["licence_url"])}" rel="license noopener">{esc(cr["licence"])}</a> ; recadrée sur fond blanc.</p>',
+                   f'<p class="credit-pied">صورة القارورة: <a href="{esc(cr["page"])}" rel="noopener">{esc(cr["source"])}</a>، رخصة <a href="{esc(cr["licence_url"])}" rel="license noopener">{esc(cr["licence"])}</a>، مقصوصة على خلفية بيضاء.</p>')
+    commande = T(f"""<h2>Commande et livraison de l'eau {esc(nom)} — bientôt</h2>
+    <p class="intro" style="margin-top:6px">La commande avec livraison à domicile arrive bientôt sur
+    <a href="../../">Prix des Eaux de Tunisie</a> : vous commanderez auprès de grossistes et dépôts partenaires
+    de votre région, à leurs propres prix, livraison comprise (les prix ci-dessus sont ceux des grandes
+    surfaces, à titre indicatif). <a href="https://t.me/prixeautunisie" rel="noopener">Être prévenu de l'ouverture</a>.</p>""",
+                 f"""<h2>طلب ماء {LG.iso(esc(nom))} وتوصيله — قريبًا</h2>
+    <p class="intro" style="margin-top:6px">الطلب مع التوصيل إلى المنزل قريبًا في <a href="../../">أسعار الماء في تونس</a>: ستطلب من تجّار جملة
+    ومخازن شريكة في جهتك، بأسعارهم الخاصة، مع التوصيل (الأسعار أعلاه هي أسعار المغازات الكبرى، للإرشاد فقط).
+    <a href="https://t.me/prixeautunisie" rel="noopener">أعلِمني عند الافتتاح</a>.</p>""")
+
     return f"""<!doctype html>
-<html lang="fr" translate="no">
+{html_tag}
 <head>
 <meta charset="utf-8">
 <meta name="google" content="notranslate">
@@ -165,8 +211,8 @@ def page_marque(b):
 <script type="application/ld+json">{jsonld}</script>
 </head>
 <body>
-{entete("../../")}
-{bandeau("../../", "Prix de l'eau " + esc(nom), "Prix de toutes les eaux minérales en Tunisie", ar, maj_fr)}
+{entete("../../", lang)}
+{bandeau("../../", T("Prix de l'eau ", "سعر ماء ") + (esc(nom) if lang != "ar" else LG.iso(esc(nom))), T("Prix de toutes les eaux minérales en Tunisie", "أسعار كل المياه المعدنية في تونس"), None, maj_fr, lang)}
 <div class="wrap">
   <section>
     <div class="card" style="max-width:680px">
@@ -177,33 +223,28 @@ def page_marque(b):
       {f'<div class="meta">{" · ".join(meta_bits)}</div>' if meta_bits else ""}
       {tableau}
     </div>
-    <p class="sub" style="margin-top:10px">Prix relevés le {maj_fr} sur les boutiques en ligne des
-    grandes surfaces — indicatifs, ils peuvent varier selon le magasin.
-    Stika = pack de 6 bouteilles (12 pour les 50 cl).</p>
-    {f'<p class="credit-pied">Photo de la bouteille : <a href="{esc(cr["page"])}" rel="noopener">{esc(cr["source"])}</a>, licence <a href="{esc(cr["licence_url"])}" rel="license noopener">{esc(cr["licence"])}</a> ; recadrée sur fond blanc.</p>' if img and cr else ""}
-    <a class="bouton-wa" href="{wa}" target="_blank" rel="noopener">{ICONE_WA}Partager sur WhatsApp</a>
+    {bas}
+    {credit}
+    <a class="bouton-wa" href="{wa}" target="_blank" rel="noopener">{ICONE_WA}{T("Partager sur WhatsApp", "شارك على واتساب")}</a>
   </section>
   <section>{compo_html}</section>
   <section>
-    <h2>Commande et livraison de l'eau {esc(nom)} — bientôt</h2>
-    <p class="intro" style="margin-top:6px">La commande avec livraison à domicile arrive bientôt sur
-    <a href="../../">Prix des Eaux de Tunisie</a> : vous commanderez auprès de grossistes et dépôts partenaires
-    de votre région, à leurs propres prix, livraison comprise (les prix ci-dessus sont ceux des grandes
-    surfaces, à titre indicatif). <a href="https://t.me/prixeautunisie" rel="noopener">Être prévenu de l'ouverture</a>.</p>
+    {commande}
   </section>
 </div>
-{pied("../../")}
+{pied("../../", lang)}
 </body>
 </html>
 """
 
 
 # ---------------------------------------------------------------- génération
+# Une adresse par langue (21/11/2026) : chaque page est préparée en français et en arabe, puis tools/langues.py les écrit
+# ensemble (<chemin>/ et ar/<chemin>/), une fois connue la liste de toutes les pages arabes (liens qui restent dans ar/).
+LG.MIROIR.add("")                                     # l'accueil existe en arabe (ar/index.html, fabriqué plus bas)
 urls = [f"{SITE}/"]
 for b in data["brands"]:
-    d = ROOT / "marque" / b["id"]
-    d.mkdir(parents=True, exist_ok=True)
-    (d / "index.html").write_text(page_marque(b), encoding="utf-8", newline="\n")
+    LG.ajouter(f"marque/{b['id']}/", page_marque(b), page_marque(b, "ar"))
     urls.append(f"{SITE}/marque/{b['id']}/")
 
 # pages de marques disparues de la liste : on les retire
@@ -219,25 +260,20 @@ sys.path.insert(0, str(ROOT / "tools"))
 from build_guides import generer  # noqa: E402
 urls += generer(data, COMPO, SITE, ROOT, maj_fr)
 
-# page vidéo (video/) tirée de quelle-eau/ : mêmes en-tête, pied, CSP et ?v= (tools/page_video.py, réglages page_video.json)
-from page_video import pages_video  # noqa: E402
-urls += [SITE + "/" + c for c in pages_video(str(ROOT))]
-
 # rapports du mois (18/10/2026, règle commune § 25) : rapports/ et rapports/AAAA-MM/, chiffres tirés de data/historique.json
 import build_guides as G  # noqa: E402
 from build_rapports import generer as generer_rapports  # noqa: E402
-urls += generer_rapports(data, SITE, G)          # (url, date des chiffres) : un mois fini garde sa date
+urls_rapports = generer_rapports(data, SITE, G)          # (url, date des chiffres) : un mois fini garde sa date
 
-# sitemap
-today = date.today().isoformat()
-sm = ['<?xml version="1.0" encoding="UTF-8"?>',
-      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-for i, u in enumerate(urls):
-    u, lm = u if isinstance(u, tuple) else (u, today)
-    sm.append(f"  <url><loc>{u}</loc><lastmod>{lm}</lastmod>"
-              f"<changefreq>daily</changefreq><priority>{'1.0' if i == 0 else '0.7'}</priority></url>")
-sm.append("</urlset>")
-(ROOT / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8", newline="\n")
+# toutes les pages préparées : écrites maintenant, en français et en arabe
+LG.ecrire_tout(str(ROOT))
+
+# page vidéo (video/) tirée de quelle-eau/ : mêmes en-tête, pied, CSP et ?v= (tools/page_video.py, réglages page_video.json) ;
+# elle garde UNE adresse (?lang=ar) : ni langue fixe, ni bouton de langue, ni hreflang de sa page modèle
+from page_video import pages_video  # noqa: E402
+urls_video = [SITE + "/" + c for c in pages_video(str(ROOT))]
+for c in urls_video:
+    LG.page_unique(str(ROOT / c.replace(SITE + "/", "") / "index.html"))
 
 # liens statiques sur l'accueil (entre <!--MARQUES--> et <!--/MARQUES-->)
 index = ROOT / "index.html"
@@ -259,6 +295,30 @@ noms = ", ".join(b["name"] for b in data["brands"])
 html = re.sub(r'("text": ")\d+ marques vendues en Tunisie : [^"]*(")',
               lambda m: m.group(1) + f"{nb} marques vendues en Tunisie : {noms}." + m.group(2),
               html)
-index.write_text(html, encoding="utf-8", newline="\n")
+# accueil arabe : ar/index.html tiré d'index.html (tools/langues.py, ACCUEIL) ; hreflang et bouton de langue sur les deux
+fr_acc, ar_acc = LG.finir(html, LG.accueil_ar(html, nb), "")
+index.write_text(fr_acc, encoding="utf-8", newline="\n")
+LG.ecrire(str(ROOT), "ar/", ar_acc)
+if LG.MANQUES:
+    print("ATTENTION accueil arabe : morceau(x) d'index.html sans traduction (tools/langues.py, ACCUEIL) :", *LG.MANQUES, sep="\n  ")
 
-print(f"{len(data['brands'])} pages marque générées · sitemap {len(urls)} URLs · liens accueil : {lien_accueil}")
+# pages arabes dont la page française a disparu (marque retirée…) : retirées
+for c in LG.nettoyer(str(ROOT)):
+    print("page arabe retirée : ar/" + c)
+
+# sitemap : chaque page française puis sa version arabe (ar/…), avec la date de ses chiffres
+today = date.today().isoformat()
+sm = ['<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+toutes = [(u, today) for u in urls] + urls_rapports + [(u, today) for u in urls_video]
+for i, (u, lm) in enumerate(toutes):
+    chemin = u.replace(SITE + "/", "")
+    versions = [u] + ([f"{SITE}/ar/{chemin}"] if chemin in LG.MIROIR else [])
+    for v in versions:
+        sm.append(f"  <url><loc>{v}</loc><lastmod>{lm}</lastmod>"
+                  f"<changefreq>daily</changefreq><priority>{'1.0' if i == 0 else '0.7'}</priority></url>")
+sm.append("</urlset>")
+(ROOT / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8", newline="\n")
+
+n_sm = len(sm) - 3
+print(f"{len(data['brands'])} pages marque générées (+ arabe) · sitemap {n_sm} URLs · liens accueil : {lien_accueil}")

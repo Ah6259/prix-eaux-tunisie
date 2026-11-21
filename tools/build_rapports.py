@@ -107,16 +107,24 @@ ICO_PART = ('<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" 
             '<path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>')
 
 
-def bouton_partage(url, titre):
+def bouton_partage(url, titre, lang="fr"):
     """UN bouton « Partager ce rapport » (menu de partage du téléphone ; protection.js, button[data-partage-rapport])."""
     from html import escape
+    a, c = (("شارك هذا التقرير", "تم نسخ الرابط ✓ — الصقه حيث تريد") if lang == "ar"
+            else ("Partager ce rapport", "Lien copié ✓ — collez-le où vous voulez"))
     return (f'<div class="rp-partage"><button class="rp-partager" type="button" data-partage-rapport="{escape(url)}" data-titre="{escape(titre)}">'
-            f'{ICO_PART}<span class="rp-a-copier">Partager ce rapport</span><span class="rp-copie">Lien copié ✓ — collez-le où vous voulez</span></button>'
+            f'{ICO_PART}<span class="rp-a-copier">{a}</span><span class="rp-copie">{c}</span></button>'
             '</div>')
 
 
-def page(m, d, prev, courant, ids, SITE, G):
-    """HTML du rapport d'un mois (G = module build_guides : gabarit, échappement)."""
+def jour_ar(d):
+    return f"{int(d[8:10])} {MOIS_AR[int(d[5:7]) - 1]} {d[:4]}"
+
+
+def page(m, d, prev, courant, ids, SITE, G, lang="fr"):
+    """HTML du rapport d'un mois (G = module build_guides : gabarit, échappement), en français ou en arabe."""
+    if lang == "ar":
+        return page_ar(m, d, prev, courant, ids, SITE, G)
     esc, iso = G._esc, G._iso
     mt, ma = mois_txt(m), mois_ar(m)
     rang = sorted(d["marques"].items(), key=lambda x: (x[1]["med"], x[0]))
@@ -138,12 +146,8 @@ def page(m, d, prev, courant, ids, SITE, G):
             f"La plus chère : <strong>{esc(nz)}</strong>, {_dt(xz['med'])} la bouteille.",
             f"Stika 1,5 L la moins chère vue ce mois-ci : {_dt(st['prix'])} le {jour_txt(st['date'])} ({esc(', '.join(st['marques']))}).",
             f"{len(rang)} marques suivies au moins {MIN_JOURS} jours, sur {d['jours']} jours de relevés."]
-    evo = []
     if prev:
-        ev = sorted(((nom, variation(x["med"], pm[nom]["med"])) for nom, x in d["marques"].items() if nom in pm), key=lambda x: (x[1] is None, x[1] or 0))
-        ev = [e for e in ev if e[1] is not None]
-        hausses = [e for e in reversed(ev) if e[1] > 0][:3]
-        baisses = [e for e in ev if e[1] < 0][:3]
+        hausses, baisses, ev = evolutions(d, pm)
         if hausses:
             bref.append("Hausses depuis " + mois_txt(mois_precedent(m)) + " : " + ", ".join(f"{esc(n)} (+{v} %)" for n, v in hausses) + ".")
         if baisses:
@@ -182,23 +186,110 @@ def page(m, d, prev, courant, ids, SITE, G):
     <em>Source : Prix des Eaux de Tunisie, « {esc(titre)} », {url}</em></p>
     {f'<p class="intro">Autres mois : {autres} · <a href="../">tous les rapports</a></p>' if autres else '<p class="intro"><a href="../">Tous les rapports</a></p>'}
   </section>"""
-    img = apercu(m, f"Prix de l’eau en bouteille en Tunisie", mt, f"La moins chère : {n1} · {_dt(x1['med'])}",
-                 f"Bouteille 1,5 L, prix médian · {len(rang)} marques comparées")
-    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": titre[:110], "inLanguage": ["fr", "ar"],
+    img = _APERCUS.get(m) or apercu(m, f"Prix de l’eau en bouteille en Tunisie", mt, f"La moins chère : {n1} · {_dt(x1['med'])}",
+                                     f"Bouteille 1,5 L, prix médian · {len(rang)} marques comparées")
+    _APERCUS[m] = img
+    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": titre[:110], "inLanguage": "fr",
            "datePublished": d.get("debut") or d["au"], "dateModified": max(d["au"], d.get("debut") or ""), "url": url,
            "author": {"@type": "Organization", "name": "Prix des Eaux de Tunisie", "url": SITE + "/"},
            "publisher": {"@type": "Organization", "name": "Prix des Eaux de Tunisie", "url": SITE + "/"}, "image": SITE + "/" + img},
           {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
               {"@type": "Question", "name": f"Quelle est l'eau en bouteille la moins chère en Tunisie en {mt} ?",
-               "acceptedAnswer": {"@type": "Answer", "text": f"{n1}, avec un prix médian de {_dt(x1['med'])} la bouteille de 1,5 L ({_dt(x1['med'] * 6)} la stika de 6)."}},
-              {"@type": "Question", "name": f"كم ثمن قارورة الماء في تونس في {ma}؟",
-               "acceptedAnswer": {"@type": "Answer", "text": f"أرخص ماركة: {iso(n1)} بـ {iso(_dt(x1['med']))} للقارورة 1,5 لتر."}}]},
+               "acceptedAnswer": {"@type": "Answer", "text": f"{n1}, avec un prix médian de {_dt(x1['med'])} la bouteille de 1,5 L ({_dt(x1['med'] * 6)} la stika de 6)."}}]},
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
               {"@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE + "/"},
               {"@type": "ListItem", "position": 2, "name": "Rapports du mois", "item": SITE + "/rapports/"},
               {"@type": "ListItem", "position": 3, "name": mt, "item": url}]}]
     return G._gabarit(SITE, f"rapports/{m}", titre + " | Prix des Eaux de Tunisie", desc, f"Prix de l'eau en Tunisie : {mt}", corps,
-                      json.dumps(ld, ensure_ascii=False), f"أسعار الماء المعدني في تونس: {iso(ma)}", racine="../../", og_type="article", og_image=img)
+                      json.dumps(ld, ensure_ascii=False), None, racine="../../", og_type="article", og_image=img)
+
+
+_APERCUS = {}
+
+
+def evolutions(d, pm):
+    ev = sorted(((nom, variation(x["med"], pm[nom]["med"])) for nom, x in d["marques"].items() if nom in pm), key=lambda x: (x[1] is None, x[1] or 0))
+    ev = [e for e in ev if e[1] is not None]
+    return [e for e in reversed(ev) if e[1] > 0][:3], [e for e in ev if e[1] < 0][:3], ev
+
+
+def page_ar(m, d, prev, courant, ids, SITE, G):
+    """Rapport du mois en arabe (ar/rapports/AAAA-MM/) : mêmes chiffres que la page française, calculés une seule fois."""
+    esc, iso = G._esc, G._iso
+    D = lambda v: G._dt(v, "ar")
+    ma = mois_ar(m)
+    rang = sorted(d["marques"].items(), key=lambda x: (x[1]["med"], x[0]))
+    lien = lambda nom: (f"<a href='../../marque/{ids[nom]}/'>{esc(nom)}</a>" if nom in ids else esc(nom))
+    pm = (prev or {}).get("marques", {})
+    def var(nom, x):
+        v = variation(x["med"], pm[nom]["med"]) if nom in pm else None
+        if v is None:
+            return "<td class='n'>—</td>" if prev else ""
+        return f"<td class='n'>{'+' if v > 0 else ''}{v} %</td>"
+    lignes = "".join(f"<tr><td>{i}</td><td>{lien(nom)}<small>{x['jours']} يومًا من الأسعار</small></td><td class='n'>{D(x['med'])}</td>"
+                     f"<td class='n'>{D(x['med'] * 6)}</td><td class='n'>{D(x['min'])}<small>منذ {int(x['min_date'][8:10])}/{x['min_date'][5:7]}</small></td>{var(nom, x)}</tr>"
+                     for i, (nom, x) in enumerate(rang, 1))
+    statut = (f"أرقام إلى غاية {jour_ar(d['au'])}، تُحدَّث كل يوم حتى نهاية الشهر." if m == courant
+              else f"تقرير نهائي ({d['jours']} يومًا من القراءات، من {jour_ar(d['du'])} إلى {jour_ar(d['au'])}).")
+    (n1, x1), (nz, xz) = rang[0], rang[-1]
+    st = d["stika_min"]
+    bref = [f"أرخص علامة هذا الشهر (قارورة 1,5 لتر، السعر الوسيط): <strong>{iso(esc(n1))}</strong>، {D(x1['med'])} — أي {D(x1['med'] * 6)} للستيكة من 6.",
+            f"الأغلى: <strong>{iso(esc(nz))}</strong>، {D(xz['med'])} للقارورة.",
+            f"أرخص ستيكة 1,5 لتر شوهدت هذا الشهر: {D(st['prix'])} يوم {jour_ar(st['date'])} ({iso(esc('، '.join(st['marques'])))}).",
+            f"{len(rang)} علامة متابَعة {MIN_JOURS} أيام على الأقل، من أصل {d['jours']} يومًا من القراءات."]
+    if prev:
+        hausses, baisses, ev = evolutions(d, pm)
+        if hausses:
+            bref.append(f"ارتفاع منذ {mois_ar(mois_precedent(m))}: " + "، ".join(f"{iso(esc(n))} (+{v} %)" for n, v in hausses) + ".")
+        if baisses:
+            bref.append("انخفاض: " + "، ".join(f"{iso(esc(n))} ({v} %)" for n, v in baisses) + ".")
+        if not hausses and not baisses and ev:
+            bref.append(f"لا تغيير في السعر الوسيط منذ {mois_ar(mois_precedent(m))} للعلامات الـ{len(ev)} المتابَعة في الشهرين.")
+    else:
+        bref.append("أول تقرير: تطوّر الأسعار من شهر إلى آخر سيظهر ابتداءً من الشهر القادم.")
+    url = f"{SITE}/ar/rapports/{m}/"
+    titre = f"سعر الماء المعبّأ في تونس، {ma}: أرخص علامة هي {iso(n1)}"
+    desc = (f"أسعار الماء في تونس — تقرير الشهر. {ma}: السعر الوسيط لقارورة الماء 1,5 لتر وللستيكة لـ{len(rang)} علامة في تونس، "
+            f"الأرخص ({iso(n1)}، {iso(D(x1['med']))})، الأغلى، والتطوّر. محسوب كل يوم من أسعار المغازات، مجانًا.")
+    autres = " · ".join(f"<a href='../{x}/'>{mois_ar(x)}</a>" for x in sorted(G._RAPPORTS_MOIS, reverse=True) if x != m)
+    corps = f"""
+  <p class="rp-signature">تقرير من <b>أسعار الماء في تونس</b> · <bdi>prix-eau.clicvia.com</bdi></p>
+  {bouton_partage(url, titre, "ar")}
+  <section>
+    <p class="intro">أسعار الماء المعبّأ تُقرأ كل يوم من المتاجر الإلكترونية للمغازات الكبرى في تونس (Carrefour وGéant). {statut}</p>
+    <ul class="intro">{"".join(f"<li>{b}</li>" for b in bref)}</ul>
+  </section>
+  <section>
+    <h2>كل العلامات: قارورة ماء عادي 1,5 لتر</h2>
+    <div class="tableau-defile"><table class="guide-table magasin"><tr><th>#</th><th>العلامة</th><th>السعر الوسيط</th><th>الستيكة (×6)</th><th>الأدنى</th>{"<th>التطوّر</th>" if prev else ""}</tr>{lignes}</table></div>
+  </section>
+  <section>
+    <h2>كيف تُحسب هذه الأرقام</h2>
+    <p class="intro">كل يوم، يقرأ روبوت الموقع أسعار المغازات المتابَعة (المصادر مذكورة أسفل الصفحة) ويحتفظ لكل علامة بأرخص قارورة ماء عادي 1,5 لتر.
+    <strong>السعر الوسيط</strong> للشهر هو السعر الذي في الوسط: نصف الأيام أرخص منه والنصف الآخر أغلى. لا تظهر علامة إلا إذا كان لها {MIN_JOURS} أيام
+    من الأسعار على الأقل في الشهر. الستيكة = 6 قوارير. أسعار تقريبية قد تتغيّر حسب المغازة. لا تقدير: فقط أسعار مقروءة.</p>
+  </section>
+  {bouton_partage(url, titre, "ar")}
+  <section>
+    <h2>للاستشهاد بهذه الأرقام</h2>
+    <p class="intro">صحفيون، مدوّنون: يمكنكم استعمال هذه الأرقام مع ذكر المصدر:<br>
+    <em>المصدر: أسعار الماء في تونس، « {esc(titre)} »، <bdi>{url}</bdi></em></p>
+    {f'<p class="intro">أشهر أخرى: {autres} · <a href="../">كل التقارير</a></p>' if autres else '<p class="intro"><a href="../">كل التقارير</a></p>'}
+  </section>"""
+    img = _APERCUS.get(m, "assets/og-image-v7.jpg")
+    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": titre[:110], "inLanguage": "ar",
+           "datePublished": d.get("debut") or d["au"], "dateModified": max(d["au"], d.get("debut") or ""), "url": url,
+           "author": {"@type": "Organization", "name": "Prix des Eaux de Tunisie", "url": SITE + "/"},
+           "publisher": {"@type": "Organization", "name": "Prix des Eaux de Tunisie", "url": SITE + "/"}, "image": SITE + "/" + img},
+          {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+              {"@type": "Question", "name": f"كم ثمن قارورة الماء في تونس في {ma}؟",
+               "acceptedAnswer": {"@type": "Answer", "text": f"أرخص علامة: {iso(n1)} بـ {iso(D(x1['med']))} للقارورة 1,5 لتر."}}]},
+          {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+              {"@type": "ListItem", "position": 1, "name": "الرئيسية", "item": SITE + "/ar/"},
+              {"@type": "ListItem", "position": 2, "name": "تقارير الشهر", "item": SITE + "/ar/rapports/"},
+              {"@type": "ListItem", "position": 3, "name": ma, "item": url}]}]
+    return G._gabarit(SITE, f"rapports/{m}", titre + " | أسعار الماء في تونس", desc, f"سعر الماء في تونس: {ma}", corps,
+                      json.dumps(ld, ensure_ascii=False), None, racine="../../", og_type="article", og_image=img, lang="ar")
 
 
 def apercu(m, titre_img, mt, chiffre, sous):
@@ -218,7 +309,19 @@ def apercu(m, titre_img, mt, chiffre, sous):
     return rel if AP.fabriquer(os.path.join(racine, rel), titre_img, mt, chiffre, sous) else "assets/og-image-v7.jpg"
 
 
-def page_liste(hist, courant, SITE, G):
+def page_liste(hist, courant, SITE, G, lang="fr"):
+    if lang == "ar":
+        items = "".join(f"<li><a href='{m}/'><strong>{mois_ar(m)}</strong></a> — {len(hist['mois'][m]['marques'])} علامة · "
+                        f"{'جارٍ' if m == courant else 'نهائي'}</li>" for m in sorted(hist["mois"], reverse=True))
+        corps = f"""
+  <section>
+    <p class="intro">كل شهر، سعر الماء المعبّأ لكل العلامات المتابَعة، محسوب آليًا من الأسعار المقروءة كل يوم في المغازات. مجانًا.</p>
+    <ul class="intro">{items}</ul>
+  </section>"""
+        return G._gabarit(SITE, "rapports", "تقارير الشهر: سعر الماء المعبّأ في تونس | أسعار الماء في تونس",
+                          "كل شهر، السعر الوسيط لقارورة الماء 1,5 لتر وللستيكة لكل العلامات التي تُباع في تونس، الأرخص والتطوّر. "
+                          "محسوب من الأسعار المقروءة كل يوم، مجانًا.",
+                          "تقارير الشهر", corps, None, lang="ar")
     items = "".join(f"<li><a href='{m}/'><strong>{mois_txt(m).capitalize()}</strong></a> — {len(hist['mois'][m]['marques'])} marques · "
                     f"{'en cours' if m == courant else 'définitif'}</li>" for m in sorted(hist["mois"], reverse=True))
     corps = f"""
@@ -230,12 +333,14 @@ def page_liste(hist, courant, SITE, G):
     return G._gabarit(SITE, "rapports", "Rapports du mois : prix de l'eau en bouteille en Tunisie | Prix des Eaux de Tunisie",
                       "Chaque mois, le prix médian de la bouteille d'eau 1,5 L et de la stika pour toutes les marques vendues en Tunisie, "
                       "la moins chère et l'évolution. Calculé sur les prix relevés chaque jour, gratuit.",
-                      "Rapports du mois", corps, None, "تقارير الشهر: أسعار الماء المعدني في تونس")
+                      "Rapports du mois", corps, None)
 
 
 def generer(data, SITE, G, fichier=None):
-    """Met à jour data/rapports.json et écrit les pages ; renvoie [(url, lastmod)] pour le plan du site."""
+    """Met à jour data/rapports.json et prépare les pages (français + arabe, écrites par tools/langues.py) ;
+    renvoie [(url, lastmod)] pour le plan du site."""
     global FICHIER
+    import langues as LG
     if fichier:
         FICHIER = Path(fichier)
     serie = json.loads((ROOT / "data" / "historique.json").read_text(encoding="utf-8")).get("serie", [])
@@ -248,10 +353,9 @@ def generer(data, SITE, G, fichier=None):
     G._RAPPORTS_MOIS = list(hist["mois"])
     urls = []
     for m, d in sorted(hist["mois"].items()):
-        dossier = ROOT / "rapports" / m
-        dossier.mkdir(parents=True, exist_ok=True)
-        (dossier / "index.html").write_text(page(m, d, hist["mois"].get(mois_precedent(m)), courant, ids, SITE, G), encoding="utf-8", newline="\n")
+        prev = hist["mois"].get(mois_precedent(m))
+        LG.ajouter(f"rapports/{m}/", page(m, d, prev, courant, ids, SITE, G), page(m, d, prev, courant, ids, SITE, G, "ar"))
         urls.append((f"{SITE}/rapports/{m}/", d["au"]))
-    (ROOT / "rapports" / "index.html").write_text(page_liste(hist, courant, SITE, G), encoding="utf-8", newline="\n")
+    LG.ajouter("rapports/", page_liste(hist, courant, SITE, G), page_liste(hist, courant, SITE, G, "ar"))
     urls.insert(0, (f"{SITE}/rapports/", hist["mois"][courant]["au"]))
     return urls
