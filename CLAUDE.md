@@ -20,7 +20,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Doit rester **public** (Pages gratuit). `gh` : "C:\Program Files\GitHub CLI\gh.exe".
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
-- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (`CSS_V` de build_guides.py et style.css : 20261025a ; app.js : 20261023b ; protection.js et assets/son.js : 20261020b).**
+- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (`CSS_V` de build_guides.py et style.css : 20261121a ; app.js : 20261107a ; protection.js et assets/son.js : 20261020b).**
 - Image d'aperçu des liens partagés : `assets/og-image-v7.jpg` (05/10 : texte à gauche + nouvelle icône goutte + photo NEUTRE de l'eau versée à droite ; modèle `tools/og-image.html`, capture Edge 1200×630 puis JPEG qualité 88 ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
@@ -623,3 +623,11 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - **16/11 (fin de nuit)** : robot controle-matin (documents-tunisie-robot) ROUGE : la routine du matin a dit « poussé » mais son compte
   rendu n'est jamais arrivé (2e fois après le 12/11). Correction prête (A.13, `consignes des taches/verification-matin-sites.md`) mais
   SEUL Ahmed peut modifier cette routine (Claude refusé) : geste urgent en tête de `memoire claude/a-faire-sur-le-pc.md`. Ce site : rien.
+
+## 21/11/2026 — mode sombre lisible (signalé par Ahmed, tous les sites)
+- En sombre `--accent` devient clair (#4FB6DC) : texte blanc dessus illisible (« Voir », « Envoyer », boutons de filtre, panier, « Être prévenu »).
+  Nouvelle variable `--on-accent` (blanc en clair, #0C1B24 en sombre) pour tout texte posé sur `--accent` ; encadré « Ce ne sont pas les grandes
+  surfaces… » sur `--gaz-soft` ; prix du vote en rose clair en sombre ; boutons WhatsApp (`.top-partage`, `.bouton-wa`) en vert #1A7F45
+  (le vert vif + blanc était illisible aussi en clair) ; fond du bandeau photo foncé (verset blanc lisible même sans photo) ; « Mon Carrefour : »
+  en pastille (illisible sur le bandeau bleu en clair). Contrôle (accueil + fenêtres .help-pop + pages fabriquées) : 0 texte sous 3, clair et sombre.
+  style.css / `CSS_V` 20261121a, pages refaites par `python tools/build_pages.py`.
