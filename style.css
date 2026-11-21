@@ -1,7 +1,7 @@
 :root{
   color-scheme:light;
-  --bg:#F4F8FA; --surface:#FFFFFF; --ink:#0F2B3D; --muted:#5A7484;
-  --accent:#0E7FA8; --accent-soft:#E1F0F6; --best:#128A52; --best-soft:#E3F3EB;
+  --bg:#F4F8FA; --surface:#FFFFFF; --ink:#0F2B3D; --muted:#506878;  /* 21/11/2026 : foncés d'un cran (contraste ≥ 4,5 en clair) */
+  --accent:#0B6E93; --accent-soft:#E1F0F6; --best:#0F7A48; --best-soft:#E3F3EB;
   --line:#D7E4EB; --chip:#EDF4F8; --shadow:0 1px 2px rgba(15,43,61,.05),0 6px 20px rgba(15,43,61,.06);
   --gaz:#8A5A0E; --gaz-soft:#F6EDDC;
   --chartline:#0E7FA8;  /* validé (contraste, bande de luminosité) sur fond clair */
@@ -90,12 +90,12 @@ h1 .drop{color:var(--accent)}
 /* bouton Telegram « Alertes prix », tout à droite du titre */
 .tg-btn{
   flex:none; display:inline-flex; align-items:center; gap:6px;
-  background:#229ED9; color:#fff; text-decoration:none; font-size:13px; font-weight:700;
+  background:#1877AB; color:#fff; text-decoration:none; font-size:13px; font-weight:700;
   padding:6px 12px; border-radius:999px;
 }
 /* 5 secousses à l'ouverture, puis de nouveau toutes les 12 s — 3 séries au total, ensuite immobile */
 .tg-btn{animation:secoue 12s ease-in-out 1s 3}
-.tg-btn:hover{background:#1A86BA}
+.tg-btn:hover{background:#13628D}
 @keyframes secoue{
   0%,25%,100%{transform:rotate(0)}
   2.5%,7.5%,12.5%,17.5%,22.5%{transform:rotate(8deg)}
@@ -106,7 +106,7 @@ h1 .drop{color:var(--accent)}
 .tg-txt{display:flex; flex-direction:column; align-items:center; line-height:1.1}
 /* « PROMO » en rouge sous « Alertes » (pastille rouge : lisible sur le bouton bleu) */
 .tg-promo{
-  margin-top:2px; background:#E53935; color:#fff; font-size:9.5px; font-weight:800;
+  margin-top:2px; background:#C62828; color:#fff; font-size:9.5px; font-weight:800;
   letter-spacing:.06em; padding:1px 6px; border-radius:999px;
 }
 
@@ -196,7 +196,7 @@ h2{
   border-color:var(--best); color:var(--best); background:var(--best-soft); font-weight:700;
   display:inline-flex; align-items:center; gap:6px;
 }
-.chip-stika[aria-pressed="true"]{background:var(--best); border-color:var(--best); color:#fff}
+.chip-stika[aria-pressed="true"]{background:var(--best); border-color:var(--best); color:var(--on-accent)}
 .ic-stika{width:26px; height:20px; flex:none; filter:drop-shadow(0 1px 1px rgba(15,43,61,.25))}
 
 /* évolution des prix (repliée par défaut, en bas de page) */
@@ -745,7 +745,7 @@ section:has(> #match-open){padding-bottom:6px}
   font-weight:600; text-decoration:none; cursor:pointer}
 .etiq:hover{border-color:var(--accent)}
 .etiq-bientot{border-style:dashed}
-.bientot{background:#E53935; color:#fff; font-size:10px; font-weight:800; padding:1px 6px; border-radius:999px; text-transform:uppercase; letter-spacing:.04em}
+.bientot{background:#C62828; color:#fff; font-size:10px; font-weight:800; padding:1px 6px; border-radius:999px; text-transform:uppercase; letter-spacing:.04em}
 .etapes-cmd{margin:6px 0 10px; padding-left:20px; font-size:14px; line-height:1.55}
 .etapes-cmd li{margin-bottom:4px}
 .livraison-alerte{text-decoration:none; margin-top:4px}
