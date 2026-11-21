@@ -222,7 +222,7 @@ def page_unique(fichier):
 # seul le texte affiché change.
 # ------------------------------------------------------------------------------------------------------------------------------
 ACCUEIL = [
-    ('<title>Prix de l\'eau en Tunisie — comparateur gratuit, bouteille et stika</title>',
+    ('<title>Prix de l\'eau minérale en Tunisie : stika et bouteille, comparateur</title>',
      '<title>أسعار الماء المعدني في تونس — مقارن مجاني، القارورة والستيكة</title>'),
     ('<meta property="og:title" content="Prix des Eaux de Tunisie — comparateur gratuit">',
      '<meta property="og:title" content="أسعار الماء المعدني في تونس — مقارن مجاني">'),
@@ -441,7 +441,9 @@ MANQUES = []
 def _jsonld_accueil_ar(nb):
     d = {"@context": "https://schema.org", "@graph": [
         {"@type": "WebSite", "name": NOM_AR, "alternateName": "Prix des Eaux de Tunisie", "url": URL_SITE + "ar/", "inLanguage": "ar",
-         "description": "مقارن مجاني لأسعار الماء المعدني في تونس (القارورة والستيكة) في Géant وCarrefour، يُحدَّث كل يوم."},
+         "description": "مقارن مجاني لأسعار الماء المعدني في تونس (القارورة والستيكة) في Géant وCarrefour، يُحدَّث كل يوم.",
+         "publisher": {"@type": "Organization", "name": "Clicvia", "url": "https://clicvia.com/",
+                       "sameAs": ["https://www.facebook.com/1327283777142447"]}},
         {"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": "ما هي الستيكة؟", "acceptedAnswer": {"@type": "Answer", "text":
              "في تونس، الستيكة هي علبة من 6 قوارير ماء (12 للقوارير الصغيرة 50 صل)، وسعرها 6 أضعاف سعر القارورة."}},

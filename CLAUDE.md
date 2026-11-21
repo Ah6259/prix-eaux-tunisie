@@ -678,3 +678,14 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   (aucun nouveau travail en arabe ; Conférences reste sans adresse arabe). Sources mortes retirées de l'alarme (A.10 terminé) : Finances
   (Concours), Douane (Appels d'offres), location-vacance et tunisiapromo (Immobilier). Ce site-ci : rien de plus que l'adresse `ar/` du jour.
 - Sur le PC : `git checkout main` puis `git pull` dans chaque dépôt (tout est fusionné dans `main`).
+
+## 21/11/2026 (nuit) — Google + IA (demande d'Ahmed : « que Google et les IA indexent nos sites »)
+- État Search Console (21/11) : accueil « Crawled - currently not indexed » (dernière visite de Google le 12/10), prix-stika/ « Discovered » ;
+  requêtes vues : « stika eau » (position ~8,6), « prix stika eau ».
+- Accueil : titre « Prix de l'eau minérale en Tunisie : stika et bouteille, comparateur » (+ clé de `ACCUEIL` de tools/langues.py),
+  description avec « eau minérale » ; JSON-LD WebSite (FR et AR, `_jsonld_accueil_ar`) avec l'éditeur `Organization` Clicvia (sameAs page
+  Facebook) ; réponses FAQ du JSON-LD SANS chiffres (avant : « 0,610 DT (Bargou, Marwa et Melliti) » figé depuis octobre, alors que la
+  page montre les prix du jour par app.js). Règle : aucun prix écrit en dur dans le JSON-LD de l'accueil.
+- `llms.txt` réécrit à la main SANS chiffre périmé (l'ancien, fait le 13/10 par l'outil commun `outils visibilite/llms.py`, citait les prix
+  du 23/10 et « Commandez votre eau et faites-vous livrer » alors que la commande est fermée). Si l'outil commun est relancé, relire ce fichier.
+- « Comment fonctionne le site ? » (FR + AR) : ligne « Publié par Clicvia… pour nous écrire : Votre avis » (rubrique « Site indépendant »).

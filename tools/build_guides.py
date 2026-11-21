@@ -571,7 +571,8 @@ def page_a_propos(data, SITE, maj_fr, lang="fr"):
         "هذه الصفحة تُحدَّث مع كل تغيير في الموقع."])}
   {bloc("موقع مستقل", [
         "موقع <b>غير رسمي</b>، لا علاقة له بالمغازات ولا بالعلامات المذكورة. الأسماء والشعارات ملك لأصحابها.",
-        "لا نبيع الماء اليوم: نقارن الأسعار لنساعدك على الدفع أقل."])}
+        "لا نبيع الماء اليوم: نقارن الأسعار لنساعدك على الدفع أقل.",
+        f"ينشره {_iso('Clicvia')} (<a href=\"https://clicvia.com/ar/\" rel=\"noopener\">clicvia.com</a>)، الذي يجمع خدمات عملية مجانية لتونس. لتكتب لنا: استمارة « رأيك » في أسفل الصفحة الرئيسية."])}
   <section><p class="sub"><a href="../">العودة إلى مقارن أسعار الماء</a> · <a href="../prix-stika/">سعر الستيكة اليوم</a>.</p></section>"""
         return _gabarit(SITE, "a-propos", "كيف يعمل الموقع؟ — أسعار الماء في تونس، مقارن مجاني",
                         "كيف يعمل موقع أسعار الماء في تونس: من أين تأتي الأسعار (Carrefour وGéant)، كيف تستعمل المقارن، معطياتك، "
@@ -636,7 +637,8 @@ def page_a_propos(data, SITE, maj_fr, lang="fr"):
         "Cette page est mise à jour à chaque changement du site."])}
   {bloc("Site indépendant", [
         "Site <b>non officiel</b>, sans lien avec les magasins ni avec les marques citées. Les noms et logos appartiennent à leurs propriétaires.",
-        "Nous ne vendons pas d'eau aujourd'hui : nous comparons les prix pour vous aider à payer moins cher."])}
+        "Nous ne vendons pas d'eau aujourd'hui : nous comparons les prix pour vous aider à payer moins cher.",
+        "Publié par <b>Clicvia</b> (<a href=\"https://clicvia.com/\" rel=\"noopener\">clicvia.com</a>), qui réunit des services pratiques et gratuits pour la Tunisie. Pour nous écrire : le formulaire « Votre avis » en bas de l'accueil."])}
   <section><p class="sub"><a href="../">Retour au comparateur des prix de l&#39;eau</a> · <a href="../prix-stika/">prix de la stika aujourd&#39;hui</a>.</p></section>"""
     return _gabarit(SITE, "a-propos", "Comment fonctionne le site ? — Prix des Eaux de Tunisie, comparateur gratuit",
                     "Comment fonctionne Prix des Eaux de Tunisie : d'où viennent les prix de l'eau (Carrefour, Géant), "
