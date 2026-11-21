@@ -5,6 +5,7 @@
   --line:#D7E4EB; --chip:#EDF4F8; --shadow:0 1px 2px rgba(15,43,61,.05),0 6px 20px rgba(15,43,61,.06);
   --gaz:#8A5A0E; --gaz-soft:#F6EDDC;
   --chartline:#0E7FA8;  /* validé (contraste, bande de luminosité) sur fond clair */
+  --on-accent:#fff;  /* texte posé sur --accent (foncé en mode sombre : 21/11/2026) */
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -13,6 +14,7 @@
     --line:#1E3644; --chip:#1A303D; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
     --gaz:#E0B160; --gaz-soft:#3A2E14;
     --chartline:#35A0C8;  /* validé sur fond sombre */
+    --on-accent:#0C1B24;
     color-scheme:dark;
   }
 }
@@ -22,6 +24,7 @@
   --line:#1E3644; --chip:#1A303D; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
   --gaz:#E0B160; --gaz-soft:#3A2E14;
   --chartline:#35A0C8;
+  --on-accent:#0C1B24;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -164,7 +167,7 @@ h2{
 .dd-btn .ic-photo{height:22px; width:auto; border-radius:4px; margin-right:0; flex:none}
 .dd-btn[aria-expanded="true"]{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
 .dd-btn.dd-stika{border-color:var(--best); color:var(--best); background:var(--best-soft); font-weight:700}
-.dd-btn.dd-actif{background:var(--accent); border-color:var(--accent); color:#fff}
+.dd-btn.dd-actif{background:var(--accent); border-color:var(--accent); color:var(--on-accent)}
 .dd-btn.dd-actif i{color:#fff}
 /* panneau qui s'ouvre sous la barre */
 .dd-panel{
@@ -187,7 +190,7 @@ h2{
   border:1px solid var(--line); background:var(--surface); color:var(--ink);
   border-radius:999px; padding:6px 14px; font:inherit; font-size:13px; font-weight:500; cursor:pointer;
 }
-.chipbtn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
+.chipbtn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--on-accent)}
 /* bouton Stika mis en avant (vert, avec l'icône du pack de bouteilles) */
 .chip-stika{
   border-color:var(--best); color:var(--best); background:var(--best-soft); font-weight:700;
@@ -318,7 +321,7 @@ footer a:hover{text-decoration:underline}
   background:var(--accent-soft); color:var(--accent); font-size:16px; font-weight:700;
   line-height:1; cursor:pointer; flex:none;
 }
-.addbtn:hover{background:var(--accent); color:#fff}
+.addbtn:hover{background:var(--accent); color:var(--on-accent)}
 td.addc{width:34px; text-align:center; padding-right:0}
 .stika-cell{text-align:right}
 .stika-cell .p{font-weight:600; font-variant-numeric:tabular-nums; display:block}
@@ -347,11 +350,11 @@ td.addc{width:34px; text-align:center; padding-right:0}
 .cartbar-info b{font-variant-numeric:tabular-nums}
 .cartbar-btn{
   border:none; border-radius:999px; padding:10px 20px; cursor:pointer;
-  background:var(--accent); color:#fff; font:inherit; font-weight:700; font-size:14px;
+  background:var(--accent); color:var(--on-accent); font:inherit; font-weight:700; font-size:14px;
   display:flex; align-items:center; gap:7px;
 }
 .cart-count{
-  background:#fff; color:var(--accent); border-radius:999px; min-width:22px; height:22px;
+  background:var(--on-accent); color:var(--accent); border-radius:999px; min-width:22px; height:22px;
   display:inline-flex; align-items:center; justify-content:center;
   font-weight:800; font-size:13px; padding:0 6px;
 }
@@ -511,7 +514,7 @@ section:has(> #match-open){padding-bottom:6px}
 .hadith-title{font-family:"Amiri","Amiri Quran",serif; font-weight:700; min-width:0; font-size:21px !important; -webkit-text-stroke:.35px currentColor}
 .sum-cta{
   margin-inline-start:auto; flex:none; display:inline-flex; align-items:center; gap:6px;
-  background:var(--accent); color:#fff; border-radius:999px;
+  background:var(--accent); color:var(--on-accent); border-radius:999px;
   padding:7px 16px; font-size:13.5px; font-weight:600; white-space:nowrap;
 }
 .collapse summary:hover .sum-cta{filter:brightness(1.1)}
@@ -538,7 +541,7 @@ section:has(> #match-open){padding-bottom:6px}
 .sig-ico{font-size:22px; line-height:1; flex:none}
 .sig-bouton{
   display:inline-flex; align-items:center; gap:6px; border:0; cursor:pointer;
-  background:var(--accent); color:#fff; font:inherit; font-weight:700; font-size:14px;
+  background:var(--accent); color:var(--on-accent); font:inherit; font-weight:700; font-size:14px;
   padding:9px 18px; border-radius:999px;
 }
 .sig-bouton:hover{filter:brightness(1.1)}
@@ -586,7 +589,7 @@ section:has(> #match-open){padding-bottom:6px}
 .avis .hp{position:absolute; left:-9999px; height:0; border:0; padding:0}
 .avis-actions{display:flex; align-items:center; gap:12px}
 .avis-send{
-  background:var(--accent); color:#fff; border:0; border-radius:999px;
+  background:var(--accent); color:var(--on-accent); border:0; border-radius:999px;
   padding:9px 26px; font:inherit; font-weight:600; cursor:pointer;
 }
 .avis-send:hover{filter:brightness(1.1)}
@@ -689,7 +692,9 @@ section:has(> #match-open){padding-bottom:6px}
 .winner.vote-win .winner-price{color:#B02A5B}
 .vote-coeur{font-size:18px; flex:none}
 #vote-more{white-space:nowrap; font-size:12.5px; padding:6px 12px}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .winner.vote-win{background:#3A1624} }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .winner.vote-win{background:#3A1624} :root:not([data-theme="light"]) .winner.vote-win .winner-price{color:#F48FB1} }
+:root[data-theme="dark"] .winner.vote-win{background:#3A1624}
+:root[data-theme="dark"] .winner.vote-win .winner-price{color:#F48FB1}
 :root[data-theme="dark"] .winner.vote-win{background:#3A1624}
 
 .vote-liste[hidden]{display:none}   /* classement des votes replié tant qu'on n'a pas cliqué */
@@ -744,14 +749,14 @@ section:has(> #match-open){padding-bottom:6px}
 .etapes-cmd{margin:6px 0 10px; padding-left:20px; font-size:14px; line-height:1.55}
 .etapes-cmd li{margin-bottom:4px}
 .livraison-alerte{text-decoration:none; margin-top:4px}
-#livraison-pop .livraison-alerte{color:#fff}   /* sinon la couleur des liens de la fenêtre l'emporte */
+#livraison-pop .livraison-alerte{color:var(--on-accent)}   /* sinon la couleur des liens de la fenêtre l'emporte */
 
 /* classement complet (par prix) sous la carte « La moins chère » */
 .top-classement .compare-toggle{padding-block:20px 0}   /* bouton à égale distance de la carte du dessus et de la barre du dessous (§ 29) */
 .top-classement #compare-rest{margin-top:8px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:6px 12px}
 .vote-sec{margin-top:6px; border-top:0; padding-top:0}
 #match-titre{white-space:nowrap; font-size:min(18px, 4.4vw)}   /* titre de la fenêtre du vote sur une ligne */
-.livraison-cle{background:var(--warn-soft, #F6EDDC); border-left:4px solid var(--gaz); padding:8px 12px; border-radius:8px}
+.livraison-cle{background:var(--gaz-soft); border-left:4px solid var(--gaz); padding:8px 12px; border-radius:8px}
 #livraison-titre{white-space:nowrap; font-size:min(18px, 4.4vw); margin-right:28px}
 
 /* visibilité : partage WhatsApp, ligne en arabe, liens guides */
@@ -759,7 +764,7 @@ section:has(> #match-open){padding-bottom:6px}
 .top-carte{position:relative}
 .top-carte .top-detail{padding-right:104px}
 .top-partage{position:absolute; right:16px; bottom:10px;
-  display:inline-flex; align-items:center; gap:4px; background:#25D366; color:#fff;
+  display:inline-flex; align-items:center; gap:4px; background:#1A7F45; color:#fff;
   font-weight:700; font-size:12px; text-decoration:none; padding:4px 10px 4px 8px; border-radius:999px}
 .top-partage svg{width:14px; height:14px; fill:currentColor}
 .top-partage:hover{filter:brightness(1.05)}
@@ -821,7 +826,7 @@ header.site{background:var(--surface); box-shadow:0 1px 0 var(--line),0 4px 14px
 /* vraie photo NETTE et NEUTRE (eau versée, aucune marque) en bandeau AU-DESSUS du texte : rien par-dessus,
    le texte blanc reste sur le bleu uni. Téléphone : pleine largeur ; ordinateur : dans la colonne, coins arrondis. */
 .hero-photo{position:relative; padding-top:0}
-.hero-bande{position:relative; margin:0 0 9px; background:#fff}
+.hero-bande{position:relative; margin:0 0 9px; background:#0A3C52}
 .hero-bande img{display:block; width:100%; height:auto; aspect-ratio:1440/173; object-fit:cover}
 .credit-photo{position:absolute; right:3px; top:2px; margin:0; padding:0 5px; border-radius:5px; font-size:8.5px;
   line-height:1.4; color:#fff; background:rgba(4,40,56,.6)}
@@ -921,7 +926,7 @@ footer .copyright{margin:14px 0 0}
 .page-hero .maj{display:inline-flex; align-items:center; gap:6px; margin-top:12px; font-size:12.5px; font-weight:600;
   background:rgba(255,255,255,.14); border-radius:999px; padding:4px 12px}
 .page-hero .maj::before{content:""; width:7px; height:7px; border-radius:50%; background:#7CF0BE}
-.bouton-wa{display:inline-flex; align-items:center; gap:8px; margin-top:12px; background:#1FAF5A; color:#fff; font-weight:700;
+.bouton-wa{display:inline-flex; align-items:center; gap:8px; margin-top:12px; background:#1A7F45; color:#fff; font-weight:700;
   text-decoration:none; padding:9px 18px; border-radius:999px; font-size:14px; box-shadow:0 1px 2px rgba(15,43,61,.15)}
 .bouton-wa svg{width:18px; height:18px; fill:#fff}
 .bouton-wa:hover{filter:brightness(1.05)}
@@ -953,8 +958,8 @@ input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-
 .video-nom{font-weight:800;font-size:1.05rem;margin:0}
 .video-page h1{font-size:1.4rem;font-weight:800;line-height:1.25;margin:6px 0 14px}
 .video-lecteur{display:block;height:min(58vh,640px);width:auto;max-width:100%;aspect-ratio:9/16;object-fit:contain;margin:0 auto 18px;border-radius:18px;background:#111;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-.btn-video-site{display:block;max-width:360px;margin:0 auto 12px;padding:16px;border-radius:14px;background:var(--accent);color:#fff;font-weight:800;font-size:1.15rem;text-decoration:none}
-.btn-video-partager{display:block;width:100%;max-width:360px;margin:0 auto;padding:13px;border-radius:14px;border:2px solid var(--accent);background:#fff;color:var(--accent);font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit}
+.btn-video-site{display:block;max-width:360px;margin:0 auto 12px;padding:16px;border-radius:14px;background:var(--accent);color:var(--on-accent);font-weight:800;font-size:1.15rem;text-decoration:none}
+.btn-video-partager{display:block;width:100%;max-width:360px;margin:0 auto;padding:13px;border-radius:14px;border:2px solid var(--accent);background:var(--surface);color:var(--accent);font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit}
 .lien-video{text-align:center;font-size:.9rem;margin:18px 0 6px}.lien-video a{color:inherit;text-decoration:underline}
 
 /* un seul verset sur une ligne (09/10/2026 : la fenêtre Coran + hadith est partie sur Points d'eau Tunisie) */
@@ -988,3 +993,4 @@ input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-
 /* Mon Carrefour (07/11/2026) */
 .mon-carrefour{margin:8px 0 4px;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .mon-carrefour select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid #b9cbe0;max-width:100%}
+.mon-carrefour label{background:var(--surface);color:var(--ink);padding:3px 10px;border-radius:999px}  /* lisible même posé sur le bandeau bleu (21/11/2026) */
