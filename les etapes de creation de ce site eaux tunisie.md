@@ -502,3 +502,11 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   (une phrase française ajoutée à l'accueil = sa traduction dans cette liste, sinon le test la trouve sur la page arabe).
 - `app.js` écrit ses textes dans la langue de la page (`T(fr, ar)`), `protection.js` gère le bouton de langue et l'ancien `?lang=ar`.
 - Test : bloc « UNE ADRESSE PAR LANGUE » de `tools/test_site.mjs`.
+
+## Leçons du 21/11/2026 (soir)
+- **Demander avant de traduire ou d'agrandir une tâche** : séparer les langues d'un site ne veut pas dire traduire tout le site ;
+  si une page n'a presque pas d'arabe, proposer d'abord (Ahmed : « Arrête de faire en arabe », aucun nouveau travail en arabe).
+- **Source morte depuis longtemps** (son site refuse ou ne répond plus, rien à réparer chez nous) : Ahmed décide de la retirer ;
+  méthode : la sortir de l'alarme (liste `RETIREES` de `tools/sources_en_panne.py`, ou `False` dans les réglages des sources),
+  garder son lecteur et ses tests, la remettre si le site revient. Fait le 21/11 : Finances (Concours), Douane (Appels d'offres),
+  location-vacance et tunisiapromo (Immobilier).

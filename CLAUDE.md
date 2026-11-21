@@ -672,3 +672,9 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   pages AR, hreflang réciproques, bouton de langue, liens des pages AR, titres arabes uniques ≤ 70, JSON-LD, plan du site, accueil arabe rendu
   par app.js dans jsdom, renvois ?lang=ar / langue gardée / robot) + ligne « Une adresse par langue » dans FONCTIONS (a-propos FR et AR).
   Contrôles du 21/11 : visiteur simulé ANOMALIES 0 ; mode sombre (seuil 3) et clair (seuil 4,5) : 0 sur /, /ar/, ar/marque/safia/, ar/prix-stika/, ar/rapports/2026-11/.
+
+## Update workflow du 21/11/2026 (soir, session en ligne)
+- Autres sites : Documents a l'ARABE à l'adresse principale (français sous `fr/`, décision d'Ahmed) ; **Ahmed : « Arrête de faire en arabe »**
+  (aucun nouveau travail en arabe ; Conférences reste sans adresse arabe). Sources mortes retirées de l'alarme (A.10 terminé) : Finances
+  (Concours), Douane (Appels d'offres), location-vacance et tunisiapromo (Immobilier). Ce site-ci : rien de plus que l'adresse `ar/` du jour.
+- Sur le PC : `git checkout main` puis `git pull` dans chaque dépôt (tout est fusionné dans `main`).
