@@ -92,6 +92,9 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   - Prix des gaufrettes, biscuits et chips (https://clicvia.com/tableau-bord/prix-snacks/, dépôt privé projets-ahmed) : biscuits, gaufrettes, chips, snacks.
   - Prix Hygiène & Maison (dépôt privé projets-ahmed) : lessive, savon, dentifrice, shampoing, produits d'entretien.
   Exemple : Glovo (eau + biscuits, chips, lessive, dentifrice lisibles).
+  **Idées du matin (22/11/2026, demande d'Ahmed)** : le message du matin se termine par 2-3 idées d'amélioration NUMÉROTÉES
+  (ce site ou ses autres sites de prix), concrètes, jamais déjà proposées : carnet `tools/idees_du_matin.md` (règles en tête).
+  Ahmed répond « fais N » / « non N » ; rien n'est fait sans son accord.
 
 ## Robots (GitHub Actions)
 - `maj-prix.yml` ≈ 1h07 Tunis : collect_prices → price_drops (Telegram) → build_history → build_pages → commit.

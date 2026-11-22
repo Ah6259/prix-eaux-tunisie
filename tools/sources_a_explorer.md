@@ -8,6 +8,8 @@ chaque enseigne ajoutée reçoit son logo (robot `logos.yml`).
 
 **Consigne GÉNÉRALE d'Ahmed (22/11/2026) — valable pour TOUS ses sites de suivi de prix, présents et futurs :** pour CHAQUE source examinée, noter TOUS les rayons qu'elle vend (eau, snacks, hygiène, maison, boissons, épicerie, lait…), puis comparer avec la liste « Sites de suivi de prix d'Ahmed » de CLAUDE.md. Chaque site concerné est écrit dans la ligne du carnet (« aussi pour : … ») et dans le message du matin. Un rayon qui ne correspond à AUCUN site existant est aussi signalé (« idée de nouveau site : … »). Les autres sites ne sont jamais modifiés d'ici : Ahmed décide.
 
+**Message du matin : terminer par 2-3 idées d'amélioration numérotées (carnet `tools/idees_du_matin.md`, règles en tête).**
+
 Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisible seulement depuis le PC · ⛔ bloquée / interdite · ❌ pas de prix d'eau
 
 | Date | Site | Statut | Notes |

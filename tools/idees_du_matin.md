@@ -1,0 +1,19 @@
+# Idées d'amélioration du matin — carnet
+
+Demande d'Ahmed (22/11/2026) : chaque matin, la routine « Nouvelles sources de prix » termine son message par
+**2 ou 3 idées d'amélioration** (numérotées), pour ce site ou pour ses autres sites de suivi de prix
+(liste « Sites de suivi de prix d'Ahmed » de CLAUDE.md).
+
+Règles :
+- Une idée = une phrase simple + ce que ça apporte au visiteur + le temps de travail estimé (petit / moyen / gros).
+- Idées CONCRÈTES, tirées de ce qu'on a vu (sources, prix relevés, robots, pages, essais en cours), jamais au hasard.
+- Ne jamais reproposer une idée déjà dans ce carnet (sauf si quelque chose a changé : le dire).
+- Respecter les décisions d'Ahmed de CLAUDE.md (ex. pas de nouveau travail en arabe, pas de Monoprix sans source automatique,
+  Mazraa Market laissé de côté, commande fermée).
+- RIEN n'est fait sans son accord : Ahmed répond « fais 2 » (ou « non 2 ») ; la réponse est notée ici.
+- Une idée pour un site du dépôt privé projets-ahmed : la proposer, mais elle se fait dans une session sur ce dépôt.
+
+| Date | N° | Idée | Pour quel site | Taille | Réponse d'Ahmed |
+|---|---|---|---|---|---|
+| 22/11/2026 | 1 | Ajouter Glovo en essai silencieux | Eau | moyen | « fais » (essai lancé, `essai-glovo.yml`) |
+| 22/11/2026 | 2 | Glovo pour les snacks et l'hygiène | Snacks, Hygiène & Maison | moyen | en attente (à faire dans projets-ahmed) |
