@@ -85,6 +85,9 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - **Recherche quotidienne de nouvelles sources** (demande d'Ahmed, 04/10) : Routine Claude « Nouvelles sources de prix »
   chaque matin ; carnet `tools/sources_a_explorer.md` ; test de lecture depuis GitHub par le robot `tester-source.yml`.
   Elle propose, elle n'ajoute rien au site sans l'accord d'Ahmed.
+  **22/11/2026 (« fais 1 » d'Ahmed)** : pour chaque source, elle regarde AUSSI si on y trouve des snacks ou des produits d'hygiène /
+  maison (sites snacks et hygiène du dépôt privé projets-ahmed) et le note (« aussi pour : snacks / hygiène ») + le dit dans son message.
+  Exemple : Glovo (biscuits, chips, lessive, dentifrice lisibles).
 
 ## Robots (GitHub Actions)
 - `maj-prix.yml` ≈ 1h07 Tunis : collect_prices → price_drops (Telegram) → build_history → build_pages → commit.
