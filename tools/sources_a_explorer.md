@@ -6,7 +6,7 @@ Règles : jamais de contournement d'une protection anti-robot (Cloudflare, captc
 respecter robots.txt ; aucune nouvelle source ajoutée au site sans l'accord d'Ahmed ;
 chaque enseigne ajoutée reçoit son logo (robot `logos.yml`).
 
-**Consigne d'Ahmed (22/11/2026, « fais 1 ») : pour CHAQUE source examinée, regarder aussi si elle vend des snacks (biscuits, gaufrettes, chips) ou des produits d'hygiène et de maison (lessive, dentifrice, savon…). Si oui, l'écrire dans la ligne du carnet (« aussi pour : snacks / hygiène ») et le dire dans le message du matin : ces deux sites (dépôt privé projets-ahmed) ne sont pas modifiés d'ici, Ahmed décide.**
+**Consigne GÉNÉRALE d'Ahmed (22/11/2026) — valable pour TOUS ses sites de suivi de prix, présents et futurs :** pour CHAQUE source examinée, noter TOUS les rayons qu'elle vend (eau, snacks, hygiène, maison, boissons, épicerie, lait…), puis comparer avec la liste « Sites de suivi de prix d'Ahmed » de CLAUDE.md. Chaque site concerné est écrit dans la ligne du carnet (« aussi pour : … ») et dans le message du matin. Un rayon qui ne correspond à AUCUN site existant est aussi signalé (« idée de nouveau site : … »). Les autres sites ne sont jamais modifiés d'ici : Ahmed décide.
 
 Statuts : ✅ déjà utilisée · 🟢 prometteuse (à proposer) · 🖥️ lisible seulement depuis le PC · ⛔ bloquée / interdite · ❌ pas de prix d'eau
 
