@@ -689,3 +689,10 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - `llms.txt` réécrit à la main SANS chiffre périmé (l'ancien, fait le 13/10 par l'outil commun `outils visibilite/llms.py`, citait les prix
   du 23/10 et « Commandez votre eau et faites-vous livrer » alors que la commande est fermée). Si l'outil commun est relancé, relire ce fichier.
 - « Comment fonctionne le site ? » (FR + AR) : ligne « Publié par Clicvia… pour nous écrire : Votre avis » (rubrique « Site indépendant »).
+
+## Update workflow du 22/11/2026 (session en ligne)
+- Visibilité (Ahmed : « mes sites ne sont pas beaucoup vus ») : 5 aides ont mis éditeur Clicvia + llms.txt sans chiffre sur 12 sites,
+  année automatique sur Code de la route, tableau des prix sur Mon agent, « Classement Google » dans le tableau de bord (relevé figé du
+  21/11 tant que le secret `GSC_CLE` n'existe pas : à créer par Ahmed sur le PC). VIS.1 jour 1 fait par Ahmed le 22/11.
+- Réponse donnée : PAS de robot qui visite nos sites (Google ne classe pas selon les visites, fausses visites = risque + GoatCounter faussé).
+- `outils visibilite/llms.py` (projets-ahmed) ne réécrit plus le llms.txt de ce site (liste `ECRITS_A_LA_MAIN`, `--forcer`).

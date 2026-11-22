@@ -247,3 +247,6 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - **21/11/2026** : site lisible en mode sombre ET en mode clair (boutons, fenêtres, verset, couleurs un cran plus foncées ; style 20261121b).
   Sur tous les sites d'Ahmed : règle commune § 65 et contrôle `mode_sombre.mjs` (projets-ahmed). Autres sites : Prix Hygiène & Maison allégé
   et passé au turquoise (hygiene.clicvia.com), outil vidéo réparé (Code de la route, Points d'eau). L'adresse arabe séparée (`ar/`) est faite le même jour (voir plus haut).
+- **22/11/2026** : Google + IA : titre « Prix de l'eau minérale en Tunisie », éditeur Clicvia dans les données Google, FAQ cachée sans prix
+  figés, `llms.txt` sans chiffre. Autres sites le même jour : mêmes signaux sur 12 sites, année automatique pour Code de la route, Mon agent
+  avec tableau des prix, classement Google dans le tableau de bord. Geste d'Ahmed : demander l'indexation dans Search Console (VIS.1).
