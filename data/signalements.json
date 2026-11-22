@@ -1,6 +1,6 @@
 {
- "maj": "2026-11-15T20:15",
- "publies": 2,
+ "maj": "2026-11-22T15:09",
+ "publies": 1,
  "rejetes": [
   {
    "horodateur": "30/09/2026 10:58:17",
@@ -36,6 +36,12 @@
    "horodateur": "08/10/2026 21:44:00",
    "marque": "Jannet",
    "prix": "5040",
+   "raison": "prix vu il y a plus de 30 jours"
+  },
+  {
+   "horodateur": "22/10/2026 15:59:25",
+   "marque": "Tijen",
+   "prix": "690",
    "raison": "prix vu il y a plus de 30 jours"
   }
  ],
