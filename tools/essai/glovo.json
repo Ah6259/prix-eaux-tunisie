@@ -9,23 +9,18 @@
      "url": "https://glovoapp.com/fr/tn/tunis/stores/monoprix-tis?content=eaux-plates-c.37011387",
      "produits": [
       {
-       "nom": "Eau minérale SABRINE 1.5L - 014",
-       "prix": 0.68,
-       "prix_barre": null
-      },
-      {
        "nom": "Eau minérale SAFIA 1.5L - 111",
        "prix": 0.69,
        "prix_barre": null
       },
       {
-       "nom": "Eau minérale MIRA 2L - 073",
-       "prix": 0.77,
+       "nom": "Eau de source MIRA 0.95L - 103",
+       "prix": 0.61,
        "prix_barre": null
       },
       {
-       "nom": "Eau minérale MELLITI 1.5L - 302",
-       "prix": 0.61,
+       "nom": "Eau minérale MARWA 1.5L - 722",
+       "prix": 0.64,
        "prix_barre": null
       },
       {
@@ -34,9 +29,9 @@
        "prix_barre": null
       },
       {
-       "nom": "Eau minérale Délice 1L",
-       "prix": 0.69,
-       "prix_barre": 0.73
+       "nom": "Eau minérale MELLITI 1.5L - 302",
+       "prix": 0.61,
+       "prix_barre": null
       }
      ]
     },
