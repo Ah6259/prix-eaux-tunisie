@@ -17,3 +17,6 @@ Règles :
 |---|---|---|---|---|---|
 | 22/11/2026 | 1 | Ajouter Glovo en essai silencieux | Eau | moyen | « fais » (essai lancé, `essai-glovo.yml`) |
 | 22/11/2026 | 2 | Glovo pour les snacks et l'hygiène | Snacks, Hygiène & Maison | moyen | en attente (à faire dans projets-ahmed) |
+| 22/11/2026 | 3 | Afficher les prix maximum officiels (0,5 L 0,600 · 1 L 0,800 · 1,5 L 0,850 · 2 L 0,950 DT) sous les prix | Eau | petit | en attente |
+| 22/11/2026 | 4 | Bilan automatique de l'essai Glovo le 29/11 (jours réussis, écart avec carrefour.tn) envoyé à Ahmed | Eau | petit | en attente |
+| 22/11/2026 | 5 | Signaler (Telegram interne) un magasin qui vend une eau AU-DESSUS du prix maximum officiel | Eau | moyen | en attente |
