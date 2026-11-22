@@ -1,0 +1,46 @@
+name: Essai Glovo (silencieux)
+
+# Essai demandé par Ahmed le 22/11/2026 (« fais ») : lit chaque jour le rayon eaux de 3 magasins sur Glovo
+# (Monoprix Tunis, Carrefour Market Sousse, Aziza Gabès) et l'enregistre dans tools/essai/glovo.json.
+# RIEN n'est affiché sur le site. Comparaison Carrefour (Glovo) / carrefour.tn pour vérifier que les prix Glovo sont justes.
+on:
+  schedule:
+    - cron: "17 9 * * *"   # 10h17 à Tunis, loin du relevé de nuit
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: essai-glovo        # file à part : ne prend jamais la place d'un relevé maj-prix en attente
+
+jobs:
+  essai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Lire Glovo
+        id: lire
+        continue-on-error: true
+        run: python tools/essai_glovo.py
+      - name: Enregistrer le releve
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/essai/glovo.json
+          if git diff --cached --quiet; then echo "Rien de nouveau"; exit 0; fi
+          git commit -m "Essai Glovo ($(date -u +%Y-%m-%d))"
+          for i in 1 2 3; do
+            git pull --rebase -X theirs --autostash origin main && git push && exit 0
+            sleep 15
+          done
+          exit 1
+      - name: Signaler un echec de lecture
+        if: steps.lire.outcome == 'failure'
+        run: |
+          echo "ÉCHEC : Glovo n'a donné aucune eau pour au moins un magasin (voir l'étape « Lire Glovo »)."
+          exit 1

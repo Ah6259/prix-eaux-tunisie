@@ -97,6 +97,10 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `battement-de-coeur.yml` le 1er du mois (évite la pause GitHub après 60 jours sans activité).
 - `instagram.yml` chaque lundi 9h05 : `tools/image_semaine.py` → image 1080×1350 « les 5 stikas les moins chères »
   + texte (assets/instagram/) envoyés sur le canal Telegram ; Ahmed les repost sur Instagram.
+- **`essai-glovo.yml` (22/11/2026, « fais » d'Ahmed) : ESSAI SILENCIEUX de Glovo** chaque jour 10h17 (groupe `essai-glovo`) :
+  `tools/essai_glovo.py` lit le rayon eaux de Monoprix Tunis, Carrefour Market Sousse et Aziza Gabès sur glovoapp.com (pages publiques,
+  robots.txt permissif) → `tools/essai/glovo.json` (60 jours). RIEN sur le site. Comparaison Carrefour Glovo / carrefour.tn (1er jour :
+  identiques au millime). Après quelques jours : bilan à Ahmed ; afficher Monoprix / Aziza seulement avec son accord (logo, mention « prix vu sur Glovo »).
 - `logos.yml` (manuel) : télécharge les logos d'une enseigne ; `tester-source.yml` (manuel) : vérifie si GitHub peut lire un site.
 - `telegram-bienvenue.yml` manuel. Groupe de concurrence commun `maj-prix`. Secret : `TELEGRAM_BOT_TOKEN`.
 - Relancer à la main : `gh workflow run maj-prix.yml -R Ah6259/prix-eaux-tunisie`.
