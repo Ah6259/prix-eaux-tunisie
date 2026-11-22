@@ -510,3 +510,9 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   méthode : la sortir de l'alarme (liste `RETIREES` de `tools/sources_en_panne.py`, ou `False` dans les réglages des sources),
   garder son lecteur et ses tests, la remettre si le site revient. Fait le 21/11 : Finances (Concours), Douane (Appels d'offres),
   location-vacance et tunisiapromo (Immobilier).
+- **Être vu sur Google et par les IA (22/11/2026)** : un robot qui « visite » nos sites ne sert à rien (Google ne classe pas selon les
+  visites et repère les fausses : risque de pénalité, statistiques faussées). Ce qui marche : (1) texte propre au site (chiffres à nous,
+  jamais copiés), (2) liens depuis les pages que Google connaît déjà (portail, Outils), (3) données Google : éditeur `Organization`
+  Clicvia dans le JSON-LD, (4) `llms.txt` SANS chiffre ni date (ils vieillissent), (5) robots.txt : assistants IA de recherche permis,
+  robots d'entraînement refusés, (6) titres avec l'année qui change seule (Code de la route : « 2026-2027 » en novembre-décembre),
+  (7) le geste d'Ahmed : Search Console → « Demander l'indexation », ~10 adresses par jour, (8) partages par Ahmed lui-même.
