@@ -22,4 +22,4 @@ Règles :
 | 22/11/2026 | 5 | Signaler (Telegram interne) un magasin qui vend une eau AU-DESSUS du prix maximum officiel | Eau | moyen | en attente |
 | 23/11/2026 | 6 | Ajouter Monoprix Sfax et Monoprix Sousse à l'essai Glovo (2 lignes dans `tools/essai_glovo.py`) : Monoprix suivi dans 3 grandes villes au lieu d'une | Eau | petit | en attente |
 | 23/11/2026 | 7 | Dans l'essai Glovo, noter « magasin sans catalogue ce jour » (page vide comme Gabès le 23/11) à part d'une vraie panne, pour que le bilan du 29/11 soit juste | Eau | petit | en attente |
-| 23/11/2026 | 8 | Idée de nouveau site : « Prix des boissons et du lait » (sodas, jus, lait), lisible sur les mêmes pages Glovo et sur carrefour.tn — aucun site d'Ahmed ne suit ces rayons | nouveau site | gros | en attente |
+| 23/11/2026 | 8 | Idée de nouveau site : « Prix des boissons et du lait » (sodas, jus, lait), lisible sur les mêmes pages Glovo et sur carrefour.tn — aucun site d'Ahmed ne suit ces rayons | nouveau site | gros | « non » d'Ahmed (23/11/2026 : pas demandé) — ne plus le reproposer |
