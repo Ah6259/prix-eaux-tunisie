@@ -360,6 +360,8 @@ ACCUEIL = [
     ('<a href="quelle-eau/">Quelle eau minérale choisir ?</a>', '<a href="quelle-eau/">أي ماء معدني تختار؟</a>'),
     ('<a href="a-propos/">Comment fonctionne le site ?</a>\n    <a href="https://eau.clicvia.com/"', '<a href="a-propos/">كيف يعمل الموقع؟</a>\n    <a href="https://eau.clicvia.com/"'),
     ('rel="noopener">Où trouver de l\'eau (sources, majels)</a>', 'rel="noopener">أين تجد الماء (عيون، مواجل)</a>'),
+    ('<a href="https://hygiene.clicvia.com/" target="_blank" rel="noopener" data-lien-site="eau-hygiene"><span class="lc-long">Produits d\'entretien et d\'hygiène livrés chez vous : comparez les prix sur Hygiène &amp; Maison</span><span class="lc-court">Produits d\'entretien livrés : Hygiène &amp; Maison</span> ›</a>',
+     '<a href="https://hygiene.clicvia.com/ar/" target="_blank" rel="noopener" data-lien-site="eau-hygiene"><span class="lc-long">مواد التنظيف والنظافة تصلك إلى البيت: قارن الأسعار في <bdi>Hygiène &amp; Maison</bdi></span><span class="lc-court">مواد التنظيف إلى بيتك: <bdi>Hygiène &amp; Maison</bdi></span> ›</a>'),
     ('<a href="https://clicvia.com/" rel="noopener">Tous nos services</a>', '<a href="https://clicvia.com/" rel="noopener">كل خدماتنا</a>'),
     ('<a href="https://clicvia.com/confidentialite/" rel="noopener">Confidentialité</a>', '<a href="https://clicvia.com/ar/confidentialite/" rel="noopener">الخصوصية</a>'),
     ('<a href="https://clicvia.com/conditions/" rel="noopener">Conditions d\'utilisation</a>', '<a href="https://clicvia.com/ar/conditions/" rel="noopener">شروط الاستعمال</a>'),

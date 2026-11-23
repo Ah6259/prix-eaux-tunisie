@@ -175,6 +175,15 @@ if ("serviceWorker" in navigator && location.protocol === "https:") {
   } catch (x) {}
 })();
 
+/* Liens vers nos autres sites (cercle Clicvia, règle commune § 67, CE.1 / CE.8 du 23/11/2026) : un lien a[data-lien-site="eau-hygiene"]
+   compte UN clic anonyme « lien-site/eau-hygiene » dans GoatCounter, sans bloquer la navigation et sans transmettre aucune donnée. */
+document.addEventListener("click", function (e) {
+  var a = e.target && e.target.closest && e.target.closest("a[data-lien-site]");
+  if (!a) return;
+  var nom = a.getAttribute("data-lien-site");
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "lien-site/" + nom, title: "Lien vers " + nom, event: true }); } catch (x) {}
+});
+
 /* >>> vidéo de présentation : page video/ partagée par le bouton « Partager » (outil vidéos d'Ahmed) */
 window.VIDEO_SITE = {"base": BASE_SITE, "defaut": "fr", "nom": {"fr": "Prix des Eaux de Tunisie", "ar": "أسعار الماء المعدني في تونس"}};
 /* Bouton « Partager » (demande d'Ahmed, octobre 2026) : partage un LIEN vers la page vidéo du site (qui montre la vidéo

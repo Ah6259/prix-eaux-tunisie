@@ -550,6 +550,7 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
     ["prix signalés (vérifiés, hors classement)", ex("data/signalements.js"), /prix signalés[\s\S]{0,120}hors classement/],
     ["commande & livraison (bientôt)", /id="livraison-open"/.test(acc), /Commande &amp; livraison/],
     ["alertes Telegram", /t\.me\/prixeautunisie/.test(acc), /Alertes \/ PROMO[\s\S]{0,40}Telegram/],
+    ["lien vers Hygiène & Maison (cercle Clicvia)", /data-lien-site="eau-hygiene"/.test(acc), /Produits d&#39;entretien livrés<\/b>[\s\S]{0,80}hygiene\.clicvia\.com/],
     ["questions fréquentes", /class="faq"/.test(acc), /Questions fréquentes/],
     ["votre avis", /id="avis-form"/.test(acc), /Votre avis/],
     ["pages des marques", ex("marque"), /Une page par marque/],
@@ -724,6 +725,23 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
       || !/<a href="https:\/\/clicvia\.com\/conditions\/"[^>]*>Conditions d'utilisation<\/a>/.test(pied); });
   check(`liens « Confidentialité » et « Conditions d'utilisation » (clicvia.com) dans le pied de chaque page (${toutesPages.length + autres.length} pages)`
     + (sansLiens.length ? " — manque : " + sansLiens.slice(0, 3).join(", ") : ""), sansLiens.length === 0); }
+
+// 23/11/2026 (cercle Clicvia CE.8, règle commune § 67) : lien sobre vers Hygiène & Maison sur l'accueil FR (-> hygiene.clicvia.com/)
+// et AR (-> hygiene.clicvia.com/ar/), jamais l'inverse ; clic compté « lien-site/eau-hygiene » sans bloquer la navigation.
+for (const [f, url, adresse] of [["index.html", "https://hygiene.clicvia.com/", "https://prix-eau.clicvia.com/"], ["ar/index.html", "https://hygiene.clicvia.com/ar/", "https://prix-eau.clicvia.com/ar/"]]) {
+  if (!existsSync(join(root, f))) { check(`${f} : présent pour le lien Hygiène & Maison`, false); continue; }
+  const h = lire(f).replace(/<script[^>]*src="[^"]*"[^>]*><\/script>/g, "");
+  const w = new JSDOM(h, { url: adresse, runScripts: "outside-only" }).window;
+  w.eval(prot);
+  const comptes = []; w.goatcounter = { count: o => comptes.push(o) };
+  const liens = [...w.document.querySelectorAll('a[href*="hygiene.clicvia.com"]')];
+  const a = liens[0];
+  let ouvert = false;
+  if (a) { const ev = new w.MouseEvent("click", { bubbles: true, cancelable: true }); a.dispatchEvent(ev); ouvert = !ev.defaultPrevented; }
+  check(`${f} : un seul lien vers Hygiène & Maison (${url}), nouvel onglet rel="noopener", clic compté lien-site/eau-hygiene sans bloquer`,
+    liens.length === 1 && a.getAttribute("href") === url && a.target === "_blank" && /noopener/.test(a.rel)
+    && a.dataset.lienSite === "eau-hygiene" && ouvert && comptes.length === 1 && comptes[0].path === "lien-site/eau-hygiene" && comptes[0].event === true);
+}
 
 console.log(erreurs ? `\n${erreurs} PROBLÈME(S)` : "\nTOUT PASSE");
 process.exit(erreurs ? 1 : 0);

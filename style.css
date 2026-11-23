@@ -990,6 +990,11 @@ input, select, textarea, form, form *, a, button{user-select:text; -webkit-user-
 .lien-comment{margin:4px 0 0; text-align:center; font-size:14px}
 .lien-comment a{color:var(--accent); font-weight:600}
 .lien-comment span{color:var(--muted); margin-inline-start:6px}
+/* cercle Clicvia CE.8 (23/11/2026) : lien sobre vers Hygiène & Maison ; au téléphone une seule ligne courte (jamais cachée) */
+.lien-cercle{margin:6px 0 0; text-align:center; font-size:13px; line-height:1.35}
+.lien-cercle a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
+.lien-cercle .lc-court{display:none}
+@media (max-width:560px){.lien-cercle .lc-long{display:none}.lien-cercle .lc-court{display:inline}}
 /* Mon Carrefour (07/11/2026) */
 .mon-carrefour{margin:8px 0 4px;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .mon-carrefour select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid #b9cbe0;max-width:100%}

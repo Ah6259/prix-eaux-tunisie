@@ -33,7 +33,7 @@ SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
-CSS_V = "20261121c"
+CSS_V = "20261123a"
 
 # Logo (goutte en aplats dans un carré bleu, comme l'icône du téléphone) : même dessin que l'en-tête de l'accueil
 LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1797C4"/><stop offset="1" stop-color="#0A5F80"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg-eau{n})"/><path d="M256 84C256 84 142 236 142 318a114 114 0 0 0 228 0C370 236 256 84 256 84Z" fill="#fff"/><path d="M256 84C256 84 370 236 370 318a114 114 0 0 1-114 114Z" fill="#D5EEF7"/><path d="M150 336Q203 306 256 336T362 336Q356 410 256 432Q156 410 150 336Z" fill="#7FCBE6"/><path d="M256 336Q309 366 362 336Q356 410 256 432Z" fill="#5DB7D9"/></svg>')
@@ -544,6 +544,7 @@ def page_a_propos(data, SITE, maj_fr, lang="fr"):
         "<b>بلّغ عن سعر رأيته في المغازة</b>: العلامة، الحجم، السعر، المغازة والتاريخ؛ يُنشر بعد التثبّت في بطاقة العلامة وعلى تيليغرام.",
         "<b>الطلب والتوصيل (قريبًا)</b>: أزرار « + » تحضّر سلة، لكن الطلب غير مفتوح بعد.",
         "<b>تنبيهات التخفيضات</b>: قناة تيليغرام ترسل انخفاض الأسعار والأسعار المبلَّغ عنها.",
+        '<b>مواد التنظيف إلى بيتك</b>: رابط نحو موقعنا <a href="https://hygiene.clicvia.com/ar/" rel="noopener"><bdi>Hygiène &amp; Maison</bdi></a> (أسعار مواد التنظيف والنظافة، مع التوصيل إلى كامل تونس)؛ نحسب النقرة فقط، دون أي معطى عنك.',
         "<b>أسئلة متكرّرة</b> و<b>رأيك</b> (استمارة لتكتب لنا) في أسفل الصفحة.",
         "<b>عنوان لكل لغة</b>: كل صفحة موجودة بالفرنسية وبالعربية (في ar/)، وزر اللغة في أعلى كل صفحة ينقلك إلى الصفحة نفسها باللغة الأخرى."])}
   {bloc("الصفحات الأخرى", [
@@ -610,6 +611,7 @@ def page_a_propos(data, SITE, maj_fr, lang="fr"):
         "<b>Signaler un prix vu en magasin</b> : marque, format, prix, magasin et date ; il est publié après vérification, sur la fiche de la marque et sur Telegram.",
         "<b>Commande &amp; livraison (bientôt)</b> : les boutons « + » préparent un panier, mais la commande n'est pas encore ouverte.",
         "<b>Alertes / PROMO</b> : le canal Telegram envoie les baisses de prix et les prix signalés.",
+        '<b>Produits d&#39;entretien livrés</b> : un lien vers notre site <a href="https://hygiene.clicvia.com/" rel="noopener">Hygiène &amp; Maison</a> (prix des produits d&#39;entretien et d&#39;hygiène, livrés partout en Tunisie) ; seul le clic est compté, sans aucune donnée sur vous.',
         "<b>Questions fréquentes</b> et <b>Votre avis</b> (formulaire pour nous écrire) en bas de la page.",
         "<b>Une adresse par langue</b> : chaque page existe en français et en arabe (dans ar/) ; le bouton de langue, en haut de chaque page, ouvre la même page dans l’autre langue."])}
   {bloc("Les autres pages", [
