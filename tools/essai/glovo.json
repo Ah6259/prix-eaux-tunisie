@@ -364,6 +364,178 @@
      ]
     }
    }
+  },
+  {
+   "date": "2026-11-24",
+   "magasins": {
+    "monoprix-tunis": {
+     "nom": "Monoprix Tunis",
+     "url": "https://glovoapp.com/fr/tn/tunis/stores/monoprix-tis?content=eaux-plates-c.37011387",
+     "produits": [
+      {
+       "nom": "Eau minérale SAFIA 1.5L - 111",
+       "prix": 0.69,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau minérale MARWA 1.5L - 722",
+       "prix": 0.64,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau de source naturelle MAY TUNISIA 2L - 061",
+       "prix": 0.9,
+       "prix_barre": null
+      }
+     ]
+    },
+    "carrefour-sousse": {
+     "nom": "Carrefour Market Sousse",
+     "url": "https://glovoapp.com/fr/tn/sousse/stores/carrefour-nso?content=eaux-plates-c.36071216",
+     "produits": [
+      {
+       "nom": "Eau De Source Delice 1.5L",
+       "prix": 0.69,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau Minérale Marwa 1.5L",
+       "prix": 0.64,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau Minérale Sabrine 1.5L",
+       "prix": 0.68,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau De Source 2L Mira",
+       "prix": 0.76,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau Minérale Aqualine 1.5L",
+       "prix": 0.63,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau De Source Mira 0.95L",
+       "prix": 0.61,
+       "prix_barre": null
+      },
+      {
+       "nom": "BRIMA Eau minérale BRIMA - 1.5L",
+       "prix": 0.65,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau De Source 2L Denya",
+       "prix": 0.8,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau De Source Delice 0.5L",
+       "prix": 0.48,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau Minérale Palma 1,5L - 025",
+       "prix": 0.76,
+       "prix_barre": null
+      },
+      {
+       "nom": "Mira 0,4Litre/Stika",
+       "prix": 0.39,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau Minérale Palma 2L - 032",
+       "prix": 0.92,
+       "prix_barre": null
+      }
+     ],
+     "comparaison_carrefour_tn": [
+      {
+       "nom": "Eau Minérale Sabrine 1.5L",
+       "glovo": 0.68,
+       "carrefour_tn": 0.68,
+       "ecart_pct": 0.0
+      },
+      {
+       "nom": "Eau De Source 2L Mira",
+       "glovo": 0.76,
+       "carrefour_tn": 0.76,
+       "ecart_pct": 0.0
+      },
+      {
+       "nom": "Eau Minérale Aqualine 1.5L",
+       "glovo": 0.63,
+       "carrefour_tn": 0.63,
+       "ecart_pct": 0.0
+      },
+      {
+       "nom": "Eau De Source Mira 0.95L",
+       "glovo": 0.61,
+       "carrefour_tn": 0.61,
+       "ecart_pct": 0.0
+      },
+      {
+       "nom": "BRIMA Eau minérale BRIMA - 1.5L",
+       "glovo": 0.65,
+       "carrefour_tn": 0.65,
+       "ecart_pct": 0.0
+      },
+      {
+       "nom": "Eau De Source 2L Denya",
+       "glovo": 0.8,
+       "carrefour_tn": 0.8,
+       "ecart_pct": 0.0
+      },
+      {
+       "nom": "Eau Minérale Palma 1,5L - 025",
+       "glovo": 0.76,
+       "carrefour_tn": 0.76,
+       "ecart_pct": 0.0
+      }
+     ]
+    },
+    "aziza-gabes": {
+     "nom": "Aziza Gabès",
+     "url": "https://glovoapp.com/fr/tn/gabes/stores/magasins-aziza-gbs?content=eaux-c.50827073",
+     "produits": [
+      {
+       "nom": "Eau De Source Delice 1.5L - 026",
+       "prix": 0.73,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau De Source Naturelle Vivian 2L - 032",
+       "prix": 0.72,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau Minerale 2L Dima - 046",
+       "prix": 0.92,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau Minerale 2L Melina - 059",
+       "prix": 0.9,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau De Source 1,5l Tiba",
+       "prix": 0.69,
+       "prix_barre": null
+      },
+      {
+       "nom": "Eau de source naturelle MAY TUNISIA 2L - 061",
+       "prix": 0.9,
+       "prix_barre": null
+      }
+     ]
+    }
+   }
   }
  ]
 }
