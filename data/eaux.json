@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -86,7 +86,7 @@
      },
      "magasins": {
       "Carrefour": [
-       7,
+       8,
        39
       ]
      },
@@ -95,6 +95,7 @@
        "ariana": 0.78,
        "boumhal": 0.78,
        "boumhal_lcv": 0.78,
+       "cun": 0.78,
        "mahdia": 0.78,
        "mahdia_lcv": 0.78,
        "manzah9": 0.78,
@@ -531,12 +532,13 @@
      },
      "magasins": {
       "Carrefour": [
-       1,
+       2,
        39
       ]
      },
      "par_mag": {
       "Carrefour": {
+       "ksarsaid": 0.69,
        "mof_lcv": 0.69
       }
      }
@@ -567,7 +569,7 @@
      },
      "magasins": {
       "Carrefour": [
-       13,
+       10,
        39
       ]
      },
@@ -580,12 +582,9 @@
        "boumhal_lcv": 0.88,
        "cun": 0.88,
        "gammarth": 0.88,
-       "mof_lcv": 0.88,
        "sahloul": 0.88,
-       "sfax_express": 0.88,
        "sfax_jadida": 0.88,
-       "sfax_lafrane": 0.88,
-       "sfax_mall": 0.88
+       "sfax_lafrane": 0.88
       }
      }
     }
@@ -629,7 +628,7 @@
      },
      "magasins": {
       "Carrefour": [
-       29,
+       27,
        39
       ]
      },
@@ -644,7 +643,6 @@
        "gabes": 0.64,
        "gabes_lcv": 0.64,
        "gammarth": 0.62,
-       "hammamet": 0.64,
        "ksarsaid": 0.62,
        "ksarsaid_lcv": 0.62,
        "lac2": 0.63,
@@ -657,7 +655,6 @@
        "marsa_express": 0.64,
        "mof_lcv": 0.66,
        "mourouj": 0.63,
-       "mrezgua_lcv": 0.64,
        "sahloul": 0.62,
        "sfax_express": 0.66,
        "sfax_jadida": 0.66,
@@ -705,7 +702,7 @@
      },
      "magasins": {
       "Carrefour": [
-       34,
+       32,
        39
       ]
      },
@@ -723,8 +720,6 @@
        "gammarth": 0.83,
        "gazelle": 0.83,
        "hammamet": 0.83,
-       "ksarsaid": 0.83,
-       "ksarsaid_lcv": 0.83,
        "lac2": 0.83,
        "mahdia": 0.83,
        "mahdia_lcv": 0.83,
@@ -1296,7 +1291,7 @@
    "source": null,
    "depuis": null,
    "note": null,
-   "img": "assets/img/produits/927068016b2a.jpg",
+   "img": "assets/img/produits/ee2b51b88d1e.jpg",
    "types": [
     "plate"
    ],
@@ -1306,7 +1301,7 @@
      "format": "1.5 L",
      "category": "plate",
      "flavor": null,
-     "img": "assets/img/produits/927068016b2a.jpg",
+     "img": "assets/img/produits/ee2b51b88d1e.jpg",
      "prices": {
       "Géant": 0.69
      },
@@ -1360,21 +1355,20 @@
      },
      "magasins": {
       "Carrefour": [
-       25,
+       24,
        39
       ]
      },
      "par_mag": {
       "Carrefour": {
        "aouina": 0.68,
+       "ariana": 0.68,
        "borj_cedria": 0.68,
        "boumhal": 0.68,
        "boumhal_lcv": 0.68,
        "cun": 0.68,
        "gammarth": 0.68,
        "gazelle": 0.68,
-       "ksarsaid": 0.68,
-       "ksarsaid_lcv": 0.68,
        "lac2": 0.68,
        "mahdia": 0.68,
        "mahdia_lcv": 0.68,
@@ -1416,6 +1410,19 @@
      "img": "assets/img/safia_15l.jpg",
      "prices": {
       "Géant": 0.43
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
+    },
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/safia_15l.jpg",
+     "prices": {
+      "Géant": 0.69
      },
      "non_dispo": [
       "Carrefour"
@@ -1480,7 +1487,7 @@
      },
      "magasins": {
       "Carrefour": [
-       28,
+       27,
        39
       ]
      },
@@ -1507,7 +1514,6 @@
        "manzah9": 0.44,
        "mof_lcv": 0.44,
        "mos": 0.44,
-       "mourouj": 0.44,
        "mrezgua_lcv": 0.44,
        "sahloul": 0.44,
        "sfax_express": 0.44,
@@ -1529,7 +1535,7 @@
      },
      "magasins": {
       "Carrefour": [
-       29,
+       30,
        39
       ]
      },
@@ -1552,6 +1558,7 @@
        "mahdia_lcv": 0.68,
        "manar_city": 0.68,
        "manar_city_lcv": 0.68,
+       "manzah9": 0.68,
        "marsa": 0.68,
        "marsa_express": 0.68,
        "mof_lcv": 0.68,
@@ -1598,13 +1605,13 @@
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-23",
+   "dernier_ok": "2026-11-24",
    "nb": 23,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-23",
-   "nb": 41
+   "dernier_ok": "2026-11-24",
+   "nb": 42
   }
  },
  "magasins_carrefour": {
