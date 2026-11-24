@@ -250,3 +250,6 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - **22/11/2026** : Google + IA : titre « Prix de l'eau minérale en Tunisie », éditeur Clicvia dans les données Google, FAQ cachée sans prix
   figés, `llms.txt` sans chiffre. Autres sites le même jour : mêmes signaux sur 12 sites, année automatique pour Code de la route, Mon agent
   avec tableau des prix, classement Google dans le tableau de bord. Geste d'Ahmed : demander l'indexation dans Search Console (VIS.1).
+- **24/11/2026** : rien de changé sur le site. Mémoire : chaque session commence par brancher le dépôt général `projets-ahmed` et lancer
+  `debut de session.py eau` (une session ouverte sur ce seul dépôt avait donné une date de « dernière mise à jour » vieille de 2 jours) ;
+  même rubrique « EN TOUT PREMIER » dans les 41 dépôts Clicvia.

@@ -516,3 +516,7 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   Clicvia dans le JSON-LD, (4) `llms.txt` SANS chiffre ni date (ils vieillissent), (5) robots.txt : assistants IA de recherche permis,
   robots d'entraînement refusés, (6) titres avec l'année qui change seule (Code de la route : « 2026-2027 » en novembre-décembre),
   (7) le geste d'Ahmed : Search Console → « Demander l'indexation », ~10 adresses par jour, (8) partages par Ahmed lui-même.
+- **Une session sur le téléphone voit seulement les dépôts choisis (24/11/2026)** : la mémoire de TOUS les sites (update workflow,
+  journal, tâches) est dans le dépôt général `projets-ahmed`. Chaque `CLAUDE.md` commence donc par la rubrique « EN TOUT PREMIER » :
+  brancher projets-ahmed, lancer `debut de session.py <projet>`, regarder les deux dépôts pour « la dernière mise à jour ».
+  Le plus simple : cocher aussi `projets-ahmed` à l'ouverture de la session. Tout nouveau site reçoit cette rubrique dès sa création.

@@ -719,3 +719,10 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   21/11 tant que le secret `GSC_CLE` n'existe pas : à créer par Ahmed sur le PC). VIS.1 jour 1 fait par Ahmed le 22/11.
 - Réponse donnée : PAS de robot qui visite nos sites (Google ne classe pas selon les visites, fausses visites = risque + GoatCounter faussé).
 - `outils visibilite/llms.py` (projets-ahmed) ne réécrit plus le llms.txt de ce site (liste `ECRITS_A_LA_MAIN`, `--forcer`).
+
+## Update workflow du 24/11/2026 (session en ligne)
+- Problème vu par Ahmed : la session (ouverte sur ce seul dépôt) a donné « dernier update workflow : 22/11 » alors qu'il y en avait deux
+  le 24/11 dans projets-ahmed. Réparé : rubrique « EN TOUT PREMIER » en tête de ce fichier ET des 41 dépôts Clicvia (CLAUDE.md créé dans
+  les 15 qui n'en avaient pas) ; règle commune § 68 et procédure « nouveau site » (projets-ahmed). Rien de changé sur le site.
+- Effet de bord réparé le jour même : le déploiement de `prix-eau-tunisie` (redirection) a échoué sur l'envoi du CLAUDE.md (paquet
+  « github-pages » introuvable, panne passagère de GitHub) -> relancé.
