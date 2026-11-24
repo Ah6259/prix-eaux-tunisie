@@ -4,6 +4,15 @@ Fichier lu automatiquement par Claude Code au début de chaque session dans ce d
 **À tenir à jour à chaque « update workflow »** (en même temps que le README et le guide).
 Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 
+## EN TOUT PREMIER (24/11/2026, problème vu par Ahmed)
+- La mémoire générale, les « update workflow » et le journal de TOUS les sites sont dans le dépôt PRIVÉ **`Ah6259/projets-ahmed`**
+  (le dépôt général), PAS ici. Une session ouverte sur ce seul dépôt ne voit donc pas le dernier travail d'Ahmed (le 24/11, Claude a
+  répondu « dernier update workflow : 22/11 » alors qu'il y en avait deux le jour même dans projets-ahmed).
+- **Au début de CHAQUE session, avant de répondre quoi que ce soit** : si `../projets-ahmed` n'existe pas, le brancher
+  (`add_repo` Ah6259/projets-ahmed, puis `git clone --depth 30 https://github.com/Ah6259/projets-ahmed ../projets-ahmed`) ; sinon `git pull` ;
+  puis `python3 "debut de session.py" eau` dans `../projets-ahmed` et en résumer le résultat à Ahmed.
+- « Dernier workflow / dernière mise à jour » = regarder `git log` de projets-ahmed ET de ce dépôt (toutes branches), jamais un seul.
+
 ## Qui et comment travailler
 - Propriétaire : Ahmed (compte GitHub `Ah6259`), débutant en git/web. Expliquer simplement, **en français**.
 - **Toujours demander avant d'installer un logiciel.**
