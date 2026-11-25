@@ -528,3 +528,4 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   Soir du 25/11 : nouvelle règle commune § 71 (encadrés liés au contenu vers la page d'achat, clics comptés dans GoatCounter, pas de gratuité) et
   procédure « nouveau site » point 7 (projets-ahmed). Ce site n'a pas de Pass : à appliquer s'il en a un un jour. Rien de changé sur le site.
 - **25/11/2026 (soir)** : plan Google — lastmod honnête (`tools/lastmod.py`), marques sans prix ni composition en noindex hors du plan du site, bloc « l'essentiel » sur l'accueil (FR + AR). Demandes de liens à d'autres sites : abandonnées (décision d'Ahmed).
+- **25/11/2026 (fin, update workflow)** : plan Google B.1-B.3 FAIT ici et sur 13 autres sites publics (annuaires après le 01/12). Au week-end du 28-29/11 : audit des Pass (PASS.3, projets-ahmed) — ce site n'a pas de Pass. Rien d'autre de changé ici.
