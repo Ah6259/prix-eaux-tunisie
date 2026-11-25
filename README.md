@@ -258,3 +258,5 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
   projets-ahmed, règle commune § 70.8) : si ce site a un jour un Pass, il prend ce module.
   Week-end du 28-29/11 (liste `memoire claude/a-faire-weekend-28-29-novembre.md` de projets-ahmed) : pour ce site, bilan de l'essai silencieux
   de Glovo (robot `essai-glovo.yml`) puis décision d'Ahmed sur l'affichage de Monoprix / Aziza.
+  Soir du 25/11 : nouvelle règle commune § 71 (encadrés liés au contenu vers la page d'achat, clics comptés dans GoatCounter, pas de gratuité) et
+  procédure « nouveau site » point 7 (projets-ahmed). Ce site n'a pas de Pass : à appliquer s'il en a un un jour. Rien de changé sur le site.
