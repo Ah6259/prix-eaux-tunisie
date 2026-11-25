@@ -260,3 +260,4 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
   de Glovo (robot `essai-glovo.yml`) puis décision d'Ahmed sur l'affichage de Monoprix / Aziza.
   Soir du 25/11 : nouvelle règle commune § 71 (encadrés liés au contenu vers la page d'achat, clics comptés dans GoatCounter, pas de gratuité) et
   procédure « nouveau site » point 7 (projets-ahmed). Ce site n'a pas de Pass : à appliquer s'il en a un un jour. Rien de changé sur le site.
+- **25/11/2026 (soir)** : plan Google — lastmod honnête (`tools/lastmod.py`), marques sans prix ni composition en noindex hors du plan du site, bloc « l'essentiel » sur l'accueil (FR + AR). Demandes de liens à d'autres sites : abandonnées (décision d'Ahmed).

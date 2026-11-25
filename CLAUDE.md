@@ -746,3 +746,4 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
 - Tests (test_site.mjs, vérifiés par sabotage) : dates pas toutes du jour, date = data/lastmod.json, aucune page noindex dans le plan, accueil
   jamais noindex, règle des pages maigres, lastmod.py avec données inventées. À savoir : la FAQ repliée garde des prix d'exemple (remplacés par
   app.js) et une réponse « commande sur WhatsApp » alors que la commande est fermée (à corriger avec l'accord d'Ahmed).
+- **25/11/2026 (soir, update workflow)** : plan Google B.1-B.3 fait ici (voir ci-dessus) et en cours sur les autres sites publics ; **B.4 ABANDONNÉ par Ahmed : ne jamais proposer de contacter d'autres sites (médias, associations, annuaires) pour des liens** (« ils vont demander de l'argent »).
