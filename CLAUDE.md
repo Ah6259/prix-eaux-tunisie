@@ -726,3 +726,8 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   les 15 qui n'en avaient pas) ; règle commune § 68 et procédure « nouveau site » (projets-ahmed). Rien de changé sur le site.
 - Effet de bord réparé le jour même : le déploiement de `prix-eau-tunisie` (redirection) a échoué sur l'envoi du CLAUDE.md (paquet
   « github-pages » introuvable, panne passagère de GitHub) -> relancé.
+
+## Update workflow du 25/11/2026 (session en ligne)
+- **25/11/2026** : rien de changé sur ce site (pas de Pass). Ailleurs : e-mail automatique de confirmation aux clients des Pass (Resend, Worker
+  api-email.clicvia.com) en service sur les 8 sites à Pass ; leur parcours d'achat est devenu UN module commun (`outils communs/pass-commun/` de
+  projets-ahmed, règle commune § 70.8) : si ce site a un jour un Pass, il prend ce module.

@@ -253,3 +253,6 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - **24/11/2026** : rien de changé sur le site. Mémoire : chaque session commence par brancher le dépôt général `projets-ahmed` et lancer
   `debut de session.py eau` (une session ouverte sur ce seul dépôt avait donné une date de « dernière mise à jour » vieille de 2 jours) ;
   même rubrique « EN TOUT PREMIER » dans les 41 dépôts Clicvia.
+- **25/11/2026** : rien de changé sur ce site (pas de Pass). Ailleurs : e-mail automatique de confirmation aux clients des Pass (Resend, Worker
+  api-email.clicvia.com) en service sur les 8 sites à Pass ; leur parcours d'achat est devenu UN module commun (`outils communs/pass-commun/` de
+  projets-ahmed, règle commune § 70.8) : si ce site a un jour un Pass, il prend ce module.

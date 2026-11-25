@@ -520,3 +520,6 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
   journal, tâches) est dans le dépôt général `projets-ahmed`. Chaque `CLAUDE.md` commence donc par la rubrique « EN TOUT PREMIER » :
   brancher projets-ahmed, lancer `debut de session.py <projet>`, regarder les deux dépôts pour « la dernière mise à jour ».
   Le plus simple : cocher aussi `projets-ahmed` à l'ouverture de la session. Tout nouveau site reçoit cette rubrique dès sa création.
+- **25/11/2026** : rien de changé sur ce site (pas de Pass). Ailleurs : e-mail automatique de confirmation aux clients des Pass (Resend, Worker
+  api-email.clicvia.com) en service sur les 8 sites à Pass ; leur parcours d'achat est devenu UN module commun (`outils communs/pass-commun/` de
+  projets-ahmed, règle commune § 70.8) : si ce site a un jour un Pass, il prend ce module.
