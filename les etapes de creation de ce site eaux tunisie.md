@@ -523,3 +523,5 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - **25/11/2026** : rien de changé sur ce site (pas de Pass). Ailleurs : e-mail automatique de confirmation aux clients des Pass (Resend, Worker
   api-email.clicvia.com) en service sur les 8 sites à Pass ; leur parcours d'achat est devenu UN module commun (`outils communs/pass-commun/` de
   projets-ahmed, règle commune § 70.8) : si ce site a un jour un Pass, il prend ce module.
+  Week-end du 28-29/11 (liste `memoire claude/a-faire-weekend-28-29-novembre.md` de projets-ahmed) : pour ce site, bilan de l'essai silencieux
+  de Glovo (robot `essai-glovo.yml`) puis décision d'Ahmed sur l'affichage de Monoprix / Aziza.
