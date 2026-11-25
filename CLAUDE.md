@@ -748,3 +748,4 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   app.js) et une réponse « commande sur WhatsApp » alors que la commande est fermée (à corriger avec l'accord d'Ahmed).
 - **25/11/2026 (soir, update workflow)** : plan Google B.1-B.3 fait ici (voir ci-dessus) et en cours sur les autres sites publics ; **B.4 ABANDONNÉ par Ahmed : ne jamais proposer de contacter d'autres sites (médias, associations, annuaires) pour des liens** (« ils vont demander de l'argent »).
 - **25/11/2026 (fin, update workflow)** : plan Google B.1-B.3 FAIT ici et sur 13 autres sites publics (annuaires après le 01/12). Au week-end du 28-29/11 : audit des Pass (PASS.3, projets-ahmed) — ce site n'a pas de Pass. Rien d'autre de changé ici.
+- **25/11/2026 (fin de session)** : tout est envoyé et en ligne (aussi les autres sites). Pour reprendre sur le PC : `git checkout main` puis `git pull` ici et dans projets-ahmed.
