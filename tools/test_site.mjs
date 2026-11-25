@@ -267,7 +267,7 @@ const toutesPages = ["index.html", ...guides, ...marques, ...rapports];
   check("SEO : titre de 10 à 70 caractères et description de 40 à 170 sur chaque page" + (longs.length ? " — " + longs.slice(0, 4).join(" ; ") : ""), longs.length === 0); }
 const sur = (desc, test) => { const ko = toutesPages.filter(f => !test(lire(f), f));
   check(`${desc} (${toutesPages.length} pages)${ko.length ? " — manque : " + ko.slice(0, 3).join(", ") : ""}`, ko.length === 0); };
-sur("meta noai, noimageai", s => s.includes('<meta name="robots" content="noai, noimageai">'));
+sur("meta noai, noimageai", s => /<meta name="robots" content="(noindex, follow, )?noai, noimageai">/.test(s));
 sur("pas de traduction automatique (translate=\"no\" + meta google notranslate)", s => /<html lang="fr" translate="no"[ >]/.test(s) && s.includes('<meta name="google" content="notranslate">'));
 sur("referrer strict-origin-when-cross-origin", s => s.includes('<meta name="referrer" content="strict-origin-when-cross-origin">'));
 sur("script anti-copie protection.js chargé", s => /<script src="(\.\.\/)*protection\.js\?v=/.test(s));
@@ -522,6 +522,59 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
   }
 }
 
+// ---- 25/11/2026 (plan Google B.1 + B.2) : plan du site HONNÊTE.
+//      B.2 : <lastmod> = dernier VRAI changement de la page (tools/lastmod.py, mémoire data/lastmod.json), jamais « aujourd'hui » partout ;
+//      B.1 : une page maigre (marque sans aucun prix ni composition) reste en ligne mais en noindex, hors du plan du site.
+{
+  const sm = lire("sitemap.xml");
+  const urls = [...sm.matchAll(/<url><loc>([^<]+)<\/loc>(?:<lastmod>([^<]+)<\/lastmod>)?/g)];
+  const jour = new Date().toISOString().slice(0, 10);
+  const datesSm = urls.map(m => m[2]);
+  check(`plan du site : chaque adresse a sa date (${urls.length} adresses)`, urls.length > 10 && datesSm.every(d => /^\d{4}-\d{2}-\d{2}$/.test(d)));
+  check("plan du site : les dates ne sont pas toutes celles du jour, ni toutes identiques (date du dernier vrai changement)",
+    !datesSm.every(d => d === jour) && new Set(datesSm).size > 1);
+  const LMJ = existsSync(join(root, "data/lastmod.json")) ? JSON.parse(lire("data/lastmod.json")) : {};
+  const fichierDe = u => u.replace("https://prix-eau.clicvia.com/", "") + "index.html";
+  const faux = urls.filter(m => !/\/rapports\/(\d{4}-\d{2}\/)?$/.test(m[1]) && (!LMJ[fichierDe(m[1])] || LMJ[fichierDe(m[1])].date !== m[2])).map(m => m[1]);
+  check("plan du site : la date de chaque page = celle de data/lastmod.json (rapports du mois : date de leurs chiffres)" + (faux.length ? " — " + faux.slice(0, 3).join(", ") : ""), !faux.length);
+  check("tools/build_pages.py fabrique les dates avec tools/lastmod.py (pas la date du jour pour tout) et le robot enregistre la mémoire",
+    /import lastmod as LM/.test(lire("tools/build_pages.py")) && !/\(u, today\) for u in urls/.test(lire("tools/build_pages.py"))
+    && /git add data\//.test(lire(".github/workflows/maj-prix.yml")));
+  const avecNoindex = urls.filter(m => { const f = fichierDe(m[1]); return existsSync(join(root, f)) && /<meta name="robots" content="[^"]*noindex/.test(lire(f)); }).map(m => m[1]);
+  check("plan du site : aucune page en noindex" + (avecNoindex.length ? " — " + avecNoindex.join(", ") : ""), !avecNoindex.length);
+  const jamais = ["index.html", "ar/index.html", "a-propos/index.html", "prix-stika/index.html", "quelle-eau/index.html", "rapports/index.html",
+    "prix-eau-carrefour/index.html", "prix-eau-geant/index.html"].filter(f => !existsSync(join(root, f)) || /noindex/.test(lire(f).match(/<meta name="robots"[^>]*>/)?.[0] || ""));
+  check("accueil, guides, magasins, a-propos et rapports : jamais en noindex" + (jamais.length ? " — " + jamais.join(", ") : ""), !jamais.length);
+  // règle des pages maigres recalculée ici : marque sans produit ET sans composition = noindex ; toute autre marque = indexée
+  const J = JSON.parse(lire("data/eaux.json"));
+  const CO = JSON.parse(lire("data/composition.js").match(/window\.EAUX_COMPO\s*=\s*({[\s\S]*})\s*;/)[1]).waters;
+  const malRangees = J.brands.filter(b => {
+    const maigre = !(b.products || []).length && !CO[b.id];
+    return ["marque/" + b.id + "/index.html", "ar/marque/" + b.id + "/index.html"].some(f => /noindex/.test(lire(f).match(/<meta name="robots"[^>]*>/)[0]) !== maigre);
+  }).map(b => b.id);
+  check(`pages maigres : seule une marque sans aucun prix ni composition est en noindex (${J.brands.filter(b => !(b.products || []).length && !CO[b.id]).length} sur ${J.brands.length})`
+    + (malRangees.length ? " — " + malRangees.join(", ") : ""), !malRangees.length);
+  // données inventées : une page inchangée garde sa date, une page changée prend la date du jour, seule une date qui change n'y change rien
+  const { execFileSync } = await import("node:child_process");
+  const { mkdtempSync, writeFileSync, mkdirSync, rmSync } = await import("node:fs");
+  const { tmpdir } = await import("node:os");
+  const tmp = mkdtempSync(join(tmpdir(), "lastmod-"));
+  try {
+    mkdirSync(join(tmp, "a"), { recursive: true }); mkdirSync(join(tmp, "b"), { recursive: true });
+    writeFileSync(join(tmp, "a/index.html"), '<p>Prix relevés le 01/11/2026</p><p>Safia 0,690 DT</p><link href="s.css?v=1">');
+    writeFileSync(join(tmp, "b/index.html"), "<p>Marwa 0,610 DT</p>");
+    const py = (jour, code) => JSON.parse(execFileSync(process.platform === "win32" ? "python" : "python3",
+      ["-c", `import sys,json;sys.path.insert(0,${JSON.stringify(join(root, "tools"))});import lastmod;print(json.dumps(lastmod.dates(${JSON.stringify(tmp)},["a/index.html","b/index.html"],"${jour}")))`], { encoding: "utf-8" }));
+    const j1 = py("2026-11-01");
+    writeFileSync(join(tmp, "a/index.html"), '<p>Prix relevés le 02/11/2026</p><p>Safia 0,690 DT</p><link href="s.css?v=2">');
+    writeFileSync(join(tmp, "b/index.html"), "<p>Marwa 0,650 DT</p>");
+    const j2 = py("2026-11-02");
+    check("tools/lastmod.py (données inventées) : page dont seules la date et le ?v= changent = date gardée ; prix changé = date du jour",
+      j1["a/index.html"] === "2026-11-01" && j2["a/index.html"] === "2026-11-01" && j2["b/index.html"] === "2026-11-02");
+  } catch (e) { check("tools/lastmod.py (données inventées) : " + e.message, false); }
+  finally { rmSync(tmp, { recursive: true, force: true }); }
+}
+
 // ---- 25/10/2026 (RÈGLE d'Ahmed, règle commune § 44 : « la page Comment fonctionne le site doit être mise à jour chaque fois qu'on
 //      modifie le site ») : chaque fonction visible du site (repère dans le code ou les pages) doit être expliquée dans a-propos/
 //      (page fabriquée par page_a_propos() de tools/build_guides.py). Nouvelle fonction = une ligne ici + son explication dans la page.
@@ -667,7 +720,7 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
   check("données Google (JSON-LD) : lisibles sur les pages arabes, sans arabe sur les pages françaises", !jsonKo.length && !jsonFrAr.length);
   const sm = lire("sitemap.xml");
   check("plan du site : chaque page française ET sa page arabe (ar/…), pas les pages retirées",
-    frPages.every(f => sm.includes(`<loc>${SITE}${chemin(f)}</loc>`) && sm.includes(`<loc>${SITE}ar/${chemin(f)}</loc>`)) && !/ar\/prix-eau-(monoprix|otrity)/.test(sm)
+    frPages.filter(f => !/<meta name="robots" content="[^"]*noindex/.test(lire(f))).every(f => sm.includes(`<loc>${SITE}${chemin(f)}</loc>`) && sm.includes(`<loc>${SITE}ar/${chemin(f)}</loc>`)) && !/ar\/prix-eau-(monoprix|otrity)/.test(sm)
     && !existsSync(join(root, "ar/prix-eau-monoprix")) && !existsSync(join(root, "ar/video")));
   check("pages retirées (Monoprix, Otrity) et vidéo : une seule adresse, sans bouton de langue ni hreflang",
     ["prix-eau-monoprix/index.html", "prix-eau-otrity/index.html", "video/index.html"].every(f => !/langue-btn|hreflang|data-langue-fixe/.test(lire(f))));

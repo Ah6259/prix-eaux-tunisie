@@ -50,6 +50,13 @@ COMPO_ROWS_AR = {"tds": "البقايا الجافة (TDS)", "ca": "الكالس
 TEXTES_AR = json.loads(re.search(r"window\.TEXTES_AR\s*=\s*({.*})\s*;", (ROOT / "assets" / "textes-ar.js").read_text(encoding="utf-8"), re.S).group(1))
 
 
+def maigre(b):
+    """Page de marque MAIGRE (plan Google B.1, 25/11/2026) : ni prix relevé (aucun produit) ni composition connue.
+    Elle reste en ligne pour le visiteur, mais en noindex et hors du plan du site ; elle revient seule dès qu'un prix
+    ou une composition apparaît."""
+    return not (b.get("products") or []) and not COMPO["waters"].get(b["id"])
+
+
 def page_marque(b, lang="fr"):
     """Page d'une marque, en français (marque/<id>/) ou en arabe (ar/marque/<id>/, rangée par tools/langues.py)."""
     T = lambda fr, ar: ar if lang == "ar" else fr
@@ -187,7 +194,7 @@ def page_marque(b, lang="fr"):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://prix-eaux-tunisie.goatcounter.com; connect-src 'self' https://docs.google.com https://formspree.io https://prix-eaux-tunisie.goatcounter.com; form-action 'self' https://docs.google.com https://formspree.io; object-src 'none'; base-uri 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="robots" content="noai, noimageai">
+<meta name="robots" content="{'noindex, follow, ' if maigre(b) else ''}noai, noimageai">
 <script src="../../protection.js?v={CSS_V}"></script>
 <title>{titre}</title>
 <meta name="description" content="{esc(desc)}">
@@ -306,17 +313,27 @@ if LG.MANQUES:
 for c in LG.nettoyer(str(ROOT)):
     print("page arabe retirée : ar/" + c)
 
-# sitemap : chaque page française puis sa version arabe (ar/…), avec la date de ses chiffres
-today = date.today().isoformat()
+# sitemap : chaque page française puis sa version arabe (ar/…). Date = dernier VRAI changement de la page
+# (tools/lastmod.py, mémoire data/lastmod.json ; 25/11/2026, plan Google B.2) ; un rapport du mois garde la date de ses
+# chiffres. Une page en noindex (marque maigre, page retirée) n'est jamais dans le plan du site (B.1).
+import lastmod as LM  # noqa: E402
+fichier = lambda u: (u.replace(SITE + "/", "") + "index.html")
+candidats = [(u, None) for u in urls] + urls_rapports + [(u, None) for u in urls_video]
+noindex = lambda f: (ROOT / f).exists() and re.search(r'<meta name="robots" content="[^"]*noindex', (ROOT / f).read_text(encoding="utf-8"))
+toutes, fichiers = [], []
+for i, (u, lm) in enumerate(candidats):
+    chemin = u.replace(SITE + "/", "")
+    for v in [u] + ([f"{SITE}/ar/{chemin}"] if chemin in LG.MIROIR else []):
+        if noindex(fichier(v)):
+            continue
+        toutes.append((v, lm, i == 0))
+        fichiers.append(fichier(v))
+DATES = LM.dates(ROOT, fichiers)
 sm = ['<?xml version="1.0" encoding="UTF-8"?>',
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-toutes = [(u, today) for u in urls] + urls_rapports + [(u, today) for u in urls_video]
-for i, (u, lm) in enumerate(toutes):
-    chemin = u.replace(SITE + "/", "")
-    versions = [u] + ([f"{SITE}/ar/{chemin}"] if chemin in LG.MIROIR else [])
-    for v in versions:
-        sm.append(f"  <url><loc>{v}</loc><lastmod>{lm}</lastmod>"
-                  f"<changefreq>daily</changefreq><priority>{'1.0' if i == 0 else '0.7'}</priority></url>")
+for v, lm, accueil in toutes:
+    sm.append(f"  <url><loc>{v}</loc><lastmod>{lm or DATES.get(fichier(v), date.today().isoformat())}</lastmod>"
+              f"<changefreq>daily</changefreq><priority>{'1.0' if accueil else '0.7'}</priority></url>")
 sm.append("</urlset>")
 (ROOT / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8", newline="\n")
 

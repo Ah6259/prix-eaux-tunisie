@@ -735,3 +735,14 @@ vérification Google Search Console). Dans le dossier parent `_claude code proje
   de Glovo (robot `essai-glovo.yml`) puis décision d'Ahmed sur l'affichage de Monoprix / Aziza.
   Soir du 25/11 : nouvelle règle commune § 71 (encadrés liés au contenu vers la page d'achat, clics comptés dans GoatCounter, pas de gratuité) et
   procédure « nouveau site » point 7 (projets-ahmed). Ce site n'a pas de Pass : à appliquer s'il en a un un jour. Rien de changé sur le site.
+
+## 25/11/2026 — plan Google (chute d'octobre, fiche `memoire claude/chute-google-octobre-2026.md` de projets-ahmed)
+- **B.2 lastmod honnête** : `tools/lastmod.py` (appelé par build_pages.py) : date d'une page = dernier VRAI changement (empreinte du HTML sans
+  dates ni ?v=, mémoire `data/lastmod.json`, page inconnue = date retrouvée dans git) ; les rapports du mois gardent la date de leurs chiffres.
+- **B.1 pages maigres** : une marque SANS aucun prix NI composition (`maigre()` de build_pages.py ; aujourd'hui : Rayan) = page en ligne mais
+  `noindex, follow` et hors du plan du site ; elle revient seule dès qu'un prix ou une composition apparaît. Jamais de noindex sur l'accueil,
+  guides, magasins, a-propos, rapports. Plan du site : 91 -> 89 adresses.
+- **B.3** : bloc visible « Prix de l'eau en Tunisie : l'essentiel » (3 questions, AUCUN prix écrit) avant « Évolution des prix », traduit dans `ACCUEIL`.
+- Tests (test_site.mjs, vérifiés par sabotage) : dates pas toutes du jour, date = data/lastmod.json, aucune page noindex dans le plan, accueil
+  jamais noindex, règle des pages maigres, lastmod.py avec données inventées. À savoir : la FAQ repliée garde des prix d'exemple (remplacés par
+  app.js) et une réponse « commande sur WhatsApp » alors que la commande est fermée (à corriger avec l'accord d'Ahmed).

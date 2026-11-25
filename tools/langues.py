@@ -222,6 +222,34 @@ def page_unique(fichier):
 # seul le texte affiché change.
 # ------------------------------------------------------------------------------------------------------------------------------
 ACCUEIL = [
+    # l'essentiel en texte (plan Google B.3, 25/11/2026), sans aucun prix écrit
+    ("""    <h2>Prix de l'eau en Tunisie : l'essentiel</h2>
+    <h3>Quel est le prix d'une stika d'eau ?</h3>
+    <p>La <strong>stika</strong> est le pack de 6&nbsp;bouteilles de 1,5&nbsp;L (12 pour les bouteilles de 50&nbsp;cl), le format le plus acheté par les familles.
+    Son prix change selon la marque et le magasin : le site le calcule chaque jour pour chaque marque, à partir du prix de la bouteille,
+    et le guide <a href="prix-stika/">prix de la stika d'eau</a> les range de la moins chère à la plus chère.</p>
+    <h3>Où voir le prix de l'eau minérale en Tunisie ?</h3>
+    <p>Les prix de cette page sont relevés automatiquement chaque nuit sur les boutiques en ligne de Carrefour et de Géant,
+    seulement pour les produits en stock. Ils sont indicatifs : un magasin peut afficher un autre prix, surtout pendant une promotion.
+    Chaque marque a sa page, avec ses prix par format et sa composition.</p>
+    <h3>Quelle est l'eau la moins chère aujourd'hui ?</h3>
+    <p>La carte « La moins chère aujourd'hui », en haut de la page, donne la réponse du jour, puis le classement complet des marques,
+    en bouteille ou en stika, par format et par type d'eau (minérale, de source, traitée, gazeuse). La réponse change avec les promotions :
+    elle n'est donc jamais écrite à l'avance ici. Pour choisir selon le goût ou la santé, voir le guide <a href="quelle-eau/">quelle eau choisir</a>.</p>""",
+     """    <h2>أسعار الماء في تونس: الأساسي</h2>
+    <h3>كم ثمن ستيكة الماء؟</h3>
+    <p><strong>الستيكة</strong> هي علبة من 6&nbsp;قوارير سعة 1,5&nbsp;لتر (12 قارورة للقوارير الصغيرة 50&nbsp;صل)، وهي أكثر ما تشتريه العائلات.
+    يتغيّر ثمنها حسب العلامة والمغازة: يحسبه الموقع كل يوم لكل علامة انطلاقًا من ثمن القارورة،
+    ودليل <a href="prix-stika/">ثمن ستيكة الماء</a> يرتّبها من الأرخص إلى الأغلى.</p>
+    <h3>أين أرى أسعار الماء المعدني في تونس؟</h3>
+    <p>تُقرأ أسعار هذه الصفحة آليًا كل ليلة من المتاجر الإلكترونية لـ<bdi>Carrefour</bdi> و<bdi>Géant</bdi>،
+    للمنتجات المتوفّرة فقط. هي أسعار تقريبية: قد تعرض مغازة ثمنًا آخر، خاصة أثناء التخفيضات.
+    لكل علامة صفحتها، فيها أسعارها حسب الحجم وتركيبتها.</p>
+    <h3>ما هو أرخص ماء اليوم؟</h3>
+    <p>بطاقة «الأرخص اليوم» في أعلى الصفحة تعطي جواب اليوم، ثم الترتيب الكامل للعلامات،
+    بالقارورة أو بالستيكة، حسب الحجم ونوع الماء (معدني، ماء منبع، معالج، غازي). يتغيّر الجواب مع التخفيضات:
+    لذلك لا يُكتب مسبقًا هنا. لاختيار الماء حسب الذوق أو الصحة، انظر دليل <a href="quelle-eau/">أيّ ماء أختار</a>.</p>"""),
+    ('<!-- l\'essentiel en texte (plan Google B.3, 25/11/2026) : lisible sans JavaScript, AUCUN prix écrit ici (ils changent chaque nuit) -->', ''),
     ('<title>Prix de l\'eau minérale en Tunisie : stika et bouteille, comparateur</title>',
      '<title>أسعار الماء المعدني في تونس — مقارن مجاني، القارورة والستيكة</title>'),
     ('<meta property="og:title" content="Prix des Eaux de Tunisie — comparateur gratuit">',
