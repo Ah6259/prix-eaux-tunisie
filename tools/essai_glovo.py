@@ -114,7 +114,7 @@ def main():
     donnees["releves"] = [r for r in donnees.get("releves", []) if r.get("date") != jour] + [releve]
     donnees["releves"] = sorted(donnees["releves"], key=lambda r: r["date"])[-JOURS_GARDES:]
     FICHIER.parent.mkdir(parents=True, exist_ok=True)
-    FICHIER.write_text(json.dumps(donnees, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    FICHIER.write_text(json.dumps(donnees, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
     if vides:
         print("ÉCHEC : aucune eau lue pour " + ", ".join(vides) + " (page changée ou injoignable)")
         return 1
