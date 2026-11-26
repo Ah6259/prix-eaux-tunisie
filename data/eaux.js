@@ -1,5 +1,5 @@
 window.EAUX_DATA = {
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "currency": "DT",
  "stores": [
   "Carrefour",
@@ -89,7 +89,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       11,
+       12,
        39
       ]
      },
@@ -99,6 +99,7 @@ window.EAUX_DATA = {
        "boumhal": 0.78,
        "boumhal_lcv": 0.78,
        "cun": 0.78,
+       "ennasr_1": 0.78,
        "mahdia": 0.78,
        "mahdia_lcv": 0.78,
        "manzah9": 0.78,
@@ -283,6 +284,19 @@ window.EAUX_DATA = {
      "non_dispo": [
       "Géant"
      ]
+    },
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/produits/f337a82540a9.jpg",
+     "prices": {
+      "Géant": 0.9
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
     }
    ]
   },
@@ -323,15 +337,17 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       14,
+       16,
        39
       ]
      },
      "par_mag": {
       "Carrefour": {
+       "aouina": 0.4,
        "borj_cedria": 0.4,
        "boumhal": 0.4,
        "boumhal_lcv": 0.4,
+       "gammarth": 0.4,
        "gazelle": 0.4,
        "manar_city": 0.4,
        "manar_city_lcv": 0.4,
@@ -510,6 +526,19 @@ window.EAUX_DATA = {
      ]
     },
     {
+     "liters": 0.5,
+     "format": "500 ml",
+     "category": "plate",
+     "flavor": null,
+     "img": "assets/img/delice_delio_250ml_pomme.jpg",
+     "prices": {
+      "Géant": 0.48
+     },
+     "non_dispo": [
+      "Carrefour"
+     ]
+    },
+    {
      "liters": 1.0,
      "format": "1 L",
      "category": "plate",
@@ -630,7 +659,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       27,
+       28,
        39
       ]
      },
@@ -645,6 +674,7 @@ window.EAUX_DATA = {
        "gabes": 0.64,
        "gabes_lcv": 0.64,
        "gammarth": 0.62,
+       "gazelle": 0.63,
        "ksarsaid": 0.62,
        "ksarsaid_lcv": 0.62,
        "lac2": 0.63,
@@ -704,7 +734,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       34,
+       32,
        39
       ]
      },
@@ -721,7 +751,6 @@ window.EAUX_DATA = {
        "gabes_lcv": 0.83,
        "gammarth": 0.83,
        "gazelle": 0.83,
-       "hammamet": 0.83,
        "ksarsaid": 0.83,
        "ksarsaid_lcv": 0.83,
        "lac2": 0.83,
@@ -736,7 +765,6 @@ window.EAUX_DATA = {
        "mof_lcv": 0.83,
        "mos": 0.83,
        "mourouj": 0.83,
-       "mrezgua_lcv": 0.83,
        "sahloul": 0.83,
        "sfax_express": 0.83,
        "sfax_lafrane": 0.83,
@@ -1355,7 +1383,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       26,
+       25,
        39
       ]
      },
@@ -1383,7 +1411,6 @@ window.EAUX_DATA = {
        "mourouj": 0.68,
        "sahloul": 0.68,
        "sfax_express": 0.68,
-       "sfax_jadida": 0.68,
        "sfax_lafrane": 0.68,
        "sfax_mall": 0.68,
        "tunis_livraison": 0.68
@@ -1489,7 +1516,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       26,
+       22,
        39
       ]
      },
@@ -1504,18 +1531,14 @@ window.EAUX_DATA = {
        "gabes_lcv": 0.44,
        "gammarth": 0.44,
        "gazelle": 0.44,
-       "hammamet": 0.44,
        "ksarsaid": 0.44,
        "ksarsaid_lcv": 0.44,
        "lac2": 0.44,
-       "mahdia": 0.44,
-       "mahdia_lcv": 0.44,
        "manar_city": 0.44,
        "manar_city_lcv": 0.44,
        "manzah9": 0.44,
        "mof_lcv": 0.44,
        "mos": 0.44,
-       "mrezgua_lcv": 0.44,
        "sahloul": 0.44,
        "sfax_express": 0.44,
        "sfax_mall": 0.44,
@@ -1536,7 +1559,7 @@ window.EAUX_DATA = {
      },
      "magasins": {
       "Carrefour": [
-       30,
+       26,
        39
       ]
      },
@@ -1551,12 +1574,9 @@ window.EAUX_DATA = {
        "gabes_lcv": 0.68,
        "gammarth": 0.68,
        "gazelle": 0.68,
-       "hammamet": 0.69,
        "ksarsaid": 0.68,
        "ksarsaid_lcv": 0.68,
        "lac2": 0.68,
-       "mahdia": 0.68,
-       "mahdia_lcv": 0.68,
        "manar_city": 0.68,
        "manar_city_lcv": 0.68,
        "manzah9": 0.68,
@@ -1565,7 +1585,6 @@ window.EAUX_DATA = {
        "mof_lcv": 0.68,
        "mos": 0.68,
        "mourouj": 0.68,
-       "mrezgua_lcv": 0.69,
        "sfax_express": 0.68,
        "sfax_jadida": 0.68,
        "sfax_mall": 0.68,
@@ -1606,13 +1625,13 @@ window.EAUX_DATA = {
  ],
  "statut_sources": {
   "carrefour": {
-   "dernier_ok": "2026-11-25",
+   "dernier_ok": "2026-11-26",
    "nb": 23,
    "par_magasin": true
   },
   "geant": {
-   "dernier_ok": "2026-11-25",
-   "nb": 42
+   "dernier_ok": "2026-11-26",
+   "nb": 44
   }
  },
  "magasins_carrefour": {
