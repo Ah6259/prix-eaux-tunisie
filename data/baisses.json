@@ -1,17 +1,17 @@
 {
- "date": "2026-11-19",
+ "date": "2026-11-27",
  "baisses": [
   {
-   "id": "delice",
-   "marque": "Délice",
+   "id": "garci",
+   "marque": "Garci",
    "format": "1 L",
    "litres": 1.0,
    "gazeuse": false,
    "saveur": null,
-   "enseigne": "Géant",
-   "avant": 0.73,
-   "prix": 0.69,
-   "pct": 5.5
+   "enseigne": "Carrefour",
+   "avant": 0.63,
+   "prix": 0.62,
+   "pct": 1.6
   }
  ]
 }
