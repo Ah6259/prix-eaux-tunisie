@@ -3,7 +3,8 @@ window.EAUX_DATA = {
  "currency": "DT",
  "stores": [
   "Carrefour",
-  "Géant"
+  "Géant",
+  "Aziza"
  ],
  "sources": [
   {
@@ -13,6 +14,10 @@ window.EAUX_DATA = {
   {
    "name": "Géant Drive Tunisie",
    "url": "https://www.geantdrive.tn"
+  },
+  {
+   "name": "Aziza (prix vus sur Glovo, magasin de Gabès)",
+   "url": "https://glovoapp.com/fr/tn/gabes/stores/magasins-aziza-gbs"
   },
   {
    "name": "Wikipédia — Eaux minérales en Tunisie",
@@ -494,7 +499,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/dima_15l.jpg",
      "prices": {
-      "Carrefour": 0.78
+      "Carrefour": 0.78,
+      "Aziza": 0.92
      },
      "magasins": {
       "Carrefour": [
@@ -561,7 +567,8 @@ window.EAUX_DATA = {
      "img": "assets/img/delice_15l.jpg",
      "prices": {
       "Carrefour": 0.69,
-      "Géant": 0.69
+      "Géant": 0.69,
+      "Aziza": 0.73
      },
      "magasins": {
       "Carrefour": [
@@ -960,7 +967,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/may_tunisia_15l.jpg",
      "prices": {
-      "Géant": 0.9
+      "Géant": 0.9,
+      "Aziza": 0.9
      },
      "non_dispo": [
       "Carrefour"
@@ -1026,7 +1034,8 @@ window.EAUX_DATA = {
      "flavor": null,
      "img": "assets/img/melina_x.jpg",
      "prices": {
-      "Géant": 0.76
+      "Géant": 0.76,
+      "Aziza": 0.9
      },
      "non_dispo": [
       "Carrefour"
@@ -1366,7 +1375,22 @@ window.EAUX_DATA = {
    "types": [
     "plate"
    ],
-   "products": [],
+   "products": [
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": null,
+     "prices": {
+      "Aziza": 0.83
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Géant"
+     ]
+    }
+   ],
    "img_credit": {
     "credit": "Photo : Open Food Facts, CC BY-SA",
     "source": "Open Food Facts",
@@ -1497,7 +1521,22 @@ window.EAUX_DATA = {
    "types": [
     "plate"
    ],
-   "products": [],
+   "products": [
+    {
+     "liters": 1.5,
+     "format": "1.5 L",
+     "category": "plate",
+     "flavor": null,
+     "img": null,
+     "prices": {
+      "Aziza": 0.69
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Géant"
+     ]
+    }
+   ],
    "img_credit": {
     "credit": "Photo : Open Food Facts, CC BY-SA",
     "source": "Open Food Facts",
@@ -1626,7 +1665,22 @@ window.EAUX_DATA = {
    "types": [
     "plate"
    ],
-   "products": []
+   "products": [
+    {
+     "liters": 2.0,
+     "format": "2 L",
+     "category": "plate",
+     "flavor": null,
+     "img": null,
+     "prices": {
+      "Aziza": 0.72
+     },
+     "non_dispo": [
+      "Carrefour",
+      "Géant"
+     ]
+    }
+   ]
   },
   {
    "id": "elixir",
@@ -1651,6 +1705,17 @@ window.EAUX_DATA = {
   "geant": {
    "dernier_ok": "2026-11-28",
    "nb": 44
+  },
+  "aziza": {
+   "dernier_ok": "2026-11-28",
+   "nb": 7
+  }
+ },
+ "via": {
+  "Aziza": {
+   "site": "Glovo",
+   "lieu": "Gabès",
+   "url": "https://glovoapp.com/fr/tn/gabes/stores/magasins-aziza-gbs"
   }
  },
  "magasins_carrefour": {

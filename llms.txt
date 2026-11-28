@@ -1,6 +1,6 @@
 # Prix des Eaux de Tunisie — comparateur gratuit du prix de l'eau minérale
 
-> Comparateur gratuit du prix de l'eau minérale en bouteille en Tunisie : Safia, Marwa, Sabrine, Melliti, Aqualine… Prix de la bouteille et de la stika (pack de 6 bouteilles) chez Carrefour et Géant, relevés automatiquement chaque nuit, seulement pour les produits en stock. Sans inscription. أسعار الماء المعدني في تونس.
+> Comparateur gratuit du prix de l'eau minérale en bouteille en Tunisie : Safia, Marwa, Sabrine, Melliti, Aqualine… Prix de la bouteille et de la stika (pack de 6 bouteilles) chez Carrefour, Géant et Aziza (prix d'Aziza vus sur Glovo, magasin de Gabès), relevés automatiquement chaque nuit, seulement pour les produits en stock. Sans inscription. أسعار الماء المعدني في تونس.
 
 Site gratuit et indépendant (non officiel), publié par Clicvia (https://clicvia.com/), qui réunit des services pratiques pour la Tunisie. Adresse : https://prix-eau.clicvia.com/
 Langues : français (pages à leur adresse) et arabe (même page dans https://prix-eau.clicvia.com/ar/…, une adresse par langue).
@@ -8,11 +8,12 @@ La commande et la livraison d'eau ne sont PAS encore ouvertes : le site compare 
 
 ## Pages principales
 
-- [Accueil : la stika la moins chère aujourd'hui et le classement de toutes les marques](https://prix-eau.clicvia.com/) : prix du jour de chaque marque, bouteille et stika, chez Carrefour et Géant ; filtres (eau minérale, de source, traitée, gazeuse ; format) ; questions fréquentes.
+- [Accueil : la stika la moins chère aujourd'hui et le classement de toutes les marques](https://prix-eau.clicvia.com/) : prix du jour de chaque marque, bouteille et stika, chez Carrefour, Géant et Aziza ; filtres (eau minérale, de source, traitée, gazeuse ; format) ; questions fréquentes.
 - [Prix de la stika d'eau en Tunisie aujourd'hui](https://prix-eau.clicvia.com/prix-stika/) : toutes les marques classées de la stika la moins chère à la plus chère, refait chaque nuit.
 - [Quelle eau minérale choisir en Tunisie ?](https://prix-eau.clicvia.com/quelle-eau/) : eaux pauvres en sodium (bébé, régime sans sel), eaux légères, riches en calcium ou en magnésium, d'après le tableau officiel de l'Office du Thermalisme, avec leur prix.
 - [Prix de l'eau chez Carrefour Tunisie](https://prix-eau.clicvia.com/prix-eau-carrefour/) : bouteille et stika de chaque marque chez Carrefour, comparées à Géant.
 - [Prix de l'eau chez Géant Tunisie](https://prix-eau.clicvia.com/prix-eau-geant/) : bouteille et stika de chaque marque chez Géant, comparées à Carrefour.
+- [Prix de l'eau chez Aziza](https://prix-eau.clicvia.com/prix-eau-aziza/) : prix des eaux du magasin Aziza de Gabès, vus sur Glovo (application de livraison), comparés à Carrefour et Géant.
 - [Rapports du mois](https://prix-eau.clicvia.com/rapports/) : prix médian de la bouteille de 1,5 L et de la stika par marque, la moins chère du mois et l'évolution, calculés sur les prix relevés chaque jour.
 - [Comment fonctionne le site ?](https://prix-eau.clicvia.com/a-propos/) : d'où viennent les prix, comment ils sont vérifiés, mises à jour, qui publie le site.
 - Une page par marque, par exemple [Safia](https://prix-eau.clicvia.com/marque/safia/), [Marwa](https://prix-eau.clicvia.com/marque/marwa/), [Sabrine](https://prix-eau.clicvia.com/marque/sabrine/), [Melliti](https://prix-eau.clicvia.com/marque/melliti/), [Aqualine](https://prix-eau.clicvia.com/marque/aqualine/) : prix de chaque format dans chaque magasin, composition et source de l'eau.
@@ -26,7 +27,7 @@ Ce fichier est produit chaque nuit par le robot du site ; un assistant peut le l
 
 ## À savoir
 
-- Prix relevés chaque nuit dans les boutiques en ligne de Carrefour et Géant ; la date du relevé est écrite sur chaque page. Les prix sont indicatifs et peuvent varier selon le magasin et les promotions.
+- Prix relevés chaque nuit dans les boutiques en ligne de Carrefour et Géant, et sur Glovo pour Aziza (magasin de Gabès) ; la date du relevé est écrite sur chaque page. Les prix sont indicatifs et peuvent varier selon le magasin et les promotions.
 - Une stika = 6 bouteilles (12 pour les petites bouteilles de 0,75 L ou moins) ; son prix = 6 (ou 12) fois le prix de la bouteille.
 - Site non officiel, sans lien avec les magasins ni avec les marques citées.
 - Pour citer : « Prix des Eaux de Tunisie » (prix-eau.clicvia.com) avec le lien de la page utilisée.

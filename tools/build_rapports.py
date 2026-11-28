@@ -165,7 +165,7 @@ def page(m, d, prev, courant, ids, SITE, G, lang="fr"):
   <p class="rp-signature">Un rapport de <b>Prix des Eaux de Tunisie</b> · prix-eau.clicvia.com</p>
   {bouton_partage(url, titre)}
   <section>
-    <p class="intro">Prix de l'eau en bouteille relevés chaque jour sur les boutiques en ligne des grandes surfaces de Tunisie (Carrefour, Géant). {statut}</p>
+    <p class="intro">Prix de l'eau en bouteille relevés chaque jour sur les boutiques en ligne des grandes surfaces de Tunisie (Carrefour, Géant) et sur Glovo (Aziza). {statut}</p>
     <ul class="intro">{"".join(f"<li>{b}</li>" for b in bref)}</ul>
   </section>
   <section>
@@ -256,7 +256,7 @@ def page_ar(m, d, prev, courant, ids, SITE, G):
   <p class="rp-signature">تقرير من <b>أسعار الماء في تونس</b> · <bdi>prix-eau.clicvia.com</bdi></p>
   {bouton_partage(url, titre, "ar")}
   <section>
-    <p class="intro">أسعار الماء المعبّأ تُقرأ كل يوم من المتاجر الإلكترونية للمغازات الكبرى في تونس (Carrefour وGéant). {statut}</p>
+    <p class="intro">أسعار الماء المعبّأ تُقرأ كل يوم من المتاجر الإلكترونية للمغازات الكبرى في تونس (Carrefour وGéant) وعلى Glovo (Aziza). {statut}</p>
     <ul class="intro">{"".join(f"<li>{b}</li>" for b in bref)}</ul>
   </section>
   <section>

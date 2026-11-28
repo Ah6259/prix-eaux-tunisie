@@ -121,6 +121,8 @@ c.MINIMUM_OFFRES = {}
 c.carrefour = lambda: [offre("carrefour", "AQUALINE", 1.5, 0.63, magasins=[26, 39]),
                        offre("carrefour", "TIJEN", 1.5, 0.68, magasins=[39, 39])]
 c.geant = lambda: [offre("geant", "AQUALINE", 1.5, 0.60), offre("geant", "SAFIA", 1.5, 0.69)]
+# Aziza (prix vus sur Glovo, un seul magasin, 28/11/2026) : jamais lu pour de vrai ici ; vend Tiba seulement
+c.aziza = lambda: [offre("aziza", "TIBA", 1.5, 0.69)]
 def passage():
     sortie, sys.stdout = sys.stdout, open(TMP / "journal.txt", "a", encoding="utf-8")
     try:
@@ -147,8 +149,11 @@ P2 = {(b["name"], p["liters"]): p for b in passage()["brands"] for p in b["produ
 verifie("site : une enseigne en panne (Géant) n'est jamais dite « non disponible »",
         all("Géant" not in (p.get("non_dispo") or []) for p in P2.values())
         and "Géant" in (P2.get(("Safia", 1.5)) or {}).get("prices", {}), P2)
-verifie("site : seules les enseignes suivies (Carrefour, Géant) apparaissent, jamais Otrity ni Monoprix",
-        all(set(p["prices"]) | set(p.get("non_dispo") or []) <= {"Carrefour", "Géant"} for p in list(P.values()) + list(P2.values())))
+verifie("site : seules les enseignes suivies (Carrefour, Géant, Aziza) apparaissent, jamais Otrity ni Monoprix",
+        all(set(p["prices"]) | set(p.get("non_dispo") or []) <= {"Carrefour", "Géant", "Aziza"} for p in list(P.values()) + list(P2.values())))
+verifie("site : Aziza (un seul magasin lu sur Glovo) n'est jamais dite « non disponible », même pour une eau qu'elle n'a pas",
+        all("Aziza" not in (p.get("non_dispo") or []) for p in list(P.values()) + list(P2.values()))
+        and (P.get(("Tiba", 1.5)) or {}).get("prices") == {"Aziza": 0.69})
 
 # le site affiche bien ces informations (app.js, pages marque, pages magasin)
 app = (ROOT / "app.js").read_text(encoding="utf-8")

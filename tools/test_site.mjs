@@ -367,6 +367,9 @@ for (const b of DATA.brands.filter(b => Object.values(LIBRES.photos).some(ph => 
   check(`${b.name} : la photo libre a son crédit dans les données`, !!b.img_credit && b.img_credit.page.startsWith("https://"));
 tape("");
 for (const b of avecCredit) {
+  // marque vendue seulement dans un autre format que 1,5 L (Royal 2 L chez Aziza, 28/11/2026) : cachée par le filtre
+  // de format par défaut -> on la cherche par son nom, comme un visiteur
+  tape(carte(b.name) ? "" : b.name);
   const c = carte(b.name);
   const fig = c?.querySelector(".card-head figure.photo-libre");
   check(`${b.name} : crédit « Photo : ${b.img_credit.source}, CC BY-SA » sous la photo (accueil)`,
@@ -375,6 +378,7 @@ for (const b of avecCredit) {
   const pm = existsSync(join(root, "marque", b.id, "index.html")) ? lire(`marque/${b.id}/index.html`) : "";
   check(`${b.name} : photo + crédit sur la page marque`, pm.includes(`../../${b.img}`) && pm.includes(`Photo : ${b.img_credit.source}</a>, `) && pm.includes(b.img_credit.page));
 }
+tape("");
 check("photos sans crédit : aucune (chaque photo libre est créditée)",
   DATA.brands.every(b => !b.img || !b.img.startsWith("assets/img/libres/") || b.img_credit));
 if (avecCredit.length)
@@ -503,9 +507,26 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
   const fichiers = ["data/eaux.json", "data/eaux.js", "sitemap.xml", "llms.txt", "manifest.webmanifest", "robots.txt"].filter(f => existsSync(join(root, f)));
   check(`aucune enseigne retirée dans ${fichiers.join(", ")}`, fichiers.length === 6 && fichiers.every(f => !RETIREES.test(lire(f))));
   const J = JSON.parse(lire("data/eaux.json"));
-  check("data/eaux.json : enseignes suivies = Carrefour et Géant seulement (stores, statut_sources, prix, non disponible)",
-    JSON.stringify(J.stores) === '["Carrefour","Géant"]' && Object.keys(J.statut_sources || {}).every(k => ["carrefour", "geant"].includes(k))
-    && J.brands.every(b => b.products.every(p => [...Object.keys(p.prices), ...(p.non_dispo || [])].every(s => ["Carrefour", "Géant"].includes(s)))));
+  check("data/eaux.json : enseignes suivies = Carrefour, Géant et Aziza (via Glovo) seulement (stores, statut_sources, prix, non disponible)",
+    JSON.stringify(J.stores) === '["Carrefour","Géant","Aziza"]' && Object.keys(J.statut_sources || {}).every(k => ["carrefour", "geant", "aziza"].includes(k))
+    && J.brands.every(b => b.products.every(p => [...Object.keys(p.prices), ...(p.non_dispo || [])].every(s => ["Carrefour", "Géant", "Aziza"].includes(s)))));
+  // ---- 28/11/2026 (« fais B » d'Ahmed, accord de Glovo) : Aziza, prix VUS SUR GLOVO au magasin de Gabès ----------------------
+  check("Aziza (Glovo) : jamais « non disponible » (un seul magasin lu : son absence ne dit rien des autres magasins Aziza)",
+    J.brands.every(b => b.products.every(p => !(p.non_dispo || []).includes("Aziza"))));
+  check("Aziza (Glovo) : data/eaux.json dit d'où viennent ses prix (via Glovo, Gabès) et le cite dans les sources",
+    J.via?.Aziza?.site === "Glovo" && J.via.Aziza.lieu === "Gabès" && J.sources.some(x => /Aziza/.test(x.name) && /glovoapp\.com/.test(x.url)));
+  check("Aziza : logo officiel présent (assets/logos/aziza.png) et déclaré dans LOGOS d'app.js",
+    existsSync(join(root, "assets/logos/aziza.png")) && /"Aziza":\s*\{ src: RACINE \+ "assets\/logos\/aziza\.png"/.test(lire("app.js")));
+  {
+    const avecAziza = cartes().filter(c => [...c.querySelectorAll(".offer .store")].some(e => /Aziza/.test(e.textContent)));
+    check(`accueil : chaque prix Aziza porte la mention « prix vu sur Glovo, magasin de Gabès » (${avecAziza.length} fiches)`,
+      !J.brands.some(b => b.products.some(p => p.prices.Aziza)) || (avecAziza.length > 0 && avecAziza.every(c => c.querySelector(".offer-via")?.textContent.includes("prix vu sur Glovo, magasin de Gabès"))));
+    const pa = existsSync(join(root, "prix-eau-aziza/index.html")) ? lire("prix-eau-aziza/index.html") : "";
+    check("page prix-eau-aziza/ : prix d'Aziza avec la phrase « magasin de Gabès, vus sur Glovo » (FR et AR)",
+      pa.includes("vus sur <b>Glovo</b>") && /Gabès/.test(pa) && existsSync(join(root, "ar/prix-eau-aziza/index.html")) && lire("ar/prix-eau-aziza/index.html").includes("قابس"));
+    check("robot des prix : produit Glovo en rupture (isOutOfStock) écarté, photos Glovo (lots de bouteilles) jamais reprises",
+      /if t\["rupture"\] or not est_eau/.test(lire("tools/collect_prices.py")) && /"image_src": None/.test(lire("tools/collect_prices.py")));
+  }
   check("app.js : plus de nom ni de logo d'enseigne retirée", !/["']?(otrity|monoprix)["']?\s*:/i.test(lire("app.js")) && !/logos\/(otrity|monoprix)/.test(lire("app.js")));
   check("accueil affiché : aucune enseigne retirée (hors liste du formulaire « Signaler un prix »)",
     !RETIREES.test([...doc.body.querySelectorAll("*")].filter(e => !e.closest('select[name="magasin"]') && !e.children.length).map(e => e.textContent).join(" ")));
@@ -594,6 +615,7 @@ check("cloche d'alerte qui vibre (.cloche-vibre, règle commune)", /\.cloche-vib
     ["composition de l'eau", /Composition/.test(js), /Composition/],
     ["« dans N magasins sur M » (Carrefour)", /offer-mag/.test(js), /dans N magasins sur M/],
     ["« non disponible »", /non disponible/.test(js), /non disponible/],
+    ["prix d'Aziza vus sur Glovo (magasin de Gabès)", /viaTxt/.test(js), /Prix d.Aziza vus sur Glovo[\s\S]{0,120}magasin de Gabès/],
     ["« Mon Carrefour » (prix et stock du magasin choisi)", /id="mon-carrefour"/.test(acc), /Mon Carrefour[\s\S]{0,120}CE magasin/],
     ["avertissement des prix anciens", /id="alerte-maj"/.test(acc), /un message vous prévient/],
     ["baisses de prix du jour", /id="baisses"/.test(acc), /Baisses de prix du jour/],

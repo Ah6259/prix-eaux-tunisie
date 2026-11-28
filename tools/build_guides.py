@@ -29,11 +29,12 @@ def _esc(s):
 # Mention des sources en bas de chaque page (les CGU de Carrefour demandent de citer la source)
 SOURCES_HTML = ('Prix indicatifs relevés sur les boutiques en ligne : '
                 '<a href="https://www.carrefour.tn" rel="noopener">Carrefour Tunisie</a> · '
-                '<a href="https://www.geantdrive.tn" rel="noopener">Géant Drive</a>. '
+                '<a href="https://www.geantdrive.tn" rel="noopener">Géant Drive</a> · '
+                '<a href="https://glovoapp.com/fr/tn/gabes/stores/magasins-aziza-gbs" rel="noopener">Glovo</a> (Aziza, magasin de Gabès). '
                 'Les noms, marques et logos des enseignes appartiennent à leurs propriétaires.')
 
 # Version de la feuille de style (cache des téléphones) : la changer avec celle d'index.html
-CSS_V = "20261123a"
+CSS_V = "20261128a"
 
 # Logo (goutte en aplats dans un carré bleu, comme l'icône du téléphone) : même dessin que l'en-tête de l'accueil
 LOGO_SVG = ('<svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg-eau{n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1797C4"/><stop offset="1" stop-color="#0A5F80"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg-eau{n})"/><path d="M256 84C256 84 142 236 142 318a114 114 0 0 0 228 0C370 236 256 84 256 84Z" fill="#fff"/><path d="M256 84C256 84 370 236 370 318a114 114 0 0 1-114 114Z" fill="#D5EEF7"/><path d="M150 336Q203 306 256 336T362 336Q356 410 256 432Q156 410 150 336Z" fill="#7FCBE6"/><path d="M256 336Q309 366 362 336Q356 410 256 432Z" fill="#5DB7D9"/></svg>')
@@ -100,11 +101,18 @@ def sources_html(lang="fr"):
         return SOURCES_HTML
     return ('أسعار تقريبية مقروءة من المتاجر الإلكترونية: '
             '<a href="https://www.carrefour.tn" rel="noopener">Carrefour</a> · '
-            '<a href="https://www.geantdrive.tn" rel="noopener">Géant Drive</a>. '
+            '<a href="https://www.geantdrive.tn" rel="noopener">Géant Drive</a> · '
+            '<a href="https://glovoapp.com/fr/tn/gabes/stores/magasins-aziza-gbs" rel="noopener">Glovo</a> (<bdi>Aziza</bdi>، مغازة قابس). '
             'أسماء المغازات وعلاماتها وشعاراتها ملك لأصحابها.')
 
 
-MAGASINS = {"Carrefour": ("prix-eau-carrefour", "كارفور"), "Géant": ("prix-eau-geant", "جيان")}
+MAGASINS = {"Carrefour": ("prix-eau-carrefour", "كارفور"), "Géant": ("prix-eau-geant", "جيان"),
+            "Aziza": ("prix-eau-aziza", "عزيزة")}   # Aziza : prix vus sur Glovo, magasin de Gabès (28/11/2026)
+# enseignes lues sur Glovo dans un seul magasin : phrase ajoutée à leur page (mêmes mots que app.js)
+VIA_GLOVO = {"Aziza": ("Les prix d'Aziza sont ceux de son magasin de <b>Gabès</b>, vus sur <b>Glovo</b> (application de livraison) : "
+                       "un autre magasin Aziza peut afficher un autre prix.",
+                       "أسعار <bdi>Aziza</bdi> هي أسعار مغازتها في <b>قابس</b>، كما تظهر على <b><bdi>Glovo</bdi></b> (تطبيق توصيل): "
+                       "قد تعرض مغازة <bdi>Aziza</bdi> أخرى ثمنًا آخر.")}
 # Enseignes retirées du comparateur (23/10/2026, décision d'Ahmed : le site doit être autonome) : Otrity bloque GitHub
 # (Cloudflare, API wp-json comprise), Monoprix bloque même le PC. Leur ancienne page reste en ligne, courte et en noindex.
 RETIRES = {"Monoprix": ("prix-eau-monoprix", "مونوبري"), "Otrity": ("prix-eau-otrity", "أوتريتي")}
@@ -267,7 +275,7 @@ def page_prix_stika(data, SITE, maj_fr, lang="fr"):
         corps = f"""
   <section>
     <p class="intro"><strong>اليوم ({maj_fr})، أرخص ستيكة ماء 1,5 لتر في تونس هي {_iso(_esc(g['name']))} بـ {D(pg * 6)}</strong>
-    (6 قوارير، في {_iso(_esc(', '.join(mg)))}). الأسعار أسفله تُقرأ كل يوم من المتاجر الإلكترونية للمغازات الكبرى (Carrefour وGéant)؛
+    (6 قوارير، في {_iso(_esc(', '.join(mg)))}). الأسعار أسفله تُقرأ كل يوم من المتاجر الإلكترونية للمغازات الكبرى (Carrefour وGéant) وعلى Glovo (Aziza)؛
     هي أسعار تقريبية وقد تتغيّر حسب المغازة.</p>
     {_partage(SITE, "prix-stika", f"💧 أرخص ستيكة ماء اليوم: {_iso(g['name'])} {_iso(D(pg * 6))}.", lang)}
   </section>
@@ -293,7 +301,7 @@ def page_prix_stika(data, SITE, maj_fr, lang="fr"):
   <section>
     <p class="intro"><strong>Aujourd'hui ({maj_fr}), la stika d'eau 1,5 L la moins chère en Tunisie est
     {_esc(g['name'])} à {D(pg * 6)}</strong> (6 bouteilles, chez {_esc(', '.join(mg))}).
-    Les prix ci-dessous sont relevés chaque jour sur les boutiques en ligne des grandes surfaces (Carrefour, Géant) ;
+    Les prix ci-dessous sont relevés chaque jour sur les boutiques en ligne des grandes surfaces (Carrefour, Géant) et sur Glovo (Aziza) ;
     ils sont indicatifs et peuvent varier selon le magasin.</p>
     {_partage(SITE, "prix-stika", f"💧 Stika d'eau la moins chère aujourd'hui : {g['name']} {D(pg * 6)}.")}
   </section>
@@ -446,7 +454,7 @@ def page_magasin(data, magasin, SITE, maj_fr, lang="fr"):
         autres = " · ".join(f'<a href="../{c}/">{a}</a>' for m, (c, a) in MAGASINS.items() if m != magasin)
         corps = f"""
   <section>
-    <p class="intro">{accroche} الأسعار هي سعر القارورة وسعر الستيكة (6 قوارير 1,5 لتر أو 12 قارورة 0,5 لتر).
+    <p class="intro">{accroche} {VIA_GLOVO[magasin][1] if magasin in VIA_GLOVO else ""} الأسعار هي سعر القارورة وسعر الستيكة (6 قوارير 1,5 لتر أو 12 قارورة 0,5 لتر).
     هي أسعار تقريبية وقد تتغيّر حسب المغازة. عمود « في مكان آخر من » يعرض أفضل سعر في المغازات الأخرى المتابَعة.</p>
     {_partage(SITE, chemin, f"💧 سعر الماء في {nom_ar} اليوم: {court}.", lang)}
   </section>
@@ -463,7 +471,7 @@ def page_magasin(data, magasin, SITE, maj_fr, lang="fr"):
     autres = " · ".join(f'<a href="../{c}/">{m}</a>' for m, (c, _) in MAGASINS.items() if m != magasin)
     corps = f"""
   <section>
-    <p class="intro">{accroche} Les prix sont ceux de la bouteille, et de la stika (6 bouteilles de 1,5 L ou 12 de 0,5 L).
+    <p class="intro">{accroche} {VIA_GLOVO[magasin][0] if magasin in VIA_GLOVO else ""} Les prix sont ceux de la bouteille, et de la stika (6 bouteilles de 1,5 L ou 12 de 0,5 L).
     Ils sont indicatifs et peuvent varier selon le magasin. La colonne « Ailleurs dès » montre le meilleur prix des autres magasins suivis.</p>
     {_partage(SITE, chemin, f"💧 Prix de l'eau chez {magasin} aujourd'hui : {court}.")}
   </section>
@@ -495,7 +503,7 @@ def page_retiree(magasin, SITE):
     <p class="sub"><a href="../">Voir le comparateur des prix de l&#39;eau</a> · <a href="../prix-stika/">prix de la stika aujourd&#39;hui</a>.</p>
   </section>"""
     h = _gabarit(SITE, chemin, f"{magasin} n'est plus suivi — Prix des Eaux de Tunisie",
-                 f"{magasin} n'est plus suivi par le comparateur des prix de l'eau. Voir les prix chez Carrefour et Géant.",
+                 f"{magasin} n'est plus suivi par le comparateur des prix de l'eau. Voir les prix chez Carrefour, Géant et Aziza.",
                  f"{magasin} n'est plus suivi", corps, noindex=True)
     return LG.BOUTON.sub("", h)          # pas de version arabe : pas de bouton de langue
 
@@ -522,7 +530,8 @@ def page_a_propos(data, SITE, maj_fr, lang="fr"):
     القارورة والستيكة (6{N}قوارير، أو 12 للقوارير الصغيرة 0,5{N}لتر). مجاني ودون تسجيل، بالعربية وبالفرنسية. آخر قراءة للأسعار يوم {maj_fr}.</p>
   </section>
   {bloc("من أين تأتي الأسعار", [
-        f"من المتاجر الإلكترونية لـ<b>{_iso('Carrefour')}</b> و<b>{_iso('Géant')}</b>: روبوت يقرأ أسعارها آليًا كل ليلة ({liens_mag}).",
+        f"من المتاجر الإلكترونية لـ<b>{_iso('Carrefour')}</b> و<b>{_iso('Géant')}</b>، وعلى <b>{_iso('Glovo')}</b> لـ<b>{_iso('Aziza')}</b>: روبوت يقرأ أسعارها آليًا كل ليلة ({liens_mag}).",
+        f"<b>أسعار {_iso('Aziza')}</b> هي أسعار مغازتها في قابس كما تظهر على {_iso('Glovo')} (تطبيق توصيل)، ومكتوب تحتها « سعر على {_iso('Glovo')}، مغازة قابس ».",
         "لا نحتفظ بالسعر إلا إذا كان المنتوج <b>متوفرًا</b>. في Carrefour، يقرأ الموقع كل مغازة ويكتب « في N مغازة من M » تحت السعر.",
         "المنتوج الذي لا تبيعه مغازة اليوم يُكتب أمامه « غير متوفر ».",
         "<b>مغازة Carrefour متاعي</b>: اختر مغازتك فوق الترتيب؛ تصبح أسعار Carrefour أسعار هذه المغازة بالذات، والماء غير الموجود في مخزونها يُكتب « غير متوفر ». يبقى اختيارك في هاتفك (لا يُرسل شيء).",
@@ -576,11 +585,12 @@ def page_a_propos(data, SITE, maj_fr, lang="fr"):
         f"ينشره {_iso('Clicvia')} (<a href=\"https://clicvia.com/ar/\" rel=\"noopener\">clicvia.com</a>)، الذي يجمع خدمات عملية مجانية لتونس. لتكتب لنا: استمارة « رأيك » في أسفل الصفحة الرئيسية."])}
   <section><p class="sub"><a href="../">العودة إلى مقارن أسعار الماء</a> · <a href="../prix-stika/">سعر الستيكة اليوم</a>.</p></section>"""
         return _gabarit(SITE, "a-propos", "كيف يعمل الموقع؟ — أسعار الماء في تونس، مقارن مجاني",
-                        "كيف يعمل موقع أسعار الماء في تونس: من أين تأتي الأسعار (Carrefour وGéant)، كيف تستعمل المقارن، معطياتك، "
+                        "كيف يعمل موقع أسعار الماء في تونس: من أين تأتي الأسعار (Carrefour وGéant وAziza)، كيف تستعمل المقارن، معطياتك، "
                         "تحديث كل يوم. مجاني.",
                         "كيف يعمل الموقع؟", corps, None, maj=maj_fr, lang="ar")
 
-    mags = " et ".join(data.get("stores") or MAGASINS)
+    _m = list(data.get("stores") or MAGASINS)
+    mags = ", ".join(_m[:-1]) + " et " + _m[-1] if len(_m) > 1 else "".join(_m)
     liens_mag = " · ".join(f'<a href="../{c}/">{m}</a>' for m, (c, _) in MAGASINS.items())
     corps = f"""
   <section>
@@ -589,7 +599,8 @@ def page_a_propos(data, SITE, maj_fr, lang="fr"):
     Gratuit, sans inscription, en français et en arabe. Derniers prix relevés le {maj_fr}.</p>
   </section>
   {bloc("D'où viennent les prix", [
-        f"Des boutiques en ligne de <b>{mags}</b> : un robot lit leurs prix automatiquement chaque nuit ({liens_mag}).",
+        f"Des boutiques en ligne et des applications de livraison des magasins <b>{mags}</b> : un robot lit leurs prix automatiquement chaque nuit ({liens_mag}).",
+        "<b>Prix d'Aziza vus sur Glovo</b> : ce sont ceux de son magasin de Gabès, lus sur l'application de livraison Glovo ; ils portent la mention « prix vu sur Glovo, magasin de Gabès ».",
         "Un prix n'est gardé que si le produit est <b>en stock</b>. Chez Carrefour, le site lit chaque magasin et écrit « dans N magasins sur M » sous le prix.",
         "Un produit qu'une enseigne ne vend pas aujourd'hui est marqué « non disponible ».",
         "<b>Mon Carrefour</b> : choisissez votre magasin Carrefour au-dessus du classement ; les prix Carrefour deviennent ceux de CE magasin, et une eau qu'il n'a pas en stock est marquée « non disponible ». Votre choix reste dans votre téléphone (rien n'est envoyé).",
@@ -643,7 +654,7 @@ def page_a_propos(data, SITE, maj_fr, lang="fr"):
         "Publié par <b>Clicvia</b> (<a href=\"https://clicvia.com/\" rel=\"noopener\">clicvia.com</a>), qui réunit des services pratiques et gratuits pour la Tunisie. Pour nous écrire : le formulaire « Votre avis » en bas de l'accueil."])}
   <section><p class="sub"><a href="../">Retour au comparateur des prix de l&#39;eau</a> · <a href="../prix-stika/">prix de la stika aujourd&#39;hui</a>.</p></section>"""
     return _gabarit(SITE, "a-propos", "Comment fonctionne le site ? — Prix des Eaux de Tunisie, comparateur gratuit",
-                    "Comment fonctionne Prix des Eaux de Tunisie : d'où viennent les prix de l'eau (Carrefour, Géant), "
+                    "Comment fonctionne Prix des Eaux de Tunisie : d'où viennent les prix de l'eau (Carrefour, Géant, Aziza), "
                     "comment utiliser le comparateur, vos données, mises à jour chaque jour. Gratuit.",
                     "Comment fonctionne le site ?", corps, None, maj=maj_fr)
 

@@ -229,7 +229,7 @@ ACCUEIL = [
     Son prix change selon la marque et le magasin : le site le calcule chaque jour pour chaque marque, à partir du prix de la bouteille,
     et le guide <a href="prix-stika/">prix de la stika d'eau</a> les range de la moins chère à la plus chère.</p>
     <h3>Où voir le prix de l'eau minérale en Tunisie ?</h3>
-    <p>Les prix de cette page sont relevés automatiquement chaque nuit sur les boutiques en ligne de Carrefour et de Géant,
+    <p>Les prix de cette page sont relevés automatiquement chaque nuit sur les boutiques en ligne de Carrefour et de Géant, et sur Glovo pour Aziza (magasin de Gabès),
     seulement pour les produits en stock. Ils sont indicatifs : un magasin peut afficher un autre prix, surtout pendant une promotion.
     Chaque marque a sa page, avec ses prix par format et sa composition.</p>
     <h3>Quelle est l'eau la moins chère aujourd'hui ?</h3>
@@ -242,7 +242,7 @@ ACCUEIL = [
     يتغيّر ثمنها حسب العلامة والمغازة: يحسبه الموقع كل يوم لكل علامة انطلاقًا من ثمن القارورة،
     ودليل <a href="prix-stika/">ثمن ستيكة الماء</a> يرتّبها من الأرخص إلى الأغلى.</p>
     <h3>أين أرى أسعار الماء المعدني في تونس؟</h3>
-    <p>تُقرأ أسعار هذه الصفحة آليًا كل ليلة من المتاجر الإلكترونية لـ<bdi>Carrefour</bdi> و<bdi>Géant</bdi>،
+    <p>تُقرأ أسعار هذه الصفحة آليًا كل ليلة من المتاجر الإلكترونية لـ<bdi>Carrefour</bdi> و<bdi>Géant</bdi>، وعلى <bdi>Glovo</bdi> لـ<bdi>Aziza</bdi> (مغازة قابس)،
     للمنتجات المتوفّرة فقط. هي أسعار تقريبية: قد تعرض مغازة ثمنًا آخر، خاصة أثناء التخفيضات.
     لكل علامة صفحتها، فيها أسعارها حسب الحجم وتركيبتها.</p>
     <h3>ما هو أرخص ماء اليوم؟</h3>
@@ -308,10 +308,10 @@ ACCUEIL = [
     ('rel="noopener">Shixart1985</a> · <a href="https://creativecommons.org/licenses/by/2.0/deed.fr" rel="license noopener">CC BY 2.0</a> · Wikimedia Commons</figcaption>',
      'rel="noopener">Shixart1985</a> · <a href="https://creativecommons.org/licenses/by/2.0/deed.ar" rel="license noopener">CC BY 2.0</a> · ويكيميديا كومنز</figcaption>'),
     ('<p class="intro identite">Les <strong>prix de l\'eau dans les magasins tunisiens</strong>, comparés chaque jour. Gratuit, sans inscription.\n'
-     '  <span class="identite-2">Prix <b>indicatifs</b> relevés sur les boutiques en ligne des grandes surfaces (Carrefour, Géant), complétés par les prix que vous signalez (<a href="#sources">sources citées</a>).\n'
+     '  <span class="identite-2">Prix <b>indicatifs</b> relevés sur les boutiques en ligne des grandes surfaces (Carrefour, Géant) et sur Glovo (Aziza), complétés par les prix que vous signalez (<a href="#sources">sources citées</a>).\n'
      '  Pour la future commande, le <b>prix final</b> dépendra du fournisseur et du stock disponible au moment de la livraison.</span></p>',
      '<p class="intro identite"><strong>أسعار الماء في المغازات التونسية</strong>، نقارنها كل يوم. مجانًا ودون تسجيل.\n'
-     '  <span class="identite-2">أسعار <b>تقريبية</b> نقرؤها في المتاجر الإلكترونية للمغازات الكبرى (Carrefour وGéant)، مع الأسعار التي تبلّغون عنها (<a href="#sources">المصادر مذكورة</a>).\n'
+     '  <span class="identite-2">أسعار <b>تقريبية</b> نقرؤها في المتاجر الإلكترونية للمغازات الكبرى (Carrefour وGéant) وعلى Glovo (Aziza)، مع الأسعار التي تبلّغون عنها (<a href="#sources">المصادر مذكورة</a>).\n'
      '  بالنسبة للطلبية القادمة، <b>السعر النهائي</b> يحدّده المزوّد حسب المخزون المتوفر يوم التوصيل.</span></p>'),
     ('<label for="mon-carrefour">🛒 Mon Carrefour :</label>', '<label for="mon-carrefour">🛒 مغازة Carrefour متاعي:</label>'),
     ('<option value="">Tous les magasins</option>', '<option value="">كل المغازات</option>'),
@@ -352,8 +352,8 @@ ACCUEIL = [
     ('<h3>C\'est quoi une « stika » ?</h3>\n    <p>En Tunisie, la <strong>stika</strong> est le pack de 6 bouteilles d\'eau (12 pour les petites\n    bouteilles de 50 cl), le format le plus acheté par les familles. Sur ce site, chaque produit\n    affiche le prix de la bouteille et celui de la stika.</p>',
      '<h3>ما هي « الستيكة »؟</h3>\n    <p>في تونس، <strong>الستيكة</strong> هي علبة من 6 قوارير ماء (12 للقوارير الصغيرة 50 صل)، وهي الأكثر شراءً عند العائلات. '
      'في هذا الموقع، كل منتوج يعرض سعر القارورة وسعر الستيكة.</p>'),
-    ('<h3>D\'où viennent les prix affichés ?</h3>\n    <p>Les prix sont relevés automatiquement chaque jour sur les boutiques en ligne des grandes\n    surfaces tunisiennes (Géant Drive, Carrefour). Ils sont indicatifs et\n    peuvent varier selon le magasin et les promotions du moment.</p>',
-     '<h3>من أين تأتي الأسعار المعروضة؟</h3>\n    <p>تُقرأ الأسعار آليًا كل يوم من المتاجر الإلكترونية للمغازات الكبرى في تونس (Géant Drive وCarrefour). '
+    ('<h3>D\'où viennent les prix affichés ?</h3>\n    <p>Les prix sont relevés automatiquement chaque jour sur les boutiques en ligne des grandes\n    surfaces tunisiennes (Géant Drive, Carrefour) et, pour Aziza, sur Glovo. Ils sont indicatifs et\n    peuvent varier selon le magasin et les promotions du moment.</p>',
+     '<h3>من أين تأتي الأسعار المعروضة؟</h3>\n    <p>تُقرأ الأسعار آليًا كل يوم من المتاجر الإلكترونية للمغازات الكبرى في تونس (Géant Drive وCarrefour)، وعلى Glovo بالنسبة لـAziza. '
      'هي أسعار تقريبية وقد تتغيّر حسب المغازة والتخفيضات.</p>'),
     ('<h3>Comment fonctionne la commande avec livraison ?</h3>\n    <p>Ajoutez vos produits avec le bouton <strong>+</strong>, indiquez votre téléphone et votre\n    adresse (ou localisez-vous d\'un clic), puis envoyez la commande — elle nous arrive sur WhatsApp.\n    Nous revenons vers vous avec le prix total et les frais de livraison pour confirmer. Vous ne\n    payez qu\'à la livraison, et l\'envoi de la commande ne vous engage à rien.</p>',
      '<h3>كيف سيعمل الطلب مع التوصيل؟</h3>\n    <p>الطلب غير مفتوح بعد. عند فتحه: تضيف منتوجاتك بزر <strong>+</strong>، تكتب رقم هاتفك وعنوانك (أو تحدّد موقعك بنقرة)، '
@@ -395,6 +395,7 @@ ACCUEIL = [
     ('<a href="https://clicvia.com/conditions/" rel="noopener">Conditions d\'utilisation</a>', '<a href="https://clicvia.com/ar/conditions/" rel="noopener">شروط الاستعمال</a>'),
     ('<a href="prix-eau-carrefour/">Prix de l\'eau chez Carrefour</a>', '<a href="prix-eau-carrefour/">سعر الماء في Carrefour</a>'),
     ('<a href="prix-eau-geant/">Prix de l\'eau chez Géant</a>', '<a href="prix-eau-geant/">سعر الماء في Géant</a>'),
+    ('<a href="prix-eau-aziza/">Prix de l\'eau chez Aziza</a>', '<a href="prix-eau-aziza/">سعر الماء في Aziza</a>'),
     ('rel="noopener">Alertes promo (Telegram)</a>', 'rel="noopener">تنبيهات التخفيضات (تيليغرام)</a>'),
     ('<a href="#avis">Votre avis</a></nav>', '<a href="#avis">رأيك</a></nav>'),
     ('<h2 class="pied-titre" id="sources">Sources des prix</h2>', '<h2 class="pied-titre" id="sources">مصادر الأسعار</h2>'),
@@ -471,14 +472,14 @@ MANQUES = []
 def _jsonld_accueil_ar(nb):
     d = {"@context": "https://schema.org", "@graph": [
         {"@type": "WebSite", "name": NOM_AR, "alternateName": "Prix des Eaux de Tunisie", "url": URL_SITE + "ar/", "inLanguage": "ar",
-         "description": "مقارن مجاني لأسعار الماء المعدني في تونس (القارورة والستيكة) في Géant وCarrefour، يُحدَّث كل يوم.",
+         "description": "مقارن مجاني لأسعار الماء المعدني في تونس (القارورة والستيكة) في Géant وCarrefour وAziza، يُحدَّث كل يوم.",
          "publisher": {"@type": "Organization", "name": "Clicvia", "url": "https://clicvia.com/",
                        "sameAs": ["https://www.facebook.com/1327283777142447"]}},
         {"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": "ما هي الستيكة؟", "acceptedAnswer": {"@type": "Answer", "text":
              "في تونس، الستيكة هي علبة من 6 قوارير ماء (12 للقوارير الصغيرة 50 صل)، وسعرها 6 أضعاف سعر القارورة."}},
             {"@type": "Question", "name": "من أين تأتي الأسعار؟", "acceptedAnswer": {"@type": "Answer", "text":
-             "تُقرأ الأسعار آليًا كل يوم من المتاجر الإلكترونية للمغازات الكبرى في تونس (Géant Drive وCarrefour). هي أسعار تقريبية."}},
+             "تُقرأ الأسعار آليًا كل يوم من المتاجر الإلكترونية للمغازات الكبرى في تونس (Géant Drive وCarrefour)، وعلى Glovo بالنسبة لـAziza (مغازة قابس). هي أسعار تقريبية."}},
             {"@type": "Question", "name": "كم علامة ماء نقارن؟", "acceptedAnswer": {"@type": "Answer", "text":
              f"{nb} علامة ماء تُباع في تونس، مياه عادية وغازية، مع سعر القارورة والستيكة."}}]}]}
     return '<script type="application/ld+json">\n' + json.dumps(d, ensure_ascii=False, indent=2) + "\n</script>"
@@ -494,8 +495,8 @@ def accueil_ar(fr, nb_marques):
         else:
             MANQUES.append(a[:70])
     desc = (f"مقارن مجاني لأسعار الماء المعدني في تونس: {nb_marques} علامة ({iso('Safia')}، {iso('Marwa')}، {iso('Sabrine')}…)، "
-            f"القارورة والستيكة في {iso('Géant')} و{iso('Carrefour')}، تُحدَّث كل يوم.")
-    ogd = f"قارن مجانًا أسعار {nb_marques} علامة ماء معدني (القارورة والستيكة) في {iso('Géant')} و{iso('Carrefour')}. تُحدَّث كل يوم."
+            f"القارورة والستيكة في {iso('Géant')} و{iso('Carrefour')} و{iso('Aziza')}، تُحدَّث كل يوم.")
+    ogd = f"قارن مجانًا أسعار {nb_marques} علامة ماء معدني (القارورة والستيكة) في {iso('Géant')} و{iso('Carrefour')} و{iso('Aziza')}. تُحدَّث كل يوم."
     ar = re.sub(r'<meta name="description" content="[^"]*">', lambda m: f'<meta name="description" content="{H.escape(desc)}">', ar, count=1)
     ar = re.sub(r'<meta property="og:description" content="[^"]*">', lambda m: f'<meta property="og:description" content="{H.escape(ogd)}">', ar, count=1)
     ar = re.sub(r'<script type="application/ld\+json">.*?</script>', lambda m: _jsonld_accueil_ar(nb_marques), ar, count=1, flags=re.S)

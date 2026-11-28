@@ -112,13 +112,18 @@ function compoBlock(b){
 // robots s'arrêtaient, le site préviendrait que les prix sont anciens.
 // Enseignes suivies : seulement celles que GitHub lit seul chaque nuit (Monoprix et Otrity retirés le 23/10/2026,
 // décision d'Ahmed : le site doit être autonome, sans relevé à la main ni depuis le PC).
-const NOMS_SRC = { carrefour: "Carrefour", geant: "Géant" };
+const NOMS_SRC = { carrefour: "Carrefour", geant: "Géant", aziza: "Aziza" };
+// enseignes dont les prix sont VUS SUR GLOVO, dans un seul magasin (Aziza de Gabès, 28/11/2026, « fais B » d'Ahmed) :
+// mention écrite sous leur prix, pour ne pas les confondre avec les prix lus sur le site du magasin lui-même
+const VIA = DATA.via || {};
+const viaTxt = s => VIA[s] ? `<small class="offer-mag offer-via">${T(`prix vu sur ${VIA[s].site}, magasin de ${VIA[s].lieu}`, `سعر على ${isoAr(VIA[s].site)}، مغازة ${VIA[s].lieu === "Gabès" ? "قابس" : isoAr(VIA[s].lieu)}`)}</small>` : "";
 // (statut_sources.<x>.manuel = source relevée à la main : jamais d'alerte de retard ; aucune aujourd'hui)
 // logos officiels des enseignes (assets/logos/), affichés devant le nom du magasin.
 // Géant : le logo est le mot « Géant » lui-même, il remplace le texte.
 const LOGOS = {
   "Carrefour": { src: RACINE + "assets/logos/carrefour.png" },
   "Géant":     { src: RACINE + "assets/logos/geant.png", mot: true },
+  "Aziza":     { src: RACINE + "assets/logos/aziza.png" },   // panier-cœur jaune du logo officiel (aziza.tn)
 };
 function enseigne(nom){
   const l = LOGOS[nom];
@@ -233,7 +238,8 @@ function prodRow(p, b){
     .map(([s,v]) => `<span class="offer${multi && best.includes(s) ? " best" : ""}">
         <span class="store">${enseigne(s)}</span><span class="p">${fmtDT(dispPrice(v, p.liters))}</span></span>` +
         // vendu dans une partie des magasins seulement (Carrefour : stock différent d'un magasin à l'autre)
-        (p.magasins && p.magasins[s] ? `<small class="offer-mag">${T(`dans ${p.magasins[s][0]} magasin${p.magasins[s][0] > 1 ? "s" : ""} sur ${p.magasins[s][1]}`, `في ${p.magasins[s][0]} مغازة من ${p.magasins[s][1]}`)}</small>` : ""))
+        (p.magasins && p.magasins[s] ? `<small class="offer-mag">${T(`dans ${p.magasins[s][0]} magasin${p.magasins[s][0] > 1 ? "s" : ""} sur ${p.magasins[s][1]}`, `في ${p.magasins[s][0]} مغازة من ${p.magasins[s][1]}`)}</small>` : "") +
+        viaTxt(s))
     .join("") +
     // enseignes vérifiées aujourd'hui qui ne vendent pas ce format (collect_prices.py, 23/10/2026)
     (p.non_dispo || []).map(s => `<span class="offer na">
@@ -278,7 +284,7 @@ function renderTop(){
       <span class="top-label"><svg class="ic-goutte" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s-6.5 8.4-6.5 12.6a6.5 6.5 0 0 0 13 0C18.5 11.4 12 3 12 3z"/></svg>${T("La moins chère aujourd'hui", "الأرخص اليوم")}</span>
       <span class="top-ligne"><b class="top-nom">${g.b.name}</b>
         <b class="top-prix">${prix(g.m.prix)}</b></span>
-      <span class="top-detail">${unite} – ${enseignes(g.m.magasins)}</span>
+      <span class="top-detail">${unite} – ${enseignes(g.m.magasins)}${g.m.magasins.some(m => VIA[m]) ? T(" (prix vu sur Glovo)", " (سعر على \u2068Glovo\u2069)") : ""}</span>
     </a>
     <!-- petit bouton de partage WhatsApp, posé sous le prix (dans la carte verte) -->
     <a class="top-partage" target="_blank" rel="noopener" aria-label="${T("Partager sur WhatsApp", "شارك على واتساب")}" title="${T("Partager sur WhatsApp", "شارك على واتساب")}" href="https://wa.me/?text=${encodeURIComponent(T(
@@ -287,7 +293,7 @@ function renderTop(){
     </div>
     <ol class="top-liste" start="2">${rows.slice(1, 5).map(r => `
       <li><a href="#m-${r.b.id}"><span class="top-n">${r.b.name}</span>
-        <span class="top-p">${prix(r.m.prix)}</span><small class="top-ens">${r.m.magasins.map(m => `<span>${enseigne(m)}</span>`).join("")}</small></a></li>`).join("")}
+        <span class="top-p">${prix(r.m.prix)}</span><small class="top-ens">${r.m.magasins.map(m => `<span>${enseigne(m)}${VIA[m] ? ` <small>(${isoAr("Glovo")})</small>` : ""}</span>`).join("")}</small></a></li>`).join("")}
     </ol>
 `;
   box.hidden = false;
@@ -626,7 +632,7 @@ render();
 })();
 
 /* footer ----------------------------------------------------------------- */
-const NOMS_SOURCES_AR = { "Carrefour Tunisie": "Carrefour", "Géant Drive Tunisie": "Géant Drive", "Wikipédia — Eaux minérales en Tunisie": "ويكيبيديا (بالفرنسية)" };
+const NOMS_SOURCES_AR = { "Carrefour Tunisie": "Carrefour", "Géant Drive Tunisie": "Géant Drive", "Aziza (prix vus sur Glovo, magasin de Gabès)": "Aziza (Glovo، قابس)", "Wikipédia — Eaux minérales en Tunisie": "ويكيبيديا (بالفرنسية)" };
 const dateLongue = new Date(DATA.updated + "T12:00:00").toLocaleDateString(LOC, {day:"numeric",month:"long",year:"numeric"});
 const liensSources = DATA.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${AR ? (NOMS_SOURCES_AR[s.name] || s.name.split(" ")[0]) : s.name}</a>`).join(" · ");
 document.getElementById("foot").innerHTML = T(

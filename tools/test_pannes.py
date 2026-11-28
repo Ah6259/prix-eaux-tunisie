@@ -21,10 +21,11 @@ for _f in (sys.stdout, sys.stderr):
         _f.reconfigure(encoding="utf-8", errors="replace")
 sys.path.insert(0, str(ROOT / "tools"))
 import collect_prices as c  # noqa: E402
+AZIZA_VRAI = c.aziza   # le vrai lecteur de Glovo (les scénarios le remplacent par des offres simulées)
 
 J0 = date(2026, 10, 1)
 REEL = json.loads((ROOT / "data" / "eaux.json").read_text(encoding="utf-8"))
-NOMS = {"carrefour": "Carrefour", "geant": "Géant"}
+NOMS = {"carrefour": "Carrefour", "geant": "Géant", "aziza": "Aziza"}   # Aziza : prix vus sur Glovo (28/11/2026)
 # Enseignes RETIRÉES le 23/10/2026 (décision d'Ahmed : site autonome) : ne doivent plus jamais revenir
 RETIREES = {"otrity": "Otrity", "monoprix": "Monoprix"}
 
@@ -57,7 +58,7 @@ class Bac:
         c.telecharger_image = lambda url: None
         self.jour = J0
         if avec_historique:
-            self.passe({s: ok(s) for s in ("carrefour", "geant")}, avancer=False)
+            self.passe({s: ok(s) for s in ("carrefour", "geant", "aziza")}, avancer=False)
 
     def passe(self, comportements, avancer=True):
         """Un passage du robot (une nuit)."""
@@ -70,6 +71,7 @@ class Bac:
         c.date = FausseDate
         c.carrefour = comportements.get("carrefour", ok("carrefour"))
         c.geant = comportements.get("geant", ok("geant"))
+        c.aziza = comportements.get("aziza", ok("aziza"))   # jamais Glovo pour de vrai pendant les tests
         sortie = sys.stdout
         sys.stdout = sys.stderr = open(self.tmp / "journal.txt", "a", encoding="utf-8")
         try:
@@ -126,8 +128,8 @@ def scenario(titre, attendu, verifie):
     return deco
 
 
-@scenario("1. Tout fonctionne", "2 enseignes (Carrefour, Géant), aucun avertissement",
-          lambda e, d, m: e == ["Carrefour", "Géant"] and m == "(aucun avertissement)")
+@scenario("1. Tout fonctionne", "3 enseignes (Carrefour, Géant, Aziza via Glovo), aucun avertissement",
+          lambda e, d, m: e == ["Aziza", "Carrefour", "Géant"] and m == "(aucun avertissement)")
 def _():
     b = Bac(); d = b.passe({}); return b, d, b.jour
 
@@ -191,21 +193,21 @@ def _():
           lambda e, d, m: "Carrefour" in e and "Géant" in e and m.startswith(("ℹ️", "⚠️")))
 def _():
     b = Bac()
-    for _ in range(2): d = b.passe({"carrefour": panne(), "geant": panne()})
+    for _ in range(2): d = b.passe({"carrefour": panne(), "geant": panne(), "aziza": panne()})
     return b, d, b.jour
 
 @scenario("11. Toutes les sources en panne 3 nuits", "⚠️ « non mis à jour depuis le … »",
           lambda e, d, m: m.startswith("⚠️ prix non mis à jour"))
 def _():
     b = Bac()
-    for _ in range(3): d = b.passe({"carrefour": panne(), "geant": panne()})
+    for _ in range(3): d = b.passe({"carrefour": panne(), "geant": panne(), "aziza": panne()})
     return b, d, b.jour
 
 @scenario("12. Toutes les sources en panne 10 nuits", "aucun prix + ⚠️ « indisponibles »",
           lambda e, d, m: e == [] and m.startswith("⚠️ prix momentanément"))
 def _():
     b = Bac()
-    for _ in range(10): d = b.passe({"carrefour": panne(), "geant": panne()})
+    for _ in range(10): d = b.passe({"carrefour": panne(), "geant": panne(), "aziza": panne()})
     return b, d, b.jour
 
 @scenario("13. Robots arrêtés (GitHub en pause), visite 20 jours après", "⚠️ « non mis à jour depuis le … »",
@@ -229,12 +231,12 @@ def avec_retirees(base):
 def sans_retirees(d):
     """Aucune trace d'Otrity ni de Monoprix : prix, « non disponible », magasins, statut, liste des enseignes, sources."""
     texte = json.dumps({k: d[k] for k in ("brands", "stores", "sources", "statut_sources")}, ensure_ascii=False).lower()
-    return (set(d["statut_sources"]) <= set(NOMS) and d["stores"] == ["Carrefour", "Géant"]
+    return (set(d["statut_sources"]) <= set(NOMS) and d["stores"] == ["Carrefour", "Géant", "Aziza"]
             and not any(n.lower() in texte or k in texte for k, n in RETIREES.items()))
 
 @scenario("14. Ancien relevé avec Otrity et Monoprix (avant le 23/10/2026)",
           "après une nuit : seulement Carrefour et Géant, aucune trace des enseignes retirées (prix, statut, non disponible)",
-          lambda e, d, m: e == ["Carrefour", "Géant"] and sans_retirees(d) and m == "(aucun avertissement)")
+          lambda e, d, m: e == ["Aziza", "Carrefour", "Géant"] and sans_retirees(d) and m == "(aucun avertissement)")
 def _():
     b = Bac()
     c.OUT_JSON.write_text(json.dumps(avec_retirees(json.loads(c.OUT_JSON.read_text(encoding="utf-8")))), encoding="utf-8")
@@ -242,15 +244,15 @@ def _():
 
 @scenario("14b. Même ancien relevé, Carrefour en panne (reprise des anciens prix)",
           "la reprise ne ramène JAMAIS Otrity ni Monoprix",
-          lambda e, d, m: e == ["Carrefour", "Géant"] and sans_retirees(d))
+          lambda e, d, m: e == ["Aziza", "Carrefour", "Géant"] and sans_retirees(d))
 def _():
     b = Bac()
     c.OUT_JSON.write_text(json.dumps(avec_retirees(json.loads(c.OUT_JSON.read_text(encoding="utf-8")))), encoding="utf-8")
     d = b.passe({"carrefour": panne()}); return b, d, b.jour
 
 @scenario("14c. Vieux fichiers data/otrity.json et data/monoprix.json restés sur le disque",
-          "ignorés : le robot ne lit plus que Carrefour et Géant",
-          lambda e, d, m: e == ["Carrefour", "Géant"] and sans_retirees(d))
+          "ignorés : le robot ne lit plus que Carrefour, Géant et Aziza (Glovo)",
+          lambda e, d, m: e == ["Aziza", "Carrefour", "Géant"] and sans_retirees(d))
 def _():
     b = Bac()
     offre = {"marque": "AQUALINE", "nom": "Eau minérale AQUALINE 1.5L", "volume_l": 1.5, "nb_unites": 1,
@@ -270,6 +272,49 @@ def _():
           lambda e, d, m: "Géant" not in e and "geant" not in d["statut_sources"])
 def _():
     b = Bac(avec_historique=False); d = b.passe({"geant": partiel("geant")}, avancer=False); return b, d, b.jour
+
+# ---- Aziza, prix vus sur Glovo au magasin de Gabès (28/11/2026)
+@scenario("17. Glovo (Aziza) en panne 1 nuit", "prix Aziza de la veille gardés, Carrefour et Géant du jour, aucun avertissement",
+          lambda e, d, m: e == ["Aziza", "Carrefour", "Géant"] and m == "(aucun avertissement)"
+          and d["statut_sources"]["aziza"]["dernier_ok"] == "2026-10-01")
+def _():
+    b = Bac(); d = b.passe({"aziza": panne("curl: (22) HTTP 503")}); return b, d, b.jour
+
+@scenario("17b. Glovo (Aziza) en panne 8 nuits", "prix Aziza RETIRÉS, Carrefour et Géant restent",
+          lambda e, d, m: e == ["Carrefour", "Géant"])
+def _():
+    b = Bac()
+    for _ in range(8): d = b.passe({"aziza": panne()})
+    return b, d, b.jour
+
+@scenario("17c. Glovo ne renvoie que 2 eaux (page changée)", "« presque rien lu » : prix de la veille, jamais 2 eaux seules",
+          lambda e, d, m: "Aziza" in e and d["statut_sources"]["aziza"]["dernier_ok"] == "2026-10-01")
+def _():
+    b = Bac(); d = b.passe({"aziza": partiel("aziza", 2)}); return b, d, b.jour
+
+@scenario("17d. Aziza : jamais « non disponible » (un seul magasin lu sur Glovo)",
+          "une eau absente du magasin de Gabès n'est pas dite « non disponible » chez Aziza",
+          lambda e, d, m: all("Aziza" not in (p.get("non_dispo") or []) for b in d["brands"] for p in b["products"]))
+def _():
+    b = Bac(); d = b.passe({}); return b, d, b.jour
+
+# lecture d'une page Glovo inventée : produit en rupture écarté, prix promo retenu, page sans produit = panne
+_FAUSSE = ('x"type":"PRODUCT_TILE","data":{"name":"Eau De Source 1,5l Tiba","price":0.69,"imageUrl":"https://i/t.jpg","promotions":[],'
+           '"isOutOfStock":"false"}x"type":"PRODUCT_TILE","data":{"name":"Eau minérale Délice 1L","price":0.73,"promotions":'
+           '[{"productId":"1","title":"-0,040 DT","price":0.69,"priceInfo":{}}],"isOutOfStock":"false"}'
+           'x"type":"PRODUCT_TILE","data":{"name":"Eau Minerale 2L Dima - 046","price":0.92,"promotions":[],"isOutOfStock":"true"}'
+           'x"type":"PRODUCT_TILE","data":{"name":"Jus d\'orange 1L","price":2.5,"promotions":[],"isOutOfStock":"false"}')
+_t = c.tuiles_glovo(_FAUSSE.replace('"', '\\"'))
+_get = c.http_get
+c.http_get = lambda *a, **k: _FAUSSE.encode()
+c.RAW_DIR = Path(tempfile.mkdtemp())
+_a = AZIZA_VRAI()
+c.http_get = _get
+resultats.append(([(x["nom"], x["prix"], x["rupture"]) for x in _t] == [("Eau De Source 1,5l Tiba", 0.69, False), ("Eau minérale Délice 1L", 0.69, False),
+                  ("Eau Minerale 2L Dima - 046", 0.92, True), ("Jus d'orange 1L", 2.5, False)]
+                  and [(o["marque"], o["volume_l"], o["prix"], o["image_src"]) for o in _a] == [("TIBA", 1.5, 0.69, None), ("DELICE", 1.0, 0.69, None)],
+                  "17e. Lecture de Glovo (page inventée) : rupture écartée, promotion retenue, autre produit ignoré, pas de photo Glovo",
+                  "Tiba 0,690 et Délice 1 L 0,690 (promo) ; Dima en rupture et le jus écartés", str([(o["marque"], o["prix"]) for o in _a]), "—"))
 
 # photos libres (Open Food Facts) des marques sans photo de magasin : doivent rester après chaque nuit
 LIBRES = json.loads((ROOT / "data" / "photos_libres.json").read_text(encoding="utf-8"))["photos"]

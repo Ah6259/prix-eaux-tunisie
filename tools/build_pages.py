@@ -85,8 +85,8 @@ def page_marque(b, lang="fr"):
                       f"<td>{offres}</td><td style='text-align:end'>{stika}</td></tr>")
     tableau = (f"<table class='prices'><tr><th>{T('Format', 'الحجم')}</th><th>{T('Prix bouteille par enseigne', 'سعر القارورة حسب المغازة')}</th>"
                f"<th>{T('Stika', 'الستيكة')}</th></tr>{''.join(lignes)}</table>") if lignes else \
-        T("<p><em>Prix non disponible pour le moment dans les enseignes que nous suivons (Carrefour, Géant).</em></p>",
-          "<p><em>السعر غير متوفر حاليًا في المغازات التي نتابعها (Carrefour وGéant).</em></p>")
+        T("<p><em>Prix non disponible pour le moment dans les enseignes que nous suivons (Carrefour, Géant, Aziza).</em></p>",
+          "<p><em>السعر غير متوفر حاليًا في المغازات التي نتابعها (Carrefour وGéant وAziza).</em></p>")
 
     # composition
     compo_html = ""
@@ -128,11 +128,11 @@ def page_marque(b, lang="fr"):
         prix15 = min(c15)
     # SEO (08/11/2026) : description <= 165 caractères (Google coupe au-delà), sans promesse de livraison (commande fermée)
     if lang == "ar":
-        desc = (f"سعر ماء {LG.iso(nom)} في تونس: القارورة والستيكة في Géant وCarrefour، يُحدَّث كل يوم."
+        desc = (f"سعر ماء {LG.iso(nom)} في تونس: القارورة والستيكة في Géant وCarrefour وAziza، يُحدَّث كل يوم."
                 + (f" قارورة 1,5 لتر من {LG.iso(D(prix15))}." if prix15 else "")
                 + " التركيبة، مقارن مجاني.")
     else:
-        desc = (f"Prix de l'eau {nom} en Tunisie : bouteille et stika chez Géant et Carrefour, mis à jour chaque jour."
+        desc = (f"Prix de l'eau {nom} en Tunisie : bouteille et stika chez Géant, Carrefour et Aziza, mis à jour chaque jour."
                 + (f" 1,5 L dès {D(prix15).replace(chr(160), ' ')}." if prix15 else "")
                 + " Composition, comparateur gratuit.")
 

@@ -263,3 +263,6 @@ filtres, MAJ de nuit, historique, alertes Telegram, SEO, GoatCounter) pour d'aut
 - **25/11/2026 (soir)** : plan Google — lastmod honnête (`tools/lastmod.py`), marques sans prix ni composition en noindex hors du plan du site, bloc « l'essentiel » sur l'accueil (FR + AR). Demandes de liens à d'autres sites : abandonnées (décision d'Ahmed).
 - **25/11/2026 (fin, update workflow)** : plan Google B.1-B.3 FAIT ici et sur 13 autres sites publics (annuaires après le 01/12). Au week-end du 28-29/11 : audit des Pass (PASS.3, projets-ahmed) — ce site n'a pas de Pass. Rien d'autre de changé ici.
 - **25/11/2026 (fin de session)** : tout est envoyé et en ligne (aussi les autres sites). Pour reprendre sur le PC : `git checkout main` puis `git pull` ici et dans projets-ahmed.
+- **28/11/2026 — Aziza ajoutée (prix vus sur Glovo, magasin de Gabès)** : 3e enseigne du comparateur, lue chaque nuit par le robot
+  sur la page publique Glovo du magasin Aziza de Gabès (accord de Glovo obtenu par Ahmed). Mention « prix vu sur Glovo, magasin de Gabès »
+  sous chaque prix, logo officiel, page « Prix de l'eau chez Aziza ». Monoprix reste en essai silencieux.

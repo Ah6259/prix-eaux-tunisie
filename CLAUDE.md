@@ -29,7 +29,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
   Doit rester **public** (Pages gratuit). `gh` : "C:\Program Files\GitHub CLI\gh.exe".
 - `Ah6259/prix-eau-tunisie` = simple **redirection** à garder (liens partagés + référencement). Ne pas y remettre de noindex ni de scraping.
 - 35 marques, prix bouteille + **stika** (6 × bouteille, 12 si ≤ 0,75 L).
-- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (`CSS_V` de build_guides.py, style.css, app.js et protection.js : 20261123a ; assets/son.js : 20261020b ; assets/textes-ar.js prend le ?v= d'app.js).**
+- Cache des téléphones : **changer le `?v=` de style.css / app.js dans index.html à chaque modification (`CSS_V` de build_guides.py, style.css, app.js et protection.js : 20261128a ; assets/son.js : 20261020b ; assets/textes-ar.js prend le ?v= d'app.js).**
 - Image d'aperçu des liens partagés : `assets/og-image-v7.jpg` (05/10 : texte à gauche + nouvelle icône goutte + photo NEUTRE de l'eau versée à droite ; modèle `tools/og-image.html`, capture Edge 1200×630 puis JPEG qualité 88 ; aussi sur les 2 guides et les 35 pages marques, avec og:image:type JPEG), volontairement **sans nombre de marques ni noms de magasins**
   (l'ancienne affichait « 22 marques, Monoprix, Aziza »). Si on la change : nouveau nom de fichier (WhatsApp/Facebook gardent l'ancienne en cache).
 - Tests d'affichage mobile : headless Chrome dans des iframes de 340/390 px (les petites fenêtres sont ignorées).
@@ -60,7 +60,19 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 
 ## Sources de prix
 - **Carrefour** (API GraphQL) et **Géant Drive** (HTML) : lus en direct chaque nuit par GitHub. Géant : `curl -k` en cas d'erreur de certificat (code 60).
-  **Ce sont les DEUX seules enseignes du comparateur depuis le 23/10/2026.**
+  **Ce sont les DEUX seules enseignes lues sur leur propre site depuis le 23/10/2026 ; + Aziza via Glovo depuis le 28/11/2026 (ci-dessous).**
+- **AZIZA AJOUTÉE LE 28/11/2026 (« fais B » d'Ahmed ; Ahmed dit avoir l'ACCORD de Glovo : garder sa trace écrite)** : 3e enseigne,
+  prix **vus sur Glovo** au magasin Aziza de **Gabès** (`aziza()` de collect_prices.py, page publique glovoapp.com lue une fois par nuit ;
+  conditions d'utilisation de Glovo illisibles depuis le cloud : page derrière Cloudflare, jamais contournée). Données JSON de la page :
+  `isOutOfStock` = écarté (§ 43), prix promo retenu, photos Glovo NON reprises (lots de 12-18 bouteilles pour un prix à l'unité).
+  Aziza n'est JAMAIS « non disponible » (un seul magasin lu). `via` dans eaux.json -> mention « prix vu sur Glovo, magasin de Gabès »
+  sous chaque prix (`viaTxt` d'app.js, FR + AR), logo `assets/logos/aziza.png` (panier-cœur jaune recadré du logo officiel d'aziza.tn,
+  dont le texte est blanc), page `prix-eau-aziza/` (+ ar/) dans `MAGASINS` de build_guides.py (phrase `VIA_GLOVO`), sources/pied de page,
+  llms.txt, textes de l'accueil (+ `ACCUEIL` de langues.py), a-propos (FONCTIONS : 38). Minimum 3 offres ; panne > 2 jours = robot rouge
+  comme les autres. Tests : test_site.mjs (bloc Aziza, vérifié par sabotage), test_pannes.py (17 à 17e, 28 scénarios ; Glovo jamais
+  appelé pendant les tests), test_disponibilite.py. Bilan de l'essai (22-27/11) : Carrefour Glovo = carrefour.tn au millime.
+  **Monoprix reste en ESSAI SILENCIEUX** (3-5 eaux, liste qui change chaque jour) : nouveau bilan vers le 12/12/2026 avant d'en parler à Ahmed.
+  Versions 20261128a (style.css, app.js, protection.js, CSS_V).
 - **DÉCISION D'AHMED (23/10/2026) : le site doit être AUTONOME (rien sur le PC, rien à la main) → Otrity et Monoprix RETIRÉS
   du comparateur.** Otrity : Cloudflare bloque GitHub, y compris l'API wp-json (il n'était lu que depuis le PC d'Ahmed par la
   tâche Windows « PrixEaux-Otrity » et `tools/otrity_local.py`). Monoprix : relevé à la main par captures (`data/monoprix.json`),
@@ -116,7 +128,7 @@ Dépôt PUBLIC : ne rien écrire ici de personnel ni de secret.
 - `battement-de-coeur.yml` le 1er du mois (évite la pause GitHub après 60 jours sans activité).
 - `instagram.yml` chaque lundi 9h05 : `tools/image_semaine.py` → image 1080×1350 « les 5 stikas les moins chères »
   + texte (assets/instagram/) envoyés sur le canal Telegram ; Ahmed les repost sur Instagram.
-- **`essai-glovo.yml` (22/11/2026, « fais » d'Ahmed) : ESSAI SILENCIEUX de Glovo** chaque jour 10h17 (groupe `essai-glovo`) :
+- **`essai-glovo.yml` (22/11/2026, « fais » d'Ahmed ; Aziza passée sur le site le 28/11, Monoprix toujours en essai) : ESSAI SILENCIEUX de Glovo** chaque jour 10h17 (groupe `essai-glovo`) :
   `tools/essai_glovo.py` lit le rayon eaux de Monoprix Tunis, Carrefour Market Sousse et Aziza Gabès sur glovoapp.com (pages publiques,
   robots.txt permissif) → `tools/essai/glovo.json` (60 jours). RIEN sur le site. Comparaison Carrefour Glovo / carrefour.tn (1er jour :
   identiques au millime). Après quelques jours : bilan à Ahmed ; afficher Monoprix / Aziza seulement avec son accord (logo, mention « prix vu sur Glovo »).

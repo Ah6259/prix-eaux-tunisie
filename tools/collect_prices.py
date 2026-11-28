@@ -8,6 +8,9 @@ de ce site (marques -> produits -> prix par enseigne).
 Sources :
   - Carrefour Tunisie : API GraphQL (catégorie « Eaux ») — en direct
   - Géant Drive       : page catégorie « Eaux » (HTML PrestaShop) — en direct
+  - Aziza (28/11/2026, « fais B » d'Ahmed, accord de Glovo obtenu par Ahmed) : rayon « Eaux » du magasin Aziza de
+    GABÈS sur glovoapp.com (page publique lue une fois par nuit) — prix « vus sur Glovo », un seul magasin ;
+    produit « isOutOfStock » = écarté (règle § 43). Essai silencieux du 22 au 27/11 : prix Carrefour Glovo = carrefour.tn.
   (Otrity et Monoprix RETIRÉS le 23/10/2026, décision d'Ahmed : le site doit être AUTONOME, rien sur le PC,
    rien à la main. Otrity : Cloudflare bloque GitHub, API wp-json comprise (il n'était lu que depuis le PC d'Ahmed).
    Monoprix : relevé à la main par captures ; courses.monoprix.tn bloqué par Cloudflare même depuis le PC.
@@ -45,7 +48,7 @@ RAW_DIR = ROOT / "tools" / "raw"
 # Une enseigne qui donne moins que ce nombre d'offres = lecteur cassé, même au premier relevé (règle commune § 17,
 # incident Tunisie-annonce du 15/10/2026 : 1 annonce gardée, robot vert). Relevés du 14/10/2026 : Carrefour 62, Géant 35.
 # Carrefour lu magasin par magasin depuis le 23/10/2026 : 17 eaux vendues dans au moins un magasin.
-MINIMUM_OFFRES = {"carrefour": 8, "geant": 10}
+MINIMUM_OFFRES = {"carrefour": 8, "geant": 10, "aziza": 3}
 MAX_JOURS_REPRISE = 7   # une source en panne garde ses anciens prix 7 jours au plus
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36"
@@ -131,7 +134,7 @@ META = {
 }
 
 # Enseignes suivies = celles que GitHub lit seul chaque nuit (Otrity et Monoprix retirés le 23/10/2026)
-ENSEIGNES = {"carrefour": "Carrefour", "geant": "Géant"}
+ENSEIGNES = {"carrefour": "Carrefour", "geant": "Géant", "aziza": "Aziza"}
 SUIVIES = tuple(ENSEIGNES)
 
 # id de marque -> préfixe des photos choisies à la main dans assets/img
@@ -349,6 +352,51 @@ def geant():
     return out
 
 
+# ---------------------------------------------------------------- Aziza (via Glovo, 28/11/2026)
+AZIZA_GLOVO = "https://glovoapp.com/fr/tn/gabes/stores/magasins-aziza-gbs?content=eaux-c.50827073"
+# enseignes lues sur Glovo (un seul magasin) : mention affichée sur le site, jamais « non disponible »
+# (un produit absent de CE magasin ne dit rien des autres magasins de l'enseigne)
+VIA_GLOVO = {"Aziza": {"site": "Glovo", "lieu": "Gabès", "url": "https://glovoapp.com/fr/tn/gabes/stores/magasins-aziza-gbs"}}
+
+
+def tuiles_glovo(page):
+    """Produits d'une page de magasin Glovo : [{nom, prix, image, rupture}] (données JSON de la page).
+    prix = prix payé (promotion comprise), rupture = « isOutOfStock » de Glovo."""
+    s = page.replace('\\"', '"')
+    out, vus = [], set()
+    for bloc in s.split('"type":"PRODUCT_TILE","data":')[1:]:
+        g = lambda pat: (re.search(pat, bloc) or [None, None])[1]
+        nom = g(r'"name":"([^"]+)"')
+        prix = g(r'"price":([\d.]+)')
+        if not nom or prix is None or nom in vus:
+            continue
+        vus.add(nom)
+        promo = re.search(r'"promotions":\[\{[^\]]*?"price":([\d.]+)', bloc)
+        out.append({"nom": " ".join(html.unescape(nom).split()),
+                    "prix": float(promo.group(1) if promo else prix),
+                    "image": g(r'"imageUrl":"([^"]+)"'),
+                    "rupture": g(r'"isOutOfStock":"(\w+)"') == "true"})
+    return out
+
+
+def aziza():
+    page = http_get(AZIZA_GLOVO, headers={"Accept-Language": "fr"}).decode("utf-8", errors="replace")
+    (RAW_DIR / "aziza-glovo.html").write_text(page, encoding="utf-8", newline="\n")
+    out = []
+    for t in tuiles_glovo(page):
+        if t["rupture"] or not est_eau(t["nom"]):
+            continue
+        vol, nb = parse_volume(t["nom"])
+        out.append({
+            "enseigne": "aziza", "marque": trouver_marque("", t["nom"]), "nom": t["nom"],
+            "volume_l": vol, "nb_unites": nb, "type": type_eau(t["nom"]),
+            # photos Glovo NON reprises : ce sont souvent des lots de 12 à 18 bouteilles alors que le prix est celui
+            # d'UNE bouteille (Royal, Vivian, 28/11/2026) -> photo trompeuse ; la marque garde sa photo de magasin ou libre
+            "prix": t["prix"], "image_src": None,
+        })
+    return out
+
+
 # ---------------------------------------------------------------- images choisies à la main
 def images_curated():
     """{préfixe de nom de fichier -> chemin} des photos de assets/img (hors produits/)."""
@@ -437,7 +485,7 @@ def main():
         statut = {k: {"dernier_ok": ancien.get("updated"), "nb": 0} for k in SUIVIES}
     offres = []
     lues = set()  # enseignes lues EN DIRECT ce jour (pas les reprises) : un produit absent chez elles = « non disponible »
-    sources = (("Carrefour", carrefour, "carrefour"), ("Géant", geant, "geant"))
+    sources = (("Carrefour", carrefour, "carrefour"), ("Géant", geant, "geant"), ("Aziza", aziza, "aziza"))
     for nom, f, cle_src in sources:
         prec = statut.get(cle_src) or {}
         try:
@@ -547,7 +595,7 @@ def main():
         if pm:
             prod["par_mag"] = pm
         # enseignes lues aujourd'hui qui ne vendent pas ce format : « non disponible » sur le site (23/10/2026)
-        absentes = [ENSEIGNES[e] for e in SUIVIES if e in lues and e not in p["vus"]]
+        absentes = [ENSEIGNES[e] for e in SUIVIES if e in lues and e not in p["vus"] and ENSEIGNES[e] not in VIA_GLOVO]
         if absentes:
             prod["non_dispo"] = absentes
         b["products"].append(prod)
@@ -586,10 +634,12 @@ def main():
         "sources": [
             {"name": "Carrefour Tunisie", "url": "https://www.carrefour.tn"},
             {"name": "Géant Drive Tunisie", "url": "https://www.geantdrive.tn"},
+            {"name": "Aziza (prix vus sur Glovo, magasin de Gabès)", "url": VIA_GLOVO["Aziza"]["url"]},
             {"name": "Wikipédia — Eaux minérales en Tunisie", "url": "https://fr.wikipedia.org/wiki/Eaux_min%C3%A9rales_en_Tunisie"},
         ],
         "brands": out_brands,
         "statut_sources": statut,
+        "via": VIA_GLOVO,
     }
     # noms des magasins Carrefour lus aujourd'hui (sinon ceux du dernier relevé) : liste « Mon Carrefour » du site
     noms = dict(CARREFOUR_NOMS) or dict((ancien or {}).get("magasins_carrefour") or {})

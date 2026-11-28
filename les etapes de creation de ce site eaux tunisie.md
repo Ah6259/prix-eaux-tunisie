@@ -530,3 +530,12 @@ ouveau site - procedure.md` (toutes les leçons du site de l'eau y sont).
 - **25/11/2026 (soir)** : plan Google — lastmod honnête (`tools/lastmod.py`), marques sans prix ni composition en noindex hors du plan du site, bloc « l'essentiel » sur l'accueil (FR + AR). Demandes de liens à d'autres sites : abandonnées (décision d'Ahmed).
 - **25/11/2026 (fin, update workflow)** : plan Google B.1-B.3 FAIT ici et sur 13 autres sites publics (annuaires après le 01/12). Au week-end du 28-29/11 : audit des Pass (PASS.3, projets-ahmed) — ce site n'a pas de Pass. Rien d'autre de changé ici.
 - **25/11/2026 (fin de session)** : tout est envoyé et en ligne (aussi les autres sites). Pour reprendre sur le PC : `git checkout main` puis `git pull` ici et dans projets-ahmed.
+- **Ajouter une enseigne vue sur une application de livraison (28/11/2026, Aziza via Glovo)** — méthode réutilisable :
+  1. essai SILENCIEUX quelques jours (robot à part, rien sur le site) ; comparer une enseigne déjà suivie (Carrefour Glovo = carrefour.tn) ;
+  2. bilan à Ahmed, sa décision, et l'accord écrit du site (conditions d'utilisation lues ; si elles sont cachées derrière un barrage
+     anti-robot, ne pas le contourner : demander à Ahmed) ;
+  3. lire les données JSON de la page (stock `isOutOfStock`, prix promo) plutôt que le texte affiché ; ne pas reprendre des photos trompeuses
+     (lots de bouteilles pour un prix à l'unité) ;
+  4. un seul magasin lu = jamais « non disponible » pour cette enseigne, et une mention écrite sous chaque prix (« prix vu sur …, magasin de … ») ;
+  5. logo officiel dans ses couleurs, page magasin, textes (accueil + traduction arabe, llms.txt, pied de page), page « Comment fonctionne le site ? » ;
+  6. tests : scénarios de panne de la nouvelle source (le vrai site jamais appelé pendant les tests), lecture d'une page inventée, sabotage.
